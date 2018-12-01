@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import {
   View,
   Text,
+  Image,
   TouchableOpacity,
   StyleSheet,
   Platform
@@ -46,6 +47,15 @@ const styles = StyleSheet.create({
   scannerContainer: {
     flex: 1,
     backgroundColor: "#000000"
+  },
+  scannerCamera: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  scannerImage: {
+    width: layout.window.width * 0.5,
+    height: layout.window.width * 0.5
   },
 
   buttonContainer: {
@@ -93,8 +103,13 @@ export default class ScannerScreen extends React.Component {
         <View style={styles.scannerContainer}>
           <BarCodeScanner
             onBarCodeRead={scan => alert(scan.data)}
-            style={StyleSheet.absoluteFill}
-          />
+            style={[StyleSheet.absoluteFill, styles.scannerCamera]}
+          >
+            <Image
+              style={styles.scannerImage}
+              source={require("../assets/images/qr.png")}
+            />
+          </BarCodeScanner>
         </View>
 
         <View style={styles.buttonContainer}>
