@@ -1,14 +1,31 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { connect } from "react-redux";
+import { AsyncStorage, ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { setUrl, QRDATA_URL } from "../store/reducers/qrdata";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
-export default class UrlScreen extends React.Component {
+class UrlScreen extends React.Component {
   static navigationOptions = {
     header: null
+  };
+
+  get urlField() {
+    // Default value:
+    return this.props.url !== null ? this.props.url : "URL";
+  }
+
+  onSavePress = async () => {
+    try {
+      await AsyncStorage.setItem(QRDATA_URL, this.props.url);
+    } catch (err) {
+      // Silent error…
+    }
+
+    this.props.navigation.navigate("Scanner");
   };
 
   render() {
@@ -23,14 +40,15 @@ export default class UrlScreen extends React.Component {
           </View>
 
           <View style={styles.inputContainer}>
-            <Input value="URL" />
+            <Input
+              value={this.urlField}
+              onChangeText={text => this.props.setUrl(text)}
+              autoCapitalize="none"
+            />
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button
-              title="Save"
-              onPress={() => this.props.navigation.navigate("Scanner")}
-            />
+            <Button title="Save" onPress={this.onSavePress} />
           </View>
         </ScrollView>
       </View>
@@ -72,3 +90,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 30
   }
 });
+
+const mapStateToProps = state => ({
+  // …
+  url: state.qrdata.url
+});
+
+const mapDispatchToProps = {
+  // …
+  setUrl
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UrlScreen);

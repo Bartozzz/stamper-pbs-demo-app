@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { BarCodeScanner } from "expo";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -10,6 +11,7 @@ import {
   Platform
 } from "react-native";
 
+import { setQrc } from "../store/reducers/qrdata";
 import Button from "../components/Button";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class ScannerScreen extends React.Component {
+class ScannerScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "QR Code scanner",
     headerRight: (
@@ -97,25 +99,66 @@ export default class ScannerScreen extends React.Component {
     )
   });
 
+  state = {
+    focusedScreen: true
+  };
+
+  focusListener = null;
+  blurListener = null;
+
+  componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("willFocus", () =>
+      this.setState({ focusedScreen: true })
+    );
+
+    this.blurListener = this.props.navigation.addListener("willBlur", () =>
+      this.setState({ focusedScreen: false })
+    );
+  }
+
+  componentWillUnmount() {
+    this.focusListener.remove();
+    this.blurListener.remove();
+  }
+
+  onBarCodeRead = scan => {
+    this.props.setQrc(scan.data);
+    this.props.navigation.navigate("Output");
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.scannerContainer}>
-          <BarCodeScanner
-            onBarCodeRead={scan => alert(scan.data)}
-            style={[StyleSheet.absoluteFill, styles.scannerCamera]}
-          >
-            <Image
-              style={styles.scannerImage}
-              source={require("../assets/images/qr.png")}
-            />
-          </BarCodeScanner>
+          {this.state.focusedScreen ? (
+            <BarCodeScanner
+              onBarCodeRead={this.onBarCodeRead}
+              style={[StyleSheet.absoluteFill, styles.scannerCamera]}
+            >
+              <Image
+                style={styles.scannerImage}
+                source={require("../assets/images/qr.png")}
+              />
+            </BarCodeScanner>
+          ) : null}
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button title="Scan" />
+          <Button title="Scan" onPress={() => null} />
         </View>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  // …
+  qrc: state.qrdata.qrc
+});
+
+const mapDispatchToProps = {
+  // …
+  setQrc
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScannerScreen);

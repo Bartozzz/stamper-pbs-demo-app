@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   ScrollView,
   FlatList,
@@ -8,37 +9,74 @@ import {
   Platform
 } from "react-native";
 
+import { getData } from "../store/reducers/qrdata";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import Error from "../components/Error";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
-const demoData = [
-  {
-    name: "FirstName",
-    value: "FirstNameTest1"
-  },
-  {
-    name: "LastName",
-    value: "LastNameTest1"
-  },
-  {
-    name: "FirstNameId",
-    value: "132c3bfc67ef42b99aa046e7711d8091"
-  },
-  {
-    name: "LastNameId",
-    value: "7348e2e4aabe413c947658a9c0c9d493"
-  },
-  {
-    name: "OrderId",
-    value: "62ebfbf685b2482d86f73794e99e08ae"
-  }
-];
-
-export default class OutputScreen extends React.Component {
+class OutputScreen extends React.Component {
   static navigationOptions = {
     header: null
+  };
+
+  componentDidMount() {
+    const { url, qrc, getData } = this.props;
+
+    if (url && qrc) {
+      getData(`${url}${qrc}`);
+    }
+  }
+
+  renderData = () => {
+    return (
+      <FlatList
+        data={this.props.data}
+        renderItem={({ item }) => (
+          <Text style={styles.flatListItem}>
+            {item.name}
+            {"\n"}
+            {item.value}
+          </Text>
+        )}
+      />
+    );
+  };
+
+  renderError = () => {
+    return <Error message={this.props.error} />;
+  };
+
+  renderEmpty = () => {
+    return (
+      <Text style={styles.flatListItem}>
+        There's not data to fetch. Make sure you've scanned a correct QR Code
+        and wrote a correct URL.
+      </Text>
+    );
+  };
+
+  renderLoading = () => {
+    return <Text style={styles.loading}>Loading data…</Text>;
+  };
+
+  renderContent = () => {
+    const { error, loading, data } = this.props;
+
+    if (loading) {
+      return this.renderLoading();
+    }
+
+    if (error) {
+      return this.renderError();
+    }
+
+    if (!data || data.length === 0) {
+      return this.renderEmpty();
+    }
+
+    return this.renderData();
   };
 
   render() {
@@ -48,16 +86,7 @@ export default class OutputScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <FlatList
-            data={demoData}
-            renderItem={({ item }) => (
-              <Text style={styles.flatListItem}>
-                {item.name}
-                {"\n"}
-                {item.value}
-              </Text>
-            )}
-          />
+          {this.renderContent()}
         </ScrollView>
 
         <View style={styles.buttonContainer}>
@@ -90,6 +119,14 @@ const styles = StyleSheet.create({
     paddingVertical: 18
   },
 
+  loading: {
+    color: colors.color,
+
+    fontSize: 20,
+    fontFamily: layout.fontText,
+    textAlign: "center"
+  },
+
   buttonContainer: {
     alignItems: "center",
     marginTop: 20,
@@ -105,3 +142,19 @@ const styles = StyleSheet.create({
     })
   }
 });
+
+const mapStateToProps = state => ({
+  // …
+  loading: state.qrdata.fetchingData,
+  error: state.qrdata.error,
+  data: state.qrdata.data,
+  url: state.qrdata.url,
+  qrc: state.qrdata.qrc
+});
+
+const mapDispatchToProps = {
+  // …
+  getData
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OutputScreen);

@@ -1,8 +1,20 @@
 import React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Provider } from "react-redux";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import {
+  AsyncStorage,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View
+} from "react-native";
 import AppContainer from "./navigation/AppNavigator";
 import colors from "./constants/Colors";
+import configureStore from "./store";
+import { QRDATA_URL, setUrl } from "./store/reducers/qrdata";
+
+// Redux store:
+const store = configureStore();
 
 export default class App extends React.Component {
   state = {
@@ -21,20 +33,39 @@ export default class App extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
-        {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
-        <AppContainer />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
+          <AppContainer />
+        </View>
+      </Provider>
     );
   }
 
+  _loadStorageAsync = async () => {
+    try {
+      const url = await AsyncStorage.getItem(QRDATA_URL);
+
+      if (url !== null) {
+        store.dispatch(setUrl(url));
+      }
+    } catch (err) {
+      // Silent error…
+    }
+  };
+
   _loadResourcesAsync = async () => {
     return Promise.all([
+      // Local storage (redux):
+      this._loadStorageAsync(),
+
+      // Preload assets:
       Asset.loadAsync([
         // …
         require("./assets/images/qr.png")
       ]),
 
+      // Load fonts:
       Font.loadAsync({
         ...Icon.Ionicons.font,
         "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
