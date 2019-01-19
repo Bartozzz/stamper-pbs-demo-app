@@ -7,6 +7,8 @@ import {
 
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
+import MainScreen from "../screens/dashboard/MainScreen";
+import MenuScreen from "../screens/dashboard/MenuScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
@@ -35,9 +37,20 @@ const AuthStack = createStackNavigator(
     Register: AuthRegisterScreen,
     TermsOfService: TermsOfServiceScreen
   },
-
   {
     initialRouteName: "Login",
+    defaultNavigationOptions
+  }
+);
+
+const DashboardStack = createStackNavigator(
+  {
+    Main: MainScreen,
+    Menu: MenuScreen,
+    TermsOfService: TermsOfServiceScreen
+  },
+  {
+    initialRouteName: "Main",
     defaultNavigationOptions
   }
 );
@@ -48,7 +61,6 @@ const AppStack = createStackNavigator(
     Scanner: ScanScreen,
     Output: OutputScreen
   },
-
   {
     initialRouteName: "Url",
     defaultNavigationOptions
@@ -60,10 +72,11 @@ export default createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       App: AppStack,
-      Auth: AuthStack
+      Auth: AuthStack,
+      Dashboard: DashboardStack
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "Dashboard"
     }
   )
 );
