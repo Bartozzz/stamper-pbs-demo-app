@@ -9,12 +9,12 @@ import {
   Platform
 } from "react-native";
 
-import { getData } from "../store/reducers/qrdata";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import Error from "../components/Error";
-import colors from "../constants/Colors";
-import layout from "../constants/Layout";
+import { getData } from "../../store/reducers/qrdata";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import Error from "../../components/Error";
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 class OutputScreen extends React.Component {
   static navigationOptions = {

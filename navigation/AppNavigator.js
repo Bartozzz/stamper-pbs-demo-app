@@ -7,12 +7,12 @@ import {
 
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
-import AuthLoadingScreen from "../screens/AuthLoadingScreen";
-import AuthLoginScreen from "../screens/AuthLoginScreen";
-import AuthRegisterScreen from "../screens/AuthRegisterScreen";
-import UrlScreen from "../screens/UrlScreen";
-import ScannerScreen from "../screens/ScannerScreen";
-import OutputScreen from "../screens/OutputScreen";
+import AuthLoadingScreen from "../screens/auth/LoadingScreen";
+import AuthLoginScreen from "../screens/auth/LoginScreen";
+import AuthRegisterScreen from "../screens/auth/RegisterScreen";
+import UrlScreen from "../screens/scanner/UrlScreen";
+import ScanScreen from "../screens/scanner/ScanScreen";
+import OutputScreen from "../screens/scanner/OutputScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
 
 const defaultNavigationOptions = {
@@ -44,11 +44,8 @@ const AuthStack = createStackNavigator(
 
 const AppStack = createStackNavigator(
   {
-    // Screen 1:
     Url: UrlScreen,
-    // Screen 2:
-    Scanner: ScannerScreen,
-    // Screen 3
+    Scanner: ScanScreen,
     Output: OutputScreen
   },
 

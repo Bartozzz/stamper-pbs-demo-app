@@ -11,10 +11,10 @@ import {
   Platform
 } from "react-native";
 
-import { setQrc } from "../store/reducers/qrdata";
-import Button from "../components/Button";
-import colors from "../constants/Colors";
-import layout from "../constants/Layout";
+import { setQrc } from "../../store/reducers/qrdata";
+import Button from "../../components/Button";
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 const forwardIcon =
   Platform.OS === "ios" ? "ios-arrow-forward" : "md-arrow-forward";
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class ScannerScreen extends React.Component {
+class ScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "QR Code scanner",
     headerRight: (
@@ -137,7 +137,7 @@ class ScannerScreen extends React.Component {
             >
               <Image
                 style={styles.scannerImage}
-                source={require("../assets/images/qr.png")}
+                source={require("../../assets/images/qr.png")}
               />
             </BarCodeScanner>
           ) : null}
@@ -161,4 +161,4 @@ const mapDispatchToProps = {
   setQrc
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScannerScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ScanScreen);

@@ -6,7 +6,7 @@ import {
   View
 } from "react-native";
 
-import colors from "../constants/Colors";
+import colors from "../../constants/Colors";
 
 class AuthLoadingScreen extends React.Component {
   async componentDidMount() {

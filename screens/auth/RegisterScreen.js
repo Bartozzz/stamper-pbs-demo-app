@@ -8,12 +8,12 @@ import {
   View
 } from "react-native";
 
-import AuthHero from "../components/auth/Hero";
-import Button from "../components/Button";
-import InputWithIcon from "../components/InputWithIcon";
+import AuthHero from "../../components/auth/Hero";
+import Button from "../../components/Button";
+import InputWithIcon from "../../components/InputWithIcon";
 
-import colors from "../constants/Colors";
-import layout from "../constants/Layout";
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 class AuthRegisterScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

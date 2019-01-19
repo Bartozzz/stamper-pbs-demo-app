@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { AsyncStorage, ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { setUrl, QRDATA_URL } from "../store/reducers/qrdata";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import colors from "../constants/Colors";
-import layout from "../constants/Layout";
+import { setUrl, QRDATA_URL } from "../../store/reducers/qrdata";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 class UrlScreen extends React.Component {
   static navigationOptions = {
