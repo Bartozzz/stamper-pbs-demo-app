@@ -13,15 +13,32 @@ import AuthRegisterScreen from "../screens/AuthRegisterScreen";
 import UrlScreen from "../screens/UrlScreen";
 import ScannerScreen from "../screens/ScannerScreen";
 import OutputScreen from "../screens/OutputScreen";
+import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
+
+const defaultNavigationOptions = {
+  headerTintColor: colors.color,
+
+  headerStyle: {
+    backgroundColor: colors.primary
+  },
+
+  headerTitleStyle: {
+    textTransform: "uppercase",
+    fontFamily: layout.fontHead,
+    fontSize: 20
+  }
+};
 
 const AuthStack = createStackNavigator(
   {
     Login: AuthLoginScreen,
-    Register: AuthRegisterScreen
+    Register: AuthRegisterScreen,
+    TermsOfService: TermsOfServiceScreen
   },
 
   {
-    //…
+    initialRouteName: "Login",
+    defaultNavigationOptions
   }
 );
 
@@ -37,20 +54,7 @@ const AppStack = createStackNavigator(
 
   {
     initialRouteName: "Url",
-
-    defaultNavigationOptions: {
-      headerTintColor: colors.color,
-
-      headerStyle: {
-        backgroundColor: colors.primary
-      },
-
-      headerTitleStyle: {
-        textTransform: "uppercase",
-        fontFamily: layout.fontHead,
-        fontSize: 20
-      }
-    }
+    defaultNavigationOptions
   }
 );
 

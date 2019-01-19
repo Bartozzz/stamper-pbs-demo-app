@@ -31,7 +31,7 @@ class AuthRegisterScreen extends React.Component {
   };
 
   navigateToTOS = () => {
-    this.props.navigation.navigate("Register");
+    this.props.navigation.navigate("TermsOfService");
   };
 
   render() {
