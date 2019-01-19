@@ -1,13 +1,31 @@
 import React from "react";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createAppContainer
+} from "react-navigation";
 
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
+import AuthLoadingScreen from "../screens/AuthLoadingScreen";
+import AuthLoginScreen from "../screens/AuthLoginScreen";
+import AuthRegisterScreen from "../screens/AuthRegisterScreen";
 import UrlScreen from "../screens/UrlScreen";
 import ScannerScreen from "../screens/ScannerScreen";
 import OutputScreen from "../screens/OutputScreen";
 
-const AppNavigator = createStackNavigator(
+const AuthStack = createStackNavigator(
+  {
+    Login: AuthLoginScreen,
+    Register: AuthRegisterScreen
+  },
+
+  {
+    //…
+  }
+);
+
+const AppStack = createStackNavigator(
   {
     // Screen 1:
     Url: UrlScreen,
@@ -36,4 +54,15 @@ const AppNavigator = createStackNavigator(
   }
 );
 
-export default createAppContainer(AppNavigator);
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: AppStack,
+      Auth: AuthStack
+    },
+    {
+      initialRouteName: "AuthLoading"
+    }
+  )
+);
