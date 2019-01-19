@@ -17,16 +17,21 @@ class Button extends Component {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize: 20,
-    fontFamily: layout.fontText,
+    fontSize: 18,
+    fontWeight: "900",
+    fontFamily: layout.fontHead,
+
     color: colors.color,
     textAlign: "center",
     textTransform: "uppercase"
   },
 
   buttonStyle: {
-    padding: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+
     width: "100%",
+
     backgroundColor: colors.primary,
     borderRadius: 5
   }
