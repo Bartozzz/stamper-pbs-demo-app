@@ -5,7 +5,14 @@ import layout from "../constants/Layout";
 
 class Input extends Component {
   render() {
-    return <TextInput {...this.props} style={styles.inputStyle} />;
+    return (
+      <TextInput
+        {...this.props}
+        placeholderTextColor={colors.color}
+        style={styles.inputStyle}
+        underlineColorAndroid="transparent"
+      />
+    );
   }
 }
 

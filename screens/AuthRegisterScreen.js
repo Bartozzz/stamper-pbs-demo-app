@@ -10,7 +10,7 @@ import {
 
 import AuthHero from "../components/auth/Hero";
 import Button from "../components/Button";
-import Input from "../components/Input";
+import InputWithIcon from "../components/InputWithIcon";
 
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
@@ -41,7 +41,9 @@ class AuthRegisterScreen extends React.Component {
 
         <ScrollView style={styles.regContainer}>
           <View style={styles.inputContainer}>
-            <Input
+            <InputWithIcon
+              iconName="ios-contact"
+              iconSize={20}
               placeholder="Login"
               value={this.state.login}
               onChangeText={login => this.setState({ login })}
@@ -50,7 +52,9 @@ class AuthRegisterScreen extends React.Component {
           </View>
 
           <View style={styles.inputContainer}>
-            <Input
+            <InputWithIcon
+              iconName="ios-at"
+              iconSize={20}
               placeholder="Email"
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
@@ -59,7 +63,9 @@ class AuthRegisterScreen extends React.Component {
           </View>
 
           <View style={styles.inputContainer}>
-            <Input
+            <InputWithIcon
+              iconName="ios-lock"
+              iconSize={20}
               placeholder="Password"
               value={this.state.password}
               onChangeText={password => this.setState({ password })}

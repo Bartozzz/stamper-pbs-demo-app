@@ -4,5 +4,7 @@ export default {
   primary: "#0046F4",
   background: "#001232",
 
-  error: "red"
+  error: "red",
+
+  inputBorder: "#555f6f"
 };
