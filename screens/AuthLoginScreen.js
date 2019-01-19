@@ -17,6 +17,7 @@ import layout from "../constants/Layout";
 
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
+    title: "Logowanie",
     header: null
   };
 

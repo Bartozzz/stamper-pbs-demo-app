@@ -16,9 +16,9 @@ import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
 class AuthRegisterScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: "Rejestracja"
+  });
 
   state = {
     login: null,
