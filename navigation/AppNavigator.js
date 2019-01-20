@@ -14,6 +14,8 @@ import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
 import ProfileMenuScreen from "../screens/profile/MenuScreen";
+import ProfileEditScreen from "../screens/profile/EditScreen";
+import ProfilePasswordScreen from "../screens/profile/PasswordScreen";
 import ScannerUrlScreen from "../screens/scanner/UrlScreen";
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
 import ScannerOutputScreen from "../screens/scanner/OutputScreen";
@@ -59,6 +61,8 @@ const DashboardStack = createStackNavigator(
 const ProfileStack = createStackNavigator(
   {
     [Route.PROFILE_MENU]: ProfileMenuScreen,
+    [Route.PROFILE_EDIT]: ProfileEditScreen,
+    [Route.PROFILE_PASSWORD]: ProfilePasswordScreen,
     [Route.PROFILE_TOS]: TermsOfServiceScreen
   },
   {
@@ -89,7 +93,7 @@ export default createAppContainer(
       [Route.PROFILE]: ProfileStack
     },
     {
-      initialRouteName: Route.AUTH_LOADING
+      initialRouteName: Route.PROFILE
     }
   )
 );

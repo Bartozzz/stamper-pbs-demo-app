@@ -16,6 +16,8 @@ class ProfileMenuScreen extends React.Component {
   });
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.menu}>
@@ -29,19 +31,28 @@ class ProfileMenuScreen extends React.Component {
 
           <View style={styles.menuSpacer} />
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_EDIT)}
+          >
             <Text style={styles.menuItemText}>Edytuj profil</Text>
           </TouchableOpacity>
 
           <View style={styles.menuSpacer} />
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_PASSWORD)}
+          >
             <Text style={styles.menuItemText}>Zmiana hasła</Text>
           </TouchableOpacity>
 
           <View style={styles.menuSpacer} />
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_TOS)}
+          >
             <Text style={styles.menuItemText}>Regulamin</Text>
           </TouchableOpacity>
 
@@ -85,7 +96,7 @@ const styles = StyleSheet.create({
   email: {
     marginBottom: 30,
 
-    color: colors.primary
+    color: colors.label
   },
 
   menu: {
