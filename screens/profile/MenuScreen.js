@@ -11,8 +11,11 @@ class ProfileMenuScreen extends React.Component {
     title: "Dashboard",
     headerTitle: "",
     headerRight: <Hamburger navigation={navigation} />,
-    headerStyle: { backgroundColor: colors.background },
-    headerTransparent: true
+    headerStyle: {
+      borderBottomWidth: 0,
+      backgroundColor: colors.background
+    }
+    // headerTransparent: true
   });
 
   render() {
@@ -69,9 +72,6 @@ class ProfileMenuScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // HACK:
-    marginTop: 85,
-
     flex: 1,
     backgroundColor: colors.background
   },
