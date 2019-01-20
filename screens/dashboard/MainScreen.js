@@ -57,7 +57,7 @@ class MainScreen extends React.Component {
         return;
 
       case MENU_PROFILE:
-        return;
+        return navigation.navigate("ProfileMenu");
 
       case MENU_MARKET:
         return;

@@ -8,7 +8,6 @@ import {
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 import MainScreen from "../screens/dashboard/MainScreen";
-import MenuScreen from "../screens/dashboard/MenuScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
@@ -16,6 +15,7 @@ import UrlScreen from "../screens/scanner/UrlScreen";
 import ScanScreen from "../screens/scanner/ScanScreen";
 import OutputScreen from "../screens/scanner/OutputScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
+import ProfileMenuScreen from "../screens/profile/ProfileMenuScreen";
 
 const defaultNavigationOptions = {
   headerTintColor: colors.color,
@@ -46,11 +46,21 @@ const AuthStack = createStackNavigator(
 const DashboardStack = createStackNavigator(
   {
     Main: MainScreen,
-    Menu: MenuScreen,
     TermsOfService: TermsOfServiceScreen
   },
   {
     initialRouteName: "Main",
+    defaultNavigationOptions
+  }
+);
+
+const ProfileStack = createStackNavigator(
+  {
+    ProfileMenu: ProfileMenuScreen,
+    TermsOfService: TermsOfServiceScreen
+  },
+  {
+    initialRouteName: "ProfileMenu",
     defaultNavigationOptions
   }
 );
@@ -73,10 +83,11 @@ export default createAppContainer(
       AuthLoading: AuthLoadingScreen,
       App: AppStack,
       Auth: AuthStack,
-      Dashboard: DashboardStack
+      Dashboard: DashboardStack,
+      Profile: ProfileStack
     },
     {
-      initialRouteName: "Dashboard"
+      initialRouteName: "Profile"
     }
   )
 );
