@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 import InputWithIcon from "../../components/InputWithIcon";
 
 import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -47,32 +48,28 @@ class AuthLoginScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <AuthHero style={styles.hero} />
 
         <ScrollView style={styles.loginContainer}>
-          <View style={styles.inputContainer}>
-            <InputWithIcon
-              iconName="ios-contact"
-              iconSize={20}
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-              autoCapitalize="none"
-            />
-          </View>
+          <InputWithIcon
+            iconName="ios-contact"
+            iconSize={20}
+            placeholder="Email"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithIcon
-              iconName="ios-lock"
-              iconSize={20}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={password => this.setState({ password })}
-              autoCapitalize="none"
-              secureTextEntry
-            />
-          </View>
+          <InputWithIcon
+            iconName="ios-lock"
+            iconSize={20}
+            placeholder="Password"
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            autoCapitalize="none"
+            secureTextEntry
+          />
 
           <AuthLoginScreenLinks
             loginWithFacebook={this.loginWithFacebook}
@@ -134,19 +131,9 @@ export const AuthLoginScreenLinks = props => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
   hero: {
     paddingTop: 70,
     height: 460
-  },
-
-  inputContainer: {
-    alignItems: "center",
-    marginVertical: 15
   },
 
   loginProvider: {

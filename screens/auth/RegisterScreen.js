@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 import InputWithIcon from "../../components/InputWithIcon";
 
 import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -39,43 +40,37 @@ class AuthRegisterScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <AuthHero />
 
         <ScrollView style={styles.regContainer}>
-          <View style={styles.inputContainer}>
-            <InputWithIcon
-              iconName="ios-contact"
-              iconSize={20}
-              placeholder="Login"
-              value={this.state.login}
-              onChangeText={login => this.setState({ login })}
-              autoCapitalize="none"
-            />
-          </View>
+          <InputWithIcon
+            iconName="ios-contact"
+            iconSize={20}
+            placeholder="Login"
+            value={this.state.login}
+            onChangeText={login => this.setState({ login })}
+            autoCapitalize="none"
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithIcon
-              iconName="ios-at"
-              iconSize={20}
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-              autoCapitalize="none"
-            />
-          </View>
+          <InputWithIcon
+            iconName="ios-at"
+            iconSize={20}
+            placeholder="Email"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithIcon
-              iconName="ios-lock"
-              iconSize={20}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={password => this.setState({ password })}
-              autoCapitalize="none"
-              secureTextEntry
-            />
-          </View>
+          <InputWithIcon
+            iconName="ios-lock"
+            iconSize={20}
+            placeholder="Password"
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            autoCapitalize="none"
+            secureTextEntry
+          />
 
           <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
 
@@ -104,16 +99,6 @@ export const AuthRegisterScreenLinks = props => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
-  inputContainer: {
-    alignItems: "center",
-    marginVertical: 15
-  },
-
   regBold: {
     fontWeight: "900"
   },

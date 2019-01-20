@@ -6,6 +6,7 @@ import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -15,25 +16,37 @@ class ProfilePasswordScreen extends React.Component {
     headerRight: <Hamburger navigation={navigation} />
   });
 
+  state = {
+    currPassword: null,
+    newPasswordA: null,
+    newPasswordB: null
+  };
+
   editPassword = event => {
-    console.log("Updating passowrd");
+    console.log("Updating passowrd", this.state);
   };
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <View style={styles.form}>
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Hasło aktualne" />
-          </View>
+          <InputWithLabel
+            label="Hasło aktualne"
+            value={this.state.currentPassword}
+            onChangeText={currPassword => this.setState({ currPassword })}
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Nowe hasło" />
-          </View>
+          <InputWithLabel
+            label="Nowe hasło"
+            value={this.state.newPasswordA}
+            onChangeText={newPasswordA => this.setState({ newPasswordA })}
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Potwierdź hasło" />
-          </View>
+          <InputWithLabel
+            label="Potwierdź hasło"
+            value={this.state.newPasswordB}
+            onChangeText={newPasswordB => this.setState({ newPasswordB })}
+          />
         </View>
 
         <View style={styles.buttonContainer}>
@@ -45,11 +58,6 @@ class ProfilePasswordScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
   form: {
     flex: 1,
     marginHorizontal: 30,
@@ -57,9 +65,6 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
 
-  inputContainer: {
-    marginVertical: 10
-  },
   buttonContainer: {
     marginBottom: 70,
     marginHorizontal: 30

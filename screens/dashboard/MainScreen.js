@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
 import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -77,8 +78,8 @@ class DashboardMainScreen extends React.Component {
     const scannerStyles = this.isFocused(MENU_SCANNER) ? styles.boxFocus : null;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.menu}>
+      <View style={defaultStyles.container}>
+        <View style={[defaultStyles.center, styles.menu]}>
           <View style={styles.row}>
             <TouchableOpacity
               activeOpacity={1}
@@ -176,16 +177,8 @@ class DashboardMainScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
   menu: {
-    flex: 1,
-
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   },
 
   row: {

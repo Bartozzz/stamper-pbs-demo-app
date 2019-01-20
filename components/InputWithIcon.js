@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
 
+    marginVertical: 15,
+
     borderRadius: 100,
     borderWidth: 1,
     borderStyle: "solid",

@@ -6,6 +6,7 @@ import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -15,29 +16,44 @@ class ProfileEditScreen extends React.Component {
     headerRight: <Hamburger navigation={navigation} />
   });
 
+  state = {
+    firstName: null,
+    lastName: null,
+    email: null,
+    login: null
+  };
+
   editProfile = event => {
-    console.log("Updating profile");
+    console.log("Updating profile", this.state);
   };
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <View style={styles.form}>
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Imię" />
-          </View>
+          <InputWithLabel
+            label="Imię"
+            value={this.state.firstName}
+            onChangeText={firstName => this.setState({ firstName })}
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Nazwisko" />
-          </View>
+          <InputWithLabel
+            label="Nazwisko"
+            value={this.state.lastName}
+            onChangeText={lastName => this.setState({ lastName })}
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Email" />
-          </View>
+          <InputWithLabel
+            label="Email"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+          />
 
-          <View style={styles.inputContainer}>
-            <InputWithLabel label="Nick" />
-          </View>
+          <InputWithLabel
+            label="Nick"
+            value={this.state.login}
+            onChangeText={login => this.setState({ login })}
+          />
         </View>
 
         <View style={styles.buttonContainer}>
@@ -49,19 +65,11 @@ class ProfileEditScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
   form: {
     flex: 1,
     marginHorizontal: 30
   },
 
-  inputContainer: {
-    marginVertical: 10
-  },
   buttonContainer: {
     marginBottom: 70,
     marginHorizontal: 30

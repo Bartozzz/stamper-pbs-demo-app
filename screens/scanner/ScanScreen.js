@@ -14,6 +14,7 @@ import {
 import * as Routes from "../../navigation";
 import { setQrc } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -21,11 +22,6 @@ const forwardIcon =
   Platform.OS === "ios" ? "ios-arrow-forward" : "md-arrow-forward";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
   next: {
     flexDirection: "row",
     alignItems: "center"
@@ -129,7 +125,7 @@ class ScannerScanScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <View style={styles.scannerContainer}>
           {this.state.focusedScreen ? (
             <BarCodeScanner

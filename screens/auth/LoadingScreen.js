@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StyleSheet,
-  View
-} from "react-native";
+import { ActivityIndicator, AsyncStorage, View } from "react-native";
 
 import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
+import styles from "../../constants/Styles";
 
 class AuthLoadingScreen extends React.Component {
   async componentDidMount() {
@@ -20,21 +16,11 @@ class AuthLoadingScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, styles.center]}>
         <ActivityIndicator color={colors.primary} size="large" />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
 
 export default AuthLoadingScreen;

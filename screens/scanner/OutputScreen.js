@@ -14,6 +14,7 @@ import { getData } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Error from "../../components/Error";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -82,9 +83,9 @@ class ScannerOutputScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <ScrollView
-          style={styles.container}
+          style={defaultStyles.container}
           contentContainerStyle={styles.contentContainer}
         >
           {this.renderContent()}
@@ -102,10 +103,6 @@ class ScannerOutputScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
   contentContainer: {
     paddingTop: 70,
     paddingHorizontal: 30

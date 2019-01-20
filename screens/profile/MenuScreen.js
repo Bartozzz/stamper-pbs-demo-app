@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Hamburger from "../../components/Hamburger";
 
 import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -22,7 +23,7 @@ class ProfileMenuScreen extends React.Component {
     const { navigation } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <View style={styles.menu}>
           <Image
             style={styles.avatar}
@@ -71,11 +72,6 @@ class ProfileMenuScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-
   avatar: {
     width: 80,
     height: 80,

@@ -16,6 +16,7 @@ import { setUrl, QRDATA_URL } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Hamburger from "../../components/Hamburger";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -48,9 +49,9 @@ class ScannerUrlScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={defaultStyles.container}>
         <ScrollView
-          style={styles.container}
+          style={defaultStyles.container}
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.titleContainer}>
@@ -75,10 +76,6 @@ class ScannerUrlScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
   contentContainer: {
     paddingTop: 30
   },
