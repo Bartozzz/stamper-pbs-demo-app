@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Hamburger from "../../components/Hamburger";
 
+import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 

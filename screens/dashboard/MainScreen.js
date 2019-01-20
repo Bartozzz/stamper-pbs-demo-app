@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
+import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -17,7 +18,7 @@ const MENU_PROFILE = "MENU_PROFILE";
 const MENU_WALLET = "MENU_WALLET";
 const MENU_SCANNER = "MENU_SCANNER";
 
-class MainScreen extends React.Component {
+class DashboardMainScreen extends React.Component {
   static navigationOptions = {
     title: "Dashboard",
     header: null
@@ -57,13 +58,13 @@ class MainScreen extends React.Component {
         return;
 
       case MENU_PROFILE:
-        return navigation.navigate("ProfileMenu");
+        return navigation.navigate(Routes.PROFILE);
 
       case MENU_MARKET:
         return;
 
       case MENU_SCANNER:
-        return navigation.navigate("Url");
+        return navigation.navigate(Routes.SCANNER);
     }
   };
 
@@ -222,4 +223,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainScreen;
+export default DashboardMainScreen;

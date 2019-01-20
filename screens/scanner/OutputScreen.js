@@ -9,6 +9,7 @@ import {
   Platform
 } from "react-native";
 
+import * as Routes from "../../navigation";
 import { getData } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -16,7 +17,7 @@ import Error from "../../components/Error";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
-class OutputScreen extends React.Component {
+class ScannerOutputScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
@@ -92,7 +93,7 @@ class OutputScreen extends React.Component {
         <View style={styles.buttonContainer}>
           <Button
             title="Scanner"
-            onPress={() => this.props.navigation.navigate("Scanner")}
+            onPress={() => this.props.navigation.navigate(Routes.SCANNER_SCAN)}
           />
         </View>
       </View>
@@ -157,4 +158,6 @@ const mapDispatchToProps = {
   getData
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutputScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ScannerOutputScreen
+);

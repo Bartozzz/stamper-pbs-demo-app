@@ -12,6 +12,7 @@ import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
 import InputWithIcon from "../../components/InputWithIcon";
 
+import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
@@ -37,11 +38,11 @@ class AuthLoginScreen extends React.Component {
   loginWithCredentials = () => {
     console.log("Logging-in with credentials", this.state);
 
-    this.props.navigation.navigate("Url");
+    this.props.navigation.navigate(Routes.DASHBOARD);
   };
 
   navigateToRegister = () => {
-    this.props.navigation.navigate("Register");
+    this.props.navigation.navigate(Routes.AUTH_REGISTER);
   };
 
   render() {

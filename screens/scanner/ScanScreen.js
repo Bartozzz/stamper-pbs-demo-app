@@ -11,6 +11,7 @@ import {
   Platform
 } from "react-native";
 
+import * as Routes from "../../navigation";
 import { setQrc } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import colors from "../../constants/Colors";
@@ -76,13 +77,13 @@ const styles = StyleSheet.create({
   }
 });
 
-class ScanScreen extends React.Component {
+class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Skanuj kod",
     headerRight: (
       <TouchableOpacity
         style={styles.next}
-        onPress={() => navigation.navigate("Output")}
+        onPress={() => navigation.navigate(Routes.SCANNER_DATA)}
       >
         <Text style={styles.nextText}>Next</Text>
 
@@ -123,7 +124,7 @@ class ScanScreen extends React.Component {
 
   onBarCodeRead = scan => {
     this.props.setQrc(scan.data);
-    this.props.navigation.navigate("Output");
+    this.props.navigation.navigate(Routes.SCANNER_DATA);
   };
 
   render() {
@@ -161,4 +162,4 @@ const mapDispatchToProps = {
   setQrc
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScanScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ScannerScanScreen);

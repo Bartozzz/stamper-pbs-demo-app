@@ -5,17 +5,19 @@ import {
   createAppContainer
 } from "react-navigation";
 
+import * as Route from "./index";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
-import MainScreen from "../screens/dashboard/MainScreen";
+
+import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
-import UrlScreen from "../screens/scanner/UrlScreen";
-import ScanScreen from "../screens/scanner/ScanScreen";
-import OutputScreen from "../screens/scanner/OutputScreen";
+import ProfileMenuScreen from "../screens/profile/MenuScreen";
+import ScannerUrlScreen from "../screens/scanner/UrlScreen";
+import ScannerScanScreen from "../screens/scanner/ScanScreen";
+import ScannerOutputScreen from "../screens/scanner/OutputScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
-import ProfileMenuScreen from "../screens/profile/ProfileMenuScreen";
 
 const defaultNavigationOptions = {
   headerTintColor: colors.color,
@@ -33,46 +35,46 @@ const defaultNavigationOptions = {
 
 const AuthStack = createStackNavigator(
   {
-    Login: AuthLoginScreen,
-    Register: AuthRegisterScreen,
-    TermsOfService: TermsOfServiceScreen
+    [Route.AUTH_LOGIN]: AuthLoginScreen,
+    [Route.AUTH_REGISTER]: AuthRegisterScreen,
+    [Route.AUTH_TOS]: TermsOfServiceScreen
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: Route.AUTH_LOGIN,
     defaultNavigationOptions
   }
 );
 
 const DashboardStack = createStackNavigator(
   {
-    Main: MainScreen,
-    TermsOfService: TermsOfServiceScreen
+    [Route.DASHBOARD_MAIN]: DashboardMainScreen,
+    [Route.DASHBOARD_TOS]: TermsOfServiceScreen
   },
   {
-    initialRouteName: "Main",
+    initialRouteName: Route.DASHBOARD_MAIN,
     defaultNavigationOptions
   }
 );
 
 const ProfileStack = createStackNavigator(
   {
-    ProfileMenu: ProfileMenuScreen,
-    TermsOfService: TermsOfServiceScreen
+    [Route.PROFILE_MENU]: ProfileMenuScreen,
+    [Route.PROFILE_TOS]: TermsOfServiceScreen
   },
   {
-    initialRouteName: "ProfileMenu",
+    initialRouteName: Route.PROFILE_MENU,
     defaultNavigationOptions
   }
 );
 
-const AppStack = createStackNavigator(
+const ScannerStack = createStackNavigator(
   {
-    Url: UrlScreen,
-    Scanner: ScanScreen,
-    Output: OutputScreen
+    [Route.SCANNER_URL]: ScannerUrlScreen,
+    [Route.SCANNER_SCAN]: ScannerScanScreen,
+    [Route.SCANNER_DATA]: ScannerOutputScreen
   },
   {
-    initialRouteName: "Url",
+    initialRouteName: Route.SCANNER_URL,
     defaultNavigationOptions
   }
 );
@@ -80,14 +82,14 @@ const AppStack = createStackNavigator(
 export default createAppContainer(
   createSwitchNavigator(
     {
-      AuthLoading: AuthLoadingScreen,
-      App: AppStack,
-      Auth: AuthStack,
-      Dashboard: DashboardStack,
-      Profile: ProfileStack
+      [Route.AUTH]: AuthStack,
+      [Route.AUTH_LOADING]: AuthLoadingScreen,
+      [Route.DASHBOARD]: DashboardStack,
+      [Route.SCANNER]: ScannerStack,
+      [Route.PROFILE]: ProfileStack
     },
     {
-      initialRouteName: "Profile"
+      initialRouteName: Route.AUTH_LOADING
     }
   )
 );

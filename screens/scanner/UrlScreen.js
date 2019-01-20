@@ -11,6 +11,7 @@ import {
   View
 } from "react-native";
 
+import * as Routes from "../../navigation";
 import { setUrl, QRDATA_URL } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -53,10 +54,13 @@ const styles = StyleSheet.create({
   }
 });
 
-class UrlScreen extends React.Component {
+class ScannerUrlScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "QR Code tester",
-    headerRight: <Hamburger navigation={navigation} />
+    headerTitle: "",
+    headerRight: <Hamburger navigation={navigation} />,
+    headerStyle: { backgroundColor: colors.background },
+    headerTransparent: true
   });
 
   get urlField() {
@@ -71,7 +75,7 @@ class UrlScreen extends React.Component {
       // Silent error…
     }
 
-    this.props.navigation.navigate("Scanner");
+    this.props.navigation.navigate(Routes.SCANNER_SCAN);
   };
 
   render() {
@@ -112,4 +116,4 @@ const mapDispatchToProps = {
   setUrl
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UrlScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ScannerUrlScreen);

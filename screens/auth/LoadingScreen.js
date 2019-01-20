@@ -6,6 +6,7 @@ import {
   View
 } from "react-native";
 
+import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 
 class AuthLoadingScreen extends React.Component {
@@ -14,7 +15,7 @@ class AuthLoadingScreen extends React.Component {
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? "App" : "Auth");
+    this.props.navigation.navigate(userToken ? Routes.DASHBOARD : Routes.AUTH);
   }
 
   render() {
