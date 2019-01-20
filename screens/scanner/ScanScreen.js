@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
 class ScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "QR Code scanner",
+    title: "Skanuj kod",
     headerRight: (
       <TouchableOpacity
         style={styles.next}
@@ -144,7 +144,7 @@ class ScanScreen extends React.Component {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button title="Scan" onPress={() => null} />
+          <Button title="Skanuj kod" onPress={() => null} />
         </View>
       </View>
     );

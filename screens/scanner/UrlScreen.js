@@ -1,6 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { AsyncStorage, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import {
+  AsyncStorage,
+  ScrollView,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  Text,
+  View
+} from "react-native";
 
 import { setUrl, QRDATA_URL } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
@@ -8,10 +17,72 @@ import Input from "../../components/Input";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
+const menuIcon = Platform.OS === "ios" ? "ios-menu" : "md-menu";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
+  contentContainer: {
+    paddingTop: 30
+  },
+
+  titleContainer: {
+    alignItems: "center",
+    marginTop: 70,
+    marginBottom: 40
+  },
+  titleText: {
+    fontFamily: layout.fontHead,
+    fontSize: 40,
+    color: colors.color,
+    textTransform: "uppercase",
+    textAlign: "center"
+  },
+
+  inputContainer: {
+    alignItems: "center",
+    marginTop: 15,
+    marginBottom: 60,
+    marginHorizontal: 30
+  },
+
+  buttonContainer: {
+    alignItems: "center",
+    marginHorizontal: 30
+  },
+
+  menuIcon: {
+    ...Platform.select({
+      ios: {
+        paddingRight: 20
+      },
+      android: {
+        paddingLeft: 8,
+        paddingRight: 16
+      }
+    })
+  }
+});
+
 class UrlScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: "QR Code tester",
+    headerRight: (
+      <TouchableOpacity onPress={() => navigation.navigate("Dashboard")}>
+        <Ionicons
+          style={styles.menuIcon}
+          name={menuIcon}
+          size={Platform.select({
+            ios: 32,
+            android: 24
+          })}
+          color="white"
+        />
+      </TouchableOpacity>
+    )
+  });
 
   get urlField() {
     // Default value:
@@ -55,41 +126,6 @@ class UrlScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-  contentContainer: {
-    paddingTop: 30
-  },
-
-  titleContainer: {
-    alignItems: "center",
-    marginTop: 70,
-    marginBottom: 40
-  },
-  titleText: {
-    fontFamily: layout.fontHead,
-    fontSize: 40,
-    color: colors.color,
-    textTransform: "uppercase",
-    textAlign: "center"
-  },
-
-  inputContainer: {
-    alignItems: "center",
-    marginTop: 15,
-    marginBottom: 60,
-    marginHorizontal: 30
-  },
-
-  buttonContainer: {
-    alignItems: "center",
-    marginHorizontal: 30
-  }
-});
 
 const mapStateToProps = state => ({
   // …

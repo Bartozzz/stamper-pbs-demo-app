@@ -35,6 +35,10 @@ class MainScreen extends React.Component {
     this.setState({ focused });
   };
 
+  blurMenuElement = () => {
+    this.setState({ focused: null });
+  };
+
   navigateTo = element => () => {
     const { navigation } = this.props;
 
@@ -79,6 +83,7 @@ class MainScreen extends React.Component {
               activeOpacity={1}
               style={[styles.box, mapStyles]}
               onPressIn={this.focusMenuElement(MENU_MAP)}
+              onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_MAP)}
             >
               <Image
@@ -93,6 +98,7 @@ class MainScreen extends React.Component {
               activeOpacity={1}
               style={[styles.box, walletStyles]}
               onPressIn={this.focusMenuElement(MENU_WALLET)}
+              onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_WALLET)}
             >
               <Image
@@ -109,6 +115,7 @@ class MainScreen extends React.Component {
               activeOpacity={1}
               style={[styles.box, prizesStyles]}
               onPressIn={this.focusMenuElement(MENU_PRIZES)}
+              onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_PRIZES)}
             >
               <Image
@@ -123,6 +130,7 @@ class MainScreen extends React.Component {
               activeOpacity={1}
               style={[styles.box, profileStyles]}
               onPressIn={this.focusMenuElement(MENU_PROFILE)}
+              onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_PROFILE)}
             >
               <Image
@@ -139,6 +147,7 @@ class MainScreen extends React.Component {
               activeOpacity={1}
               style={[styles.box, marketStyles]}
               onPressIn={this.focusMenuElement(MENU_MARKET)}
+              onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_MARKET)}
             >
               <Image
@@ -153,6 +162,7 @@ class MainScreen extends React.Component {
               activeOpacity={1}
               style={[styles.box, scannerStyles]}
               onPressIn={this.focusMenuElement(MENU_SCANNER)}
+              onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_SCANNER)}
             >
               <Text style={styles.boxText}>Skanuj</Text>
