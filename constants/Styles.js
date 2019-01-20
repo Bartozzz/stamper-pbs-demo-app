@@ -8,8 +8,16 @@ export default StyleSheet.create({
     backgroundColor: colors.background
   },
 
+  content: {
+    paddingHorizontal: 30
+  },
+
   center: {
     justifyContent: "center",
     alignItems: "center"
+  },
+
+  row: {
+    flexDirection: "row"
   }
 });

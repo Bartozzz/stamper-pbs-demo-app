@@ -16,6 +16,7 @@ import AuthRegisterScreen from "../screens/auth/RegisterScreen";
 import ProfileMenuScreen from "../screens/profile/MenuScreen";
 import ProfileEditScreen from "../screens/profile/EditScreen";
 import ProfilePasswordScreen from "../screens/profile/PasswordScreen";
+import ProfileLogoutScreen from "../screens/profile/LogoutScreen";
 import ScannerUrlScreen from "../screens/scanner/UrlScreen";
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
 import ScannerOutputScreen from "../screens/scanner/OutputScreen";
@@ -63,6 +64,7 @@ const ProfileStack = createStackNavigator(
     [Route.PROFILE_MENU]: ProfileMenuScreen,
     [Route.PROFILE_EDIT]: ProfileEditScreen,
     [Route.PROFILE_PASSWORD]: ProfilePasswordScreen,
+    [Route.PROFILE_LOGOUT]: ProfileLogoutScreen,
     [Route.PROFILE_TOS]: TermsOfServiceScreen
   },
   {

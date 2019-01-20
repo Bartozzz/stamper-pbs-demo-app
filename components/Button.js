@@ -5,10 +5,13 @@ import layout from "../constants/Layout";
 
 class Button extends Component {
   render() {
-    const { title, onPress } = this.props;
+    const { title, style, onPress } = this.props;
 
     return (
-      <TouchableOpacity style={styles.buttonStyle} onPress={() => onPress()}>
+      <TouchableOpacity
+        style={[styles.buttonStyle, style]}
+        onPress={() => onPress()}
+      >
         <Text style={styles.textStyle}>{title}</Text>
       </TouchableOpacity>
     );

@@ -80,7 +80,7 @@ class DashboardMainScreen extends React.Component {
     return (
       <View style={defaultStyles.container}>
         <View style={[defaultStyles.center, styles.menu]}>
-          <View style={styles.row}>
+          <View style={[defaultStyles.row, styles.row]}>
             <TouchableOpacity
               activeOpacity={1}
               style={[styles.box, mapStyles]}
@@ -112,7 +112,7 @@ class DashboardMainScreen extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.row}>
+          <View style={[defaultStyles.row, styles.row]}>
             <TouchableOpacity
               activeOpacity={1}
               style={[styles.box, prizesStyles]}
@@ -144,7 +144,7 @@ class DashboardMainScreen extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.row}>
+          <View style={[defaultStyles.row, styles.row]}>
             <TouchableOpacity
               activeOpacity={1}
               style={[styles.box, marketStyles]}
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
   },
 
   row: {
-    flexDirection: "row",
     marginHorizontal: 40
   },
 

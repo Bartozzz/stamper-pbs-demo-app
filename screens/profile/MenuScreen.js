@@ -62,7 +62,11 @@ class ProfileMenuScreen extends React.Component {
 
           <View style={styles.menuSpacer} />
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity
+            style={styles.menuItem}
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_LOGOUT)}
+          >
             <Text style={styles.menuItemText}>Wyloguj się</Text>
           </TouchableOpacity>
         </View>
