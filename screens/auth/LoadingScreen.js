@@ -9,7 +9,15 @@ import styles from "../../constants/Styles";
 
 class AuthLoadingScreen extends React.Component {
   componentDidMount() {
-    this.props.authorize().then(() => this.navigateToApp());
+    const { appToken, authorize } = this.props;
+
+    if (appToken) {
+      this.navigateToApp();
+    } else {
+      authorize()
+        .then(() => this.navigateToApp())
+        .catch(err => console.log(err));
+    }
   }
 
   navigateToApp() {
@@ -33,7 +41,6 @@ class AuthLoadingScreen extends React.Component {
 
 const mapStateToProps = state => ({
   // …
-  loading: state.auth.fetchingData,
   appToken: state.auth.appToken,
   accessToken: state.auth.accessToken,
   refreshToken: state.auth.refreshToken
