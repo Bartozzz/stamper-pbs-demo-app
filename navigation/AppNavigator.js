@@ -95,7 +95,7 @@ export default createAppContainer(
       [Route.PROFILE]: ProfileStack
     },
     {
-      initialRouteName: Route.PROFILE
+      initialRouteName: Route.AUTH_LOADING
     }
   )
 );

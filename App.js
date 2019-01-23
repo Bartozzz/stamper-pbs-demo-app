@@ -1,17 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { AppLoading, Asset, Font, Icon } from "expo";
-import {
-  AsyncStorage,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  View
-} from "react-native";
+import { AsyncStorage, Platform, StatusBar } from "react-native";
 import AppContainer from "./navigation/AppNavigator";
-import colors from "./constants/Colors";
 import configureStore from "./store";
 import { QRDATA_URL, setUrl } from "./store/reducers/qrdata";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "./store/reducers/auth";
 
 // Redux store:
 const store = configureStore();
@@ -34,10 +28,10 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <View style={styles.container}>
+        <React.Fragment>
           {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
           <AppContainer />
-        </View>
+        </React.Fragment>
       </Provider>
     );
   }
@@ -45,9 +39,19 @@ export default class App extends React.Component {
   _loadStorageAsync = async () => {
     try {
       const url = await AsyncStorage.getItem(QRDATA_URL);
+      const accessToken = await AsyncStorage.getItem(ACCESS_TOKEN);
+      const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN);
 
       if (url !== null) {
         store.dispatch(setUrl(url));
+      }
+
+      if (accessToken !== null) {
+        console.log("GOT ACCESS TOKEN", accessToken);
+      }
+
+      if (refreshToken !== null) {
+        console.log("GOT REFRESH TOKEN", refreshToken);
       }
     } catch (err) {
       // Silent error…
@@ -83,10 +87,3 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background
-  }
-});
