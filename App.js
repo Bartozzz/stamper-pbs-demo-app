@@ -5,7 +5,12 @@ import { AsyncStorage, Platform, StatusBar } from "react-native";
 import AppContainer from "./navigation/AppNavigator";
 import configureStore from "./store";
 import { QRDATA_URL, setUrl } from "./store/reducers/qrdata";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "./store/reducers/auth";
+import {
+  ACCESS_TOKEN,
+  REFRESH_TOKEN,
+  setAccessToken,
+  setRefreshToken
+} from "./store/reducers/auth";
 
 // Redux store:
 const store = configureStore();
@@ -47,11 +52,11 @@ export default class App extends React.Component {
       }
 
       if (accessToken !== null) {
-        console.log("GOT ACCESS TOKEN", accessToken);
+        store.dispatch(setAccessToken(accessToken));
       }
 
       if (refreshToken !== null) {
-        console.log("GOT REFRESH TOKEN", refreshToken);
+        store.dispatch(setRefreshToken(refreshToken));
       }
     } catch (err) {
       // Silent error…

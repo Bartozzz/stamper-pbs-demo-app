@@ -21,7 +21,10 @@ class AuthLoadingScreen extends React.Component {
   }
 
   navigateToApp() {
-    const { accessToken } = this.props;
+    const { accessToken, refreshToken } = this.props;
+
+    console.debug("AT:", accessToken);
+    console.debug("RT:", refreshToken);
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.

@@ -7,6 +7,8 @@ export const ACCESS_TOKEN = "access_token";
 export const REFRESH_TOKEN = "refresh_token";
 
 // Actions
+export const SET_ACCESS_TOKEN = "app/AUTH/SET/ACCESS_TOKEN";
+export const SET_REFRESH_TOKEN = "app/AUTH/SET/REFRESH_TOKEN";
 export const ACCESS_REQUEST = "APP/AUTH/ACCESS_REQUEST";
 export const ACCESS_SUCCESS = "APP/AUTH/ACCESS_SUCCESS";
 export const ACCESS_FAIL = "APP/AUTH/ACCESS_FAIL";
@@ -29,6 +31,23 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case SET_ACCESS_TOKEN:
+      const header = `Bearer ${action.payload}`;
+
+      // Required in all other endpoints:
+      axios.defaults.headers.common["Authorization"] = header;
+
+      return {
+        ...state,
+        accessToken: action.payload
+      };
+
+    case SET_REFRESH_TOKEN:
+      return {
+        ...state,
+        refreshToken: action.payload
+      };
+
     case ACCESS_REQUEST:
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
@@ -133,4 +152,14 @@ export const logout = () => ({
       url: Url.Account.Logout()
     }
   }
+});
+
+export const setAccessToken = accessToken => ({
+  type: SET_ACCESS_TOKEN,
+  payload: accessToken
+});
+
+export const setRefreshToken = refreshToken => ({
+  type: SET_REFRESH_TOKEN,
+  payload: refreshToken
 });
