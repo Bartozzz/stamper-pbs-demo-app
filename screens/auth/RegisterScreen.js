@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+  AsyncStorage,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -10,8 +11,14 @@ import {
 
 import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
+import Error from "../../components/Error";
 import InputWithIcon from "../../components/InputWithIcon";
 
+import {
+  register,
+  ACCESS_TOKEN,
+  REFRESH_TOKEN
+} from "../../store/reducers/auth";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -23,15 +30,56 @@ class AuthRegisterScreen extends React.Component {
   });
 
   state = {
-    login: null,
-    email: null,
-    password: null
+    // nickname: null,
+    // password: null,
+    // email: null,
+    nickname: "testing",
+    password: "Test1234+",
+    email: "testing@test.pl",
+
+    error: {
+      nickname: [],
+      password: [],
+      email: [],
+      other: []
+    }
   };
 
   registerWithCredentials = () => {
-    console.log("Logging-in with credentials", this.state);
+    const { email, password, nickname } = this.state;
+    const { register, navigation } = this.props;
 
-    this.props.navigation.navigate(Routes.DASHBOARD);
+    register(email, password, nickname).then(async response => {
+      if (!response.error) {
+        try {
+          const { accessToken, refreshToken } = response.payload.data;
+
+          await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
+          await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
+        } catch (err) {
+          console.error(err);
+        }
+
+        navigation.navigate(Routes.DASHBOARD);
+      } else {
+        const { data } = response.error.response;
+
+        const error = {
+          nickname: null,
+          password: null,
+          email: null,
+          other: null
+        };
+
+        if (data.Nickname) error.nickname = data.Nickname;
+        if (data.Password) error.password = data.Password;
+        if (data.Email) error.email = data.Email;
+        if (data.Error) error.other = data.Error;
+
+        console.debug(error, data);
+        this.setState({ error });
+      }
+    });
   };
 
   navigateToTOS = () => {
@@ -39,17 +87,22 @@ class AuthRegisterScreen extends React.Component {
   };
 
   render() {
+    const { nickname, password, email, error } = this.state;
+
     return (
       <View style={defaultStyles.container}>
         <AuthHero />
 
         <ScrollView style={styles.regContainer}>
+          {error.other ? <Error message={error.other} /> : null}
+
           <InputWithIcon
             iconName="ios-contact"
             iconSize={20}
             placeholder="Login"
-            value={this.state.login}
-            onChangeText={login => this.setState({ login })}
+            value={nickname}
+            error={error.nickname}
+            onChangeText={nickname => this.setState({ nickname })}
             autoCapitalize="none"
           />
 
@@ -57,7 +110,8 @@ class AuthRegisterScreen extends React.Component {
             iconName="ios-at"
             iconSize={20}
             placeholder="Email"
-            value={this.state.email}
+            value={email}
+            error={error.email}
             onChangeText={email => this.setState({ email })}
             autoCapitalize="none"
           />
@@ -66,7 +120,8 @@ class AuthRegisterScreen extends React.Component {
             iconName="ios-lock"
             iconSize={20}
             placeholder="Password"
-            value={this.state.password}
+            value={password}
+            error={error.password}
             onChangeText={password => this.setState({ password })}
             autoCapitalize="none"
             secureTextEntry
@@ -122,10 +177,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   // …
+  loading: state.auth.fetchingData
 });
 
 const mapDispatchToProps = {
-  // …
+  // …,
+  register
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthRegisterScreen);

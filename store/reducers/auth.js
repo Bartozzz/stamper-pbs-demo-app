@@ -62,7 +62,7 @@ export default function reducer(state = initialState, action) {
         appToken: null
       };
 
-    case ACCESS_SUCCESS:
+    case ACCESS_SUCCESS: {
       const token = action.payload.data.accessToken;
       const header = `Bearer ${token}`;
 
@@ -74,6 +74,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         appToken: token
       };
+    }
 
     case LOGOUT_REQUEST:
     case LOGOUT_SUCCESS:
@@ -88,13 +89,21 @@ export default function reducer(state = initialState, action) {
       };
 
     case LOGIN_SUCCESS:
-    case REGISTER_SUCCESS:
+    case REGISTER_SUCCESS: {
+      const accessToken = action.payload.data.accessToken;
+      const refreshToken = action.payload.data.refreshToken;
+      const header = `Bearer ${accessToken}`;
+
+      // Required in all other endpoints:
+      axios.defaults.headers.common["Authorization"] = header;
+
       return {
         ...state,
         fetchingData: false,
-        accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken
+        accessToken: accessToken,
+        refreshToken: refreshToken
       };
+    }
 
     default:
       return state;
