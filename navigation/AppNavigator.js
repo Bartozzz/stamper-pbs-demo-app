@@ -26,6 +26,7 @@ const defaultNavigationOptions = {
   headerTintColor: colors.color,
 
   headerStyle: {
+    borderBottomWidth: 0,
     backgroundColor: colors.primary
   },
 
