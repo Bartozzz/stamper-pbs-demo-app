@@ -23,6 +23,9 @@ export const REGISTER_FAIL = "APP/AUTH/REGISTER_FAIL";
 export const LOGOUT_REQUEST = "APP/AUTH/LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "APP/AUTH/LOGOUT_SUCCESS";
 export const LOGOUT_FAIL = "APP/AUTH/LOGOUT_FAIL";
+export const CHANGE_PASSWORD_REQUEST = "APP/AUTH/CHANGE_PASSWORD_REQUEST";
+export const CHANGE_PASSWORD_SUCCESS = "APP/AUTH/CHANGE_PASSWORD_SUCCESS";
+export const CHANGE_PASSWORD_FAIL = "APP/AUTH/CHANGE_PASSWORD_FAIL";
 
 const initialState = {
   fetchingData: false,
@@ -117,6 +120,17 @@ export default function reducer(state = initialState, action) {
       };
     }
 
+    // case CHANGE_PASSWORD_REQUEST: {
+    //   axios.defaults.headers.common["Authorization"] = state.appToken;
+    //
+    //   return {
+    //     ...state,
+    //     expiryDate: null,
+    //     accessToken: null,
+    //     refreshToken: null
+    //   };
+    // }
+
     default:
       return state;
   }
@@ -171,6 +185,21 @@ export const logout = () => ({
     request: {
       method: "POST",
       url: Url.Account.Logout()
+    }
+  }
+});
+
+export const changePassword = (Current, NewPassword, ConfirmNewPassword) => ({
+  type: CHANGE_PASSWORD_REQUEST,
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.ChangePassword(),
+      data: {
+        CurrentPassword: Current,
+        NewPassword,
+        ConfirmNewPassword
+      }
     }
   }
 });
