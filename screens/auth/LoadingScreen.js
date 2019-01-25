@@ -21,17 +21,25 @@ class AuthLoadingScreen extends React.Component {
   }
 
   navigateToApp() {
-    const { email, accessToken, refreshToken, getProfile } = this.props;
+    const { email, appToken, accessToken, refreshToken } = this.props;
 
-    // Required, so user's access token doesn't gets overrided by app's access
-    // token from AuthLoadingScreen's componentDidMount:
-    this.props.setAccessToken(accessToken);
+    if (accessToken) {
+      // Required, so user's access token doesn't gets overrided by app's access
+      // token from AuthLoadingScreen's componentDidMount:
+      this.props.setAccessToken(accessToken);
 
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    getProfile()
-      .then(this.handleAuthorized)
-      .catch(this.handleUnauthorized);
+      // This will switch to the App screen or Auth screen and this loading
+      // screen will be unmounted and thrown away.
+      this.props
+        .getProfile()
+        .then(this.handleAuthorized)
+        .catch(this.handleUnauthorized);
+    } else if (appToken) {
+      // If the user is not logged-in, we probably want to use the app internal
+      // access token (for endpoints like login etc.):
+      this.props.setAccessToken(appToken);
+      this.handleUnauthorized();
+    }
   }
 
   handleAuthorized = async response => {
