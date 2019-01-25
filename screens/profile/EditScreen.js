@@ -1,10 +1,21 @@
 import React from "react";
-import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
+import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
 
 import Button from "../../components/Button";
+import Error from "../../components/Error";
 import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
+import {
+  EMAIL,
+  updateProfile,
+  setNickname,
+  setFirstname,
+  setLastname,
+  setEmail,
+  setPhoto
+} from "../../store/reducers/profile";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -17,41 +28,101 @@ class ProfileEditScreen extends React.Component {
   });
 
   state = {
-    firstName: null,
-    lastName: null,
-    email: null,
-    login: null
+    firstName: this.props.firstname,
+    lastName: this.props.lastname,
+    login: this.props.nickname,
+    email: this.props.email,
+    photo: this.props.photo,
+
+    error: {
+      firstName: null,
+      lastName: null,
+      login: null,
+      email: null,
+      photo: null,
+      other: null
+    }
   };
 
   editProfile = event => {
-    console.log("Updating profile", this.state);
+    const { login, firstName, lastName, email } = this.state;
+    const { updateProfile } = this.props;
+
+    updateProfile(login, firstName, lastName, email)
+      .then(this.handleSuccess)
+      .catch(this.handleError);
+  };
+
+  handleSuccess = async response => {
+    await AsyncStorage.setItem(EMAIL, this.state.email);
+
+    // Update local store (here because update endpoint doesn't return updated
+    // data):
+    this.props.setNickname(this.state.login);
+    this.props.setFirstname(this.state.firstName);
+    this.props.setLastname(this.state.lastName);
+    this.props.setEmail(this.state.email);
+    this.props.setPhoto(this.state.photo);
+
+    // Go back:
+    this.props.navigation.navigate(Routes.PROFILE_MENU);
+  };
+
+  handleError = async response => {
+    const { data } = response.error.response;
+
+    const error = {
+      firstName: null,
+      lastName: null,
+      login: null,
+      email: null,
+      photo: null,
+      other: null
+    };
+
+    if (data.Nickname) error.login = data.Nickname;
+    if (data.Firstname) error.firstName = data.Firstname;
+    if (data.Lastname) error.lastName = data.Lastname;
+    if (data.Email) error.email = data.Email;
+    if (data.Photo) error.other = data.Photo;
+    if (data.Error) error.other = data.Error;
+
+    this.setState({ error });
   };
 
   render() {
+    const { firstName, lastName, email, login, photo, error } = this.state;
+
     return (
       <View style={defaultStyles.container}>
         <View style={styles.form}>
+          {error.other ? <Error message={error.other} /> : null}
+
           <InputWithLabel
             label="Imię"
-            value={this.state.firstName}
+            value={firstName}
+            error={error.firstName}
             onChangeText={firstName => this.setState({ firstName })}
           />
 
           <InputWithLabel
             label="Nazwisko"
-            value={this.state.lastName}
+            value={lastName}
+            error={error.lastName}
             onChangeText={lastName => this.setState({ lastName })}
           />
 
           <InputWithLabel
             label="Email"
-            value={this.state.email}
+            value={email}
+            error={error.email}
             onChangeText={email => this.setState({ email })}
           />
 
           <InputWithLabel
             label="Nick"
-            value={this.state.login}
+            value={login}
+            error={error.login}
             onChangeText={login => this.setState({ login })}
           />
         </View>
@@ -76,4 +147,23 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileEditScreen;
+const mapStateToProps = state => ({
+  // …
+  nickname: state.profile.nickname,
+  firstname: state.profile.firstname,
+  lastname: state.profile.lastname,
+  email: state.profile.email,
+  photo: state.profile.photo
+});
+
+const mapDispatchToProps = {
+  // …
+  updateProfile,
+  setNickname,
+  setFirstname,
+  setLastname,
+  setEmail,
+  setPhoto
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileEditScreen);
