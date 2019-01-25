@@ -111,10 +111,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   // …
-  email: state.profile.email,
-  appToken: state.auth.appToken,
-  accessToken: state.auth.accessToken,
-  refreshToken: state.auth.refreshToken
 });
 
 const mapDispatchToProps = {
