@@ -47,39 +47,47 @@ class AuthRegisterScreen extends React.Component {
 
   registerWithCredentials = () => {
     const { email, password, nickname } = this.state;
-    const { register, navigation } = this.props;
+    const { register } = this.props;
 
-    register(email, password, nickname).then(async response => {
-      if (!response.error) {
-        try {
-          const { accessToken, refreshToken } = response.payload.data;
+    register(email, password, nickname)
+      .then(this.handleSuccess)
+      .catch(this.handleError);
+  };
 
-          await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
-          await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
-        } catch (err) {
-          console.error(err);
-        }
+  handleSuccess = async response => {
+    if (response.error) {
+      return this.handleError(response);
+    }
 
-        navigation.navigate(Routes.DASHBOARD);
-      } else {
-        const { data } = response.error.response;
+    try {
+      const { accessToken, refreshToken } = response.payload.data;
 
-        const error = {
-          nickname: null,
-          password: null,
-          email: null,
-          other: null
-        };
+      await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
+      await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
+    } catch (err) {
+      console.error(err);
+    }
 
-        if (data.Nickname) error.nickname = data.Nickname;
-        if (data.Password) error.password = data.Password;
-        if (data.Email) error.email = data.Email;
-        if (data.Error) error.other = data.Error;
+    // Triggers profile fetch and redirects to the dashboard screen:
+    this.props.navigation.navigate(Routes.AUTH_LOADING);
+  };
 
-        console.debug(error, data);
-        this.setState({ error });
-      }
-    });
+  handleError = async response => {
+    const { data } = response.error.response;
+
+    const error = {
+      nickname: null,
+      password: null,
+      email: null,
+      other: null
+    };
+
+    if (data.Nickname) error.nickname = data.Nickname;
+    if (data.Password) error.password = data.Password;
+    if (data.Email) error.email = data.Email;
+    if (data.Error) error.other = data.Error;
+
+    this.setState({ error });
   };
 
   navigateToTOS = () => {
