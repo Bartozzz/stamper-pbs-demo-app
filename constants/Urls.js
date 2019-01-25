@@ -26,6 +26,10 @@ const V1 = {
       return `${Server.V1}/Account/ForgotPassword`;
     },
 
+    ChangePassword() {
+      return `${Server.V1}/Account/ChangePassword`;
+    },
+
     Register() {
       return `${Server.V1}/Account/Register`;
     },
@@ -38,20 +42,20 @@ const V1 = {
       return `${Server.V1}/Account/Logout`;
     },
 
-    GetProfile() {
-      return `${Server.V1}/Account/GetProfile`;
+    RefreshToken() {
+      return `${Server.V1}/Account/RefreshToken`;
     },
 
-    UpdatePhoto() {
-      return `${Server.V1}/Account/UpdatePhoto`;
+    GetProfile() {
+      return `${Server.V1}/Account/GetProfile`;
     },
 
     UpdateProfile() {
       return `${Server.V1}/Account/UpdateProfile`;
     },
 
-    ChangePassword() {
-      return `${Server.V1}/Account/ChangePassword`;
+    UpdatePhoto() {
+      return `${Server.V1}/Account/UpdatePhoto`;
     },
 
     GetTermsAndConditions() {
@@ -104,5 +108,16 @@ const V1 = {
   }
 };
 
+// Those endpoints doesn't require Authorization header:
+const publicUrls = [
+  V1.Account.ApplicationToken(),
+  V1.Account.RefreshToken(),
+  V1.Account.Register(),
+  V1.Account.ExternalRegister(),
+  V1.Account.Login(),
+  V1.Account.ExternalLogin(),
+  V1.Account.GetTermsAndConditions()
+];
+
 export default V1;
-export { Server, V1 };
+export { Server, V1, publicUrls };
