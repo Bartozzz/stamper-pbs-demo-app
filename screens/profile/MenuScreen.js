@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Hamburger from "../../components/Hamburger";
 
@@ -20,18 +21,15 @@ class ProfileMenuScreen extends React.Component {
   });
 
   render() {
-    const { navigation } = this.props;
+    const { nickname, email, photo, navigation } = this.props;
 
     return (
       <View style={defaultStyles.container}>
         <View style={styles.menu}>
-          <Image
-            style={styles.avatar}
-            source={{ uri: "https://www.w3schools.com/howto/img_avatar.png" }}
-          />
+          <Image style={styles.avatar} source={{ uri: photo }} />
 
-          <Text style={styles.login}>Sonik923</Text>
-          <Text style={styles.email}>zosia@gmail.com</Text>
+          <Text style={styles.login}>{nickname}</Text>
+          <Text style={styles.email}>{email}</Text>
 
           <View style={styles.menuSpacer} />
 
@@ -124,4 +122,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileMenuScreen;
+const mapStateToProps = state => ({
+  // …
+  nickname: state.profile.nickname,
+  email: state.profile.email,
+  photo: state.profile.photo
+});
+
+const mapDispatchToProps = {
+  // …
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenuScreen);
