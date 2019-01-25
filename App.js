@@ -4,10 +4,13 @@ import { AppLoading, Asset, Font, Icon } from "expo";
 import { AsyncStorage, Platform, StatusBar } from "react-native";
 import AppContainer from "./navigation/AppNavigator";
 import configureStore from "./store";
+import { EMAIL, setEmail } from "./store/reducers/profile";
 import { QRDATA_URL, setUrl } from "./store/reducers/qrdata";
 import {
+  EXPIRY_DATE,
   ACCESS_TOKEN,
   REFRESH_TOKEN,
+  setExpiryDate,
   setAccessToken,
   setRefreshToken
 } from "./store/reducers/auth";
@@ -44,11 +47,21 @@ export default class App extends React.Component {
   _loadStorageAsync = async () => {
     try {
       const url = await AsyncStorage.getItem(QRDATA_URL);
+      const email = await AsyncStorage.getItem(EMAIL);
+      const expiryDate = await AsyncStorage.getItem(EXPIRY_DATE);
       const accessToken = await AsyncStorage.getItem(ACCESS_TOKEN);
       const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN);
 
       if (url !== null) {
         store.dispatch(setUrl(url));
+      }
+
+      if (email !== null) {
+        store.dispatch(setEmail(email));
+      }
+
+      if (expiryDate !== null) {
+        store.dispatch(setExpiryDate(expiryDate));
       }
 
       if (accessToken !== null) {
