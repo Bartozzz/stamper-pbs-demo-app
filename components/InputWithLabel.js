@@ -8,6 +8,38 @@ class InputWithLabel extends Component {
     isFocused: false
   };
 
+  get inputStyle() {
+    if (this.error) {
+      return styles.inputContainerErrored;
+    } else if (this.state.isFocused) {
+      return styles.inputContainerFocused;
+    }
+  }
+
+  get inputColor() {
+    if (this.error) {
+      return colors.error;
+    } else if (this.state.isFocused) {
+      return colors.color;
+    } else {
+      return colors.inputBorder;
+    }
+  }
+
+  get error() {
+    const { error } = this.props;
+
+    if (Array.isArray(error)) {
+      if (error.length) {
+        return error.join(". ") + ".";
+      }
+    } else if (error) {
+      return error + ".";
+    } else {
+      return null;
+    }
+  }
+
   handleFocus = () => {
     this.setState({
       isFocused: true
@@ -24,33 +56,38 @@ class InputWithLabel extends Component {
     const { label, ...rest } = this.props;
     const { isFocused } = this.state;
 
-    const placeholderColor = isFocused ? colors.color : colors.inputBorder;
-    const inputStyle = isFocused ? styles.inputContainerFocused : null;
-
     return (
-      <View style={[styles.inputContainer, inputStyle]}>
-        <TextInput
-          {...rest}
-          placeholderTextColor={placeholderColor}
-          style={styles.inputStyle}
-          underlineColorAndroid="transparent"
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
+      <View style={[styles.inputPadder]}>
+        <View style={[styles.inputContainer, this.inputStyle]}>
+          <TextInput
+            {...rest}
+            placeholderTextColor={this.inputColor}
+            style={styles.inputStyle}
+            underlineColorAndroid="transparent"
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
 
-        <Text style={styles.inputLabel}>{label}</Text>
+          <Text style={styles.inputLabel}>{label}</Text>
+        </View>
+
+        {this.error ? (
+          <Text style={styles.inputError}>{this.error}</Text>
+        ) : null}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  inputPadder: {
+    marginVertical: 15
+  },
+
   inputContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-
-    marginVertical: 15,
 
     borderRadius: 8,
     borderWidth: 1.5,
@@ -58,6 +95,9 @@ const styles = StyleSheet.create({
   },
   inputContainerFocused: {
     borderColor: colors.color
+  },
+  inputContainerErrored: {
+    borderColor: colors.error
   },
 
   inputLabel: {
@@ -76,6 +116,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: layout.fontText,
     color: colors.color
+  },
+
+  inputError: {
+    color: colors.error,
+    marginHorizontal: 17,
+    marginTop: 2
   }
 });
 
