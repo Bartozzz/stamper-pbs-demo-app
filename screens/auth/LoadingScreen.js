@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ActivityIndicator, AsyncStorage, View } from "react-native";
-
-import { authorize } from "../../store/reducers/auth";
+import { authorize, setAccessToken } from "../../store/reducers/auth";
+import { EMAIL, getProfile } from "../../store/reducers/profile";
 import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 import styles from "../../constants/Styles";
@@ -21,17 +21,30 @@ class AuthLoadingScreen extends React.Component {
   }
 
   navigateToApp() {
-    const { accessToken, refreshToken } = this.props;
+    const { email, accessToken, refreshToken, getProfile } = this.props;
 
-    console.debug("AT:", accessToken);
-    console.debug("RT:", refreshToken);
+    // Required, so user's access token doesn't gets overrided by app's access
+    // token from AuthLoadingScreen's componentDidMount:
+    this.props.setAccessToken(accessToken);
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(
-      accessToken ? Routes.DASHBOARD : Routes.AUTH
-    );
+    getProfile()
+      .then(this.handleAuthorized)
+      .catch(this.handleUnauthorized);
   }
+
+  handleAuthorized = async response => {
+    // await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
+    // await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
+    await AsyncStorage.setItem(EMAIL, response.payload.data.email);
+
+    return this.props.navigation.navigate(Routes.DASHBOARD);
+  };
+
+  handleUnauthorized = async err => {
+    return this.props.navigation.navigate(Routes.AUTH);
+  };
 
   render() {
     return (
@@ -44,6 +57,7 @@ class AuthLoadingScreen extends React.Component {
 
 const mapStateToProps = state => ({
   // …
+  email: state.profile.email,
   appToken: state.auth.appToken,
   accessToken: state.auth.accessToken,
   refreshToken: state.auth.refreshToken
@@ -51,7 +65,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // …
-  authorize
+  authorize,
+  getProfile,
+  setAccessToken
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);

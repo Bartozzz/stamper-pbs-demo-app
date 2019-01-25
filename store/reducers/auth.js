@@ -3,12 +3,14 @@ import Secret from "../../constants/Secret";
 import axios from "../axios";
 
 // Keys used for local storage:
+export const EXPIRY_DATE = "expiry_date";
 export const ACCESS_TOKEN = "access_token";
 export const REFRESH_TOKEN = "refresh_token";
 
 // Actions
-export const SET_ACCESS_TOKEN = "app/AUTH/SET/ACCESS_TOKEN";
-export const SET_REFRESH_TOKEN = "app/AUTH/SET/REFRESH_TOKEN";
+export const SET_EXPIRY_DATE = "APP/AUTH/SET/EXPIRY_DATE";
+export const SET_ACCESS_TOKEN = "APP/AUTH/SET/ACCESS_TOKEN";
+export const SET_REFRESH_TOKEN = "APP/AUTH/SET/REFRESH_TOKEN";
 export const ACCESS_REQUEST = "APP/AUTH/ACCESS_REQUEST";
 export const ACCESS_SUCCESS = "APP/AUTH/ACCESS_SUCCESS";
 export const ACCESS_FAIL = "APP/AUTH/ACCESS_FAIL";
@@ -25,12 +27,19 @@ export const LOGOUT_FAIL = "APP/AUTH/LOGOUT_FAIL";
 const initialState = {
   fetchingData: false,
   appToken: null,
+  expiryDate: null,
   accessToken: null,
   refreshToken: null
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case SET_EXPIRY_DATE:
+      return {
+        ...state,
+        expiryDate: action.payload
+      };
+
     case SET_ACCESS_TOKEN:
       const header = `Bearer ${action.payload}`;
 
@@ -84,12 +93,14 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         fetchingData: false,
+        expiryDate: null,
         accessToken: null,
         refreshToken: null
       };
 
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS: {
+      const expiryDate = action.payload.data.expiryDate;
       const accessToken = action.payload.data.accessToken;
       const refreshToken = action.payload.data.refreshToken;
       const header = `Bearer ${accessToken}`;
@@ -100,6 +111,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         fetchingData: false,
+        expiryDate: expiryDate,
         accessToken: accessToken,
         refreshToken: refreshToken
       };
@@ -161,6 +173,11 @@ export const logout = () => ({
       url: Url.Account.Logout()
     }
   }
+});
+
+export const setExpiryDate = expiryDate => ({
+  type: SET_EXPIRY_DATE,
+  payload: expiryDate
 });
 
 export const setAccessToken = accessToken => ({
