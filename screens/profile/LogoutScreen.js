@@ -1,10 +1,28 @@
 import React from "react";
-import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
+import {
+  StyleSheet,
+  AsyncStorage,
+  Image,
+  Text,
+  View,
+  TouchableOpacity
+} from "react-native";
 
 import Button from "../../components/Button";
 import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
+import {
+  EXPIRY_DATE,
+  ACCESS_TOKEN,
+  REFRESH_TOKEN,
+  logout,
+  setExpiryDate,
+  setAccessToken,
+  setRefreshToken
+} from "../../store/reducers/auth";
+import { EMAIL } from "../../store/reducers/profile";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -18,10 +36,23 @@ class ProfileLogoutScreen extends React.Component {
     headerRight: <Hamburger navigation={navigation} />
   });
 
-  accept = event => {
-    console.log("Logging out");
+  accept = async event => {
+    const { navigation, logout } = this.props;
 
-    this.props.navigation.navigate(Routes.AUTH_LOADING);
+    // Clear local persistent storage:
+    await AsyncStorage.multiRemove([
+      EXPIRY_DATE,
+      ACCESS_TOKEN,
+      REFRESH_TOKEN,
+      EMAIL
+    ]);
+
+    // Clear local volatile storage:
+    this.props.setExpiryDate(null);
+    this.props.setAccessToken(null);
+    this.props.setRefreshToken(null);
+
+    logout().finally(() => navigation.navigate(Routes.AUTH_LOADING));
   };
 
   refuse = event => {
@@ -78,4 +109,22 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileLogoutScreen;
+const mapStateToProps = state => ({
+  // …
+  email: state.profile.email,
+  appToken: state.auth.appToken,
+  accessToken: state.auth.accessToken,
+  refreshToken: state.auth.refreshToken
+});
+
+const mapDispatchToProps = {
+  // …
+  logout,
+  setExpiryDate,
+  setAccessToken,
+  setRefreshToken
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ProfileLogoutScreen
+);
