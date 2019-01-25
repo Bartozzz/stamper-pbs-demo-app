@@ -16,13 +16,14 @@ import { setUrl, QRDATA_URL } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Hamburger from "../../components/Hamburger";
+import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
 class ScannerUrlScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "QR Code tester",
+    title: i18n.t("navigation.scanner.url"),
     headerTitle: "",
     headerRight: <Hamburger navigation={navigation} />,
     headerStyle: {
@@ -55,7 +56,7 @@ class ScannerUrlScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}
         >
           <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>QR Code{"\n"}tester</Text>
+            <Text style={styles.titleText}>{i18n.t("scanner.url.title")}</Text>
           </View>
 
           <View style={styles.inputContainer}>
@@ -67,7 +68,7 @@ class ScannerUrlScreen extends React.Component {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Save" onPress={this.onSavePress} />
+            <Button title={i18n.t("save")} onPress={this.onSavePress} />
           </View>
         </ScrollView>
       </View>

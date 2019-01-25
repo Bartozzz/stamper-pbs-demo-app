@@ -2,11 +2,12 @@ import React from "react";
 import { StyleSheet, View, ScrollView, Dimensions } from "react-native";
 import HTML from "react-native-render-html";
 
+import i18n from "../translations";
 import colors from "../constants/Colors";
 
 class TermsOfServiceScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Regulamin"
+    title: i18n.t("navigation.tos")
   });
 
   render() {

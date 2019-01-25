@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -21,7 +22,7 @@ const MENU_SCANNER = "MENU_SCANNER";
 
 class DashboardMainScreen extends React.Component {
   static navigationOptions = {
-    title: "Dashboard",
+    title: i18n.t("navigation.dashboard.main"),
     header: null
   };
 
@@ -93,7 +94,7 @@ class DashboardMainScreen extends React.Component {
                 style={[styles.boxIcon, { width: 60, height: 60 }]}
               />
 
-              <Text style={styles.boxText}>Okolica</Text>
+              <Text style={styles.boxText}>{i18n.t("dashboard.map")}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -108,7 +109,7 @@ class DashboardMainScreen extends React.Component {
                 style={[styles.boxIcon, { width: 60, height: 60 }]}
               />
 
-              <Text style={styles.boxText}>Portfel</Text>
+              <Text style={styles.boxText}>{i18n.t("dashboard.wallet")}</Text>
             </TouchableOpacity>
           </View>
 
@@ -125,7 +126,7 @@ class DashboardMainScreen extends React.Component {
                 style={[styles.boxIcon, { width: 60, height: 60 }]}
               />
 
-              <Text style={styles.boxText}>Nagrody</Text>
+              <Text style={styles.boxText}>{i18n.t("dashboard.prizes")}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -140,7 +141,7 @@ class DashboardMainScreen extends React.Component {
                 style={[styles.boxIcon, { width: 60, height: 60 }]}
               />
 
-              <Text style={styles.boxText}>Twój profil</Text>
+              <Text style={styles.boxText}>{i18n.t("dashboard.profile")}</Text>
             </TouchableOpacity>
           </View>
 
@@ -157,7 +158,7 @@ class DashboardMainScreen extends React.Component {
                 style={[styles.boxIcon, { width: 60, height: 60 }]}
               />
 
-              <Text style={styles.boxText}>Market</Text>
+              <Text style={styles.boxText}>{i18n.t("dashboard.market")}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -167,7 +168,7 @@ class DashboardMainScreen extends React.Component {
               onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_SCANNER)}
             >
-              <Text style={styles.boxText}>Skanuj</Text>
+              <Text style={styles.boxText}>{i18n.t("dashboard.scanner")}</Text>
             </TouchableOpacity>
           </View>
         </View>

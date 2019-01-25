@@ -8,6 +8,8 @@ import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import { changePassword } from "../../store/reducers/auth";
+
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -15,7 +17,7 @@ import layout from "../../constants/Layout";
 
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Zmiana hasła",
+    title: i18n.t("navigation.profile.password"),
     headerRight: <Hamburger navigation={navigation} />
   });
 
@@ -74,7 +76,7 @@ class ProfilePasswordScreen extends React.Component {
           {error.other ? <Error message={error.other} /> : null}
 
           <InputWithLabel
-            label="Hasło aktualne"
+            label={i18n.t("profile.password.current")}
             value={currPassword}
             error={error.currPassword}
             onChangeText={currPassword => this.setState({ currPassword })}
@@ -83,7 +85,7 @@ class ProfilePasswordScreen extends React.Component {
           />
 
           <InputWithLabel
-            label="Nowe hasło"
+            label={i18n.t("profile.password.password")}
             value={newPasswordA}
             error={error.newPasswordA}
             onChangeText={newPasswordA => this.setState({ newPasswordA })}
@@ -92,7 +94,7 @@ class ProfilePasswordScreen extends React.Component {
           />
 
           <InputWithLabel
-            label="Potwierdź hasło"
+            label={i18n.t("profile.password.confirm")}
             value={newPasswordB}
             error={error.newPasswordB}
             onChangeText={newPasswordB => this.setState({ newPasswordB })}
@@ -102,7 +104,7 @@ class ProfilePasswordScreen extends React.Component {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button title="Zapisz zmiany" onPress={this.editPassword} />
+          <Button title={i18n.t("profile.save")} onPress={this.editPassword} />
         </View>
       </View>
     );

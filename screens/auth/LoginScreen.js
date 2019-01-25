@@ -16,6 +16,7 @@ import InputWithIcon from "../../components/InputWithIcon";
 
 import { login, ACCESS_TOKEN, REFRESH_TOKEN } from "../../store/reducers/auth";
 
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -23,7 +24,7 @@ import layout from "../../constants/Layout";
 
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
-    title: "Logowanie",
+    title: i18n.t("navigation.auth.login"),
     header: null
   };
 
@@ -108,7 +109,7 @@ class AuthLoginScreen extends React.Component {
           <InputWithIcon
             iconName="ios-contact"
             iconSize={20}
-            placeholder="Email"
+            placeholder={i18n.t("auth.email")}
             value={email}
             error={error.email}
             onChangeText={email => this.setState({ email })}
@@ -118,7 +119,7 @@ class AuthLoginScreen extends React.Component {
           <InputWithIcon
             iconName="ios-lock"
             iconSize={20}
-            placeholder="Password"
+            placeholder={i18n.t("auth.password")}
             value={password}
             error={error.password}
             onChangeText={password => this.setState({ password })}
@@ -132,7 +133,10 @@ class AuthLoginScreen extends React.Component {
             navigateToRegister={this.navigateToRegister}
           />
 
-          <Button title="Zaloguj się" onPress={this.loginWithCredentials} />
+          <Button
+            title={i18n.t("auth.login")}
+            onPress={this.loginWithCredentials}
+          />
         </ScrollView>
       </View>
     );
@@ -143,7 +147,7 @@ export const AuthLoginScreenLinks = props => (
   <View>
     <View style={styles.loginContainerTextContainer}>
       <Text style={[styles.loginContainerText, styles.loginContainerTextA]}>
-        Zaloguj się z
+        {i18n.t("auth.loginWith")}
       </Text>
 
       <TouchableOpacity onPress={props.loginWithFacebook}>
@@ -160,7 +164,7 @@ export const AuthLoginScreenLinks = props => (
       </TouchableOpacity>
 
       <Text style={[styles.loginContainerText, styles.loginContainerTextA]}>
-        lub
+        {i18n.t("auth.loginOr")}
       </Text>
 
       <TouchableOpacity onPress={props.loginWithGoogle}>
@@ -179,7 +183,7 @@ export const AuthLoginScreenLinks = props => (
 
     <TouchableOpacity onPress={props.navigateToRegister}>
       <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
-        Rejestracja
+        {i18n.t("auth.register")}
       </Text>
     </TouchableOpacity>
   </View>

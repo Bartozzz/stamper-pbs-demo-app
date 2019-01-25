@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import i18n from "../translations";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
@@ -13,7 +14,7 @@ class Error extends Component {
       return message;
     } else {
       console.error(message);
-      return "Internal error";
+      return i18n.t("errorInternal");
     }
   }
 
@@ -26,7 +27,7 @@ class Error extends Component {
 
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorHead}>Something bad happened:</Text>
+        <Text style={styles.errorHead}>{i18n.t("error")}:</Text>
         <Text style={styles.errorText}>{message}</Text>
       </View>
     );

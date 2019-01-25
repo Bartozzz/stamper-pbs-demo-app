@@ -14,6 +14,8 @@ import { getData } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Error from "../../components/Error";
+
+import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
@@ -52,15 +54,12 @@ class ScannerOutputScreen extends React.Component {
 
   renderEmpty = () => {
     return (
-      <Text style={styles.flatListItem}>
-        There's not data to fetch. Make sure you've scanned a correct QR Code
-        and wrote a correct URL.
-      </Text>
+      <Text style={styles.flatListItem}>{i18n.t("scanner.output.empty")}</Text>
     );
   };
 
   renderLoading = () => {
-    return <Text style={styles.loading}>Loading data…</Text>;
+    return <Text style={styles.loading}>{i18n.t("loading")}</Text>;
   };
 
   renderContent = () => {
@@ -93,7 +92,7 @@ class ScannerOutputScreen extends React.Component {
 
         <View style={styles.buttonContainer}>
           <Button
-            title="Scanner"
+            title={i18n.t("scanner.output.scanner")}
             onPress={() => this.props.navigation.navigate(Routes.SCANNER_SCAN)}
           />
         </View>

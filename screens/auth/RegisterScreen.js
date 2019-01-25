@@ -19,6 +19,8 @@ import {
   ACCESS_TOKEN,
   REFRESH_TOKEN
 } from "../../store/reducers/auth";
+
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -26,7 +28,7 @@ import layout from "../../constants/Layout";
 
 class AuthRegisterScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Rejestracja"
+    title: i18n.t("navigation.auth.register")
   });
 
   state = {
@@ -107,7 +109,7 @@ class AuthRegisterScreen extends React.Component {
           <InputWithIcon
             iconName="ios-contact"
             iconSize={20}
-            placeholder="Login"
+            placeholder={i18n.t("auth.nickname")}
             value={nickname}
             error={error.nickname}
             onChangeText={nickname => this.setState({ nickname })}
@@ -117,7 +119,7 @@ class AuthRegisterScreen extends React.Component {
           <InputWithIcon
             iconName="ios-at"
             iconSize={20}
-            placeholder="Email"
+            placeholder={i18n.t("auth.email")}
             value={email}
             error={error.email}
             onChangeText={email => this.setState({ email })}
@@ -127,7 +129,7 @@ class AuthRegisterScreen extends React.Component {
           <InputWithIcon
             iconName="ios-lock"
             iconSize={20}
-            placeholder="Password"
+            placeholder={i18n.t("auth.password")}
             value={password}
             error={error.password}
             onChangeText={password => this.setState({ password })}
@@ -138,7 +140,7 @@ class AuthRegisterScreen extends React.Component {
           <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
 
           <Button
-            title="Zarejestruj się"
+            title={i18n.t("auth.register")}
             onPress={this.registerWithCredentials}
           />
         </ScrollView>
@@ -150,12 +152,13 @@ class AuthRegisterScreen extends React.Component {
 export const AuthRegisterScreenLinks = props => (
   <View style={styles.regContainerTextContainer}>
     <Text style={[styles.regContainerText, styles.regContainerTextA]}>
-      Kontynuując akceptujesz Nasz
+      {i18n.t("auth.tosAccept")}
     </Text>
 
     <TouchableOpacity onPress={props.navigateToTOS}>
       <Text style={[styles.regContainerText, styles.regBold]}>
-        Regulamin{"  "}
+        {i18n.t("auth.tos")}
+        {"  "}
       </Text>
     </TouchableOpacity>
   </View>

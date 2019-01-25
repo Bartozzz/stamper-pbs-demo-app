@@ -16,6 +16,8 @@ import {
   setEmail,
   setPhoto
 } from "../../store/reducers/profile";
+
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -23,7 +25,7 @@ import layout from "../../constants/Layout";
 
 class ProfileEditScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Edycja profilu",
+    title: i18n.t("navigation.profile.edit"),
     headerRight: <Hamburger navigation={navigation} />
   });
 
@@ -99,28 +101,28 @@ class ProfileEditScreen extends React.Component {
           {error.other ? <Error message={error.other} /> : null}
 
           <InputWithLabel
-            label="Imię"
+            label={i18n.t("auth.firstname")}
             value={firstName}
             error={error.firstName}
             onChangeText={firstName => this.setState({ firstName })}
           />
 
           <InputWithLabel
-            label="Nazwisko"
+            label={i18n.t("auth.lastname")}
             value={lastName}
             error={error.lastName}
             onChangeText={lastName => this.setState({ lastName })}
           />
 
           <InputWithLabel
-            label="Email"
+            label={i18n.t("auth.email")}
             value={email}
             error={error.email}
             onChangeText={email => this.setState({ email })}
           />
 
           <InputWithLabel
-            label="Nick"
+            label={i18n.t("auth.nickname")}
             value={login}
             error={error.login}
             onChangeText={login => this.setState({ login })}
@@ -128,7 +130,7 @@ class ProfileEditScreen extends React.Component {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button title="Zapisz zmiany" onPress={this.editProfile} />
+          <Button title={i18n.t("profile.save")} onPress={this.editProfile} />
         </View>
       </View>
     );

@@ -23,6 +23,8 @@ import {
   setRefreshToken
 } from "../../store/reducers/auth";
 import { EMAIL } from "../../store/reducers/profile";
+
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -32,7 +34,7 @@ const logoutIcon = require("../../assets/images/icons/next_icon.png");
 
 class ProfileLogoutScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Wyloguj się",
+    title: i18n.t("navigation.profile.logout"),
     headerRight: <Hamburger navigation={navigation} />
   });
 
@@ -65,14 +67,21 @@ class ProfileLogoutScreen extends React.Component {
         <View style={[defaultStyles.center, styles.logout]}>
           <Image style={styles.logoutIcon} source={logoutIcon} />
 
-          <Text style={styles.logoutText}>
-            Jesteś pewien {"\n"} że chcesz się wylogować?
-          </Text>
+          <Text style={styles.logoutText}>{i18n.t("profile.logout.sure")}</Text>
         </View>
 
         <View style={[defaultStyles.row, styles.buttons]}>
-          <Button style={styles.button} title="Tak" onPress={this.accept} />
-          <Button style={styles.button} title="Nie" onPress={this.refuse} />
+          <Button
+            style={styles.button}
+            title={i18n.t("yes")}
+            onPress={this.accept}
+          />
+
+          <Button
+            style={styles.button}
+            title={i18n.t("no")}
+            onPress={this.refuse}
+          />
         </View>
       </View>
     );

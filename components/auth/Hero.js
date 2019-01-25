@@ -1,15 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import i18n from "../../translations";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
 export default function AuthHero(props) {
   return (
     <View style={[styles.hero, props.style]}>
-      <Text style={styles.heroTextA}>Dołącz do</Text>
-      <Text style={styles.heroTextA}>bardziej lojalnych!</Text>
-      <Text style={styles.heroTextB}>Z nami wiele możesz, nic nie musisz.</Text>
+      <Text style={styles.heroTextA}>{i18n.t("auth.hero.slogan1")}</Text>
+      <Text style={styles.heroTextB}>{i18n.t("auth.hero.slogan2")}</Text>
     </View>
   );
 }

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Hamburger from "../../components/Hamburger";
 
+import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -10,7 +11,7 @@ import layout from "../../constants/Layout";
 
 class ProfileMenuScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Dashboard",
+    title: i18n.t("navigation.profile.menu"),
     headerTitle: "",
     headerRight: <Hamburger navigation={navigation} />,
     headerStyle: {
@@ -37,7 +38,9 @@ class ProfileMenuScreen extends React.Component {
             style={styles.menuItem}
             onPress={() => navigation.navigate(Routes.PROFILE_EDIT)}
           >
-            <Text style={styles.menuItemText}>Edytuj profil</Text>
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.edit")}
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.menuSpacer} />
@@ -46,7 +49,9 @@ class ProfileMenuScreen extends React.Component {
             style={styles.menuItem}
             onPress={() => navigation.navigate(Routes.PROFILE_PASSWORD)}
           >
-            <Text style={styles.menuItemText}>Zmiana hasła</Text>
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.password")}
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.menuSpacer} />
@@ -55,7 +60,9 @@ class ProfileMenuScreen extends React.Component {
             style={styles.menuItem}
             onPress={() => navigation.navigate(Routes.PROFILE_TOS)}
           >
-            <Text style={styles.menuItemText}>Regulamin</Text>
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.tos")}
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.menuSpacer} />
@@ -65,7 +72,9 @@ class ProfileMenuScreen extends React.Component {
             style={styles.menuItem}
             onPress={() => navigation.navigate(Routes.PROFILE_LOGOUT)}
           >
-            <Text style={styles.menuItemText}>Wyloguj się</Text>
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.logout")}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

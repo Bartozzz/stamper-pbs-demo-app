@@ -14,6 +14,7 @@ import {
 import * as Routes from "../../navigation";
 import { setQrc } from "../../store/reducers/qrdata";
 import Button from "../../components/Button";
+import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
 
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Skanuj kod",
+    title: i18n.t("navigation.scanner.scan"),
     headerRight: (
       <TouchableOpacity
         style={styles.next}
@@ -141,7 +142,7 @@ class ScannerScanScreen extends React.Component {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button title="Skanuj kod" onPress={() => null} />
+          <Button title={i18n.t("scanner.scan.action")} onPress={() => null} />
         </View>
       </View>
     );
