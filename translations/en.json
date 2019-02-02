@@ -84,6 +84,10 @@
       "current": "Hasło aktualne",
       "password": "Nowe hasło",
       "confirm": "Potwierdź hasło"
+    },
+
+    "edit": {
+      "changePhoto": "Zmień zdjęcie"
     }
   },
 
@@ -105,6 +109,10 @@
   "errors": {
     "auth": {
       "unauthorized": "Podano złe dane logowania"
+    },
+
+    "edit": {
+      "photo": "Błąd podczas zmiany zdjęcia"
     }
   }
 }

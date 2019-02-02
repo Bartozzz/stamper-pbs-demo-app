@@ -10,6 +10,9 @@ export const PROFILE_GET_FAIL = "APP/PROFILE/GET_FAIL";
 export const PROFILE_UPDATE_REQUEST = "APP/PROFILE/UPDATE_REQUEST";
 export const PROFILE_UPDATE_SUCCESS = "APP/PROFILE/UPDATE_SUCCESS";
 export const PROFILE_UPDATE_FAIL = "APP/PROFILE/UPDATE_FAIL";
+export const PHOTO_UPDATE_REQUEST = "APP/PHOTO/UPDATE_REQUEST";
+export const PHOTO_UPDATE_SUCCESS = "APP/PHOTO/UPDATE_SUCCESS";
+export const PHOTO_UPDATE_FAIL = "APP/PHOTO/UPDATE_FAIL";
 export const PROFILE_SET_NICKNAME = "APP/PROFILE/SET_NICKNAME";
 export const PROFILE_SET_FIRSTNAME = "APP/PROFILE/SET_FIRSTNAME";
 export const PROFILE_SET_LASTNAME = "APP/PROFILE/SET_LASTNAME";
@@ -91,6 +94,19 @@ export const updateProfile = (Nickname, Firstname, Lastname, Email) => ({
         Firstname,
         Lastname,
         Email
+      }
+    }
+  }
+});
+
+export const updatePhoto = Photo => ({
+  types: [PHOTO_UPDATE_REQUEST, PHOTO_UPDATE_SUCCESS, PHOTO_UPDATE_FAIL],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.UpdatePhoto(),
+      data: {
+        Photo
       }
     }
   }

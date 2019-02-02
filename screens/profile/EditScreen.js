@@ -1,14 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
+import {
+  StyleSheet,
+  ActivityIndicator,
+  AsyncStorage,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  Text,
+  View
+} from "react-native";
+import { Permissions, ImagePicker } from "expo";
+import { AntDesign } from "@expo/vector-icons";
 
 import Button from "../../components/Button";
+import Background from "../../components/Background";
 import Error from "../../components/Error";
 import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import {
   EMAIL,
+  updatePhoto,
   updateProfile,
   setNickname,
   setFirstname,
@@ -23,6 +36,8 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
+const BackgroundImage = require("../../assets/backgrounds/logout.png");
+
 class ProfileEditScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.edit"),
@@ -35,6 +50,7 @@ class ProfileEditScreen extends React.Component {
     login: this.props.nickname,
     email: this.props.email,
     photo: this.props.photo,
+    uploading: false,
 
     error: {
       firstName: null,
@@ -43,6 +59,53 @@ class ProfileEditScreen extends React.Component {
       email: null,
       photo: null,
       other: null
+    }
+  };
+
+  uploadImage = async () => {
+    const { uploading } = this.state;
+    const { updatePhoto, setPhoto } = this.props;
+
+    // Already uploading:
+    if (uploading) {
+      return;
+    }
+
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (status === "granted") {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        base64: true,
+        mediaTypes: "Images",
+        allowsEditing: true,
+        aspect: [1, 1]
+      });
+
+      if (!result.cancelled) {
+        const photo = `data:image/jpg;base64,${result.base64}`;
+
+        this.setState({
+          uploading: true
+        });
+
+        updatePhoto(photo)
+          .then(() => {
+            // Update local database:
+            setPhoto(photo);
+
+            // Update component's photo:
+            this.setState({
+              photo: photo,
+              uploading: false
+            });
+          })
+          .catch(err => {
+            this.setState({
+              uploading: false,
+              error: { other: i18n.t("errors.edit.photo") }
+            });
+          });
+      }
     }
   };
 
@@ -97,41 +160,62 @@ class ProfileEditScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <View style={styles.form}>
-          {error.other ? <Error message={error.other} /> : null}
+        <Background source={BackgroundImage}>
+          <TouchableOpacity onPress={this.uploadImage}>
+            <ImageBackground
+              resizeMode="cover"
+              source={{ uri: photo }}
+              style={styles.upload}
+            >
+              {this.state.uploading ? (
+                <ActivityIndicator color="white" size="large" />
+              ) : (
+                <React.Fragment>
+                  <AntDesign name="camerao" size={36} color="white" />
+                  <Text style={styles.uploadText}>
+                    {i18n.t("profile.edit.changePhoto")}
+                  </Text>
+                </React.Fragment>
+              )}
+            </ImageBackground>
+          </TouchableOpacity>
 
-          <InputWithLabel
-            label={i18n.t("auth.firstname")}
-            value={firstName}
-            error={error.firstName}
-            onChangeText={firstName => this.setState({ firstName })}
-          />
+          <View style={styles.form}>
+            {error.other ? <Error message={error.other} /> : null}
 
-          <InputWithLabel
-            label={i18n.t("auth.lastname")}
-            value={lastName}
-            error={error.lastName}
-            onChangeText={lastName => this.setState({ lastName })}
-          />
+            <InputWithLabel
+              label={i18n.t("auth.firstname")}
+              value={firstName}
+              error={error.firstName}
+              onChangeText={firstName => this.setState({ firstName })}
+            />
 
-          <InputWithLabel
-            label={i18n.t("auth.email")}
-            value={email}
-            error={error.email}
-            onChangeText={email => this.setState({ email })}
-          />
+            <InputWithLabel
+              label={i18n.t("auth.lastname")}
+              value={lastName}
+              error={error.lastName}
+              onChangeText={lastName => this.setState({ lastName })}
+            />
 
-          <InputWithLabel
-            label={i18n.t("auth.nickname")}
-            value={login}
-            error={error.login}
-            onChangeText={login => this.setState({ login })}
-          />
-        </View>
+            <InputWithLabel
+              label={i18n.t("auth.email")}
+              value={email}
+              error={error.email}
+              onChangeText={email => this.setState({ email })}
+            />
 
-        <View style={styles.buttonContainer}>
-          <Button title={i18n.t("profile.save")} onPress={this.editProfile} />
-        </View>
+            <InputWithLabel
+              label={i18n.t("auth.nickname")}
+              value={login}
+              error={error.login}
+              onChangeText={login => this.setState({ login })}
+            />
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <Button title={i18n.t("profile.save")} onPress={this.editProfile} />
+          </View>
+        </Background>
       </View>
     );
   }
@@ -140,12 +224,28 @@ class ProfileEditScreen extends React.Component {
 const styles = StyleSheet.create({
   form: {
     flex: 1,
+
+    paddingTop: 15,
     marginHorizontal: 30
   },
 
   buttonContainer: {
     marginBottom: 70,
     marginHorizontal: 30
+  },
+
+  upload: {
+    justifyContent: "center",
+    alignItems: "center",
+
+    width: "100%",
+    height: 200
+  },
+  uploadText: {
+    marginTop: 5,
+
+    fontSize: 10,
+    color: colors.info
   }
 });
 
@@ -160,6 +260,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // …
+  updatePhoto,
   updateProfile,
   setNickname,
   setFirstname,
