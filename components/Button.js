@@ -20,19 +20,23 @@ class Button extends Component {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "900",
     fontFamily: layout.fontHead,
 
     color: colors.color,
     textAlign: "center",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    textShadowColor: "rgba(0, 0, 0, 0.16)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2
   },
 
   buttonStyle: {
-    paddingVertical: 15,
-    paddingHorizontal: 10,
+    justifyContent: "center",
+    alignItems: "center",
 
+    height: 48,
     width: "100%",
 
     backgroundColor: colors.primary,
