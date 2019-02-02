@@ -36,13 +36,13 @@ class Error extends Component {
 
 const styles = StyleSheet.create({
   errorHead: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: layout.fontHead,
     color: colors.color
   },
 
   errorText: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: layout.fontText,
     color: colors.color
   },

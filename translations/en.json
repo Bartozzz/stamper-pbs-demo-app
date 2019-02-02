@@ -49,6 +49,7 @@
 
     "tos": "Regulamin",
     "tosAccept": "Kontynuując akceptujesz Nasz",
+    "dontHaveAccount": "Nie masz konta? Zarejestruj się.",
 
     "hero": {
       "slogan1": "Dołącz do \n bardziej lojalnych!",
@@ -98,6 +99,12 @@
     "output": {
       "empty": "Brak danych do wczytania. Upewnij się, że zeskanowałeś poprawny kod oraz pisałeś właściwy adres URL",
       "scanner": "Skaner"
+    }
+  },
+
+  "errors": {
+    "auth": {
+      "unauthorized": "Podano złe dane logowania"
     }
   }
 }

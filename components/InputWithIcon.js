@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
 
+    height: 47,
+    width: "100%",
+
     borderRadius: 100,
     borderWidth: 1,
     borderStyle: "solid",
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 0,
 
-    fontSize: 20,
+    fontSize: 14,
     fontFamily: layout.fontText,
     color: colors.color
   },

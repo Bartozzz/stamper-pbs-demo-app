@@ -6,7 +6,8 @@ import {
   AsyncStorage,
   TouchableOpacity,
   ScrollView,
-  View
+  View,
+  ImageBackground
 } from "react-native";
 
 import AuthHero from "../../components/auth/Hero";
@@ -21,6 +22,9 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import { getErrorsFromResponse } from "../../helpers/errors";
+
+const BackgroundImage = require("../../assets/backgrounds/password.png");
 
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
@@ -79,17 +83,13 @@ class AuthLoginScreen extends React.Component {
   handleError = async response => {
     const { data } = response.error.response;
 
-    const error = {
-      password: null,
-      email: null,
-      other: null
-    };
-
-    if (data.Password) error.password = data.Password;
-    if (data.Email) error.email = data.Email;
-    if (data.Error) error.other = data.Error;
-
-    this.setState({ error });
+    this.setState({
+      error: getErrorsFromResponse(data, {
+        password: null,
+        email: null,
+        other: null
+      })
+    });
   };
 
   navigateToRegister = () => {
@@ -101,43 +101,50 @@ class AuthLoginScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <AuthHero style={styles.hero} />
+        <ImageBackground
+          source={BackgroundImage}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <AuthHero style={styles.hero} />
 
-        <ScrollView style={styles.loginContainer}>
-          {error.other ? <Error message={error.other} /> : null}
+          <ScrollView style={styles.loginContainer}>
+            {error.other ? (
+              <Error message={i18n.t("errors.auth.unauthorized")} />
+            ) : null}
 
-          <InputWithIcon
-            iconName="ios-contact"
-            iconSize={20}
-            placeholder={i18n.t("auth.email")}
-            value={email}
-            error={error.email}
-            onChangeText={email => this.setState({ email })}
-            autoCapitalize="none"
-          />
+            <InputWithIcon
+              iconName="ios-contact"
+              iconSize={20}
+              placeholder={i18n.t("auth.email")}
+              value={email}
+              error={error.email}
+              onChangeText={email => this.setState({ email })}
+              autoCapitalize="none"
+            />
 
-          <InputWithIcon
-            iconName="ios-lock"
-            iconSize={20}
-            placeholder={i18n.t("auth.password")}
-            value={password}
-            error={error.password}
-            onChangeText={password => this.setState({ password })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
+            <InputWithIcon
+              iconName="ios-lock"
+              iconSize={20}
+              placeholder={i18n.t("auth.password")}
+              value={password}
+              error={error.password}
+              onChangeText={password => this.setState({ password })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-          <AuthLoginScreenLinks
-            loginWithFacebook={this.loginWithFacebook}
-            loginWithGoogle={this.loginWithGoogle}
-            navigateToRegister={this.navigateToRegister}
-          />
+            <AuthLoginScreenLinks
+              loginWithFacebook={this.loginWithFacebook}
+              loginWithGoogle={this.loginWithGoogle}
+              navigateToRegister={this.navigateToRegister}
+            />
 
-          <Button
-            title={i18n.t("auth.login")}
-            onPress={this.loginWithCredentials}
-          />
-        </ScrollView>
+            <Button
+              title={i18n.t("auth.login")}
+              onPress={this.loginWithCredentials}
+            />
+          </ScrollView>
+        </ImageBackground>
       </View>
     );
   }
@@ -183,7 +190,7 @@ export const AuthLoginScreenLinks = props => (
 
     <TouchableOpacity onPress={props.navigateToRegister}>
       <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
-        {i18n.t("auth.register")}
+        {i18n.t("auth.dontHaveAccount")}
       </Text>
     </TouchableOpacity>
   </View>
@@ -199,7 +206,8 @@ const styles = StyleSheet.create({
     fontWeight: "900"
   },
   loginContainer: {
-    marginHorizontal: 30
+    marginHorizontal: 30,
+    paddingTop: 15
   },
   loginContainerTextContainer: {
     flexDirection: "row",
@@ -210,17 +218,17 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   loginContainerTextA: {
-    fontSize: 16,
+    fontSize: 14,
 
     marginTop: 15,
     marginBottom: 10
   },
   loginContainerTextB: {
-    fontSize: 20,
-    fontWeight: "900",
+    color: colors.info,
+    fontSize: 12,
 
-    marginTop: 15,
-    marginBottom: 30
+    marginTop: 10,
+    marginBottom: 25
   }
 });
 
