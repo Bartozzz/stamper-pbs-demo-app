@@ -29,6 +29,10 @@ export function getErrorsFromResponse(response, defaultErrors = {}) {
         errors[errorField] = toArray(errorValue);
       }
     });
+
+    if (Reflect.has(errors, "other") && Reflect.has(response, "Error")) {
+      errors.other = toArray(response.Error);
+    }
   }
 
   return errors;
