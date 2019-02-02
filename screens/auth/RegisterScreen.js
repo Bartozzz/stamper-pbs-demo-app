@@ -6,9 +6,9 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  View,
-  ImageBackground
+  View
 } from "react-native";
+import Background from "../../components/Background";
 
 import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
@@ -100,10 +100,7 @@ class AuthRegisterScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <ImageBackground
-          source={BackgroundImage}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <Background source={BackgroundImage}>
           <AuthHero />
 
           <ScrollView style={styles.regContainer}>
@@ -147,7 +144,7 @@ class AuthRegisterScreen extends React.Component {
               onPress={this.registerWithCredentials}
             />
           </ScrollView>
-        </ImageBackground>
+        </Background>
       </View>
     );
   }

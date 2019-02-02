@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
-  ImageBackground
-} from "react-native";
+import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
+import Background from "../../components/Background";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -90,10 +84,7 @@ class DashboardMainScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <ImageBackground
-          source={BackgroundImage}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <Background source={BackgroundImage}>
           <View style={[defaultStyles.center, styles.menu]}>
             <Image
               source={LogoImage}
@@ -200,7 +191,7 @@ class DashboardMainScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
+        </Background>
       </View>
     );
   }

@@ -1,14 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ImageBackground
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import Hamburger from "../../components/Hamburger";
+import Background from "../../components/Background";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -37,10 +31,7 @@ class ProfileMenuScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <ImageBackground
-          source={BackgroundImage}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <Background source={BackgroundImage}>
           <Image
             source={LogoImage}
             style={[styles.logo, { width: 195, height: 70 }]}
@@ -97,7 +88,7 @@ class ProfileMenuScreen extends React.Component {
               </Text>
             </TouchableOpacity>
           </View>
-        </ImageBackground>
+        </Background>
       </View>
     );
   }

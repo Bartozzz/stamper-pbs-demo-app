@@ -6,9 +6,9 @@ import {
   AsyncStorage,
   TouchableOpacity,
   ScrollView,
-  View,
-  ImageBackground
+  View
 } from "react-native";
+import Background from "../../components/Background";
 
 import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
@@ -101,10 +101,7 @@ class AuthLoginScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <ImageBackground
-          source={BackgroundImage}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <Background source={BackgroundImage}>
           <AuthHero style={styles.hero} />
 
           <ScrollView style={styles.loginContainer}>
@@ -144,7 +141,7 @@ class AuthLoginScreen extends React.Component {
               onPress={this.loginWithCredentials}
             />
           </ScrollView>
-        </ImageBackground>
+        </Background>
       </View>
     );
   }
