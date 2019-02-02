@@ -7,6 +7,7 @@ export default {
   label: "#3e619e",
 
   error: "#FF5D30",
+  info: "#709BE7",
 
   inputBorder: "#555f6f"
 };
