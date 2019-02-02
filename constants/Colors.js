@@ -6,7 +6,7 @@ export default {
   highlight: "#020d1e",
   label: "#3e619e",
 
-  error: "red",
+  error: "#FF5D30",
 
   inputBorder: "#555f6f"
 };
