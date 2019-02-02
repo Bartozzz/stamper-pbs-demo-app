@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import Button from "../../components/Button";
+import Background from "../../components/Background";
 import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
 
@@ -30,6 +31,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
+const BackgroundImage = require("../../assets/backgrounds/logout.png");
 const logoutIcon = require("../../assets/images/icons/next_icon.png");
 
 class ProfileLogoutScreen extends React.Component {
@@ -63,7 +65,10 @@ class ProfileLogoutScreen extends React.Component {
 
   render() {
     return (
-      <View style={[defaultStyles.container, defaultStyles.content]}>
+      <Background
+        source={BackgroundImage}
+        style={[defaultStyles.container, defaultStyles.content]}
+      >
         <View style={[defaultStyles.center, styles.logout]}>
           <Image style={styles.logoutIcon} source={logoutIcon} />
 
@@ -83,24 +88,31 @@ class ProfileLogoutScreen extends React.Component {
             onPress={this.refuse}
           />
         </View>
-      </View>
+      </Background>
     );
   }
 }
 
 const styles = StyleSheet.create({
   logout: {
-    flex: 1,
     alignItems: "center",
 
-    marginVertical: 45,
-    marginHorizontal: 20,
+    paddingVertical: 100,
+    marginVertical: 40,
+    marginHorizontal: 40,
+    marginTop: 80,
 
-    borderRadius: 10
+    shadowColor: "#2699FB",
+    shadowOffset: { width: 0, height: 30 },
+    shadowOpacity: 0.1,
+    shadowRadius: 30,
+
+    borderRadius: 10,
+    backgroundColor: colors.background
   },
   logoutText: {
     color: colors.color,
-    fontSize: 18,
+    fontSize: 15,
     textAlign: "center"
   },
   logoutIcon: {
