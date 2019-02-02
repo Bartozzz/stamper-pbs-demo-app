@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingRight: 10,
 
-    color: colors.label,
-    fontSize: 12
+    color: colors.info,
+    fontSize: 10
   },
 
   inputStyle: {
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 15,
 
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: layout.fontText,
     color: colors.color
   },

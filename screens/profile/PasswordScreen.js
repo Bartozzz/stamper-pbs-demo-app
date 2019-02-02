@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
 import Button from "../../components/Button";
+import Background from "../../components/Background";
 import Error from "../../components/Error";
 import Hamburger from "../../components/Hamburger";
 import InputWithLabel from "../../components/InputWithLabel";
@@ -14,6 +15,8 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+
+const BackgroundImage = require("../../assets/backgrounds/logout.png");
 
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -72,40 +75,45 @@ class ProfilePasswordScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <View style={styles.form}>
-          {error.other ? <Error message={error.other} /> : null}
+        <Background source={BackgroundImage}>
+          <View style={styles.form}>
+            {error.other ? <Error message={error.other} /> : null}
 
-          <InputWithLabel
-            label={i18n.t("profile.password.current")}
-            value={currPassword}
-            error={error.currPassword}
-            onChangeText={currPassword => this.setState({ currPassword })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
+            <InputWithLabel
+              label={i18n.t("profile.password.current")}
+              value={currPassword}
+              error={error.currPassword}
+              onChangeText={currPassword => this.setState({ currPassword })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-          <InputWithLabel
-            label={i18n.t("profile.password.password")}
-            value={newPasswordA}
-            error={error.newPasswordA}
-            onChangeText={newPasswordA => this.setState({ newPasswordA })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
+            <InputWithLabel
+              label={i18n.t("profile.password.password")}
+              value={newPasswordA}
+              error={error.newPasswordA}
+              onChangeText={newPasswordA => this.setState({ newPasswordA })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-          <InputWithLabel
-            label={i18n.t("profile.password.confirm")}
-            value={newPasswordB}
-            error={error.newPasswordB}
-            onChangeText={newPasswordB => this.setState({ newPasswordB })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
-        </View>
+            <InputWithLabel
+              label={i18n.t("profile.password.confirm")}
+              value={newPasswordB}
+              error={error.newPasswordB}
+              onChangeText={newPasswordB => this.setState({ newPasswordB })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+          </View>
 
-        <View style={styles.buttonContainer}>
-          <Button title={i18n.t("profile.save")} onPress={this.editPassword} />
-        </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              title={i18n.t("profile.save")}
+              onPress={this.editPassword}
+            />
+          </View>
+        </Background>
       </View>
     );
   }
