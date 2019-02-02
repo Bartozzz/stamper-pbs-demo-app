@@ -1,0 +1,31 @@
+﻿W systemie będzie zapisane url api dla kraju, do testów proszę używać
+apiUrl = https://stamper-mobile-api-users.azurewebsites.net
+
+Po skanowaniu aplikacja powinna odczytać parametr ‘p’ z url kodu oraz wykonać zapytanie do API /Stamp/Add przesyłając parametr jako json
+
+Przykład 
+
+QR Code 
+www.google.com/test?p=1111
+
+Zapytanie API
+https://stamper-mobile-api-users.azurewebsites.net/stamp/add
+{
+"code":"1111"
+}
+
+
+1111	1	Title Card 1		dodaj punkt
+11110	-1	Title Card 1		odejmij punkt
+11111	-5	Title Card 1		odejmij kartę, gdy jest pełna karta w systemie 
+11112	5	Title Card 1		dodaj kartę 
+2222	1	Title Card 2		dodaj punkt
+3333	1	Title Card 3		dodaj punkt
+4444	1	Title Card 4		dodaj punkt
+44441	-1	Title Card 4		odejmij punkt
+5555	1	Title Card 5		dodaj punkt
+6666	1	Title Card 6		dodaj punkt
+7777	1	Title Card 7		dodaj punkt
+77771	-5	Title Card 8		odejmij kartę, gdy jest pełna karta w systemie 
+8888	1	Title Card 8		dodaj punkt
+
