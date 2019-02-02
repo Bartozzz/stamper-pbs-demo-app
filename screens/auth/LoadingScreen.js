@@ -8,6 +8,10 @@ import colors from "../../constants/Colors";
 import styles from "../../constants/Styles";
 
 class AuthLoadingScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
   componentDidMount() {
     const { appToken, authorize } = this.props;
 
