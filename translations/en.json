@@ -113,6 +113,10 @@
 
     "edit": {
       "photo": "Błąd podczas zmiany zdjęcia"
+    },
+
+    "tos": {
+      "fetch": "Bląd wczytywania regulaminu"
     }
   }
 }
