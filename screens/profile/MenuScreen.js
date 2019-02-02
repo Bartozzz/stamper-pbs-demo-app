@@ -18,11 +18,7 @@ class ProfileMenuScreen extends React.Component {
     title: i18n.t("navigation.profile.menu"),
     headerTitle: "",
     headerRight: <Hamburger navigation={navigation} />,
-    headerStyle: {
-      borderBottomWidth: 0,
-      // backgroundColor: colors.background,
-      backgroundColor: "#001432"
-    }
+    headerStyle: defaultStyles.headerTransparent
     // headerTransparent: true
   });
 
@@ -30,66 +26,64 @@ class ProfileMenuScreen extends React.Component {
     const { nickname, email, photo, navigation } = this.props;
 
     return (
-      <View style={defaultStyles.container}>
-        <Background source={BackgroundImage}>
-          <Image
-            source={LogoImage}
-            style={[styles.logo, { width: 195, height: 70 }]}
-          />
+      <Background source={BackgroundImage}>
+        <Image
+          source={LogoImage}
+          style={[styles.logo, { width: 195, height: 70 }]}
+        />
 
-          <View style={styles.menu}>
-            <Image style={styles.avatar} source={{ uri: photo }} />
+        <View style={styles.menu}>
+          <Image style={styles.avatar} source={{ uri: photo }} />
 
-            <Text style={styles.login}>{nickname}</Text>
-            <Text style={styles.email}>{email}</Text>
+          <Text style={styles.login}>{nickname}</Text>
+          <Text style={styles.email}>{email}</Text>
 
-            <View style={styles.menuSpacer} />
+          <View style={styles.menuSpacer} />
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigation.navigate(Routes.PROFILE_EDIT)}
-            >
-              <Text style={styles.menuItemText}>
-                {i18n.t("profile.menu.edit")}
-              </Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_EDIT)}
+          >
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.edit")}
+            </Text>
+          </TouchableOpacity>
 
-            <View style={styles.menuSpacer} />
+          <View style={styles.menuSpacer} />
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigation.navigate(Routes.PROFILE_PASSWORD)}
-            >
-              <Text style={styles.menuItemText}>
-                {i18n.t("profile.menu.password")}
-              </Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_PASSWORD)}
+          >
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.password")}
+            </Text>
+          </TouchableOpacity>
 
-            <View style={styles.menuSpacer} />
+          <View style={styles.menuSpacer} />
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => navigation.navigate(Routes.PROFILE_TOS)}
-            >
-              <Text style={styles.menuItemText}>
-                {i18n.t("profile.menu.tos")}
-              </Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_TOS)}
+          >
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.tos")}
+            </Text>
+          </TouchableOpacity>
 
-            <View style={styles.menuSpacer} />
+          <View style={styles.menuSpacer} />
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              style={styles.menuItem}
-              onPress={() => navigation.navigate(Routes.PROFILE_LOGOUT)}
-            >
-              <Text style={styles.menuItemText}>
-                {i18n.t("profile.menu.logout")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </Background>
-      </View>
+          <TouchableOpacity
+            style={styles.menuItem}
+            style={styles.menuItem}
+            onPress={() => navigation.navigate(Routes.PROFILE_LOGOUT)}
+          >
+            <Text style={styles.menuItemText}>
+              {i18n.t("profile.menu.logout")}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Background>
     );
   }
 }

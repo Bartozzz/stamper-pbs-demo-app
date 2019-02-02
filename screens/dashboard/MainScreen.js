@@ -83,116 +83,110 @@ class DashboardMainScreen extends React.Component {
     const scannerStyles = this.isFocused(MENU_SCANNER) ? styles.boxFocus : null;
 
     return (
-      <View style={defaultStyles.container}>
-        <Background source={BackgroundImage}>
-          <View style={[defaultStyles.center, styles.menu]}>
-            <Image
-              source={LogoImage}
-              style={[styles.logo, { width: 195, height: 70 }]}
-            />
+      <Background source={BackgroundImage}>
+        <View style={[defaultStyles.center, styles.menu]}>
+          <Image
+            source={LogoImage}
+            style={[styles.logo, { width: 195, height: 70 }]}
+          />
 
-            <View style={[defaultStyles.row, styles.row]}>
-              <TouchableOpacity
-                activeOpacity={1}
-                style={[styles.box, mapStyles]}
-                onPressIn={this.focusMenuElement(MENU_MAP)}
-                onPressOut={this.blurMenuElement}
-                onPress={this.navigateTo(MENU_MAP)}
-              >
-                <Image
-                  source={MenuImageMap}
-                  style={[styles.boxIcon, { width: 60, height: 60 }]}
-                />
+          <View style={[defaultStyles.row, styles.row]}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[styles.box, mapStyles]}
+              onPressIn={this.focusMenuElement(MENU_MAP)}
+              onPressOut={this.blurMenuElement}
+              onPress={this.navigateTo(MENU_MAP)}
+            >
+              <Image
+                source={MenuImageMap}
+                style={[styles.boxIcon, { width: 60, height: 60 }]}
+              />
 
-                <Text style={styles.boxText}>{i18n.t("dashboard.map")}</Text>
-              </TouchableOpacity>
+              <Text style={styles.boxText}>{i18n.t("dashboard.map")}</Text>
+            </TouchableOpacity>
 
-              <TouchableOpacity
-                activeOpacity={1}
-                style={[styles.box, walletStyles]}
-                onPressIn={this.focusMenuElement(MENU_WALLET)}
-                onPressOut={this.blurMenuElement}
-                onPress={this.navigateTo(MENU_WALLET)}
-              >
-                <Image
-                  source={MenuImageWallet}
-                  style={[styles.boxIcon, { width: 60, height: 60 }]}
-                />
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[styles.box, walletStyles]}
+              onPressIn={this.focusMenuElement(MENU_WALLET)}
+              onPressOut={this.blurMenuElement}
+              onPress={this.navigateTo(MENU_WALLET)}
+            >
+              <Image
+                source={MenuImageWallet}
+                style={[styles.boxIcon, { width: 60, height: 60 }]}
+              />
 
-                <Text style={styles.boxText}>{i18n.t("dashboard.wallet")}</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={[defaultStyles.row, styles.row]}>
-              <TouchableOpacity
-                activeOpacity={1}
-                style={[styles.box, prizesStyles]}
-                onPressIn={this.focusMenuElement(MENU_PRIZES)}
-                onPressOut={this.blurMenuElement}
-                onPress={this.navigateTo(MENU_PRIZES)}
-              >
-                <Image
-                  source={MenuImagePrizes}
-                  style={[styles.boxIcon, { width: 60, height: 60 }]}
-                />
-
-                <Text style={styles.boxText}>{i18n.t("dashboard.prizes")}</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                activeOpacity={1}
-                style={[styles.box, profileStyles]}
-                onPressIn={this.focusMenuElement(MENU_PROFILE)}
-                onPressOut={this.blurMenuElement}
-                onPress={this.navigateTo(MENU_PROFILE)}
-              >
-                <Image
-                  source={MenuImageProfile}
-                  style={[styles.boxIcon, { width: 60, height: 60 }]}
-                />
-
-                <Text style={styles.boxText}>
-                  {i18n.t("dashboard.profile")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={[defaultStyles.row, styles.row]}>
-              <TouchableOpacity
-                activeOpacity={1}
-                style={[styles.box, marketStyles]}
-                onPressIn={this.focusMenuElement(MENU_MARKET)}
-                onPressOut={this.blurMenuElement}
-                onPress={this.navigateTo(MENU_MARKET)}
-              >
-                <Image
-                  source={MenuImageMarket}
-                  style={[styles.boxIcon, { width: 60, height: 60 }]}
-                />
-
-                <Text style={styles.boxText}>{i18n.t("dashboard.market")}</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                activeOpacity={1}
-                style={[styles.box, scannerStyles]}
-                onPressIn={this.focusMenuElement(MENU_SCANNER)}
-                onPressOut={this.blurMenuElement}
-                onPress={this.navigateTo(MENU_SCANNER)}
-              >
-                <Image
-                  source={MenuImageScanner}
-                  style={[styles.boxIcon, { width: 60, height: 60 }]}
-                />
-
-                <Text style={styles.boxText}>
-                  {i18n.t("dashboard.scanner")}
-                </Text>
-              </TouchableOpacity>
-            </View>
+              <Text style={styles.boxText}>{i18n.t("dashboard.wallet")}</Text>
+            </TouchableOpacity>
           </View>
-        </Background>
-      </View>
+
+          <View style={[defaultStyles.row, styles.row]}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[styles.box, prizesStyles]}
+              onPressIn={this.focusMenuElement(MENU_PRIZES)}
+              onPressOut={this.blurMenuElement}
+              onPress={this.navigateTo(MENU_PRIZES)}
+            >
+              <Image
+                source={MenuImagePrizes}
+                style={[styles.boxIcon, { width: 60, height: 60 }]}
+              />
+
+              <Text style={styles.boxText}>{i18n.t("dashboard.prizes")}</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[styles.box, profileStyles]}
+              onPressIn={this.focusMenuElement(MENU_PROFILE)}
+              onPressOut={this.blurMenuElement}
+              onPress={this.navigateTo(MENU_PROFILE)}
+            >
+              <Image
+                source={MenuImageProfile}
+                style={[styles.boxIcon, { width: 60, height: 60 }]}
+              />
+
+              <Text style={styles.boxText}>{i18n.t("dashboard.profile")}</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={[defaultStyles.row, styles.row]}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[styles.box, marketStyles]}
+              onPressIn={this.focusMenuElement(MENU_MARKET)}
+              onPressOut={this.blurMenuElement}
+              onPress={this.navigateTo(MENU_MARKET)}
+            >
+              <Image
+                source={MenuImageMarket}
+                style={[styles.boxIcon, { width: 60, height: 60 }]}
+              />
+
+              <Text style={styles.boxText}>{i18n.t("dashboard.market")}</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              activeOpacity={1}
+              style={[styles.box, scannerStyles]}
+              onPressIn={this.focusMenuElement(MENU_SCANNER)}
+              onPressOut={this.blurMenuElement}
+              onPress={this.navigateTo(MENU_SCANNER)}
+            >
+              <Image
+                source={MenuImageScanner}
+                style={[styles.boxIcon, { width: 60, height: 60 }]}
+              />
+
+              <Text style={styles.boxText}>{i18n.t("dashboard.scanner")}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Background>
     );
   }
 }

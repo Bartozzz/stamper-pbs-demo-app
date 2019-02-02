@@ -4,7 +4,6 @@ import {
   StyleSheet,
   ActivityIndicator,
   AsyncStorage,
-  Image,
   ImageBackground,
   TouchableOpacity,
   Text,
@@ -159,64 +158,62 @@ class ProfileEditScreen extends React.Component {
     const { firstName, lastName, email, login, photo, error } = this.state;
 
     return (
-      <View style={defaultStyles.container}>
-        <Background source={BackgroundImage}>
-          <TouchableOpacity onPress={this.uploadImage}>
-            <ImageBackground
-              resizeMode="cover"
-              source={{ uri: photo }}
-              style={styles.upload}
-            >
-              {this.state.uploading ? (
-                <ActivityIndicator color="white" size="large" />
-              ) : (
-                <React.Fragment>
-                  <AntDesign name="camerao" size={36} color="white" />
-                  <Text style={styles.uploadText}>
-                    {i18n.t("profile.edit.changePhoto")}
-                  </Text>
-                </React.Fragment>
-              )}
-            </ImageBackground>
-          </TouchableOpacity>
+      <Background source={BackgroundImage}>
+        <TouchableOpacity onPress={this.uploadImage}>
+          <ImageBackground
+            resizeMode="cover"
+            source={{ uri: photo }}
+            style={styles.upload}
+          >
+            {this.state.uploading ? (
+              <ActivityIndicator color="white" size="large" />
+            ) : (
+              <React.Fragment>
+                <AntDesign name="camerao" size={36} color="white" />
+                <Text style={styles.uploadText}>
+                  {i18n.t("profile.edit.changePhoto")}
+                </Text>
+              </React.Fragment>
+            )}
+          </ImageBackground>
+        </TouchableOpacity>
 
-          <View style={styles.form}>
-            {error.other ? <Error message={error.other} /> : null}
+        <View style={styles.form}>
+          {error.other ? <Error message={error.other} /> : null}
 
-            <InputWithLabel
-              label={i18n.t("auth.firstname")}
-              value={firstName}
-              error={error.firstName}
-              onChangeText={firstName => this.setState({ firstName })}
-            />
+          <InputWithLabel
+            label={i18n.t("auth.firstname")}
+            value={firstName}
+            error={error.firstName}
+            onChangeText={firstName => this.setState({ firstName })}
+          />
 
-            <InputWithLabel
-              label={i18n.t("auth.lastname")}
-              value={lastName}
-              error={error.lastName}
-              onChangeText={lastName => this.setState({ lastName })}
-            />
+          <InputWithLabel
+            label={i18n.t("auth.lastname")}
+            value={lastName}
+            error={error.lastName}
+            onChangeText={lastName => this.setState({ lastName })}
+          />
 
-            <InputWithLabel
-              label={i18n.t("auth.email")}
-              value={email}
-              error={error.email}
-              onChangeText={email => this.setState({ email })}
-            />
+          <InputWithLabel
+            label={i18n.t("auth.email")}
+            value={email}
+            error={error.email}
+            onChangeText={email => this.setState({ email })}
+          />
 
-            <InputWithLabel
-              label={i18n.t("auth.nickname")}
-              value={login}
-              error={error.login}
-              onChangeText={login => this.setState({ login })}
-            />
-          </View>
+          <InputWithLabel
+            label={i18n.t("auth.nickname")}
+            value={login}
+            error={error.login}
+            onChangeText={login => this.setState({ login })}
+          />
+        </View>
 
-          <View style={styles.buttonContainer}>
-            <Button title={i18n.t("profile.save")} onPress={this.editProfile} />
-          </View>
-        </Background>
-      </View>
+        <View style={styles.buttonContainer}>
+          <Button title={i18n.t("profile.save")} onPress={this.editProfile} />
+        </View>
+      </Background>
     );
   }
 }

@@ -100,49 +100,47 @@ class AuthLoginScreen extends React.Component {
     const { email, password, error } = this.state;
 
     return (
-      <View style={defaultStyles.container}>
-        <Background source={BackgroundImage}>
-          <AuthHero style={styles.hero} />
+      <Background source={BackgroundImage}>
+        <AuthHero style={styles.hero} />
 
-          <ScrollView style={styles.loginContainer}>
-            {error.other ? (
-              <Error message={i18n.t("errors.auth.unauthorized")} />
-            ) : null}
+        <ScrollView style={styles.loginContainer}>
+          {error.other ? (
+            <Error message={i18n.t("errors.auth.unauthorized")} />
+          ) : null}
 
-            <InputWithIcon
-              iconName="ios-contact"
-              iconSize={20}
-              placeholder={i18n.t("auth.email")}
-              value={email}
-              error={error.email}
-              onChangeText={email => this.setState({ email })}
-              autoCapitalize="none"
-            />
+          <InputWithIcon
+            iconName="ios-contact"
+            iconSize={20}
+            placeholder={i18n.t("auth.email")}
+            value={email}
+            error={error.email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+          />
 
-            <InputWithIcon
-              iconName="ios-lock"
-              iconSize={20}
-              placeholder={i18n.t("auth.password")}
-              value={password}
-              error={error.password}
-              onChangeText={password => this.setState({ password })}
-              autoCapitalize="none"
-              secureTextEntry
-            />
+          <InputWithIcon
+            iconName="ios-lock"
+            iconSize={20}
+            placeholder={i18n.t("auth.password")}
+            value={password}
+            error={error.password}
+            onChangeText={password => this.setState({ password })}
+            autoCapitalize="none"
+            secureTextEntry
+          />
 
-            <AuthLoginScreenLinks
-              loginWithFacebook={this.loginWithFacebook}
-              loginWithGoogle={this.loginWithGoogle}
-              navigateToRegister={this.navigateToRegister}
-            />
+          <AuthLoginScreenLinks
+            loginWithFacebook={this.loginWithFacebook}
+            loginWithGoogle={this.loginWithGoogle}
+            navigateToRegister={this.navigateToRegister}
+          />
 
-            <Button
-              title={i18n.t("auth.login")}
-              onPress={this.loginWithCredentials}
-            />
-          </ScrollView>
-        </Background>
-      </View>
+          <Button
+            title={i18n.t("auth.login")}
+            onPress={this.loginWithCredentials}
+          />
+        </ScrollView>
+      </Background>
     );
   }
 }

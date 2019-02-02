@@ -1,15 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
-import {
-  AsyncStorage,
-  ScrollView,
-  StyleSheet,
-  Platform,
-  TouchableOpacity,
-  Text,
-  View
-} from "react-native";
+import { AsyncStorage, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import * as Routes from "../../navigation";
 import { setUrl, QRDATA_URL } from "../../store/reducers/qrdata";
@@ -26,10 +18,7 @@ class ScannerUrlScreen extends React.Component {
     title: i18n.t("navigation.scanner.url"),
     headerTitle: "",
     headerRight: <Hamburger navigation={navigation} />,
-    headerStyle: {
-      borderBottomWidth: 0,
-      backgroundColor: colors.background
-    }
+    headerStyle: defaultStyles.headerTransparent
     // headerTransparent: true
   });
 

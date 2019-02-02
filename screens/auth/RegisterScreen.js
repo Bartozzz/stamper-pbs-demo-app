@@ -99,53 +99,51 @@ class AuthRegisterScreen extends React.Component {
     const { nickname, password, email, error } = this.state;
 
     return (
-      <View style={defaultStyles.container}>
-        <Background source={BackgroundImage}>
-          <AuthHero />
+      <Background source={BackgroundImage}>
+        <AuthHero />
 
-          <ScrollView style={styles.regContainer}>
-            {error.other ? <Error message={error.other} /> : null}
+        <ScrollView style={styles.regContainer}>
+          {error.other ? <Error message={error.other} /> : null}
 
-            <InputWithIcon
-              iconName="ios-contact"
-              iconSize={20}
-              placeholder={i18n.t("auth.nickname")}
-              value={nickname}
-              error={error.nickname}
-              onChangeText={nickname => this.setState({ nickname })}
-              autoCapitalize="none"
-            />
+          <InputWithIcon
+            iconName="ios-contact"
+            iconSize={20}
+            placeholder={i18n.t("auth.nickname")}
+            value={nickname}
+            error={error.nickname}
+            onChangeText={nickname => this.setState({ nickname })}
+            autoCapitalize="none"
+          />
 
-            <InputWithIcon
-              iconName="ios-at"
-              iconSize={20}
-              placeholder={i18n.t("auth.email")}
-              value={email}
-              error={error.email}
-              onChangeText={email => this.setState({ email })}
-              autoCapitalize="none"
-            />
+          <InputWithIcon
+            iconName="ios-at"
+            iconSize={20}
+            placeholder={i18n.t("auth.email")}
+            value={email}
+            error={error.email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+          />
 
-            <InputWithIcon
-              iconName="ios-lock"
-              iconSize={20}
-              placeholder={i18n.t("auth.password")}
-              value={password}
-              error={error.password}
-              onChangeText={password => this.setState({ password })}
-              autoCapitalize="none"
-              secureTextEntry
-            />
+          <InputWithIcon
+            iconName="ios-lock"
+            iconSize={20}
+            placeholder={i18n.t("auth.password")}
+            value={password}
+            error={error.password}
+            onChangeText={password => this.setState({ password })}
+            autoCapitalize="none"
+            secureTextEntry
+          />
 
-            <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
+          <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
 
-            <Button
-              title={i18n.t("auth.register")}
-              onPress={this.registerWithCredentials}
-            />
-          </ScrollView>
-        </Background>
-      </View>
+          <Button
+            title={i18n.t("auth.register")}
+            onPress={this.registerWithCredentials}
+          />
+        </ScrollView>
+      </Background>
     );
   }
 }

@@ -1,8 +1,15 @@
 import React from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import { ImageBackground, ScrollView, StyleSheet } from "react-native";
+import colors from "../constants/Colors";
+import defaultStyles from "../constants/Styles";
 
 const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1
+  },
+
   background: {
+    flex: 1,
     width: "100%",
     height: "100%"
   }
@@ -10,12 +17,18 @@ const styles = StyleSheet.create({
 
 export default function Background({ children, style, ...props }) {
   return (
-    <ImageBackground
-      resizeMode="stretch"
-      {...props}
-      style={[styles.background, props.style]}
+    <ScrollView
+      style={defaultStyles.container}
+      contentContainerStyle={styles.container}
+      alwaysBounceVertical={false}
     >
-      {children}
-    </ImageBackground>
+      <ImageBackground
+        resizeMode="stretch"
+        {...props}
+        style={[styles.background, props.style]}
+      >
+        {children}
+      </ImageBackground>
+    </ScrollView>
   );
 }

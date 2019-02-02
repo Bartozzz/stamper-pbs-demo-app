@@ -1,13 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  AsyncStorage,
-  Image,
-  Text,
-  View,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -65,10 +58,7 @@ class ProfileLogoutScreen extends React.Component {
 
   render() {
     return (
-      <Background
-        source={BackgroundImage}
-        style={[defaultStyles.container, defaultStyles.content]}
-      >
+      <Background source={BackgroundImage}>
         <View style={[defaultStyles.center, styles.logout]}>
           <Image style={styles.logoutIcon} source={logoutIcon} />
 
