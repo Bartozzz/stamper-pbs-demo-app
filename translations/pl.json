@@ -110,6 +110,8 @@
   },
 
   "success": {
+    "changed": "Zmiany zostały wprowadzone!",
+
     "scanner": {
       "stampAdd": "Pieczątka została dodana!"
     },
@@ -120,6 +122,8 @@
   },
 
   "errors": {
+    "changed": "Zmiany nie zostały wprowadzone!",
+
     "scanner": {
       "stampAdd": "Nie było można dodać pieczątki."
     },

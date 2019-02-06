@@ -127,7 +127,10 @@ class ProfileEditScreen extends React.Component {
     this.props.setPhoto(this.state.photo);
 
     // Go back:
-    this.props.navigation.navigate(Routes.PROFILE_MENU);
+    this.props.navigation.navigate(Routes.INFO_SUCCESS, {
+      redirect: Routes.PROFILE_MENU,
+      message: i18n.t("success.changed")
+    });
   };
 
   handleError = async response => {
