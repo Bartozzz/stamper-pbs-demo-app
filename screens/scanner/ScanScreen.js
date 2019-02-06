@@ -55,8 +55,18 @@ class ScannerScanScreen extends React.Component {
 
     this.props
       .addStamp(code)
-      .then(() => this.props.navigation.navigate(Routes.DASHBOARD))
-      .catch(() => this.props.navigation.navigate(Routes.DASHBOARD));
+      .then(() =>
+        this.props.navigation.navigate(Routes.INFO_SUCCESS, {
+          redirect: Routes.DASHBOARD,
+          message: i18n.t("success.scanner.stampAdd")
+        })
+      )
+      .catch(() =>
+        this.props.navigation.navigate(Routes.INFO_ERROR, {
+          redirect: Routes.DASHBOARD,
+          message: i18n.t("errors.scanner.stampAdd")
+        })
+      );
   };
 
   renderBarCodeScanner() {

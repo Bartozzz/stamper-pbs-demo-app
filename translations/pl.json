@@ -111,7 +111,17 @@
     }
   },
 
+  "success": {
+    "scanner": {
+      "stampAdd": "Pieczątka została dodana!"
+    }
+  },
+
   "errors": {
+    "scanner": {
+      "stampAdd": "Nie było można dodać pieczątki."
+    },
+
     "auth": {
       "unauthorized": "Podano złe dane logowania"
     },
