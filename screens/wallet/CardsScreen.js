@@ -1,6 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  ActivityIndicator,
+  Image,
+  Text,
+  View,
+  ScrollView
+} from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Bar as ProgressBar } from "react-native-progress";
 
@@ -13,18 +20,10 @@ import layout from "../../constants/Layout";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";
+import { getWallet } from "../../store/reducers/wallet";
+import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet.png");
-
-const data = [
-  { id: 1, title: "Darmowa kawa", image: null, expiry: +new Date() },
-  { id: 2, title: "Darmowa kawa", image: null, expiry: +new Date() },
-  { id: 3, title: "Darmowa kawa", image: null, expiry: +new Date() },
-  { id: 4, title: "Darmowa kawa", image: null, expiry: +new Date() },
-  { id: 5, title: "Darmowa kawa", image: null, expiry: +new Date() },
-  { id: 6, title: "Darmowa kawa", image: null, expiry: +new Date() },
-  { id: 7, title: "Darmowa kawa", image: null, expiry: +new Date() }
-];
 
 class WalletCardsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -33,8 +32,79 @@ class WalletCardsScreen extends React.Component {
     headerRight: <Hamburger navigation={navigation} />
   });
 
+  componentDidMount() {
+    this.props.getWallet();
+  }
+
+  renderCards() {
+    const { cards, isLoading } = this.props;
+
+    if (isLoading) {
+      return <ActivityIndicator color={colors.primary} size="large" />;
+    } else {
+      return (
+        <SwipeListView
+          useFlatList
+          data={cards}
+          renderItem={(data, rowMap) => (
+            <View style={[styles.item, styles.itemFront]} key={data.item.id}>
+              <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>
+                <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
+
+                <View style={{ marginTop: 6 }}>
+                  <ProgressBar
+                    progress={data.item.stampsToDate / data.item.stampsTotal}
+                    borderRadius={0}
+                    height={6}
+                    width={140}
+                    color="#0046F5"
+                    unfilledColor="#001432"
+                    borderWidth={0}
+                  />
+                </View>
+              </View>
+
+              <View style={defaultStyles.row}>
+                <Image
+                  source={{ uri: data.item.iconUrl }}
+                  style={{ width: 40, height: 40, borderRadius: 20 }}
+                />
+
+                <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
+                  <View>
+                    <Text style={styles.textTitle}>{data.item.title}</Text>
+                    <Text style={styles.textExpiry}>
+                      ważna do {formatDate(data.item.validToDate)}
+                    </Text>
+                  </View>
+
+                  <Text style={styles.textAmount}>
+                    {data.item.stampsToDate} / {data.item.stampsTotal}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          )}
+          renderHiddenItem={(data, rowMap) => (
+            <View
+              style={[styles.item, styles.itemBack]}
+              key={`${data.item.id}_hidden`}
+            >
+              <Text>Left</Text>
+              <Text>Right</Text>
+            </View>
+          )}
+          disableRightSwipe={true}
+          rightOpenValue={-75}
+        />
+      );
+    }
+  }
+
   render() {
-    const { navigation } = this.props;
+    const { navigation, cards, isLoading } = this.props;
+
+    console.log(isLoading, cards);
 
     return (
       <Background source={BackgroundImage} disableScroll>
@@ -44,62 +114,7 @@ class WalletCardsScreen extends React.Component {
           cards
         />
 
-        <ScrollView style={styles.list}>
-          <SwipeListView
-            useFlatList
-            data={data}
-            renderItem={(data, rowMap) => (
-              <View style={[styles.item, styles.itemFront]}>
-                <View
-                  style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}
-                >
-                  <Text style={styles.textId}>Nr. 123</Text>
-
-                  <View style={{ marginTop: 6 }}>
-                    <ProgressBar
-                      progress={0.3}
-                      borderRadius={0}
-                      height={6}
-                      width={140}
-                      color="#0046F5"
-                      unfilledColor="#001432"
-                      borderWidth={0}
-                    />
-                  </View>
-                </View>
-
-                <View style={defaultStyles.row}>
-                  <Image
-                    source={{
-                      uri:
-                        "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png"
-                    }}
-                    style={{ width: 40, height: 40 }}
-                  />
-
-                  <View
-                    style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}
-                  >
-                    <View>
-                      <Text style={styles.textTitle}>Darmowa kawa</Text>
-                      <Text style={styles.textExpiry}>ważna do 11/12/2015</Text>
-                    </View>
-
-                    <Text style={styles.textAmount}>2/10</Text>
-                  </View>
-                </View>
-              </View>
-            )}
-            renderHiddenItem={(data, rowMap) => (
-              <View style={[styles.item, styles.itemBack]}>
-                <Text>Left</Text>
-                <Text>Right</Text>
-              </View>
-            )}
-            disableRightSwipe={true}
-            rightOpenValue={-75}
-          />
-        </ScrollView>
+        <ScrollView style={styles.list}>{this.renderCards()}</ScrollView>
       </Background>
     );
   }
@@ -158,10 +173,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   // …
+  isLoading: state.wallet.isLoading,
+  cards: state.wallet.cards
 });
 
 const mapDispatchToProps = {
   // …
+  getWallet
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletCardsScreen);
