@@ -58,7 +58,7 @@ class DashboardMainScreen extends React.Component {
         return;
 
       case MENU_WALLET:
-        return;
+        return navigation.navigate(Routes.WALLET);
 
       case MENU_PRIZES:
         return;

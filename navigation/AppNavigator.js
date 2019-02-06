@@ -20,12 +20,15 @@ import ProfileLogoutScreen from "../screens/profile/LogoutScreen";
 import ScannerUrlScreen from "../screens/scanner/UrlScreen";
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
 import ScannerOutputScreen from "../screens/scanner/OutputScreen";
+import WalletCardsScreen from "../screens/wallet/CardsScreen";
+import WalletPlacesScreen from "../screens/wallet/PlacesScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
 
 const defaultNavigationOptions = {
   headerTintColor: colors.color,
 
   headerStyle: {
+    elevation: 0,
     borderBottomWidth: 0,
     backgroundColor: colors.primary
   },
@@ -74,6 +77,23 @@ const ProfileStack = createStackNavigator(
   }
 );
 
+const WalletStack = createStackNavigator(
+  {
+    [Route.WALLET_CARDS]: WalletCardsScreen,
+    [Route.WALLET_PLACES]: WalletPlacesScreen
+  },
+  {
+    initialRouteName: Route.WALLET_CARDS,
+    defaultNavigationOptions,
+    transitionConfig: () => ({
+      transitionSpec: {
+        // Disable animations:
+        duration: 0
+      }
+    })
+  }
+);
+
 const ScannerStack = createStackNavigator(
   {
     [Route.SCANNER_URL]: ScannerUrlScreen,
@@ -93,7 +113,8 @@ export default createAppContainer(
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,
-      [Route.PROFILE]: ProfileStack
+      [Route.PROFILE]: ProfileStack,
+      [Route.WALLET]: WalletStack
     },
     {
       initialRouteName: Route.AUTH_LOADING
