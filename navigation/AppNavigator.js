@@ -9,6 +9,8 @@ import * as Route from "./index";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
+import InfoErrorScreen from "../screens/info/ErrorScreen";
+import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
@@ -46,6 +48,17 @@ const AuthStack = createStackNavigator(
   },
   {
     initialRouteName: Route.AUTH_LOGIN,
+    defaultNavigationOptions
+  }
+);
+
+const InfoStack = createStackNavigator(
+  {
+    [Route.INFO_ERROR]: InfoErrorScreen,
+    [Route.INFO_SUCCESS]: InfoSuccessScreen
+  },
+  {
+    initialRouteName: Route.INFO_SUCCESS,
     defaultNavigationOptions
   }
 );
@@ -106,6 +119,7 @@ export default createAppContainer(
   createSwitchNavigator(
     {
       [Route.AUTH]: AuthStack,
+      [Route.INFO]: InfoStack,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,

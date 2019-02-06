@@ -4,6 +4,10 @@ export const AUTH_LOGIN = "AuthLogin";
 export const AUTH_REGISTER = "AuthRegister";
 export const AUTH_TOS = "AuthTOS";
 
+export const INFO = "Info";
+export const INFO_ERROR = "InfoError";
+export const INFO_SUCCESS = "InfoSuccess";
+
 export const DASHBOARD = "Dashboard";
 export const DASHBOARD_MAIN = "DashboardMain";
 export const DASHBOARD_TOS = "DashboardTOS";
