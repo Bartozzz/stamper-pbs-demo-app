@@ -1,6 +1,4 @@
 {
-  "__locale": "PL",
-
   "loading": "Ładowanie…",
   "save": "Zapisz",
   "yes": "Tak",
@@ -114,12 +112,20 @@
   "success": {
     "scanner": {
       "stampAdd": "Pieczątka została dodana!"
+    },
+
+    "profile": {
+      "photoAdd": "Zdjęcie zostało przesłane!"
     }
   },
 
   "errors": {
     "scanner": {
       "stampAdd": "Nie było można dodać pieczątki."
+    },
+
+    "profile": {
+      "photoAdd": "Bląd podczas przesyłania zdjęcia."
     },
 
     "auth": {

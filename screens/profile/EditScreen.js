@@ -89,21 +89,19 @@ class ProfileEditScreen extends React.Component {
 
         updatePhoto(photo)
           .then(() => {
-            // Update local database:
             setPhoto(photo);
 
-            // Update component's photo:
-            this.setState({
-              photo: photo,
-              uploading: false
+            this.props.navigation.navigate(Routes.INFO_SUCCESS, {
+              redirect: Routes.PROFILE_EDIT,
+              message: i18n.t("success.profile.photoAdd")
             });
           })
-          .catch(err => {
-            this.setState({
-              uploading: false,
-              error: { other: i18n.t("errors.edit.photo") }
-            });
-          });
+          .catch(() =>
+            this.props.navigation.navigate(Routes.INFO_ERROR, {
+              redirect: Routes.PROFILE_EDIT,
+              message: i18n.t("errors.profile.photoAdd")
+            })
+          );
       }
     }
   };
