@@ -48,7 +48,10 @@ class ProfilePasswordScreen extends React.Component {
 
   handleSuccess = async response => {
     // Go back:
-    this.props.navigation.navigate(Routes.PROFILE_MENU);
+    this.props.navigation.navigate(Routes.INFO_SUCCESS, {
+      redirect: Routes.PROFILE_MENU,
+      message: i18n.t("success.changed")
+    });
   };
 
   handleError = async response => {
