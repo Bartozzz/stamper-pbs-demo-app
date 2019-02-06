@@ -16,9 +16,7 @@ export const PROFILE_LOGOUT = "ProfileLogout";
 export const PROFILE_TOS = "ProfileTos";
 
 export const SCANNER = "Scanner";
-export const SCANNER_URL = "ScannerUrl";
 export const SCANNER_SCAN = "ScannerScan";
-export const SCANNER_DATA = "ScannerData";
 
 export const WALLET = "Wallet";
 export const WALLET_CARDS = "WalletCards";

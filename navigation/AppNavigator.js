@@ -17,9 +17,7 @@ import ProfileMenuScreen from "../screens/profile/MenuScreen";
 import ProfileEditScreen from "../screens/profile/EditScreen";
 import ProfilePasswordScreen from "../screens/profile/PasswordScreen";
 import ProfileLogoutScreen from "../screens/profile/LogoutScreen";
-import ScannerUrlScreen from "../screens/scanner/UrlScreen";
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
-import ScannerOutputScreen from "../screens/scanner/OutputScreen";
 import WalletCardsScreen from "../screens/wallet/CardsScreen";
 import WalletPlacesScreen from "../screens/wallet/PlacesScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
@@ -96,12 +94,10 @@ const WalletStack = createStackNavigator(
 
 const ScannerStack = createStackNavigator(
   {
-    [Route.SCANNER_URL]: ScannerUrlScreen,
-    [Route.SCANNER_SCAN]: ScannerScanScreen,
-    [Route.SCANNER_DATA]: ScannerOutputScreen
+    [Route.SCANNER_SCAN]: ScannerScanScreen
   },
   {
-    initialRouteName: Route.SCANNER_URL,
+    initialRouteName: Route.SCANNER_SCAN,
     defaultNavigationOptions
   }
 );
