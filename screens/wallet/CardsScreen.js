@@ -102,15 +102,11 @@ class WalletCardsScreen extends React.Component {
   }
 
   render() {
-    const { navigation, cards, isLoading } = this.props;
-
-    console.log(isLoading, cards);
-
     return (
       <Background source={BackgroundImage} disableScroll>
         <WalletHeader
           title={i18n.t("navigation.wallet.cards")}
-          navigation={navigation}
+          navigation={this.props.navigation}
           cards
         />
 
