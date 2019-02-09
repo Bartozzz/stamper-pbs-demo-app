@@ -1,11 +1,19 @@
 import React, { Component } from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
 class Button extends Component {
   render() {
-    const { title, style, onPress } = this.props;
+    const { title, style, disabled, onPress } = this.props;
+
+    if (disabled) {
+      return (
+        <View style={[styles.buttonStyle, styles.disabledButtonStyle, style]}>
+          <Text style={styles.textStyle}>{title}</Text>
+        </View>
+      );
+    }
 
     return (
       <TouchableOpacity
@@ -41,6 +49,9 @@ const styles = StyleSheet.create({
 
     backgroundColor: colors.primary,
     borderRadius: 5
+  },
+  disabledButtonStyle: {
+    backgroundColor: "#1A345F"
   }
 });
 
