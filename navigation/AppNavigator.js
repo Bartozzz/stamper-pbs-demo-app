@@ -11,6 +11,7 @@ import layout from "../constants/Layout";
 
 import InfoErrorScreen from "../screens/info/ErrorScreen";
 import InfoSuccessScreen from "../screens/info/SuccessScreen";
+import PrizesListScreen from "../screens/prizes/ListScreen";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
@@ -59,6 +60,16 @@ const InfoStack = createStackNavigator(
   },
   {
     initialRouteName: Route.INFO_SUCCESS,
+    defaultNavigationOptions
+  }
+);
+
+const PrizesStack = createStackNavigator(
+  {
+    [Route.PRIZES_LIST]: PrizesListScreen
+  },
+  {
+    initialRouteName: Route.PRIZES_LIST,
     defaultNavigationOptions
   }
 );
@@ -120,6 +131,7 @@ export default createAppContainer(
     {
       [Route.AUTH]: AuthStack,
       [Route.INFO]: InfoStack,
+      [Route.PRIZES]: PrizesStack,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,

@@ -8,6 +8,9 @@ export const INFO = "Info";
 export const INFO_ERROR = "InfoError";
 export const INFO_SUCCESS = "InfoSuccess";
 
+export const PRIZES = "Prizes";
+export const PRIZES_LIST = "PrizesList";
+
 export const DASHBOARD = "Dashboard";
 export const DASHBOARD_MAIN = "DashboardMain";
 export const DASHBOARD_TOS = "DashboardTOS";
