@@ -55,7 +55,7 @@ class DashboardMainScreen extends React.Component {
 
     switch (element) {
       case MENU_MAP:
-        return;
+        return navigation.navigate(Routes.MAP);
 
       case MENU_WALLET:
         return navigation.navigate(Routes.WALLET);

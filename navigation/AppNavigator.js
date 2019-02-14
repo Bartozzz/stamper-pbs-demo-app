@@ -12,6 +12,8 @@ import layout from "../constants/Layout";
 import InfoErrorScreen from "../screens/info/ErrorScreen";
 import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import PrizesListScreen from "../screens/prizes/ListScreen";
+import MapNearbyScreen from "../screens/map/NearbyScreen";
+import MapFavoritesScreen from "../screens/map/FavoritesScreen";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
@@ -74,6 +76,17 @@ const PrizesStack = createStackNavigator(
   }
 );
 
+const MapStack = createStackNavigator(
+  {
+    [Route.MAP_NEARBY]: MapNearbyScreen,
+    [Route.MAP_FAVORITES]: MapFavoritesScreen
+  },
+  {
+    initialRouteName: Route.MAP_NEARBY,
+    defaultNavigationOptions
+  }
+);
+
 const DashboardStack = createStackNavigator(
   {
     [Route.DASHBOARD_MAIN]: DashboardMainScreen,
@@ -132,6 +145,7 @@ export default createAppContainer(
       [Route.AUTH]: AuthStack,
       [Route.INFO]: InfoStack,
       [Route.PRIZES]: PrizesStack,
+      [Route.MAP]: MapStack,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,

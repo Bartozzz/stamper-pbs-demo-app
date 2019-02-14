@@ -11,6 +11,10 @@ export const INFO_SUCCESS = "InfoSuccess";
 export const PRIZES = "Prizes";
 export const PRIZES_LIST = "PrizesList";
 
+export const MAP = "Map";
+export const MAP_NEARBY = "MapNearby";
+export const MAP_FAVORITES = "MapFavorites";
+
 export const DASHBOARD = "Dashboard";
 export const DASHBOARD_MAIN = "DashboardMain";
 export const DASHBOARD_TOS = "DashboardTOS";
