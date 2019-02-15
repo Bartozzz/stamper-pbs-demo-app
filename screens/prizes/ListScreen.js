@@ -59,6 +59,9 @@ class PrizesListScreen extends React.Component {
         <FlatList
           data={prizes}
           extraData={selected}
+          keyExtractor={item => {
+            return item.id;
+          }}
           renderItem={({ item }) => {
             const isSelected = selected === item.id;
 

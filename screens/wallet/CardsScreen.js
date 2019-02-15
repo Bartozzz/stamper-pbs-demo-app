@@ -46,6 +46,9 @@ class WalletCardsScreen extends React.Component {
         <SwipeListView
           useFlatList
           data={cards}
+          keyExtractor={item => {
+            return item.id;
+          }}
           renderItem={(data, rowMap) => (
             <View style={[styles.item, styles.itemFront]} key={data.item.id}>
               <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>

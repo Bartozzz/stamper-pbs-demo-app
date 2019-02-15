@@ -44,9 +44,11 @@ class WalletPlacesScreen extends React.Component {
         <FlatList
           data={cards}
           numColumns={2}
+          keyExtractor={item => {
+            return item.id;
+          }}
           renderItem={({ item }) => (
             <Card
-              key={item.id}
               image={{ uri: item.logoUrl }}
               title={item.merchantName}
               subtitle={item.stampsTotal}
