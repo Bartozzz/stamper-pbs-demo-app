@@ -5,6 +5,7 @@ import { StyleSheet, View, Text, Image, ActivityIndicator } from "react-native";
 
 import Hamburger from "../../components/Hamburger";
 import HeaderBackIcon from "../../components/HeaderBack";
+import MapHeader from "../../components/map/Header";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -59,6 +60,14 @@ class MapNearbyScreen extends React.Component {
       .then(data => getRegion("Paris"))
       .catch(err => getRegion("Paris"));
   }
+
+  toggleMode = () => {
+    if (this.state.mode === MODE_MAP) {
+      this.setState({ mode: MODE_CARD });
+    } else {
+      this.setState({ mode: MODE_MAP });
+    }
+  };
 
   requestUserPosition = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -125,15 +134,7 @@ class MapNearbyScreen extends React.Component {
     return null;
   }
 
-  render() {
-    if (!this.state.locationLoaded) {
-      return (
-        <View style={[defaultStyles.container, defaultStyles.center]}>
-          <ActivityIndicator color={colors.primary} size="large" />
-        </View>
-      );
-    }
-
+  renderData() {
     switch (this.state.mode) {
       case MODE_MAP:
         return this.renderDataAsMap();
@@ -141,6 +142,32 @@ class MapNearbyScreen extends React.Component {
       case MODE_CARD:
         return this.renderDataAsCards();
     }
+  }
+
+  render() {
+    const { navigation } = this.props;
+    const { mode, locationLoaded } = this.state;
+
+    if (!locationLoaded) {
+      return (
+        <View style={[defaultStyles.container, defaultStyles.center]}>
+          <ActivityIndicator color={colors.primary} size="large" />
+        </View>
+      );
+    }
+
+    return (
+      <>
+        <MapHeader
+          mode={mode}
+          navigation={navigation}
+          onToggleMode={this.toggleMode}
+          nearby
+        />
+
+        {this.renderData()}
+      </>
+    );
   }
 }
 
@@ -157,9 +184,11 @@ const styles = StyleSheet.create({
 
   map: {
     flex: 1,
+    zIndex: 1,
 
     // Center indicator vertically:
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: colors.background
   },
 
   marker: {
