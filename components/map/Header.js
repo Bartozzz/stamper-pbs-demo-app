@@ -39,9 +39,7 @@ export default function MapHeader(props) {
 
   return (
     <View style={[styles.header, props.style]}>
-      <TouchableOpacity
-        onPress={() => props.navigation.navigate(Routes.MAP_NEARBY)}
-      >
+      <TouchableOpacity onPress={props.onSelectNearby}>
         <View style={nearbyBorderStyles}>
           <Text style={nearbyStyles}>W pobliżu</Text>
         </View>
@@ -51,9 +49,7 @@ export default function MapHeader(props) {
         <View style={styles.toggle}>{modeIcon}</View>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => props.navigation.navigate(Routes.MAP_FAVORITES)}
-      >
+      <TouchableOpacity onPress={props.onSelectFav}>
         <View style={favBorderStyles}>
           <Text style={favStyles}>Ulubione</Text>
         </View>

@@ -1,11 +1,21 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { MapView, Location, Permissions } from "expo";
-import { StyleSheet, View, Text, Image, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  Image,
+  ActivityIndicator
+} from "react-native";
 
+import Background from "../../components/Background";
 import Hamburger from "../../components/Hamburger";
 import HeaderBackIcon from "../../components/HeaderBack";
 import MapHeader from "../../components/map/Header";
+import Card from "../../components/Card";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -16,10 +26,13 @@ import layout from "../../constants/Layout";
 import { getRegion } from "../../store/reducers/map";
 
 import mapStyle from "../../assets/mapStyle";
+import BackgroundImage from "../../assets/backgrounds/wallet.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 
 const MODE_MAP = "MODE_MAP";
 const MODE_CARD = "MODE_CARD";
+const FILTER_ALL = "FILTER_ALL";
+const FILTER_FAV = "FILTER_FAV";
 
 class MapNearbyScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -34,6 +47,7 @@ class MapNearbyScreen extends React.Component {
 
   state = {
     mode: MODE_MAP,
+    filter: FILTER_ALL,
     city: null,
     location: null,
     locationLoaded: false
@@ -52,13 +66,34 @@ class MapNearbyScreen extends React.Component {
     }
   }
 
+  get data() {
+    const { data } = this.props;
+    const { filter } = this.state;
+
+    switch (filter) {
+      case FILTER_FAV:
+        return data.filter(item => item.isFavorite);
+
+      default:
+        return data;
+    }
+  }
+
   componentDidMount() {
     const { getRegion } = this.props;
 
     this.requestUserPosition()
-      // .then(data => getRegion(data.city))
-      .then(data => getRegion("Paris"))
-      .catch(err => getRegion("Paris"));
+      .then(data => {
+        // getRegion(data.city)
+        getRegion("Paris");
+
+        this.setState(data);
+      })
+      .catch(err => {
+        getRegion("Paris");
+
+        this.setState(data);
+      });
   }
 
   toggleMode = () => {
@@ -67,6 +102,12 @@ class MapNearbyScreen extends React.Component {
     } else {
       this.setState({ mode: MODE_MAP });
     }
+  };
+
+  setFilter = filter => () => {
+    this.setState({
+      filter
+    });
   };
 
   requestUserPosition = async () => {
@@ -82,19 +123,15 @@ class MapNearbyScreen extends React.Component {
       reverse = await Location.reverseGeocodeAsync(location.coords);
     }
 
-    const newState = {
+    // Same shape as component' state:
+    return {
       city: Array.isArray(reverse) ? reverse[0].city : null,
       location,
       locationLoaded: true
     };
-
-    this.setState(newState);
-
-    return newState;
   };
 
   renderDataAsMap() {
-    const { data } = this.props;
     const { location } = this.state;
 
     return (
@@ -106,7 +143,7 @@ class MapNearbyScreen extends React.Component {
           minZoomLevel={15}
           initialRegion={this.initialRegion}
         >
-          {data.map(item => (
+          {this.data.map(item => (
             <MapView.Marker
               key={item.id}
               coordinate={{
@@ -131,7 +168,26 @@ class MapNearbyScreen extends React.Component {
   }
 
   renderDataAsCards() {
-    return null;
+    return (
+      <ScrollView style={styles.list}>
+        <FlatList
+          data={this.data}
+          numColumns={2}
+          keyExtractor={item => {
+            return item.id;
+          }}
+          renderItem={({ item }) => (
+            <Card
+              image={{ uri: item.logoUrl }}
+              title={item.title}
+              subtitle={`zbierz ${item.stampsTotal} pieczątek`}
+              action={"Dodaj kartę"}
+              onPress={() => null}
+            />
+          )}
+        />
+      </ScrollView>
+    );
   }
 
   renderData() {
@@ -146,7 +202,7 @@ class MapNearbyScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const { mode, locationLoaded } = this.state;
+    const { mode, filter, locationLoaded } = this.state;
 
     if (!locationLoaded) {
       return (
@@ -157,21 +213,28 @@ class MapNearbyScreen extends React.Component {
     }
 
     return (
-      <>
+      <Background source={BackgroundImage} disableScroll>
         <MapHeader
           mode={mode}
           navigation={navigation}
+          onSelectNearby={this.setFilter(FILTER_ALL)}
+          onSelectFav={this.setFilter(FILTER_FAV)}
           onToggleMode={this.toggleMode}
-          nearby
+          nearby={filter === FILTER_ALL}
+          fav={filter === FILTER_FAV}
         />
 
         {this.renderData()}
-      </>
+      </Background>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  list: {
+    margin: 8
+  },
+
   indicator: {
     // position: "absolute",
 
@@ -199,13 +262,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  // …
   isLoading: state.map.isLoading,
   data: state.map.data
 });
 
 const mapDispatchToProps = {
-  // …
   getRegion
 };
 

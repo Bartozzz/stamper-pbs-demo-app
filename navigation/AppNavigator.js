@@ -12,8 +12,7 @@ import layout from "../constants/Layout";
 import InfoErrorScreen from "../screens/info/ErrorScreen";
 import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import PrizesListScreen from "../screens/prizes/ListScreen";
-import MapNearbyScreen from "../screens/map/NearbyScreen";
-import MapFavoritesScreen from "../screens/map/FavoritesScreen";
+import MapScreen from "../screens/map/MapScreen";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
@@ -78,11 +77,10 @@ const PrizesStack = createStackNavigator(
 
 const MapStack = createStackNavigator(
   {
-    [Route.MAP_NEARBY]: MapNearbyScreen,
-    [Route.MAP_FAVORITES]: MapFavoritesScreen
+    [Route.MAP_ALL]: MapScreen
   },
   {
-    initialRouteName: Route.MAP_NEARBY,
+    initialRouteName: Route.MAP_ALL,
     defaultNavigationOptions
   }
 );
