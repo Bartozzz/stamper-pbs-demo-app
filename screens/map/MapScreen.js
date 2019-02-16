@@ -25,6 +25,7 @@ import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
+import { addCard } from "../../store/reducers/wallet";
 
 import mapStyle from "../../assets/mapStyle";
 import BackgroundImage from "../../assets/backgrounds/wallet.png";
@@ -132,6 +133,25 @@ class MapNearbyScreen extends React.Component {
     };
   };
 
+  addCard = cardId => () => {
+    const { navigation, addCard } = this.props;
+
+    addCard(cardId)
+      .then(() =>
+        navigation.navigate(Routes.INFO_SUCCESS, {
+          redirect: Routes.DASHBOARD,
+          message: i18n.t("success.wallet.cardAdd")
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        navigation.navigate(Routes.INFO_ERROR, {
+          redirect: Routes.DASHBOARD,
+          message: i18n.t("errors.wallet.cardAdd")
+        });
+      });
+  };
+
   addFav = cardId => () => {
     this.props.addFav(cardId);
   };
@@ -191,7 +211,7 @@ class MapNearbyScreen extends React.Component {
               title={item.title}
               subtitle={`zbierz ${item.stampsTotal} pieczątek`}
               action={"Dodaj kartę"}
-              onPress={() => null}
+              onPress={this.addCard(item.id)}
               renderAction={() =>
                 item.favorite ? (
                   <AntDesign
@@ -294,6 +314,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getRegion,
+  addCard,
   addFav,
   removeFav
 };

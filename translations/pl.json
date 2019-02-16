@@ -117,6 +117,10 @@
       "claimPrize": "Gratulujemy!\n Odebrałeś nagrodę!"
     },
 
+    "wallet": {
+      "cardAdd": "Karta\n dodana do portfela!"
+    },
+
     "profile": {
       "photoAdd": "Zdjęcie zostało przesłane!"
     }
@@ -128,6 +132,10 @@
     "scanner": {
       "stampAdd": "Nie było można dodać pieczątki.",
       "claimPrize": "Nie udało się odebrać nagrody."
+    },
+
+    "wallet": {
+      "cardAdd": "Nie było można dodać karty."
     },
 
     "profile": {
