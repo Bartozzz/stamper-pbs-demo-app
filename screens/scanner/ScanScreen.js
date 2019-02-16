@@ -5,7 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { Text, View, Image, StyleSheet, Platform } from "react-native";
 
 import * as Routes from "../../navigation";
-import { setQrc } from "../../store/reducers/qrdata";
 import { addStamp } from "../../store/reducers/stamp";
 import Button from "../../components/Button";
 import Hamburger from "../../components/Hamburger";
