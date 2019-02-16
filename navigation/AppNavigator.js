@@ -13,6 +13,7 @@ import InfoErrorScreen from "../screens/info/ErrorScreen";
 import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import PrizesListScreen from "../screens/prizes/ListScreen";
 import MapScreen from "../screens/map/MapScreen";
+import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
@@ -85,6 +86,16 @@ const MapStack = createStackNavigator(
   }
 );
 
+const CardStack = createStackNavigator(
+  {
+    [Route.CARD_INFO]: CardInfoScreen
+  },
+  {
+    initialRouteName: Route.CARD_INFO,
+    defaultNavigationOptions
+  }
+);
+
 const DashboardStack = createStackNavigator(
   {
     [Route.DASHBOARD_MAIN]: DashboardMainScreen,
@@ -144,6 +155,7 @@ export default createAppContainer(
       [Route.INFO]: InfoStack,
       [Route.PRIZES]: PrizesStack,
       [Route.MAP]: MapStack,
+      [Route.CARD]: CardStack,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,

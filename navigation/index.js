@@ -14,6 +14,9 @@ export const PRIZES_LIST = "PrizesList";
 export const MAP = "Map";
 export const MAP_ALL = "MapAll";
 
+export const CARD = "Card";
+export const CARD_INFO = "CardInfo";
+
 export const DASHBOARD = "Dashboard";
 export const DASHBOARD_MAIN = "DashboardMain";
 export const DASHBOARD_TOS = "DashboardTOS";

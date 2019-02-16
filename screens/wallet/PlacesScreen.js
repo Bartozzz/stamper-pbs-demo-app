@@ -33,7 +33,7 @@ class WalletPlacesScreen extends React.Component {
   }
 
   renderCards() {
-    const { cards, isLoading } = this.props;
+    const { cards, isLoading, navigation } = this.props;
 
     console.log(cards);
 
@@ -53,7 +53,12 @@ class WalletPlacesScreen extends React.Component {
               title={item.merchantName}
               subtitle={item.stampsTotal}
               action={"Zobacz karty"}
-              onPress={() => null}
+              onPress={() => {
+                navigation.navigate(Routes.CARD_INFO, {
+                  merchant: item.merchantName,
+                  cards: cards.filter(c => c.merchantName === item.merchantName)
+                });
+              }}
             />
           )}
         />
