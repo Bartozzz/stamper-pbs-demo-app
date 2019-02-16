@@ -16,7 +16,17 @@ const BackgroundImage = require("../assets/backgrounds/tos.png");
 // @see https://www.npmjs.com/package/react-native-render-html#styling
 const classesStyles = {};
 const tagsStyles = {
-  p: { color: "white" }
+  h2: {
+    color: "white",
+    fontSize: 16,
+
+    marginTop: 20,
+    marginBottom: 4
+  },
+  p: {
+    color: "#95989A",
+    fontSize: 12
+  }
 };
 
 class TermsOfServiceScreen extends React.Component {
@@ -61,12 +71,14 @@ class TermsOfServiceScreen extends React.Component {
         ) : error ? (
           <Error message={error} />
         ) : (
-          <HTML
-            html={content}
-            imagesMaxWidth={Dimensions.get("window").width}
-            tagsStyles={tagsStyles}
-            classesStyles={classesStyles}
-          />
+          <View style={{ paddingHorizontal: 24, paddingVertical: 20 }}>
+            <HTML
+              html={content}
+              imagesMaxWidth={Dimensions.get("window").width}
+              tagsStyles={tagsStyles}
+              classesStyles={classesStyles}
+            />
+          </View>
         )}
       </Background>
     );
