@@ -6,7 +6,8 @@ import {
   Image,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Bar as ProgressBar } from "react-native-progress";
@@ -20,10 +21,14 @@ import layout from "../../constants/Layout";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";
-import { getWallet } from "../../store/reducers/wallet";
+import { getWallet, removeCard } from "../../store/reducers/wallet";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet.png");
+const DeleteImage = require("../../assets/images/delete.png");
+
+const height = 90;
+const margin = 15;
 
 class WalletCardsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -35,6 +40,10 @@ class WalletCardsScreen extends React.Component {
   componentDidMount() {
     this.props.getWallet();
   }
+
+  removeCard = cardId => () => {
+    this.props.removeCard(cardId);
+  };
 
   renderCards() {
     const { cards, isLoading } = this.props;
@@ -50,55 +59,60 @@ class WalletCardsScreen extends React.Component {
             return item.id;
           }}
           renderItem={(data, rowMap) => (
-            <View style={[styles.item, styles.itemFront]} key={data.item.id}>
-              <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>
-                <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
+            <>
+              <View style={[styles.item, styles.itemFront]} key={data.item.id}>
+                <View
+                  style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}
+                >
+                  <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
 
-                <View style={{ marginTop: 6 }}>
-                  <ProgressBar
-                    progress={data.item.stampsToDate / data.item.stampsTotal}
-                    borderRadius={0}
-                    height={6}
-                    width={140}
-                    color="#0046F5"
-                    unfilledColor="#001432"
-                    borderWidth={0}
-                  />
+                  <View style={{ marginTop: 6 }}>
+                    <ProgressBar
+                      progress={data.item.stampsToDate / data.item.stampsTotal}
+                      borderRadius={0}
+                      height={6}
+                      width={140}
+                      color="#0046F5"
+                      unfilledColor="#001432"
+                      borderWidth={0}
+                    />
+                  </View>
                 </View>
-              </View>
 
-              <View style={defaultStyles.row}>
-                <Image
-                  source={{ uri: data.item.iconUrl }}
-                  style={{ width: 40, height: 40, borderRadius: 20 }}
-                />
+                <View style={defaultStyles.row}>
+                  <Image
+                    source={{ uri: data.item.iconUrl }}
+                    style={{ width: 40, height: 40, borderRadius: 20 }}
+                  />
 
-                <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
-                  <View>
-                    <Text style={styles.textTitle}>{data.item.title}</Text>
-                    <Text style={styles.textExpiry}>
-                      ważna do {formatDate(data.item.validToDate)}
+                  <View
+                    style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}
+                  >
+                    <View>
+                      <Text style={styles.textTitle}>{data.item.title}</Text>
+                      <Text style={styles.textExpiry}>
+                        ważna do {formatDate(data.item.validToDate)}
+                      </Text>
+                    </View>
+
+                    <Text style={styles.textAmount}>
+                      {data.item.stampsToDate} / {data.item.stampsTotal}
                     </Text>
                   </View>
-
-                  <Text style={styles.textAmount}>
-                    {data.item.stampsToDate} / {data.item.stampsTotal}
-                  </Text>
                 </View>
               </View>
-            </View>
+
+              <TouchableOpacity
+                style={styles.itemRemove}
+                onPress={this.removeCard(data.item.id)}
+              >
+                <Image source={DeleteImage} style={styles.itemRemoveImage} />
+              </TouchableOpacity>
+            </>
           )}
-          renderHiddenItem={(data, rowMap) => (
-            <View
-              style={[styles.item, styles.itemBack]}
-              key={`${data.item.id}_hidden`}
-            >
-              <Text>Left</Text>
-              <Text>Right</Text>
-            </View>
-          )}
+          renderHiddenItem={(data, rowMap) => <View />}
           disableRightSwipe={true}
-          rightOpenValue={-75}
+          rightOpenValue={-(height + margin)}
         />
       );
     }
@@ -135,10 +149,25 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   itemFront: {
-    backgroundColor: "#203451"
+    backgroundColor: "rgba(255, 255, 255, 0.1)"
   },
-  itemBack: {
-    backgroundColor: "#f16c41"
+  itemRemove: {
+    alignItems: "center",
+    justifyContent: "center",
+
+    position: "absolute",
+    top: 10,
+    right: -height,
+
+    height: height,
+    width: height,
+
+    backgroundColor: "#f16c41",
+    borderRadius: 10
+  },
+  itemRemoveImage: {
+    width: 40,
+    height: 40
   },
 
   textId: {
@@ -178,7 +207,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // …
-  getWallet
+  getWallet,
+  removeCard
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletCardsScreen);

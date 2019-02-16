@@ -38,6 +38,15 @@ export default function reducer(state = initialState, action) {
         cards: []
       };
 
+    case WALLET_REMOVE_CARD_REQUEST: {
+      const { cardId } = action.payload.request.data;
+
+      return {
+        ...state,
+        cards: state.cards.filter(card => card.id !== cardId)
+      };
+    }
+
     default:
       return state;
   }
