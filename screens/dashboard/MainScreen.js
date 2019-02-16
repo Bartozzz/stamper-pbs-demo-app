@@ -221,7 +221,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 150,
     margin: 10,
-    padding: 1,
 
     borderRadius: 8,
     borderWidth: 1,
@@ -229,8 +228,7 @@ const styles = StyleSheet.create({
     borderColor: colors.border
   },
   boxFocus: {
-    padding: 0,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: colors.primary,
     backgroundColor: colors.highlight
   },
