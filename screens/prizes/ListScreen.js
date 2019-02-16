@@ -15,6 +15,7 @@ import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import * as Routes from "../../navigation";
 import Header from "../../components/Header";
 import Hamburger from "../../components/Hamburger";
 import Button from "../../components/Button";
@@ -40,7 +41,11 @@ class PrizesListScreen extends React.Component {
     this.props.getPrizes();
   }
 
-  claimPrize = () => {};
+  claimPrize = () => {
+    this.props.navigation.navigate(Routes.SCANNER, {
+      type: Routes.PRIZES
+    });
+  };
 
   selectPrize = prizeId => () => {
     this.setState({

@@ -51,20 +51,28 @@ class ScannerScanScreen extends React.Component {
   }
 
   onBarCodeRead = scan => {
-    const code = getParameterByName("p", scan.data);
+    const { navigation, addStamp } = this.props;
 
-    this.props
-      .addStamp(code)
+    const code = getParameterByName("p", scan.data);
+    const mode = navigation.getParam("type", Routes.SCANNER);
+
+    addStamp(code)
       .then(() =>
-        this.props.navigation.navigate(Routes.INFO_SUCCESS, {
+        navigation.navigate(Routes.INFO_SUCCESS, {
           redirect: Routes.DASHBOARD,
-          message: i18n.t("success.scanner.stampAdd")
+          message:
+            mode === Routes.SCANNER
+              ? i18n.t("success.scanner.stampAdd")
+              : i18n.t("success.scanner.claimPrize")
         })
       )
       .catch(() =>
-        this.props.navigation.navigate(Routes.INFO_ERROR, {
+        navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.DASHBOARD,
-          message: i18n.t("errors.scanner.stampAdd")
+          message:
+            mode === Routes.SCANNER
+              ? i18n.t("errors.scanner.stampAdd")
+              : i18n.t("errors.scanner.claimPrize")
         })
       );
   };

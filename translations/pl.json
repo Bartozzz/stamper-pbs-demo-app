@@ -113,7 +113,8 @@
     "changed": "Zmiany zostały wprowadzone!",
 
     "scanner": {
-      "stampAdd": "Pieczątka została dodana!"
+      "stampAdd": "Pieczątka została dodana!",
+      "claimPrize": "Gratulujemy!\n Odebrałeś nagrodę!"
     },
 
     "profile": {
@@ -125,7 +126,8 @@
     "changed": "Zmiany nie zostały wprowadzone!",
 
     "scanner": {
-      "stampAdd": "Nie było można dodać pieczątki."
+      "stampAdd": "Nie było można dodać pieczątki.",
+      "claimPrize": "Nie udało się odebrać nagrody."
     },
 
     "profile": {
