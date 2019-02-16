@@ -32,9 +32,9 @@ export default function MapHeader(props) {
 
   const modeIcon =
     props.mode === "MODE_MAP" ? (
-      <Image source={ModeMap} style={styles.toggleIcon} />
-    ) : (
       <Image source={ModeCards} style={styles.toggleIcon} />
+    ) : (
+      <Image source={ModeMap} style={styles.toggleIcon} />
     );
 
   return (
