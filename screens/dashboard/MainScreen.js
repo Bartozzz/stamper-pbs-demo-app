@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
 
@@ -7,6 +8,8 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+
+import { getPrizesCount } from "../../store/reducers/prizes";
 
 const MenuImageMap = require("../../assets/images/menu/map.png");
 const MenuImageMarket = require("../../assets/images/menu/market-inactive.png");
@@ -33,6 +36,10 @@ class DashboardMainScreen extends React.Component {
   state = {
     focused: null
   };
+
+  componentDidMount() {
+    this.props.getPrizesCount();
+  }
 
   isFocused = element => {
     return this.state.focused === element;
@@ -75,6 +82,8 @@ class DashboardMainScreen extends React.Component {
   };
 
   render() {
+    const { prizesCount } = this.props;
+
     const mapStyles = this.isFocused(MENU_MAP) ? styles.boxFocus : null;
     const walletStyles = this.isFocused(MENU_WALLET) ? styles.boxFocus : null;
     const prizesStyles = this.isFocused(MENU_PRIZES) ? styles.boxFocus : null;
@@ -130,6 +139,10 @@ class DashboardMainScreen extends React.Component {
               onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_PRIZES)}
             >
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>{prizesCount}</Text>
+              </View>
+
               <Image
                 source={MenuImagePrizes}
                 style={[styles.boxIcon, { width: 60, height: 60 }]}
@@ -206,7 +219,7 @@ const styles = StyleSheet.create({
 
   box: {
     flex: 1,
-    height: 120,
+    height: 150,
     margin: 10,
     padding: 1,
 
@@ -230,8 +243,39 @@ const styles = StyleSheet.create({
   },
   boxIcon: {
     alignSelf: "center",
-    marginVertical: 12
+    marginTop: 20,
+    marginBottom: 16
+  },
+
+  badge: {
+    position: "absolute",
+    right: 10,
+    top: 10,
+
+    alignItems: "center",
+    justifyContent: "center",
+
+    width: 22,
+    height: 22,
+    borderRadius: 22,
+
+    backgroundColor: "#00d1ff"
+  },
+  badgeText: {
+    color: colors.color,
+    fontFamily: layout.fontHead,
+    textAlign: "center"
   }
 });
 
-export default DashboardMainScreen;
+const mapStateToProps = state => ({
+  prizesCount: state.prizes.count
+});
+
+const mapDispatchToProps = {
+  getPrizesCount
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  DashboardMainScreen
+);

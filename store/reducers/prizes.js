@@ -10,6 +10,7 @@ export const PRIZES_GET_COUNT_FAIL = "APP/PRIZES_COUNT/GET_FAIL";
 
 const initialState = {
   isLoading: false,
+  count: 0,
   prizes: []
 };
 
@@ -33,6 +34,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         isLoading: false,
         prizes: []
+      };
+
+    case PRIZES_GET_COUNT_SUCCESS:
+      return {
+        ...state,
+        count: action.payload.data
       };
 
     default:
