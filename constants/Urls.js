@@ -70,6 +70,10 @@ const V1 = {
   },
 
   Favorite: {
+    Add() {
+      return `${Server.V1}/Favorite/Add`;
+    },
+
     Remove() {
       return `${Server.V1}/Favorite/Remove`;
     }

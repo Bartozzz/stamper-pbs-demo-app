@@ -5,11 +5,22 @@ import layout from "../constants/Layout";
 
 class Card extends Component {
   render() {
-    const { image, title, subtitle, action, onPress } = this.props;
+    const {
+      image,
+      title,
+      subtitle,
+      action,
+      onPress,
+      renderAction
+    } = this.props;
 
     return (
       <View style={styles.cardPadder}>
         <View style={styles.card}>
+          <View style={styles.cardActionButton}>
+            {typeof renderAction === "function" ? renderAction() : null}
+          </View>
+
           <Image style={styles.cardImage} source={image} />
 
           <Text style={styles.cardTitle}>{title}</Text>
@@ -33,6 +44,11 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.color,
     borderRadius: 8
+  },
+  cardActionButton: {
+    position: "absolute",
+    top: 10,
+    left: 13
   },
   cardImage: {
     alignSelf: "center",

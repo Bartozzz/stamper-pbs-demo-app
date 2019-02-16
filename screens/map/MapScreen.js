@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { AntDesign } from "@expo/vector-icons";
 import { MapView, Location, Permissions } from "expo";
 import {
   StyleSheet,
@@ -23,7 +24,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
-import { getRegion } from "../../store/reducers/map";
+import { getRegion, addFav, removeFav } from "../../store/reducers/map";
 
 import mapStyle from "../../assets/mapStyle";
 import BackgroundImage from "../../assets/backgrounds/wallet.png";
@@ -72,7 +73,7 @@ class MapNearbyScreen extends React.Component {
 
     switch (filter) {
       case FILTER_FAV:
-        return data.filter(item => item.isFavorite);
+        return data.filter(item => item.favorite === true);
 
       default:
         return data;
@@ -131,6 +132,14 @@ class MapNearbyScreen extends React.Component {
     };
   };
 
+  addFav = cardId => () => {
+    this.props.addFav(cardId);
+  };
+
+  removeFav = cardId => () => {
+    this.props.removeFav(cardId);
+  };
+
   renderDataAsMap() {
     const { location } = this.state;
 
@@ -183,6 +192,23 @@ class MapNearbyScreen extends React.Component {
               subtitle={`zbierz ${item.stampsTotal} pieczątek`}
               action={"Dodaj kartę"}
               onPress={() => null}
+              renderAction={() =>
+                item.favorite ? (
+                  <AntDesign
+                    name="star"
+                    size={20}
+                    color="#F3CE30"
+                    onPress={this.removeFav(item.id)}
+                  />
+                ) : (
+                  <AntDesign
+                    name="staro"
+                    size={20}
+                    color="#95989A"
+                    onPress={this.addFav(item.id)}
+                  />
+                )
+              }
             />
           )}
         />
@@ -267,7 +293,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getRegion
+  getRegion,
+  addFav,
+  removeFav
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapNearbyScreen);
