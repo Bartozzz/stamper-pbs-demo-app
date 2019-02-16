@@ -83,8 +83,38 @@ export default class App extends React.Component {
 
       // Preload assets:
       Asset.loadAsync([
-        // …
-        require("./assets/images/qr.png")
+        require("./assets/backgrounds/cards.png"),
+        require("./assets/backgrounds/details.png"),
+        require("./assets/backgrounds/hero.png"),
+        require("./assets/backgrounds/hero-2.png"),
+        require("./assets/backgrounds/home.png"),
+        require("./assets/backgrounds/logout.png"),
+        require("./assets/backgrounds/nearby.png"),
+        require("./assets/backgrounds/password.png"),
+        require("./assets/backgrounds/plain.png"),
+        require("./assets/backgrounds/prizes.png"),
+        require("./assets/backgrounds/profile.png"),
+        require("./assets/backgrounds/tos.png"),
+        require("./assets/backgrounds/wallet.png"),
+        require("./assets/logos/stamper.png"),
+        require("./assets/logos/stamper-icon.png"),
+        require("./assets/images/delete.png"),
+        require("./assets/images/error.png"),
+        require("./assets/images/icon.png"),
+        require("./assets/images/qr.png"),
+        require("./assets/images/splash.png"),
+        require("./assets/images/success.png"),
+        require("./assets/images/icons/location_indicator.png"),
+        require("./assets/images/icons/next_icon.png"),
+        require("./assets/images/menu/map.png"),
+        require("./assets/images/menu/market.png"),
+        require("./assets/images/menu/market-inactive.png"),
+        require("./assets/images/menu/mode_cards.png"),
+        require("./assets/images/menu/mode_map.png"),
+        require("./assets/images/menu/prize.png"),
+        require("./assets/images/menu/profile.png"),
+        require("./assets/images/menu/scanner.png"),
+        require("./assets/images/menu/wallet.png")
       ]),
 
       // Load fonts:
