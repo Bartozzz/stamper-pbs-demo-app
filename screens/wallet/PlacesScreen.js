@@ -35,14 +35,28 @@ class WalletPlacesScreen extends React.Component {
   renderCards() {
     const { cards, isLoading, navigation } = this.props;
 
-    console.log(cards);
+    // Merge data of cards with same merchant name:
+    const data = cards.reduce((accumulator, currentValue) => {
+      const index = accumulator.findIndex(
+        card => card.merchantName === currentValue.merchantName
+      );
+
+      if (index === -1) {
+        accumulator.push(currentValue);
+      } else {
+        accumulator[index].stampsTotal += currentValue.stampsTotal;
+        accumulator[index].stampsToDate += currentValue.stampsToDate;
+      }
+
+      return accumulator;
+    }, []);
 
     if (isLoading) {
       return <ActivityIndicator color={colors.primary} size="large" />;
     } else {
       return (
         <FlatList
-          data={cards}
+          data={data}
           numColumns={2}
           keyExtractor={item => {
             return item.id;
