@@ -1,6 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Platform, TouchableOpacity } from "react-native";
+import * as Routes from "../navigation";
 
 const styles = StyleSheet.create({
   backIcon: {
@@ -18,7 +19,13 @@ const styles = StyleSheet.create({
 
 export default function BackButton(props) {
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate("Dashboard")}>
+    <TouchableOpacity
+      onPress={() =>
+        props.onPress
+          ? props.onPress()
+          : props.navigation.navigate(Routes.DASHBOARD)
+      }
+    >
       <Ionicons
         style={styles.backIcon}
         name={Platform.select({
