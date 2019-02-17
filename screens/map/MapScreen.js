@@ -89,8 +89,8 @@ class MapNearbyScreen extends React.Component {
 
     this.requestUserPosition()
       .then(data => {
-        // getRegion(data.city)
-        getRegion("Paris");
+        getRegion(data.city);
+        // getRegion("Paris");
 
         this.setState(data);
       })
