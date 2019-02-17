@@ -9,7 +9,8 @@ import {
   FlatList,
   ScrollView,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from "react-native";
 
 import Background from "../../components/Background";
@@ -28,6 +29,7 @@ import { getRegion, addFav, removeFav } from "../../store/reducers/map";
 import { addCard } from "../../store/reducers/wallet";
 
 import mapStyle from "../../assets/mapStyle";
+import PlusImage from "../../assets/images/plus.png";
 import BackgroundImage from "../../assets/backgrounds/wallet.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 
@@ -50,6 +52,7 @@ class MapNearbyScreen extends React.Component {
   state = {
     mode: MODE_MAP,
     filter: FILTER_ALL,
+    selected: null,
     city: null,
     location: null,
     locationLoaded: false
@@ -133,18 +136,21 @@ class MapNearbyScreen extends React.Component {
     };
   };
 
+  selectCard = cardId => () => {
+    this.setState({ selected: cardId });
+  };
+
   addCard = cardId => () => {
     const { navigation, addCard } = this.props;
 
     addCard(cardId)
-      .then(() =>
+      .then(() => {
         navigation.navigate(Routes.INFO_SUCCESS, {
           redirect: Routes.DASHBOARD,
           message: i18n.t("success.wallet.cardAdd")
-        })
-      )
+        });
+      })
       .catch(err => {
-        console.log(err);
         navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.DASHBOARD,
           message: i18n.t("errors.wallet.cardAdd")
@@ -161,7 +167,8 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderDataAsMap() {
-    const { location } = this.state;
+    const { location, selected } = this.state;
+    const selectedCard = this.data.find(item => item.id === selected);
 
     return (
       <View style={styles.map}>
@@ -172,9 +179,16 @@ class MapNearbyScreen extends React.Component {
           minZoomLevel={15}
           initialRegion={this.initialRegion}
         >
+          <MapView.Marker coordinate={this.initialRegion}>
+            <View>
+              <Image style={styles.indicator} source={LocationIndicator} />
+            </View>
+          </MapView.Marker>
+
           {this.data.map(item => (
             <MapView.Marker
               key={item.id}
+              onPress={this.selectCard(item.id)}
               coordinate={{
                 latitude: Number(item.lat),
                 longitude: Number(item.lng)
@@ -185,13 +199,32 @@ class MapNearbyScreen extends React.Component {
               </View>
             </MapView.Marker>
           ))}
-
-          <MapView.Marker coordinate={this.initialRegion}>
-            <View>
-              <Image style={styles.indicator} source={LocationIndicator} />
-            </View>
-          </MapView.Marker>
         </MapView>
+
+        {selectedCard && (
+          <View style={styles.selected}>
+            <View style={styles.selectedImageContainer}>
+              <Image
+                style={styles.selectedImage}
+                source={{ uri: selectedCard.iconUrl }}
+              />
+            </View>
+
+            <View style={styles.selectedInfoContainer}>
+              <Text style={styles.selectedTitle}>{selectedCard.title}</Text>
+              <Text style={styles.selectedAmount}>
+                {selectedCard.stampsTotal}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.selectedAddContainer}
+              onPress={this.addCard(selected)}
+            >
+              <Image style={styles.selectAdd} source={PlusImage} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }
@@ -282,6 +315,7 @@ const styles = StyleSheet.create({
   },
 
   indicator: {
+    zIndex: 1,
     // position: "absolute",
 
     // Center indicator horizontally:
@@ -301,9 +335,66 @@ const styles = StyleSheet.create({
   },
 
   marker: {
+    zIndex: 2,
     width: 40,
     height: 40,
     borderRadius: 20
+  },
+
+  selected: {
+    zIndex: 3,
+
+    flexDirection: "row",
+    alignSelf: "center",
+    alignItems: "center",
+
+    position: "absolute",
+    bottom: 25,
+
+    height: 80,
+    width: 350,
+    borderRadius: 80,
+
+    backgroundColor: colors.primary
+  },
+  selectedImageContainer: {
+    marginHorizontal: 12,
+
+    alignItems: "center",
+    justifyContent: "center",
+
+    width: 55,
+    height: 55,
+
+    borderWidth: 5,
+    borderStyle: "solid",
+    borderColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 55,
+    backgroundColor: colors.background
+  },
+  selectedImage: {
+    width: 50,
+    height: 50
+  },
+  selectedInfoContainer: {
+    flex: 1
+  },
+  selectedTitle: {
+    color: colors.color,
+    fontSize: 14,
+    fontFamily: layout.fontHead
+  },
+  selectedAmount: {
+    color: "#709BE7",
+    fontSize: 9,
+    fontFamily: layout.fontText
+  },
+  selectedAddContainer: {
+    marginRight: 16
+  },
+  selectAdd: {
+    width: 48,
+    height: 48
   }
 });
 

@@ -95,6 +95,7 @@ export default class App extends React.Component {
         require("./assets/images/delete.png"),
         require("./assets/images/error.png"),
         require("./assets/images/icon.png"),
+        require("./assets/images/plus.png"),
         require("./assets/images/qr.png"),
         require("./assets/images/splash.png"),
         require("./assets/images/success.png"),
