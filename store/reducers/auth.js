@@ -30,6 +30,7 @@ export const CHANGE_PASSWORD_FAIL = "APP/AUTH/CHANGE_PASSWORD_FAIL";
 const initialState = {
   fetchingData: false,
   appToken: null,
+  appTokenExpiryDate: null,
   expiryDate: null,
   accessToken: null,
   refreshToken: null
@@ -68,15 +69,20 @@ export default function reducer(state = initialState, action) {
         fetchingData: true
       };
 
-    case ACCESS_REQUEST:
+    case ACCESS_REQUEST: {
+      console.log("Requesting new app access token…");
+
       return {
         ...state,
         appToken: null
       };
+    }
 
     case ACCESS_SUCCESS: {
-      const token = action.payload.data.accessToken;
-      const header = `Bearer ${token}`;
+      console.log("Got new new app access token…");
+
+      const { accessToken, expiryDate } = action.payload.data;
+      const header = `Bearer ${accessToken}`;
 
       // Set app access token for further usage.
       // Required in all other endpoints:
@@ -84,7 +90,8 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        appToken: token
+        appToken: accessToken,
+        appTokenExpiryDate: expiryDate
       };
     }
 

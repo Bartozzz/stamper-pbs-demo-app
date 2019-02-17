@@ -27,7 +27,9 @@ class AuthLoadingScreen extends React.Component {
   navigateToApp() {
     const { email, appToken, accessToken, refreshToken } = this.props;
 
-    if (accessToken) {
+    if (accessToken && refreshToken) {
+      console.log("Got user access token and refresh token…");
+
       // Required, so user's access token doesn't gets overrided by app's access
       // token from AuthLoadingScreen's componentDidMount:
       this.props.setAccessToken(accessToken);
@@ -43,6 +45,8 @@ class AuthLoadingScreen extends React.Component {
       // access token (for endpoints like login etc.):
       this.props.setAccessToken(appToken);
       this.handleUnauthorized();
+    } else {
+      console.log("?");
     }
   }
 

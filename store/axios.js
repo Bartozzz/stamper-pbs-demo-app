@@ -28,9 +28,8 @@ const middleware = axiosMiddleware(client, {
         }
 
         const { auth, profile } = getState();
-        const refreshToken = auth.refreshToken;
-        const expiryDate = auth.expiryDate;
-        const email = profile.email;
+        const { appToken, refreshToken, expiryDate } = auth;
+        const { email } = profile;
 
         let originalRequest = response;
         let tokenIsExpired = new Date(expiryDate) < new Date();
@@ -40,14 +39,17 @@ const middleware = axiosMiddleware(client, {
         if (tokenIsExpired && email && refreshToken) {
           console.log("Token expired… Generating a new access token:");
 
+          response["Authorization"] = `Bearer ${appToken}`;
+
           return client
             .post(Url.Account.RefreshToken(), {
               email: email,
               refreshtoken: refreshToken
             })
             .then(async response => {
-              console.log("Issued a new access token…");
               const { accessToken, refreshToken, expiryDate } = response.data;
+
+              console.log("Issued a new access token…", response.data);
 
               // Update local persistent storage:
               await AsyncStorage.setItem(EXPIRY_DATE, expiryDate);
