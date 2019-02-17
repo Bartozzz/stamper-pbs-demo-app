@@ -122,7 +122,9 @@ class MapNearbyScreen extends React.Component {
 
     if (status === "granted") {
       // Get user geocode location:
-      location = await Location.getCurrentPositionAsync({});
+      location = await Location.getCurrentPositionAsync({
+        enableHighAccuracy: true
+      });
 
       // Try to find the name of the city the current user is in:
       reverse = await Location.reverseGeocodeAsync(location.coords);
