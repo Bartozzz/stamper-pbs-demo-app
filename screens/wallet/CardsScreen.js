@@ -33,20 +33,51 @@ const margin = 15;
 class WalletCardsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "",
-    headerLeft: <InputSearch />,
+    headerLeft: (
+      <InputSearch
+        onChangeText={
+          navigation.state.params &&
+          Reflect.has(navigation.state.params, "handleSearch")
+            ? navigation.state.params.handleSearch
+            : null
+        }
+      />
+    ),
     headerRight: <Hamburger navigation={navigation} />
   });
 
+  state = {
+    search: null
+  };
+
   componentDidMount() {
     this.props.getWallet();
+    this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
   removeCard = cardId => () => {
     this.props.removeCard(cardId);
   };
 
+  handleSearch = search => {
+    this.setState({ search });
+  };
+
   renderCards() {
     const { cards, isLoading } = this.props;
+    const { search } = this.state;
+    let data = cards;
+
+    // Filter data based on current search term:
+    if (search) {
+      data = data.filter(
+        card =>
+          card.id.toLowerCase().includes(search.toLowerCase()) ||
+          card.cardNumber.toLowerCase().includes(search.toLowerCase()) ||
+          card.title.toLowerCase().includes(search.toLowerCase()) ||
+          card.merchantName.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
     if (isLoading) {
       return <ActivityIndicator color={colors.primary} size="large" />;
@@ -54,7 +85,7 @@ class WalletCardsScreen extends React.Component {
       return (
         <SwipeListView
           useFlatList
-          data={cards}
+          data={data}
           keyExtractor={item => {
             return item.id;
           }}

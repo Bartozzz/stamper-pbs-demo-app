@@ -24,32 +24,64 @@ const BackgroundImage = require("../../assets/backgrounds/wallet.png");
 class WalletPlacesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "",
-    headerLeft: <InputSearch />,
+    headerLeft: (
+      <InputSearch
+        onChangeText={
+          navigation.state.params &&
+          Reflect.has(navigation.state.params, "handleSearch")
+            ? navigation.state.params.handleSearch
+            : null
+        }
+      />
+    ),
     headerRight: <Hamburger navigation={navigation} />
   });
 
+  state = {
+    search: ""
+  };
+
   componentDidMount() {
     this.props.getWallet();
+    this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
+
+  handleSearch = search => {
+    this.setState({ search });
+  };
 
   renderCards() {
     const { cards, isLoading, navigation } = this.props;
+    const { search } = this.state;
 
-    // Merge data of cards with same merchant name:
-    const data = cards.reduce((accumulator, currentValue) => {
-      const index = accumulator.findIndex(
-        card => card.merchantName === currentValue.merchantName
-      );
+    const data = cards
+      .filter(
+        card =>
+          card.id.toLowerCase().includes(search.toLowerCase()) ||
+          card.title.toLowerCase().includes(search.toLowerCase()) ||
+          card.cardNumber.toLowerCase().includes(search.toLowerCase()) ||
+          card.merchantName.toLowerCase().includes(search.toLowerCase())
+      )
+      .reduce((acc, curr) => {
+        const index = acc.findIndex(c => c.merchantName === curr.merchantName);
 
-      if (index === -1) {
-        accumulator.push(currentValue);
-      } else {
-        accumulator[index].stampsTotal += currentValue.stampsTotal;
-        accumulator[index].stampsToDate += currentValue.stampsToDate;
-      }
+        if (index === -1) {
+          acc = [...acc, curr];
+        } else {
+          acc = acc.map(
+            (e, i) =>
+              i === index
+                ? {
+                    ...e,
+                    stampsTotal: e.stampsTotal + curr.stampsTotal,
+                    stampsToDate: e.stampsToDate + curr.stampsToDate
+                  }
+                : e
+          );
+        }
 
-      return accumulator;
-    }, []);
+        return acc;
+      }, Array.from([]));
 
     if (isLoading) {
       return <ActivityIndicator color={colors.primary} size="large" />;

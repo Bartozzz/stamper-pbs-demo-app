@@ -29,16 +29,27 @@ const BackgroundImage = require("../../assets/backgrounds/prizes.png");
 class PrizesListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "",
-    headerLeft: <InputSearch />,
+    headerLeft: (
+      <InputSearch
+        onChangeText={
+          navigation.state.params &&
+          Reflect.has(navigation.state.params, "handleSearch")
+            ? navigation.state.params.handleSearch
+            : null
+        }
+      />
+    ),
     headerRight: <Hamburger navigation={navigation} />
   });
 
   state = {
-    selected: null
+    selected: null,
+    search: null
   };
 
   componentDidMount() {
     this.props.getPrizes();
+    this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
   claimPrize = () => {
@@ -53,16 +64,32 @@ class PrizesListScreen extends React.Component {
     });
   };
 
+  handleSearch = searchTerm => {
+    this.setState({
+      search: searchTerm
+    });
+  };
+
   renderList() {
     const { prizes, isLoading } = this.props;
-    const { selected } = this.state;
+    const { selected, search } = this.state;
+    let data = prizes;
+
+    // Filter data based on current search term:
+    if (search) {
+      data = data.filter(
+        prize =>
+          prize.title.toLowerCase().includes(search.toLowerCase()) ||
+          prize.merchantName.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
     if (isLoading) {
       return <ActivityIndicator color={colors.primary} size="large" />;
     } else {
       return (
         <FlatList
-          data={prizes}
+          data={data}
           extraData={selected}
           keyExtractor={item => {
             return item.id;
