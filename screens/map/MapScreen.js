@@ -323,8 +323,8 @@ const styles = StyleSheet.create({
     // Center indicator horizontally:
     // alignSelf: "center",
 
-    width: 300,
-    height: 300
+    width: 120,
+    height: 120
   },
 
   map: {
