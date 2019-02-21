@@ -74,6 +74,7 @@ class InputWithIcon extends Component {
             underlineColorAndroid="transparent"
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
+            autoCorrect={false}
           />
         </View>
 

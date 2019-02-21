@@ -20,6 +20,7 @@ class InputSearch extends Component {
           placeholderTextColor={colors.info}
           style={styles.inputStyle}
           underlineColorAndroid="transparent"
+          autoCorrect={false}
         />
       </View>
     );

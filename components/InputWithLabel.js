@@ -66,6 +66,7 @@ class InputWithLabel extends Component {
             underlineColorAndroid="transparent"
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
+            autoCorrect={false}
           />
 
           <Text style={styles.inputLabel}>{label}</Text>
