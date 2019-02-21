@@ -171,6 +171,19 @@ export const login = (email, password) => ({
   }
 });
 
+export const loginExternal = email => ({
+  types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.ExternalLogin(),
+      data: {
+        email
+      }
+    }
+  }
+});
+
 export const register = (email, password, nickname) => ({
   types: [REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL],
   payload: {
@@ -180,6 +193,21 @@ export const register = (email, password, nickname) => ({
       data: {
         email,
         password,
+        nickname
+      }
+    }
+  }
+});
+
+export const registerExternal = (email, provider, nickname) => ({
+  types: [REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.ExternalRegister(),
+      data: {
+        email,
+        provider,
         nickname
       }
     }

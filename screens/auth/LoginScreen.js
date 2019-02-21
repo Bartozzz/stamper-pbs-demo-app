@@ -1,4 +1,5 @@
 import React from "react";
+import { Facebook, Google } from "expo";
 import { connect } from "react-redux";
 import {
   StyleSheet,
@@ -17,7 +18,13 @@ import Button from "../../components/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/InputWithIcon";
 
-import { login, ACCESS_TOKEN, REFRESH_TOKEN } from "../../store/reducers/auth";
+import {
+  login,
+  loginExternal,
+  registerExternal,
+  ACCESS_TOKEN,
+  REFRESH_TOKEN
+} from "../../store/reducers/auth";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -47,12 +54,68 @@ class AuthLoginScreen extends React.Component {
     }
   };
 
-  loginWithFacebook = () => {
-    console.log("Logging-in with Facebook");
+  loginExternal = email => {
+    this.props
+      .loginExternal(email)
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   };
 
-  loginWithGoogle = () => {
-    console.log("Logging-in with Google");
+  loginWithFacebook = async () => {
+    const { loginExternal, registerExternal } = this.props;
+
+    const fetchUser = async token => {
+      const endpoint = "https://graph.facebook.com/me?fields=email";
+
+      // Get the user's email using Facebook's Graph API:
+      const resp = await fetch(`${endpoint}&access_token=${token}`);
+      const data = await resp.json();
+
+      return data;
+    };
+
+    try {
+      const fid = "858778281140242";
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
+
+      if (type === "success") {
+        const user = await fetchUser(token);
+
+        registerExternal(user.email, "facebook", user.email.split("@")[0])
+          .then(() => this.loginExternal(user.email))
+          .catch(() => this.loginExternal(user.email));
+      }
+    } catch (e) {
+      this.setState({
+        error: {
+          ...this.state.error,
+          other: "Facebook error"
+        }
+      });
+    }
+  };
+
+  loginWithGoogle = async () => {
+    const { loginExternal, registerExternal } = this.props;
+
+    try {
+      const clientId =
+        "802676794484-4hur6ue6ionheedpb8mt294t8flj175a.apps.googleusercontent.com";
+      const { type, user } = await Google.logInAsync({ clientId });
+
+      if (type === "success") {
+        registerExternal(user.email, "google", user.email.split("@")[0])
+          .then(() => this.loginExternal(user.email))
+          .catch(() => this.loginExternal(user.email));
+      }
+    } catch (e) {
+      this.setState({
+        error: {
+          ...this.state.error,
+          other: "Google error"
+        }
+      });
+    }
   };
 
   loginWithCredentials = () => {
@@ -238,7 +301,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // …
-  login
+  login,
+  loginExternal,
+  registerExternal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthLoginScreen);
