@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  View
+  View,
+  Dimensions
 } from "react-native";
 import Background from "../../components/Background";
 
@@ -100,7 +101,7 @@ class AuthRegisterScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage}>
-        <AuthHero />
+        <AuthHero style={styles.hero} />
 
         <ScrollView style={styles.regContainer}>
           {error.other ? <Error message={error.other} /> : null}
@@ -162,6 +163,10 @@ export const AuthRegisterScreenLinks = props => (
 );
 
 const styles = StyleSheet.create({
+  hero: {
+    height: Math.max(250, (Dimensions.get("window").height - 170) / 2)
+  },
+
   regBold: {
     fontWeight: "900"
   },

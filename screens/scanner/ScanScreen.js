@@ -136,17 +136,8 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     alignItems: "center",
-    marginTop: 20,
-    marginHorizontal: 30,
-
-    ...Platform.select({
-      ios: {
-        marginBottom: 35
-      },
-      android: {
-        marginBottom: 20
-      }
-    })
+    marginVertical: 20,
+    marginHorizontal: 30
   }
 });
 

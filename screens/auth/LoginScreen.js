@@ -6,7 +6,8 @@ import {
   AsyncStorage,
   TouchableOpacity,
   ScrollView,
-  View
+  View,
+  Dimensions
 } from "react-native";
 import Background from "../../components/Background";
 
@@ -193,8 +194,7 @@ export const AuthLoginScreenLinks = props => (
 
 const styles = StyleSheet.create({
   hero: {
-    paddingTop: 70,
-    height: 460
+    height: Math.max(320, Dimensions.get("window").height / 2)
   },
 
   loginProvider: {

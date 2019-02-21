@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
 
   login: {
-    marginVertical: 17,
+    marginVertical: 14,
 
     color: colors.color,
     fontSize: 16,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
 
   email: {
-    marginBottom: 35,
+    marginBottom: 30,
 
     color: colors.info,
     fontSize: 10,
@@ -121,9 +121,11 @@ const styles = StyleSheet.create({
   menu: {
     alignItems: "center",
 
-    paddingVertical: 35,
-    marginVertical: 45,
+    paddingTop: 20,
+    paddingBottom: 10,
     marginHorizontal: 40,
+    marginTop: 40,
+    marginBottom: 10,
 
     borderRadius: 10,
     backgroundColor: colors.background
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border
   },
   menuItem: {
-    marginVertical: 24
+    marginVertical: 18
   },
   menuItemText: {
     color: colors.color,

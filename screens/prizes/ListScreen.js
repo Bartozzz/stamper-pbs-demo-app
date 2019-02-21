@@ -181,12 +181,12 @@ class PrizesListScreen extends React.Component {
 const styles = StyleSheet.create({
   // …
   list: {
-    paddingTop: 15
+    paddingTop: 15,
+    paddingBottom: 15
   },
 
   buttonContainer: {
-    paddingTop: 32,
-    paddingBottom: 60,
+    paddingVertical: 20,
     paddingHorizontal: 24
   },
 

@@ -11,7 +11,7 @@ import defaultStyles from "../constants/Styles";
 import colors from "../constants/Colors";
 import axios from "../store/axios";
 
-const BackgroundImage = require("../assets/backgrounds/tos.png");
+const BackgroundImage = require("../assets/backgrounds/tos_wn.png");
 
 // @see https://www.npmjs.com/package/react-native-render-html#styling
 const classesStyles = {};

@@ -87,9 +87,10 @@ const styles = StyleSheet.create({
   logout: {
     alignItems: "center",
 
-    paddingVertical: 100,
+    paddingTop: 60,
+    paddingBottom: 64,
     marginVertical: 40,
-    marginHorizontal: 40,
+    marginHorizontal: 36,
     marginTop: 80,
 
     shadowColor: "#2699FB",

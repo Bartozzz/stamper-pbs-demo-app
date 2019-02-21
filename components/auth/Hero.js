@@ -21,7 +21,7 @@ export default function AuthHero(props) {
 
 export const styles = StyleSheet.create({
   hero: {
-    height: 350,
+    height: 300,
     backgroundColor: colors.background,
 
     justifyContent: "center",
