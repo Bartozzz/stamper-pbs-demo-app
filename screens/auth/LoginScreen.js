@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   View,
+  KeyboardAvoidingView,
   Dimensions
 } from "react-native";
 import Background from "../../components/Background";
@@ -101,47 +102,49 @@ class AuthLoginScreen extends React.Component {
     const { email, password, error } = this.state;
 
     return (
-      <Background source={BackgroundImage}>
-        <AuthHero style={styles.hero} />
+      <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
+        <Background source={BackgroundImage} disableScroll>
+          <AuthHero style={styles.hero} />
 
-        <ScrollView style={styles.loginContainer}>
-          {error.other ? (
-            <Error message={i18n.t("errors.auth.unauthorized")} />
-          ) : null}
+          <ScrollView style={styles.loginContainer}>
+            {error.other ? (
+              <Error message={i18n.t("errors.auth.unauthorized")} />
+            ) : null}
 
-          <InputWithIcon
-            iconName="ios-contact"
-            iconSize={20}
-            placeholder={i18n.t("auth.email")}
-            value={email}
-            error={error.email}
-            onChangeText={email => this.setState({ email })}
-            autoCapitalize="none"
-          />
+            <InputWithIcon
+              iconName="ios-contact"
+              iconSize={20}
+              placeholder={i18n.t("auth.email")}
+              value={email}
+              error={error.email}
+              onChangeText={email => this.setState({ email })}
+              autoCapitalize="none"
+            />
 
-          <InputWithIcon
-            iconName="ios-lock"
-            iconSize={20}
-            placeholder={i18n.t("auth.password")}
-            value={password}
-            error={error.password}
-            onChangeText={password => this.setState({ password })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
+            <InputWithIcon
+              iconName="ios-lock"
+              iconSize={20}
+              placeholder={i18n.t("auth.password")}
+              value={password}
+              error={error.password}
+              onChangeText={password => this.setState({ password })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-          <AuthLoginScreenLinks
-            loginWithFacebook={this.loginWithFacebook}
-            loginWithGoogle={this.loginWithGoogle}
-            navigateToRegister={this.navigateToRegister}
-          />
+            <AuthLoginScreenLinks
+              loginWithFacebook={this.loginWithFacebook}
+              loginWithGoogle={this.loginWithGoogle}
+              navigateToRegister={this.navigateToRegister}
+            />
 
-          <Button
-            title={i18n.t("auth.login")}
-            onPress={this.loginWithCredentials}
-          />
-        </ScrollView>
-      </Background>
+            <Button
+              title={i18n.t("auth.login")}
+              onPress={this.loginWithCredentials}
+            />
+          </ScrollView>
+        </Background>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -194,7 +197,9 @@ export const AuthLoginScreenLinks = props => (
 
 const styles = StyleSheet.create({
   hero: {
-    height: Math.max(320, Dimensions.get("window").height / 2)
+    flex: 1,
+    minHeight: 250,
+    maxHeight: Math.max(320, Dimensions.get("window").height / 2)
   },
 
   loginProvider: {

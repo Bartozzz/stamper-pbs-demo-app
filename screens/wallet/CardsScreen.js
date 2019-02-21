@@ -158,7 +158,10 @@ class WalletCardsScreen extends React.Component {
           cards
         />
 
-        <ScrollView style={styles.list}>{this.renderCards()}</ScrollView>
+        <ScrollView style={styles.list}>
+          {this.renderCards()}
+          <View style={{ height: 60 }} />
+        </ScrollView>
       </Background>
     );
   }
@@ -166,7 +169,7 @@ class WalletCardsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   list: {
-    paddingTop: 15
+    paddingTop: 8
   },
 
   item: {

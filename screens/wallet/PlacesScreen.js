@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   StyleSheet,
   ScrollView,
+  View,
   ActivityIndicator,
   FlatList
 } from "react-native";
@@ -123,7 +124,10 @@ class WalletPlacesScreen extends React.Component {
           places
         />
 
-        <ScrollView style={styles.list}>{this.renderCards()}</ScrollView>
+        <ScrollView style={styles.list}>
+          {this.renderCards()}
+          <View style={{ height: 60 }} />
+        </ScrollView>
       </Background>
     );
   }

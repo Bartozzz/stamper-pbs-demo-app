@@ -3,6 +3,10 @@ import colors from "./Colors";
 import layout from "./Layout";
 
 export default StyleSheet.create({
+  grow: {
+    flex: 1
+  },
+
   container: {
     flex: 1,
 

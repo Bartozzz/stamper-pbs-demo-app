@@ -267,6 +267,7 @@ class MapNearbyScreen extends React.Component {
             />
           )}
         />
+        <View style={{ height: 60 }} />
       </ScrollView>
     );
   }

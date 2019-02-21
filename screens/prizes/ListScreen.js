@@ -164,7 +164,10 @@ class PrizesListScreen extends React.Component {
       <Background source={BackgroundImage} disableScroll>
         <Header title={"Nagrody"} />
 
-        <ScrollView style={styles.list}>{this.renderList()}</ScrollView>
+        <ScrollView style={styles.list}>
+          {this.renderList()}
+          <View style={{ height: 60 }} />
+        </ScrollView>
 
         <View style={styles.buttonContainer}>
           <Button
