@@ -13,6 +13,14 @@ class ErrorScreen extends React.Component {
     header: null
   };
 
+  componentDidMount() {
+    this.timeout = setTimeout(() => this.redirect(), 3000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
   redirect = () => {
     const { navigation } = this.props;
     const screen = navigation.getParam("redirect", Routes.AUTH);
