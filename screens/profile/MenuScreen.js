@@ -10,7 +10,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
-const BackgroundImage = require("../../assets/backgrounds/profile.png");
+const BackgroundImage = require("../../assets/backgrounds/profile_wn.png");
 const LogoImage = require("../../assets/logos/stamper.png");
 
 class ProfileMenuScreen extends React.Component {

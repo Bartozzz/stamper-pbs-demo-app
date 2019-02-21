@@ -24,7 +24,7 @@ import InputSearch from "../../components/InputSearch";
 import { getPrizes } from "../../store/reducers/prizes";
 import { formatDate } from "../../helpers/date";
 
-const BackgroundImage = require("../../assets/backgrounds/prizes.png");
+const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 
 class PrizesListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

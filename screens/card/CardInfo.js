@@ -15,7 +15,7 @@ import Button from "../../components/Button";
 import Background from "../../components/Background";
 import { formatDate } from "../../helpers/date";
 
-const BackgroundImage = require("../../assets/backgrounds/prizes.png");
+const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 
 class CardInfoScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

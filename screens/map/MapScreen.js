@@ -30,7 +30,7 @@ import { addCard } from "../../store/reducers/wallet";
 
 import mapStyle from "../../assets/mapStyle";
 import PlusImage from "../../assets/images/plus.png";
-import BackgroundImage from "../../assets/backgrounds/wallet.png";
+import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 
 const MODE_MAP = "MODE_MAP";

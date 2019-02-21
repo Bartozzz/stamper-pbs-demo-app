@@ -28,7 +28,7 @@ import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
-const BackgroundImage = require("../../assets/backgrounds/password.png");
+const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthRegisterScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

@@ -35,7 +35,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
-const BackgroundImage = require("../../assets/backgrounds/logout.png");
+const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 
 class ProfileEditScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

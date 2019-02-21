@@ -19,7 +19,7 @@ import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";
 import { getWallet } from "../../store/reducers/wallet";
 
-const BackgroundImage = require("../../assets/backgrounds/wallet.png");
+const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
 
 class WalletPlacesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

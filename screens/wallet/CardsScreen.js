@@ -24,7 +24,7 @@ import WalletHeader from "../../components/wallet/Header";
 import { getWallet, removeCard } from "../../store/reducers/wallet";
 import { formatDate } from "../../helpers/date";
 
-const BackgroundImage = require("../../assets/backgrounds/wallet.png");
+const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
 const DeleteImage = require("../../assets/images/delete.png");
 
 const height = 90;
