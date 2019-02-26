@@ -21,6 +21,7 @@ class ScannerScanScreen extends React.Component {
   });
 
   state = {
+    isProcessing: false,
     focusedScreen: true,
     hasCameraPermission: null
   };
@@ -50,10 +51,19 @@ class ScannerScanScreen extends React.Component {
   }
 
   onBarCodeRead = scan => {
+    const { isProcessing } = this.state;
     const { navigation, addStamp } = this.props;
+
+    if (isProcessing) {
+      return;
+    }
 
     const code = getParameterByName("p", scan.data);
     const mode = navigation.getParam("type", Routes.SCANNER);
+
+    this.setState({
+      isProcessing: true
+    });
 
     addStamp(code)
       .then(() =>
