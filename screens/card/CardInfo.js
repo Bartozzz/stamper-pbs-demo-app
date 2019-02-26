@@ -167,8 +167,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   slideInnerContainer: {
-    width: Dimensions.get("window").width * 0.75,
-    height: 182,
+    // width: Dimensions.get("window").width * 0.75,
+    width: 280,
+    height: 180,
 
     backgroundColor: colors.color,
     borderRadius: 10
