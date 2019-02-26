@@ -50,7 +50,7 @@ class MapNearbyScreen extends React.Component {
   });
 
   state = {
-    mode: MODE_MAP,
+    mode: MODE_CARD,
     filter: FILTER_ALL,
     selected: null,
     city: null,
