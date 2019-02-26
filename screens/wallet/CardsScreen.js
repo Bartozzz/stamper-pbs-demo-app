@@ -51,7 +51,13 @@ class WalletCardsScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getWallet();
+    // As from specs (client e-mail):
+    // "Po wczytaniu Portfel > Miejsca proszę wynik zapisać lokalnie oraz go
+    // wyzerować po wejściu na ekran główny by przechodzenie pomiędzy widokiem
+    // Portfel > Karty i spowrotem do Portfel > Miejsca  nie wymagały ponownego
+    // wczytywania danych".
+    // this.props.getWallet();
+
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
