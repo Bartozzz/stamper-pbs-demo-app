@@ -89,8 +89,8 @@ class MapNearbyScreen extends React.Component {
 
     this.requestUserPosition()
       .then(data => {
-        getRegion(data.city);
-        // getRegion("Paris");
+        // getRegion(data.city);
+        getRegion("Paris");
 
         this.setState(data);
       })
@@ -215,7 +215,9 @@ class MapNearbyScreen extends React.Component {
             <View style={styles.selectedInfoContainer}>
               <Text style={styles.selectedTitle}>{selectedCard.title}</Text>
               <Text style={styles.selectedAmount}>
-                {selectedCard.stampsTotal}
+                {i18n.t("map.collectStamps", {
+                  count: selectedCard.stampsTotal
+                })}
               </Text>
             </View>
 
@@ -244,8 +246,10 @@ class MapNearbyScreen extends React.Component {
             <Card
               image={{ uri: item.logoUrl }}
               title={item.title}
-              subtitle={`zbierz ${item.stampsTotal} pieczątek`}
-              action={"Dodaj kartę"}
+              subtitle={i18n.t("map.collectStamps", {
+                count: item.stampsTotal
+              })}
+              action={i18n.t("map.addCard")}
               onPress={this.addCard(item.id)}
               renderAction={() =>
                 item.favorite ? (

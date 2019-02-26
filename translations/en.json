@@ -112,11 +112,21 @@
   "wallet": {
     "cardsAmount": {
       "one": "1 karta",
-      "few": "{{amount}} karty",
-      "other": "{{amount}} kart",
+      "few": "{{count}} karty",
+      "other": "{{count}} kart",
       "zero": "0 kart"
     },
     "seeCards": "Zobacz karty"
+  },
+
+  "map": {
+    "collectStamps": {
+      "one": "zbierz 1 pieczątkę",
+      "few": "zbierz {{count}} pieczątki",
+      "other": "zbierz {{count}} pieczątek",
+      "zero": "brak pieczątek do zebrania"
+    },
+    "addCard": "Dodaj kartę"
   },
 
   "success": {
