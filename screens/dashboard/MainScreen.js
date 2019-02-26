@@ -139,9 +139,11 @@ class DashboardMainScreen extends React.Component {
               onPressOut={this.blurMenuElement}
               onPress={this.navigateTo(MENU_PRIZES)}
             >
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{prizesCount}</Text>
-              </View>
+              {prizesCount > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{prizesCount}</Text>
+                </View>
+              )}
 
               <Image
                 source={MenuImagePrizes}
