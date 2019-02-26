@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   cardButtonText: {
     color: colors.color,
     fontSize: 15,
-    fontFamily: layout.fontText,
+    fontFamily: layout.fontHead,
     textTransform: "uppercase",
     textAlign: "center"
   }
