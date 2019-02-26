@@ -216,12 +216,11 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginBottom: 50
+    marginBottom: 30
   },
 
   box: {
     flex: 1,
-    height: 150,
     margin: 10,
 
     borderRadius: 8,
@@ -235,6 +234,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.highlight
   },
   boxText: {
+    marginBottom: 20,
+
     color: colors.color,
 
     fontSize: 16,
