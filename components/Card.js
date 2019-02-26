@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
   cardImage: {
     alignSelf: "center",
 
-    marginTop: 30,
-    marginBottom: 24,
+    marginTop: 35,
+    marginBottom: 20,
 
-    width: 60,
-    height: 60
+    width: 70,
+    height: 70
   },
   cardTitle: {
     color: "#001432",

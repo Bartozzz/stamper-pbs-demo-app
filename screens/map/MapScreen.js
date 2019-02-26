@@ -89,8 +89,8 @@ class MapNearbyScreen extends React.Component {
 
     this.requestUserPosition()
       .then(data => {
-        // getRegion(data.city);
-        getRegion("Paris");
+        getRegion(data.city);
+        // getRegion("Paris");
 
         this.setState(data);
       })
@@ -343,9 +343,9 @@ const styles = StyleSheet.create({
 
   marker: {
     zIndex: 2,
-    width: 40,
-    height: 40,
-    borderRadius: 20
+    width: 50,
+    height: 50,
+    borderRadius: 25
   },
 
   selected: {
