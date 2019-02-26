@@ -67,7 +67,13 @@ class WalletPlacesScreen extends React.Component {
         const index = acc.findIndex(c => c.merchantName === curr.merchantName);
 
         if (index === -1) {
-          acc = [...acc, curr];
+          acc = [
+            ...acc,
+            {
+              ...curr,
+              cardsAmount: 1
+            }
+          ];
         } else {
           acc = acc.map(
             (e, i) =>
@@ -75,7 +81,8 @@ class WalletPlacesScreen extends React.Component {
                 ? {
                     ...e,
                     stampsTotal: e.stampsTotal + curr.stampsTotal,
-                    stampsToDate: e.stampsToDate + curr.stampsToDate
+                    stampsToDate: e.stampsToDate + curr.stampsToDate,
+                    cardsAmount: e.cardsAmount + 1
                   }
                 : e
           );
@@ -98,8 +105,10 @@ class WalletPlacesScreen extends React.Component {
             <Card
               image={{ uri: item.logoUrl }}
               title={item.merchantName}
-              subtitle={item.stampsTotal}
-              action={"Zobacz karty"}
+              subtitle={i18n.t("wallet.cardsAmount", {
+                count: item.cardsAmount
+              })}
+              action={i18n.t("wallet.seeCards")}
               onPress={() => {
                 navigation.navigate(Routes.CARD_INFO, {
                   merchant: item.merchantName,

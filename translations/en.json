@@ -109,6 +109,16 @@
     }
   },
 
+  "wallet": {
+    "cardsAmount": {
+      "one": "1 karta",
+      "few": "{{amount}} karty",
+      "other": "{{amount}} kart",
+      "zero": "0 kart"
+    },
+    "seeCards": "Zobacz karty"
+  },
+
   "success": {
     "changed": "Zmiany zostały wprowadzone!",
 
