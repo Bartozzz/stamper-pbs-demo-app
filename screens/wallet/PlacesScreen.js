@@ -52,7 +52,7 @@ class WalletPlacesScreen extends React.Component {
   };
 
   renderCards() {
-    const { cards, isLoading, navigation } = this.props;
+    const { cards, navigation } = this.props;
     const { search } = this.state;
 
     const data = cards
@@ -91,39 +91,35 @@ class WalletPlacesScreen extends React.Component {
         return acc;
       }, Array.from([]));
 
-    if (isLoading) {
-      return <ActivityIndicator color={colors.primary} size="large" />;
-    } else {
-      return (
-        <FlatList
-          data={data}
-          numColumns={2}
-          keyExtractor={item => {
-            return item.id;
-          }}
-          renderItem={({ item }) => (
-            <Card
-              image={{ uri: item.logoUrl }}
-              title={item.merchantName}
-              subtitle={i18n.t("wallet.cardsAmount", {
-                count: item.cardsAmount
-              })}
-              action={i18n.t("wallet.seeCards")}
-              onPress={() => {
-                navigation.navigate(Routes.CARD_INFO, {
-                  merchant: item.merchantName,
-                  cards: cards.filter(c => c.merchantName === item.merchantName)
-                });
-              }}
-            />
-          )}
-        />
-      );
-    }
+    return (
+      <FlatList
+        data={data}
+        numColumns={2}
+        keyExtractor={item => {
+          return item.id;
+        }}
+        renderItem={({ item }) => (
+          <Card
+            image={{ uri: item.logoUrl }}
+            title={item.merchantName}
+            subtitle={i18n.t("wallet.cardsAmount", {
+              count: item.cardsAmount
+            })}
+            action={i18n.t("wallet.seeCards")}
+            onPress={() => {
+              navigation.navigate(Routes.CARD_INFO, {
+                merchant: item.merchantName,
+                cards: cards.filter(c => c.merchantName === item.merchantName)
+              });
+            }}
+          />
+        )}
+      />
+    );
   }
 
   render() {
-    const { navigation } = this.props;
+    const { isLoading, navigation } = this.props;
 
     return (
       <Background source={BackgroundImage} disableScroll>
@@ -133,10 +129,16 @@ class WalletPlacesScreen extends React.Component {
           places
         />
 
-        <ScrollView style={styles.list}>
-          {this.renderCards()}
-          <View style={{ height: 60 }} />
-        </ScrollView>
+        {isLoading ? (
+          <View style={[defaultStyles.grow, defaultStyles.center]}>
+            <ActivityIndicator color={colors.primary} size="large" />
+          </View>
+        ) : (
+          <ScrollView style={styles.list}>
+            {this.renderCards()}
+            <View style={{ height: 60 }} />
+          </ScrollView>
+        )}
       </Background>
     );
   }

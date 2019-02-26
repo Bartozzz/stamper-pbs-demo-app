@@ -64,7 +64,7 @@ class WalletCardsScreen extends React.Component {
   };
 
   renderCards() {
-    const { cards, isLoading } = this.props;
+    const { cards } = this.props;
     const { search } = this.state;
     let data = cards;
 
@@ -79,89 +79,89 @@ class WalletCardsScreen extends React.Component {
       );
     }
 
-    if (isLoading) {
-      return <ActivityIndicator color={colors.primary} size="large" />;
-    } else {
-      return (
-        <SwipeListView
-          useFlatList
-          data={data}
-          keyExtractor={item => {
-            return item.id;
-          }}
-          renderItem={(data, rowMap) => (
-            <>
-              <View style={[styles.item, styles.itemFront]} key={data.item.id}>
-                <View
-                  style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}
-                >
-                  <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
+    return (
+      <SwipeListView
+        useFlatList
+        data={data}
+        keyExtractor={item => {
+          return item.id;
+        }}
+        renderItem={(data, rowMap) => (
+          <>
+            <View style={[styles.item, styles.itemFront]} key={data.item.id}>
+              <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>
+                <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
 
-                  <View style={{ marginTop: 6 }}>
-                    <ProgressBar
-                      progress={data.item.stampsToDate / data.item.stampsTotal}
-                      borderRadius={0}
-                      height={6}
-                      width={140}
-                      color="#0046F5"
-                      unfilledColor="#001432"
-                      borderWidth={0}
-                    />
-                  </View>
-                </View>
-
-                <View style={defaultStyles.row}>
-                  <Image
-                    source={{ uri: data.item.iconUrl }}
-                    style={{ width: 40, height: 40, borderRadius: 20 }}
+                <View style={{ marginTop: 6 }}>
+                  <ProgressBar
+                    progress={data.item.stampsToDate / data.item.stampsTotal}
+                    borderRadius={0}
+                    height={6}
+                    width={140}
+                    color="#0046F5"
+                    unfilledColor="#001432"
+                    borderWidth={0}
                   />
-
-                  <View
-                    style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}
-                  >
-                    <View>
-                      <Text style={styles.textTitle}>{data.item.title}</Text>
-                      <Text style={styles.textExpiry}>
-                        ważna do {formatDate(data.item.validToDate)}
-                      </Text>
-                    </View>
-
-                    <Text style={styles.textAmount}>
-                      {data.item.stampsToDate} / {data.item.stampsTotal}
-                    </Text>
-                  </View>
                 </View>
               </View>
 
-              <TouchableOpacity
-                style={styles.itemRemove}
-                onPress={this.removeCard(data.item.id)}
-              >
-                <Image source={DeleteImage} style={styles.itemRemoveImage} />
-              </TouchableOpacity>
-            </>
-          )}
-          renderHiddenItem={(data, rowMap) => <View />}
-          disableRightSwipe={true}
-          rightOpenValue={-(height + margin)}
-        />
-      );
-    }
+              <View style={defaultStyles.row}>
+                <Image
+                  source={{ uri: data.item.iconUrl }}
+                  style={{ width: 40, height: 40, borderRadius: 20 }}
+                />
+
+                <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
+                  <View>
+                    <Text style={styles.textTitle}>{data.item.title}</Text>
+                    <Text style={styles.textExpiry}>
+                      ważna do {formatDate(data.item.validToDate)}
+                    </Text>
+                  </View>
+
+                  <Text style={styles.textAmount}>
+                    {data.item.stampsToDate} / {data.item.stampsTotal}
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            <TouchableOpacity
+              style={styles.itemRemove}
+              onPress={this.removeCard(data.item.id)}
+            >
+              <Image source={DeleteImage} style={styles.itemRemoveImage} />
+            </TouchableOpacity>
+          </>
+        )}
+        renderHiddenItem={(data, rowMap) => <View />}
+        disableRightSwipe={true}
+        rightOpenValue={-(height + margin)}
+      />
+    );
   }
 
   render() {
+    const { isLoading, navigation } = this.props;
+
     return (
       <Background source={BackgroundImage} disableScroll>
         <WalletHeader
           title={i18n.t("navigation.wallet.cards")}
-          navigation={this.props.navigation}
+          navigation={navigation}
           cards
         />
 
-        <ScrollView style={styles.list}>
-          {this.renderCards()}
-          <View style={{ height: 60 }} />
-        </ScrollView>
+        {isLoading ? (
+          <View style={[defaultStyles.grow, defaultStyles.center]}>
+            <ActivityIndicator color={colors.primary} size="large" />
+          </View>
+        ) : (
+          <ScrollView style={styles.list}>
+            {this.renderCards()}
+            <View style={{ height: 60 }} />
+          </ScrollView>
+        )}
       </Background>
     );
   }
