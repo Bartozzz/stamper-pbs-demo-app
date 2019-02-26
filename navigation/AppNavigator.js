@@ -127,7 +127,7 @@ const WalletStack = createStackNavigator(
     [Route.WALLET_PLACES]: WalletPlacesScreen
   },
   {
-    initialRouteName: Route.WALLET_CARDS,
+    initialRouteName: Route.WALLET_PLACES,
     defaultNavigationOptions,
     transitionConfig: () => ({
       transitionSpec: {
