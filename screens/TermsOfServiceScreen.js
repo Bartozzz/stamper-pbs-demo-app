@@ -3,9 +3,12 @@ import { ActivityIndicator, View, Dimensions } from "react-native";
 import HTML from "react-native-render-html";
 
 import Background from "../components/Background";
+import HeaderTitle from "../components/HeaderTitle";
+import HeaderBackIcon from "../components/HeaderBack";
 import Error from "../components/Error";
 
 import i18n from "../translations";
+import * as Routes from "../navigation";
 import Url from "../constants/Urls";
 import defaultStyles from "../constants/Styles";
 import colors from "../constants/Colors";
@@ -31,7 +34,15 @@ const tagsStyles = {
 
 class TermsOfServiceScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: i18n.t("navigation.tos")
+    title: i18n.t("navigation.tos"),
+    headerTitle: HeaderTitle,
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />
+    ),
+    headerStyle: defaultStyles.headerTwoLines
   });
 
   state = {

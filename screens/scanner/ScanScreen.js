@@ -8,6 +8,8 @@ import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
 import Button from "../../components/Button";
 import Hamburger from "../../components/Hamburger";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBackIcon from "../../components/HeaderBack";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -17,7 +19,10 @@ import { getParameterByName } from "../../helpers/urls";
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.scanner.scan"),
-    headerRight: <Hamburger navigation={navigation} />
+    headerTitle: HeaderTitle,
+    headerLeft: <HeaderBackIcon navigation={navigation} />,
+    headerRight: <Hamburger navigation={navigation} />,
+    headerStyle: defaultStyles.headerTwoLines
   });
 
   state = {

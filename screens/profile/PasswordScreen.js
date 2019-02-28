@@ -6,6 +6,8 @@ import Button from "../../components/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
 import Hamburger from "../../components/Hamburger";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBackIcon from "../../components/HeaderBack";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import { changePassword } from "../../store/reducers/auth";
@@ -21,7 +23,15 @@ const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.password"),
-    headerRight: <Hamburger navigation={navigation} />
+    headerTitle: HeaderTitle,
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.navigate(Routes.PROFILE_MENU)}
+      />
+    ),
+    headerRight: <Hamburger navigation={navigation} />,
+    headerStyle: defaultStyles.headerTwoLines
   });
 
   state = {

@@ -5,6 +5,8 @@ import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import Hamburger from "../../components/Hamburger";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBackIcon from "../../components/HeaderBack";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import {
@@ -30,7 +32,15 @@ const logoutIcon = require("../../assets/images/icons/next_icon.png");
 class ProfileLogoutScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.logout"),
-    headerRight: <Hamburger navigation={navigation} />
+    headerTitle: HeaderTitle,
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.navigate(Routes.PROFILE_MENU)}
+      />
+    ),
+    headerRight: <Hamburger navigation={navigation} />,
+    headerStyle: defaultStyles.headerTwoLines
   });
 
   accept = async event => {
@@ -87,9 +97,9 @@ const styles = StyleSheet.create({
   logout: {
     alignItems: "center",
 
-    paddingTop: 60,
-    paddingBottom: 64,
-    marginVertical: 40,
+    paddingTop: 40,
+    paddingBottom: 44,
+    marginVertical: 20,
     marginHorizontal: 36,
     marginTop: 80,
 
@@ -109,7 +119,7 @@ const styles = StyleSheet.create({
   logoutIcon: {
     width: 120,
     height: 120,
-    marginBottom: 100
+    marginBottom: 60
   },
 
   buttons: {

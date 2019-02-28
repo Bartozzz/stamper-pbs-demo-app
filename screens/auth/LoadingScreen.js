@@ -61,7 +61,11 @@ class AuthLoadingScreen extends React.Component {
     return this.props.navigation.navigate(Routes.DASHBOARD);
   };
 
-  handleUnauthorized = async err => {
+  handleUnauthorized = async error => {
+    if (error) {
+      console.error(error);
+    }
+
     return this.props.navigation.navigate(Routes.AUTH);
   };
 

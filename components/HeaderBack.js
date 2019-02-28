@@ -4,9 +4,14 @@ import { StyleSheet, Platform, TouchableOpacity } from "react-native";
 import * as Routes from "../navigation";
 
 const styles = StyleSheet.create({
+  back: {
+    alignSelf: "flex-start"
+  },
+
   backIcon: {
     ...Platform.select({
       ios: {
+        paddingTop: 1,
         paddingLeft: 20
       },
       android: {
@@ -20,6 +25,7 @@ const styles = StyleSheet.create({
 export default function BackButton(props) {
   return (
     <TouchableOpacity
+      style={styles.back}
       onPress={() =>
         props.onPress
           ? props.onPress()

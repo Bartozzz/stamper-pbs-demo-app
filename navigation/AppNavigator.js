@@ -46,6 +46,15 @@ const defaultNavigationOptions = {
   }
 };
 
+const disableNavigationAnimations = {
+  transitionConfig: () => ({
+    transitionSpec: {
+      // Disable animations:
+      duration: -1
+    }
+  })
+};
+
 const AuthStack = createStackNavigator(
   {
     [Route.AUTH_LOGIN]: AuthLoginScreen,
@@ -54,7 +63,9 @@ const AuthStack = createStackNavigator(
   },
   {
     initialRouteName: Route.AUTH_LOGIN,
-    defaultNavigationOptions
+    headerLayoutPreset: "left",
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -65,7 +76,9 @@ const InfoStack = createStackNavigator(
   },
   {
     initialRouteName: Route.INFO_SUCCESS,
-    defaultNavigationOptions
+    headerLayoutPreset: "left",
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -75,7 +88,9 @@ const PrizesStack = createStackNavigator(
   },
   {
     initialRouteName: Route.PRIZES_LIST,
-    defaultNavigationOptions
+    headerLayoutPreset: "left",
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -85,7 +100,8 @@ const MapStack = createStackNavigator(
   },
   {
     initialRouteName: Route.MAP_ALL,
-    defaultNavigationOptions
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -95,7 +111,8 @@ const CardStack = createStackNavigator(
   },
   {
     initialRouteName: Route.CARD_INFO,
-    defaultNavigationOptions
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -106,7 +123,9 @@ const DashboardStack = createStackNavigator(
   },
   {
     initialRouteName: Route.DASHBOARD_MAIN,
-    defaultNavigationOptions
+    headerLayoutPreset: "left",
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -120,7 +139,9 @@ const ProfileStack = createStackNavigator(
   },
   {
     initialRouteName: Route.PROFILE_MENU,
-    defaultNavigationOptions
+    headerLayoutPreset: "left",
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 
@@ -131,13 +152,9 @@ const WalletStack = createStackNavigator(
   },
   {
     initialRouteName: Route.WALLET_PLACES,
+    headerLayoutPreset: "left",
     defaultNavigationOptions,
-    transitionConfig: () => ({
-      transitionSpec: {
-        // Disable animations:
-        duration: 0
-      }
-    })
+    ...disableNavigationAnimations
   }
 );
 
@@ -147,7 +164,9 @@ const ScannerStack = createStackNavigator(
   },
   {
     initialRouteName: Route.SCANNER_SCAN,
-    defaultNavigationOptions
+    headerLayoutPreset: "left",
+    defaultNavigationOptions,
+    ...disableNavigationAnimations
   }
 );
 

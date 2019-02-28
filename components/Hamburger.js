@@ -3,9 +3,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Platform, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
+  hamburger: {
+    alignSelf: "flex-start"
+  },
+
   hamburgerIcon: {
     ...Platform.select({
       ios: {
+        paddingTop: 5,
         paddingRight: 20
       },
       android: {
@@ -18,7 +23,10 @@ const styles = StyleSheet.create({
 
 export default function Hamburger(props) {
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate("Dashboard")}>
+    <TouchableOpacity
+      style={styles.hamburger}
+      onPress={() => props.navigation.navigate("Dashboard")}
+    >
       <Ionicons
         style={styles.hamburgerIcon}
         name={Platform.select({

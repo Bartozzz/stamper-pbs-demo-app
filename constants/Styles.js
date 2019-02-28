@@ -26,6 +26,24 @@ export default StyleSheet.create({
     flexDirection: "row"
   },
 
+  headerTwoLines: {
+    marginTop: layout.headerTopSpacer,
+    height: 96,
+
+    backgroundColor: colors.primary,
+
+    // Remove shadow on iOS:
+    borderBottomWidth: 0,
+    shadowColor: "transparent",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+
+    // Remove shadow on Android:
+    elevation: 0
+  },
+  headerTwoLinesTitle: {},
+
   headerTransparent: {
     marginTop: layout.headerTopSpacer,
 
