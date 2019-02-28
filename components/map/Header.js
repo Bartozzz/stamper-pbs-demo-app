@@ -12,6 +12,7 @@ const ModeCards = require("../../assets/images/menu/mode_cards.png");
 export default function MapHeader(props) {
   const nearbyStyles = [
     styles.headerItem,
+    styles.textLeft,
     props.nearby ? styles.headerItemActive : false
   ];
 
@@ -22,6 +23,7 @@ export default function MapHeader(props) {
 
   const favStyles = [
     styles.headerItem,
+    styles.textRight,
     props.fav ? styles.headerItemActive : false
   ];
 
@@ -39,17 +41,20 @@ export default function MapHeader(props) {
 
   return (
     <View style={[styles.header, props.style]}>
-      <TouchableOpacity onPress={props.onSelectNearby}>
+      <TouchableOpacity style={styles.touchable} onPress={props.onSelectNearby}>
         <View style={nearbyBorderStyles}>
           <Text style={nearbyStyles}>W pobliżu</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => props.onToggleMode()}>
+      <TouchableOpacity
+        style={styles.touchable}
+        onPress={() => props.onToggleMode()}
+      >
         <View style={styles.toggle}>{modeIcon}</View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={props.onSelectFav}>
+      <TouchableOpacity style={styles.touchable} onPress={props.onSelectFav}>
         <View style={favBorderStyles}>
           <Text style={favStyles}>Ulubione</Text>
         </View>
@@ -59,6 +64,17 @@ export default function MapHeader(props) {
 }
 
 export const styles = StyleSheet.create({
+  touchable: {
+    flex: 1
+  },
+
+  textLeft: {
+    textAlign: "left"
+  },
+  textRight: {
+    textAlign: "right"
+  },
+
   header: {
     zIndex: 2,
 
@@ -79,19 +95,22 @@ export const styles = StyleSheet.create({
     color: "#95989A"
   },
   headerItemActive: {
-    color: colors.color
+    color: colors.color,
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+    textDecorationColor: colors.primary
   },
-  headerBorderItem: {
-    paddingBottom: 2,
-    paddingHorizontal: 3,
+  //headerBorderItem: {
+  //  paddingBottom: 2,
+  //  paddingHorizontal: 3,
 
-    borderStyle: "solid",
-    borderBottomWidth: 2,
-    borderBottomColor: "transparent"
-  },
-  headerBorderActive: {
-    borderBottomColor: colors.primary
-  },
+  //  borderStyle: "solid",
+  //  borderBottomWidth: 2,
+  //  borderBottomColor: "transparent"
+  //},
+  //headerBorderActive: {
+  //  borderBottomColor: colors.primary
+  //},
 
   toggle: {
     zIndex: 3,
