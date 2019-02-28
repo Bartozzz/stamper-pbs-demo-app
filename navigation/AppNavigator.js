@@ -29,6 +29,7 @@ import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
 
 const defaultNavigationOptions = {
   headerTintColor: colors.color,
+  headerBackTitle: null,
 
   headerStyle: {
     elevation: 0,
