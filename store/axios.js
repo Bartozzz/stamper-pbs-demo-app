@@ -32,7 +32,7 @@ const middleware = axiosMiddleware(client, {
         const { email } = profile;
 
         let originalRequest = request;
-        let tokenIsExpired = new Date(expiryDate) < new Date();
+        let tokenIsExpired = new Date(expiryDate) - 5000 < new Date();
 
         // New access tokens should be issued only if the current one is expired
         // AND we have the user's email & refresh token:
@@ -50,6 +50,10 @@ const middleware = axiosMiddleware(client, {
               const { accessToken, refreshToken, expiryDate } = response.data;
 
               console.log("Issued a new access token…", response.data);
+              console.log(
+                "Token will expire in",
+                (new Date(expiryDate) - new Date()) / 1000
+              );
 
               // Update local persistent storage:
               await AsyncStorage.setItem(EXPIRY_DATE, expiryDate);
