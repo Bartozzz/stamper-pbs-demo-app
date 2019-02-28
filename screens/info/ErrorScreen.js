@@ -14,7 +14,7 @@ class ErrorScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.timeout = setTimeout(() => this.redirect(), 3000);
+    this.timeout = setTimeout(() => this.redirect(), 2000);
   }
 
   componentWillUnmount() {
