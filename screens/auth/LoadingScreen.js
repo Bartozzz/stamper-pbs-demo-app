@@ -41,19 +41,22 @@ class AuthLoadingScreen extends React.Component {
         .then(this.handleAuthorized)
         .catch(this.handleUnauthorized);
     } else if (appToken) {
+      console.log("User access & refresh token not found, setting app token…");
       // If the user is not logged-in, we probably want to use the app internal
       // access token (for endpoints like login etc.):
       this.props.setAccessToken(appToken);
       this.handleUnauthorized();
-    } else {
-      console.log("?");
     }
   }
 
   handleAuthorized = async response => {
-    // await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
-    // await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
-    await AsyncStorage.setItem(EMAIL, response.payload.data.email);
+    try {
+      if (response.payload.data.email) {
+        await AsyncStorage.setItem(EMAIL, response.payload.data.email);
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     return this.props.navigation.navigate(Routes.DASHBOARD);
   };
