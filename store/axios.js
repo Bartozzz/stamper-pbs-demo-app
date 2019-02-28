@@ -123,13 +123,15 @@ const middleware = axiosMiddleware(client, {
                 dispatch(setAccessToken(accessToken));
                 dispatch(setRefreshToken(refreshToken));
 
-                originalRequest["Authorization"] = `Bearer ${accessToken}`;
+                originalRequest.headers[
+                  "Authorization"
+                ] = `Bearer ${accessToken}`;
 
                 console.log("Re-trying the request");
                 return client(originalRequest);
               })
               .catch(err => {
-                console.log("Could not issue new access token…");
+                console.log("Could not issue new access token…", err);
                 return Promise.reject(error);
               });
           }
