@@ -87,11 +87,23 @@ const middleware = axiosMiddleware(client, {
             console.log("Unauthorized – issuing new access token…");
             originalRequest._retry = true;
 
+            const { auth, profile } = getState();
+            const { appToken, refreshToken } = auth;
+            const { email } = profile;
+
             return client
-              .post(Url.Account.RefreshToken(), {
-                email: email,
-                refreshtoken: refreshToken
-              })
+              .post(
+                Url.Account.RefreshToken(),
+                {
+                  email: email,
+                  refreshtoken: refreshToken
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${appToken}`
+                  }
+                }
+              )
               .then(async response => {
                 const { accessToken, refreshToken, expiryDate } = response.data;
 
