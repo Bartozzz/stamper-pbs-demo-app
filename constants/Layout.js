@@ -9,6 +9,9 @@ export default {
     height
   },
 
+  // React navigation:
+  headerTopSpacer: 6,
+
   // Utilities:
   isSmallDevice: width < 375,
 

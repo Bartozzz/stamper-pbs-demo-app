@@ -27,6 +27,8 @@ export default StyleSheet.create({
   },
 
   headerTransparent: {
+    marginTop: layout.headerTopSpacer,
+
     // backgroundColor: colors.background,
     backgroundColor: "#001432",
 

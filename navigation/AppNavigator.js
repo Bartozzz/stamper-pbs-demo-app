@@ -32,6 +32,8 @@ const defaultNavigationOptions = {
   headerBackTitle: null,
 
   headerStyle: {
+    marginTop: layout.headerTopSpacer,
+
     elevation: 0,
     borderBottomWidth: 0,
     backgroundColor: colors.primary
