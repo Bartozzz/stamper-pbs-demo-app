@@ -20,18 +20,18 @@ const middleware = axiosMiddleware(client, {
   returnRejectedPromiseOnError: true,
   interceptors: {
     request: [
-      ({ getState, dispatch }, response) => {
+      ({ getState, dispatch }, request) => {
         // If the url is public, i.e. doesn't require the Authorization header,
         // then just execute the request:
-        if (publicUrls.includes(response.url)) {
-          return Promise.resolve(response);
+        if (publicUrls.includes(request.url)) {
+          return Promise.resolve(request);
         }
 
         const { auth, profile } = getState();
         const { appToken, refreshToken, expiryDate } = auth;
         const { email } = profile;
 
-        let originalRequest = response;
+        let originalRequest = request;
         let tokenIsExpired = new Date(expiryDate) < new Date();
 
         // New access tokens should be issued only if the current one is expired
@@ -39,7 +39,7 @@ const middleware = axiosMiddleware(client, {
         if (tokenIsExpired && email && refreshToken) {
           console.log("Token expired… Generating a new access token:");
 
-          response["Authorization"] = `Bearer ${appToken}`;
+          request["Authorization"] = `Bearer ${appToken}`;
 
           return client
             .post(Url.Account.RefreshToken(), {
@@ -63,7 +63,7 @@ const middleware = axiosMiddleware(client, {
 
               originalRequest["Authorization"] = `Bearer ${accessToken}`;
 
-              return Promise.resolve(originalRequest);
+              return originalRequest;
             })
             .catch(err => {
               console.log("Could not issue new access token…");
@@ -71,7 +71,7 @@ const middleware = axiosMiddleware(client, {
             });
         }
 
-        return Promise.resolve(response);
+        return Promise.resolve(request);
       }
     ]
   }
