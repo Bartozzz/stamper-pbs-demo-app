@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   },
   cardActionButton: {
     position: "absolute",
-    top: 10,
-    left: 13
+    top: 0,
+    left: 0
   },
   cardImage: {
     alignSelf: "center",

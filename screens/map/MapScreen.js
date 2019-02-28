@@ -258,6 +258,7 @@ class MapNearbyScreen extends React.Component {
                     size={20}
                     color="#F3CE30"
                     onPress={this.removeFav(item.id)}
+                    style={styles.star}
                   />
                 ) : (
                   <AntDesign
@@ -265,6 +266,7 @@ class MapNearbyScreen extends React.Component {
                     size={20}
                     color="#95989A"
                     onPress={this.addFav(item.id)}
+                    style={styles.star}
                   />
                 )
               }
@@ -319,6 +321,11 @@ class MapNearbyScreen extends React.Component {
 const styles = StyleSheet.create({
   list: {
     margin: 8
+  },
+
+  star: {
+    paddingVertical: 10,
+    paddingHorizontal: 13
   },
 
   indicator: {
