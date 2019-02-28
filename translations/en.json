@@ -61,16 +61,16 @@
   },
 
   "dashboard": {
-    "map": "Okolica",
-    "wallet": "Portfel",
-    "prizes": "Nagrody",
+    "map": "Region",
+    "wallet": "Wallet",
+    "prizes": "Rewards",
     "market": "Market",
-    "profile": "Twój profil",
-    "scanner": "Skanuj"
+    "profile": "Profile",
+    "scanner": "Scan"
   },
 
   "profile": {
-    "save": "Zapisz zmiany",
+    "save": "Save",
 
     "menu": {
       "edit": "Edytuj profil",
