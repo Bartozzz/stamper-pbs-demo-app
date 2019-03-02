@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import Hamburger from "../../components/Hamburger";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Background from "../../components/Background";
 
 import i18n from "../../translations";
@@ -16,7 +16,7 @@ class ProfileMenuScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.menu"),
     headerTitle: "",
-    headerRight: <Hamburger navigation={navigation} />,
+    headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTransparent
     // headerTransparent: true
   });

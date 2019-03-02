@@ -14,8 +14,8 @@ import {
 } from "react-native";
 
 import Background from "../../components/Background";
-import Hamburger from "../../components/Hamburger";
-import HeaderBackIcon from "../../components/HeaderBack";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 import MapHeader from "../../components/map/Header";
 import Card from "../../components/Card";
 
@@ -42,7 +42,7 @@ class MapNearbyScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Okolica",
     headerLeft: <HeaderBackIcon navigation={navigation} />,
-    headerRight: <Hamburger navigation={navigation} />,
+    headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: {
       ...defaultStyles.headerTransparent,
       backgroundColor: colors.background

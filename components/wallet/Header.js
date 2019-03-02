@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import * as Routes from "../../navigation";
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
+import defaultStyles from "../../constants/Styles";
 
 export default function WalletHeader(props) {
   const cardsStyles = [
@@ -47,11 +48,8 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary
   },
   tabsTitle: {
-    flex: 1,
-
-    fontFamily: "poppins-bold",
-    fontSize: 26,
-    color: colors.color
+    ...defaultStyles.grow,
+    ...defaultStyles.headerTwoLinesTitle
   },
   tabsItem: {
     marginLeft: 16,

@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import defaultStyles from "../../constants/Styles";
 
 const ModeMap = require("../../assets/images/menu/mode_map.png");
 const ModeCards = require("../../assets/images/menu/mode_cards.png");
@@ -11,7 +12,7 @@ const ModeCards = require("../../assets/images/menu/mode_cards.png");
 export default function MapHeader(props) {
   const nearbyStyles = [
     styles.headerItem,
-    styles.textLeft,
+    defaultStyles.textLeft,
     props.nearby ? styles.headerItemActive : false
   ];
 
@@ -22,7 +23,7 @@ export default function MapHeader(props) {
 
   const favStyles = [
     styles.headerItem,
-    styles.textRight,
+    defaultStyles.textRight,
     props.fav ? styles.headerItemActive : false
   ];
 
@@ -40,20 +41,23 @@ export default function MapHeader(props) {
 
   return (
     <View style={[styles.header, props.style]}>
-      <TouchableOpacity style={styles.touchable} onPress={props.onSelectNearby}>
+      <TouchableOpacity
+        style={defaultStyles.grow}
+        onPress={props.onSelectNearby}
+      >
         <View style={nearbyBorderStyles}>
           <Text style={nearbyStyles}>{i18n.t("map.nearby")}</Text>
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.touchable}
+        style={defaultStyles.grow}
         onPress={() => props.onToggleMode()}
       >
         <View style={styles.toggle}>{modeIcon}</View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.touchable} onPress={props.onSelectFav}>
+      <TouchableOpacity style={defaultStyles.grow} onPress={props.onSelectFav}>
         <View style={favBorderStyles}>
           <Text style={favStyles}>{i18n.t("map.favs")}</Text>
         </View>
@@ -63,17 +67,6 @@ export default function MapHeader(props) {
 }
 
 export const styles = StyleSheet.create({
-  touchable: {
-    flex: 1
-  },
-
-  textLeft: {
-    textAlign: "left"
-  },
-  textRight: {
-    textAlign: "right"
-  },
-
   header: {
     zIndex: 2,
 

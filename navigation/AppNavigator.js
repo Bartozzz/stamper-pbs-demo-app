@@ -39,9 +39,8 @@ const defaultNavigationOptions = {
   },
 
   headerTitleStyle: {
-    textTransform: "uppercase",
-    fontFamily: layout.fontHead,
-    fontSize: 20
+    fontFamily: "poppins-semi-bold",
+    fontSize: 17
   }
 };
 

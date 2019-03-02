@@ -16,8 +16,8 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import * as Routes from "../../navigation";
 
-import Hamburger from "../../components/Hamburger";
-import HeaderBackIcon from "../../components/HeaderBack";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 import Background from "../../components/Background";
 import { formatDate } from "../../helpers/date";
 
@@ -33,7 +33,7 @@ class CardInfoScreen extends React.Component {
         onPress={() => navigation.navigate(Routes.WALLET_PLACES)}
       />
     ),
-    headerRight: <Hamburger navigation={navigation} />,
+    headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: {
       ...defaultStyles.headerTransparent,
       backgroundColor: colors.background

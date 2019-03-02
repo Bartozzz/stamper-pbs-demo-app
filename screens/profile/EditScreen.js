@@ -16,9 +16,9 @@ import { AntDesign } from "@expo/vector-icons";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
-import Hamburger from "../../components/Hamburger";
-import HeaderTitle from "../../components/HeaderTitle";
-import HeaderBackIcon from "../../components/HeaderBack";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderTitle from "../../components/nav/HeaderTitle";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 import InputWithLabel from "../../components/InputWithLabel";
 
 import {
@@ -49,7 +49,7 @@ class ProfileEditScreen extends React.Component {
         onPress={() => navigation.navigate(Routes.PROFILE_MENU)}
       />
     ),
-    headerRight: <Hamburger navigation={navigation} />,
+    headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTwoLines
   });
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import colors from "../constants/Colors";
+import colors from "../../constants/Colors";
+import defaultStyles from "../../constants/Styles";
 
 export default function Header(props) {
   return (
@@ -23,10 +24,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary
   },
   headerTitle: {
-    flex: 1,
-
-    fontFamily: "poppins-bold",
-    fontSize: 26,
-    color: colors.color
+    ...defaultStyles.grow,
+    ...defaultStyles.headerTwoLinesTitle
   }
 });

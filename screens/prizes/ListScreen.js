@@ -16,8 +16,8 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
-import Header from "../../components/Header";
-import Hamburger from "../../components/Hamburger";
+import Header from "../../components/nav/Header";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
@@ -39,7 +39,7 @@ class PrizesListScreen extends React.Component {
         }
       />
     ),
-    headerRight: <Hamburger navigation={navigation} />
+    headerRight: <HeaderHamburger navigation={navigation} />
   });
 
   state = {

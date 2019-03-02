@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function Hamburger(props) {
+export default function HeaderHamburger(props) {
   return (
     <TouchableOpacity
       style={styles.hamburger}

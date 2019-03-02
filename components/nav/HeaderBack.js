@@ -1,7 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Platform, TouchableOpacity } from "react-native";
-import * as Routes from "../navigation";
+import * as Routes from "../../navigation";
 
 const styles = StyleSheet.create({
   back: {

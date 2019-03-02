@@ -12,7 +12,7 @@ import {
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Bar as ProgressBar } from "react-native-progress";
 
-import Hamburger from "../../components/Hamburger";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -41,7 +41,7 @@ class WalletCardsScreen extends React.Component {
         }
       />
     ),
-    headerRight: <Hamburger navigation={navigation} />
+    headerRight: <HeaderHamburger navigation={navigation} />
   });
 
   state = {

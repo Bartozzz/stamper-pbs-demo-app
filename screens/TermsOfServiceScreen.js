@@ -3,8 +3,8 @@ import { ActivityIndicator, View, Dimensions } from "react-native";
 import HTML from "react-native-render-html";
 
 import Background from "../components/Background";
-import HeaderTitle from "../components/HeaderTitle";
-import HeaderBackIcon from "../components/HeaderBack";
+import HeaderTitle from "../components/nav/HeaderTitle";
+import HeaderBackIcon from "../components/nav/HeaderBack";
 import Error from "../components/Error";
 
 import i18n from "../translations";

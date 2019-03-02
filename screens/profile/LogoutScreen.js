@@ -4,9 +4,9 @@ import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
-import Hamburger from "../../components/Hamburger";
-import HeaderTitle from "../../components/HeaderTitle";
-import HeaderBackIcon from "../../components/HeaderBack";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderTitle from "../../components/nav/HeaderTitle";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import {
   EXPIRY_DATE,
@@ -37,7 +37,7 @@ class ProfileLogoutScreen extends React.Component {
         onPress={() => navigation.navigate(Routes.PROFILE_MENU)}
       />
     ),
-    headerRight: <Hamburger navigation={navigation} />,
+    headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTwoLines
   });
 

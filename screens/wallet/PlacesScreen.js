@@ -10,7 +10,7 @@ import {
 
 import * as Routes from "../../navigation";
 import Card from "../../components/Card";
-import Hamburger from "../../components/Hamburger";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
@@ -34,7 +34,7 @@ class WalletPlacesScreen extends React.Component {
         }
       />
     ),
-    headerRight: <Hamburger navigation={navigation} />
+    headerRight: <HeaderHamburger navigation={navigation} />
   });
 
   state = {

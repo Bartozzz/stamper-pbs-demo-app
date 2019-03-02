@@ -9,7 +9,6 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-
     backgroundColor: colors.background
   },
 
@@ -42,7 +41,11 @@ export default StyleSheet.create({
     // Remove shadow on Android:
     elevation: 0
   },
-  headerTwoLinesTitle: {},
+  headerTwoLinesTitle: {
+    fontFamily: "poppins-bold",
+    fontSize: 26,
+    color: colors.color
+  },
 
   headerTransparent: {
     marginTop: layout.headerTopSpacer,
@@ -59,5 +62,12 @@ export default StyleSheet.create({
 
     // Remove shadow on Android:
     elevation: 0
+  },
+
+  textLeft: {
+    textAlign: "left"
+  },
+  textRight: {
+    textAlign: "right"
   }
 });

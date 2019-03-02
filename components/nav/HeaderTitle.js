@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Animated } from "react-native";
-import colors from "../constants/Colors";
+import colors from "../../constants/Colors";
 
 const AnimatedText = Animated.Text;
 
