@@ -133,8 +133,10 @@
     "changed": "Zmiany zostały wprowadzone!",
 
     "scanner": {
-      "stampAdd": "Pieczątka została dodana!",
-      "claimPrize": "Gratulujemy!\n Odebrałeś nagrodę!"
+      "add": "Pieczątka została dodana!",
+      "subtract": "Pieczątka została odjęta!",
+      "congratulations": "Gratulujemy! Zdobyłeś nagrodę!",
+      "reward": "Gratulujemy! Odebrałeś nagrodę!"
     },
 
     "wallet": {
