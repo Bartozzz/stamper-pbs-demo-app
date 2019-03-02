@@ -77,6 +77,7 @@ export default class App extends React.Component {
 
       // Preload assets:
       Asset.loadAsync([
+        require("./assets/backgrounds/card.png"),
         require("./assets/backgrounds/cards_wn.png"),
         require("./assets/backgrounds/cards.png"),
         require("./assets/backgrounds/details_wn.png"),
