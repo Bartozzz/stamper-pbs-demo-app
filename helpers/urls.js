@@ -1,4 +1,5 @@
 export function getParameterByName(name, url) {
+  // eslint-disable-next-line
   const param = name.replace(/[\[\]]/g, "\\$&");
   const regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)");
   const results = regex.exec(url);

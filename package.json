@@ -28,7 +28,10 @@
     "redux-axios-middleware": "4.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "8.2.6",
     "babel-preset-expo": "^5.0.0",
+    "eslint": "4.19.1",
+    "eslint-plugin-react": "7.12.4",
     "jest-expo": "^32.0.0"
   },
   "private": true

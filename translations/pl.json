@@ -24,6 +24,10 @@
       "password": "Zmiana hasła"
     },
 
+    "prizes": {
+      "list": "Nagrody"
+    },
+
     "scanner": {
       "url": "QR Code tester",
       "scan": "Skanuj kod"
@@ -94,6 +98,17 @@
     }
   },
 
+  "prizes": {
+    "receive": "Odbierz nagrodę"
+  },
+
+  "card": {
+    "details1": "Ilość pieczątek do nagrody",
+    "details2": "Promocja trwa do",
+    "details3": "Możliwość wymiany pieczątek",
+    "details4": "Zebrane pieczątki"
+  },
+
   "scanner": {
     "url": {
       "title": "QR Code \n tester"
@@ -110,6 +125,9 @@
   },
 
   "wallet": {
+    "cards": "Karty",
+    "places": "Miejsca",
+
     "cardsAmount": {
       "one": "1 karta",
       "few": "{{count}} karty",
@@ -120,6 +138,9 @@
   },
 
   "map": {
+    "nearby": "W pobliżu",
+    "favs": "Ulubione",
+
     "collectStamps": {
       "one": "zbierz 1 pieczątkę",
       "few": "zbierz {{count}} pieczątki",

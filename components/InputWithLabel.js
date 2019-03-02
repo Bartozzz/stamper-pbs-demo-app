@@ -54,7 +54,6 @@ class InputWithLabel extends Component {
 
   render() {
     const { label, ...rest } = this.props;
-    const { isFocused } = this.state;
 
     return (
       <View style={[styles.inputPadder]}>

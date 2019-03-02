@@ -4,7 +4,6 @@ import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import * as Routes from "../../navigation";
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 
 export default function WalletHeader(props) {
   const cardsStyles = [
@@ -23,13 +22,13 @@ export default function WalletHeader(props) {
       <TouchableOpacity
         onPress={() => props.navigation.navigate(Routes.WALLET_CARDS)}
       >
-        <Text style={cardsStyles}>Karty</Text>
+        <Text style={cardsStyles}>{i18n.t("wallet.cards")}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => props.navigation.navigate(Routes.WALLET_PLACES)}
       >
-        <Text style={placesStyles}>Miejsca</Text>
+        <Text style={placesStyles}>{i18n.t("wallet.places")}</Text>
       </TouchableOpacity>
     </View>
   );

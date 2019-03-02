@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
 
-import * as Routes from "../../navigation";
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
@@ -43,7 +42,7 @@ export default function MapHeader(props) {
     <View style={[styles.header, props.style]}>
       <TouchableOpacity style={styles.touchable} onPress={props.onSelectNearby}>
         <View style={nearbyBorderStyles}>
-          <Text style={nearbyStyles}>W pobliżu</Text>
+          <Text style={nearbyStyles}>{i18n.t("map.nearby")}</Text>
         </View>
       </TouchableOpacity>
 
@@ -56,7 +55,7 @@ export default function MapHeader(props) {
 
       <TouchableOpacity style={styles.touchable} onPress={props.onSelectFav}>
         <View style={favBorderStyles}>
-          <Text style={favStyles}>Ulubione</Text>
+          <Text style={favStyles}>{i18n.t("map.favs")}</Text>
         </View>
       </TouchableOpacity>
     </View>

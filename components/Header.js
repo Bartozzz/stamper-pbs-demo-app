@@ -1,10 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-
-import * as Routes from "../navigation";
-import i18n from "../translations";
 import colors from "../constants/Colors";
-import layout from "../constants/Layout";
 
 export default function Header(props) {
   return (

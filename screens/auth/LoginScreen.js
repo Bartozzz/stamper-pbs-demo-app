@@ -31,7 +31,6 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
@@ -92,7 +91,7 @@ class AuthLoginScreen extends React.Component {
   };
 
   loginWithFacebook = async () => {
-    const { loginExternal, registerExternal } = this.props;
+    const { registerExternal } = this.props;
 
     const fetchUser = async token => {
       const endpoint = "https://graph.facebook.com/me?fields=email";
@@ -126,7 +125,7 @@ class AuthLoginScreen extends React.Component {
   };
 
   loginWithGoogle = async () => {
-    const { loginExternal, registerExternal } = this.props;
+    const { registerExternal } = this.props;
 
     try {
       const clientId =
@@ -327,7 +326,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
   // …
 });
 

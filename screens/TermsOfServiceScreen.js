@@ -8,7 +8,6 @@ import HeaderBackIcon from "../components/HeaderBack";
 import Error from "../components/Error";
 
 import i18n from "../translations";
-import * as Routes from "../navigation";
 import Url from "../constants/Urls";
 import defaultStyles from "../constants/Styles";
 import colors from "../constants/Colors";
@@ -62,7 +61,7 @@ class TermsOfServiceScreen extends React.Component {
           content: response.data
         });
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({
           loading: false,
           error: i18n.t("errors.tos.fetch")

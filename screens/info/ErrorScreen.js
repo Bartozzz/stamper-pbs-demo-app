@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, View, Text, Image } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";

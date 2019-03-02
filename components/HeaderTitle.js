@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, Platform, Animated } from "react-native";
+import { StyleSheet, Animated } from "react-native";
 import colors from "../constants/Colors";
-import layout from "../constants/Layout";
 
 const AnimatedText = Animated.Text;
 
-const HeaderTitle = ({ style, ...rest }) => (
+const HeaderTitle = ({ ...rest }) => (
   <AnimatedText
     numberOfLines={1}
     {...rest}

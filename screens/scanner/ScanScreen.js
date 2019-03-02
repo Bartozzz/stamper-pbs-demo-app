@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BarCodeScanner, Permissions } from "expo";
-import { Ionicons } from "@expo/vector-icons";
-import { Text, View, Image, StyleSheet, Platform } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 
 import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
@@ -12,7 +11,6 @@ import HeaderTitle from "../../components/HeaderTitle";
 import HeaderBackIcon from "../../components/HeaderBack";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 import { getParameterByName } from "../../helpers/urls";
 
@@ -77,7 +75,7 @@ class ScannerScanScreen extends React.Component {
           message: i18n.t(`success.scanner.${res.payload.data.message}`)
         })
       )
-      .catch(err => {
+      .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.DASHBOARD,
           message:
@@ -153,7 +151,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
   // …
 });
 

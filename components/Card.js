@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { TouchableOpacity, Text, View, Image, StyleSheet } from "react-native";
 import colors from "../constants/Colors";
-import layout from "../constants/Layout";
 
 class Card extends Component {
   render() {

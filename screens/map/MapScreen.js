@@ -87,18 +87,15 @@ class MapNearbyScreen extends React.Component {
   componentDidMount() {
     const { getRegion } = this.props;
 
-    this.requestUserPosition()
-      .then(data => {
-        // getRegion(data.city);
+    this.requestUserPosition().then(data => {
+      if (__DEV__) {
         getRegion("Paris");
+      } else {
+        getRegion(data.city);
+      }
 
-        this.setState(data);
-      })
-      .catch(err => {
-        getRegion("Paris");
-
-        this.setState(data);
-      });
+      this.setState(data);
+    });
   }
 
   toggleMode = () => {
@@ -152,7 +149,7 @@ class MapNearbyScreen extends React.Component {
           message: i18n.t("success.wallet.cardAdd")
         });
       })
-      .catch(err => {
+      .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.DASHBOARD,
           message: i18n.t("errors.wallet.cardAdd")
@@ -169,7 +166,7 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderDataAsMap() {
-    const { location, selected } = this.state;
+    const { selected } = this.state;
     const selectedCard = this.data.find(item => item.id === selected);
 
     return (

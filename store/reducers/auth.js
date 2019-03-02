@@ -44,7 +44,7 @@ export default function reducer(state = initialState, action) {
         expiryDate: action.payload
       };
 
-    case SET_ACCESS_TOKEN:
+    case SET_ACCESS_TOKEN: {
       const header = `Bearer ${action.payload}`;
 
       // Required in all other endpoints:
@@ -54,6 +54,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         accessToken: action.payload
       };
+    }
 
     case SET_REFRESH_TOKEN:
       return {
@@ -61,7 +62,6 @@ export default function reducer(state = initialState, action) {
         refreshToken: action.payload
       };
 
-    case ACCESS_REQUEST:
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
       return {

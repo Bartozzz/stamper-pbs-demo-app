@@ -25,7 +25,7 @@ class AuthLoadingScreen extends React.Component {
   }
 
   navigateToApp() {
-    const { email, appToken, accessToken, refreshToken } = this.props;
+    const { appToken, accessToken, refreshToken } = this.props;
 
     if (accessToken && refreshToken) {
       console.log("Got user access token and refresh token…");
@@ -79,15 +79,12 @@ class AuthLoadingScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  // …
-  email: state.profile.email,
   appToken: state.auth.appToken,
   accessToken: state.auth.accessToken,
   refreshToken: state.auth.refreshToken
 });
 
 const mapDispatchToProps = {
-  // …
   authorize,
   getProfile,
   setAccessToken

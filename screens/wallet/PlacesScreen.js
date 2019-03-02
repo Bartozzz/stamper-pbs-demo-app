@@ -14,7 +14,6 @@ import Hamburger from "../../components/Hamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import colors from "../constants/Colors";
-import layout from "../constants/Layout";
 
 class Button extends Component {
   render() {

@@ -7,7 +7,6 @@ import Background from "../../components/Background";
 import Hamburger from "../../components/Hamburger";
 import HeaderTitle from "../../components/HeaderTitle";
 import HeaderBackIcon from "../../components/HeaderBack";
-import InputWithLabel from "../../components/InputWithLabel";
 
 import {
   EXPIRY_DATE,
@@ -24,7 +23,6 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const logoutIcon = require("../../assets/images/icons/next_icon.png");
@@ -43,7 +41,7 @@ class ProfileLogoutScreen extends React.Component {
     headerStyle: defaultStyles.headerTwoLines
   });
 
-  accept = async event => {
+  accept = async () => {
     const { navigation, logout } = this.props;
 
     // Clear local persistent storage:
@@ -62,7 +60,7 @@ class ProfileLogoutScreen extends React.Component {
     logout().finally(() => navigation.navigate(Routes.AUTH_LOADING));
   };
 
-  refuse = event => {
+  refuse = () => {
     this.props.navigation.navigate(Routes.PROFILE_MENU);
   };
 
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
   // …
 });
 

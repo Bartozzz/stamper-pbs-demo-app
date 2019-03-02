@@ -12,12 +12,10 @@ import {
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Bar as ProgressBar } from "react-native-progress";
 
-import * as Routes from "../../navigation";
 import Hamburger from "../../components/Hamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";
@@ -92,7 +90,7 @@ class WalletCardsScreen extends React.Component {
         keyExtractor={item => {
           return item.id;
         }}
-        renderItem={(data, rowMap) => (
+        renderItem={data => (
           <>
             <View style={[styles.item, styles.itemFront]} key={data.item.id}>
               <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>
@@ -140,7 +138,7 @@ class WalletCardsScreen extends React.Component {
             </TouchableOpacity>
           </>
         )}
-        renderHiddenItem={(data, rowMap) => <View />}
+        renderHiddenItem={() => <View />}
         disableRightSwipe={true}
         rightOpenValue={-(height + margin)}
       />

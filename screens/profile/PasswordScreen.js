@@ -15,8 +15,6 @@ import { changePassword } from "../../store/reducers/auth";
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 
@@ -47,7 +45,7 @@ class ProfilePasswordScreen extends React.Component {
     }
   };
 
-  editPassword = event => {
+  editPassword = () => {
     const { currPassword, newPasswordA, newPasswordB } = this.state;
     const { changePassword } = this.props;
 
@@ -56,7 +54,7 @@ class ProfilePasswordScreen extends React.Component {
       .catch(this.handleError);
   };
 
-  handleSuccess = async response => {
+  handleSuccess = async () => {
     // Go back:
     this.props.navigation.navigate(Routes.INFO_SUCCESS, {
       redirect: Routes.PROFILE_MENU,
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
   // …
 });
 

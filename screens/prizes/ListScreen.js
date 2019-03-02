@@ -162,7 +162,7 @@ class PrizesListScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage} disableScroll>
-        <Header title={"Nagrody"} />
+        <Header title={i18n.t("navigation.prizes.list")} />
 
         <ScrollView style={styles.list}>
           {this.renderList()}
@@ -171,7 +171,7 @@ class PrizesListScreen extends React.Component {
 
         <View style={styles.buttonContainer}>
           <Button
-            title="Odbieram nagrodę"
+            title={i18n.t("prizes.receive")}
             onPress={this.claimPrize}
             disabled={selected === null}
           />

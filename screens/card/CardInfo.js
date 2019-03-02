@@ -14,12 +14,10 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
 
 import Hamburger from "../../components/Hamburger";
 import HeaderBackIcon from "../../components/HeaderBack";
-import Button from "../../components/Button";
 import Background from "../../components/Background";
 import { formatDate } from "../../helpers/date";
 
@@ -50,11 +48,8 @@ class CardInfoScreen extends React.Component {
     const { navigation } = this.props;
     const { active } = this.state;
 
-    const merchant = navigation.getParam("merchant");
     const cards = navigation.getParam("cards");
     const card = cards[active];
-
-    console.log(card);
 
     return (
       <Background source={BackgroundImage} disableScroll>
@@ -63,7 +58,7 @@ class CardInfoScreen extends React.Component {
             ref={carousel => (this.carouselRef = carousel)}
             data={cards}
             onSnapToItem={index => this.setState({ active: index })}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <View style={styles.slideInnerContainer}>
                 <ImageBackground
                   source={CardImage}
@@ -136,7 +131,7 @@ class CardInfoScreen extends React.Component {
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
               <Text style={styles.textDescription}>
-                Ilość pieczątek do nagrody
+                {i18n.t("card.details1")}
               </Text>
             </View>
 
@@ -149,7 +144,9 @@ class CardInfoScreen extends React.Component {
 
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
-              <Text style={styles.textDescription}>Promocja trwa do</Text>
+              <Text style={styles.textDescription}>
+                {i18n.t("card.details2")}
+              </Text>
             </View>
 
             <View>
@@ -162,18 +159,20 @@ class CardInfoScreen extends React.Component {
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
               <Text style={styles.textDescription}>
-                Możliwość wymiany pieczątek
+                {i18n.t("card.details3")}
               </Text>
             </View>
 
             <View>
-              <Text style={styles.textValue}>TAK</Text>
+              <Text style={styles.textValue}>Yes</Text>
             </View>
           </View>
 
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
-              <Text style={styles.textDescription}>Zebrane pieczątki</Text>
+              <Text style={styles.textDescription}>
+                {i18n.t("card.details3")}
+              </Text>
             </View>
 
             <View>

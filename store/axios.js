@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
-import Url, { publicUrls } from "../constants/Urls";
+import Url from "../constants/Urls";
 import {
   EXPIRY_DATE,
   ACCESS_TOKEN,

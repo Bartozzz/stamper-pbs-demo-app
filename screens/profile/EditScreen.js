@@ -36,7 +36,6 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 
@@ -117,7 +116,7 @@ class ProfileEditScreen extends React.Component {
     }
   };
 
-  editProfile = event => {
+  editProfile = () => {
     const { login, firstName, lastName, email } = this.state;
     const { updateProfile } = this.props;
 
@@ -126,7 +125,7 @@ class ProfileEditScreen extends React.Component {
       .catch(this.handleError);
   };
 
-  handleSuccess = async response => {
+  handleSuccess = async () => {
     await AsyncStorage.setItem(EMAIL, this.state.email);
 
     // Update local store (here because update endpoint doesn't return updated

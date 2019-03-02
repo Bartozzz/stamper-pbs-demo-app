@@ -54,8 +54,7 @@ class InputWithIcon extends Component {
   };
 
   render() {
-    const { iconName, iconSize, error, ...rest } = this.props;
-    const { isFocused } = this.state;
+    const { iconName, iconSize, ...rest } = this.props;
 
     return (
       <View style={[styles.inputPadder]}>
