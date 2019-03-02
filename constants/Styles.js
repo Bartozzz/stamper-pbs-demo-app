@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import colors from "./Colors";
 import layout from "./Layout";
 
@@ -27,7 +27,10 @@ export default StyleSheet.create({
 
   headerTwoLines: {
     marginTop: layout.headerTopSpacer,
-    height: 96,
+    height: Platform.select({
+      ios: 96,
+      android: 56
+    }),
 
     backgroundColor: colors.primary,
 

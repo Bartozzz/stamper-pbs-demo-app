@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -10,7 +10,10 @@ export default {
   },
 
   // React navigation:
-  headerTopSpacer: 6,
+  headerTopSpacer: Platform.select({
+    ios: 6,
+    android: 0
+  }),
 
   // Utilities:
   isSmallDevice: width < 375,

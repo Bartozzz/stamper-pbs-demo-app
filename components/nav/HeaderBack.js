@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
       },
       android: {
+        paddingTop: 16,
         paddingRight: 8,
         paddingLeft: 16
       }
