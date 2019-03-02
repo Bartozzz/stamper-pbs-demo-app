@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   View,
+  Keyboard,
   KeyboardAvoidingView,
   Dimensions
 } from "react-native";
@@ -42,16 +43,45 @@ class AuthLoginScreen extends React.Component {
   };
 
   state = {
-    // password: null,
-    // email: null,
-    password: "Test1234+",
-    email: "testing@test.pl",
+    isKeyboardVisible: false,
+
+    password: __DEV__ ? "Test1234+" : null,
+    email: __DEV__ ? "testing@test.pl" : null,
 
     error: {
       password: null,
       email: null,
       other: null
     }
+  };
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      "keyboardWillShow",
+      this.handleKeyboardShow
+    );
+
+    this.keyboardDidHideListener = Keyboard.addListener(
+      "keyboardWillHide",
+      this.handleKeyboardHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  handleKeyboardShow = () => {
+    this.setState({
+      isKeyboardVisible: true
+    });
+  };
+
+  handleKeyboardHide = () => {
+    this.setState({
+      isKeyboardVisible: false
+    });
   };
 
   loginExternal = email => {
@@ -162,12 +192,14 @@ class AuthLoginScreen extends React.Component {
   };
 
   render() {
-    const { email, password, error } = this.state;
+    const { isKeyboardVisible, email, password, error } = this.state;
 
     return (
       <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
         <Background source={BackgroundImage} disableScroll>
-          <AuthHero style={styles.hero} />
+          <AuthHero
+            style={[styles.hero, isKeyboardVisible && { display: "none" }]}
+          />
 
           <ScrollView style={styles.loginContainer}>
             {error.other ? (

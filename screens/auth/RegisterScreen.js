@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   View,
+  Keyboard,
   KeyboardAvoidingView,
   Dimensions
 } from "react-native";
@@ -38,12 +39,11 @@ class AuthRegisterScreen extends React.Component {
   });
 
   state = {
-    // nickname: null,
-    // password: null,
-    // email: null,
-    nickname: "testing",
-    password: "Test1234+",
-    email: "testing@test.pl",
+    isKeyboardVisible: false,
+
+    nickname: __DEV__ ? "testing" : null,
+    password: __DEV__ ? "Test1234+" : null,
+    email: __DEV__ ? "testing@test.pl" : null,
 
     error: {
       nickname: [],
@@ -51,6 +51,35 @@ class AuthRegisterScreen extends React.Component {
       email: [],
       other: []
     }
+  };
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      "keyboardWillShow",
+      this.handleKeyboardShow
+    );
+
+    this.keyboardDidHideListener = Keyboard.addListener(
+      "keyboardWillHide",
+      this.handleKeyboardHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  handleKeyboardShow = () => {
+    this.setState({
+      isKeyboardVisible: true
+    });
+  };
+
+  handleKeyboardHide = () => {
+    this.setState({
+      isKeyboardVisible: false
+    });
   };
 
   registerWithCredentials = () => {
@@ -98,12 +127,14 @@ class AuthRegisterScreen extends React.Component {
   };
 
   render() {
-    const { nickname, password, email, error } = this.state;
+    const { isKeyboardVisible, nickname, password, email, error } = this.state;
 
     return (
       <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
         <Background source={BackgroundImage} disableScroll>
-          <AuthHero style={styles.hero} />
+          <AuthHero
+            style={[styles.hero, isKeyboardVisible && { display: "none" }]}
+          />
 
           <ScrollView style={styles.regContainer}>
             {error.other ? <Error message={error.other} /> : null}
