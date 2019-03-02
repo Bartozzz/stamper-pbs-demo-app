@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   scannerImage: {
-    width: layout.window.width * 0.5,
-    height: layout.window.width * 0.5
+    width: layout.window.width * 0.7,
+    height: layout.window.width * 0.7
   },
 
   buttonContainer: {
