@@ -1,6 +1,14 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  Image,
+  ImageBackground,
+  Dimensions
+} from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 
 import i18n from "../../translations";
@@ -15,7 +23,8 @@ import Button from "../../components/Button";
 import Background from "../../components/Background";
 import { formatDate } from "../../helpers/date";
 
-const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
+const BackgroundImage = require("../../assets/backgrounds/details_wn.png");
+const CardImage = require("../../assets/backgrounds/card.png");
 
 class CardInfoScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -55,7 +64,50 @@ class CardInfoScreen extends React.Component {
             data={cards}
             onSnapToItem={index => this.setState({ active: index })}
             renderItem={({ item, index }) => (
-              <View style={styles.slideInnerContainer}>{/* … */}</View>
+              <View style={styles.slideInnerContainer}>
+                <ImageBackground
+                  source={CardImage}
+                  style={styles.slideInnerImage}
+                >
+                  <ImageBackground
+                    source={{ uri: item.cardUrl }}
+                    style={styles.slideInnerImage}
+                  >
+                    <View style={styles.slideInnerSection}>
+                      <View style={{ height: 130, padding: 15 }}>
+                        {!item.cardOnly && (
+                          <Image
+                            source={{ uri: item.logoUrl }}
+                            style={{ width: 80, height: 80 }}
+                          />
+                        )}
+                      </View>
+
+                      <Text
+                        style={[styles.slideInnerText, styles.slideInnerTextA]}
+                      >
+                        {item.cardNumber}
+                      </Text>
+                      <Text
+                        style={[styles.slideInnerText, styles.slideInnerTextB]}
+                      >
+                        {item.title}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={[styles.slideInnerSection, defaultStyles.center]}
+                    >
+                      {!item.cardOnly && (
+                        <Image
+                          source={{ uri: item.iconUrl }}
+                          style={{ width: 100, height: 100 }}
+                        />
+                      )}
+                    </View>
+                  </ImageBackground>
+                </ImageBackground>
+              </View>
             )}
             inactiveSlideScale={0.9}
             inactiveSlideOpacity={0.5}
@@ -171,8 +223,33 @@ const styles = StyleSheet.create({
     width: 280,
     height: 180,
 
-    backgroundColor: colors.color,
+    // backgroundColor: colors.color,
     borderRadius: 10
+  },
+  slideInnerImage: {
+    ...defaultStyles.grow,
+    ...defaultStyles.row,
+
+    width: "100%",
+    height: "100%",
+
+    borderRadius: 10
+  },
+  slideInnerSection: {
+    flex: 1
+  },
+  slideInnerText: {
+    paddingLeft: 20
+  },
+  slideInnerTextA: {
+    marginBottom: 10,
+
+    fontSize: 9,
+    color: colors.info
+  },
+  slideInnerTextB: {
+    fontSize: 10,
+    color: colors.info
   },
 
   infoContainer: {
