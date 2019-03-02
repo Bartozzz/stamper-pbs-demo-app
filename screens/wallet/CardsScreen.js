@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     flex: 1,
 
     fontSize: 14,
-    fontFamily: layout.fontHead,
+    fontFamily: "nunito-black",
     color: "#95989A"
   },
   textTitle: {
@@ -222,11 +222,12 @@ const styles = StyleSheet.create({
     marginBottom: 3,
 
     fontSize: 14,
-    fontFamily: layout.fontHead,
+    fontFamily: "poppins-bold",
     color: colors.color
   },
   textExpiry: {
     fontSize: 9,
+    fontFamily: "nunito-regular",
     color: "#95989A"
   },
   textAmount: {
@@ -235,6 +236,7 @@ const styles = StyleSheet.create({
 
     textAlign: "right",
     fontSize: 12,
+    fontFamily: "nunito-regular",
     color: "#95989A"
   }
 });

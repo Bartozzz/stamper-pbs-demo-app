@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     marginVertical: 6,
 
     fontSize: 26,
-    fontFamily: layout.fontHead,
+    fontFamily: "poppins-bold",
     color: colors.color,
 
     alignSelf: "flex-end"

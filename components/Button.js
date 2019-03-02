@@ -29,8 +29,7 @@ class Button extends Component {
 const styles = StyleSheet.create({
   textStyle: {
     fontSize: 16,
-    fontWeight: "900",
-    fontFamily: layout.fontHead,
+    fontFamily: "poppins-bold",
 
     color: colors.color,
     textAlign: "center",

@@ -50,14 +50,14 @@ export const styles = StyleSheet.create({
   tabsTitle: {
     flex: 1,
 
-    fontFamily: layout.fontHead,
+    fontFamily: "poppins-bold",
     fontSize: 26,
     color: colors.color
   },
   tabsItem: {
     marginLeft: 16,
 
-    fontFamily: layout.fontText,
+    fontFamily: "poppins-regular",
     fontSize: 18,
     color: colors.color,
 

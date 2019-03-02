@@ -238,8 +238,8 @@ const styles = StyleSheet.create({
 
     color: colors.color,
 
-    fontSize: 16,
-    fontFamily: layout.fontText,
+    fontSize: 14,
+    fontFamily: "poppins-regular",
     textAlign: "center"
   },
   boxIcon: {

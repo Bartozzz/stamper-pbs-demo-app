@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   headerTitle: {
     flex: 1,
 
-    fontFamily: layout.fontHead,
+    fontFamily: "poppins-bold",
     fontSize: 26,
     color: colors.color
   }

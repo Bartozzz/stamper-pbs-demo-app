@@ -56,20 +56,20 @@ const styles = StyleSheet.create({
     marginTop: 35,
     marginBottom: 20,
 
-    width: 70,
-    height: 70
+    width: 60,
+    height: 60
   },
   cardTitle: {
     color: "#001432",
     fontSize: 14,
-    fontFamily: layout.fontText,
+    fontFamily: "poppins-bold",
     textTransform: "uppercase",
     textAlign: "center"
   },
   cardSubtitle: {
     color: "#709BE7",
     fontSize: 9,
-    fontFamily: layout.fontText,
+    fontFamily: "nunito-regular",
     textTransform: "uppercase",
     textAlign: "center"
   },
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   cardButtonText: {
     color: colors.color,
     fontSize: 15,
-    fontFamily: layout.fontHead,
+    fontFamily: "poppins-bold",
     textTransform: "uppercase",
     textAlign: "center"
   }

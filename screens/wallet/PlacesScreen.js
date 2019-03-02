@@ -146,7 +146,7 @@ class WalletPlacesScreen extends React.Component {
 
 const styles = StyleSheet.create({
   list: {
-    margin: 8
+    padding: 8
   }
 });
 

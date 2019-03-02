@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
     color: colors.color,
     fontSize: 16,
-    fontFamily: layout.fontHead
+    fontFamily: "poppins-bold"
   },
 
   email: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 
     color: colors.info,
     fontSize: 10,
-    fontFamily: layout.fontText
+    fontFamily: "nunito-regular"
   },
 
   menu: {
@@ -137,11 +137,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border
   },
   menuItem: {
-    marginVertical: 18
+    marginVertical: 16
   },
   menuItemText: {
     color: colors.color,
-    fontSize: 24,
+    fontSize: 22,
+    fontFamily: "poppins-regular",
     textAlign: "center"
   }
 });
