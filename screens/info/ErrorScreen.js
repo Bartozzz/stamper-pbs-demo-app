@@ -47,7 +47,7 @@ class ErrorScreen extends React.Component {
 
 const styles = StyleSheet.create({
   bg: {
-    backgroundColor: colors.error
+    backgroundColor: "#95989A"
   },
   image: {
     width: 150,
