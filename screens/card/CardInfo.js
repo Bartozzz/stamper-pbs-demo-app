@@ -173,7 +173,7 @@ class CardInfoScreen extends React.Component {
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
               <Text style={styles.textDescription}>
-                {i18n.t("card.details3")}
+                {i18n.t("card.details4")}
               </Text>
             </View>
 
@@ -181,6 +181,16 @@ class CardInfoScreen extends React.Component {
               <Text style={styles.textValue}>
                 {card.stampsToDate}/{card.stampsTotal}
               </Text>
+            </View>
+          </View>
+
+          <View style={[styles.row]}>
+            <Text style={styles.descriptionTitle}>
+              {i18n.t("card.details5")}
+            </Text>
+
+            <View>
+              <Text style={styles.descriptionValue}>{card.description}</Text>
             </View>
           </View>
         </ScrollView>
@@ -262,7 +272,7 @@ const styles = StyleSheet.create({
   row: {
     alignItems: "center",
 
-    height: 74,
+    minHeight: 74,
 
     borderStyle: "solid",
     borderBottomWidth: 1,
@@ -286,6 +296,26 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "right",
     textTransform: "uppercase"
+  },
+
+  descriptionTitle: {
+    alignSelf: "flex-start",
+
+    marginLeft: 24,
+    marginTop: 24,
+
+    color: "#636363",
+    fontSize: 14,
+    textAlign: "left",
+    textTransform: "uppercase"
+  },
+  descriptionValue: {
+    marginHorizontal: 24,
+    marginVertical: 24,
+
+    color: "#636363",
+    fontSize: 14,
+    textAlign: "left"
   }
 });
 
