@@ -101,7 +101,7 @@ class AuthRegisterScreen extends React.Component {
       await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
       await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
 
     // Triggers profile fetch and redirects to the dashboard screen:

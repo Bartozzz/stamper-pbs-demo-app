@@ -13,7 +13,6 @@ class Error extends Component {
     } else if (typeof message === "string") {
       return message;
     } else {
-      console.error(message);
       return i18n.t("errorInternal");
     }
   }
