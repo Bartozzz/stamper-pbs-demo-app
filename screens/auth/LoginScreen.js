@@ -37,8 +37,7 @@ const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
-    title: i18n.t("navigation.auth.login"),
-    header: null
+    title: i18n.t("navigation.auth.login")
   };
 
   state = {
@@ -292,8 +291,8 @@ export const AuthLoginScreenLinks = props => (
 const styles = StyleSheet.create({
   hero: {
     flex: 1,
-    minHeight: 250,
-    maxHeight: Math.max(320, Dimensions.get("window").height / 2)
+    minHeight: 230,
+    maxHeight: Math.max(250, (Dimensions.get("window").height - 170) / 2)
   },
 
   loginProvider: {
