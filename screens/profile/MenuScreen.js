@@ -11,6 +11,7 @@ import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/profile_wn.png");
 const LogoImage = require("../../assets/logos/stamper.png");
+const EmailImage = require("../../assets/images/icons/email.png");
 
 class ProfileMenuScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -33,9 +34,12 @@ class ProfileMenuScreen extends React.Component {
 
         <View style={styles.menu}>
           <Image style={styles.avatar} source={{ uri: photo }} />
-
           <Text style={styles.login}>{nickname}</Text>
-          <Text style={styles.email}>{email}</Text>
+
+          <View style={defaultStyles.row}>
+            <Image style={styles.emailIcon} source={EmailImage} />
+            <Text style={styles.email}>{email}</Text>
+          </View>
 
           <View style={styles.menuSpacer} />
 
@@ -114,6 +118,11 @@ const styles = StyleSheet.create({
     color: colors.info,
     fontSize: 10,
     fontFamily: "nunito-regular"
+  },
+  emailIcon: {
+    width: 16,
+    height: 16,
+    marginRight: 6
   },
 
   menu: {
