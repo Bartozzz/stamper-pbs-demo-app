@@ -63,10 +63,12 @@ class CardInfoScreen extends React.Component {
                 <ImageBackground
                   source={CardImage}
                   style={styles.slideInnerImage}
+                  resizeMode="cover"
                 >
                   <ImageBackground
                     source={{ uri: item.cardUrl }}
                     style={styles.slideInnerImage}
+                    resizeMode="cover"
                   >
                     <View style={styles.slideInnerSection}>
                       <View style={{ height: 130, padding: 15 }}>
