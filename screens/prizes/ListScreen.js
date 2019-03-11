@@ -71,8 +71,8 @@ class PrizesListScreen extends React.Component {
   };
 
   renderList() {
-    const { prizes, isLoading } = this.props;
     const { selected, search } = this.state;
+    const { prizes } = this.props;
     let data = prizes;
 
     // Filter data based on current search term:
@@ -84,90 +84,88 @@ class PrizesListScreen extends React.Component {
       );
     }
 
-    if (isLoading) {
-      return <ActivityIndicator color={colors.primary} size="large" />;
-    } else {
-      return (
-        <FlatList
-          data={data}
-          extraData={selected}
-          keyExtractor={item => {
-            return item.id;
-          }}
-          renderItem={({ item }) => {
-            const isSelected = selected === item.id;
+    return (
+      <FlatList
+        data={data}
+        extraData={selected}
+        keyExtractor={item => {
+          return item.id;
+        }}
+        renderItem={({ item }) => {
+          const isSelected = selected === item.id;
 
-            return (
-              <TouchableOpacity
-                key={item.id}
-                style={[styles.item, isSelected && styles.itemSelected]}
-                onPress={this.selectPrize(item.id)}
-              >
-                <View style={defaultStyles.row}>
-                  <View
-                    style={[
-                      styles.imageContainer,
-                      isSelected && styles.imageContainerSelected
-                    ]}
-                  >
-                    <Image
-                      source={{ uri: item.iconUrl }}
-                      style={styles.image}
-                    />
-                  </View>
+          return (
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.item, isSelected && styles.itemSelected]}
+              onPress={this.selectPrize(item.id)}
+            >
+              <View style={defaultStyles.row}>
+                <View
+                  style={[
+                    styles.imageContainer,
+                    isSelected && styles.imageContainerSelected
+                  ]}
+                >
+                  <Image source={{ uri: item.iconUrl }} style={styles.image} />
+                </View>
 
-                  <View
-                    style={[defaultStyles.row, { flex: 1, marginLeft: 15 }]}
-                  >
-                    <View>
-                      <Text
-                        style={[
-                          styles.textMerchant,
-                          isSelected && styles.textMerchantSelected
-                        ]}
-                      >
-                        {item.merchantName}
-                      </Text>
+                <View style={[defaultStyles.row, { flex: 1, marginLeft: 15 }]}>
+                  <View>
+                    <Text
+                      style={[
+                        styles.textMerchant,
+                        isSelected && styles.textMerchantSelected
+                      ]}
+                    >
+                      {item.merchantName}
+                    </Text>
 
-                      <Text
-                        style={[
-                          styles.textTitle,
-                          isSelected && styles.textTitleSelected
-                        ]}
-                      >
-                        {item.title}
-                      </Text>
+                    <Text
+                      style={[
+                        styles.textTitle,
+                        isSelected && styles.textTitleSelected
+                      ]}
+                    >
+                      {item.title}
+                    </Text>
 
-                      <Text
-                        style={[
-                          styles.textExpiry,
-                          isSelected && styles.textExpirySelected
-                        ]}
-                      >
-                        ważna do {formatDate(item.validToDate)}
-                      </Text>
-                    </View>
+                    <Text
+                      style={[
+                        styles.textExpiry,
+                        isSelected && styles.textExpirySelected
+                      ]}
+                    >
+                      ważna do {formatDate(item.validToDate)}
+                    </Text>
                   </View>
                 </View>
-              </TouchableOpacity>
-            );
-          }}
-        />
-      );
-    }
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    );
   }
 
   render() {
+    const { isLoading } = this.props;
     const { selected } = this.state;
 
     return (
       <Background source={BackgroundImage} disableScroll>
         <Header title={i18n.t("navigation.prizes.list")} />
 
-        <ScrollView style={styles.list}>
-          {this.renderList()}
-          <View style={{ height: 60 }} />
-        </ScrollView>
+        {isLoading ? (
+          <View style={[defaultStyles.grow, defaultStyles.center]}>
+            <ActivityIndicator color={colors.primary} size="large" />
+          </View>
+        ) : (
+          <ScrollView style={styles.list}>
+            {this.renderList()}
+            <View style={{ height: 60 }} />
+          </ScrollView>
+        )}
 
         <View style={styles.buttonContainer}>
           <Button
