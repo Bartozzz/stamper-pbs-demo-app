@@ -14,7 +14,8 @@
 
     "auth": {
       "login": "Logowanie",
-      "register": "Rejestracja"
+      "register": "Rejestracja",
+      "forgot": "Zapomniane hasło"
     },
 
     "profile": {
@@ -54,9 +55,12 @@
     "loginOr": "lub",
     "loginWith": "Zaloguj się z",
 
+    "resetPassword": "Zresetuj hasło",
+
     "tos": "Regulamin",
     "tosAccept": "Kontynuując akceptujesz Nasz",
     "dontHaveAccount": "Nie masz konta? Zarejestruj się.",
+    "forgotPassword": "Nie pamiętasz hasła?",
 
     "hero": {
       "slogan1": "Dołącz do \n bardziej lojalnych!",

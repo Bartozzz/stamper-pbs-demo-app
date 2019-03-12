@@ -17,6 +17,7 @@ import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
+import AuthResetPasswordScreen from "../screens/auth/ResetPasswordScreen";
 import ProfileMenuScreen from "../screens/profile/MenuScreen";
 import ProfileEditScreen from "../screens/profile/EditScreen";
 import ProfilePasswordScreen from "../screens/profile/PasswordScreen";
@@ -57,6 +58,7 @@ const AuthStack = createStackNavigator(
   {
     [Route.AUTH_LOGIN]: AuthLoginScreen,
     [Route.AUTH_REGISTER]: AuthRegisterScreen,
+    [Route.AUTH_RESET]: AuthResetPasswordScreen,
     [Route.AUTH_TOS]: TermsOfServiceScreen
   },
   {

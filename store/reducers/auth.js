@@ -239,6 +239,19 @@ export const changePassword = (Current, NewPassword, ConfirmNewPassword) => ({
   }
 });
 
+export const resetPassword = email => ({
+  type: "noop",
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.ForgotPassword(),
+      data: {
+        email
+      }
+    }
+  }
+});
+
 export const setExpiryDate = expiryDate => ({
   type: SET_EXPIRY_DATE,
   payload: expiryDate

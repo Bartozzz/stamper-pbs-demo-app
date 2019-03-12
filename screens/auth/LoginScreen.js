@@ -189,6 +189,10 @@ class AuthLoginScreen extends React.Component {
     this.props.navigation.navigate(Routes.AUTH_REGISTER);
   };
 
+  navigateToResetPassword = () => {
+    this.props.navigation.navigate(Routes.AUTH_RESET);
+  };
+
   render() {
     const { isKeyboardVisible, email, password, error } = this.state;
 
@@ -229,6 +233,7 @@ class AuthLoginScreen extends React.Component {
               loginWithFacebook={this.loginWithFacebook}
               loginWithGoogle={this.loginWithGoogle}
               navigateToRegister={this.navigateToRegister}
+              navigateToResetPassword={this.navigateToResetPassword}
             />
 
             <Button
@@ -280,11 +285,20 @@ export const AuthLoginScreenLinks = props => (
       </TouchableOpacity>
     </View>
 
-    <TouchableOpacity onPress={props.navigateToRegister}>
-      <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
-        {i18n.t("auth.dontHaveAccount")}
-      </Text>
-    </TouchableOpacity>
+    <View style={defaultStyles.row}>
+      <TouchableOpacity onPress={props.navigateToRegister}>
+        <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
+          {i18n.t("auth.dontHaveAccount")}
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={props.navigateToResetPassword}>
+        <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
+          {" "}
+          {i18n.t("auth.forgotPassword")}
+        </Text>
+      </TouchableOpacity>
+    </View>
   </View>
 );
 

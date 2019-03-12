@@ -2,6 +2,7 @@ export const AUTH = "Auth";
 export const AUTH_LOADING = "AuthLoading";
 export const AUTH_LOGIN = "AuthLogin";
 export const AUTH_REGISTER = "AuthRegister";
+export const AUTH_RESET = "AuthReset";
 export const AUTH_TOS = "AuthTOS";
 
 export const INFO = "Info";
