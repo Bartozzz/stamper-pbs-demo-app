@@ -30,6 +30,7 @@ import { addCard } from "../../store/reducers/wallet";
 
 import mapStyle from "../../assets/mapStyle";
 import PlusImage from "../../assets/images/plus.png";
+import AddedImage from "../../assets/images/icons/already-in-wallet.png";
 import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 
@@ -169,6 +170,8 @@ class MapNearbyScreen extends React.Component {
     const { selected } = this.state;
     const selectedCard = this.data.find(item => item.id === selected);
 
+    console.log(selectedCard);
+
     return (
       <View style={styles.map}>
         <MapView
@@ -218,12 +221,22 @@ class MapNearbyScreen extends React.Component {
               </Text>
             </View>
 
-            <TouchableOpacity
-              style={styles.selectedAddContainer}
-              onPress={this.addCard(selected)}
-            >
-              <Image style={styles.selectAdd} source={PlusImage} />
-            </TouchableOpacity>
+            {selectedCard.inWallet ? (
+              <View style={styles.selectedAddedContainer}>
+                <Image style={styles.selectAdded} source={AddedImage} />
+
+                <Text style={styles.selectedAddedContainerText}>
+                  {i18n.t("map.cardAlreadyAdded")}
+                </Text>
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.selectedAddContainer}
+                onPress={this.addCard(selected)}
+              >
+                <Image style={styles.selectAdd} source={PlusImage} />
+              </TouchableOpacity>
+            )}
           </View>
         )}
       </View>
@@ -403,9 +416,25 @@ const styles = StyleSheet.create({
   selectedAddContainer: {
     marginRight: 16
   },
+  selectedAddedContainer: {
+    marginRight: 14
+  },
+  selectedAddedContainerText: {
+    position: "absolute",
+    top: 2,
+    left: 4,
+
+    color: colors.primary,
+    fontSize: 6,
+    fontFamily: "nunito-regular"
+  },
   selectAdd: {
     width: 48,
     height: 48
+  },
+  selectAdded: {
+    height: 56,
+    width: 74
   }
 });
 

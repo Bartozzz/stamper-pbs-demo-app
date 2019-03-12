@@ -148,7 +148,8 @@
       "other": "zbierz {{count}} pieczątek",
       "zero": "brak pieczątek do zebrania"
     },
-    "addCard": "Dodaj kartę"
+    "addCard": "Dodaj kartę",
+    "cardAlreadyAdded": "Karta już w portfelu"
   },
 
   "success": {

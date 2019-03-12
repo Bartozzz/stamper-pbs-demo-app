@@ -111,6 +111,7 @@ export default class App extends React.Component {
         require("./assets/images/qr.png"),
         require("./assets/images/splash.png"),
         require("./assets/images/success.png"),
+        require("./assets/images/icons/already-in-wallet.png"),
         require("./assets/images/icons/location_indicator.png"),
         require("./assets/images/icons/next_icon.png"),
         require("./assets/images/menu/map.png"),
