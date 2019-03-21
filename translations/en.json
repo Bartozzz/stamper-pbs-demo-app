@@ -39,7 +39,7 @@
       "places": "Wallet"
     },
 
-    "tos": "Regulamin"
+    "tos": "Terms of Use"
   },
 
   "auth": {
@@ -63,7 +63,7 @@
     "forgotPassword": "Don't remember your password?",
 
     "hero": {
-      "slogan1": "Join \n more loyal!",
+      "slogan1": "Dołącz do \n bardziej lojalnych!",
       "slogan2": "Z nami wiele możesz, nic nie musisz."
     }
   },
