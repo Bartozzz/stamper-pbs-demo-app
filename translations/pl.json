@@ -1,0 +1,206 @@
+{
+  "loading": "Ładowanie…",
+  "save": "Zapisz",
+  "yes": "Tak",
+  "no": "Nie",
+
+  "error": "Coś złego się wydarzyło",
+  "errorInternal": "Błąd aplikacji",
+
+  "navigation": {
+    "dashboard": {
+      "main": "Dashboard"
+    },
+
+    "auth": {
+      "login": "Logowanie",
+      "register": "Rejestracja",
+      "forgot": "Zapomniane hasło"
+    },
+
+    "profile": {
+      "menu": "Menu",
+      "edit": "Edycja profilu",
+      "logout": "Wyloguj się",
+      "password": "Zmiana hasła"
+    },
+
+    "prizes": {
+      "list": "Nagrody"
+    },
+
+    "scanner": {
+      "url": "QR Code tester",
+      "scan": "Skanuj kod"
+    },
+
+    "wallet": {
+      "cards": "Portfel",
+      "places": "Portfel"
+    },
+
+    "tos": "Regulamin"
+  },
+
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "nickname": "Login",
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+
+    "login": "Zaloguj się",
+    "register": "Rejestracja",
+
+    "loginOr": "lub",
+    "loginWith": "Zaloguj się z",
+
+    "resetPassword": "Zresetuj hasło",
+
+    "tos": "Regulamin",
+    "tosAccept": "Kontynuując akceptujesz Nasz",
+    "dontHaveAccount": "Nie masz konta? Zarejestruj się.",
+    "forgotPassword": "Nie pamiętasz hasła?",
+
+    "hero": {
+      "slogan1": "Dołącz do \n bardziej lojalnych!",
+      "slogan2": "Z nami wiele możesz, nic nie musisz."
+    }
+  },
+
+  "dashboard": {
+    "map": "Okolica",
+    "wallet": "Portfel",
+    "prizes": "Nagrody",
+    "market": "Market",
+    "profile": "Twój profil",
+    "scanner": "Skanuj"
+  },
+
+  "profile": {
+    "save": "Zapisz zmiany",
+
+    "menu": {
+      "edit": "Edytuj profil",
+      "password": "Zmiana hasła",
+      "tos": "Regulamin",
+      "logout": "Wyloguj się"
+    },
+
+    "logout": {
+      "sure": "Jesteś pewien \n że chcesz się wylogować?"
+    },
+
+    "password": {
+      "current": "Hasło aktualne",
+      "password": "Nowe hasło",
+      "confirm": "Potwierdź hasło"
+    },
+
+    "edit": {
+      "changePhoto": "Zmień zdjęcie"
+    }
+  },
+
+  "prizes": {
+    "receive": "Odbierz nagrodę"
+  },
+
+  "card": {
+    "details1": "Ilość pieczątek do nagrody",
+    "details2": "Promocja trwa do",
+    "details3": "Możliwość wymiany pieczątek",
+    "details4": "Zebrane pieczątki",
+    "details5": "Opis promocji"
+  },
+
+  "scanner": {
+    "url": {
+      "title": "QR Code \n tester"
+    },
+
+    "scan": {
+      "action": "Skanuj kod"
+    },
+
+    "output": {
+      "empty": "Brak danych do wczytania. Upewnij się, że zeskanowałeś poprawny kod oraz pisałeś właściwy adres URL",
+      "scanner": "Skaner"
+    }
+  },
+
+  "wallet": {
+    "cards": "Karty",
+    "places": "Miejsca",
+
+    "cardsAmount": {
+      "one": "1 karta",
+      "few": "{{count}} karty",
+      "other": "{{count}} kart",
+      "zero": "0 kart"
+    },
+    "seeCards": "Zobacz karty"
+  },
+
+  "map": {
+    "nearby": "W pobliżu",
+    "favs": "Ulubione",
+
+    "collectStamps": {
+      "one": "zbierz 1 pieczątkę",
+      "few": "zbierz {{count}} pieczątki",
+      "other": "zbierz {{count}} pieczątek",
+      "zero": "brak pieczątek do zebrania"
+    },
+    "addCard": "Dodaj kartę",
+    "cardAlreadyAdded": "Karta już w portfelu"
+  },
+
+  "success": {
+    "changed": "Zmiany zostały wprowadzone!",
+
+    "scanner": {
+      "add": "Pieczątka została dodana!",
+      "subtract": "Pieczątka została odjęta!",
+      "congratulations": "Gratulujemy! Zdobyłeś nagrodę!",
+      "reward": "Gratulujemy! Odebrałeś nagrodę!"
+    },
+
+    "wallet": {
+      "cardAdd": "Karta\n dodana do portfela!"
+    },
+
+    "profile": {
+      "photoAdd": "Zdjęcie zostało przesłane!"
+    }
+  },
+
+  "errors": {
+    "changed": "Zmiany nie zostały wprowadzone!",
+
+    "scanner": {
+      "stampAdd": "Nie było można dodać pieczątki.",
+      "claimPrize": "Nie udało się odebrać nagrody."
+    },
+
+    "wallet": {
+      "cardAdd": "Nie było można dodać karty."
+    },
+
+    "profile": {
+      "photoAdd": "Bląd podczas przesyłania zdjęcia."
+    },
+
+    "auth": {
+      "unauthorized": "Podano złe dane logowania"
+    },
+
+    "edit": {
+      "photo": "Błąd podczas zmiany zdjęcia"
+    },
+
+    "tos": {
+      "fetch": "Bląd wczytywania regulaminu"
+    }
+  }
+}
