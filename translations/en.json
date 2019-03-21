@@ -1,11 +1,11 @@
 {
   "loading": "Ładowanie…",
-  "save": "Zapisz",
-  "yes": "Tak",
-  "no": "Nie",
+  "save": "Save",
+  "yes": "Yes",
+  "no": "No",
 
-  "error": "Coś złego się wydarzyło",
-  "errorInternal": "Błąd aplikacji",
+  "error": "An Application Error Has Occurred",
+  "errorInternal": "Application Error",
 
   "navigation": {
     "dashboard": {
@@ -13,20 +13,20 @@
     },
 
     "auth": {
-      "login": "Logowanie",
-      "register": "Rejestracja",
-      "forgot": "Zapomniane hasło"
+      "login": "Log in",
+      "register": "Register",
+      "forgot": "Forgotten password"
     },
 
     "profile": {
       "menu": "Menu",
-      "edit": "Edycja profilu",
-      "logout": "Wyloguj się",
-      "password": "Zmiana hasła"
+      "edit": "Edit Profile",
+      "logout": "Log out",
+      "password": "Change password"
     },
 
     "prizes": {
-      "list": "Nagrody"
+      "list": "Rewards"
     },
 
     "scanner": {
@@ -35,8 +35,8 @@
     },
 
     "wallet": {
-      "cards": "Portfel",
-      "places": "Portfel"
+      "cards": "Wallet",
+      "places": "Wallet"
     },
 
     "tos": "Regulamin"
@@ -46,24 +46,24 @@
     "email": "Email",
     "password": "Password",
     "nickname": "Login",
-    "firstname": "Imię",
-    "lastname": "Nazwisko",
+    "firstname": "First Name",
+    "lastname": "Last Name",
 
-    "login": "Zaloguj się",
-    "register": "Rejestracja",
+    "login": "Log in",
+    "register": "Register",
 
-    "loginOr": "lub",
-    "loginWith": "Zaloguj się z",
+    "loginOr": "or",
+    "loginWith": "Log in with",
 
-    "resetPassword": "Zresetuj hasło",
+    "resetPassword": "Reset password",
 
-    "tos": "Regulamin",
-    "tosAccept": "Kontynuując akceptujesz Nasz",
-    "dontHaveAccount": "Nie masz konta? Zarejestruj się.",
-    "forgotPassword": "Nie pamiętasz hasła?",
+    "tos": "Terms of Use",
+    "tosAccept": "By continuing you accept our",
+    "dontHaveAccount": "Don't have an account? Register.",
+    "forgotPassword": "Don't remember your password?",
 
     "hero": {
-      "slogan1": "Dołącz do \n bardziej lojalnych!",
+      "slogan1": "Join \n more loyal!",
       "slogan2": "Z nami wiele możesz, nic nie musisz."
     }
   },
@@ -81,37 +81,37 @@
     "save": "Save",
 
     "menu": {
-      "edit": "Edytuj profil",
-      "password": "Zmiana hasła",
-      "tos": "Regulamin",
-      "logout": "Wyloguj się"
+      "edit": "Edit profile",
+      "password": "Change password",
+      "tos": "Terms of Use",
+      "logout": "Log out"
     },
 
     "logout": {
-      "sure": "Jesteś pewien \n że chcesz się wylogować?"
+      "sure": "Are you sure \n you want to log out?"
     },
 
     "password": {
-      "current": "Hasło aktualne",
-      "password": "Nowe hasło",
-      "confirm": "Potwierdź hasło"
+      "current": "Current password",
+      "password": "New password",
+      "confirm": "Confirm password"
     },
 
     "edit": {
-      "changePhoto": "Zmień zdjęcie"
+      "changePhoto": "Change photo"
     }
   },
 
   "prizes": {
-    "receive": "Odbierz nagrodę"
+    "receive": "Collect your reward"
   },
 
   "card": {
-    "details1": "Ilość pieczątek do nagrody",
-    "details2": "Promocja trwa do",
-    "details3": "Możliwość wymiany pieczątek",
-    "details4": "Zebrane pieczątki",
-    "details5": "Opis promocji"
+    "details1": "Number for stamps to reward",
+    "details2": "Promotion valid to",
+    "details3": "Exchange stamps",
+    "details4": "Your stamps",
+    "details5": "Description"
   },
 
   "scanner": {
@@ -130,77 +130,77 @@
   },
 
   "wallet": {
-    "cards": "Karty",
-    "places": "Miejsca",
+    "cards": "Cards",
+    "places": "Places",
 
     "cardsAmount": {
-      "one": "1 karta",
-      "few": "{{count}} karty",
-      "other": "{{count}} kart",
-      "zero": "0 kart"
+      "one": "1 card",
+      "few": "{{count}} cards",
+      "other": "{{count}} card",
+      "zero": "0 card"
     },
-    "seeCards": "Zobacz karty"
+    "seeCards": "Show cards"
   },
 
   "map": {
-    "nearby": "W pobliżu",
-    "favs": "Ulubione",
+    "nearby": "My area",
+    "favs": "Favourites",
 
     "collectStamps": {
-      "one": "zbierz 1 pieczątkę",
-      "few": "zbierz {{count}} pieczątki",
-      "other": "zbierz {{count}} pieczątek",
-      "zero": "brak pieczątek do zebrania"
+      "one": "collect 1 stamp",
+      "few": "collect {{count}} stamps",
+      "other": "collect {{count}} stamps",
+      "zero": "no stamps to collect"
     },
-    "addCard": "Dodaj kartę",
-    "cardAlreadyAdded": "Karta już w portfelu"
+    "addCard": "Add card",
+    "cardAlreadyAdded": "Card in my wallet"
   },
 
   "success": {
-    "changed": "Zmiany zostały wprowadzone!",
+    "changed": "Changes have been saved!",
 
     "scanner": {
-      "add": "Pieczątka została dodana!",
-      "subtract": "Pieczątka została odjęta!",
-      "congratulations": "Gratulujemy! Zdobyłeś nagrodę!",
-      "reward": "Gratulujemy! Odebrałeś nagrodę!"
+      "add": "Stamp has been added!",
+      "subtract": "Stamp has been subtracted!",
+      "congratulations": "Congratulations! You have recived a reward!",
+      "reward": "Congratulations! You have recived a reward!"
     },
 
     "wallet": {
-      "cardAdd": "Karta\n dodana do portfela!"
+      "cardAdd": "Card\n has been added to the wallet!"
     },
 
     "profile": {
-      "photoAdd": "Zdjęcie zostało przesłane!"
+      "photoAdd": "Photo has been saved!"
     }
   },
 
   "errors": {
-    "changed": "Zmiany nie zostały wprowadzone!",
+    "changed": "Changes have not been saved!",
 
     "scanner": {
-      "stampAdd": "Nie było można dodać pieczątki.",
-      "claimPrize": "Nie udało się odebrać nagrody."
+      "stampAdd": "Error adding stamp.",
+      "claimPrize": "Error collecting reward."
     },
 
     "wallet": {
-      "cardAdd": "Nie było można dodać karty."
+      "cardAdd": "Error adding card."
     },
 
     "profile": {
-      "photoAdd": "Bląd podczas przesyłania zdjęcia."
+      "photoAdd": "Error sending photo."
     },
 
     "auth": {
-      "unauthorized": "Podano złe dane logowania"
+      "unauthorized": "Incorrect login or password"
     },
 
     "edit": {
-      "photo": "Błąd podczas zmiany zdjęcia"
+      "photo": "Error saving photo"
     },
 
     "tos": {
-      "fetch": "Bląd wczytywania regulaminu"
+      "fetch": "Error loading terms of use"
     }
   }
 }

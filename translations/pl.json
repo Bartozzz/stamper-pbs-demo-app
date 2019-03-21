@@ -4,7 +4,7 @@
   "yes": "Tak",
   "no": "Nie",
 
-  "error": "Coś złego się wydarzyło",
+  "error": "Wystąpił błąd aplikacji",
   "errorInternal": "Błąd aplikacji",
 
   "navigation": {
@@ -188,7 +188,7 @@
     },
 
     "profile": {
-      "photoAdd": "Bląd podczas przesyłania zdjęcia."
+      "photoAdd": "Błąd podczas przesyłania zdjęcia."
     },
 
     "auth": {
@@ -200,7 +200,7 @@
     },
 
     "tos": {
-      "fetch": "Bląd wczytywania regulaminu"
+      "fetch": "Błąd wczytywania regulaminu"
     }
   }
 }
