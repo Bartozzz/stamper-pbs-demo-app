@@ -54,8 +54,7 @@ class WalletCardsScreen extends React.Component {
     // wyzerować po wejściu na ekran główny by przechodzenie pomiędzy widokiem
     // Portfel > Karty i spowrotem do Portfel > Miejsca  nie wymagały ponownego
     // wczytywania danych".
-    // this.props.getWallet();
-
+    this.props.getWallet();
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 

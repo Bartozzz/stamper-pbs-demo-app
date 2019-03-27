@@ -150,7 +150,7 @@ const WalletStack = createStackNavigator(
     [Route.WALLET_PLACES]: WalletPlacesScreen
   },
   {
-    initialRouteName: Route.WALLET_PLACES,
+    initialRouteName: Route.WALLET_CARDS,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
     ...disableNavigationAnimations
