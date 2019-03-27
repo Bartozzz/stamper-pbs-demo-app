@@ -5,7 +5,7 @@ import i18n from "../../translations";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
-const LogoImage = require("../../assets/logos/stamper-icon.png");
+const LogoImage = require("../../assets/logos/stamper_sygnet_2x.png");
 const HeroImage = require("../../assets/backgrounds/hero.png");
 
 export default function AuthHero(props) {

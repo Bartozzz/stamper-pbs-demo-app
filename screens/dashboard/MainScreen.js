@@ -18,7 +18,7 @@ const MenuImageProfile = require("../../assets/images/menu/profile.png");
 const MenuImageWallet = require("../../assets/images/menu/wallet.png");
 const MenuImageScanner = require("../../assets/images/menu/scanner.png");
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
-const LogoImage = require("../../assets/logos/stamper.png");
+const LogoImage = require("../../assets/logos/stamper_logo_2x.png");
 
 const MENU_MAP = "MENU_MAP";
 const MENU_MARKET = "MENU_MARKET";
