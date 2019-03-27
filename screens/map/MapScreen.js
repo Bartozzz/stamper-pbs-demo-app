@@ -146,7 +146,7 @@ class MapNearbyScreen extends React.Component {
     addCard(cardId)
       .then(() => {
         navigation.navigate(Routes.INFO_SUCCESS, {
-          redirect: Routes.DASHBOARD,
+          redirect: Routes.MAP,
           message: i18n.t("success.wallet.cardAdd")
         });
       })
