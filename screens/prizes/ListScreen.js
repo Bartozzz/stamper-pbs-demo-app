@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
-  ActivityIndicator,
   StyleSheet,
   Image,
   View,
@@ -13,7 +12,6 @@ import {
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
 import Header from "../../components/nav/Header";
@@ -25,6 +23,7 @@ import { getPrizes } from "../../store/reducers/prizes";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
+const RewardsLoader = require("../../assets/loaders/rewards.gif");
 
 class PrizesListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -158,7 +157,7 @@ class PrizesListScreen extends React.Component {
 
         {isLoading ? (
           <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <ActivityIndicator color={colors.primary} size="large" />
+            <Image source={RewardsLoader} style={{ width: 150, height: 150 }} />
           </View>
         ) : (
           <ScrollView style={styles.list}>
