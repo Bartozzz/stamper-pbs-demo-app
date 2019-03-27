@@ -129,9 +129,14 @@ const styles = StyleSheet.create({
   },
 
   inputError: {
+    position: "absolute",
+    top: 48,
+
     color: colors.error,
     marginHorizontal: 17,
-    marginTop: 2
+    marginTop: 2,
+
+    fontSize: 12
   }
 });
 
