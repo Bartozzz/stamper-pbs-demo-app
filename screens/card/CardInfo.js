@@ -161,18 +161,6 @@ class CardInfoScreen extends React.Component {
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
               <Text style={styles.textDescription}>
-                {i18n.t("card.details3")}
-              </Text>
-            </View>
-
-            <View>
-              <Text style={styles.textValue}>Yes</Text>
-            </View>
-          </View>
-
-          <View style={[defaultStyles.row, styles.row]}>
-            <View style={styles.textDescriptionContainer}>
-              <Text style={styles.textDescription}>
                 {i18n.t("card.details4")}
               </Text>
             </View>
