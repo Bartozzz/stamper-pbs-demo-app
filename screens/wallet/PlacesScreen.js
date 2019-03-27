@@ -1,25 +1,19 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  ActivityIndicator,
-  FlatList
-} from "react-native";
+import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
 
 import * as Routes from "../../navigation";
 import Card from "../../components/Card";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";
 import { getWallet } from "../../store/reducers/wallet";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
+const WalletLoader = require("../../assets/loaders/wallet.gif");
 
 class WalletPlacesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -130,7 +124,7 @@ class WalletPlacesScreen extends React.Component {
 
         {isLoading ? (
           <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <ActivityIndicator color={colors.primary} size="large" />
+            <Image source={WalletLoader} style={{ width: 150, height: 150 }} />
           </View>
         ) : (
           <ScrollView style={styles.list}>

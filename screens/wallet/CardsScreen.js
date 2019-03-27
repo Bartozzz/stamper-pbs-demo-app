@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import {
   StyleSheet,
-  ActivityIndicator,
   Image,
   Text,
   View,
@@ -24,6 +23,7 @@ import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
 const DeleteImage = require("../../assets/images/delete.png");
+const WalletLoader = require("../../assets/loaders/wallet.gif");
 
 const height = 90;
 const margin = 15;
@@ -158,7 +158,7 @@ class WalletCardsScreen extends React.Component {
 
         {isLoading ? (
           <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <ActivityIndicator color={colors.primary} size="large" />
+            <Image source={WalletLoader} style={{ width: 150, height: 150 }} />
           </View>
         ) : (
           <ScrollView style={styles.list}>
