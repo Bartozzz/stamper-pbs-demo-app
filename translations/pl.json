@@ -113,12 +113,6 @@
     "details5": "Opis promocji"
   },
 
-  "scanner": {
-    "scan": {
-      "action": "Skanuj kod"
-    }
-  },
-
   "wallet": {
     "cards": "Karty",
     "places": "Miejsca",

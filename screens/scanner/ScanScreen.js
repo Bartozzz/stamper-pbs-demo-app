@@ -5,7 +5,6 @@ import { Text, View, Image, StyleSheet } from "react-native";
 
 import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
-import Button from "../../components/Button";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
@@ -121,9 +120,7 @@ class ScannerScanScreen extends React.Component {
           {this.renderBarCodeScanner()}
         </View>
 
-        <View style={styles.buttonContainer}>
-          <Button title={i18n.t("scanner.scan.action")} onPress={() => null} />
-        </View>
+        <View style={styles.buttonContainer} />
       </View>
     );
   }

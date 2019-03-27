@@ -113,12 +113,6 @@
     "details5": "Description"
   },
 
-  "scanner": {
-    "scan": {
-      "action": "Skanuj kod"
-    }
-  },
-
   "wallet": {
     "cards": "Cards",
     "places": "Places",
