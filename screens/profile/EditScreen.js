@@ -7,6 +7,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Text,
+  Keyboard,
   KeyboardAvoidingView,
   View
 } from "react-native";
@@ -54,6 +55,8 @@ class ProfileEditScreen extends React.Component {
   });
 
   state = {
+    isKeyboardVisible: false,
+
     firstName: this.props.firstname,
     lastName: this.props.lastname,
     login: this.props.nickname,
@@ -69,6 +72,35 @@ class ProfileEditScreen extends React.Component {
       photo: null,
       other: null
     }
+  };
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      "keyboardWillShow",
+      this.handleKeyboardShow
+    );
+
+    this.keyboardDidHideListener = Keyboard.addListener(
+      "keyboardWillHide",
+      this.handleKeyboardHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  handleKeyboardShow = () => {
+    this.setState({
+      isKeyboardVisible: true
+    });
+  };
+
+  handleKeyboardHide = () => {
+    this.setState({
+      isKeyboardVisible: false
+    });
   };
 
   uploadImage = async () => {
@@ -171,7 +203,10 @@ class ProfileEditScreen extends React.Component {
     return (
       <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
         <Background source={BackgroundImage}>
-          <TouchableOpacity onPress={this.uploadImage}>
+          <TouchableOpacity
+            onPress={this.uploadImage}
+            style={[this.state.isKeyboardVisible && { display: "none" }]}
+          >
             <ImageBackground
               resizeMode="cover"
               source={{ uri: photo }}
