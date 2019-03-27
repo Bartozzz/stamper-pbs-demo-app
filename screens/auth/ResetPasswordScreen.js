@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   StyleSheet,
+  View,
   ScrollView,
   Keyboard,
   KeyboardAvoidingView,
@@ -13,20 +14,26 @@ import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/InputWithIcon";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import { resetPassword } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class ResetPasswordScreen extends React.Component {
-  static navigationOptions = {
-    title: i18n.t("navigation.auth.forgot")
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.auth.forgot"),
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />
+    )
+  });
 
   state = {
     isKeyboardVisible: false,
@@ -93,7 +100,7 @@ class ResetPasswordScreen extends React.Component {
       <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
         <Background source={BackgroundImage} disableScroll>
           <AuthHero
-            style={[styles.hero, isKeyboardVisible && { display: "none" }]}
+            style={[styles.hero /*isKeyboardVisible && { display: "none" }*/]}
           />
 
           <ScrollView style={styles.loginContainer}>
@@ -110,12 +117,14 @@ class ResetPasswordScreen extends React.Component {
               onChangeText={email => this.setState({ email })}
               autoCapitalize="none"
             />
+          </ScrollView>
 
+          <View style={styles.buttonContainer}>
             <Button
               title={i18n.t("auth.resetPassword")}
               onPress={this.resetPassword}
             />
-          </ScrollView>
+          </View>
         </Background>
       </KeyboardAvoidingView>
     );
@@ -129,33 +138,16 @@ const styles = StyleSheet.create({
     maxHeight: Math.max(250, (Dimensions.get("window").height - 170) / 2)
   },
 
-  loginProvider: {
-    fontWeight: "900"
-  },
   loginContainer: {
+    flex: 1,
+
     marginHorizontal: 30,
     paddingTop: 15
   },
-  loginContainerTextContainer: {
-    flexDirection: "row",
-    alignSelf: "center"
-  },
-  loginContainerText: {
-    color: colors.color,
-    textAlign: "center"
-  },
-  loginContainerTextA: {
-    fontSize: 14,
 
-    marginTop: 15,
-    marginBottom: 10
-  },
-  loginContainerTextB: {
-    color: colors.info,
-    fontSize: 12,
-
-    marginTop: 10,
-    marginBottom: 25
+  buttonContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 24
   }
 });
 
