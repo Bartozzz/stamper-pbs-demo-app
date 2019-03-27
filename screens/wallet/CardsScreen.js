@@ -11,6 +11,7 @@ import {
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Bar as ProgressBar } from "react-native-progress";
 
+import * as Routes from "../../navigation";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -66,6 +67,14 @@ class WalletCardsScreen extends React.Component {
     this.setState({ search });
   };
 
+  navigateToCardInfo = card => {
+    this.props.navigation.navigate(Routes.CARD_INFO, {
+      merchant: "",
+      cards: [card],
+      backTo: Routes.WALLET_CARDS
+    });
+  };
+
   renderCards() {
     const { cards } = this.props;
     const { search } = this.state;
@@ -91,7 +100,11 @@ class WalletCardsScreen extends React.Component {
         }}
         renderItem={data => (
           <>
-            <View style={[styles.item, styles.itemFront]} key={data.item.id}>
+            <TouchableOpacity
+              style={[styles.item, styles.itemFront]}
+              key={data.item.id}
+              onPress={() => this.navigateToCardInfo(data.item)}
+            >
               <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>
                 <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
 
@@ -127,7 +140,7 @@ class WalletCardsScreen extends React.Component {
                   </Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.itemRemove}

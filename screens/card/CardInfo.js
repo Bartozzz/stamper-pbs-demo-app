@@ -30,7 +30,11 @@ class CardInfoScreen extends React.Component {
     headerLeft: (
       <HeaderBackIcon
         navigation={navigation}
-        onPress={() => navigation.navigate(Routes.WALLET_PLACES)}
+        onPress={() =>
+          navigation.navigate(
+            navigation.getParam("backTo", Routes.WALLET_PLACES)
+          )
+        }
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
