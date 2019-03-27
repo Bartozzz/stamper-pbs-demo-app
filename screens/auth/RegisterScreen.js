@@ -17,6 +17,7 @@ import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/InputWithIcon";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import {
   register,
@@ -33,8 +34,14 @@ import { getErrorsFromResponse } from "../../helpers/errors";
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthRegisterScreen extends React.Component {
-  static navigationOptions = () => ({
-    title: i18n.t("navigation.auth.register")
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.auth.register"),
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />
+    )
   });
 
   state = {
