@@ -9,7 +9,6 @@ import {
   FlatList,
   ScrollView,
   Image,
-  ActivityIndicator,
   TouchableOpacity
 } from "react-native";
 
@@ -33,6 +32,7 @@ import PlusImage from "../../assets/images/plus.png";
 import AddedImage from "../../assets/images/icons/already-in-wallet.png";
 import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
+import MapLoader from "../../assets/loaders/map.gif";
 
 const MODE_MAP = "MODE_MAP";
 const MODE_CARD = "MODE_CARD";
@@ -305,7 +305,7 @@ class MapNearbyScreen extends React.Component {
     if (!locationLoaded) {
       return (
         <View style={[defaultStyles.container, defaultStyles.center]}>
-          <ActivityIndicator color={colors.primary} size="large" />
+          <Image source={MapLoader} style={{ width: 150, height: 150 }} />
         </View>
       );
     }
