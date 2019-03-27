@@ -3,12 +3,6 @@ const Server = {
 };
 
 const V1 = {
-  Init: {
-    Run() {
-      return `${Server.V1}/Init/Run`;
-    }
-  },
-
   Account: {
     ApplicationToken() {
       return `${Server.V1}/Account/ApplicationToken`;

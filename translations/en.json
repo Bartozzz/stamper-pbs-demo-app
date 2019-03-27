@@ -30,7 +30,6 @@
     },
 
     "scanner": {
-      "url": "QR Code tester",
       "scan": "Skanuj kod"
     },
 
@@ -115,17 +114,8 @@
   },
 
   "scanner": {
-    "url": {
-      "title": "QR Code \n tester"
-    },
-
     "scan": {
       "action": "Skanuj kod"
-    },
-
-    "output": {
-      "empty": "Brak danych do wczytania. Upewnij się, że zeskanowałeś poprawny kod oraz pisałeś właściwy adres URL",
-      "scanner": "Skaner"
     }
   },
 
