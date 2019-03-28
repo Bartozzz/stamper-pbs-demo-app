@@ -9,6 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
+import Toast from "react-native-easy-toast";
 import { Bar as ProgressBar } from "react-native-progress";
 
 import * as Routes from "../../navigation";
@@ -60,7 +61,14 @@ class WalletCardsScreen extends React.Component {
   }
 
   removeCard = cardId => () => {
-    this.props.removeCard(cardId);
+    const card = this.props.cards.find(card => card.id === cardId);
+
+    if (card && card.stampsToDate === 0) {
+      // this.props.removeCard(cardId);
+      this.errorToast.show(i18n.t("errors.wallet.emptyCard"));
+    } else {
+      this.errorToast.show(i18n.t("errors.wallet.emptyCard"));
+    }
   };
 
   handleSearch = search => {
@@ -143,7 +151,10 @@ class WalletCardsScreen extends React.Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.itemRemove}
+              style={[
+                styles.itemRemove,
+                data.item.stampsToDate === 0 && { backgroundColor: "#555f6f" }
+              ]}
               onPress={this.removeCard(data.item.id)}
             >
               <Image source={DeleteImage} style={styles.itemRemoveImage} />
@@ -178,6 +189,8 @@ class WalletCardsScreen extends React.Component {
             <View style={{ height: 60 }} />
           </ScrollView>
         )}
+
+        <Toast ref={errorToast => (this.errorToast = errorToast)} />
       </Background>
     );
   }

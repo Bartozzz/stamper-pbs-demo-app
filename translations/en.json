@@ -169,7 +169,8 @@
     },
 
     "wallet": {
-      "cardAdd": "Error adding card."
+      "cardAdd": "Error adding card.",
+      "emptyCard": "Nie można usunąć karty z pieczątkami"
     },
 
     "profile": {
