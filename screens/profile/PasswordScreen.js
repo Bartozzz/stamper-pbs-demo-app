@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -17,6 +17,7 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
+const SpinnerImage = require("../../assets/loaders/spinner.gif");
 
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -33,6 +34,8 @@ class ProfilePasswordScreen extends React.Component {
   });
 
   state = {
+    updating: false,
+
     currPassword: null,
     newPasswordA: null,
     newPasswordB: null,
@@ -48,6 +51,8 @@ class ProfilePasswordScreen extends React.Component {
   editPassword = () => {
     const { currPassword, newPasswordA, newPasswordB } = this.state;
     const { changePassword } = this.props;
+
+    this.setState({ updating: true });
 
     changePassword(currPassword, newPasswordA, newPasswordB)
       .then(this.handleSuccess)
@@ -78,11 +83,27 @@ class ProfilePasswordScreen extends React.Component {
     // Returned by API:
     if (data[""]) error.currPassword = data[""];
 
-    this.setState({ error });
+    this.setState({ error, updating: false });
   };
 
   render() {
-    const { currPassword, newPasswordA, newPasswordB, error } = this.state;
+    const {
+      updating,
+      currPassword,
+      newPasswordA,
+      newPasswordB,
+      error
+    } = this.state;
+
+    if (updating) {
+      return (
+        <Background source={BackgroundImage}>
+          <View style={[defaultStyles.grow, defaultStyles.center]}>
+            <Image source={SpinnerImage} style={{ width: 45, height: 45 }} />
+          </View>
+        </Background>
+      );
+    }
 
     return (
       <Background source={BackgroundImage}>
