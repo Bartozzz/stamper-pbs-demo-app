@@ -103,7 +103,8 @@
   },
 
   "prizes": {
-    "receive": "Collect your reward"
+    "receive": "Collect your reward",
+    "validTill": "ważna do {{date}}"
   },
 
   "card": {

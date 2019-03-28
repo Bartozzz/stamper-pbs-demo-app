@@ -135,7 +135,9 @@ class PrizesListScreen extends React.Component {
                         isSelected && styles.textExpirySelected
                       ]}
                     >
-                      ważna do {formatDate(item.validToDate)}
+                      {i18n.t("prizes.validTill", {
+                        date: formatDate(item.validToDate)
+                      })}
                     </Text>
                   </View>
                 </View>

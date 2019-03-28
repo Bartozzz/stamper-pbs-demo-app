@@ -139,7 +139,9 @@ class WalletCardsScreen extends React.Component {
                   <View>
                     <Text style={styles.textTitle}>{data.item.title}</Text>
                     <Text style={styles.textExpiry}>
-                      ważna do {formatDate(data.item.validToDate)}
+                      {i18n.t("prizes.validTill", {
+                        date: formatDate(data.item.validToDate)
+                      })}
                     </Text>
                   </View>
 
