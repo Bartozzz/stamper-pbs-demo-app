@@ -41,7 +41,7 @@ const FILTER_FAV = "FILTER_FAV";
 
 class MapNearbyScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Okolica",
+    title: i18n.t("navigation.map"),
     headerLeft: <HeaderBackIcon navigation={navigation} />,
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: {
