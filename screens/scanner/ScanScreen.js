@@ -15,6 +15,7 @@ import { getParameterByName } from "../../helpers/urls";
 
 const SpinnerImage = require("../../assets/loaders/spinner.gif");
 const EarnedRewardImage = require("../../assets/success/earned_reward.gif");
+const ReceivedRewardImage = require("../../assets/success/received_reward.gif");
 
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -75,15 +76,19 @@ class ScannerScanScreen extends React.Component {
     addStamp(code)
       .then(res =>
         navigation.navigate(Routes.INFO_SUCCESS, {
-          image: EarnedRewardImage,
+          image:
+            res.payload.data.message === "congratulations"
+              ? EarnedRewardImage
+              : ReceivedRewardImage,
           redirect: Routes.DASHBOARD,
           message: i18n.t(`success.scanner.${res.payload.data.message}`)
         })
       )
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
-          image: EarnedRewardImage,
           redirect: Routes.DASHBOARD,
+          image:
+            mode === Routes.SCANNER ? ReceivedRewardImage : EarnedRewardImage,
           message:
             mode === Routes.SCANNER
               ? i18n.t("errors.scanner.stampAdd")
