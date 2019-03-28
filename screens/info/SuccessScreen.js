@@ -30,6 +30,8 @@ class SuccessScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
+
+    const image = navigation.getParam("image", SuccessImage);
     const message = navigation.getParam("message", "Success!");
 
     return (
@@ -38,7 +40,7 @@ class SuccessScreen extends React.Component {
         activeOpacity={1}
         style={[defaultStyles.container, defaultStyles.center, styles.bg]}
       >
-        <Image style={styles.image} source={SuccessImage} />
+        <Image style={styles.image} source={image} />
         <Text style={styles.text}>{message}</Text>
       </TouchableOpacity>
     );
@@ -50,8 +52,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary
   },
   image: {
-    width: 150,
-    height: 150
+    width: 50,
+    height: 50
   },
   text: {
     marginTop: 50,

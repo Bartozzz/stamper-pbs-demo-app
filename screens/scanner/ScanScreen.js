@@ -13,6 +13,9 @@ import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 import { getParameterByName } from "../../helpers/urls";
 
+const SpinnerImage = require("../../assets/loaders/spinner.gif");
+const EarnedRewardImage = require("../../assets/success/earned_reward.gif");
+
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.scanner.scan"),
@@ -23,6 +26,7 @@ class ScannerScanScreen extends React.Component {
   });
 
   state = {
+    isRequesting: false,
     isProcessing: false,
     focusedScreen: true,
     hasCameraPermission: null
@@ -64,18 +68,21 @@ class ScannerScanScreen extends React.Component {
     const mode = navigation.getParam("type", Routes.SCANNER);
 
     this.setState({
-      isProcessing: true
+      isProcessing: true,
+      isRequesting: true
     });
 
     addStamp(code)
       .then(res =>
         navigation.navigate(Routes.INFO_SUCCESS, {
+          image: EarnedRewardImage,
           redirect: Routes.DASHBOARD,
           message: i18n.t(`success.scanner.${res.payload.data.message}`)
         })
       )
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
+          image: EarnedRewardImage,
           redirect: Routes.DASHBOARD,
           message:
             mode === Routes.SCANNER
@@ -114,6 +121,16 @@ class ScannerScanScreen extends React.Component {
   }
 
   render() {
+    if (this.state.isRequesting) {
+      return (
+        <View style={defaultStyles.container}>
+          <View style={[defaultStyles.grow, defaultStyles.center]}>
+            <Image source={SpinnerImage} style={{ width: 45, height: 45 }} />
+          </View>
+        </View>
+      );
+    }
+
     return (
       <View style={defaultStyles.container}>
         <View style={styles.scannerContainer}>
