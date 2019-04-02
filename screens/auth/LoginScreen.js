@@ -200,7 +200,7 @@ class AuthLoginScreen extends React.Component {
       <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
         <Background source={BackgroundImage} disableScroll>
           <AuthHero
-            style={[styles.hero /*isKeyboardVisible && { display: "none" }*/]}
+            style={[styles.hero, isKeyboardVisible && { display: "none" }]}
           />
 
           <ScrollView style={styles.loginContainer}>
