@@ -21,4 +21,6 @@ i18n.pluralization["pl"] = function(count) {
   }
 };
 
+console.log("Current app locale:", i18n.currentLocale());
+
 export default i18n;

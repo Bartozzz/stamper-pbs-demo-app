@@ -103,6 +103,7 @@ export default class App extends React.Component {
         require("./assets/backgrounds/wallet_wn.png"),
         require("./assets/backgrounds/wallet.png"),
         require("./assets/logos/stamper_logo_300px.png"),
+        require("./assets/logos/stamper_logo_300px_en.png"),
         require("./assets/logos/stamper_logo_2x.png"),
         require("./assets/logos/stamper_logo_3x.png"),
         require("./assets/logos/stamper_logo_4x.png"),
