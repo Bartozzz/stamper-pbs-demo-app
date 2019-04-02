@@ -64,8 +64,7 @@ class WalletCardsScreen extends React.Component {
     const card = this.props.cards.find(card => card.id === cardId);
 
     if (card && card.stampsToDate === 0) {
-      // this.props.removeCard(cardId);
-      this.errorToast.show(i18n.t("errors.wallet.emptyCard"));
+      this.props.removeCard(cardId);
     } else {
       this.errorToast.show(i18n.t("errors.wallet.emptyCard"));
     }
