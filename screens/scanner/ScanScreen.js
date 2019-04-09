@@ -12,6 +12,7 @@ import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 import { getParameterByName } from "../../helpers/urls";
+import colors from "../../constants/Colors";
 
 const SpinnerImage = require("../../assets/loaders/spinner.gif");
 const EarnedRewardImage = require("../../assets/success/earned_reward.gif");
@@ -20,6 +21,11 @@ const ReceivedRewardImage = require("../../assets/success/received_reward.gif");
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.scanner.scan"),
+    header: navigation.state.params
+      ? navigation.state.params.hideHeader
+        ? undefined
+        : null
+      : undefined,
     headerTitle: HeaderTitle,
     headerLeft: <HeaderBackIcon navigation={navigation} />,
     headerRight: <HeaderHamburger navigation={navigation} />,
@@ -67,6 +73,10 @@ class ScannerScanScreen extends React.Component {
 
     const code = getParameterByName("p", scan.data);
     const mode = navigation.getParam("type", Routes.SCANNER);
+
+    this.props.navigation.setParams({
+      hideHeader: true
+    });
 
     this.setState({
       isProcessing: true,
@@ -126,7 +136,9 @@ class ScannerScanScreen extends React.Component {
   render() {
     if (this.state.isRequesting) {
       return (
-        <View style={defaultStyles.container}>
+        <View
+          style={[defaultStyles.container, { backgroundColor: colors.primary }]}
+        >
           <View style={[defaultStyles.grow, defaultStyles.center]}>
             <Image source={SpinnerImage} style={{ width: 45, height: 45 }} />
           </View>
