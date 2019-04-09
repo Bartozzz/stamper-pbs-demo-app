@@ -87,8 +87,6 @@ class ScannerScanScreen extends React.Component {
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.DASHBOARD,
-          image:
-            mode === Routes.SCANNER ? ReceivedRewardImage : EarnedRewardImage,
           message:
             mode === Routes.SCANNER
               ? i18n.t("errors.scanner.stampAdd")
