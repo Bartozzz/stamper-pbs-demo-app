@@ -154,7 +154,7 @@ class WalletCardsScreen extends React.Component {
             <TouchableOpacity
               style={[
                 styles.itemRemove,
-                data.item.stampsToDate === 0 && { backgroundColor: "#555f6f" }
+                data.item.stampsToDate > 0 && { backgroundColor: "#555f6f" }
               ]}
               onPress={this.removeCard(data.item.id)}
             >
