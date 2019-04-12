@@ -86,6 +86,7 @@ class ScannerScanScreen extends React.Component {
     addStamp(code)
       .then(res =>
         navigation.navigate(Routes.INFO_SUCCESS, {
+          size: 50,
           image:
             res.payload.data.message === "congratulations"
               ? EarnedRewardImage

@@ -34,6 +34,7 @@ class ErrorScreen extends React.Component {
 
     const image = navigation.getParam("image", ErrorImage);
     const message = navigation.getParam("message", "Error!");
+    const size = navigation.getParam("size", 150);
 
     return (
       <TouchableOpacity
@@ -41,7 +42,7 @@ class ErrorScreen extends React.Component {
         activeOpacity={1}
         style={[defaultStyles.container, defaultStyles.center, styles.bg]}
       >
-        <Image style={styles.image} source={image} />
+        <Image style={[{ width: size, height: size }]} source={image} />
         <Text style={styles.text}>{message}</Text>
       </TouchableOpacity>
     );
@@ -51,10 +52,6 @@ class ErrorScreen extends React.Component {
 const styles = StyleSheet.create({
   bg: {
     backgroundColor: "#95989A"
-  },
-  image: {
-    width: 50,
-    height: 50
   },
   text: {
     marginTop: 50,
