@@ -1,18 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  AsyncStorage,
+  Animated,
   StyleSheet,
   Text,
+  AsyncStorage,
   TouchableOpacity,
   ScrollView,
   View,
-  Keyboard,
-  KeyboardAvoidingView,
   Dimensions
 } from "react-native";
 import Background from "../../components/Background";
 
+import KeyboardAware from "../../components/helpers/KeyboardAware";
 import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
 import Error from "../../components/Error";
@@ -45,7 +45,7 @@ class AuthRegisterScreen extends React.Component {
   });
 
   state = {
-    isKeyboardVisible: false,
+    topAnim: new Animated.Value(0),
 
     nickname: __DEV__ ? "testing" : null,
     password: __DEV__ ? "Test1234+" : null,
@@ -57,35 +57,6 @@ class AuthRegisterScreen extends React.Component {
       email: [],
       other: []
     }
-  };
-
-  componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      "keyboardWillShow",
-      this.handleKeyboardShow
-    );
-
-    this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardWillHide",
-      this.handleKeyboardHide
-    );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  handleKeyboardShow = () => {
-    this.setState({
-      isKeyboardVisible: true
-    });
-  };
-
-  handleKeyboardHide = () => {
-    this.setState({
-      isKeyboardVisible: false
-    });
   };
 
   registerWithCredentials = () => {
@@ -132,59 +103,80 @@ class AuthRegisterScreen extends React.Component {
     this.props.navigation.navigate(Routes.AUTH_TOS);
   };
 
+  handleKeyboardShow = keyboardHeight => {
+    Animated.timing(this.state.topAnim, {
+      toValue: -keyboardHeight,
+      duration: 250
+    }).start();
+  };
+
+  handleKeyboardHide = () => {
+    Animated.timing(this.state.topAnim, {
+      toValue: 0,
+      duration: 250
+    }).start();
+  };
+
   render() {
-    const { isKeyboardVisible, nickname, password, email, error } = this.state;
+    const { topAnim, nickname, password, email, error } = this.state;
 
     return (
-      <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
-        <Background source={BackgroundImage} disableScroll>
-          <AuthHero
-            style={[styles.hero, isKeyboardVisible && { display: "none" }]}
-          />
+      <KeyboardAware
+        onKeyboardShow={this.handleKeyboardShow}
+        onKeyboardHide={this.handleKeyboardHide}
+      >
+        {() => (
+          <View style={defaultStyles.container}>
+            <AuthHero style={[styles.hero]} />
 
-          <ScrollView style={styles.regContainer}>
-            {error.other ? <Error message={error.other} /> : null}
+            <Animated.View style={[{ height: 350 }, { top: topAnim }]}>
+              <Background source={BackgroundImage} disableScroll>
+                <ScrollView style={styles.regContainer}>
+                  {error.other ? <Error message={error.other} /> : null}
 
-            <InputWithIcon
-              iconName="ios-contact"
-              iconSize={20}
-              placeholder={i18n.t("auth.nickname")}
-              value={nickname}
-              error={error.nickname}
-              onChangeText={nickname => this.setState({ nickname })}
-              autoCapitalize="none"
-            />
+                  <InputWithIcon
+                    iconName="ios-contact"
+                    iconSize={20}
+                    placeholder={i18n.t("auth.nickname")}
+                    value={nickname}
+                    error={error.nickname}
+                    onChangeText={nickname => this.setState({ nickname })}
+                    autoCapitalize="none"
+                  />
 
-            <InputWithIcon
-              iconName="ios-at"
-              iconSize={20}
-              placeholder={i18n.t("auth.email")}
-              value={email}
-              error={error.email}
-              onChangeText={email => this.setState({ email })}
-              autoCapitalize="none"
-            />
+                  <InputWithIcon
+                    iconName="ios-at"
+                    iconSize={20}
+                    placeholder={i18n.t("auth.email")}
+                    value={email}
+                    error={error.email}
+                    onChangeText={email => this.setState({ email })}
+                    autoCapitalize="none"
+                  />
 
-            <InputWithIcon
-              iconName="ios-lock"
-              iconSize={20}
-              placeholder={i18n.t("auth.password")}
-              value={password}
-              error={error.password}
-              onChangeText={password => this.setState({ password })}
-              autoCapitalize="none"
-              secureTextEntry
-            />
+                  <InputWithIcon
+                    iconName="ios-lock"
+                    iconSize={20}
+                    placeholder={i18n.t("auth.password")}
+                    value={password}
+                    error={error.password}
+                    onChangeText={password => this.setState({ password })}
+                    autoCapitalize="none"
+                    secureTextEntry
+                  />
 
-            <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
+                  <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
 
-            <Button
-              title={i18n.t("auth.register")}
-              onPress={this.registerWithCredentials}
-            />
-          </ScrollView>
-        </Background>
-      </KeyboardAvoidingView>
+                  <Button
+                    title={i18n.t("auth.register")}
+                    onPress={this.registerWithCredentials}
+                  />
+                </ScrollView>
+              </Background>
+            </Animated.View>
+          </View>
+        )}
+      </KeyboardAware>
     );
   }
 }

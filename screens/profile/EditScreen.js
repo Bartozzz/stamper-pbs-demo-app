@@ -1,19 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+  Animated,
   StyleSheet,
   ActivityIndicator,
   AsyncStorage,
   ImageBackground,
   TouchableOpacity,
   Text,
-  Keyboard,
-  KeyboardAvoidingView,
   View
 } from "react-native";
 import { Permissions, ImagePicker } from "expo";
 import { AntDesign } from "@expo/vector-icons";
 
+import KeyboardAware from "../../components/helpers/KeyboardAware";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
@@ -40,6 +40,8 @@ import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 
+const UPLOAD_HEIGHT = 120;
+
 class ProfileEditScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.edit"),
@@ -55,7 +57,8 @@ class ProfileEditScreen extends React.Component {
   });
 
   state = {
-    isKeyboardVisible: false,
+    topAnim: new Animated.Value(0),
+    heightAnim: new Animated.Value(0),
 
     firstName: this.props.firstname,
     lastName: this.props.lastname,
@@ -72,35 +75,6 @@ class ProfileEditScreen extends React.Component {
       photo: null,
       other: null
     }
-  };
-
-  componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      "keyboardWillShow",
-      this.handleKeyboardShow
-    );
-
-    this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardWillHide",
-      this.handleKeyboardHide
-    );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  handleKeyboardShow = () => {
-    this.setState({
-      isKeyboardVisible: true
-    });
-  };
-
-  handleKeyboardHide = () => {
-    this.setState({
-      isKeyboardVisible: false
-    });
   };
 
   uploadImage = async () => {
@@ -197,71 +171,106 @@ class ProfileEditScreen extends React.Component {
     this.setState({ error });
   };
 
+  handleKeyboardShow = keyboardHeight => {
+    Animated.timing(this.state.heightAnim, {
+      toValue: keyboardHeight,
+      duration: 250
+    }).start();
+
+    Animated.timing(this.state.topAnim, {
+      toValue: -UPLOAD_HEIGHT,
+      duration: 250
+    }).start();
+  };
+
+  handleKeyboardHide = () => {
+    Animated.timing(this.state.heightAnim, {
+      toValue: 0,
+      duration: 250
+    }).start();
+
+    Animated.timing(this.state.topAnim, {
+      toValue: 0,
+      duration: 250
+    }).start();
+  };
+
   render() {
     const { firstName, lastName, email, login, photo, error } = this.state;
 
     return (
-      <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
-        <Background source={BackgroundImage}>
-          <TouchableOpacity
-            onPress={this.uploadImage}
-            style={[this.state.isKeyboardVisible && { display: "none" }]}
-          >
-            <ImageBackground
-              resizeMode="cover"
-              source={{ uri: photo }}
-              style={styles.upload}
-            >
-              {this.state.uploading ? (
-                <ActivityIndicator color="white" size="large" />
-              ) : (
-                <React.Fragment>
-                  <AntDesign name="camerao" size={36} color="white" />
-                  <Text style={styles.uploadText}>
-                    {i18n.t("profile.edit.changePhoto")}
-                  </Text>
-                </React.Fragment>
-              )}
-            </ImageBackground>
-          </TouchableOpacity>
+      <KeyboardAware
+        onKeyboardShow={this.handleKeyboardShow}
+        onKeyboardHide={this.handleKeyboardHide}
+      >
+        {() => (
+          <>
+            <TouchableOpacity onPress={this.uploadImage}>
+              <ImageBackground
+                resizeMode="cover"
+                source={{ uri: photo }}
+                style={styles.upload}
+              >
+                {this.state.uploading ? (
+                  <ActivityIndicator color="white" size="large" />
+                ) : (
+                  <React.Fragment>
+                    <AntDesign name="camerao" size={36} color="white" />
+                    <Text style={styles.uploadText}>
+                      {i18n.t("profile.edit.changePhoto")}
+                    </Text>
+                  </React.Fragment>
+                )}
+              </ImageBackground>
+            </TouchableOpacity>
 
-          <View style={styles.form}>
-            {error.other ? <Error message={error.other} /> : null}
+            <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
+              <Background source={BackgroundImage}>
+                <View style={styles.form}>
+                  {error.other ? <Error message={error.other} /> : null}
 
-            <InputWithLabel
-              label={i18n.t("auth.firstname")}
-              value={firstName}
-              error={error.firstName}
-              onChangeText={firstName => this.setState({ firstName })}
-            />
+                  <InputWithLabel
+                    label={i18n.t("auth.firstname")}
+                    value={firstName}
+                    error={error.firstName}
+                    onChangeText={firstName => this.setState({ firstName })}
+                  />
 
-            <InputWithLabel
-              label={i18n.t("auth.lastname")}
-              value={lastName}
-              error={error.lastName}
-              onChangeText={lastName => this.setState({ lastName })}
-            />
+                  <InputWithLabel
+                    label={i18n.t("auth.lastname")}
+                    value={lastName}
+                    error={error.lastName}
+                    onChangeText={lastName => this.setState({ lastName })}
+                  />
 
-            <InputWithLabel
-              label={i18n.t("auth.email")}
-              value={email}
-              error={error.email}
-              onChangeText={email => this.setState({ email })}
-            />
+                  <InputWithLabel
+                    label={i18n.t("auth.email")}
+                    value={email}
+                    error={error.email}
+                    onChangeText={email => this.setState({ email })}
+                  />
 
-            <InputWithLabel
-              label={i18n.t("auth.nickname")}
-              value={login}
-              error={error.login}
-              onChangeText={login => this.setState({ login })}
-            />
-          </View>
+                  <InputWithLabel
+                    label={i18n.t("auth.nickname")}
+                    value={login}
+                    error={error.login}
+                    onChangeText={login => this.setState({ login })}
+                  />
+                </View>
 
-          <View style={styles.buttonContainer}>
-            <Button title={i18n.t("profile.save")} onPress={this.editProfile} />
-          </View>
-        </Background>
-      </KeyboardAvoidingView>
+                <View style={styles.buttonContainer}>
+                  <Button
+                    title={i18n.t("profile.save")}
+                    onPress={this.editProfile}
+                  />
+                </View>
+
+                <Animated.View style={[{ height: this.state.heightAnim }]} />
+              </Background>
+            </Animated.View>
+          </>
+        )}
+      </KeyboardAware>
     );
   }
 }
@@ -284,7 +293,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     width: "100%",
-    height: 200
+    height: UPLOAD_HEIGHT
   },
   uploadText: {
     marginTop: 5,

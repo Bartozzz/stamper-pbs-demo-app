@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, View } from "react-native";
+import { Animated, StyleSheet, Image, View } from "react-native";
 
+import KeyboardAware from "../../components/helpers/KeyboardAware";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
@@ -34,6 +35,7 @@ class ProfilePasswordScreen extends React.Component {
   });
 
   state = {
+    heightAnim: new Animated.Value(0),
     updating: false,
 
     currPassword: null,
@@ -86,6 +88,20 @@ class ProfilePasswordScreen extends React.Component {
     this.setState({ error, updating: false });
   };
 
+  handleKeyboardShow = keyboardHeight => {
+    Animated.timing(this.state.heightAnim, {
+      toValue: keyboardHeight,
+      duration: 250
+    }).start();
+  };
+
+  handleKeyboardHide = () => {
+    Animated.timing(this.state.heightAnim, {
+      toValue: 0,
+      duration: 250
+    }).start();
+  };
+
   render() {
     const {
       updating,
@@ -106,42 +122,54 @@ class ProfilePasswordScreen extends React.Component {
     }
 
     return (
-      <Background source={BackgroundImage}>
-        <View style={styles.form}>
-          {error.other ? <Error message={error.other} /> : null}
+      <KeyboardAware
+        onKeyboardShow={this.handleKeyboardShow}
+        onKeyboardHide={this.handleKeyboardHide}
+      >
+        {() => (
+          <Background source={BackgroundImage}>
+            <View style={styles.form}>
+              {error.other ? <Error message={error.other} /> : null}
 
-          <InputWithLabel
-            label={i18n.t("profile.password.current")}
-            value={currPassword}
-            error={error.currPassword}
-            onChangeText={currPassword => this.setState({ currPassword })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
+              <InputWithLabel
+                label={i18n.t("profile.password.current")}
+                value={currPassword}
+                error={error.currPassword}
+                onChangeText={currPassword => this.setState({ currPassword })}
+                autoCapitalize="none"
+                secureTextEntry
+              />
 
-          <InputWithLabel
-            label={i18n.t("profile.password.password")}
-            value={newPasswordA}
-            error={error.newPasswordA}
-            onChangeText={newPasswordA => this.setState({ newPasswordA })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
+              <InputWithLabel
+                label={i18n.t("profile.password.password")}
+                value={newPasswordA}
+                error={error.newPasswordA}
+                onChangeText={newPasswordA => this.setState({ newPasswordA })}
+                autoCapitalize="none"
+                secureTextEntry
+              />
 
-          <InputWithLabel
-            label={i18n.t("profile.password.confirm")}
-            value={newPasswordB}
-            error={error.newPasswordB}
-            onChangeText={newPasswordB => this.setState({ newPasswordB })}
-            autoCapitalize="none"
-            secureTextEntry
-          />
-        </View>
+              <InputWithLabel
+                label={i18n.t("profile.password.confirm")}
+                value={newPasswordB}
+                error={error.newPasswordB}
+                onChangeText={newPasswordB => this.setState({ newPasswordB })}
+                autoCapitalize="none"
+                secureTextEntry
+              />
+            </View>
 
-        <View style={styles.buttonContainer}>
-          <Button title={i18n.t("profile.save")} onPress={this.editPassword} />
-        </View>
-      </Background>
+            <View style={styles.buttonContainer}>
+              <Button
+                title={i18n.t("profile.save")}
+                onPress={this.editPassword}
+              />
+            </View>
+
+            <Animated.View style={[{ height: this.state.heightAnim }]} />
+          </Background>
+        )}
+      </KeyboardAware>
     );
   }
 }

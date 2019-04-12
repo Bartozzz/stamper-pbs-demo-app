@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+  Animated,
   StyleSheet,
   View,
   ScrollView,
-  Keyboard,
-  KeyboardAvoidingView,
   Dimensions
 } from "react-native";
 import Background from "../../components/Background";
 
+import KeyboardAware from "../../components/helpers/KeyboardAware";
 import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
 import Error from "../../components/Error";
@@ -36,42 +36,13 @@ class ResetPasswordScreen extends React.Component {
   });
 
   state = {
-    isKeyboardVisible: false,
+    topAnim: new Animated.Value(0),
 
     email: __DEV__ ? "testing@test.pl" : null,
 
     error: {
       email: null
     }
-  };
-
-  componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      "keyboardWillShow",
-      this.handleKeyboardShow
-    );
-
-    this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardWillHide",
-      this.handleKeyboardHide
-    );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  handleKeyboardShow = () => {
-    this.setState({
-      isKeyboardVisible: true
-    });
-  };
-
-  handleKeyboardHide = () => {
-    this.setState({
-      isKeyboardVisible: false
-    });
   };
 
   resetPassword = () => {
@@ -93,40 +64,61 @@ class ResetPasswordScreen extends React.Component {
     this.props.navigation.navigate(Routes.INFO_ERROR);
   };
 
+  handleKeyboardShow = keyboardHeight => {
+    Animated.timing(this.state.topAnim, {
+      toValue: -keyboardHeight,
+      duration: 250
+    }).start();
+  };
+
+  handleKeyboardHide = () => {
+    Animated.timing(this.state.topAnim, {
+      toValue: 0,
+      duration: 250
+    }).start();
+  };
+
   render() {
-    const { isKeyboardVisible, email, error } = this.state;
+    const { topAnim, email, error } = this.state;
 
     return (
-      <KeyboardAvoidingView style={defaultStyles.grow} behavior="padding">
-        <Background source={BackgroundImage} disableScroll>
-          <AuthHero
-            style={[styles.hero /*isKeyboardVisible && { display: "none" }*/]}
-          />
+      <KeyboardAware
+        onKeyboardShow={this.handleKeyboardShow}
+        onKeyboardHide={this.handleKeyboardHide}
+      >
+        {() => (
+          <View style={defaultStyles.container}>
+            <AuthHero style={[styles.hero]} />
 
-          <ScrollView style={styles.loginContainer}>
-            {error.other ? (
-              <Error message={i18n.t("errors.auth.unauthorized")} />
-            ) : null}
+            <Animated.View style={[{ height: 350 }, { top: topAnim }]}>
+              <Background source={BackgroundImage} disableScroll>
+                <ScrollView style={styles.loginContainer}>
+                  {error.other ? (
+                    <Error message={i18n.t("errors.auth.unauthorized")} />
+                  ) : null}
 
-            <InputWithIcon
-              iconName="ios-contact"
-              iconSize={20}
-              placeholder={i18n.t("auth.email")}
-              value={email}
-              error={error.email}
-              onChangeText={email => this.setState({ email })}
-              autoCapitalize="none"
-            />
-          </ScrollView>
+                  <InputWithIcon
+                    iconName="ios-contact"
+                    iconSize={20}
+                    placeholder={i18n.t("auth.email")}
+                    value={email}
+                    error={error.email}
+                    onChangeText={email => this.setState({ email })}
+                    autoCapitalize="none"
+                  />
+                </ScrollView>
 
-          <View style={styles.buttonContainer}>
-            <Button
-              title={i18n.t("auth.resetPassword")}
-              onPress={this.resetPassword}
-            />
+                <View style={styles.buttonContainer}>
+                  <Button
+                    title={i18n.t("auth.resetPassword")}
+                    onPress={this.resetPassword}
+                  />
+                </View>
+              </Background>
+            </Animated.View>
           </View>
-        </Background>
-      </KeyboardAvoidingView>
+        )}
+      </KeyboardAware>
     );
   }
 }
