@@ -4,6 +4,7 @@ import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
 
 import * as Routes from "../../navigation";
 import Card from "../../components/Card";
+import CardButton from "../../components/CardButton";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -103,13 +104,19 @@ class WalletPlacesScreen extends React.Component {
             subtitle={i18n.t("wallet.cardsAmount", {
               count: item.cardsAmount
             })}
-            action={i18n.t("wallet.seeCards")}
-            onPress={() => {
-              navigation.navigate(Routes.CARD_INFO, {
-                merchant: item.merchantName,
-                cards: cards.filter(c => c.merchantName === item.merchantName)
-              });
-            }}
+            renderButton={() => (
+              <CardButton
+                title={i18n.t("wallet.seeCards")}
+                onPress={() => {
+                  navigation.navigate(Routes.CARD_INFO, {
+                    merchant: item.merchantName,
+                    cards: cards.filter(
+                      c => c.merchantName === item.merchantName
+                    )
+                  });
+                }}
+              />
+            )}
           />
         )}
       />

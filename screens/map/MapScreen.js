@@ -17,6 +17,8 @@ import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import MapHeader from "../../components/map/Header";
 import Card from "../../components/Card";
+import CardButton from "../../components/CardButton";
+import WalletIcon from "../../components/icons/WalletIcon";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -243,6 +245,10 @@ class MapNearbyScreen extends React.Component {
     );
   }
 
+  navigateToWallet = () => {
+    this.props.navigation.navigate(Routes.WALLET);
+  };
+
   renderDataAsCards() {
     return (
       <ScrollView style={styles.list}>
@@ -259,9 +265,21 @@ class MapNearbyScreen extends React.Component {
               subtitle={i18n.t("map.collectStamps", {
                 count: item.stampsTotal
               })}
-              action={i18n.t("map.addCard")}
-              onPress={this.addCard(item.id)}
-              renderAction={() =>
+              renderButton={() =>
+                item.inWallet ? (
+                  <CardButton
+                    title={i18n.t("map.addCard")}
+                    onPress={() => null}
+                    disabled
+                  />
+                ) : (
+                  <CardButton
+                    title={i18n.t("map.addCard")}
+                    onPress={this.addCard(item.id)}
+                  />
+                )
+              }
+              renderPrimaryAction={() =>
                 item.favorite ? (
                   <AntDesign
                     name="star"
@@ -278,6 +296,16 @@ class MapNearbyScreen extends React.Component {
                     onPress={this.addFav(item.id)}
                     style={styles.star}
                   />
+                )
+              }
+              renderSecondaryAction={() =>
+                item.inWallet ? (
+                  <WalletIcon
+                    color={colors.primary}
+                    onPress={this.navigateToWallet}
+                  />
+                ) : (
+                  <WalletIcon color="#95989A" onPress={() => /* noop */ null} />
                 )
               }
             />

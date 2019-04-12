@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, Text, View, Image, StyleSheet } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 import colors from "../constants/Colors";
 
 class Card extends Component {
@@ -8,16 +8,24 @@ class Card extends Component {
       image,
       title,
       subtitle,
-      action,
-      onPress,
-      renderAction
+      renderPrimaryAction,
+      renderSecondaryAction,
+      renderButton
     } = this.props;
 
     return (
       <View style={styles.cardPadder}>
         <View style={styles.card}>
           <View style={styles.cardActionButton}>
-            {typeof renderAction === "function" ? renderAction() : null}
+            {typeof renderPrimaryAction === "function"
+              ? renderPrimaryAction()
+              : null}
+          </View>
+
+          <View style={styles.cardSecondaryActionButton}>
+            {typeof renderSecondaryAction === "function"
+              ? renderSecondaryAction()
+              : null}
           </View>
 
           <Image style={styles.cardImage} source={image} />
@@ -25,9 +33,7 @@ class Card extends Component {
           <Text style={styles.cardTitle}>{title}</Text>
           <Text style={styles.cardSubtitle}>{subtitle}</Text>
 
-          <TouchableOpacity style={styles.cardButton} onPress={onPress}>
-            <Text style={styles.cardButtonText}>{action}</Text>
-          </TouchableOpacity>
+          {typeof renderButton === "function" ? renderButton() : null}
         </View>
       </View>
     );
@@ -49,6 +55,11 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0
   },
+  cardSecondaryActionButton: {
+    position: "absolute",
+    top: 0,
+    right: 0
+  },
   cardImage: {
     alignSelf: "center",
 
@@ -69,22 +80,6 @@ const styles = StyleSheet.create({
     color: "#709BE7",
     fontSize: 9,
     fontFamily: "nunito-regular",
-    textTransform: "uppercase",
-    textAlign: "center"
-  },
-  cardButton: {
-    padding: 4,
-    marginHorizontal: 4,
-    marginBottom: 4,
-    marginTop: 10,
-
-    backgroundColor: colors.primary,
-    borderRadius: 7
-  },
-  cardButtonText: {
-    color: colors.color,
-    fontSize: 15,
-    fontFamily: "poppins-bold",
     textTransform: "uppercase",
     textAlign: "center"
   }
