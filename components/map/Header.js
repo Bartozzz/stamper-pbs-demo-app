@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+  View,
+  Image
+} from "react-native";
 
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
@@ -51,7 +58,7 @@ export default function MapHeader(props) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={defaultStyles.grow}
+        style={[defaultStyles.grow, styles.toggleContainer]}
         onPress={() => props.onToggleMode()}
       >
         <View style={styles.toggle}>{modeIcon}</View>
@@ -104,12 +111,17 @@ export const styles = StyleSheet.create({
   //  borderBottomColor: colors.primary
   //},
 
-  toggle: {
-    zIndex: 3,
-
+  toggleContainer: {
     position: "absolute",
-    top: -20,
+    left: (Dimensions.get("window").width - 55) / 2,
+    top: 10,
 
+    width: 55,
+    height: 55,
+
+    zIndex: 1000
+  },
+  toggle: {
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",

@@ -40,8 +40,14 @@ const defaultNavigationOptions = {
   },
 
   headerTitleStyle: {
+    flex: 1,
+
     fontFamily: "poppins-semi-bold",
-    fontSize: 17
+    fontSize: 17,
+
+    alignSelf: "center",
+    textAlign: "center",
+    justifyContent: "center"
   }
 };
 
