@@ -1,10 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BarCodeScanner, Permissions } from "expo";
-import { Text, View, Image, StyleSheet } from "react-native";
+import { AsyncStorage, Text, View, Image, StyleSheet } from "react-native";
 
 import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
+import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
+import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
@@ -82,6 +84,9 @@ class ScannerScanScreen extends React.Component {
       isProcessing: true,
       isRequesting: true
     });
+
+    AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
+    AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
     addStamp(code)
       .then(res =>

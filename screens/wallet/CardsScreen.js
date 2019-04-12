@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
+  AsyncStorage,
   StyleSheet,
   Image,
   Text,
@@ -20,7 +21,12 @@ import colors from "../../constants/Colors";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/wallet/Header";
-import { getWallet, removeCard } from "../../store/reducers/wallet";
+import {
+  WALLET_CARDS,
+  FORCE_REFRESH_WALLET,
+  getWallet,
+  removeCard
+} from "../../store/reducers/wallet";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
@@ -50,13 +56,18 @@ class WalletCardsScreen extends React.Component {
     search: null
   };
 
-  componentDidMount() {
-    // As from specs (client e-mail):
-    // "Po wczytaniu Portfel > Miejsca proszę wynik zapisać lokalnie oraz go
-    // wyzerować po wejściu na ekran główny by przechodzenie pomiędzy widokiem
-    // Portfel > Karty i spowrotem do Portfel > Miejsca  nie wymagały ponownego
-    // wczytywania danych".
-    this.props.getWallet();
+  async componentDidMount() {
+    const shouldRefetch = await AsyncStorage.getItem(FORCE_REFRESH_WALLET);
+
+    if (shouldRefetch === null || JSON.parse(shouldRefetch) === true) {
+      console.log("Refreshing wallet cards");
+
+      this.props.getWallet().then(data => {
+        AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
+        AsyncStorage.setItem(WALLET_CARDS, JSON.stringify(data.payload.data));
+      });
+    }
+
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
@@ -65,6 +76,8 @@ class WalletCardsScreen extends React.Component {
 
     if (card && card.stampsToDate === 0) {
       this.props.removeCard(cardId);
+
+      AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     } else {
       this.errorToast.show(i18n.t("errors.wallet.emptyCard"));
     }

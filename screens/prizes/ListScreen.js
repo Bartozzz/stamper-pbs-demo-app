@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
+  AsyncStorage,
   StyleSheet,
   Image,
   View,
@@ -19,7 +20,11 @@ import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
-import { getPrizes } from "../../store/reducers/prizes";
+import {
+  PRIZES_CARDS,
+  FORCE_REFRESH_PRIZES,
+  getPrizes
+} from "../../store/reducers/prizes";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
@@ -46,8 +51,19 @@ class PrizesListScreen extends React.Component {
     search: null
   };
 
-  componentDidMount() {
-    this.props.getPrizes();
+  async componentDidMount() {
+    const shouldRefetch = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
+
+    if (shouldRefetch === null || JSON.parse(shouldRefetch) === true) {
+      console.log("Refreshing prizes cards");
+
+      this.props.getPrizes().then(data => {
+        console.log(data.payload.data);
+        AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(false));
+        AsyncStorage.setItem(PRIZES_CARDS, JSON.stringify(data.payload.data));
+      });
+    }
+
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 

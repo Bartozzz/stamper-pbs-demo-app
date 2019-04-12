@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { MapView, Location, Permissions } from "expo";
 import {
+  AsyncStorage,
   StyleSheet,
   View,
   Text,
@@ -27,7 +28,7 @@ import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
-import { addCard } from "../../store/reducers/wallet";
+import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 
 import mapStyle from "../../assets/mapStyle";
 import PlusImage from "../../assets/images/plus.png";
@@ -144,6 +145,8 @@ class MapNearbyScreen extends React.Component {
 
   addCard = cardId => () => {
     const { navigation, addCard } = this.props;
+
+    AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
 
     addCard(cardId)
       .then(() => {

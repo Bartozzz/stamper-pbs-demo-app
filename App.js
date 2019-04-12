@@ -5,6 +5,8 @@ import { AsyncStorage, Platform, StatusBar } from "react-native";
 import AppContainer from "./navigation/AppNavigator";
 import configureStore from "./store";
 import { EMAIL, setEmail } from "./store/reducers/profile";
+import { WALLET_CARDS, restoreWallet } from "./store/reducers/wallet";
+import { PRIZES_CARDS, restorePrizes } from "./store/reducers/prizes";
 import {
   EXPIRY_DATE,
   ACCESS_TOKEN,
@@ -49,6 +51,8 @@ export default class App extends React.Component {
       const expiryDate = await AsyncStorage.getItem(EXPIRY_DATE);
       const accessToken = await AsyncStorage.getItem(ACCESS_TOKEN);
       const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN);
+      const walletCards = await AsyncStorage.getItem(WALLET_CARDS);
+      const prizesCards = await AsyncStorage.getItem(PRIZES_CARDS);
 
       if (email !== null) {
         store.dispatch(setEmail(email));
@@ -64,6 +68,14 @@ export default class App extends React.Component {
 
       if (refreshToken !== null) {
         store.dispatch(setRefreshToken(refreshToken));
+      }
+
+      if (walletCards !== null) {
+        store.dispatch(restoreWallet(JSON.parse(walletCards)));
+      }
+
+      if (prizesCards !== null) {
+        store.dispatch(restorePrizes(JSON.parse(prizesCards)));
       }
     } catch (err) {
       // Silent error…

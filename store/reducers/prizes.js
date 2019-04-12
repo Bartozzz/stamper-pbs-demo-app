@@ -1,6 +1,11 @@
 import Url from "../../constants/Urls";
 
+// Keys used for local storage:
+export const PRIZES_CARDS = "PRIZES_CARDS";
+export const FORCE_REFRESH_PRIZES = "FORCE_REFRESH_PRIZES";
+
 // Actions
+export const PRIZES_RESTORE = "APP/PRIZES/RESTORE";
 export const PRIZES_GET_REQUEST = "APP/PRIZES/GET_REQUEST";
 export const PRIZES_GET_SUCCESS = "APP/PRIZES/GET_SUCCESS";
 export const PRIZES_GET_FAIL = "APP/PRIZES/GET_FAIL";
@@ -42,10 +47,24 @@ export default function reducer(state = initialState, action) {
         count: action.payload.data
       };
 
+    case PRIZES_RESTORE: {
+      return {
+        ...state,
+        prizes: action.payload.cards
+      };
+    }
+
     default:
       return state;
   }
 }
+
+export const restorePrizes = payload => ({
+  type: PRIZES_RESTORE,
+  payload: {
+    cards: payload.cards
+  }
+});
 
 export const getPrizes = () => ({
   types: [PRIZES_GET_REQUEST, PRIZES_GET_SUCCESS, PRIZES_GET_FAIL],
