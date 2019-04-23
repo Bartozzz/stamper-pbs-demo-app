@@ -91,11 +91,15 @@ class ScannerScanScreen extends React.Component {
     addStamp(code)
       .then(res =>
         navigation.navigate(Routes.INFO_SUCCESS, {
-          size: 50,
+          size: 80,
           image:
             res.payload.data.message === "congratulations"
               ? EarnedRewardImage
               : ReceivedRewardImage,
+          timeout:
+            res.payload.data.message === "congratulations"
+              ? 2000 /* Earned reward */
+              : 5000 /* Received reward */,
           redirect: Routes.DASHBOARD,
           message: i18n.t(`success.scanner.${res.payload.data.message}`)
         })
