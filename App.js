@@ -144,7 +144,10 @@ export default class App extends React.Component {
         require("./assets/images/menu/prize.png"),
         require("./assets/images/menu/profile.png"),
         require("./assets/images/menu/scanner.png"),
-        require("./assets/images/menu/wallet.png")
+        require("./assets/images/menu/wallet.png"),
+        require("./assets/success/earned_reward.gif"),
+        require("./assets/success/received_reward.gif"),
+        require("./assets/success/stamp_add.gif")
       ]),
 
       // Load fonts:

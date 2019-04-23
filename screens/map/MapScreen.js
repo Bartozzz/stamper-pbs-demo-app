@@ -36,6 +36,7 @@ import AddedImage from "../../assets/images/icons/already-in-wallet.png";
 import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 import MapLoader from "../../assets/loaders/map.gif";
+import StampAdd from "../../assets/success/stamp_add.gif";
 
 const MODE_MAP = "MODE_MAP";
 const MODE_CARD = "MODE_CARD";
@@ -152,7 +153,11 @@ class MapNearbyScreen extends React.Component {
       .then(() => {
         navigation.navigate(Routes.INFO_SUCCESS, {
           redirect: Routes.MAP,
-          message: i18n.t("success.wallet.cardAdd")
+          message: i18n.t("success.wallet.cardAdd"),
+          height: 98,
+          width: 144,
+          image: StampAdd,
+          timeout: 3000
         });
       })
       .catch(() => {

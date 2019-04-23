@@ -29,12 +29,32 @@ class SuccessScreen extends React.Component {
     navigation.navigate(screen);
   };
 
+  get size() {
+    const { navigation } = this.props;
+
+    const size = navigation.getParam("size", 150);
+    const height = navigation.getParam("height", null);
+    const width = navigation.getParam("width", null);
+
+    if (height && width) {
+      return {
+        height,
+        width
+      };
+    } else {
+      return {
+        height: size,
+        width: size
+      };
+    }
+  }
+
   render() {
     const { navigation } = this.props;
 
     const image = navigation.getParam("image", SuccessImage);
     const message = navigation.getParam("message", "Success!");
-    const size = navigation.getParam("size", 150);
+    const { height, width } = this.size;
 
     return (
       <TouchableOpacity
@@ -42,7 +62,7 @@ class SuccessScreen extends React.Component {
         activeOpacity={1}
         style={[defaultStyles.container, defaultStyles.center, styles.bg]}
       >
-        <Image style={[{ width: size, height: size }]} source={image} />
+        <Image style={[{ width, height }]} source={image} />
         <Text style={styles.text}>{message}</Text>
       </TouchableOpacity>
     );
