@@ -258,10 +258,23 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderDataAsCards() {
+    // Situation 1: a restaurant has the same card in two different locations.
+    // In this case, we display only one card when rendering cards as list and
+    // keep the default rendering when rendering as a map.
+    const data = this.data.reduce((acc, curr) => {
+      const index = acc.findIndex(element => element.id === curr.id);
+
+      if (index === -1) {
+        return [...acc, curr];
+      } else {
+        return acc;
+      }
+    }, []);
+
     return (
       <ScrollView style={styles.list}>
         <FlatList
-          data={this.data}
+          data={data}
           numColumns={2}
           keyExtractor={item => {
             return item.id;
