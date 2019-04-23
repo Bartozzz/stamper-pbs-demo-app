@@ -2,8 +2,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { MapView, Location, Permissions } from "expo";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 import {
   AsyncStorage,
+  Dimensions,
   StyleSheet,
   View,
   Text,
@@ -176,12 +178,81 @@ class MapNearbyScreen extends React.Component {
     this.props.removeFav(cardId);
   };
 
-  renderDataAsMap() {
+  renderSelectedCardOnMap() {
     const { selected } = this.state;
     const selectedCard = this.data.find(item => item.id === selected);
 
-    console.log(selectedCard);
+    // If no card is selected, render nothing:
+    if (!selectedCard) {
+      return null;
+    }
 
+    // Situation 2: a restaurant can have multiple cards in the same location.
+    // When a card is selected, we should display all the cards in the selected
+    // location.
+    const selectedBatch = this.data.filter(item => {
+      const eps = 0.00001;
+      const latDiff = Math.abs(item.lat - selectedCard.lat);
+      const lngDiff = Math.abs(item.lng - selectedCard.lng);
+
+      return latDiff < eps && lngDiff < eps;
+    });
+
+    return (
+      <View style={styles.selectedContainer}>
+        <Carousel
+          ref={carousel => (this.carouselRef = carousel)}
+          data={selectedBatch}
+          onSnapToItem={index => this.setState({ active: index })}
+          renderItem={({ item }) => (
+            <View style={styles.selected}>
+              <View style={styles.selectedImageContainer}>
+                <Image
+                  style={styles.selectedImage}
+                  source={{ uri: item.iconUrl }}
+                />
+              </View>
+
+              <View style={styles.selectedInfoContainer}>
+                <Text style={styles.selectedTitle}>{item.title}</Text>
+                <Text style={styles.selectedAmount}>
+                  {i18n.t("map.collectStamps", {
+                    count: item.stampsTotal
+                  })}
+                </Text>
+              </View>
+
+              {item.inWallet ? (
+                <View style={styles.selectedAddedContainer}>
+                  <Image style={styles.selectAdded} source={AddedImage} />
+
+                  <Text style={styles.selectedAddedContainerText}>
+                    {i18n.t("map.cardAlreadyAdded")}
+                  </Text>
+                </View>
+              ) : (
+                <TouchableOpacity
+                  style={styles.selectedAddContainer}
+                  onPress={this.addCard(selected)}
+                >
+                  <Image style={styles.selectAdd} source={PlusImage} />
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
+          inactiveSlideScale={0.65}
+          inactiveSlideOpacity={0.85}
+          inactiveSlideShift={0}
+          sliderWidth={Dimensions.get("window").width}
+          itemWidth={Dimensions.get("window").width * 0.725}
+          containerCustomStyle={styles.slider}
+          contentContainerCustomStyle={styles.sliderContentContainer}
+        />
+      </View>
+    );
+  }
+
+  renderDataAsMap() {
     return (
       <View style={styles.map}>
         <MapView
@@ -199,7 +270,7 @@ class MapNearbyScreen extends React.Component {
 
           {this.data.map(item => (
             <MapView.Marker
-              key={item.id}
+              key={`${item.id}${item.lat}${item.lng}`}
               onPress={this.selectCard(item.id)}
               coordinate={{
                 latitude: Number(item.lat),
@@ -213,42 +284,7 @@ class MapNearbyScreen extends React.Component {
           ))}
         </MapView>
 
-        {selectedCard && (
-          <View style={styles.selected}>
-            <View style={styles.selectedImageContainer}>
-              <Image
-                style={styles.selectedImage}
-                source={{ uri: selectedCard.iconUrl }}
-              />
-            </View>
-
-            <View style={styles.selectedInfoContainer}>
-              <Text style={styles.selectedTitle}>{selectedCard.title}</Text>
-              <Text style={styles.selectedAmount}>
-                {i18n.t("map.collectStamps", {
-                  count: selectedCard.stampsTotal
-                })}
-              </Text>
-            </View>
-
-            {selectedCard.inWallet ? (
-              <View style={styles.selectedAddedContainer}>
-                <Image style={styles.selectAdded} source={AddedImage} />
-
-                <Text style={styles.selectedAddedContainerText}>
-                  {i18n.t("map.cardAlreadyAdded")}
-                </Text>
-              </View>
-            ) : (
-              <TouchableOpacity
-                style={styles.selectedAddContainer}
-                onPress={this.addCard(selected)}
-              >
-                <Image style={styles.selectAdd} source={PlusImage} />
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
+        {this.renderSelectedCardOnMap()}
       </View>
     );
   }
@@ -414,15 +450,19 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
 
-  selected: {
+  selectedContainer: {
     zIndex: 3,
-
-    flexDirection: "row",
-    alignSelf: "center",
-    alignItems: "center",
 
     position: "absolute",
     bottom: 25,
+
+    height: 100,
+    width: Dimensions.get("window").width
+  },
+  selected: {
+    flexDirection: "row",
+    alignSelf: "center",
+    alignItems: "center",
 
     height: 80,
     width: 350,
