@@ -148,19 +148,21 @@ class CardInfoScreen extends React.Component {
             </View>
           </View>
 
-          <View style={[defaultStyles.row, styles.row]}>
-            <View style={styles.textDescriptionContainer}>
-              <Text style={styles.textDescription}>
-                {i18n.t("card.details2")}
-              </Text>
-            </View>
+          {card.validToDate && (
+            <View style={[defaultStyles.row, styles.row]}>
+              <View style={styles.textDescriptionContainer}>
+                <Text style={styles.textDescription}>
+                  {i18n.t("card.details2")}
+                </Text>
+              </View>
 
-            <View>
-              <Text style={styles.textValue}>
-                {formatDate(card.validToDate)}
-              </Text>
+              <View>
+                <Text style={styles.textValue}>
+                  {formatDate(card.validToDate)}
+                </Text>
+              </View>
             </View>
-          </View>
+          )}
 
           <View style={[defaultStyles.row, styles.row]}>
             <View style={styles.textDescriptionContainer}>
@@ -176,15 +178,17 @@ class CardInfoScreen extends React.Component {
             </View>
           </View>
 
-          <View style={[styles.row]}>
-            <Text style={styles.descriptionTitle}>
-              {i18n.t("card.details5")}
-            </Text>
+          {card.description && (
+            <View style={[styles.row]}>
+              <Text style={styles.descriptionTitle}>
+                {i18n.t("card.details5")}
+              </Text>
 
-            <View>
-              <Text style={styles.descriptionValue}>{card.description}</Text>
+              <View>
+                <Text style={styles.descriptionValue}>{card.description}</Text>
+              </View>
             </View>
-          </View>
+          )}
         </ScrollView>
       </Background>
     );
