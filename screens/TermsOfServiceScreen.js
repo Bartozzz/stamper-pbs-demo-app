@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, View, Dimensions } from "react-native";
+import { ActivityIndicator, View, Dimensions, Linking } from "react-native";
 import HTML from "react-native-render-html";
 
 import Background from "../components/Background";
@@ -69,6 +69,10 @@ class TermsOfServiceScreen extends React.Component {
       });
   }
 
+  openLink = (event, href) => {
+    return Linking.openURL(href);
+  };
+
   render() {
     const { loading, content, error } = this.state;
 
@@ -87,6 +91,7 @@ class TermsOfServiceScreen extends React.Component {
               imagesMaxWidth={Dimensions.get("window").width}
               tagsStyles={tagsStyles}
               classesStyles={classesStyles}
+              onLinkPress={this.openLink}
             />
           </View>
         )}
