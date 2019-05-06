@@ -19,6 +19,7 @@ import colors from "../../constants/Colors";
 const SpinnerImage = require("../../assets/loaders/spinner.gif");
 const EarnedRewardImage = require("../../assets/success/earned_reward.gif");
 const ReceivedRewardImage = require("../../assets/success/received_reward.gif");
+const SubtractStampImage = require("../../assets/success/stamp_subtract.gif");
 
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -89,21 +90,31 @@ class ScannerScanScreen extends React.Component {
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
     addStamp(code)
-      .then(res =>
+      .then(res => {
+        let image;
+
+        switch (res.payload.data.message) {
+          case "congratulations":
+            image = EarnedRewardImage;
+            break;
+          case "subtract":
+            image = SubtractStampImage;
+            break;
+          default:
+            image = ReceivedRewardImage;
+        }
+
         navigation.navigate(Routes.INFO_SUCCESS, {
           size: 100,
-          image:
-            res.payload.data.message === "congratulations"
-              ? EarnedRewardImage
-              : ReceivedRewardImage,
+          image: image,
           timeout:
             res.payload.data.message === "congratulations"
               ? 5000 /* Earned reward */
               : 5000 /* Received reward */,
           redirect: Routes.DASHBOARD,
           message: i18n.t(`success.scanner.${res.payload.data.message}`)
-        })
-      )
+        });
+      })
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.DASHBOARD,
