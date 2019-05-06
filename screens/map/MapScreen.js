@@ -72,8 +72,9 @@ class MapNearbyScreen extends React.Component {
       return {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 1,
-        longitudeDelta: 1
+        // TODO: calculate deltas based on screen sizes:
+        latitudeDelta: 0.025,
+        longitudeDelta: 0.025
       };
     }
   }
@@ -96,9 +97,9 @@ class MapNearbyScreen extends React.Component {
 
     this.requestUserPosition().then(data => {
       if (__DEV__) {
-        getRegion("Paris");
+        getRegion("Paris", data.location.coords);
       } else {
-        getRegion(data.city);
+        getRegion(data.city, data.location.coords);
       }
 
       this.setState(data);
@@ -259,7 +260,6 @@ class MapNearbyScreen extends React.Component {
           style={styles.map}
           customMapStyle={mapStyle}
           provider={MapView.PROVIDER_GOOGLE}
-          minZoomLevel={15}
           initialRegion={this.initialRegion}
         >
           <MapView.Marker coordinate={this.initialRegion}>

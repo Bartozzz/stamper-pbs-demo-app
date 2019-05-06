@@ -73,14 +73,16 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const getRegion = city => ({
+export const getRegion = (city, coords) => ({
   types: [MAP_GET_REQUEST, MAP_GET_SUCCESS, MAP_GET_FAIL],
   payload: {
     request: {
       method: "POST",
       url: Url.Region.Get(),
       data: {
-        city
+        city,
+        lat: coords.latitude,
+        lng: coords.longitude
       }
     }
   }
