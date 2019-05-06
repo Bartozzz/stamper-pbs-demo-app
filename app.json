@@ -23,6 +23,10 @@
     },
     "android": {
       "package": "com.example.qrscanner"
+    },
+    "extra": {
+      "FACEBOOK_APP_ID": "858778281140242",
+      "GOOGLE_CLIENT_ID": "802676794484-4hur6ue6ionheedpb8mt294t8flj175a.apps.googleusercontent.com"
     }
   }
 }

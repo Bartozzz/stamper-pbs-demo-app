@@ -1,5 +1,5 @@
 import React from "react";
-import { Facebook, Google } from "expo";
+import { Facebook, Google, Constants } from "expo";
 import { connect } from "react-redux";
 import {
   Animated,
@@ -77,7 +77,7 @@ class AuthLoginScreen extends React.Component {
     };
 
     try {
-      const fid = "858778281140242";
+      const fid = Constants.manifest.extra.FACEBOOK_APP_ID;
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
 
       if (type === "success") {
@@ -101,8 +101,7 @@ class AuthLoginScreen extends React.Component {
     const { registerExternal } = this.props;
 
     try {
-      const clientId =
-        "802676794484-4hur6ue6ionheedpb8mt294t8flj175a.apps.googleusercontent.com";
+      const clientId = Constants.manifest.extra.GOOGLE_CLIENT_ID;
       const { type, user } = await Google.logInAsync({ clientId });
 
       if (type === "success") {
