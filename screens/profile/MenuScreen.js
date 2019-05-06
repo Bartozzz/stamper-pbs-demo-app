@@ -67,7 +67,7 @@ class ProfileMenuScreen extends React.Component {
 
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => navigation.navigate(Routes.PROFILE_TOS)}
+            onPress={() => navigation.navigate(Routes.PROFILE_LEGAL)}
           >
             <Text style={styles.menuItemText}>
               {i18n.t("profile.menu.tos")}

@@ -54,6 +54,10 @@ const V1 = {
 
     GetTermsAndConditions() {
       return `${Server.V1}/Account/GetTermsAndConditions`;
+    },
+
+    Legal(language = "en") {
+      return `${Server.V1}/Account/Legal?language=${language}`;
     }
   },
 

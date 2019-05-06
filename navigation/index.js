@@ -28,6 +28,7 @@ export const PROFILE_EDIT = "ProfileEdit";
 export const PROFILE_PASSWORD = "ProfilePassword";
 export const PROFILE_LOGOUT = "ProfileLogout";
 export const PROFILE_TOS = "ProfileTos";
+export const PROFILE_LEGAL = "ProfileLegal";
 
 export const SCANNER = "Scanner";
 export const SCANNER_SCAN = "ScannerScan";
