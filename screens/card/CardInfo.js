@@ -7,7 +7,9 @@ import {
   Text,
   Image,
   ImageBackground,
-  Dimensions
+  Dimensions,
+  TouchableOpacity,
+  Linking
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 
@@ -46,6 +48,12 @@ class CardInfoScreen extends React.Component {
 
   state = {
     active: 0
+  };
+
+  openInLinkedApp = link => {
+    if (Linking.canOpenURL(link)) {
+      Linking.openURL(link);
+    }
   };
 
   render() {
@@ -190,6 +198,13 @@ class CardInfoScreen extends React.Component {
             </View>
           )}
         </ScrollView>
+
+        <TouchableOpacity
+          style={styles.terms}
+          onPress={() => this.openInLinkedApp(card.termsAndConditionsUrl)}
+        >
+          <Text style={styles.termsText}>{i18n.t("card.seeTerms")}</Text>
+        </TouchableOpacity>
       </Background>
     );
   }
@@ -312,6 +327,18 @@ const styles = StyleSheet.create({
     color: "#636363",
     fontSize: 14,
     textAlign: "left"
+  },
+
+  terms: {
+    alignItems: "center",
+    justifyContent: "center",
+
+    height: 70
+  },
+  termsText: {
+    color: "#709BE7",
+    fontSize: 14,
+    textTransform: "uppercase"
   }
 });
 
