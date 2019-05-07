@@ -3,6 +3,7 @@
   "save": "Zapisz",
   "yes": "Tak",
   "no": "Nie",
+  "more": "Więcej",
 
   "error": "Wystąpił błąd aplikacji",
   "errorInternal": "Błąd aplikacji",
@@ -98,7 +99,8 @@
     },
 
     "edit": {
-      "changePhoto": "Zmień zdjęcie"
+      "changePhoto": "Zmień zdjęcie",
+      "newsletter": "Chce otrzymywać informację o promocjach."
     }
   },
 

@@ -3,6 +3,7 @@
   "save": "Save",
   "yes": "Yes",
   "no": "No",
+  "more": "Więcej",
 
   "error": "An Application Error Has Occurred",
   "errorInternal": "Application Error",
@@ -98,7 +99,8 @@
     },
 
     "edit": {
-      "changePhoto": "Change photo"
+      "changePhoto": "Change photo",
+      "newsletter": "Chce otrzymywać informację o promocjach."
     }
   },
 

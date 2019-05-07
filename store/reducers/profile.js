@@ -83,7 +83,13 @@ export const getProfile = () => ({
   }
 });
 
-export const updateProfile = (Nickname, Firstname, Lastname, Email) => ({
+export const updateProfile = (
+  Nickname,
+  Firstname,
+  Lastname,
+  Email,
+  Newsletter
+) => ({
   types: [PROFILE_UPDATE_REQUEST, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_FAIL],
   payload: {
     request: {
@@ -93,7 +99,8 @@ export const updateProfile = (Nickname, Firstname, Lastname, Email) => ({
         Nickname,
         Firstname,
         Lastname,
-        Email
+        Email,
+        Newsletter
       }
     }
   }

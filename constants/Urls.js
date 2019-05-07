@@ -58,6 +58,10 @@ const V1 = {
 
     Legal(language = "en") {
       return `${Server.V1}/Account/Legal?language=${language}`;
+    },
+
+    Newsletter(language = "en") {
+      return `${Server.V1}/Account/Newsletter?language=${language}`;
     }
   },
 

@@ -31,7 +31,7 @@ const tagsStyles = {
   }
 };
 
-class LegalScreen extends React.Component {
+class NewsletterTermsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.tos"),
     headerTitle: HeaderTitle,
@@ -52,7 +52,7 @@ class LegalScreen extends React.Component {
 
   componentDidMount() {
     axios
-      .get(Url.Account.Legal("en"), {
+      .get(Url.Account.Newsletter("en"), {
         responseType: "text"
       })
       .then(response => {
@@ -100,4 +100,4 @@ class LegalScreen extends React.Component {
   }
 }
 
-export default LegalScreen;
+export default NewsletterTermsScreen;

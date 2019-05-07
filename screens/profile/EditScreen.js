@@ -21,6 +21,7 @@ import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import InputWithLabel from "../../components/InputWithLabel";
+import Checkbox, { styles as checkboxStyles } from "../../components/Checkbox";
 
 import {
   EMAIL,
@@ -63,6 +64,7 @@ class ProfileEditScreen extends React.Component {
     firstName: this.props.firstname,
     lastName: this.props.lastname,
     login: this.props.nickname,
+    newsletter: this.props.newsletter,
     email: this.props.email,
     photo: this.props.photo,
     uploading: false,
@@ -123,12 +125,16 @@ class ProfileEditScreen extends React.Component {
   };
 
   editProfile = () => {
-    const { login, firstName, lastName, email } = this.state;
+    const { login, firstName, lastName, email, newsletter } = this.state;
     const { updateProfile } = this.props;
 
-    updateProfile(login, firstName, lastName, email)
+    updateProfile(login, firstName, lastName, email, newsletter)
       .then(this.handleSuccess)
       .catch(this.handleError);
+  };
+
+  showNewsletterTerms = () => {
+    this.props.navigation.navigate(Routes.PROFILE_NEWSLETTER_TOS);
   };
 
   handleSuccess = async () => {
@@ -196,7 +202,15 @@ class ProfileEditScreen extends React.Component {
   };
 
   render() {
-    const { firstName, lastName, email, login, photo, error } = this.state;
+    const {
+      firstName,
+      lastName,
+      email,
+      login,
+      newsletter,
+      photo,
+      error
+    } = this.state;
 
     return (
       <KeyboardAware
@@ -255,6 +269,29 @@ class ProfileEditScreen extends React.Component {
                     value={login}
                     error={error.login}
                     onChangeText={login => this.setState({ login })}
+                  />
+
+                  <Checkbox
+                    checked={newsletter}
+                    onChange={newsletter => this.setState({ newsletter })}
+                    label={
+                      <View style={{ flexDirection: "row" }}>
+                        <Text style={checkboxStyles.checkboxLabel}>
+                          {i18n.t("profile.edit.newsletter")}
+                        </Text>
+
+                        <TouchableOpacity onPress={this.showNewsletterTerms}>
+                          <Text
+                            style={[
+                              checkboxStyles.checkboxLabel,
+                              { fontWeight: "900", textTransform: "uppercase" }
+                            ]}
+                          >
+                            {i18n.t("more")}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    }
                   />
                 </View>
 
