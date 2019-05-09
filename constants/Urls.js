@@ -52,8 +52,8 @@ const V1 = {
       return `${Server.V1}/Account/UpdatePhoto`;
     },
 
-    GetTermsAndConditions() {
-      return `${Server.V1}/Account/GetTermsAndConditions`;
+    GetTermsAndConditions(language = "en") {
+      return `${Server.V1}/Account/GetTermsAndConditions?language=${language}`;
     },
 
     Legal(language = "en") {

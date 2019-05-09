@@ -3,7 +3,8 @@ export const AUTH_LOADING = "AuthLoading";
 export const AUTH_LOGIN = "AuthLogin";
 export const AUTH_REGISTER = "AuthRegister";
 export const AUTH_RESET = "AuthReset";
-export const AUTH_TOS = "AuthTOS";
+export const AUTH_TOS = "AuthToS";
+export const AUTH_EXTERNAL_TOS = "AuthExternalToS";
 
 export const INFO = "Info";
 export const INFO_ERROR = "InfoError";

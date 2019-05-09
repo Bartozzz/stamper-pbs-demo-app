@@ -84,8 +84,16 @@ class AuthLoginScreen extends React.Component {
         const user = await fetchUser(token);
 
         registerExternal(user.email, "facebook", user.email.split("@")[0])
-          .then(() => this.loginExternal(user.email))
-          .catch(() => this.loginExternal(user.email));
+          .then(() => {
+            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+              onAccept: () => {
+                this.loginExternal(user.email);
+              }
+            });
+          })
+          .catch(() => {
+            this.loginExternal(user.email);
+          });
       }
     } catch (e) {
       this.setState({
@@ -106,8 +114,16 @@ class AuthLoginScreen extends React.Component {
 
       if (type === "success") {
         registerExternal(user.email, "google", user.email.split("@")[0])
-          .then(() => this.loginExternal(user.email))
-          .catch(() => this.loginExternal(user.email));
+          .then(() => {
+            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+              onAccept: () => {
+                this.loginExternal(user.email);
+              }
+            });
+          })
+          .catch(() => {
+            this.loginExternal(user.email);
+          });
       }
     } catch (e) {
       this.setState({
