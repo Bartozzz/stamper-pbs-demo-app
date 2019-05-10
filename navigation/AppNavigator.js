@@ -25,6 +25,7 @@ import ProfilePasswordScreen from "../screens/profile/PasswordScreen";
 import ProfileLogoutScreen from "../screens/profile/LogoutScreen";
 import ProfileLegalScreen from "../screens/profile/LegalScreen";
 import ProfileNewsletterTermsScreen from "../screens/profile/NewsletterTermsScreen";
+import ProfileNewsletterUpdateScreen from "../screens/profile/NewsletterUpdateScreen";
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
 import WalletCardsScreen from "../screens/wallet/CardsScreen";
 import WalletPlacesScreen from "../screens/wallet/PlacesScreen";
@@ -146,7 +147,8 @@ const ProfileStack = createStackNavigator(
     [Route.PROFILE_LOGOUT]: ProfileLogoutScreen,
     [Route.PROFILE_TOS]: TermsOfServiceScreen,
     [Route.PROFILE_LEGAL]: ProfileLegalScreen,
-    [Route.PROFILE_NEWSLETTER_TOS]: ProfileNewsletterTermsScreen
+    [Route.PROFILE_NEWSLETTER_TOS]: ProfileNewsletterTermsScreen,
+    [Route.PROFILE_NEWSLETTER_UPDATE]: ProfileNewsletterUpdateScreen
   },
   {
     initialRouteName: Route.PROFILE_MENU,

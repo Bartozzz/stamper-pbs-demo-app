@@ -106,6 +106,12 @@
     "edit": {
       "changePhoto": "Zmień zdjęcie",
       "newsletter": "Chce otrzymywać informację o promocjach."
+    },
+
+    "newsletter": {
+      "title": "newsletter",
+      "action": "Zapisujesz się na ",
+      "headline": "Korzystaj bardziej!\n Zapisz się na newsletter i dowiaduj się pierwszy o nowych promocjach!"
     }
   },
 

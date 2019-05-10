@@ -31,6 +31,7 @@ export const PROFILE_LOGOUT = "ProfileLogout";
 export const PROFILE_TOS = "ProfileTos";
 export const PROFILE_LEGAL = "ProfileLegal";
 export const PROFILE_NEWSLETTER_TOS = "ProfileNewsletterTerms";
+export const PROFILE_NEWSLETTER_UPDATE = "ProfileNewsletterUpdate";
 
 export const SCANNER = "Scanner";
 export const SCANNER_SCAN = "ScannerScan";

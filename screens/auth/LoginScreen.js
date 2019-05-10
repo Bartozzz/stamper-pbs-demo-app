@@ -56,10 +56,10 @@ class AuthLoginScreen extends React.Component {
     }
   };
 
-  loginExternal = email => {
+  loginExternal = (email, firstLogin = false) => {
     this.props
       .loginExternal(email)
-      .then(this.handleSuccess)
+      .then(this.handleSuccess(firstLogin))
       .catch(this.handleError);
   };
 
@@ -87,7 +87,7 @@ class AuthLoginScreen extends React.Component {
           .then(() => {
             this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
               onAccept: () => {
-                this.loginExternal(user.email);
+                this.loginExternal(user.email, true);
               }
             });
           })
@@ -117,7 +117,7 @@ class AuthLoginScreen extends React.Component {
           .then(() => {
             this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
               onAccept: () => {
-                this.loginExternal(user.email);
+                this.loginExternal(user.email, true);
               }
             });
           })
@@ -140,11 +140,11 @@ class AuthLoginScreen extends React.Component {
     const { login } = this.props;
 
     login(email, password)
-      .then(this.handleSuccess)
+      .then(this.handleSuccess(false))
       .catch(this.handleError);
   };
 
-  handleSuccess = async response => {
+  handleSuccess = firstLogin => async response => {
     if (response.error) {
       return this.handleError(response);
     }
@@ -159,7 +159,9 @@ class AuthLoginScreen extends React.Component {
     }
 
     // Triggers profile fetch and redirects to the dashboard screen:
-    this.props.navigation.navigate(Routes.AUTH_LOADING);
+    this.props.navigation.navigate(Routes.AUTH_LOADING, {
+      redirect: firstLogin ? Routes.PROFILE_NEWSLETTER_UPDATE : Routes.DASHBOARD
+    });
   };
 
   handleError = async response => {

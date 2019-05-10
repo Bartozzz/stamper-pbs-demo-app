@@ -82,8 +82,10 @@ class AuthRegisterScreen extends React.Component {
       console.log(err);
     }
 
-    // Triggers profile fetch and redirects to the dashboard screen:
-    this.props.navigation.navigate(Routes.AUTH_LOADING);
+    // Triggers profile fetch and redirects to the newsletter update screen:
+    this.props.navigation.navigate(Routes.AUTH_LOADING, {
+      redirect: Routes.PROFILE_NEWSLETTER_UPDATE
+    });
   };
 
   handleError = async response => {

@@ -10,6 +10,9 @@ export const PROFILE_GET_FAIL = "APP/PROFILE/GET_FAIL";
 export const PROFILE_UPDATE_REQUEST = "APP/PROFILE/UPDATE_REQUEST";
 export const PROFILE_UPDATE_SUCCESS = "APP/PROFILE/UPDATE_SUCCESS";
 export const PROFILE_UPDATE_FAIL = "APP/PROFILE/UPDATE_FAIL";
+export const NEWSLETTER_UPDATE_REQUEST = "APP/NEWSLETTER/UPDATE_REQUEST";
+export const NEWSLETTER_UPDATE_SUCCESS = "APP/NEWSLETTER/UPDATE_SUCCESS";
+export const NEWSLETTER_UPDATE_FAIL = "APP/NEWSLETTER/UPDATE_FAIL";
 export const PHOTO_UPDATE_REQUEST = "APP/PHOTO/UPDATE_REQUEST";
 export const PHOTO_UPDATE_SUCCESS = "APP/PHOTO/UPDATE_SUCCESS";
 export const PHOTO_UPDATE_FAIL = "APP/PHOTO/UPDATE_FAIL";
@@ -115,6 +118,21 @@ export const updatePhoto = Photo => ({
       data: {
         Photo
       }
+    }
+  }
+});
+
+export const updateNewsletter = newsletter => ({
+  types: [
+    NEWSLETTER_UPDATE_REQUEST,
+    NEWSLETTER_UPDATE_SUCCESS,
+    NEWSLETTER_UPDATE_FAIL
+  ],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.UpdateNewsletter(),
+      data: { newsletter }
     }
   }
 });

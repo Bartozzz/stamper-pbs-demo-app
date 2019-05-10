@@ -52,6 +52,10 @@ const V1 = {
       return `${Server.V1}/Account/UpdatePhoto`;
     },
 
+    UpdateNewsletter() {
+      return `${Server.V1}/Account/UpdateNewsletter`;
+    },
+
     GetTermsAndConditions(language = "en") {
       return `${Server.V1}/Account/GetTermsAndConditions?language=${language}`;
     },

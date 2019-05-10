@@ -50,6 +50,8 @@ class AuthLoadingScreen extends React.Component {
   }
 
   handleAuthorized = async response => {
+    const { navigation } = this.props;
+
     try {
       if (response.payload.data.email) {
         await AsyncStorage.setItem(EMAIL, response.payload.data.email);
@@ -58,7 +60,9 @@ class AuthLoadingScreen extends React.Component {
       console.log(error);
     }
 
-    return this.props.navigation.navigate(Routes.DASHBOARD);
+    const redirect = navigation.getParam("redirect", Routes.DASHBOARD);
+
+    return navigation.navigate(redirect);
   };
 
   handleUnauthorized = async error => {
