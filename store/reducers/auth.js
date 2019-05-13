@@ -79,10 +79,11 @@ export default function reducer(state = initialState, action) {
     }
 
     case ACCESS_SUCCESS: {
-      console.log("Got new new app access token…");
-
       const { accessToken, expiryDate } = action.payload.data;
       const header = `Bearer ${accessToken}`;
+      const expiry = (new Date(expiryDate) - new Date()) / 1000;
+
+      console.log("Got new new app access token… Expiring in:", expiry);
 
       // Set app access token for further usage.
       // Required in all other endpoints:
