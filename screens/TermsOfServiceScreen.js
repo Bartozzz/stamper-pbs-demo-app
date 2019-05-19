@@ -52,7 +52,7 @@ class TermsOfServiceScreen extends React.Component {
 
   componentDidMount() {
     axios
-      .get(Url.Account.GetTermsAndConditions(), {
+      .get(Url.Account.TermsAndConditions(), {
         responseType: "text"
       })
       .then(response => {

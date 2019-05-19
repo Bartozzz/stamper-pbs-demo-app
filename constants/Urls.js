@@ -56,8 +56,8 @@ const V1 = {
       return `${Server.V1}/Account/UpdateNewsletter`;
     },
 
-    GetTermsAndConditions(language = "en") {
-      return `${Server.V1}/Account/GetTermsAndConditions?language=${language}`;
+    TermsAndConditions(language = "en") {
+      return `${Server.V1}/Account/TermsAndConditions?language=${language}`;
     },
 
     Legal(language = "en") {
@@ -126,7 +126,7 @@ const publicUrls = [
   V1.Account.ExternalRegister(),
   V1.Account.Login(),
   V1.Account.ExternalLogin(),
-  V1.Account.GetTermsAndConditions()
+  V1.Account.TermsAndConditions()
 ];
 
 export default V1;
