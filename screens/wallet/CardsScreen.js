@@ -57,12 +57,16 @@ class WalletCardsScreen extends React.Component {
   };
 
   async componentDidMount() {
-    const shouldRefetch = await AsyncStorage.getItem(FORCE_REFRESH_WALLET);
+    const { cards, getWallet } = this.props;
 
-    if (shouldRefetch === null || JSON.parse(shouldRefetch) === true) {
+    const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_WALLET);
+    const shouldRefetchBool = JSON.parse(shouldRefetchData);
+    const hasCards = Array.isArray(cards) && cards.length > 0;
+
+    if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
       console.log("Refreshing wallet cards");
 
-      this.props.getWallet().then(data => {
+      getWallet().then(data => {
         AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
         AsyncStorage.setItem(WALLET_CARDS, JSON.stringify(data.payload.data));
       });

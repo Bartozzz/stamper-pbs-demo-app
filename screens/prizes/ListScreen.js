@@ -52,13 +52,16 @@ class PrizesListScreen extends React.Component {
   };
 
   async componentDidMount() {
-    const shouldRefetch = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
+    const { prizes, getPrizes } = this.props;
 
-    if (shouldRefetch === null || JSON.parse(shouldRefetch) === true) {
+    const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
+    const shouldRefetchBool = JSON.parse(shouldRefetchData);
+    const hasCards = Array.isArray(prizes) && prizes.length > 0;
+
+    if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
       console.log("Refreshing prizes cards");
 
-      this.props.getPrizes().then(data => {
-        console.log(data.payload.data);
+      getPrizes().then(data => {
         AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(false));
         AsyncStorage.setItem(PRIZES_CARDS, JSON.stringify(data.payload.data));
       });
