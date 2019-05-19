@@ -18,6 +18,8 @@ import {
   setRefreshToken
 } from "../../store/reducers/auth";
 import { EMAIL } from "../../store/reducers/profile";
+import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
+import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -51,6 +53,10 @@ class ProfileLogoutScreen extends React.Component {
       REFRESH_TOKEN,
       EMAIL
     ]);
+
+    // When user is logged out, force the refresh of offline-first elements:
+    await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
+    await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
 
     // Clear local volatile storage:
     this.props.setExpiryDate(null);

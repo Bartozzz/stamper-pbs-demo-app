@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { ActivityIndicator, AsyncStorage, View } from "react-native";
 import { authorize, setAccessToken } from "../../store/reducers/auth";
 import { EMAIL, getProfile } from "../../store/reducers/profile";
+import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
+import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 import styles from "../../constants/Styles";
@@ -55,6 +57,10 @@ class AuthLoadingScreen extends React.Component {
     try {
       if (response.payload.data.email) {
         await AsyncStorage.setItem(EMAIL, response.payload.data.email);
+
+        // When the user logs-in, force the refresh of offline-first elements:
+        await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
+        await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
       }
     } catch (error) {
       console.log(error);
