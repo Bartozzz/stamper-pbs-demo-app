@@ -8,6 +8,7 @@ i18n.fallbacks = true;
 i18n.translations = { pl, en };
 i18n.locale = Localization.locale;
 i18n.defaultLocale = "pl";
+i18n.appLocale = (i18n.currentLocale() || i18n.defaultLocale).slice(0, 2);
 
 i18n.pluralization["pl"] = function(count) {
   if (count === 0) {
@@ -21,6 +22,6 @@ i18n.pluralization["pl"] = function(count) {
   }
 };
 
-console.log("Current app locale:", i18n.currentLocale());
+console.log("Current app locale:", i18n.currentLocale(), i18n.appLocale);
 
 export default i18n;

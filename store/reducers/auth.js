@@ -1,5 +1,6 @@
 import Url from "../../constants/Urls";
 import Secret from "../../constants/Secret";
+import i18n from "../../translations";
 import axios from "../axios";
 
 // Keys used for local storage:
@@ -166,7 +167,8 @@ export const login = (email, password) => ({
       url: Url.Account.Login(),
       data: {
         email,
-        password
+        password,
+        language: i18n.appLocale
       }
     }
   }
@@ -179,7 +181,8 @@ export const loginExternal = email => ({
       method: "POST",
       url: Url.Account.ExternalLogin(),
       data: {
-        email
+        email,
+        language: i18n.appLocale
       }
     }
   }
@@ -194,7 +197,8 @@ export const register = (email, password, nickname) => ({
       data: {
         email,
         password,
-        nickname
+        nickname,
+        language: i18n.appLocale
       }
     }
   }
@@ -209,7 +213,8 @@ export const registerExternal = (email, provider, nickname) => ({
       data: {
         email,
         provider,
-        nickname
+        nickname,
+        language: i18n.appLocale
       }
     }
   }
@@ -234,7 +239,8 @@ export const changePassword = (Current, NewPassword, ConfirmNewPassword) => ({
       data: {
         CurrentPassword: Current,
         NewPassword,
-        ConfirmNewPassword
+        ConfirmNewPassword,
+        language: i18n.appLocale
       }
     }
   }
@@ -247,7 +253,8 @@ export const resetPassword = email => ({
       method: "POST",
       url: Url.Account.ForgotPassword(),
       data: {
-        email
+        email,
+        language: i18n.appLocale
       }
     }
   }

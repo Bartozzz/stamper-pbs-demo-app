@@ -1,4 +1,5 @@
 import Url from "../../constants/Urls";
+import i18n from "../../translations";
 
 // Keys used for local storage:
 export const EMAIL = "email";
@@ -112,7 +113,8 @@ export const updateProfile = (
         Firstname,
         Lastname,
         Email,
-        Newsletter
+        Newsletter,
+        language: i18n.appLocale
       }
     }
   }
@@ -141,7 +143,10 @@ export const updateNewsletter = newsletter => ({
     request: {
       method: "POST",
       url: Url.Account.UpdateNewsletter(),
-      data: { newsletter }
+      data: {
+        newsletter,
+        language: i18n.appLocale
+      }
     }
   }
 });
