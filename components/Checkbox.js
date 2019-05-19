@@ -52,6 +52,8 @@ export class Checkbox extends React.PureComponent {
 
 export const styles = StyleSheet.create({
   checkboxContainer: {
+    alignItems: "center",
+
     marginHorizontal: 0,
     marginVertical: 12,
 
@@ -59,6 +61,8 @@ export const styles = StyleSheet.create({
   },
 
   checkboxButton: {
+    marginRight: 9,
+
     alignItems: "center",
     justifyContent: "center",
 
@@ -76,9 +80,9 @@ export const styles = StyleSheet.create({
   },
 
   checkboxLabel: {
-    marginLeft: 12,
+    marginRight: 2,
 
-    fontSize: 12.5,
+    fontSize: 11.5,
     color: "#709BE7"
   }
 });
