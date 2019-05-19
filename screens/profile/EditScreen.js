@@ -30,6 +30,7 @@ import {
   setNickname,
   setFirstname,
   setLastname,
+  setNewsletter,
   setEmail,
   setPhoto
 } from "../../store/reducers/profile";
@@ -145,6 +146,7 @@ class ProfileEditScreen extends React.Component {
     this.props.setNickname(this.state.login);
     this.props.setFirstname(this.state.firstName);
     this.props.setLastname(this.state.lastName);
+    this.props.setNewsletter(this.state.newsletter);
     this.props.setEmail(this.state.email);
     this.props.setPhoto(this.state.photo);
 
@@ -345,6 +347,7 @@ const mapStateToProps = state => ({
   nickname: state.profile.nickname,
   firstname: state.profile.firstname,
   lastname: state.profile.lastname,
+  newsletter: state.profile.newsletter,
   email: state.profile.email,
   photo: state.profile.photo
 });
@@ -356,6 +359,7 @@ const mapDispatchToProps = {
   setNickname,
   setFirstname,
   setLastname,
+  setNewsletter,
   setEmail,
   setPhoto
 };

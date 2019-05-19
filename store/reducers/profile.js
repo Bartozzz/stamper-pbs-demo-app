@@ -19,6 +19,7 @@ export const PHOTO_UPDATE_FAIL = "APP/PHOTO/UPDATE_FAIL";
 export const PROFILE_SET_NICKNAME = "APP/PROFILE/SET_NICKNAME";
 export const PROFILE_SET_FIRSTNAME = "APP/PROFILE/SET_FIRSTNAME";
 export const PROFILE_SET_LASTNAME = "APP/PROFILE/SET_LASTNAME";
+export const PROFILE_SET_NEWSLETTER = "APP/PROFILE/SET_NEWSLETTER";
 export const PROFILE_SET_EMAIL = "APP/PROFILE/SET_EMAIL";
 export const PROFILE_SET_PHOTO = "APP/PROFILE/SET_PHOTO";
 
@@ -26,6 +27,7 @@ const initialState = {
   nickname: null,
   firstname: null,
   lastname: null,
+  newsletter: false,
   email: null,
   photo: null
 };
@@ -38,6 +40,7 @@ export default function reducer(state = initialState, action) {
         nickname: action.payload.data.nickname,
         firstname: action.payload.data.firstname,
         lastname: action.payload.data.lastname,
+        newsletter: action.payload.data.newsletter,
         email: action.payload.data.email,
         photo: action.payload.data.photo
       };
@@ -58,6 +61,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         lastname: action.payload
+      };
+
+    case PROFILE_SET_NEWSLETTER:
+      return {
+        ...state,
+        newsletter: action.payload
       };
 
     case PROFILE_SET_EMAIL:
@@ -150,6 +159,11 @@ export const setFirstname = firstname => ({
 export const setLastname = lastname => ({
   type: PROFILE_SET_LASTNAME,
   payload: lastname
+});
+
+export const setNewsletter = newsletter => ({
+  type: PROFILE_SET_NEWSLETTER,
+  payload: newsletter
 });
 
 export const setEmail = email => ({
