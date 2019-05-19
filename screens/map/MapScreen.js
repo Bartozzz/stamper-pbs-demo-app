@@ -447,7 +447,11 @@ const styles = StyleSheet.create({
     zIndex: 2,
     width: 40,
     height: 40,
-    borderRadius: 20
+    borderRadius: 20,
+
+    // Make sure the logo fits in the marker:
+    resizeMode: "contain",
+    backgroundColor: "white"
   },
 
   selectedContainer: {
