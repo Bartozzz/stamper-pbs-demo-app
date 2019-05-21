@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, Text, View } from "react-native";
+import { AsyncStorage, StyleSheet, Image, Text, View } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -8,7 +8,6 @@ import Background from "../../components/Background";
 import { FORCE_REFRESH_WALLET, removeCard } from "../../store/reducers/wallet";
 
 import i18n from "../../translations";
-import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
@@ -27,6 +26,7 @@ class CardRemovalConfirmationScreen extends React.Component {
     const cardId = navigation.getParam("cardId");
 
     removeCard(cardId).finally(() => {
+      AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
       navigation.goBack();
     });
   };
