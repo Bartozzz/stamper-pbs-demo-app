@@ -75,18 +75,19 @@ class NewsletterUpdateScreen extends React.Component {
           </Text>
 
           <View style={[defaultStyles.row, styles.boxAction]}>
-            <Text style={styles.boxActionText}>
-              {i18n.t("profile.newsletter.action")}
-            </Text>
-
             <TouchableOpacity onPress={this.navigateToTOS}>
-              <Text style={[styles.boxActionText, { fontWeight: "900" }]}>
-                {" "}
-                {i18n.t("profile.newsletter.title")}
+              <Text
+                style={[styles.boxActionText, { textTransform: "uppercase" }]}
+              >
+                {i18n.t("profile.newsletter.terms")}
               </Text>
             </TouchableOpacity>
+          </View>
 
-            <Text style={styles.boxActionText}>?</Text>
+          <View style={[defaultStyles.row, styles.boxAction]}>
+            <Text style={[styles.boxAlternativeText]}>
+              {i18n.t("profile.newsletter.question")}
+            </Text>
           </View>
         </View>
 
@@ -112,18 +113,17 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
 
-    marginTop: 80,
-    marginBottom: 30
+    marginTop: 45,
+    marginBottom: 10
   },
 
   box: {
     alignItems: "center",
 
-    paddingTop: 60,
-    paddingBottom: 60,
+    paddingTop: 40,
+    paddingBottom: 40,
     marginVertical: 20,
-    marginHorizontal: 36,
-    marginTop: 20,
+    marginHorizontal: 20,
 
     shadowColor: "#2699FB",
     shadowOffset: { width: 0, height: 30 },
@@ -140,8 +140,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center"
   },
+  boxAlternativeText: {
+    textAlign: "center",
+    fontSize: 18,
+    color: colors.color
+  },
   boxAction: {
-    marginTop: 30
+    marginTop: 20
   },
   boxActionText: {
     color: "#709BE7",
@@ -149,9 +154,9 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   boxIcon: {
-    width: 160,
-    height: 126,
-    marginBottom: 60
+    width: 107,
+    height: 85,
+    marginBottom: 40
   },
 
   buttons: {

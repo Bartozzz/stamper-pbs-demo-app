@@ -110,8 +110,9 @@
 
     "newsletter": {
       "title": "newsletter",
-      "action": "Zapisujesz się na ",
-      "headline": "Korzystaj bardziej!\n Zapisz się na newsletter i dowiaduj się pierwszy o nowych promocjach!"
+      "terms": "Regulamin",
+      "headline": "Korzystaj bardziej!\n Zapisz się na newsletter i dowiaduj się pierwszy o nowych promocjach!",
+      "question": "Zapisujesz się na newsletter?"
     }
   },
 
