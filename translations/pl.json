@@ -159,7 +159,13 @@
       "zero": "brak pieczątek do zebrania"
     },
     "addCard": "Dodaj kartę",
-    "cardAlreadyAdded": "Karta już w portfelu"
+    "cardAlreadyAdded": "Karta już w portfelu",
+
+    "terms": {
+      "accept": "Akceptuję regulamin promocji \"{{title}}\"",
+      "confirm": "Akceptuję",
+      "terms": "Regulamin"
+    }
   },
 
   "success": {

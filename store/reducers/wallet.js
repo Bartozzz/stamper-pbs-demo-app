@@ -80,7 +80,7 @@ export const getWallet = () => ({
   }
 });
 
-export const addCard = cardId => ({
+export const addCard = (cardId, acceptedTerms = false) => ({
   types: [
     WALLET_ADD_CARD_REQUEST,
     WALLET_ADD_CARD_SUCCESS,
@@ -91,7 +91,8 @@ export const addCard = cardId => ({
       method: "POST",
       url: Url.Card.Add(),
       data: {
-        cardId
+        cardId,
+        TermsAndConditions: acceptedTerms
       }
     }
   }

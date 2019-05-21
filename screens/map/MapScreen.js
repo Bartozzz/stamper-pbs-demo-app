@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { MapView, Location, Permissions } from "expo";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import Carousel from "react-native-snap-carousel";
 import {
   AsyncStorage,
   Dimensions,
@@ -31,6 +31,7 @@ import layout from "../../constants/Layout";
 
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
 import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
+import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 
 import mapStyle from "../../assets/mapStyle";
 import PlusImage from "../../assets/images/plus.png";
@@ -151,9 +152,10 @@ class MapNearbyScreen extends React.Component {
     const { navigation, addCard } = this.props;
 
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
+    AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
-    addCard(cardId)
-      .then(() => {
+    function confirmCardTerms() {
+      addCard(cardId, true).then(() => {
         navigation.navigate(Routes.INFO_SUCCESS, {
           redirect: Routes.MAP,
           message: i18n.t("success.wallet.cardAdd"),
@@ -162,6 +164,23 @@ class MapNearbyScreen extends React.Component {
           image: StampAdd,
           timeout: 3000
         });
+      });
+    }
+
+    addCard(cardId)
+      .then(response => {
+        const { termsAndConditions } = response.payload.data;
+        const { title, termsAndConditionsUrl } = termsAndConditions;
+
+        if (termsAndConditionsUrl) {
+          navigation.navigate(Routes.MAP_ACCEPT_CARD_TERMS, {
+            title,
+            termsAndConditionsUrl,
+            onConfirm: confirmCardTerms
+          });
+        } else {
+          confirmCardTerms();
+        }
       })
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
