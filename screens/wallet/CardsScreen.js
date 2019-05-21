@@ -76,15 +76,9 @@ class WalletCardsScreen extends React.Component {
   }
 
   removeCard = cardId => () => {
-    const card = this.props.cards.find(card => card.id === cardId);
-
-    if (card && card.stampsToDate === 0) {
-      this.props.removeCard(cardId);
-
-      AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
-    } else {
-      this.errorToast.show(i18n.t("errors.wallet.emptyCard"));
-    }
+    this.props.navigation.navigate(Routes.WALLET_CARD_REMOVAL_CONFIRMATION, {
+      cardId: cardId
+    });
   };
 
   handleSearch = search => {
@@ -169,10 +163,7 @@ class WalletCardsScreen extends React.Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[
-                styles.itemRemove,
-                data.item.stampsToDate > 0 && { backgroundColor: "#555f6f" }
-              ]}
+              style={styles.itemRemove}
               onPress={this.removeCard(data.item.id)}
             >
               <Image source={DeleteImage} style={styles.itemRemoveImage} />
@@ -243,6 +234,7 @@ const styles = StyleSheet.create({
     height: height,
     width: height,
 
+    // backgroundColor: "#555f6f",
     backgroundColor: "#f16c41",
     borderRadius: 10
   },

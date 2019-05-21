@@ -39,3 +39,4 @@ export const SCANNER_SCAN = "ScannerScan";
 export const WALLET = "Wallet";
 export const WALLET_CARDS = "WalletCards";
 export const WALLET_PLACES = "WalletPlaces";
+export const WALLET_CARD_REMOVAL_CONFIRMATION = "WalletCardRemovalConfirmation";

@@ -29,6 +29,7 @@ import ProfileNewsletterUpdateScreen from "../screens/profile/NewsletterUpdateSc
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
 import WalletCardsScreen from "../screens/wallet/CardsScreen";
 import WalletPlacesScreen from "../screens/wallet/PlacesScreen";
+import WalletCardRemovalConfirmationScreen from "../screens/wallet/CardRemovalConfirmationScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
 
 const defaultNavigationOptions = {
@@ -161,7 +162,8 @@ const ProfileStack = createStackNavigator(
 const WalletStack = createStackNavigator(
   {
     [Route.WALLET_CARDS]: WalletCardsScreen,
-    [Route.WALLET_PLACES]: WalletPlacesScreen
+    [Route.WALLET_PLACES]: WalletPlacesScreen,
+    [Route.WALLET_CARD_REMOVAL_CONFIRMATION]: WalletCardRemovalConfirmationScreen
   },
   {
     initialRouteName: Route.WALLET_CARDS,

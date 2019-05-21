@@ -140,7 +140,12 @@
       "other": "{{count}} kart",
       "zero": "0 kart"
     },
-    "seeCards": "Zobacz karty"
+    "seeCards": "Zobacz karty",
+
+    "removal": {
+      "headline": "Czy na pewno chcesz usunąć kartę?",
+      "description": "Zatwierdzając wybór, wszystkie zapisane pieczątki na karcie zostaną bezpowrotnie utracone."
+    }
   },
 
   "map": {
@@ -185,8 +190,7 @@
     },
 
     "wallet": {
-      "cardAdd": "Nie było można dodać karty.",
-      "emptyCard": "Nie można usunąć karty z pieczątkami"
+      "cardAdd": "Nie było można dodać karty."
     },
 
     "profile": {
