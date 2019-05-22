@@ -36,6 +36,7 @@ export const PROFILE_NEWSLETTER_UPDATE = "ProfileNewsletterUpdate";
 
 export const SCANNER = "Scanner";
 export const SCANNER_SCAN = "ScannerScan";
+export const SCANNER_ACCEPT_STAMP_TERMS = "ScannerAcceptStampTerms";
 
 export const WALLET = "Wallet";
 export const WALLET_CARDS = "WalletCards";

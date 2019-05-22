@@ -28,6 +28,7 @@ import ProfileLegalScreen from "../screens/profile/LegalScreen";
 import ProfileNewsletterTermsScreen from "../screens/profile/NewsletterTermsScreen";
 import ProfileNewsletterUpdateScreen from "../screens/profile/NewsletterUpdateScreen";
 import ScannerScanScreen from "../screens/scanner/ScanScreen";
+import ScannerAcceptStampTermsScreen from "../screens/scanner/AcceptStampTermsScreen";
 import WalletCardsScreen from "../screens/wallet/CardsScreen";
 import WalletPlacesScreen from "../screens/wallet/PlacesScreen";
 import WalletCardRemovalConfirmationScreen from "../screens/wallet/CardRemovalConfirmationScreen";
@@ -177,7 +178,8 @@ const WalletStack = createStackNavigator(
 
 const ScannerStack = createStackNavigator(
   {
-    [Route.SCANNER_SCAN]: ScannerScanScreen
+    [Route.SCANNER_SCAN]: ScannerScanScreen,
+    [Route.SCANNER_ACCEPT_STAMP_TERMS]: ScannerAcceptStampTermsScreen
   },
   {
     initialRouteName: Route.SCANNER_SCAN,

@@ -89,8 +89,8 @@ class ScannerScanScreen extends React.Component {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
-    addStamp(code)
-      .then(res => {
+    function confirmStampTerms() {
+      addStamp(code, true).then(res => {
         let image;
 
         switch (res.payload.data.message) {
@@ -114,6 +114,23 @@ class ScannerScanScreen extends React.Component {
           redirect: Routes.DASHBOARD,
           message: i18n.t(`success.scanner.${res.payload.data.message}`)
         });
+      });
+    }
+
+    addStamp(code)
+      .then(res => {
+        const { termsAndConditions } = res.payload.data;
+        const { title, termsAndConditionsUrl } = termsAndConditions;
+
+        if (termsAndConditionsUrl) {
+          navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
+            title,
+            termsAndConditionsUrl,
+            onConfirm: confirmStampTerms
+          });
+        } else {
+          confirmStampTerms();
+        }
       })
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {

@@ -29,14 +29,15 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const addStamp = code => ({
+export const addStamp = (code, acceptedTerms = false) => ({
   types: [STAMP_ADD_REQUEST, STAMP_ADD_SUCCESS, STAMP_ADD_FAIL],
   payload: {
     request: {
       method: "POST",
       url: Url.Stamp.Add(),
       data: {
-        code
+        code,
+        TermsAndConditions: acceptedTerms
       }
     }
   }
