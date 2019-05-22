@@ -8,6 +8,7 @@ import {
   AsyncStorage,
   TouchableOpacity,
   ScrollView,
+  Platform,
   View,
   Dimensions
 } from "react-native";
@@ -37,6 +38,17 @@ const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 const heroMinWidth = 280;
 const heroMaxWidth = Math.max(340, (Dimensions.get("window").height - 170) / 2);
+
+let FACEBOOK_APP_ID;
+let GOOGLE_CLIENT_ID;
+
+if (Platform.OS === "ios") {
+  FACEBOOK_APP_ID = Constants.manifest.extra.ios.FACEBOOK_APP_ID;
+  GOOGLE_CLIENT_ID = Constants.manifest.extra.ios.GOOGLE_CLIENT_ID;
+} else {
+  FACEBOOK_APP_ID = Constants.manifest.extra.android.FACEBOOK_APP_ID;
+  GOOGLE_CLIENT_ID = Constants.manifest.extra.android.GOOGLE_CLIENT_ID;
+}
 
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
@@ -77,7 +89,7 @@ class AuthLoginScreen extends React.Component {
     };
 
     try {
-      const fid = Constants.manifest.extra.FACEBOOK_APP_ID;
+      const fid = FACEBOOK_APP_ID;
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
 
       if (type === "success") {
@@ -109,7 +121,7 @@ class AuthLoginScreen extends React.Component {
     const { registerExternal } = this.props;
 
     try {
-      const clientId = Constants.manifest.extra.GOOGLE_CLIENT_ID;
+      const clientId = GOOGLE_CLIENT_ID;
       const { type, user } = await Google.logInAsync({ clientId });
 
       if (type === "success") {
