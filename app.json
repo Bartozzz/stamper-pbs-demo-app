@@ -22,7 +22,10 @@
       "bundleIdentifier": "com.example.qrscanner"
     },
     "android": {
-      "package": "com.example.qrscanner"
+      "package": "com.example.qrscanner",
+      "adaptiveIcon": {
+        "backgroundColor": "#001432"
+      }
     },
     "extra": {
       "FACEBOOK_APP_ID": "858778281140242",
