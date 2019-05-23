@@ -15,7 +15,6 @@ import Background from "../../components/Background";
 import KeyboardAware from "../../components/helpers/KeyboardAware";
 import AuthHero from "../../components/auth/Hero";
 import Button from "../../components/Button";
-import Error from "../../components/Error";
 import InputWithIcon from "../../components/InputWithIcon";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 
@@ -134,8 +133,6 @@ class AuthRegisterScreen extends React.Component {
             <Animated.View style={[{ height: 350 }, { top: topAnim }]}>
               <Background source={BackgroundImage} disableScroll>
                 <ScrollView style={styles.regContainer}>
-                  {error.other ? <Error message={error.other} /> : null}
-
                   <InputWithIcon
                     iconName="ios-contact"
                     iconSize={20}
