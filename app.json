@@ -18,23 +18,23 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.example.qrscanner"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.getstamper.app"
     },
     "android": {
-      "package": "com.example.qrscanner",
+      "package": "com.getstamper.app",
       "adaptiveIcon": {
         "backgroundColor": "#001432"
       }
     },
     "extra": {
       "ios": {
-        "FACEBOOK_APP_ID": "858778281140242",
-        "GOOGLE_CLIENT_ID": "802676794484-4hur6ue6ionheedpb8mt294t8flj175a.apps.googleusercontent.com"
+        "FACEBOOK_APP_ID": "356151625034848",
+        "GOOGLE_CLIENT_ID": "664764542609-dm39ujqp7hvebhcanqpbtkt3342ffr3l.apps.googleusercontent.com"
       },
       "android": {
-        "FACEBOOK_APP_ID": "858778281140242",
-        "GOOGLE_CLIENT_ID": "802676794484-4hur6ue6ionheedpb8mt294t8flj175a.apps.googleusercontent.com"
+        "FACEBOOK_APP_ID": "356151625034848",
+        "GOOGLE_CLIENT_ID": "664764542609-e79dr8nrbjsutidf2ujpam8ti8nivu6p.apps.googleusercontent.com"
       }
     }
   }
