@@ -97,6 +97,7 @@ class ProfileLogoutScreen extends React.Component {
             style={styles.button}
             title={i18n.t("no")}
             onPress={this.refuse}
+            processing={this.state.processing}
           />
         </View>
       </Background>
