@@ -1,30 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 
-class InputSearch extends Component {
-  render() {
-    return (
-      <View style={styles.inputContainer}>
-        <Ionicons
-          style={styles.inputIcon}
-          name="ios-search"
-          size={16}
-          color={colors.info}
-        />
+export function InputSearch(props) {
+  return (
+    <View style={styles.inputContainer}>
+      <Ionicons
+        style={styles.inputIcon}
+        name="ios-search"
+        size={16}
+        color={colors.info}
+      />
 
-        <TextInput
-          {...this.props}
-          placeholderTextColor={colors.info}
-          style={styles.inputStyle}
-          underlineColorAndroid="transparent"
-          autoCorrect={false}
-        />
-      </View>
-    );
-  }
+      <TextInput
+        {...props}
+        placeholderTextColor={colors.info}
+        style={styles.inputStyle}
+        underlineColorAndroid="transparent"
+        autoCorrect={false}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
