@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
 
 import * as Routes from "../../navigation";
-import Card from "../../components/Card";
-import CardButton from "../../components/CardButton";
+import Card from "../../components/layout/card/Card";
+import CardButton from "../../components/layout/card/CardButton";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";

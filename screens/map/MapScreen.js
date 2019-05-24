@@ -19,8 +19,8 @@ import Background from "../../components/Background";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import MapHeader from "../../components/screens/map/Header";
-import Card from "../../components/Card";
-import CardButton from "../../components/CardButton";
+import Card from "../../components/layout/card/Card";
+import CardButton from "../../components/layout/card/CardButton";
 import WalletIcon from "../../components/icons/WalletIcon";
 
 import i18n from "../../translations";

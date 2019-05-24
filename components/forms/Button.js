@@ -11,29 +11,29 @@ import colors from "../../constants/Colors";
 export function Button({ title, style, textStyle, onPress, ...rest }) {
   if (rest.disabled) {
     return (
-      <View style={[styles.buttonStyle, styles.disabledButtonStyle, style]}>
-        <Text style={[styles.textStyle, textStyle]}>{title}</Text>
+      <View style={[styles.button, styles.disabledButton, style]}>
+        <Text style={[styles.text, textStyle]}>{title}</Text>
       </View>
     );
   }
 
   if (rest.processing) {
     return (
-      <View style={[styles.buttonStyle, styles.disabledButtonStyle, style]}>
+      <View style={[styles.button, styles.disabledButton, style]}>
         <ActivityIndicator size="small" color={colors.color} />
       </View>
     );
   }
 
   return (
-    <TouchableOpacity style={[styles.buttonStyle, style]} onPress={onPress}>
-      <Text style={[styles.textStyle, textStyle]}>{title}</Text>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  textStyle: {
+  text: {
     fontSize: 16,
     fontFamily: "poppins-bold",
 
@@ -45,17 +45,17 @@ const styles = StyleSheet.create({
     textShadowRadius: 2
   },
 
-  buttonStyle: {
+  button: {
     justifyContent: "center",
     alignItems: "center",
 
     height: 48,
-    width: "100%",
 
     backgroundColor: colors.primary,
-    borderRadius: 5
+    borderRadius: 7
   },
-  disabledButtonStyle: {
+
+  disabledButton: {
     backgroundColor: colors.disabled
   }
 });
