@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, View } from "react-native";
 
 import Box from "../../components/layout/box/Box";
 import BoxIcon from "../../components/layout/box/BoxIcon";
@@ -18,7 +17,7 @@ import defaultStyles from "../../constants/Styles";
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
-class ScannerAcceptStampTermsScreen extends React.Component {
+class ScannerConfirmRefusedTermsScreen extends React.Component {
   static navigationOptions = () => ({
     header: null
   });
@@ -27,51 +26,45 @@ class ScannerAcceptStampTermsScreen extends React.Component {
     processing: false
   };
 
-  openTermsAndConditions = link => () => {
-    Linking.openURL(link);
-  };
-
   accept = () => {
     this.setState({ processing: true });
     this.props.navigation.getParam("onConfirm", () => {})();
   };
 
   refuse = () => {
-    this.props.navigation.navigate(Routes.SCANNER_CONFIRM_REFUSED_TERMS, {
-      onAccept: () => this.props.navigation.getParam("onConfirm", () => {})()
-    });
+    this.props.navigation.navigate(Routes.SCANNER);
   };
 
   render() {
-    const title = this.props.navigation.getParam("title");
-    const terms = this.props.navigation.getParam("termsAndConditionsUrl");
-
     return (
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
 
         <Box>
-          <TouchableOpacity style={styles.close} onPress={this.refuse}>
-            <Ionicons name="md-close" size={32} color="white" />
-          </TouchableOpacity>
-
           <BoxIcon width={107} height={85} source={BalanceIcon} />
 
           <BoxText.Heading>
-            {i18n.t("map.terms.accept", { title })}
+            {i18n.t("map.terms.refuse.heading")}
           </BoxText.Heading>
 
-          <TouchableOpacity onPress={this.openTermsAndConditions(terms)}>
-            <BoxText.Action>{i18n.t("map.terms.terms")}</BoxText.Action>
-          </TouchableOpacity>
+          <BoxText.Subheading>
+            {i18n.t("map.terms.refuse.subheading")}
+          </BoxText.Subheading>
         </Box>
 
         <View style={[defaultStyles.row, styles.buttons]}>
           <Button
-            title={i18n.t("map.terms.confirm")}
+            style={styles.button}
+            title={i18n.t("yes")}
             onPress={this.accept}
             processing={this.state.processing}
-            full
+          />
+
+          <Button
+            style={styles.button}
+            title={i18n.t("no")}
+            onPress={this.refuse}
+            processing={this.state.processing}
           />
         </View>
       </Background>
@@ -87,16 +80,12 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
 
-  close: {
-    position: "absolute",
-    top: 10,
-    right: 15
-  },
-
   buttons: {
     justifyContent: "space-around",
-    marginBottom: 50,
-    marginHorizontal: 20
+    marginBottom: 50
+  },
+  button: {
+    width: 90
   }
 });
 
@@ -109,5 +98,5 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ScannerAcceptStampTermsScreen
+  ScannerConfirmRefusedTermsScreen
 );
