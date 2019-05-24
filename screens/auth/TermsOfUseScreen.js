@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
+import StamperLogo from "../../components/StamperLogo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -9,8 +10,6 @@ import colors from "../../constants/Colors";
 import Button from "../../components/forms/Button";
 
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
-const LogoImage = require("../../assets/logos/stamper_logo_2x.png");
-const LogoImageEn = require("../../assets/logos/stamper_logo_300px_en.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class TermsOfUseScreen extends React.Component {
@@ -22,32 +21,12 @@ class TermsOfUseScreen extends React.Component {
     this.props.navigation.navigate(Routes.AUTH_TOS);
   };
 
-  renderLogo() {
-    const currentLocale = i18n.currentLocale();
-
-    if (!currentLocale || currentLocale.includes("en")) {
-      return (
-        <Image
-          source={LogoImageEn}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    } else {
-      return (
-        <Image
-          source={LogoImage}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    }
-  }
-
   render() {
     const onAccept = this.props.navigation.getParam("onAccept", () => {});
 
     return (
       <Background source={BackgroundImage}>
-        {this.renderLogo()}
+        <StamperLogo style={styles.logo} />
 
         <View style={[defaultStyles.center, styles.box]}>
           <Image style={styles.boxIcon} source={BalanceIcon} />
