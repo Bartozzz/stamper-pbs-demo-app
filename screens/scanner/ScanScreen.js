@@ -89,47 +89,49 @@ class ScannerScanScreen extends React.Component {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
-    function confirmStampTerms() {
-      addStamp(code, true).then(res => {
-        let image;
+    function redirectToSuccess(message) {
+      let image;
 
-        switch (res.payload.data.message) {
-          case "congratulations":
-            image = EarnedRewardImage;
-            break;
-          case "subtract":
-            image = SubtractStampImage;
-            break;
-          default:
-            image = ReceivedRewardImage;
-        }
+      switch (message) {
+        case "congratulations":
+          image = EarnedRewardImage;
+          break;
+        case "subtract":
+          image = SubtractStampImage;
+          break;
+        default:
+          image = ReceivedRewardImage;
+      }
 
-        navigation.navigate(Routes.INFO_SUCCESS, {
-          size: 100,
-          image: image,
-          timeout:
-            res.payload.data.message === "congratulations"
-              ? 5000 /* Earned reward */
-              : 5000 /* Received reward */,
-          redirect: Routes.DASHBOARD,
-          message: i18n.t(`success.scanner.${res.payload.data.message}`)
-        });
+      navigation.navigate(Routes.INFO_SUCCESS, {
+        size: 100,
+        image: image,
+        timeout:
+          message === "congratulations"
+            ? 5000 /* Earned reward */
+            : 5000 /* Received reward */,
+        redirect: Routes.DASHBOARD,
+        message: i18n.t(`success.scanner.${message}`)
       });
     }
 
     addStamp(code)
       .then(res => {
-        const { termsAndConditions } = res.payload.data;
+        const { termsAndConditions, message } = res.payload.data;
         const { title, termsAndConditionsUrl } = termsAndConditions;
 
         if (termsAndConditionsUrl) {
           navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
             title,
             termsAndConditionsUrl,
-            onConfirm: confirmStampTerms
+            onConfirm: () => {
+              addStamp(code, true).then(res => {
+                redirectToSuccess(res.payload.data.message);
+              });
+            }
           });
         } else {
-          confirmStampTerms();
+          redirectToSuccess(message);
         }
       })
       .catch(() => {
