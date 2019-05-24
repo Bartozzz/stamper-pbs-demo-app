@@ -69,15 +69,9 @@ class AuthLoginScreen extends React.Component {
     }
   };
 
-  loginExternal = (email, firstLogin = false) => {
-    this.props
-      .loginExternal(email)
-      .then(this.handleSuccess(firstLogin))
-      .catch(this.handleError);
-  };
-
   loginWithFacebook = async () => {
-    const { registerExternal } = this.props;
+    this.setState({ processing: true });
+    const { registerExternal, navigation } = this.props;
 
     const fetchUser = async token => {
       const endpoint = "https://graph.facebook.com/me?fields=email";
@@ -98,10 +92,8 @@ class AuthLoginScreen extends React.Component {
 
         registerExternal(user.email, "facebook", user.email.split("@")[0])
           .then(() => {
-            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => {
-                this.loginExternal(user.email, true);
-              }
+            navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+              onAccept: () => this.loginExternal(user.email, true)
             });
           })
           .catch(() => {
@@ -110,16 +102,15 @@ class AuthLoginScreen extends React.Component {
       }
     } catch (e) {
       this.setState({
-        error: {
-          ...this.state.error,
-          other: "Facebook error"
-        }
+        processing: false,
+        error: { ...this.state.error, other: "Facebook error" }
       });
     }
   };
 
   loginWithGoogle = async () => {
-    const { registerExternal } = this.props;
+    this.setState({ processing: true });
+    const { registerExternal, navigation } = this.props;
 
     try {
       const clientId = GOOGLE_CLIENT_ID;
@@ -128,10 +119,9 @@ class AuthLoginScreen extends React.Component {
       if (type === "success") {
         registerExternal(user.email, "google", user.email.split("@")[0])
           .then(() => {
-            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => {
-                this.loginExternal(user.email, true);
-              }
+            // Require user to accepts the terms of service:
+            navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+              onAccept: () => this.loginExternal(user.email, true)
             });
           })
           .catch(() => {
@@ -140,12 +130,17 @@ class AuthLoginScreen extends React.Component {
       }
     } catch (e) {
       this.setState({
-        error: {
-          ...this.state.error,
-          other: "Google error"
-        }
+        processing: false,
+        error: { ...this.state.error, other: "Google error" }
       });
     }
+  };
+
+  loginExternal = (email, firstLogin = false) => {
+    this.props
+      .loginExternal(email)
+      .then(this.handleSuccess(firstLogin))
+      .catch(this.handleError);
   };
 
   loginWithCredentials = () => {
@@ -173,7 +168,7 @@ class AuthLoginScreen extends React.Component {
       console.log(err);
     }
 
-    // Triggers profile fetch and redirects to the dashboard screen:
+    // Triggers profile fetch:
     this.props.navigation.navigate(Routes.AUTH_LOADING, {
       redirect: firstLogin ? Routes.PROFILE_NEWSLETTER_UPDATE : Routes.DASHBOARD
     });
@@ -190,14 +185,6 @@ class AuthLoginScreen extends React.Component {
         other: null
       })
     });
-  };
-
-  navigateToRegister = () => {
-    this.props.navigation.navigate(Routes.AUTH_REGISTER);
-  };
-
-  navigateToResetPassword = () => {
-    this.props.navigation.navigate(Routes.AUTH_RESET);
   };
 
   handleKeyboardShow = keyboardHeight => {
@@ -252,12 +239,84 @@ class AuthLoginScreen extends React.Component {
                     secureTextEntry
                   />
 
-                  <AuthLoginScreenLinks
-                    loginWithFacebook={this.loginWithFacebook}
-                    loginWithGoogle={this.loginWithGoogle}
-                    navigateToRegister={this.navigateToRegister}
-                    navigateToResetPassword={this.navigateToResetPassword}
-                  />
+                  <View style={styles.loginContainerTextContainer}>
+                    <Text
+                      style={[
+                        styles.loginContainerText,
+                        styles.loginContainerTextA
+                      ]}
+                    >
+                      {i18n.t("auth.loginWith")}
+                    </Text>
+
+                    <TouchableOpacity onPress={this.loginWithFacebook}>
+                      <Text
+                        style={[
+                          styles.loginContainerText,
+                          styles.loginContainerTextA,
+                          styles.loginProvider
+                        ]}
+                      >
+                        {" "}
+                        Facebook{"  "}
+                      </Text>
+                    </TouchableOpacity>
+
+                    <Text
+                      style={[
+                        styles.loginContainerText,
+                        styles.loginContainerTextA
+                      ]}
+                    >
+                      {i18n.t("auth.loginOr")}
+                    </Text>
+
+                    <TouchableOpacity onPress={this.loginWithGoogle}>
+                      <Text
+                        style={[
+                          styles.loginContainerText,
+                          styles.loginContainerTextA,
+                          styles.loginProvider
+                        ]}
+                      >
+                        {" "}
+                        Google.
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={defaultStyles.row}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.props.navigation.navigate(Routes.AUTH_REGISTER);
+                      }}
+                    >
+                      <Text
+                        style={[
+                          styles.loginContainerText,
+                          styles.loginContainerTextB
+                        ]}
+                      >
+                        {i18n.t("auth.dontHaveAccount")}
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.props.navigation.navigate(Routes.AUTH_RESET);
+                      }}
+                    >
+                      <Text
+                        style={[
+                          styles.loginContainerText,
+                          styles.loginContainerTextB
+                        ]}
+                      >
+                        {" "}
+                        {i18n.t("auth.forgotPassword")}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
 
                   <Button
                     title={i18n.t("auth.login")}
@@ -273,61 +332,6 @@ class AuthLoginScreen extends React.Component {
     );
   }
 }
-
-export const AuthLoginScreenLinks = props => (
-  <View>
-    <View style={styles.loginContainerTextContainer}>
-      <Text style={[styles.loginContainerText, styles.loginContainerTextA]}>
-        {i18n.t("auth.loginWith")}
-      </Text>
-
-      <TouchableOpacity onPress={props.loginWithFacebook}>
-        <Text
-          style={[
-            styles.loginContainerText,
-            styles.loginContainerTextA,
-            styles.loginProvider
-          ]}
-        >
-          {" "}
-          Facebook{"  "}
-        </Text>
-      </TouchableOpacity>
-
-      <Text style={[styles.loginContainerText, styles.loginContainerTextA]}>
-        {i18n.t("auth.loginOr")}
-      </Text>
-
-      <TouchableOpacity onPress={props.loginWithGoogle}>
-        <Text
-          style={[
-            styles.loginContainerText,
-            styles.loginContainerTextA,
-            styles.loginProvider
-          ]}
-        >
-          {" "}
-          Google.
-        </Text>
-      </TouchableOpacity>
-    </View>
-
-    <View style={defaultStyles.row}>
-      <TouchableOpacity onPress={props.navigateToRegister}>
-        <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
-          {i18n.t("auth.dontHaveAccount")}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={props.navigateToResetPassword}>
-        <Text style={[styles.loginContainerText, styles.loginContainerTextB]}>
-          {" "}
-          {i18n.t("auth.forgotPassword")}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
 
 const styles = StyleSheet.create({
   hero: {
