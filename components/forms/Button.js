@@ -8,16 +8,16 @@ import {
 } from "react-native";
 import colors from "../../constants/Colors";
 
-export function Button({ title, style, disabled, processing, onPress }) {
-  if (disabled) {
+export function Button({ title, style, textStyle, onPress, ...rest }) {
+  if (rest.disabled) {
     return (
       <View style={[styles.buttonStyle, styles.disabledButtonStyle, style]}>
-        <Text style={styles.textStyle}>{title}</Text>
+        <Text style={[styles.textStyle, textStyle]}>{title}</Text>
       </View>
     );
   }
 
-  if (processing) {
+  if (rest.processing) {
     return (
       <View style={[styles.buttonStyle, styles.disabledButtonStyle, style]}>
         <ActivityIndicator size="small" color={colors.color} />
@@ -27,7 +27,7 @@ export function Button({ title, style, disabled, processing, onPress }) {
 
   return (
     <TouchableOpacity style={[styles.buttonStyle, style]} onPress={onPress}>
-      <Text style={styles.textStyle}>{title}</Text>
+      <Text style={[styles.textStyle, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 }
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     color: colors.color,
     textAlign: "center",
     textTransform: "uppercase",
-    textShadowColor: "rgba(0, 0, 0, 0.16)",
+    textShadowColor: colors.shadow,
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2
   },
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   disabledButtonStyle: {
-    backgroundColor: "#1A345F"
+    backgroundColor: colors.disabled
   }
 });
 
