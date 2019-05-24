@@ -30,8 +30,6 @@ class AuthLoadingScreen extends React.Component {
     const { appToken, accessToken, refreshToken } = this.props;
 
     if (accessToken && refreshToken) {
-      console.log("Got user access token and refresh token…");
-
       // Required, so user's access token doesn't gets overrided by app's access
       // token from AuthLoadingScreen's componentDidMount:
       this.props.setAccessToken(accessToken);
@@ -43,7 +41,6 @@ class AuthLoadingScreen extends React.Component {
         .then(this.handleAuthorized)
         .catch(this.handleUnauthorized);
     } else if (appToken) {
-      console.log("User access & refresh token not found, setting app token…");
       // If the user is not logged-in, we probably want to use the app internal
       // access token (for endpoints like login etc.):
       this.props.setAccessToken(appToken);
@@ -53,6 +50,7 @@ class AuthLoadingScreen extends React.Component {
 
   handleAuthorized = async response => {
     const { navigation } = this.props;
+    const nextScreen = navigation.getParam("redirect", Routes.DASHBOARD);
 
     try {
       if (response.payload.data.email) {
@@ -66,9 +64,7 @@ class AuthLoadingScreen extends React.Component {
       console.log(error);
     }
 
-    const redirect = navigation.getParam("redirect", Routes.DASHBOARD);
-
-    return navigation.navigate(redirect);
+    return navigation.navigate(nextScreen);
   };
 
   handleUnauthorized = async error => {
