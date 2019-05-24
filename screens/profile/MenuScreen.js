@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Background from "../../components/Background";
-import Logo from "../../components/Logo";
+import StamperLogo from "../../components/StamperLogo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -27,7 +27,7 @@ class ProfileMenuScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage}>
-        <Logo style={styles.logo} />
+        <StamperLogo style={styles.logo} />
 
         <View style={styles.menu}>
           <Image style={styles.avatar} source={{ uri: photo }} />

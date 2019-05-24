@@ -4,7 +4,7 @@ import { AsyncStorage, StyleSheet, Image, Text, View } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
-import Logo from "../../components/Logo";
+import StamperLogo from "../../components/StamperLogo";
 
 import { FORCE_REFRESH_WALLET, removeCard } from "../../store/reducers/wallet";
 
@@ -39,7 +39,7 @@ class CardRemovalConfirmationScreen extends React.Component {
   render() {
     return (
       <Background source={BackgroundImage}>
-        <Logo styles={styles.logo} />
+        <StamperLogo styles={styles.logo} />
 
         <View style={[defaultStyles.center, styles.box]}>
           <Image style={styles.boxIcon} source={NewsletterIcon} />

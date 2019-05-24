@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
-import Logo from "../../components/Logo";
+import StamperLogo from "../../components/StamperLogo";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -46,7 +46,7 @@ class ScannerAcceptStampTermsScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage}>
-        <Logo style={styles.logo} />
+        <StamperLogo style={styles.logo} />
 
         <View style={[defaultStyles.center, styles.box]}>
           <TouchableOpacity style={styles.close} onPress={this.refuse}>

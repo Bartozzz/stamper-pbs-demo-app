@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
-import Logo from "../../components/Logo";
+import StamperLogo from "../../components/StamperLogo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -94,7 +94,7 @@ class DashboardMainScreen extends React.Component {
     return (
       <Background source={BackgroundImage}>
         <View style={[defaultStyles.center, styles.menu]}>
-          <Logo style={{ marginBottom: 30 }} />
+          <StamperLogo style={{ marginBottom: 30 }} />
 
           <View style={[defaultStyles.row, styles.row]}>
             <TouchableOpacity

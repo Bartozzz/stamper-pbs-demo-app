@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, Image, ImageBackground, View } from "react-native";
+import { StyleSheet, Text, ImageBackground, View } from "react-native";
 
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import StamperSygnet from "../StamperSygnet";
 
-const LogoImage = require("../../assets/logos/stamper_sygnet_2x.png");
 const HeroImage = require("../../assets/backgrounds/hero.png");
 
 export default function AuthHero(props) {
@@ -15,7 +15,7 @@ export default function AuthHero(props) {
         source={HeroImage}
         style={[styles.hero, { height: "100%", width: "100%" }]}
       >
-        <Image source={LogoImage} style={{ width: 50, height: 50 }} />
+        <StamperSygnet />
 
         <Text style={styles.heroTextA}>{i18n.t("auth.hero.slogan1")}</Text>
         <Text style={styles.heroTextB}>{i18n.t("auth.hero.slogan2")}</Text>
