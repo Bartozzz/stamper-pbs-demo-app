@@ -16,15 +16,9 @@ export class Checkbox extends React.PureComponent {
   }
 
   toggle = () => {
-    const { onChange } = this.props;
-
     this.setState(
-      state => ({
-        checked: !state.checked
-      }),
-      () => {
-        onChange(this.state.checked);
-      }
+      state => ({ checked: !state.checked }),
+      () => this.props.onChange(this.state.checked)
     );
   };
 
@@ -33,15 +27,12 @@ export class Checkbox extends React.PureComponent {
     const { label } = this.props;
 
     return (
-      <View style={styles.checkboxContainer}>
+      <View style={styles.container}>
         <TouchableOpacity
-          style={[
-            styles.checkboxButton,
-            checked && styles.checkboxButtonChecked
-          ]}
+          style={[styles.checkbox, checked && styles.checkboxChecked]}
           onPress={this.toggle}
         >
-          {checked && <Ionicons name="md-checkmark" size={12} color="white" />}
+          {checked && <Ionicons name="md-checkmark" size={14} color="white" />}
         </TouchableOpacity>
 
         {label}
@@ -51,7 +42,7 @@ export class Checkbox extends React.PureComponent {
 }
 
 export const styles = StyleSheet.create({
-  checkboxContainer: {
+  container: {
     alignItems: "center",
 
     marginHorizontal: 0,
@@ -60,21 +51,24 @@ export const styles = StyleSheet.create({
     flexDirection: "row"
   },
 
-  checkboxButton: {
+  checkbox: {
     marginRight: 9,
+    // Visual centering:
+    paddingTop: 1,
+    paddingLeft: 1,
 
     alignItems: "center",
     justifyContent: "center",
 
-    width: 18,
-    height: 18,
-    borderRadius: 18,
+    width: 20,
+    height: 20,
+    borderRadius: 20,
 
     borderWidth: 1.5,
     borderStyle: "solid",
     borderColor: colors.inputBorder
   },
-  checkboxButtonChecked: {
+  checkboxChecked: {
     borderColor: colors.primary,
     backgroundColor: colors.primary
   },
@@ -83,7 +77,7 @@ export const styles = StyleSheet.create({
     marginRight: 2,
 
     fontSize: 11.5,
-    color: "#709BE7"
+    color: colors.link
   }
 });
 
