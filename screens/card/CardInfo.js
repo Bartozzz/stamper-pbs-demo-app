@@ -87,7 +87,11 @@ class CardInfoScreen extends React.Component {
                         {!item.cardOnly && (
                           <Image
                             source={{ uri: item.logoUrl }}
-                            style={{ width: 80, height: 80 }}
+                            style={{
+                              width: 80,
+                              height: 80,
+                              resizeMode: "contain"
+                            }}
                           />
                         )}
                       </View>
