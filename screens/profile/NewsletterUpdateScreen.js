@@ -4,6 +4,7 @@ import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
+import Logo from "../../components/Logo";
 
 import { updateNewsletter } from "../../store/reducers/profile";
 
@@ -13,8 +14,6 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const LogoImage = require("../../assets/logos/stamper_logo_2x.png");
-const LogoImageEn = require("../../assets/logos/stamper_logo_300px_en.png");
 const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
 
 class NewsletterUpdateScreen extends React.Component {
@@ -42,30 +41,10 @@ class NewsletterUpdateScreen extends React.Component {
     });
   };
 
-  renderLogo() {
-    const currentLocale = i18n.currentLocale();
-
-    if (!currentLocale || currentLocale.includes("en")) {
-      return (
-        <Image
-          source={LogoImageEn}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    } else {
-      return (
-        <Image
-          source={LogoImage}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    }
-  }
-
   render() {
     return (
       <Background source={BackgroundImage}>
-        {this.renderLogo()}
+        <Logo style={styles.logo} />
 
         <View style={[defaultStyles.center, styles.box]}>
           <Image style={styles.boxIcon} source={NewsletterIcon} />

@@ -12,14 +12,13 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
+import Logo from "../../components/Logo";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const LogoImage = require("../../assets/logos/stamper_logo_2x.png");
-const LogoImageEn = require("../../assets/logos/stamper_logo_300px_en.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class MapAcceptCardTermsScreen extends React.Component {
@@ -39,35 +38,13 @@ class MapAcceptCardTermsScreen extends React.Component {
     this.props.navigation.goBack();
   };
 
-  renderLogo() {
-    const currentLocale = i18n.currentLocale();
-
-    if (!currentLocale || currentLocale.includes("en")) {
-      return (
-        <Image
-          source={LogoImageEn}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    } else {
-      return (
-        <Image
-          source={LogoImage}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    }
-  }
-
   render() {
     const title = this.props.navigation.getParam("title");
     const terms = this.props.navigation.getParam("termsAndConditionsUrl");
 
-    console.log(title, terms);
-
     return (
       <Background source={BackgroundImage}>
-        {this.renderLogo()}
+        <Logo style={styles.logo} />
 
         <View style={[defaultStyles.center, styles.box]}>
           <TouchableOpacity style={styles.close} onPress={this.refuse}>

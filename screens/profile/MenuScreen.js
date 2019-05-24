@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Background from "../../components/Background";
+import Logo from "../../components/Logo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -10,7 +11,6 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/profile_wn.png");
-const LogoImage = require("../../assets/logos/stamper_logo_2x.png");
 const EmailImage = require("../../assets/images/icons/email.png");
 
 class ProfileMenuScreen extends React.Component {
@@ -27,10 +27,7 @@ class ProfileMenuScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage}>
-        <Image
-          source={LogoImage}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
+        <Logo style={styles.logo} />
 
         <View style={styles.menu}>
           <Image style={styles.avatar} source={{ uri: photo }} />

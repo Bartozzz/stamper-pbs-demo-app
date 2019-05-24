@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
+import Logo from "../../components/Logo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -18,8 +19,6 @@ const MenuImageProfile = require("../../assets/images/menu/profile.png");
 const MenuImageWallet = require("../../assets/images/menu/wallet.png");
 const MenuImageScanner = require("../../assets/images/menu/scanner.png");
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
-const LogoImage = require("../../assets/logos/stamper_logo_2x.png");
-const LogoImageEn = require("../../assets/logos/stamper_logo_300px_en.png");
 
 const MENU_MAP = "MENU_MAP";
 const MENU_MARKET = "MENU_MARKET";
@@ -82,26 +81,6 @@ class DashboardMainScreen extends React.Component {
     }
   };
 
-  renderLogo() {
-    const currentLocale = i18n.currentLocale();
-
-    if (!currentLocale || currentLocale.includes("en")) {
-      return (
-        <Image
-          source={LogoImageEn}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    } else {
-      return (
-        <Image
-          source={LogoImage}
-          style={[styles.logo, { width: 195, height: 70 }]}
-        />
-      );
-    }
-  }
-
   render() {
     const { prizesCount } = this.props;
 
@@ -115,7 +94,7 @@ class DashboardMainScreen extends React.Component {
     return (
       <Background source={BackgroundImage}>
         <View style={[defaultStyles.center, styles.menu]}>
-          {this.renderLogo()}
+          <Logo style={{ marginBottom: 30 }} />
 
           <View style={[defaultStyles.row, styles.row]}>
             <TouchableOpacity
@@ -231,10 +210,6 @@ const styles = StyleSheet.create({
 
   row: {
     marginHorizontal: 40
-  },
-
-  logo: {
-    marginBottom: 30
   },
 
   box: {
