@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { AsyncStorage, StyleSheet, Image, Text, View } from "react-native";
+import { AsyncStorage, StyleSheet, View } from "react-native";
+
+import Box from "../../components/layout/box/Box";
+import BoxIcon from "../../components/layout/box/BoxIcon";
+import * as BoxText from "../../components/layout/box/BoxText";
 
 import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
@@ -10,7 +14,6 @@ import { FORCE_REFRESH_WALLET, removeCard } from "../../store/reducers/wallet";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
@@ -45,19 +48,17 @@ class CardRemovalConfirmationScreen extends React.Component {
   render() {
     return (
       <Background source={BackgroundImage}>
-        <StamperLogo styles={styles.logo} />
+        <StamperLogo style={styles.logo} />
 
-        <View style={[defaultStyles.center, styles.box]}>
-          <Image style={styles.boxIcon} source={NewsletterIcon} />
+        <Box>
+          <BoxIcon width={107} height={85} source={NewsletterIcon} />
 
-          <Text style={styles.boxText}>
-            {i18n.t("wallet.removal.headline")}
-          </Text>
+          <BoxText.Heading>{i18n.t("wallet.removal.headline")}</BoxText.Heading>
 
-          <Text style={[styles.boxAlternativeText]}>
+          <BoxText.Subheading>
             {i18n.t("wallet.removal.description")}
-          </Text>
-        </View>
+          </BoxText.Subheading>
+        </Box>
 
         <View style={[defaultStyles.row, styles.buttons]}>
           <Button
@@ -83,46 +84,8 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
 
-    marginTop: 45,
-    marginBottom: 10
-  },
-
-  box: {
-    alignItems: "center",
-
-    paddingTop: 50,
-    paddingBottom: 50,
-    marginTop: 20,
-    marginBottom: 40,
-    marginHorizontal: 20,
-
-    shadowColor: "#2699FB",
-    shadowOffset: { width: 0, height: 30 },
-    shadowOpacity: 0.1,
-    shadowRadius: 30,
-
-    borderRadius: 10,
-    backgroundColor: colors.background
-  },
-  boxText: {
-    paddingHorizontal: 30,
-
-    color: colors.color,
-    fontSize: 24,
-    textAlign: "center"
-  },
-  boxAlternativeText: {
-    paddingHorizontal: 30,
-    marginTop: 30,
-
-    textAlign: "center",
-    fontSize: 18,
-    color: colors.color
-  },
-  boxIcon: {
-    width: 107,
-    height: 85,
-    marginBottom: 40
+    marginTop: 80,
+    marginBottom: 30
   },
 
   buttons: {

@@ -1,12 +1,14 @@
 import React from "react";
-import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
+import Box from "../../components/layout/box/Box";
+import BoxIcon from "../../components/layout/box/BoxIcon";
+import * as BoxText from "../../components/layout/box/BoxText";
+
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
-import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
 import Button from "../../components/forms/Button";
 
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
@@ -17,30 +19,25 @@ class TermsOfUseScreen extends React.Component {
     header: null
   };
 
-  navigateToTOS = () => {
-    this.props.navigation.navigate(Routes.AUTH_TOS);
-  };
-
   render() {
     const onAccept = this.props.navigation.getParam("onAccept", () => {});
+    const viewTos = () => this.props.navigation.navigate(Routes.AUTH_TOS);
 
     return (
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
 
-        <View style={[defaultStyles.center, styles.box]}>
-          <Image style={styles.boxIcon} source={BalanceIcon} />
+        <Box>
+          <BoxIcon width={160} height={125} source={BalanceIcon} />
 
-          <Text style={styles.boxText}>
+          <BoxText.Heading>
             {i18n.t("auth.externalTos.headline")}
-          </Text>
+          </BoxText.Heading>
 
-          <TouchableOpacity onPress={this.navigateToTOS}>
-            <Text style={styles.boxLink}>
-              {i18n.t("auth.externalTos.link")}
-            </Text>
+          <TouchableOpacity onPress={viewTos}>
+            <BoxText.Action>{i18n.t("auth.externalTos.link")}</BoxText.Action>
           </TouchableOpacity>
-        </View>
+        </Box>
 
         <View style={styles.button}>
           <Button title={i18n.t("yes")} onPress={onAccept} />
@@ -56,44 +53,6 @@ const styles = StyleSheet.create({
 
     marginTop: 80,
     marginBottom: 30
-  },
-
-  box: {
-    alignItems: "center",
-
-    paddingTop: 80,
-    paddingBottom: 80,
-    marginVertical: 20,
-    marginHorizontal: 36,
-    marginTop: 20,
-
-    shadowColor: "#2699FB",
-    shadowOffset: { width: 0, height: 30 },
-    shadowOpacity: 0.1,
-    shadowRadius: 30,
-
-    borderRadius: 10,
-    backgroundColor: colors.background
-  },
-  boxText: {
-    paddingHorizontal: 30,
-
-    color: colors.color,
-    fontSize: 24,
-    textAlign: "center"
-  },
-  boxLink: {
-    marginTop: 50,
-
-    color: "#709BE7",
-    fontSize: 18,
-    textAlign: "center",
-    textTransform: "uppercase"
-  },
-  boxIcon: {
-    width: 160,
-    height: 125,
-    marginBottom: 60
   },
 
   button: {
