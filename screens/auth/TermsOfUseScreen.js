@@ -6,7 +6,7 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
 const LogoImage = require("../../assets/logos/stamper_logo_2x.png");

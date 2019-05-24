@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
@@ -26,11 +26,16 @@ class ScannerAcceptStampTermsScreen extends React.Component {
     header: null
   });
 
+  state = {
+    processing: false
+  };
+
   openTermsAndConditions = link => () => {
     Linking.openURL(link);
   };
 
   accept = () => {
+    this.setState({ processing: true });
     this.props.navigation.getParam("onConfirm", () => {})();
   };
 
@@ -71,7 +76,11 @@ class ScannerAcceptStampTermsScreen extends React.Component {
         </View>
 
         <View style={[defaultStyles.row, styles.buttons]}>
-          <Button title={i18n.t("map.terms.confirm")} onPress={this.accept} />
+          <Button
+            title={i18n.t("map.terms.confirm")}
+            onPress={this.accept}
+            processing={this.state.processing}
+          />
         </View>
       </Background>
     );

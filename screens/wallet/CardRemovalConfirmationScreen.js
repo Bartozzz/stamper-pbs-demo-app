@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { AsyncStorage, StyleSheet, Image, Text, View } from "react-native";
 
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
@@ -20,7 +20,13 @@ class CardRemovalConfirmationScreen extends React.Component {
     header: null
   });
 
+  state = {
+    processing: false
+  };
+
   accept = async () => {
+    this.setState({ processing: true });
+
     const { navigation, removeCard } = this.props;
     const cardId = navigation.getParam("cardId");
 
@@ -58,12 +64,14 @@ class CardRemovalConfirmationScreen extends React.Component {
             style={styles.button}
             title={i18n.t("yes")}
             onPress={this.accept}
+            processing={this.state.processing}
           />
 
           <Button
             style={styles.button}
             title={i18n.t("no")}
             onPress={this.refuse}
+            processing={this.state.processing}
           />
         </View>
       </Background>

@@ -13,9 +13,9 @@ import {
 import Background from "../../components/Background";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
-import AuthHero from "../../components/auth/Hero";
-import Button from "../../components/Button";
-import InputWithIcon from "../../components/InputWithIcon";
+import AuthHero from "../../components/screens/auth/Hero";
+import Button from "../../components/forms/Button";
+import InputWithIcon from "../../components/forms/InputWithIcon";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import {
@@ -44,6 +44,8 @@ class AuthRegisterScreen extends React.Component {
   });
 
   state = {
+    processing: false,
+
     topAnim: new Animated.Value(0),
 
     nickname: __DEV__ ? "testing" : null,
@@ -59,6 +61,8 @@ class AuthRegisterScreen extends React.Component {
   };
 
   registerWithCredentials = () => {
+    this.setState({ processing: true });
+
     const { email, password, nickname } = this.state;
     const { register } = this.props;
 
@@ -91,6 +95,7 @@ class AuthRegisterScreen extends React.Component {
     const { data } = response.error.response;
 
     this.setState({
+      processing: false,
       error: getErrorsFromResponse(data, {
         nickname: null,
         password: null,
@@ -171,6 +176,7 @@ class AuthRegisterScreen extends React.Component {
                   <Button
                     title={i18n.t("auth.register")}
                     onPress={this.registerWithCredentials}
+                    processing={this.state.processing}
                   />
                 </ScrollView>
               </Background>

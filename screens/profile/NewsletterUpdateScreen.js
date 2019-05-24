@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
@@ -21,6 +21,10 @@ class NewsletterUpdateScreen extends React.Component {
     header: null
   });
 
+  state = {
+    processing: false
+  };
+
   navigateToTOS = () => {
     this.props.navigation.navigate(Routes.PROFILE_NEWSLETTER_TOS);
   };
@@ -28,6 +32,7 @@ class NewsletterUpdateScreen extends React.Component {
   accept = async () => {
     const { navigation, updateNewsletter } = this.props;
 
+    this.setState({ processing: true });
     updateNewsletter(true).finally(() => {
       navigation.navigate(Routes.AUTH_LOADING);
     });
@@ -36,6 +41,7 @@ class NewsletterUpdateScreen extends React.Component {
   refuse = () => {
     const { navigation, updateNewsletter } = this.props;
 
+    this.setState({ processing: true });
     updateNewsletter(false).finally(() => {
       navigation.navigate(Routes.AUTH_LOADING);
     });
@@ -75,12 +81,14 @@ class NewsletterUpdateScreen extends React.Component {
             style={styles.button}
             title={i18n.t("yes")}
             onPress={this.accept}
+            processing={this.state.processing}
           />
 
           <Button
             style={styles.button}
             title={i18n.t("no")}
             onPress={this.refuse}
+            processing={this.state.processing}
           />
         </View>
       </Background>

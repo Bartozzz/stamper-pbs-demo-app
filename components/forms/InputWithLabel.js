@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, StyleSheet } from "react-native";
-import colors from "../constants/Colors";
-import layout from "../constants/Layout";
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 class InputWithLabel extends Component {
   state = {

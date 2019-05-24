@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import colors from "../constants/Colors";
+import colors from "../../constants/Colors";
 
 export class Checkbox extends React.PureComponent {
   state = {

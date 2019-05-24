@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Animated, StyleSheet, Image, View } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
-import InputWithLabel from "../../components/InputWithLabel";
+import InputWithLabel from "../../components/forms/InputWithLabel";
 
 import { changePassword } from "../../store/reducers/auth";
 
@@ -18,7 +18,6 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const SpinnerImage = require("../../assets/loaders/spinner.gif");
 
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -35,8 +34,9 @@ class ProfilePasswordScreen extends React.Component {
   });
 
   state = {
+    processing: false,
+
     heightAnim: new Animated.Value(0),
-    updating: false,
 
     currPassword: null,
     newPasswordA: null,
@@ -54,7 +54,7 @@ class ProfilePasswordScreen extends React.Component {
     const { currPassword, newPasswordA, newPasswordB } = this.state;
     const { changePassword } = this.props;
 
-    this.setState({ updating: true });
+    this.setState({ processing: true });
 
     changePassword(currPassword, newPasswordA, newPasswordB)
       .then(this.handleSuccess)
@@ -85,7 +85,7 @@ class ProfilePasswordScreen extends React.Component {
     // Returned by API:
     if (data[""]) error.currPassword = data[""];
 
-    this.setState({ error, updating: false });
+    this.setState({ error, processing: false });
   };
 
   handleKeyboardShow = keyboardHeight => {
@@ -103,23 +103,7 @@ class ProfilePasswordScreen extends React.Component {
   };
 
   render() {
-    const {
-      updating,
-      currPassword,
-      newPasswordA,
-      newPasswordB,
-      error
-    } = this.state;
-
-    if (updating) {
-      return (
-        <Background source={BackgroundImage}>
-          <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <Image source={SpinnerImage} style={{ width: 45, height: 45 }} />
-          </View>
-        </Background>
-      );
-    }
+    const { currPassword, newPasswordA, newPasswordB, error } = this.state;
 
     return (
       <KeyboardAware
@@ -163,6 +147,7 @@ class ProfilePasswordScreen extends React.Component {
               <Button
                 title={i18n.t("profile.save")}
                 onPress={this.editPassword}
+                processing={this.state.processing}
               />
             </View>
 

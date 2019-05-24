@@ -9,8 +9,8 @@ import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import Background from "../../components/Background";
-import InputSearch from "../../components/InputSearch";
-import WalletHeader from "../../components/wallet/Header";
+import InputSearch from "../../components/forms/InputSearch";
+import WalletHeader from "../../components/screens/wallet/Header";
 import { getWallet } from "../../store/reducers/wallet";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");

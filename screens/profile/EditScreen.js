@@ -14,14 +14,16 @@ import { Permissions, ImagePicker } from "expo";
 import { AntDesign } from "@expo/vector-icons";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
-import InputWithLabel from "../../components/InputWithLabel";
-import Checkbox, { styles as checkboxStyles } from "../../components/Checkbox";
+import InputWithLabel from "../../components/forms/InputWithLabel";
+import Checkbox, {
+  styles as checkboxStyles
+} from "../../components/forms/Checkbox";
 
 import {
   EMAIL,
@@ -59,6 +61,8 @@ class ProfileEditScreen extends React.Component {
   });
 
   state = {
+    processing: false,
+
     topAnim: new Animated.Value(0),
     heightAnim: new Animated.Value(0),
 
@@ -129,6 +133,8 @@ class ProfileEditScreen extends React.Component {
     const { login, firstName, lastName, email, newsletter } = this.state;
     const { updateProfile } = this.props;
 
+    this.setState({ processing: true });
+
     updateProfile(login, firstName, lastName, email, newsletter)
       .then(this.handleSuccess)
       .catch(this.handleError);
@@ -176,7 +182,7 @@ class ProfileEditScreen extends React.Component {
     if (data.Photo) error.other = data.Photo;
     if (data.Error) error.other = data.Error;
 
-    this.setState({ error });
+    this.setState({ error, processing: false });
   };
 
   handleKeyboardShow = keyboardHeight => {
@@ -301,6 +307,7 @@ class ProfileEditScreen extends React.Component {
                   <Button
                     title={i18n.t("profile.save")}
                     onPress={this.editProfile}
+                    processing={this.state.processing}
                   />
                 </View>
 

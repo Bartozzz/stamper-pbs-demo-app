@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, ImageBackground, View } from "react-native";
 
-import i18n from "../../translations";
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
-import StamperSygnet from "../StamperSygnet";
+import i18n from "../../../translations";
+import colors from "../../../constants/Colors";
+import layout from "../../../constants/Layout";
+import StamperSygnet from "../../StamperSygnet";
 
-const HeroImage = require("../../assets/backgrounds/hero.png");
+const HeroImage = require("../../../assets/backgrounds/hero.png");
 
 export default function AuthHero(props) {
   return (

@@ -10,10 +10,10 @@ import {
 import Background from "../../components/Background";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
-import AuthHero from "../../components/auth/Hero";
-import Button from "../../components/Button";
+import AuthHero from "../../components/screens/auth/Hero";
+import Button from "../../components/forms/Button";
 import Error from "../../components/Error";
-import InputWithIcon from "../../components/InputWithIcon";
+import InputWithIcon from "../../components/forms/InputWithIcon";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import { resetPassword } from "../../store/reducers/auth";
@@ -36,6 +36,8 @@ class ResetPasswordScreen extends React.Component {
   });
 
   state = {
+    processing: false,
+
     topAnim: new Animated.Value(0),
 
     email: __DEV__ ? "testing@test.pl" : null,
@@ -46,6 +48,8 @@ class ResetPasswordScreen extends React.Component {
   };
 
   resetPassword = () => {
+    this.setState({ processing: true });
+
     this.props
       .resetPassword(this.state.email)
       .then(this.handleSuccess)
@@ -57,10 +61,12 @@ class ResetPasswordScreen extends React.Component {
       return this.handleError(response);
     }
 
+    this.setState({ processing: false });
     this.props.navigation.navigate(Routes.INFO_SUCCESS);
   };
 
   handleError = async () => {
+    this.setState({ processing: false });
     this.props.navigation.navigate(Routes.INFO_ERROR);
   };
 
@@ -112,6 +118,7 @@ class ResetPasswordScreen extends React.Component {
                   <Button
                     title={i18n.t("auth.resetPassword")}
                     onPress={this.resetPassword}
+                    processing={this.state.processing}
                   />
                 </View>
               </Background>

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
 
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
@@ -43,7 +43,13 @@ class ProfileLogoutScreen extends React.Component {
     headerStyle: defaultStyles.headerTwoLines
   });
 
+  state = {
+    processing: false
+  };
+
   accept = async () => {
+    this.setState({ processing: true });
+
     const { navigation, logout } = this.props;
 
     // Clear local persistent storage:
@@ -84,6 +90,7 @@ class ProfileLogoutScreen extends React.Component {
             style={styles.button}
             title={i18n.t("yes")}
             onPress={this.accept}
+            processing={this.state.processing}
           />
 
           <Button

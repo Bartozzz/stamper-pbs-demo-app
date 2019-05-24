@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
-import * as Routes from "../../navigation";
-import i18n from "../../translations";
-import colors from "../../constants/Colors";
-import defaultStyles from "../../constants/Styles";
+import * as Routes from "../../../navigation";
+import i18n from "../../../translations";
+import colors from "../../../constants/Colors";
+import defaultStyles from "../../../constants/Styles";
 
 export default function WalletHeader(props) {
   const cardsStyles = [

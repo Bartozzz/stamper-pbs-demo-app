@@ -17,9 +17,9 @@ import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
 import Header from "../../components/nav/Header";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import Button from "../../components/Button";
+import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
-import InputSearch from "../../components/InputSearch";
+import InputSearch from "../../components/forms/InputSearch";
 import {
   PRIZES_CARDS,
   FORCE_REFRESH_PRIZES,

@@ -8,13 +8,13 @@ import {
   Image
 } from "react-native";
 
-import i18n from "../../translations";
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
-import defaultStyles from "../../constants/Styles";
+import i18n from "../../../translations";
+import colors from "../../../constants/Colors";
+import layout from "../../../constants/Layout";
+import defaultStyles from "../../../constants/Styles";
 
-const ModeMap = require("../../assets/images/menu/mode_map.png");
-const ModeCards = require("../../assets/images/menu/mode_cards.png");
+const ModeMap = require("../../../assets/images/menu/mode_map.png");
+const ModeCards = require("../../../assets/images/menu/mode_cards.png");
 
 export default function MapHeader(props) {
   const nearbyStyles = [

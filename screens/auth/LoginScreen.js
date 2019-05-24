@@ -15,9 +15,9 @@ import {
 import Background from "../../components/Background";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
-import AuthHero from "../../components/auth/Hero";
-import Button from "../../components/Button";
-import InputWithIcon from "../../components/InputWithIcon";
+import AuthHero from "../../components/screens/auth/Hero";
+import Button from "../../components/forms/Button";
+import InputWithIcon from "../../components/forms/InputWithIcon";
 
 import {
   login,
@@ -55,6 +55,8 @@ class AuthLoginScreen extends React.Component {
   };
 
   state = {
+    processing: false,
+
     topAnim: new Animated.Value(0),
 
     password: __DEV__ ? "Test1234+" : null,
@@ -147,6 +149,8 @@ class AuthLoginScreen extends React.Component {
   };
 
   loginWithCredentials = () => {
+    this.setState({ processing: true });
+
     const { email, password } = this.state;
     const { login } = this.props;
 
@@ -179,6 +183,7 @@ class AuthLoginScreen extends React.Component {
     const { data } = response.error.response;
 
     this.setState({
+      processing: false,
       error: getErrorsFromResponse(data, {
         password: null,
         email: null,
@@ -257,6 +262,7 @@ class AuthLoginScreen extends React.Component {
                   <Button
                     title={i18n.t("auth.login")}
                     onPress={this.loginWithCredentials}
+                    processing={this.state.processing}
                   />
                 </ScrollView>
               </Background>

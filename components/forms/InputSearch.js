@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../constants/Colors";
-import layout from "../constants/Layout";
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 class InputSearch extends Component {
   render() {
