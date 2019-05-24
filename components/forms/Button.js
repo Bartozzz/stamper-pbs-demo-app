@@ -9,9 +9,11 @@ import {
 import colors from "../../constants/Colors";
 
 export function Button({ title, style, textStyle, onPress, ...rest }) {
+  const fullStyle = rest.full ? { width: "100%" } : {};
+
   if (rest.disabled) {
     return (
-      <View style={[styles.button, styles.disabledButton, style]}>
+      <View style={[styles.button, styles.disabledButton, fullStyle, style]}>
         <Text style={[styles.text, textStyle]}>{title}</Text>
       </View>
     );
@@ -19,14 +21,17 @@ export function Button({ title, style, textStyle, onPress, ...rest }) {
 
   if (rest.processing) {
     return (
-      <View style={[styles.button, styles.disabledButton, style]}>
+      <View style={[styles.button, styles.disabledButton, fullStyle, style]}>
         <ActivityIndicator size="small" color={colors.color} />
       </View>
     );
   }
 
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.button, fullStyle, style]}
+      onPress={onPress}
+    >
       <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
