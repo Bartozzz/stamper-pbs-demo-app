@@ -112,7 +112,7 @@ class ScannerScanScreen extends React.Component {
         timeout:
           message === "congratulations"
             ? 5000 /* Earned reward */
-            : 5000 /* Received reward */,
+            : 3000 /* Received reward */,
         redirect: Routes.DASHBOARD,
         message: i18n.t(`success.scanner.${message}`)
       });
