@@ -13,6 +13,7 @@ import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import PrizesListScreen from "../screens/prizes/ListScreen";
 import MapScreen from "../screens/map/MapScreen";
 import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
+import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
 import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
@@ -111,7 +112,8 @@ const PrizesStack = createStackNavigator(
 const MapStack = createStackNavigator(
   {
     [Route.MAP_ALL]: MapScreen,
-    [Route.MAP_ACCEPT_CARD_TERMS]: MapAcceptCardTermsScreen
+    [Route.MAP_ACCEPT_CARD_TERMS]: MapAcceptCardTermsScreen,
+    [Route.MAP_CONFIRM_REFUSED_TERMS]: MapConfirmRefusedTermsScreen
   },
   {
     initialRouteName: Route.MAP_ALL,

@@ -11,6 +11,7 @@ import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
+import * as Routes from "../../navigation";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 
@@ -22,16 +23,23 @@ class MapAcceptCardTermsScreen extends React.Component {
     header: null
   });
 
+  state = {
+    processing: false
+  };
+
   openTermsAndConditions = link => () => {
     Linking.openURL(link);
   };
 
   accept = () => {
+    this.setState({ processing: true });
     this.props.navigation.getParam("onConfirm", () => {})();
   };
 
   refuse = () => {
-    this.props.navigation.goBack();
+    this.props.navigation.navigate(Routes.MAP_CONFIRM_REFUSED_TERMS, {
+      onConfirm: () => this.props.navigation.getParam("onConfirm", () => {})()
+    });
   };
 
   render() {
@@ -62,6 +70,7 @@ class MapAcceptCardTermsScreen extends React.Component {
           <Button
             title={i18n.t("map.terms.confirm")}
             onPress={this.accept}
+            processing={this.state.processing}
             full
           />
         </View>

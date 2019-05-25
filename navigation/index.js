@@ -16,6 +16,7 @@ export const PRIZES_LIST = "PrizesList";
 export const MAP = "Map";
 export const MAP_ALL = "MapAll";
 export const MAP_ACCEPT_CARD_TERMS = "MapAcceptCardTerms";
+export const MAP_CONFIRM_REFUSED_TERMS = "MapConfirmRefusedTerms";
 
 export const CARD = "Card";
 export const CARD_INFO = "CardInfo";

@@ -17,7 +17,7 @@ import defaultStyles from "../../constants/Styles";
 const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
-class ScannerConfirmRefusedTermsScreen extends React.Component {
+class MapConfirmRefusedTermsScreen extends React.Component {
   static navigationOptions = () => ({
     header: null
   });
@@ -91,5 +91,5 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ScannerConfirmRefusedTermsScreen
+  MapConfirmRefusedTermsScreen
 );
