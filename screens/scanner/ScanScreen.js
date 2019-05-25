@@ -90,21 +90,24 @@ class ScannerScanScreen extends React.Component {
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
     function redirectToSuccess(message) {
-      let image;
+      let image, dimensions;
 
       switch (message) {
         case "congratulations":
           image = EarnedRewardImage;
+          dimensions = { size: 100 };
           break;
         case "subtract":
           image = SubtractStampImage;
+          dimensions = { width: 153, height: 100 };
           break;
         default:
           image = AddStampImage;
+          dimensions = { width: 153, height: 100 };
       }
 
       navigation.navigate(Routes.INFO_SUCCESS, {
-        size: 100,
+        ...dimensions,
         image: image,
         timeout:
           message === "congratulations"
