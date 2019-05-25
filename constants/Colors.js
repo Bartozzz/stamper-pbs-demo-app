@@ -4,7 +4,7 @@ export default {
 
   border: "#233055",
   primary: "#0046F4",
-  disabled: "#1A345F",
+  disabled: "#95989A",
   background: "#001232",
   highlight: "#020d1e",
   label: "#3e619e",
