@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import colors from "../../constants/Colors";
 import defaultStyles from "../../constants/Styles";
 
-export default function Header(props) {
+export function Header(props) {
   return (
     <View style={[styles.header, props.style]}>
       <Text style={styles.headerTitle}>{props.title}</Text>
@@ -28,3 +28,5 @@ export const styles = StyleSheet.create({
     ...defaultStyles.headerTwoLinesTitle
   }
 });
+
+export default Header;

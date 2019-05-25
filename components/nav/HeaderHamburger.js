@@ -1,6 +1,34 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Platform, TouchableOpacity } from "react-native";
+import * as Routes from "../../navigation";
+
+export function HeaderHamburger(props) {
+  function onPress() {
+    props.navigation.navigate(Routes.DASHBOARD);
+  }
+
+  return (
+    <TouchableOpacity style={styles.hamburger} onPress={onPress}>
+      <Ionicons
+        style={styles.hamburgerIcon}
+        name={hamburgerIconName}
+        size={hamburgerIconSize}
+        color="white"
+      />
+    </TouchableOpacity>
+  );
+}
+
+const hamburgerIconName = Platform.select({
+  ios: "ios-menu",
+  android: "md-menu"
+});
+
+const hamburgerIconSize = Platform.select({
+  ios: 32,
+  android: 24
+});
 
 const styles = StyleSheet.create({
   hamburger: {
@@ -22,24 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function HeaderHamburger(props) {
-  return (
-    <TouchableOpacity
-      style={styles.hamburger}
-      onPress={() => props.navigation.navigate("Dashboard")}
-    >
-      <Ionicons
-        style={styles.hamburgerIcon}
-        name={Platform.select({
-          ios: "ios-menu",
-          android: "md-menu"
-        })}
-        size={Platform.select({
-          ios: 32,
-          android: 24
-        })}
-        color="white"
-      />
-    </TouchableOpacity>
-  );
-}
+export default HeaderHamburger;
