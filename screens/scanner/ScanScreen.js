@@ -17,8 +17,8 @@ import { getParameterByName } from "../../helpers/urls";
 import colors from "../../constants/Colors";
 
 const SpinnerImage = require("../../assets/loaders/spinner.gif");
+const AddStampImage = require("../../assets/success/stamp_add.gif");
 const EarnedRewardImage = require("../../assets/success/earned_reward.gif");
-const ReceivedRewardImage = require("../../assets/success/received_reward.gif");
 const SubtractStampImage = require("../../assets/success/stamp_subtract.gif");
 
 class ScannerScanScreen extends React.Component {
@@ -100,7 +100,7 @@ class ScannerScanScreen extends React.Component {
           image = SubtractStampImage;
           break;
         default:
-          image = ReceivedRewardImage;
+          image = AddStampImage;
       }
 
       navigation.navigate(Routes.INFO_SUCCESS, {
