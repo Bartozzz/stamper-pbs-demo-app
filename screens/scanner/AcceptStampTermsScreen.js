@@ -38,7 +38,7 @@ class ScannerAcceptStampTermsScreen extends React.Component {
 
   refuse = () => {
     this.props.navigation.navigate(Routes.SCANNER_CONFIRM_REFUSED_TERMS, {
-      onAccept: () => this.props.navigation.getParam("onConfirm", () => {})()
+      onConfirm: () => this.props.navigation.getParam("onConfirm", () => {})()
     });
   };
 

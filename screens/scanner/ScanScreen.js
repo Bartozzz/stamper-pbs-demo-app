@@ -118,9 +118,10 @@ class ScannerScanScreen extends React.Component {
     addStamp(code)
       .then(res => {
         const { termsAndConditions, message } = res.payload.data;
-        const { title, termsAndConditionsUrl } = termsAndConditions;
 
-        if (termsAndConditionsUrl) {
+        if (termsAndConditions) {
+          const { title, termsAndConditionsUrl } = termsAndConditions;
+
           navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
             title,
             termsAndConditionsUrl,
