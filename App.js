@@ -151,6 +151,7 @@ export default class App extends React.Component {
         require("./assets/images/menu/wallet.png"),
         require("./assets/success/earned_reward.gif"),
         require("./assets/success/received_reward.gif"),
+        require("./assets/success/card_add.gif"),
         require("./assets/success/stamp_add.gif"),
         require("./assets/success/stamp_subtract.gif")
       ]),
