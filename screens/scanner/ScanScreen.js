@@ -66,16 +66,55 @@ class ScannerScanScreen extends React.Component {
     this.blurListener.remove();
   }
 
-  onBarCodeRead = scan => {
-    const { isProcessing } = this.state;
-    const { navigation, addStamp } = this.props;
+  redirectToSuccess = message => {
+    let image, dimensions, timeout;
 
-    if (isProcessing) {
+    switch (message) {
+      case "congratulations":
+        image = EarnedRewardImage;
+        dimensions = { size: 100 };
+        timeout = 5000;
+        break;
+      case "subtract":
+        image = SubtractStampImage;
+        dimensions = { width: 153, height: 100 };
+        timeout = 3000;
+        break;
+      default:
+        image = AddStampImage;
+        dimensions = { width: 153, height: 100 };
+        timeout = 3000;
+    }
+
+    this.props.navigation.navigate(Routes.INFO_SUCCESS, {
+      ...dimensions,
+      image,
+      timeout,
+      redirect: Routes.DASHBOARD,
+      message: i18n.t(`success.scanner.${message}`)
+    });
+  };
+
+  redirectToFailure = () => {
+    const { navigation } = this.props;
+    const mode = navigation.getParam("type", Routes.SCANNER);
+
+    navigation.navigate(Routes.INFO_ERROR, {
+      redirect: Routes.DASHBOARD,
+      message:
+        mode === Routes.SCANNER
+          ? i18n.t("errors.scanner.stampAdd")
+          : i18n.t("errors.scanner.claimPrize")
+    });
+  };
+
+  onBarCodeRead = scan => {
+    if (this.state.isProcessing) {
       return;
     }
 
+    const { navigation, addStamp } = this.props;
     const code = getParameterByName("p", scan.data);
-    const mode = navigation.getParam("type", Routes.SCANNER);
 
     this.props.navigation.setParams({
       hideHeader: true
@@ -89,63 +128,30 @@ class ScannerScanScreen extends React.Component {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
-    function redirectToSuccess(message) {
-      let image, dimensions, timeout;
-
-      switch (message) {
-        case "congratulations":
-          image = EarnedRewardImage;
-          dimensions = { size: 100 };
-          timeout = 5000;
-          break;
-        case "subtract":
-          image = SubtractStampImage;
-          dimensions = { width: 153, height: 100 };
-          timeout = 3000;
-          break;
-        default:
-          image = AddStampImage;
-          dimensions = { width: 153, height: 100 };
-          timeout = 3000;
-      }
-
-      navigation.navigate(Routes.INFO_SUCCESS, {
-        ...dimensions,
-        image,
-        timeout,
-        redirect: Routes.DASHBOARD,
-        message: i18n.t(`success.scanner.${message}`)
-      });
-    }
-
     addStamp(code)
       .then(res => {
         const { termsAndConditions, message } = res.payload.data;
 
         if (termsAndConditions) {
-          const { title, termsAndConditionsUrl } = termsAndConditions;
-
           navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
-            title,
-            termsAndConditionsUrl,
+            title: termsAndConditions.title,
+            termsAndConditionsUrl: termsAndConditions.termsAndConditionsUrl,
             onConfirm: () => {
-              addStamp(code, true).then(res => {
-                redirectToSuccess(res.payload.data.message);
-              });
+              addStamp(code, true)
+                .then(res => {
+                  this.redirectToSuccess(res.payload.data.message);
+                })
+                .catch(() => {
+                  this.redirectToFailure();
+                });
             }
           });
         } else {
-          redirectToSuccess(message);
+          this.redirectToSuccess(message);
         }
       })
       .catch(() => {
-        navigation.navigate(Routes.INFO_ERROR, {
-          redirect: Routes.DASHBOARD,
-          message:
-            mode === Routes.SCANNER
-              ? i18n.t("errors.scanner.stampAdd")
-              : i18n.t("errors.scanner.claimPrize")
-        });
+        this.redirectToFailure();
       });
   };
 
