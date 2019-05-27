@@ -1,5 +1,5 @@
 const Server = {
-  V1: `http://stamper-mobile-api-users.azurewebsites.net`
+  V1: `https://app.getstamper.com`
 };
 
 const V1 = {
