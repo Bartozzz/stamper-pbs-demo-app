@@ -96,7 +96,9 @@ class ResetPasswordScreen extends React.Component {
           <View style={defaultStyles.container}>
             <AuthHero style={[styles.hero]} />
 
-            <Animated.View style={[{ height: 350 }, { top: topAnim }]}>
+            <Animated.View
+              style={[{ flex: 1 }, { minHeight: 350 }, { top: topAnim }]}
+            >
               <Background source={BackgroundImage} disableScroll>
                 <ScrollView style={styles.loginContainer}>
                   {error.other ? (
