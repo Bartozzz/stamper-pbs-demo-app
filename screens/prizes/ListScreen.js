@@ -47,6 +47,7 @@ class PrizesListScreen extends React.Component {
   });
 
   state = {
+    isCheckingIfCacheValid: true,
     selected: null,
     search: null
   };
@@ -59,12 +60,15 @@ class PrizesListScreen extends React.Component {
     const hasCards = Array.isArray(prizes) && prizes.length > 0;
 
     if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
+      this.setState({ isCheckingIfCacheValid: false });
       console.log("Refreshing prizes cards");
 
       getPrizes().then(data => {
         AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(false));
         AsyncStorage.setItem(PRIZES_CARDS, JSON.stringify(data.payload.data));
       });
+    } else {
+      this.setState({ isCheckingIfCacheValid: false });
     }
 
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
@@ -170,21 +174,30 @@ class PrizesListScreen extends React.Component {
 
   render() {
     const { isLoading } = this.props;
-    const { selected } = this.state;
+    const { isCheckingIfCacheValid, selected } = this.state;
 
     return (
       <Background source={BackgroundImage} disableScroll>
         <Header title={i18n.t("navigation.prizes.list")} />
 
-        {isLoading ? (
-          <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <Image source={RewardsLoader} style={{ width: 150, height: 150 }} />
-          </View>
+        {!isCheckingIfCacheValid ? (
+          <>
+            {isLoading ? (
+              <View style={[defaultStyles.grow, defaultStyles.center]}>
+                <Image
+                  source={RewardsLoader}
+                  style={{ width: 150, height: 150 }}
+                />
+              </View>
+            ) : (
+              <ScrollView style={styles.list}>
+                {this.renderList()}
+                <View style={{ height: 60 }} />
+              </ScrollView>
+            )}
+          </>
         ) : (
-          <ScrollView style={styles.list}>
-            {this.renderList()}
-            <View style={{ height: 60 }} />
-          </ScrollView>
+          <View style={[defaultStyles.grow]} />
         )}
 
         <View style={styles.buttonContainer}>

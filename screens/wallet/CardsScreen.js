@@ -53,6 +53,7 @@ class WalletCardsScreen extends React.Component {
   });
 
   state = {
+    isCheckingIfCacheValid: true,
     search: null
   };
 
@@ -64,12 +65,15 @@ class WalletCardsScreen extends React.Component {
     const hasCards = Array.isArray(cards) && cards.length > 0;
 
     if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
+      this.setState({ isCheckingIfCacheValid: false });
       console.log("Refreshing wallet cards");
 
       getWallet().then(data => {
         AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
         AsyncStorage.setItem(WALLET_CARDS, JSON.stringify(data.payload.data));
       });
+    } else {
+      this.setState({ isCheckingIfCacheValid: false });
     }
 
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
@@ -179,6 +183,7 @@ class WalletCardsScreen extends React.Component {
 
   render() {
     const { isLoading, navigation } = this.props;
+    const { isCheckingIfCacheValid } = this.state;
 
     return (
       <Background source={BackgroundImage} disableScroll>
@@ -188,15 +193,22 @@ class WalletCardsScreen extends React.Component {
           cards
         />
 
-        {isLoading ? (
-          <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <Image source={WalletLoader} style={{ width: 150, height: 150 }} />
-          </View>
-        ) : (
-          <ScrollView style={styles.list}>
-            {this.renderCards()}
-            <View style={{ height: 60 }} />
-          </ScrollView>
+        {!isCheckingIfCacheValid && (
+          <>
+            {isLoading ? (
+              <View style={[defaultStyles.grow, defaultStyles.center]}>
+                <Image
+                  source={WalletLoader}
+                  style={{ width: 150, height: 150 }}
+                />
+              </View>
+            ) : (
+              <ScrollView style={styles.list}>
+                {this.renderCards()}
+                <View style={{ height: 60 }} />
+              </ScrollView>
+            )}
+          </>
         )}
 
         <Toast ref={errorToast => (this.errorToast = errorToast)} />
