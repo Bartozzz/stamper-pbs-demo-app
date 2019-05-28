@@ -3,7 +3,7 @@
   "save": "Save",
   "yes": "Yes",
   "no": "No",
-  "more": "Więcej",
+  "more": "More",
 
   "error": "An Application Error Has Occurred",
   "errorInternal": "Application Error",
@@ -46,7 +46,7 @@
   "auth": {
     "email": "Email",
     "password": "Password",
-    "nickname": "Login",
+    "nickname": "Nickname",
     "firstname": "First Name",
     "lastname": "Last Name",
 
@@ -64,13 +64,13 @@
     "forgotPassword": "Don't remember your password?",
 
     "hero": {
-      "slogan1": "Dołącz do \n bardziej lojalnych!",
-      "slogan2": "Z nami wiele możesz, nic nie musisz."
+      "slogan1": "Join \n more loyal customers!",
+      "slogan2": "Stamper gives you many opportunities without anyobligations."
     },
 
     "externalTos": {
-      "headline": "Akceptuję regulamin aplikacji Stamper.",
-      "link": "Zobacz regulamin"
+      "headline": "I aggree to the terms and conditions Stamper.",
+      "link": "Terms And Conditions"
     }
   },
 
@@ -89,7 +89,7 @@
     "menu": {
       "edit": "Edit profile",
       "password": "Change password",
-      "tos": "Terms of Use",
+      "tos": "Legal",
       "logout": "Log out"
     },
 
@@ -105,14 +105,14 @@
 
     "edit": {
       "changePhoto": "Change photo",
-      "newsletter": "Chce otrzymywać informację o promocjach."
+      "newsletter": "Subscribe to our newsletter."
     },
 
     "newsletter": {
       "title": "newsletter",
       "terms": "Regulamin",
-      "headline": "Korzystaj bardziej!\n Zapisz się na newsletter i dowiaduj się pierwszy o nowych promocjach!",
-      "question": "Zapisujesz się na newsletter?"
+      "headline": "Get more benefits!\n subscribe to be the first to hear about our latest promotions!",
+      "question": "Do you want to subscribe to our newsletter?"
     }
   },
 
@@ -122,12 +122,12 @@
   },
 
   "card": {
-    "details1": "Number for stamps to reward",
+    "details1": "Number of stamps to reward",
     "details2": "Promotion valid to",
     "details3": "Exchange stamps",
     "details4": "Your stamps",
     "details5": "Description",
-    "seeTerms": "Zobacz regulamin"
+    "seeTerms": "Terms And Conditions"
   },
 
   "wallet": {
@@ -143,8 +143,8 @@
     "seeCards": "Show cards",
 
     "removal": {
-      "headline": "Czy na pewno chcesz usunąć kartę?",
-      "description": "Zatwierdzając wybór, wszystkie zapisane pieczątki na karcie zostaną bezpowrotnie utracone."
+      "headline": "Are you sure you want to delete this card?",
+      "description": "By continuing you will permanently delete all the stamps from this card."
     }
   },
 
@@ -162,13 +162,13 @@
     "cardAlreadyAdded": "Card in my wallet",
 
     "terms": {
-      "accept": "Akceptuję regulamin promocji \"{{title}}\"",
-      "confirm": "Akceptuję",
-      "terms": "Regulamin",
+      "accept": "I aggree to the terms and conditions \"{{title}}\"",
+      "confirm": "Accept",
+      "terms": "Terms And Conditions",
 
       "refuse": {
-        "heading": "Czy jesteś pewien ze nie chcesz przystąpić do programu lojalnościowego?",
-        "subheading": "Byś mógł zbierać pieczątki zatwierdzenie regulaminu jest wymagane."
+        "heading": "Are you sure that you don't wont to join this loyalty program?",
+        "subheading": "To be able to colletc stamps you need to accept terms and conditions."
       }
     }
   },
