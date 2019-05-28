@@ -14,9 +14,8 @@
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
 
-    "facebookAppId": "",
+    "facebookAppId": "356151625034848",
     "facebookDisplayName": "Stamper",
-    "facebookScheme": "",
 
     "splash": {
       "image": "./assets/images/splash.png",
@@ -32,10 +31,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.getstamper.app",
-
-      "googleMapsApiKey": "",
-      "googleSignIn": { "reservedClientId": "" }
+      "bundleIdentifier": "com.getstamper.app"
     },
 
     "android": {
