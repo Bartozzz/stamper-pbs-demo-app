@@ -99,6 +99,10 @@ class AuthLoginScreen extends React.Component {
           .catch(() => {
             this.loginExternal(user.email);
           });
+      } else {
+        this.setState({
+          processing: false
+        });
       }
     } catch (e) {
       this.setState({
@@ -127,6 +131,10 @@ class AuthLoginScreen extends React.Component {
           .catch(() => {
             this.loginExternal(user.email);
           });
+      } else {
+        this.setState({
+          processing: false
+        });
       }
     } catch (e) {
       this.setState({
