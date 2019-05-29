@@ -19,10 +19,21 @@ class TermsOfUseScreen extends React.Component {
     header: null
   };
 
-  render() {
-    const onAccept = this.props.navigation.getParam("onAccept", () => {});
-    const viewTos = () => this.props.navigation.navigate(Routes.AUTH_TOS);
+  state = {
+    processing: false
+  };
 
+  accept = () => {
+    this.setState({ processing: true });
+
+    this.props.navigation.getParam("onAccept")();
+  };
+
+  showTerms = () => {
+    this.props.navigation.navigate(Routes.AUTH_TOS);
+  };
+
+  render() {
     return (
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
@@ -34,13 +45,17 @@ class TermsOfUseScreen extends React.Component {
             {i18n.t("auth.externalTos.headline")}
           </BoxText.Heading>
 
-          <TouchableOpacity onPress={viewTos}>
+          <TouchableOpacity onPress={this.showTerms}>
             <BoxText.Action>{i18n.t("auth.externalTos.link")}</BoxText.Action>
           </TouchableOpacity>
         </Box>
 
         <View style={styles.button}>
-          <Button title={i18n.t("yes")} onPress={onAccept} />
+          <Button
+            title={i18n.t("yes")}
+            onPress={this.accept}
+            processing={this.state.processing}
+          />
         </View>
       </Background>
     );

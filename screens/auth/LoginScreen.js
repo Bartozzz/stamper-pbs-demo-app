@@ -1,5 +1,4 @@
 import React from "react";
-import { Facebook, Google, Constants } from "expo";
 import { connect } from "react-redux";
 import {
   Animated,
@@ -8,10 +7,10 @@ import {
   AsyncStorage,
   TouchableOpacity,
   ScrollView,
-  Platform,
   View,
   Dimensions
 } from "react-native";
+import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
 import Background from "../../components/Background";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
@@ -38,17 +37,6 @@ const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 const heroMinWidth = 280;
 const heroMaxWidth = Math.max(340, (Dimensions.get("window").height - 170) / 2);
 
-let FACEBOOK_APP_ID;
-let GOOGLE_CLIENT_ID;
-
-if (Platform.OS === "ios") {
-  FACEBOOK_APP_ID = Constants.manifest.extra.ios.FACEBOOK_APP_ID;
-  GOOGLE_CLIENT_ID = Constants.manifest.extra.ios.GOOGLE_CLIENT_ID;
-} else {
-  FACEBOOK_APP_ID = Constants.manifest.extra.android.FACEBOOK_APP_ID;
-  GOOGLE_CLIENT_ID = Constants.manifest.extra.android.GOOGLE_CLIENT_ID;
-}
-
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
     header: null
@@ -71,69 +59,62 @@ class AuthLoginScreen extends React.Component {
 
   loginWithFacebook = async () => {
     this.setState({ processing: true });
-    const { registerExternal, navigation } = this.props;
 
-    const fetchUser = async token => {
-      const endpoint = "https://graph.facebook.com/me?fields=email";
+    logInWithFacebook(
+      user => {
+        const email = user.email;
+        const username = email.split("@")[0];
 
-      // Get the user's email using Facebook's Graph API:
-      const resp = await fetch(`${endpoint}&access_token=${token}`);
-      const data = await resp.json();
-
-      return data;
-    };
-
-    try {
-      const fid = FACEBOOK_APP_ID;
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
-
-      if (type === "success") {
-        const user = await fetchUser(token);
-
-        registerExternal(user.email, "facebook", user.email.split("@")[0])
-          .then(() => {
-            navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => this.loginExternal(user.email, true)
+        this.props
+          .registerExternal(email, "facebook", username)
+          .then(response => {
+            // Require user to accepts the terms of service. The registeration
+            // already logs the user in, so calling `loginExternal` will fail:
+            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+              onAccept: () => this.handleSuccess(true)(response)
             });
           })
           .catch(() => {
-            this.loginExternal(user.email);
+            this.loginExternal(email);
           });
+      },
+      error => {
+        this.setState({
+          processing: false,
+          error: { ...this.state.error, other: error }
+        });
       }
-    } catch (e) {
-      this.setState({
-        processing: false,
-        error: { ...this.state.error, other: "Facebook error" }
-      });
-    }
+    );
   };
 
   loginWithGoogle = async () => {
     this.setState({ processing: true });
-    const { registerExternal, navigation } = this.props;
 
-    try {
-      const clientId = GOOGLE_CLIENT_ID;
-      const { type, user } = await Google.logInAsync({ clientId });
+    logInWithGoogle(
+      user => {
+        const email = user.email;
+        const username = email.split("@")[0];
 
-      if (type === "success") {
-        registerExternal(user.email, "google", user.email.split("@")[0])
-          .then(() => {
-            // Require user to accepts the terms of service:
-            navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => this.loginExternal(user.email, true)
+        this.props
+          .registerExternal(email, "google", username)
+          .then(response => {
+            // Require user to accepts the terms of service. The registeration
+            // already logs the user in, so calling `loginExternal` will fail:
+            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+              onAccept: () => this.handleSuccess(true)(response)
             });
           })
           .catch(() => {
-            this.loginExternal(user.email);
+            this.loginExternal(email);
           });
+      },
+      error => {
+        this.setState({
+          processing: false,
+          error: { ...this.state.error, other: error }
+        });
       }
-    } catch (e) {
-      this.setState({
-        processing: false,
-        error: { ...this.state.error, other: "Google error" }
-      });
-    }
+    );
   };
 
   loginExternal = (email, firstLogin = false) => {
