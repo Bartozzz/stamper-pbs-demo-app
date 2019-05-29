@@ -40,7 +40,7 @@
     },
 
     "tos": "Terms of Use",
-    "map": "Region"
+    "map": "My Area"
   },
 
   "auth": {
@@ -75,7 +75,7 @@
   },
 
   "dashboard": {
-    "map": "Region",
+    "map": "My Area",
     "wallet": "Wallet",
     "prizes": "Rewards",
     "market": "Market",
@@ -105,14 +105,14 @@
 
     "edit": {
       "changePhoto": "Change photo",
-      "newsletter": "Subscribe to our newsletter."
+      "newsletter": "Subscribe to the newsletter. "					
     },
 
     "newsletter": {
       "title": "newsletter",
       "terms": "Terms And Conditions",
       "headline": "Get more benefits!\n subscribe to be the first to hear about our latest promotions!",
-      "question": "Do you want to subscribe to our newsletter?"
+      "question": "Would you like to subscribe to our newsletter?"
     }
   },
 
