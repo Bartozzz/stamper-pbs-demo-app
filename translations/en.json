@@ -61,11 +61,11 @@
     "tos": "Terms of Use",
     "tosAccept": "By continuing you accept our",
     "dontHaveAccount": "Don't have an account? Register.",
-    "forgotPassword": "Don't remember your password?",
+    "forgotPassword": "Reset password.",
 
     "hero": {
-      "slogan1": "Join \n more loyal customers!",
-      "slogan2": "Stamper gives you many opportunities without anyobligations."
+      "slogan1": "Join more \n loyal customers!",
+      "slogan2": "Stamper gives you many opportunities \n without any obligations."
     },
 
     "externalTos": {
@@ -110,7 +110,7 @@
 
     "newsletter": {
       "title": "newsletter",
-      "terms": "Regulamin",
+      "terms": "Terms And Conditions",
       "headline": "Get more benefits!\n subscribe to be the first to hear about our latest promotions!",
       "question": "Do you want to subscribe to our newsletter?"
     }
@@ -167,7 +167,7 @@
       "terms": "Terms And Conditions",
 
       "refuse": {
-        "heading": "Are you sure that you don't wont to join this loyalty program?",
+        "heading": "Are you sure you don't want to join this loyalty program?",
         "subheading": "To be able to colletc stamps you need to accept terms and conditions."
       }
     }
