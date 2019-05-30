@@ -46,7 +46,7 @@
   "auth": {
     "email": "Email",
     "password": "Password",
-    "nickname": "Login",
+    "nickname": "Nick",
     "firstname": "Imię",
     "lastname": "Nazwisko",
 
