@@ -79,7 +79,7 @@ class WalletCardsScreen extends React.Component {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
-  removeCard = cardId => () => {
+  removeCard = cardId => {
     this.props.navigation.navigate(Routes.WALLET_CARD_REMOVAL_CONFIRMATION, {
       cardId: cardId
     });
@@ -120,7 +120,7 @@ class WalletCardsScreen extends React.Component {
         keyExtractor={item => {
           return item.id;
         }}
-        renderItem={data => (
+        renderItem={(data, rowMap) => (
           <>
             <TouchableOpacity
               style={[styles.item, styles.itemFront]}
@@ -168,7 +168,10 @@ class WalletCardsScreen extends React.Component {
 
             <TouchableOpacity
               style={styles.itemRemove}
-              onPress={this.removeCard(data.item.id)}
+              onPress={() => {
+                rowMap[data.item.id].closeRow();
+                this.removeCard(data.item.id);
+              }}
             >
               <Image source={DeleteImage} style={styles.itemRemoveImage} />
             </TouchableOpacity>
