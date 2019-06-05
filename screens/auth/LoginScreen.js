@@ -266,7 +266,7 @@ class AuthLoginScreen extends React.Component {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={defaultStyles.row}>
+                  <View style={styles.loginContainerTextContainer}>
                     <TouchableOpacity
                       onPress={() => {
                         this.props.navigation.navigate(Routes.AUTH_REGISTER);
