@@ -53,28 +53,30 @@ class WalletCardsScreen extends React.Component {
   });
 
   state = {
-    isCheckingIfCacheValid: true,
+    isCheckingIfCacheValid: false,
     search: null
   };
 
   async componentDidMount() {
     const { cards, getWallet } = this.props;
 
-    const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_WALLET);
-    const shouldRefetchBool = JSON.parse(shouldRefetchData);
-    const hasCards = Array.isArray(cards) && cards.length > 0;
+    // const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_WALLET);
+    // const shouldRefetchBool = JSON.parse(shouldRefetchData);
+    // const hasCards = Array.isArray(cards) && cards.length > 0;
+    //
+    // if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
+    //   this.setState({ isCheckingIfCacheValid: false });
+    //   console.log("Refreshing wallet cards");
+    //
+    //   getWallet().then(data => {
+    //     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
+    //     AsyncStorage.setItem(WALLET_CARDS, JSON.stringify(data.payload.data));
+    //   });
+    // } else {
+    //   this.setState({ isCheckingIfCacheValid: false });
+    // }
 
-    if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
-      this.setState({ isCheckingIfCacheValid: false });
-      console.log("Refreshing wallet cards");
-
-      getWallet().then(data => {
-        AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
-        AsyncStorage.setItem(WALLET_CARDS, JSON.stringify(data.payload.data));
-      });
-    } else {
-      this.setState({ isCheckingIfCacheValid: false });
-    }
+    getWallet();
 
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }

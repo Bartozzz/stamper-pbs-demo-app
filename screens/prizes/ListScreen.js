@@ -47,7 +47,7 @@ class PrizesListScreen extends React.Component {
   });
 
   state = {
-    isCheckingIfCacheValid: true,
+    isCheckingIfCacheValid: false,
     selected: null,
     search: null
   };
@@ -55,21 +55,23 @@ class PrizesListScreen extends React.Component {
   async componentDidMount() {
     const { prizes, getPrizes } = this.props;
 
-    const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
-    const shouldRefetchBool = JSON.parse(shouldRefetchData);
-    const hasCards = Array.isArray(prizes) && prizes.length > 0;
+    // const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
+    // const shouldRefetchBool = JSON.parse(shouldRefetchData);
+    // const hasCards = Array.isArray(prizes) && prizes.length > 0;
+    //
+    // if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
+    //   this.setState({ isCheckingIfCacheValid: false });
+    //   console.log("Refreshing prizes cards");
+    //
+    //   getPrizes().then(data => {
+    //     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(false));
+    //     AsyncStorage.setItem(PRIZES_CARDS, JSON.stringify(data.payload.data));
+    //   });
+    // } else {
+    //   this.setState({ isCheckingIfCacheValid: false });
+    // }
 
-    if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
-      this.setState({ isCheckingIfCacheValid: false });
-      console.log("Refreshing prizes cards");
-
-      getPrizes().then(data => {
-        AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(false));
-        AsyncStorage.setItem(PRIZES_CARDS, JSON.stringify(data.payload.data));
-      });
-    } else {
-      this.setState({ isCheckingIfCacheValid: false });
-    }
+    getPrizes();
 
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
