@@ -33,9 +33,13 @@ class LegalScreen extends React.Component {
 
   componentDidMount() {
     axios
-      .get(Url.Account.Legal("en"), {
-        responseType: "text"
-      })
+      .post(
+        Url.Account.Legal("en"),
+        {},
+        {
+          responseType: "text"
+        }
+      )
       .then(response => {
         this.setState({
           loading: false,

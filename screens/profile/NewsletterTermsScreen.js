@@ -33,9 +33,13 @@ class NewsletterTermsScreen extends React.Component {
 
   componentDidMount() {
     axios
-      .get(Url.Account.Newsletter("en"), {
-        responseType: "text"
-      })
+      .post(
+        Url.Account.Newsletter("en"),
+        {},
+        {
+          responseType: "text"
+        }
+      )
       .then(response => {
         this.setState({
           loading: false,
