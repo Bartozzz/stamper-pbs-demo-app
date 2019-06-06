@@ -160,7 +160,23 @@ class CardInfoScreen extends React.Component {
             </View>
           </View>
 
-          {card.validToDate && (
+          {card.validTo ? (
+            card.validToDate && (
+              <View style={[defaultStyles.row, styles.row]}>
+                <View style={styles.textDescriptionContainer}>
+                  <Text style={styles.textDescription}>
+                    {i18n.t("card.details2")}
+                  </Text>
+                </View>
+
+                <View>
+                  <Text style={styles.textValue}>
+                    {formatDate(card.validToDate)}
+                  </Text>
+                </View>
+              </View>
+            )
+          ) : (
             <View style={[defaultStyles.row, styles.row]}>
               <View style={styles.textDescriptionContainer}>
                 <Text style={styles.textDescription}>
@@ -169,9 +185,7 @@ class CardInfoScreen extends React.Component {
               </View>
 
               <View>
-                <Text style={styles.textValue}>
-                  {formatDate(card.validToDate)}
-                </Text>
+                <Text style={styles.textValue}>--/--/----</Text>
               </View>
             </View>
           )}
