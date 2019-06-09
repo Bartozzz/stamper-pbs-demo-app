@@ -25,7 +25,7 @@ import {
   FORCE_REFRESH_PRIZES,
   getPrizes
 } from "../../store/reducers/prizes";
-import { formatDate } from "../../helpers/date";
+import ExpirationDate from "../../components/helpers/ExpirationDate";
 
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 const RewardsLoader = require("../../assets/loaders/rewards.gif");
@@ -161,7 +161,10 @@ class PrizesListScreen extends React.Component {
                       ]}
                     >
                       {i18n.t("prizes.validTill", {
-                        date: formatDate(item.validToDate)
+                        date: ExpirationDate({
+                          isValid: item.validTo,
+                          expirationDate: item.validToDate
+                        })
                       })}
                     </Text>
                   </View>
