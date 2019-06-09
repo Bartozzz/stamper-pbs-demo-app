@@ -34,7 +34,7 @@ class NewsletterTermsScreen extends React.Component {
   componentDidMount() {
     axios
       .post(
-        Url.Account.Newsletter("en"),
+        Url.Account.Newsletter(i18n.appLocale),
         {},
         {
           responseType: "text"
