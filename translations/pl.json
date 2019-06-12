@@ -118,7 +118,7 @@
 
   "prizes": {
     "receive": "Odbierz nagrodę",
-    "validTill": "ważna do d{{date}}"
+    "validTill": "ważna do {{date}}"
   },
 
   "card": {
