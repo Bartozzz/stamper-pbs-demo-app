@@ -194,8 +194,8 @@ export const AuthRegisterScreenLinks = props => (
 
     <TouchableOpacity onPress={props.navigateToTOS}>
       <Text style={[styles.regContainerText, styles.regBold]}>
+        {" "}
         {i18n.t("auth.tos")}
-        {"  "}
       </Text>
     </TouchableOpacity>
   </View>
