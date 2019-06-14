@@ -14,12 +14,10 @@ import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 import { getParameterByName } from "../../helpers/urls";
+import { getImageForMessage } from "../../helpers/scanner";
 import colors from "../../constants/Colors";
 
 const SpinnerImage = require("../../assets/loaders/spinner.gif");
-const AddStampImage = require("../../assets/success/stamp_add.gif");
-const EarnedRewardImage = require("../../assets/success/earned_reward.gif");
-const SubtractStampImage = require("../../assets/success/stamp_subtract.gif");
 
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -67,24 +65,7 @@ class ScannerScanScreen extends React.Component {
   }
 
   redirectToSuccess = message => {
-    let image, dimensions, timeout;
-
-    switch (message) {
-      case "congratulations":
-        image = EarnedRewardImage;
-        dimensions = { size: 100 };
-        timeout = 5000;
-        break;
-      case "subtract":
-        image = SubtractStampImage;
-        dimensions = { width: 153, height: 100 };
-        timeout = 3000;
-        break;
-      default:
-        image = AddStampImage;
-        dimensions = { width: 153, height: 100 };
-        timeout = 3000;
-    }
+    const { image, dimensions, timeout } = getImageForMessage(message);
 
     this.props.navigation.navigate(Routes.INFO_SUCCESS, {
       ...dimensions,
@@ -96,10 +77,9 @@ class ScannerScanScreen extends React.Component {
   };
 
   redirectToFailure = () => {
-    const { navigation } = this.props;
-    const mode = navigation.getParam("type", Routes.SCANNER);
+    const mode = this.props.navigation.getParam("type", Routes.SCANNER);
 
-    navigation.navigate(Routes.INFO_ERROR, {
+    this.props.navigation.navigate(Routes.INFO_ERROR, {
       redirect: Routes.DASHBOARD,
       message:
         mode === Routes.SCANNER
