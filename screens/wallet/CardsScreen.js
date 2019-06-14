@@ -129,7 +129,7 @@ class WalletCardsScreen extends React.Component {
               key={data.item.id}
               onPress={() => this.navigateToCardInfo(data.item)}
             >
-              <View style={[defaultStyles.row, { flex: 1, marginBottom: 10 }]}>
+              <View style={[defaultStyles.row, { flex: 1 }]}>
                 <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
 
                 <View style={{ marginTop: 6 }}>
@@ -145,7 +145,7 @@ class WalletCardsScreen extends React.Component {
                 </View>
               </View>
 
-              <View style={defaultStyles.row}>
+              <View style={[defaultStyles.row, { paddingTop: 10 }]}>
                 <Image
                   source={{ uri: data.item.iconUrl }}
                   style={{ width: 40, height: 40, borderRadius: 20 }}
