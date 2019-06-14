@@ -35,7 +35,9 @@ class LegalScreen extends React.Component {
     axios
       .post(
         Url.Account.Legal(i18n.appLocale),
-        {},
+        {
+          language: i18n.appLocale
+        },
         {
           responseType: "text"
         }

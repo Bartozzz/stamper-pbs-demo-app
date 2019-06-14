@@ -35,7 +35,9 @@ class TermsOfServiceScreen extends React.Component {
     axios
       .post(
         Url.Account.TermsAndConditions(i18n.appLocale),
-        {},
+        {
+          language: i18n.appLocale
+        },
         {
           responseType: "text"
         }
