@@ -296,7 +296,7 @@ class MapNearbyScreen extends React.Component {
                 longitude: Number(item.lng)
               }}
             >
-              <View>
+              <View style={styles.marker}>
                 <Image style={styles.marker} source={{ uri: item.logoUrl }} />
               </View>
             </MapView.Marker>
@@ -470,7 +470,10 @@ const styles = StyleSheet.create({
 
     // Make sure the logo fits in the marker:
     resizeMode: "contain",
-    backgroundColor: "white"
+    backgroundColor: "white",
+
+    // https://github.com/facebook/react-native/issues/2468
+    overflow: "hidden"
   },
 
   selectedContainer: {
