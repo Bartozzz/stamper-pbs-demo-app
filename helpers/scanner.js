@@ -1,7 +1,7 @@
-import AddStampImage from "../../assets/success/stamp_add.gif";
-import EarnedRewardImage from "../../assets/success/earned_reward.gif";
-import ReceivedRewardImage from "../../assets/success/received_reward.gif";
-import SubtractStampImage from "../../assets/success/stamp_subtract.gif";
+import AddStampImage from "../assets/success/stamp_add.gif";
+import EarnedRewardImage from "../assets/success/earned_reward.gif";
+import ReceivedRewardImage from "../assets/success/received_reward.gif";
+import SubtractStampImage from "../assets/success/stamp_subtract.gif";
 
 export function getImageForMessage(message) {
   switch (message) {
