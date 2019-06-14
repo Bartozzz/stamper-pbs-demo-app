@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Animated } from "react-native";
+import { StyleSheet, Animated, Platform } from "react-native";
 import colors from "../../constants/Colors";
 
 export function HeaderTitle(props) {
@@ -15,12 +15,22 @@ export function HeaderTitle(props) {
 
 const styles = StyleSheet.create({
   title: {
-    // Standard header margin:
-    marginVertical: 6,
+    ...Platform.select({
+      android: {
+        marginBottom: 9
+      },
+      ios: {
+        // Standard header margin:
+        marginVertical: 6
+      }
+    }),
 
-    fontSize: 26,
-    fontFamily: "poppins-bold",
     color: colors.color,
+    fontFamily: "poppins-bold",
+    fontSize: Platform.select({
+      android: 20,
+      ios: 26
+    }),
 
     // Align to the bottom of the container:
     alignSelf: "flex-end"

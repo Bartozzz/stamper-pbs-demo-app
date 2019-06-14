@@ -79,6 +79,7 @@ const AuthStack = createStackNavigator(
   },
   {
     initialRouteName: Route.AUTH_LOGIN,
+    headerLayoutPreset: "left",
     defaultNavigationOptions,
     ...disableNavigationAnimations
   }
