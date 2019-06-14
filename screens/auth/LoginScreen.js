@@ -239,7 +239,7 @@ class AuthLoginScreen extends React.Component {
                         ]}
                       >
                         {" "}
-                        Facebook{"  "}
+                        Facebook{" "}
                       </Text>
                     </TouchableOpacity>
 
