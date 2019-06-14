@@ -87,6 +87,18 @@ const tagsStyles = {
     marginTop: 20,
     marginBottom: 4
   },
+  h3: {
+    ...headingStyle
+  },
+  h4: {
+    ...headingStyle
+  },
+  h5: {
+    ...headingStyle
+  },
+  h6: {
+    ...headingStyle
+  },
   ol: {
     ...listStyle
   },
