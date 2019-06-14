@@ -1,3 +1,5 @@
+import i18n from "../translations";
+
 const Server = {
   V1: `https://app.getstamper.com`
 };
@@ -56,15 +58,15 @@ const V1 = {
       return `${Server.V1}/Account/UpdateNewsletter`;
     },
 
-    TermsAndConditions(language = "en") {
+    TermsAndConditions(language = i18n.appLocale) {
       return `${Server.V1}/Account/TermsAndConditions?language=${language}`;
     },
 
-    Legal(language = "en") {
+    Legal(language = i18n.appLocale) {
       return `${Server.V1}/Account/Legal?language=${language}`;
     },
 
-    Newsletter(language = "en") {
+    Newsletter(language = i18n.appLocale) {
       return `${Server.V1}/Account/Newsletter?language=${language}`;
     }
   },
