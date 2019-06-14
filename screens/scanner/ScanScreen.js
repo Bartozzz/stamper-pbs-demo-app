@@ -88,51 +88,70 @@ class ScannerScanScreen extends React.Component {
     });
   };
 
-  onBarCodeRead = scan => {
+  redirectToTerms = (code, termsAndConditions) => {
+    const { navigation, addStamp } = this.props;
+    const { title, termsAndConditionsUrl } = termsAndConditions;
+
+    navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
+      title,
+      termsAndConditionsUrl,
+      onConfirm: () => {
+        addStamp(code, true)
+          .then(res => {
+            const { message } = res.payload.data;
+
+            if (message) {
+              this.redirectToSuccess(message);
+            } else {
+              this.redirectToFailure();
+            }
+          })
+          .catch(() => {
+            this.redirectToFailure();
+          });
+      }
+    });
+  };
+
+  onBarCodeRead = async scan => {
     if (this.state.isProcessing) {
       return;
     }
 
-    const { navigation, addStamp } = this.props;
-    const code = getParameterByName("p", scan.data);
+    try {
+      const { addStamp } = this.props;
+      const code = getParameterByName("p", scan.data);
 
-    this.props.navigation.setParams({
-      hideHeader: true
-    });
-
-    this.setState({
-      isProcessing: true,
-      isRequesting: true
-    });
-
-    AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
-    AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
-
-    addStamp(code)
-      .then(res => {
-        const { termsAndConditions, message } = res.payload.data;
-
-        if (termsAndConditions) {
-          navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
-            title: termsAndConditions.title,
-            termsAndConditionsUrl: termsAndConditions.termsAndConditionsUrl,
-            onConfirm: () => {
-              addStamp(code, true)
-                .then(res => {
-                  this.redirectToSuccess(res.payload.data.message);
-                })
-                .catch(() => {
-                  this.redirectToFailure();
-                });
-            }
-          });
-        } else {
-          this.redirectToSuccess(message);
-        }
-      })
-      .catch(() => {
-        this.redirectToFailure();
+      this.props.navigation.setParams({
+        hideHeader: true
       });
+
+      this.setState({
+        isProcessing: true,
+        isRequesting: true
+      });
+
+      await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
+      await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
+
+      addStamp(code)
+        .then(res => {
+          const { termsAndConditions, message } = res.payload.data;
+
+          if (termsAndConditions && typeof termsAndConditions === "object") {
+            this.redirectToTerms(code, termsAndConditions);
+          } else if (message) {
+            this.redirectToSuccess(message);
+          } else {
+            this.redirectToFailure();
+          }
+        })
+        .catch(() => {
+          this.redirectToFailure();
+        });
+    } catch (err) {
+      this.redirectToFailure();
+    }
   };
 
   renderBarCodeScanner() {
