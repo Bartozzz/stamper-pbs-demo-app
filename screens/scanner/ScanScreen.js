@@ -140,7 +140,7 @@ class ScannerScanScreen extends React.Component {
 
           if (termsAndConditions && typeof termsAndConditions === "object") {
             this.redirectToTerms(code, termsAndConditions);
-          } else if (message) {
+          } else if (message && message !== "error") {
             this.redirectToSuccess(message);
           } else {
             this.redirectToFailure();
