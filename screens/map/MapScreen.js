@@ -296,8 +296,17 @@ class MapNearbyScreen extends React.Component {
                 longitude: Number(item.lng)
               }}
             >
-              <View style={styles.marker}>
-                <Image style={styles.marker} source={{ uri: item.logoUrl }} />
+              <View
+                style={[
+                  styles.marker,
+                  { overflow: "hidden", backgroundColor: "white" }
+                ]}
+              >
+                <Image
+                  style={styles.marker}
+                  resizeMode="contain"
+                  source={{ uri: item.logoUrl }}
+                />
               </View>
             </MapView.Marker>
           ))}
@@ -466,14 +475,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     width: 40,
     height: 40,
-    borderRadius: 20,
-
-    // Make sure the logo fits in the marker:
-    resizeMode: "contain",
-    backgroundColor: "white",
-
-    // https://github.com/facebook/react-native/issues/2468
-    overflow: "hidden"
+    borderRadius: 20
   },
 
   selectedContainer: {
