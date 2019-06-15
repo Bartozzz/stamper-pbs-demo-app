@@ -129,7 +129,7 @@ class WalletCardsScreen extends React.Component {
               key={data.item.id}
               onPress={() => this.navigateToCardInfo(data.item)}
             >
-              <View style={[defaultStyles.row, { flex: 1 }]}>
+              <View style={[defaultStyles.row]}>
                 <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
 
                 <View style={{ marginTop: 6 }}>
@@ -228,9 +228,6 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    flex: 1,
-    height: 90,
-
     padding: 10,
     marginHorizontal: 15,
     marginVertical: 10,
