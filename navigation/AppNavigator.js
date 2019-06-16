@@ -87,11 +87,14 @@ const AuthStack = createStackNavigator(
 
 const InfoStack = createStackNavigator(
   {
+    // The initial route is always mounted. If we set it to INFO_ERROR, it will
+    // trigger INFO_ERROR's setTimeout even if we navigte to INFO_SUCCESS:
+    [Route.INFO_INIT]: () => null,
     [Route.INFO_ERROR]: InfoErrorScreen,
     [Route.INFO_SUCCESS]: InfoSuccessScreen
   },
   {
-    initialRouteName: Route.INFO_SUCCESS,
+    initialRouteName: Route.INFO_ERROR,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
     ...disableNavigationAnimations

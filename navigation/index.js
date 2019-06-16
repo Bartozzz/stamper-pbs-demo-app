@@ -7,6 +7,7 @@ export const AUTH_TOS = "AuthToS";
 export const AUTH_EXTERNAL_TOS = "AuthExternalToS";
 
 export const INFO = "Info";
+export const INFO_INIT = "InfoInit";
 export const INFO_ERROR = "InfoError";
 export const INFO_SUCCESS = "InfoSuccess";
 
