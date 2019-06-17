@@ -264,7 +264,7 @@ class MapNearbyScreen extends React.Component {
           inactiveSlideOpacity={0.85}
           inactiveSlideShift={0}
           sliderWidth={Dimensions.get("window").width}
-          itemWidth={Dimensions.get("window").width * 0.725}
+          itemWidth={slideTargetWidth}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
         />
@@ -441,6 +441,8 @@ class MapNearbyScreen extends React.Component {
   }
 }
 
+const slideTargetWidth = 350;
+
 const styles = StyleSheet.create({
   list: {
     margin: 8
@@ -496,7 +498,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     height: 80,
-    width: 350,
+    width: slideTargetWidth,
     borderRadius: 80,
 
     backgroundColor: colors.primary
