@@ -94,7 +94,7 @@ const InfoStack = createStackNavigator(
     [Route.INFO_SUCCESS]: InfoSuccessScreen
   },
   {
-    initialRouteName: Route.INFO_ERROR,
+    initialRouteName: Route.INFO_INIT,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
     ...disableNavigationAnimations
