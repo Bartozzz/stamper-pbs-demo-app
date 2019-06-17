@@ -484,8 +484,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 25,
 
-    height: 100,
-    width: Dimensions.get("window").width
+    // Take all the width:
+    left: 0,
+    right: 0,
+
+    height: 100
   },
   selected: {
     flexDirection: "row",
