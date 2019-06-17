@@ -4,6 +4,7 @@ import Background from "../components/Background";
 import HeaderTitle from "../components/nav/HeaderTitle";
 import HeaderBackIcon from "../components/nav/HeaderBack";
 import TermsAsHTML from "../components/screens/terms/TermsAsHTML";
+import Version from "../components/helpers/Version";
 
 import i18n from "../translations";
 import Url from "../constants/Urls";
@@ -62,6 +63,7 @@ class TermsOfServiceScreen extends React.Component {
     return (
       <Background source={BackgroundImage}>
         <TermsAsHTML loading={loading} error={error} content={content} />
+        <Version />
       </Background>
     );
   }

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
-import Version from "../../components/helpers/Version";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -199,8 +198,6 @@ class DashboardMainScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-
-        <Version />
       </Background>
     );
   }
