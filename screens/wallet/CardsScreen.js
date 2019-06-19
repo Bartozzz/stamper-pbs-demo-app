@@ -130,7 +130,7 @@ class WalletCardsScreen extends React.Component {
               onPress={() => this.navigateToCardInfo(data.item)}
             >
               <View style={[defaultStyles.row]}>
-                <Text style={styles.textId}>Nr. {data.item.cardNumber}</Text>
+                <Text style={styles.textId}>{data.item.merchantName}</Text>
 
                 <View style={{ marginTop: 6 }}>
                   <ProgressBar
@@ -147,7 +147,7 @@ class WalletCardsScreen extends React.Component {
 
               <View style={[defaultStyles.row, { paddingTop: 10 }]}>
                 <Image
-                  source={{ uri: data.item.iconUrl }}
+                  source={{ uri: data.item.logoUrl }}
                   style={{ width: 40, height: 40, borderRadius: 20 }}
                 />
 
@@ -250,7 +250,11 @@ const styles = StyleSheet.create({
 
     // backgroundColor: "#555f6f",
     backgroundColor: "#f16c41",
-    borderRadius: 10
+    borderRadius: 10,
+
+    // Need to add zIndex to ensure that the TouchableOpacity will receive press
+    // events on Android:
+    zIndex: 1
   },
   itemRemoveImage: {
     width: 40,

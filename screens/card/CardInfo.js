@@ -21,6 +21,7 @@ import * as Routes from "../../navigation";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import Background from "../../components/Background";
+import CardBackground from "../../components/screens/card/CardBackground";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/details_wn.png");
@@ -72,54 +73,44 @@ class CardInfoScreen extends React.Component {
             onSnapToItem={index => this.setState({ active: index })}
             renderItem={({ item }) => (
               <View style={styles.slideInnerContainer}>
-                <ImageBackground
-                  source={CardImage}
-                  style={styles.slideInnerImage}
-                  resizeMode="cover"
-                >
-                  <ImageBackground
-                    source={{ uri: item.cardUrl }}
-                    style={styles.slideInnerImage}
-                    resizeMode="cover"
-                  >
-                    <View style={styles.slideInnerSection}>
-                      <View style={{ height: 130, padding: 15 }}>
-                        {!item.cardOnly && (
-                          <Image
-                            source={{ uri: item.logoUrl }}
-                            style={{
-                              width: 80,
-                              height: 80,
-                              resizeMode: "contain"
-                            }}
-                          />
-                        )}
-                      </View>
-
-                      <Text
-                        style={[styles.slideInnerText, styles.slideInnerTextA]}
-                      >
-                        {item.cardNumber}
-                      </Text>
-                      <Text
-                        style={[styles.slideInnerText, styles.slideInnerTextB]}
-                      >
-                        {item.title}
-                      </Text>
-                    </View>
-
-                    <View
-                      style={[styles.slideInnerSection, defaultStyles.center]}
-                    >
+                <CardBackground src={item.cardUrl}>
+                  <View style={styles.slideInnerSection}>
+                    <View style={{ height: 130, padding: 15 }}>
                       {!item.cardOnly && (
                         <Image
-                          source={{ uri: item.iconUrl }}
-                          style={{ width: 100, height: 100 }}
+                          source={{ uri: item.logoUrl }}
+                          style={{
+                            width: 80,
+                            height: 80,
+                            resizeMode: "contain"
+                          }}
                         />
                       )}
                     </View>
-                  </ImageBackground>
-                </ImageBackground>
+
+                    <Text
+                      style={[styles.slideInnerText, styles.slideInnerTextA]}
+                    >
+                      {item.cardNumber}
+                    </Text>
+                    <Text
+                      style={[styles.slideInnerText, styles.slideInnerTextB]}
+                    >
+                      {item.title}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={[styles.slideInnerSection, defaultStyles.center]}
+                  >
+                    {!item.cardOnly && (
+                      <Image
+                        source={{ uri: item.iconUrl }}
+                        style={{ width: 100, height: 100 }}
+                      />
+                    )}
+                  </View>
+                </CardBackground>
               </View>
             )}
             inactiveSlideScale={0.9}
@@ -203,12 +194,14 @@ class CardInfoScreen extends React.Component {
           )}
         </ScrollView>
 
-        <TouchableOpacity
-          style={styles.terms}
-          onPress={() => this.openInLinkedApp(card.termsAndConditionsUrl)}
-        >
-          <Text style={styles.termsText}>{i18n.t("card.seeTerms")}</Text>
-        </TouchableOpacity>
+        {card.termsAndConditionsUrl && (
+          <TouchableOpacity
+            style={styles.terms}
+            onPress={() => this.openInLinkedApp(card.termsAndConditionsUrl)}
+          >
+            <Text style={styles.termsText}>{i18n.t("card.seeTerms")}</Text>
+          </TouchableOpacity>
+        )}
       </Background>
     );
   }
