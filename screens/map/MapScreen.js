@@ -121,26 +121,35 @@ class MapNearbyScreen extends React.Component {
   };
 
   requestUserPosition = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    let location;
-    let reverse;
+    try {
+      let { status } = await Permissions.askAsync(Permissions.LOCATION);
+      let location;
+      let reverse;
 
-    if (status === "granted") {
-      // Get user geocode location:
-      location = await Location.getCurrentPositionAsync({
-        enableHighAccuracy: true
-      });
+      if (status === "granted") {
+        // Get user geocode location:
+        location = await Location.getCurrentPositionAsync({
+          enableHighAccuracy: true
+        });
 
-      // Try to find the name of the city the current user is in:
-      reverse = await Location.reverseGeocodeAsync(location.coords);
+        // Try to find the name of the city the current user is in:
+        reverse = await Location.reverseGeocodeAsync(location.coords);
+      }
+
+      // Same shape as component' state:
+      return {
+        city: Array.isArray(reverse) ? reverse[0].city : null,
+        location,
+        locationLoaded: true
+      };
+    } catch (err) {
+      console.error(err);
+
+      return {
+        location: {},
+        locationLoaded: false
+      };
     }
-
-    // Same shape as component' state:
-    return {
-      city: Array.isArray(reverse) ? reverse[0].city : null,
-      location,
-      locationLoaded: true
-    };
   };
 
   selectCard = cardId => () => {
