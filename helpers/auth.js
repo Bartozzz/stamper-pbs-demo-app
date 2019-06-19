@@ -4,12 +4,26 @@ import { Platform } from "react-native";
 let FACEBOOK_APP_ID;
 let GOOGLE_CLIENT_ID;
 
-if (Platform.OS === "ios") {
-  FACEBOOK_APP_ID = Constants.manifest.extra.ios.FACEBOOK_APP_ID;
-  GOOGLE_CLIENT_ID = Constants.manifest.extra.ios.GOOGLE_CLIENT_ID;
+if (__DEV__) {
+  FACEBOOK_APP_ID = Platform.select({
+    ios: Constants.manifest.extra.ios.FACEBOOK_APP_ID_DEV,
+    android: Constants.manifest.extra.android.FACEBOOK_APP_ID_DEV
+  });
+
+  GOOGLE_CLIENT_ID = Platform.select({
+    ios: Constants.manifest.extra.ios.GOOGLE_CLIENT_ID_DEV,
+    android: Constants.manifest.extra.android.GOOGLE_CLIENT_ID_DEV
+  });
 } else {
-  FACEBOOK_APP_ID = Constants.manifest.extra.android.FACEBOOK_APP_ID;
-  GOOGLE_CLIENT_ID = Constants.manifest.extra.android.GOOGLE_CLIENT_ID;
+  FACEBOOK_APP_ID = Platform.select({
+    ios: Constants.manifest.extra.ios.FACEBOOK_APP_ID,
+    android: Constants.manifest.extra.android.FACEBOOK_APP_ID
+  });
+
+  GOOGLE_CLIENT_ID = Platform.select({
+    ios: Constants.manifest.extra.ios.GOOGLE_CLIENT_ID,
+    android: Constants.manifest.extra.android.GOOGLE_CLIENT_ID
+  });
 }
 
 export async function fetchUserByFacebookAccessToken(token) {
