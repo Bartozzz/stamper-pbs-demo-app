@@ -11,8 +11,7 @@ import {
   Text,
   FlatList,
   ScrollView,
-  Image,
-  TouchableOpacity
+  Image
 } from "react-native";
 
 import Background from "../../components/Background";
@@ -23,6 +22,10 @@ import Card from "../../components/layout/card/Card";
 import CardButton from "../../components/layout/card/CardButton";
 import WalletIcon from "../../components/icons/WalletIcon";
 
+import IconAddToWallet from "../../components/screens/map/IconAddToWallet";
+import IconInWallet from "../../components/screens/map/IconInWallet";
+import Marker from "../../components/screens/map/Marker";
+
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
@@ -32,10 +35,13 @@ import layout from "../../constants/Layout";
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
 import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
+import {
+  getData,
+  getDataForLocation,
+  getUniqueData
+} from "../../store/selectors/map";
 
 import mapStyle from "../../assets/mapStyle";
-import PlusImage from "../../assets/images/plus.png";
-import AddedImage from "../../assets/images/icons/already-in-wallet.png";
 import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
 import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 import MapLoader from "../../assets/loaders/map.gif";
@@ -81,16 +87,9 @@ class MapNearbyScreen extends React.Component {
   }
 
   get data() {
-    const { data } = this.props;
-    const { filter } = this.state;
+    const pickOnlyFavourites = this.state.filter === FILTER_FAV;
 
-    switch (filter) {
-      case FILTER_FAV:
-        return data.filter(item => item.favorite === true);
-
-      default:
-        return data;
-    }
+    return getData(this.props.data, pickOnlyFavourites);
   }
 
   componentDidMount() {
@@ -98,7 +97,7 @@ class MapNearbyScreen extends React.Component {
 
     this.requestUserPosition().then(data => {
       if (__DEV__) {
-        getRegion("Paris", data.location.coords);
+        getRegion("Kraków", data.location.coords);
       } else {
         getRegion(data.city, data.location.coords);
       }
@@ -210,13 +209,11 @@ class MapNearbyScreen extends React.Component {
     // Situation 2: a restaurant can have multiple cards in the same location.
     // When a card is selected, we should display all the cards in the selected
     // location.
-    const selectedBatch = this.data.filter(item => {
-      const eps = 0.00001;
-      const latDiff = Math.abs(item.lat - selectedCard.lat);
-      const lngDiff = Math.abs(item.lng - selectedCard.lng);
-
-      return latDiff < eps && lngDiff < eps;
-    });
+    const selectedBatch = getDataForLocation(
+      this.data,
+      selectedCard.lat,
+      selectedCard.lng
+    );
 
     return (
       <View style={styles.selectedContainer}>
@@ -243,20 +240,9 @@ class MapNearbyScreen extends React.Component {
               </View>
 
               {item.inWallet ? (
-                <View style={styles.selectedAddedContainer}>
-                  <Image style={styles.selectAdded} source={AddedImage} />
-
-                  <Text style={styles.selectedAddedContainerText}>
-                    {i18n.t("map.cardAlreadyAdded")}
-                  </Text>
-                </View>
+                <IconInWallet />
               ) : (
-                <TouchableOpacity
-                  style={styles.selectedAddContainer}
-                  onPress={this.addCard(selected)}
-                >
-                  <Image style={styles.selectAdd} source={PlusImage} />
-                </TouchableOpacity>
+                <IconAddToWallet onPress={this.addCard(selected)} />
               )}
             </View>
           )}
@@ -288,27 +274,11 @@ class MapNearbyScreen extends React.Component {
           </MapView.Marker>
 
           {this.data.map(item => (
-            <MapView.Marker
-              key={`${item.id}${item.lat}${item.lng}`}
+            <Marker
+              key={`${item.id}:${item.lat}:${item.lng}`}
+              item={item}
               onPress={this.selectCard(item.id)}
-              coordinate={{
-                latitude: Number(item.lat),
-                longitude: Number(item.lng)
-              }}
-            >
-              <View
-                style={[
-                  styles.marker,
-                  { overflow: "hidden", backgroundColor: "white" }
-                ]}
-              >
-                <Image
-                  style={styles.marker}
-                  resizeMode="contain"
-                  source={{ uri: item.logoUrl }}
-                />
-              </View>
-            </MapView.Marker>
+            />
           ))}
         </MapView>
 
@@ -325,15 +295,7 @@ class MapNearbyScreen extends React.Component {
     // Situation 1: a restaurant has the same card in two different locations.
     // In this case, we display only one card when rendering cards as list and
     // keep the default rendering when rendering as a map.
-    const data = this.data.reduce((acc, curr) => {
-      const index = acc.findIndex(element => element.id === curr.id);
-
-      if (index === -1) {
-        return [...acc, curr];
-      } else {
-        return acc;
-      }
-    }, []);
+    const data = getUniqueData(this.data);
 
     return (
       <ScrollView style={styles.list}>
@@ -473,13 +435,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background
   },
 
-  marker: {
-    zIndex: 2,
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  },
-
   selectedContainer: {
     zIndex: 3,
 
@@ -534,29 +489,6 @@ const styles = StyleSheet.create({
     color: "#709BE7",
     fontSize: 9,
     fontFamily: layout.fontText
-  },
-  selectedAddContainer: {
-    marginRight: 16
-  },
-  selectedAddedContainer: {
-    marginRight: 14
-  },
-  selectedAddedContainerText: {
-    position: "absolute",
-    top: 2,
-    left: 4,
-
-    color: colors.primary,
-    fontSize: 6,
-    fontFamily: "nunito-regular"
-  },
-  selectAdd: {
-    width: 48,
-    height: 48
-  },
-  selectAdded: {
-    height: 56,
-    width: 74
   }
 });
 
