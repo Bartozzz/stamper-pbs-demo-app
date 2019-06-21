@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { Constants } from "expo";
+import Constants from 'expo-constants';
 import { version } from "../../package.json";
 
 export function Version({ style, ...props }) {

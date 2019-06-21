@@ -1,4 +1,6 @@
-import { Facebook, Google, Constants } from "expo";
+import { Google } from "expo";
+import Constants from "expo-constants";
+import * as Facebook from "expo-facebook";
 import { Platform } from "react-native";
 
 let FACEBOOK_APP_ID;

@@ -30,10 +30,10 @@ class CardRemovalConfirmationScreen extends React.Component {
   accept = async () => {
     this.setState({ processing: true });
 
-    const { navigation, removeCard } = this.props;
+    const { navigation } = this.props;
     const cardId = navigation.getParam("cardId");
 
-    removeCard(cardId).finally(() => {
+    this.props.removeCard(cardId).finally(() => {
       AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
       navigation.goBack();
     });

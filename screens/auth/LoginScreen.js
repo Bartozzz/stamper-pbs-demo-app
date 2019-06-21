@@ -128,9 +128,9 @@ class AuthLoginScreen extends React.Component {
     this.setState({ processing: true });
 
     const { email, password } = this.state;
-    const { login } = this.props;
 
-    login(email, password)
+    this.props
+      .login(email, password)
       .then(this.handleSuccess(false))
       .catch(this.handleError);
   };

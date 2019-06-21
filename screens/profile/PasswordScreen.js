@@ -52,11 +52,11 @@ class ProfilePasswordScreen extends React.Component {
 
   editPassword = () => {
     const { currPassword, newPasswordA, newPasswordB } = this.state;
-    const { changePassword } = this.props;
 
     this.setState({ processing: true });
 
-    changePassword(currPassword, newPasswordA, newPasswordB)
+    this.props
+      .changePassword(currPassword, newPasswordA, newPasswordB)
       .then(this.handleSuccess)
       .catch(this.handleError);
   };

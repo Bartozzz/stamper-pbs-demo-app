@@ -50,8 +50,6 @@ class ProfileLogoutScreen extends React.Component {
   accept = async () => {
     this.setState({ processing: true });
 
-    const { navigation, logout } = this.props;
-
     // Clear local persistent storage:
     await AsyncStorage.multiRemove([
       EXPIRY_DATE,
@@ -69,7 +67,9 @@ class ProfileLogoutScreen extends React.Component {
     this.props.setAccessToken(null);
     this.props.setRefreshToken(null);
 
-    logout().finally(() => navigation.navigate(Routes.AUTH_LOADING));
+    this.props
+      .logout()
+      .finally(() => this.props.navigation.navigate(Routes.AUTH_LOADING));
   };
 
   refuse = () => {

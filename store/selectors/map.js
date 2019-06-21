@@ -25,5 +25,5 @@ export function getUniqueData(data) {
     } else {
       return acc;
     }
-  });
+  }, []);
 }

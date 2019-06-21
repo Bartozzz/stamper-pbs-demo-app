@@ -67,9 +67,9 @@ class AuthRegisterScreen extends React.Component {
     this.setState({ processing: true });
 
     const { email, password, nickname } = this.state;
-    const { register } = this.props;
 
-    register(email, password, nickname)
+    this.props
+      .register(email, password, nickname)
       .then(this.handleSuccess)
       .catch(this.handleError);
   };

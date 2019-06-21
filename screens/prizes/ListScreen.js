@@ -53,8 +53,6 @@ class PrizesListScreen extends React.Component {
   };
 
   async componentDidMount() {
-    const { prizes, getPrizes } = this.props;
-
     // const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
     // const shouldRefetchBool = JSON.parse(shouldRefetchData);
     // const hasCards = Array.isArray(prizes) && prizes.length > 0;
@@ -71,8 +69,7 @@ class PrizesListScreen extends React.Component {
     //   this.setState({ isCheckingIfCacheValid: false });
     // }
 
-    getPrizes();
-
+    this.props.getPrizes();
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { BarCodeScanner, Permissions } from "expo";
+import * as Permissions from "expo-permissions";
+import { BarCodeScanner } from "expo-barcode-scanner";
 import { AsyncStorage, Text, View, Image, StyleSheet } from "react-native";
 
 import * as Routes from "../../navigation";
@@ -89,14 +90,15 @@ class ScannerScanScreen extends React.Component {
   };
 
   redirectToTerms = (code, termsAndConditions) => {
-    const { navigation, addStamp } = this.props;
+    const { navigation } = this.props;
     const { title, termsAndConditionsUrl } = termsAndConditions;
 
     navigation.navigate(Routes.SCANNER_ACCEPT_STAMP_TERMS, {
       title,
       termsAndConditionsUrl,
       onConfirm: () => {
-        addStamp(code, true)
+        this.props
+          .addStamp(code, true)
           .then(res => {
             const { message } = res.payload.data;
 
@@ -119,7 +121,6 @@ class ScannerScanScreen extends React.Component {
     }
 
     try {
-      const { addStamp } = this.props;
       const code = getParameterByName("p", scan.data);
 
       this.props.navigation.setParams({
@@ -134,7 +135,8 @@ class ScannerScanScreen extends React.Component {
       await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
       await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
-      addStamp(code)
+      this.props
+        .addStamp(code)
         .then(res => {
           const { termsAndConditions, message } = res.payload.data;
 

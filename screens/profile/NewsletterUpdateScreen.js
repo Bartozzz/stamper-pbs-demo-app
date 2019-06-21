@@ -32,21 +32,19 @@ class NewsletterUpdateScreen extends React.Component {
     this.props.navigation.navigate(Routes.PROFILE_NEWSLETTER_TOS);
   };
 
-  accept = async () => {
-    const { navigation, updateNewsletter } = this.props;
-
+  accept = () => {
     this.setState({ processing: true });
-    updateNewsletter(true).finally(() => {
-      navigation.navigate(Routes.AUTH_LOADING);
+
+    this.props.updateNewsletter(true).finally(() => {
+      this.props.navigation.navigate(Routes.AUTH_LOADING);
     });
   };
 
   refuse = () => {
-    const { navigation, updateNewsletter } = this.props;
-
     this.setState({ processing: true });
-    updateNewsletter(false).finally(() => {
-      navigation.navigate(Routes.AUTH_LOADING);
+
+    this.props.updateNewsletter(false).finally(() => {
+      this.props.navigation.navigate(Routes.AUTH_LOADING);
     });
   };
 

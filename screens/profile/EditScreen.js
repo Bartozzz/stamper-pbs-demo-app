@@ -10,7 +10,8 @@ import {
   Text,
   View
 } from "react-native";
-import { Permissions, ImagePicker } from "expo";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 import { AntDesign } from "@expo/vector-icons";
 
 import KeyboardAware from "../../components/helpers/KeyboardAware";
@@ -85,11 +86,8 @@ class ProfileEditScreen extends React.Component {
   };
 
   uploadImage = async () => {
-    const { uploading } = this.state;
-    const { updatePhoto, setPhoto } = this.props;
-
     // Already uploading:
-    if (uploading) {
+    if (this.state.uploading) {
       return;
     }
 
@@ -110,9 +108,10 @@ class ProfileEditScreen extends React.Component {
           uploading: true
         });
 
-        updatePhoto(photo)
+        this.props
+          .updatePhoto(photo)
           .then(() => {
-            setPhoto(photo);
+            this.props.setPhoto(photo);
 
             this.props.navigation.navigate(Routes.INFO_SUCCESS, {
               redirect: Routes.PROFILE_EDIT,
@@ -131,11 +130,11 @@ class ProfileEditScreen extends React.Component {
 
   editProfile = () => {
     const { login, firstName, lastName, email, newsletter } = this.state;
-    const { updateProfile } = this.props;
 
     this.setState({ processing: true });
 
-    updateProfile(login, firstName, lastName, email, newsletter)
+    this.props
+      .updateProfile(login, firstName, lastName, email, newsletter)
       .then(this.handleSuccess)
       .catch(this.handleError);
   };

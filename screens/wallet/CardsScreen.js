@@ -24,8 +24,7 @@ import WalletHeader from "../../components/screens/wallet/Header";
 import {
   WALLET_CARDS,
   FORCE_REFRESH_WALLET,
-  getWallet,
-  removeCard
+  getWallet
 } from "../../store/reducers/wallet";
 import { formatDate } from "../../helpers/date";
 
@@ -58,8 +57,6 @@ class WalletCardsScreen extends React.Component {
   };
 
   async componentDidMount() {
-    const { cards, getWallet } = this.props;
-
     // const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_WALLET);
     // const shouldRefetchBool = JSON.parse(shouldRefetchData);
     // const hasCards = Array.isArray(cards) && cards.length > 0;
@@ -76,7 +73,7 @@ class WalletCardsScreen extends React.Component {
     //   this.setState({ isCheckingIfCacheValid: false });
     // }
 
-    getWallet();
+    this.props.getWallet();
 
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
@@ -300,8 +297,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // …
-  getWallet,
-  removeCard
+  getWallet
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletCardsScreen);

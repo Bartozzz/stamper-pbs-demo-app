@@ -1,7 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
-import { MapView, Location, Permissions } from "expo";
+import * as Permissions from "expo-permissions";
+import * as Location from "expo-location";
+import MapView from "react-native-maps";
 import Carousel from "react-native-snap-carousel";
 import {
   AsyncStorage,
@@ -93,13 +95,11 @@ class MapNearbyScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { getRegion } = this.props;
-
     this.requestUserPosition().then(data => {
       if (__DEV__) {
-        getRegion("Kraków", data.location.coords);
+        this.props.getRegion("Kraków", data.location.coords);
       } else {
-        getRegion(data.city, data.location.coords);
+        this.props.getRegion(data.city, data.location.coords);
       }
 
       this.setState(data);

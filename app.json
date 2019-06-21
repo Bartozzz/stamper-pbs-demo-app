@@ -11,7 +11,7 @@
     "primaryColor": "#0046F4",
 
     "version": "1.0.1",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],
 
     "facebookAppId": "356151625034848",
@@ -31,13 +31,23 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.getstamper.app"
+      "bundleIdentifier": "com.getstamper.app",
+
+      "config": {
+        "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
+      }
     },
 
     "android": {
       "package": "com.getstamper.app",
       "adaptiveIcon": {
         "backgroundColor": "#001432"
+      },
+
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
+        }
       }
     },
 

@@ -82,7 +82,7 @@ class WalletPlacesScreen extends React.Component {
         }
 
         return acc;
-      }, Array.from([]));
+      }, []);
 
     return (
       <FlatList

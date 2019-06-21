@@ -15,12 +15,13 @@ class AuthLoadingScreen extends React.Component {
   };
 
   componentDidMount() {
-    const { appToken, authorize } = this.props;
+    const { appToken } = this.props;
 
     if (appToken) {
       this.navigateToApp();
     } else {
-      authorize()
+      this.props
+        .authorize()
         .then(() => this.navigateToApp())
         .catch(err => console.log(err));
     }

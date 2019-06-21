@@ -1,5 +1,5 @@
 import React from "react";
-import { MapView } from "expo";
+import MapView from "react-native-maps";
 import { View, Image, StyleSheet } from "react-native";
 
 export function Marker({ item, onPress = () => null }) {
