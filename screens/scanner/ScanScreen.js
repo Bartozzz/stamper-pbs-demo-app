@@ -170,7 +170,7 @@ class ScannerScanScreen extends React.Component {
     if (focusedScreen) {
       return (
         <BarCodeScanner
-          onBarCodeRead={this.onBarCodeRead}
+          onBarCodeScanned={this.onBarCodeRead}
           style={[StyleSheet.absoluteFill, styles.scannerCamera]}
         >
           <Image
