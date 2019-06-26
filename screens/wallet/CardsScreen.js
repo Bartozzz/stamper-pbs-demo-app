@@ -4,14 +4,12 @@ import {
   AsyncStorage,
   StyleSheet,
   Image,
-  Text,
   View,
   ScrollView,
   TouchableOpacity
 } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import Toast from "react-native-easy-toast";
-import { Bar as ProgressBar } from "react-native-progress";
 
 import * as Routes from "../../navigation";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
@@ -21,12 +19,15 @@ import colors from "../../constants/Colors";
 import Background from "../../components/Background";
 import InputSearch from "../../components/forms/InputSearch";
 import WalletHeader from "../../components/screens/wallet/Header";
+import CardsList from "../../components/screens/wallet/CardsList";
+import CardFront from "../../components/screens/wallet/CardFront";
+import CardBack from "../../components/screens/wallet/CardBack";
+
 import {
   WALLET_CARDS,
   FORCE_REFRESH_WALLET,
   getWallet
 } from "../../store/reducers/wallet";
-import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
 const DeleteImage = require("../../assets/images/delete.png");
@@ -113,72 +114,15 @@ class WalletCardsScreen extends React.Component {
     }
 
     return (
-      <SwipeListView
-        useFlatList
+      <CardsList
         data={data}
-        keyExtractor={item => {
-          return item.id;
+        onCheck={item => {
+          this.navigateToCardInfo(item);
         }}
-        renderItem={(data, rowMap) => (
-          <>
-            <TouchableOpacity
-              style={[styles.item, styles.itemFront]}
-              key={data.item.id}
-              onPress={() => this.navigateToCardInfo(data.item)}
-            >
-              <View style={[defaultStyles.row]}>
-                <Text style={styles.textId}>{data.item.merchantName}</Text>
-
-                <View style={{ marginTop: 6 }}>
-                  <ProgressBar
-                    progress={data.item.stampsToDate / data.item.stampsTotal}
-                    borderRadius={0}
-                    height={6}
-                    width={140}
-                    color="#0046F5"
-                    unfilledColor="#001432"
-                    borderWidth={0}
-                  />
-                </View>
-              </View>
-
-              <View style={[defaultStyles.row, { paddingTop: 10 }]}>
-                <Image
-                  source={{ uri: data.item.logoUrl }}
-                  style={{ width: 40, height: 40, borderRadius: 20 }}
-                />
-
-                <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
-                  <View>
-                    <Text style={styles.textTitle}>{data.item.title}</Text>
-                    <Text style={styles.textExpiry}>
-                      {i18n.t("prizes.validTill", {
-                        date: formatDate(data.item.validToDate)
-                      })}
-                    </Text>
-                  </View>
-
-                  <Text style={styles.textAmount}>
-                    {data.item.stampsToDate} / {data.item.stampsTotal}
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.itemRemove}
-              onPress={() => {
-                rowMap[data.item.id].closeRow();
-                this.removeCard(data.item.id);
-              }}
-            >
-              <Image source={DeleteImage} style={styles.itemRemoveImage} />
-            </TouchableOpacity>
-          </>
-        )}
-        renderHiddenItem={() => <View />}
-        disableRightSwipe={true}
-        rightOpenValue={-(height + margin)}
+        onDelete={(item, rowMap) => {
+          rowMap[item.id].closeRow();
+          this.removeCard(item.id);
+        }}
       />
     );
   }
