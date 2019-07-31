@@ -27,7 +27,8 @@
     },
 
     "prizes": {
-      "list": "Rewards"
+      "list": "Rewards",
+      "collect": "Odbieranie nagrody"
     },
 
     "scanner": {
@@ -105,7 +106,7 @@
 
     "edit": {
       "changePhoto": "Change photo",
-      "newsletter": "Subscribe to the newsletter. "					
+      "newsletter": "Subscribe to the newsletter. "
     },
 
     "newsletter": {
@@ -117,8 +118,15 @@
   },
 
   "prizes": {
-    "receive": "Collect your reward",
-    "validTill": "valid to {{date}}"
+    "receiveOnline": "Odbierz nagrodę on-line",
+    "receiveOnPlace": "Odbierz nagrodę w placówce",
+    "quickCollect": "Szybkie odbieranie w sklepie",
+
+    "validTill": "valid to {{date}}",
+    "writeCode": "Wpisz kod nagrody:",
+
+    "available": "Nagrody do odebrania",
+    "received": "Odebrane"
   },
 
   "card": {

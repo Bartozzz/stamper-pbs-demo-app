@@ -13,6 +13,8 @@ export const INFO_SUCCESS = "InfoSuccess";
 
 export const PRIZES = "Prizes";
 export const PRIZES_LIST = "PrizesList";
+export const PRIZES_RECEIVED = "PrizesReceived";
+export const PRIZES_SELECTED = "PrizesSelected";
 
 export const MAP = "Map";
 export const MAP_ALL = "MapAll";
