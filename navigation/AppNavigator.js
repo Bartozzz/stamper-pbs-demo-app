@@ -10,7 +10,9 @@ import layout from "../constants/Layout";
 
 import InfoErrorScreen from "../screens/info/ErrorScreen";
 import InfoSuccessScreen from "../screens/info/SuccessScreen";
-import PrizesListScreen from "../screens/prizes/ListScreen";
+import PrizesAvailableScreen from "../screens/prizes/AvailableListScreen";
+import PrizesReceivedScreen from "../screens/prizes/ReceivedListScreen";
+import PrizesRewardCodeScreen from "../screens/prizes/RewardCodeScreen";
 import MapScreen from "../screens/map/MapScreen";
 import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
 import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
@@ -103,7 +105,9 @@ const InfoStack = createStackNavigator(
 
 const PrizesStack = createStackNavigator(
   {
-    [Route.PRIZES_LIST]: PrizesListScreen
+    [Route.PRIZES_LIST]: PrizesAvailableScreen,
+    [Route.PRIZES_RECEIVED]: PrizesReceivedScreen,
+    [Route.PRIZES_SELECTED]: PrizesRewardCodeScreen
   },
   {
     initialRouteName: Route.PRIZES_LIST,
