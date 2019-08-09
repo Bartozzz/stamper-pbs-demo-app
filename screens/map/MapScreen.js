@@ -251,7 +251,7 @@ class MapNearbyScreen extends React.Component {
               {item.inWallet ? (
                 <IconInWallet />
               ) : (
-                <IconAddToWallet onPress={this.addCard(selected)} />
+                <IconAddToWallet onPress={this.addCard(item.id)} />
               )}
             </View>
           )}
@@ -513,4 +513,7 @@ const mapDispatchToProps = {
   removeFav
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapNearbyScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MapNearbyScreen);
