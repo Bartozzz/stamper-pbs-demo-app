@@ -168,7 +168,7 @@
 
       "refuse": {
         "heading": "Are you sure you don't want to join this loyalty program?",
-        "subheading": "To be able to colletc stamps you need to accept terms and conditions."
+        "subheading": "To be able to collect stamps you need to accept terms and conditions."
       }
     }
   },
@@ -177,18 +177,18 @@
     "changed": "Changes have been saved!",
 
     "scanner": {
-      "add": "Stamp has been added!",
-      "subtract": "Stamp has been subtracted!",
+      "add": "Your stamp has been added!",
+      "subtract": "Your stamp has been subtracted!",
       "congratulations": "Congratulations! You have recived a reward!",
       "reward": "Congratulations! You have recived a reward!"
     },
 
     "wallet": {
-      "cardAdd": "Card\n has been added to the wallet!"
+      "cardAdd": "The card\n has been added to the wallet!"
     },
 
     "profile": {
-      "photoAdd": "Photo has been saved!"
+      "photoAdd": "Your photo has been saved!"
     }
   },
 
@@ -201,11 +201,11 @@
     },
 
     "wallet": {
-      "cardAdd": "Error adding card."
+      "cardAdd": "Error adding the card."
     },
 
     "profile": {
-      "photoAdd": "Error sending photo."
+      "photoAdd": "Error sending the photo."
     },
 
     "auth": {
@@ -213,11 +213,11 @@
     },
 
     "edit": {
-      "photo": "Error saving photo"
+      "photo": "Error saving the photo"
     },
 
     "tos": {
-      "fetch": "Error loading terms of use"
+      "fetch": "Error loading the terms of use"
     }
   }
 }
