@@ -66,4 +66,4 @@ pipelines:
             - apk add --no-cache bash
             - npm ci
             - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-            - npx expo publish --non-interactive --release-channel feature/$BITBUCKET_PR_ID
+            - npx expo publish --non-interactive --release-channel feature.$BITBUCKET_PR_ID
