@@ -306,6 +306,9 @@ class MapNearbyScreen extends React.Component {
     // keep the default rendering when rendering as a map.
     const data = getUniqueData(this.data);
 
+    // Show favourite items first:
+    data.sort(item => !item.favorite);
+
     return (
       <ScrollView style={styles.list}>
         <FlatList
@@ -326,6 +329,7 @@ class MapNearbyScreen extends React.Component {
                   <CardButton
                     title={i18n.t("map.addCard")}
                     onPress={() => null}
+                    style={{ backgroundColor: "#34dbff" }}
                     disabled
                   />
                 ) : (
@@ -356,10 +360,7 @@ class MapNearbyScreen extends React.Component {
               }
               renderSecondaryAction={() =>
                 item.inWallet ? (
-                  <WalletIcon
-                    color={colors.primary}
-                    onPress={this.navigateToWallet}
-                  />
+                  <WalletIcon color="#34dbff" onPress={this.navigateToWallet} />
                 ) : (
                   <WalletIcon color="#95989A" onPress={() => /* noop */ null} />
                 )
