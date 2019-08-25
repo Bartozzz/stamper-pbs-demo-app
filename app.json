@@ -51,23 +51,6 @@
           "apiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
         }
       }
-    },
-
-    "extra": {
-      "ios": {
-        "FACEBOOK_APP_ID": "356151625034848",
-        "GOOGLE_CLIENT_ID": "664764542609-o4r5a6sbj6av965qv6708p6mvm0aj6si.apps.googleusercontent.com",
-
-        "FACEBOOK_APP_ID_DEV": "356151625034848",
-        "GOOGLE_CLIENT_ID_DEV": "664764542609-dm39ujqp7hvebhcanqpbtkt3342ffr3l.apps.googleusercontent.com"
-      },
-      "android": {
-        "FACEBOOK_APP_ID": "356151625034848",
-        "GOOGLE_CLIENT_ID": "664764542609-hnmmq5p12fc19efikv023lhm4i8bct6k.apps.googleusercontent.com",
-
-        "FACEBOOK_APP_ID_DEV": "356151625034848",
-        "GOOGLE_CLIENT_ID_DEV": "664764542609-e79dr8nrbjsutidf2ujpam8ti8nivu6p.apps.googleusercontent.com"
-      }
     }
   }
 }

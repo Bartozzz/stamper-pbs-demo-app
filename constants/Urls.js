@@ -1,7 +1,10 @@
 import i18n from "../translations";
+import getEnvVariables from "../helpers/env";
+
+const { apiUrl } = getEnvVariables();
 
 const Server = {
-  V1: `https://app.getstamper.com`
+  V1: apiUrl
 };
 
 const V1 = {
