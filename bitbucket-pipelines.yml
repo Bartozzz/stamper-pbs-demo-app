@@ -1,0 +1,42 @@
+---
+image: node:alpine
+
+definitions:
+  caches:
+    npm: ~/.npm
+
+pipelines:
+  default:
+    - step:
+        name: Install dependencies
+        caches:
+          - node
+          - npm
+        script:
+          - npm install -g expo-cli
+          - npm install
+    - step:
+        name: Run tests
+        script:
+          - npm test
+  branches:
+    development:
+      - step:
+         name: Install dependencies
+         caches:
+           - node
+           - npm
+         script:
+           - apk add --no-cache bash
+           - npm install -g expo-cli
+           - npm install
+      - step:
+          name: Run tests
+          script:
+            - npm test
+      - step:
+          name: Deploy to Expo
+          deployment: test
+          script:
+            - npx expo login --username $EXPO_USERNAME --password $EXPO_PASSWORD
+            - npx expo publish
