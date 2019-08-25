@@ -105,7 +105,7 @@
 
     "edit": {
       "changePhoto": "Change photo",
-      "newsletter": "Subscribe to the newsletter. "					
+      "newsletter": "Subscribe to the newsletter. "
     },
 
     "newsletter": {
@@ -151,6 +151,7 @@
   "map": {
     "nearby": "My area",
     "favs": "Favourites",
+    "online": "On-line",
 
     "collectStamps": {
       "one": "collect 1 stamp",
