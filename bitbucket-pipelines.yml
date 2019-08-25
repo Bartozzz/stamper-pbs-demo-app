@@ -1,3 +1,5 @@
+# https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
+# https://confluence.atlassian.com/bitbucket/environment-variables-794502608.html
 ---
 image: node:alpine
 
@@ -6,41 +8,26 @@ definitions:
     npm: ~/.npm
     jest: .jest
 
-pipelines:
-  default:
-    - step:
-        name: Install dependencies
+  steps:
+    - step: &validate-and-test
+        name: Validate and test
         caches:
           - npm
+          - jest
         script:
-          - apk add --no-cache bash
           - npm ci
-          - npm install -g expo-cli
-          - npm install
-  #    - step:
-  #        name: Run tests
-  #        caches:
-  #          - jest
-  #        script:
-  #          - npm test
+        # - npm test
+
+pipelines:
+  default:
+    - step: *validate-and-test
 
   branches:
-    development:
-      - step:
-          name: Install dependencies
-          caches:
-            - npm
-          script:
-            - npm ci
-      #      - step:
-      #          name: Run tests
-      #          caches:
-      #            - jest
-      #          script:
-      #            - npm test
+    master:
+      - step: *validate-and-test
       - step:
           name: Deploy to Expo
-          deployment: test
+          deployment: production
           caches:
             - npm
           script:
@@ -48,3 +35,35 @@ pipelines:
             - npm ci
             - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
             - npx expo publish --non-interactive
+
+    development:
+      - step: *validate-and-test
+      - step:
+          name: Deploy to Expo
+          deployment: staging
+          caches:
+            - npm
+          script:
+            - apk add --no-cache bash
+            - npm ci
+            - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+            - npx expo publish --non-interactive --release-channel staging
+
+    pull-requests:
+      # This runs as default for any branch not elsewhere defined
+      - "**":
+          - step: *validate-and-test
+
+      # Any branch with a feature prefix
+      - feature/*:
+          - step: *validate-and-test
+          - step:
+              name: Deploy to Expo
+              deployment: test
+              caches:
+                - npm
+              script:
+                - apk add --no-cache bash
+                - npm ci
+                - npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+                - npx expo publish --non-interactive --release-channel feature/$BITBUCKET_PR_ID
