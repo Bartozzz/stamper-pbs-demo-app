@@ -52,7 +52,7 @@ import CardAdd from "../../assets/success/card_add.gif";
 const MODE_MAP = "MODE_MAP";
 const MODE_CARD = "MODE_CARD";
 const FILTER_ALL = "FILTER_ALL";
-const FILTER_FAV = "FILTER_FAV";
+const FILTER_ONLINE = "FILTER_ONLINE";
 
 class MapNearbyScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -89,9 +89,9 @@ class MapNearbyScreen extends React.Component {
   }
 
   get data() {
-    const pickOnlyFavourites = this.state.filter === FILTER_FAV;
+    const pickOnlyOnline = this.state.filter === FILTER_ONLINE;
 
-    return getData(this.props.data, pickOnlyFavourites);
+    return getData(this.props.data, pickOnlyOnline);
   }
 
   componentDidMount() {
@@ -401,10 +401,10 @@ class MapNearbyScreen extends React.Component {
           mode={mode}
           navigation={navigation}
           onSelectNearby={this.setFilter(FILTER_ALL)}
-          onSelectFav={this.setFilter(FILTER_FAV)}
+          onSelectFav={this.setFilter(FILTER_ONLINE)}
           onToggleMode={this.toggleMode}
           nearby={filter === FILTER_ALL}
-          fav={filter === FILTER_FAV}
+          fav={filter === FILTER_ONLINE}
         />
 
         {this.renderData()}
