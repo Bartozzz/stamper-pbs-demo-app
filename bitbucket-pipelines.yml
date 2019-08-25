@@ -15,25 +15,25 @@ pipelines:
         script:
           - npm install -g expo-cli
           - npm install
-    - step:
-        name: Run tests
-        script:
-          - npm test
+  #    - step:
+  #        name: Run tests
+  #        script:
+  #          - npm test
   branches:
     development:
       - step:
-         name: Install dependencies
-         caches:
-           - node
-           - npm
-         script:
-           - apk add --no-cache bash
-           - npm install -g expo-cli
-           - npm install
-      - step:
-          name: Run tests
+          name: Install dependencies
+          caches:
+            - node
+            - npm
           script:
-            - npm test
+            - apk add --no-cache bash
+            - npm install -g expo-cli
+            - npm install
+      #      - step:
+      #          name: Run tests
+      #          script:
+      #            - npm test
       - step:
           name: Deploy to Expo
           deployment: test
