@@ -66,7 +66,7 @@ export default function MapHeader(props) {
 
       <TouchableOpacity style={defaultStyles.grow} onPress={props.onSelectFav}>
         <View style={favBorderStyles}>
-          <Text style={favStyles}>{i18n.t("map.favs")}</Text>
+          <Text style={favStyles}>{i18n.t("map.online")}</Text>
         </View>
       </TouchableOpacity>
     </View>
