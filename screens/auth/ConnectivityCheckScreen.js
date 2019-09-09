@@ -9,14 +9,23 @@ import OfflineImage from "../../assets/offline.png";
 const ConnectivityCheckScreen = ({ navigation }) => {
   const [isOffline, setIsOffline] = React.useState(false);
 
+  const networkListener = React.useCallback(isConnected => {
+    console.log("Network status changed", isConnected);
+
+    if (!isConnected) {
+      setIsOffline(true);
+    } else {
+      navigation.navigate(Routes.AUTH_LOADING);
+    }
+  }, []);
+
   React.useEffect(() => {
-    NetInfo.isConnected.fetch().then(isConnected => {
-      if (!isConnected) {
-        setIsOffline(true);
-      } else {
-        navigation.navigate(Routes.AUTH_LOADING);
-      }
-    });
+    const subscription = NetInfo.isConnected.addEventListener(
+      "connectionChange",
+      networkListener
+    );
+
+    return subscription.remove;
   }, []);
 
   if (isOffline) {
