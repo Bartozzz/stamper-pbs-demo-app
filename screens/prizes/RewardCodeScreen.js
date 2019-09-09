@@ -65,9 +65,14 @@ class RewardCodeScreen extends React.Component {
           </View>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <Button title={i18n.t("prizes.quickCollect")} onPress={() => null} />
-        </View>
+        {!!card.collectOnlineUrl && (
+          <View style={styles.buttonContainer}>
+            <Button
+              title={i18n.t("prizes.quickCollect")}
+              onPress={() => null}
+            />
+          </View>
+        )}
       </Background>
     );
   }
