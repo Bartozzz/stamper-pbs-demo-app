@@ -1,4 +1,5 @@
 export const AUTH = "Auth";
+export const AUTH_CONNECTIVITY_CHECK = "AuthConnectivityCheck";
 export const AUTH_LOADING = "AuthLoading";
 export const AUTH_LOGIN = "AuthLogin";
 export const AUTH_REGISTER = "AuthRegister";
