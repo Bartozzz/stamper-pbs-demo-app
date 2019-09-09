@@ -76,8 +76,8 @@ class RewardCodeScreen extends React.Component {
 const styles = StyleSheet.create({
   // …
   about: {
-    marginTop: 90,
-    marginBottom: 60
+    marginTop: 60,
+    marginBottom: 40
   },
   aboutIcon: {
     alignSelf: "center",
