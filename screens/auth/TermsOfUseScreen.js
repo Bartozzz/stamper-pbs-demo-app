@@ -30,7 +30,7 @@ class TermsOfUseScreen extends React.Component {
   };
 
   showTerms = () => {
-    this.props.navigation.navigate(Routes.AUTH_TOS);
+    this.props.navigation.push(Routes.AUTH_TOS);
   };
 
   render() {

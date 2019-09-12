@@ -68,16 +68,15 @@ class WalletPlacesScreen extends React.Component {
             }
           ];
         } else {
-          acc = acc.map(
-            (e, i) =>
-              i === index
-                ? {
-                    ...e,
-                    stampsTotal: e.stampsTotal + curr.stampsTotal,
-                    stampsToDate: e.stampsToDate + curr.stampsToDate,
-                    cardsAmount: e.cardsAmount + 1
-                  }
-                : e
+          acc = acc.map((e, i) =>
+            i === index
+              ? {
+                  ...e,
+                  stampsTotal: e.stampsTotal + curr.stampsTotal,
+                  stampsToDate: e.stampsToDate + curr.stampsToDate,
+                  cardsAmount: e.cardsAmount + 1
+                }
+              : e
           );
         }
 
@@ -102,7 +101,7 @@ class WalletPlacesScreen extends React.Component {
               <CardButton
                 title={i18n.t("wallet.seeCards")}
                 onPress={() => {
-                  navigation.navigate(Routes.CARD_INFO, {
+                  navigation.push(Routes.CARD_INFO, {
                     merchant: item.merchantName,
                     cards: cards.filter(
                       c => c.merchantName === item.merchantName
@@ -160,4 +159,7 @@ const mapDispatchToProps = {
   getWallet
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletPlacesScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletPlacesScreen);

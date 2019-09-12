@@ -181,7 +181,7 @@ class MapNearbyScreen extends React.Component {
         const { title, termsAndConditionsUrl } = termsAndConditions;
 
         if (termsAndConditionsUrl) {
-          navigation.navigate(Routes.MAP_ACCEPT_CARD_TERMS, {
+          navigation.push(Routes.MAP_ACCEPT_CARD_TERMS, {
             title,
             termsAndConditionsUrl,
             onConfirm: confirmCardTerms
@@ -297,7 +297,7 @@ class MapNearbyScreen extends React.Component {
   }
 
   navigateToWallet = () => {
-    this.props.navigation.navigate(Routes.WALLET);
+    this.props.navigation.push(Routes.WALLET);
   };
 
   renderDataAsCards() {

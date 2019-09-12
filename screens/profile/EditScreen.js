@@ -140,7 +140,7 @@ class ProfileEditScreen extends React.Component {
   };
 
   showNewsletterTerms = () => {
-    this.props.navigation.navigate(Routes.PROFILE_NEWSLETTER_TOS);
+    this.props.navigation.push(Routes.PROFILE_NEWSLETTER_TOS);
   };
 
   handleSuccess = async () => {
@@ -370,4 +370,7 @@ const mapDispatchToProps = {
   setPhoto
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileEditScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileEditScreen);

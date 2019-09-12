@@ -74,7 +74,7 @@ class PrizesListScreen extends React.Component {
   }
 
   claimPrize = () => {
-    this.props.navigation.navigate(Routes.SCANNER, {
+    this.props.navigation.push(Routes.SCANNER, {
       type: Routes.PRIZES
     });
   };
@@ -309,4 +309,7 @@ const mapDispatchToProps = {
   getPrizes
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrizesListScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrizesListScreen);
