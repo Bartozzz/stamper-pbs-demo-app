@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
 
-    marginTop: 80,
-    marginBottom: 30
+    marginTop: 40,
+    marginBottom: 0
   },
 
   buttons: {
@@ -117,6 +117,7 @@ const mapDispatchToProps = {
   updateNewsletter
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  NewsletterUpdateScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewsletterUpdateScreen);
