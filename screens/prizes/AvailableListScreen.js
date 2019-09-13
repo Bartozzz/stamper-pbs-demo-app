@@ -74,10 +74,14 @@ class PrizesListScreen extends React.Component {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
-  claimPrize = () => {
+  claimPrizeOnline = () => {
     this.props.navigation.navigate(Routes.PRIZES_SELECTED, {
       card: this.state.selected
     });
+  };
+
+  claimPrizeOffline = () => {
+    this.props.navigation.navigate(Routes.SCANNER);
   };
 
   selectPrize = prize => () => {
@@ -209,19 +213,21 @@ class PrizesListScreen extends React.Component {
 
         {selected && (
           <View style={styles.buttonContainer}>
-            <Button
-              title={i18n.t("prizes.receiveOnline")}
-              onPress={this.claimPrize}
-              disabled={!selected.collectOnline}
-              style={styles.button}
-            />
+            {selected.collectOnline && (
+              <Button
+                title={i18n.t("prizes.receiveOnline")}
+                onPress={this.claimPrizeOnline}
+                style={styles.button}
+              />
+            )}
 
-            <Button
-              title={i18n.t("prizes.receiveOnPlace")}
-              onPress={this.claimPrize}
-              disabled={!selected.collectOnline}
-              style={styles.button}
-            />
+            {selected.collectOnline && (
+              <Button
+                title={i18n.t("prizes.receiveOnPlace")}
+                onPress={this.claimPrizeOffline}
+                style={styles.button}
+              />
+            )}
           </View>
         )}
       </Background>
