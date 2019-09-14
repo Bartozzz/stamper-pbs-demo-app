@@ -119,7 +119,7 @@
 
   "prizes": {
     "receiveOnline": "Odbierz nagrodę on-line",
-    "receiveOnPlace": "Odbierz nagrodę w placówce",
+    "receiveOnPlace": "Odbierz nagrodę",
     "quickCollect": "Szybkie odbieranie w sklepie",
 
     "validTill": "ważna do {{date}}",

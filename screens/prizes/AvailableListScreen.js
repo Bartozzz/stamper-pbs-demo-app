@@ -215,19 +215,18 @@ class PrizesListScreen extends React.Component {
           <View style={styles.buttonContainer}>
             {selected.collectOnline && (
               <Button
-                title={i18n.t("prizes.receiveOnline")}
-                onPress={this.claimPrizeOnline}
-                style={styles.button}
-              />
-            )}
-
-            {selected.collectOnline && (
-              <Button
                 title={i18n.t("prizes.receiveOnPlace")}
                 onPress={this.claimPrizeOffline}
                 style={styles.button}
               />
-            )}
+            )}			
+			{selected.collectOnline && (
+              <Button
+                title={i18n.t("prizes.receiveOnline")}
+                onPress={this.claimPrizeOnline}
+                style={styles.button}
+              />
+            )}            
           </View>
         )}
       </Background>
