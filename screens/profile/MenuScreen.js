@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 10,
     marginHorizontal: 40,
-    marginTop: 40,
-    marginBottom: 10,
+    marginTop: 25,
 
     borderRadius: 10,
     backgroundColor: colors.background
@@ -141,11 +140,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border
   },
   menuItem: {
-    marginVertical: 16
+    marginVertical: 14
   },
   menuItemText: {
     color: colors.color,
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: "poppins-regular",
     textAlign: "center"
   }
@@ -162,4 +161,7 @@ const mapDispatchToProps = {
   // …
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenuScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileMenuScreen);
