@@ -120,8 +120,6 @@ class PrizesListScreen extends React.Component {
         renderItem={({ item }) => {
           const isSelected = selected && selected.id === item.id;
 
-          console.log(item);
-
           return (
             <TouchableOpacity
               key={item.id}
