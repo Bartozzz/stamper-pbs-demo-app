@@ -18,6 +18,7 @@ import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
 import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
 import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
+import AuthConnectivityCheckScreen from "../screens/auth/ConnectivityCheckScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
@@ -209,6 +210,7 @@ export default createAppContainer(
       [Route.PRIZES]: PrizesStack,
       [Route.MAP]: MapStack,
       [Route.CARD]: CardStack,
+      [Route.AUTH_CONNECTIVITY_CHECK]: AuthConnectivityCheckScreen,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,
@@ -216,7 +218,7 @@ export default createAppContainer(
       [Route.WALLET]: WalletStack
     },
     {
-      initialRouteName: Route.AUTH_LOADING
+      initialRouteName: Route.AUTH_CONNECTIVITY_CHECK
     }
   )
 );
