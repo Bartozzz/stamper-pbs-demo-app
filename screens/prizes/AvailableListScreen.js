@@ -156,19 +156,30 @@ class PrizesListScreen extends React.Component {
                       {item.title}
                     </Text>
 
-                    <Text
-                      style={[
-                        styles.textExpiry,
-                        isSelected && styles.textExpirySelected
-                      ]}
-                    >
-                      {i18n.t("prizes.validTill", {
-                        date: ExpirationDate({
-                          isValid: item.validTo,
-                          expirationDate: item.validToDate
-                        })
-                      })}
-                    </Text>
+                    <View style={styles.otherInformations}>
+                      <Text
+                        style={[
+                          styles.textExpiry,
+                          isSelected && styles.textExpirySelected
+                        ]}
+                      >
+                        {i18n.t("prizes.validTill", {
+                          date: ExpirationDate({
+                            isValid: item.validTo,
+                            expirationDate: item.validToDate
+                          })
+                        })}
+                      </Text>
+
+                      <Text
+                        style={[
+                          styles.textCardNumber,
+                          isSelected && styles.textCardNumberSelected
+                        ]}
+                      >
+                        NR {item.cardNumber}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
@@ -219,14 +230,15 @@ class PrizesListScreen extends React.Component {
                 onPress={this.claimPrizeOffline}
                 style={styles.button}
               />
-            )}			
-			{selected.collectOnline && (
+            )}
+
+            {selected.collectOnline && (
               <Button
                 title={i18n.t("prizes.receiveOnline")}
                 onPress={this.claimPrizeOnline}
                 style={styles.button}
               />
-            )}            
+            )}
           </View>
         )}
       </Background>
@@ -310,13 +322,32 @@ const styles = StyleSheet.create({
     color: "#95989A"
   },
 
+  otherInformations: {
+    marginTop: 5,
+
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+
   textExpiry: {
-    marginTop: 11,
+    width: "50%",
 
     fontSize: 9,
     color: "#74798B"
   },
   textExpirySelected: {
+    color: "#74798B"
+  },
+
+  textCardNumber: {
+    width: "50%",
+
+    fontSize: 9,
+    color: "#74798B",
+    textAlign: "right"
+  },
+  textCardNumberSelected: {
     color: "#74798B"
   }
 });
