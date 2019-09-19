@@ -329,7 +329,6 @@ class MapNearbyScreen extends React.Component {
                   <CardButton
                     title={i18n.t("map.addCard")}
                     onPress={() => null}
-                    style={{ backgroundColor: "#34dbff" }}
                     disabled
                   />
                 ) : (
@@ -360,7 +359,10 @@ class MapNearbyScreen extends React.Component {
               }
               renderSecondaryAction={() =>
                 item.inWallet ? (
-                  <WalletIcon color="#34dbff" onPress={this.navigateToWallet} />
+                  <WalletIcon
+                    color={colors.primary}
+                    onPress={this.navigateToWallet}
+                  />
                 ) : (
                   <WalletIcon color="#95989A" onPress={() => /* noop */ null} />
                 )
