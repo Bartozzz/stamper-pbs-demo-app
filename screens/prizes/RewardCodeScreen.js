@@ -45,9 +45,12 @@ class RewardCodeScreen extends React.Component {
     headerStyle: defaultStyles.headerTwoLines
   });
 
+  openLinkInBrowser = link => {
+    return Linking.openURL(link);
+  };
+
   render() {
     const { navigation } = this.props;
-
     const card = navigation.getParam("card");
 
     return (
@@ -69,7 +72,7 @@ class RewardCodeScreen extends React.Component {
           <View style={styles.buttonContainer}>
             <Button
               title={i18n.t("prizes.quickCollect")}
-              onPress={() => null}
+              onPress={() => this.openLinkInBrowser(card.collectOnlineUrl)}
             />
           </View>
         )}
