@@ -40,7 +40,7 @@
 
     "android": {
       "package": "com.getstamper.app",
-      "versionCode": 6,
+      "versionCode": 7,
 
       "adaptiveIcon": {
         "backgroundColor": "#001432"
