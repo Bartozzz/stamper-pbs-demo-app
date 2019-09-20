@@ -1,32 +1,8 @@
 import { Google } from "expo";
-import Constants from "expo-constants";
 import * as Facebook from "expo-facebook";
-import { Platform } from "react-native";
+import getEnvVariables from "./env";
 
-let FACEBOOK_APP_ID;
-let GOOGLE_CLIENT_ID;
-
-if (__DEV__) {
-  FACEBOOK_APP_ID = Platform.select({
-    ios: Constants.manifest.extra.ios.FACEBOOK_APP_ID_DEV,
-    android: Constants.manifest.extra.android.FACEBOOK_APP_ID_DEV
-  });
-
-  GOOGLE_CLIENT_ID = Platform.select({
-    ios: Constants.manifest.extra.ios.GOOGLE_CLIENT_ID_DEV,
-    android: Constants.manifest.extra.android.GOOGLE_CLIENT_ID_DEV
-  });
-} else {
-  FACEBOOK_APP_ID = Platform.select({
-    ios: Constants.manifest.extra.ios.FACEBOOK_APP_ID,
-    android: Constants.manifest.extra.android.FACEBOOK_APP_ID
-  });
-
-  GOOGLE_CLIENT_ID = Platform.select({
-    ios: Constants.manifest.extra.ios.GOOGLE_CLIENT_ID,
-    android: Constants.manifest.extra.android.GOOGLE_CLIENT_ID
-  });
-}
+const { facebookAppId, googleClientId } = getEnvVariables();
 
 export async function fetchUserByFacebookAccessToken(token) {
   const endpoint = "https://graph.facebook.com/me?fields=email";
@@ -40,7 +16,7 @@ export async function fetchUserByFacebookAccessToken(token) {
 
 export async function logInWithGoogle(onSuccess, onError) {
   try {
-    const clientId = GOOGLE_CLIENT_ID;
+    const clientId = googleClientId;
     const { type, user } = await Google.logInAsync({ clientId });
 
     if (type !== "success") {
@@ -55,7 +31,7 @@ export async function logInWithGoogle(onSuccess, onError) {
 
 export async function logInWithFacebook(onSuccess, onError) {
   try {
-    const fid = FACEBOOK_APP_ID;
+    const fid = facebookAppId;
     const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
 
     if (type !== "success") {

@@ -1,6 +1,6 @@
-export function getData(data, filterFavorites) {
-  if (filterFavorites) {
-    return data.filter(item => item.favorite);
+export function getData(data, filterOnline) {
+  if (filterOnline) {
+    return data.filter(item => item.online);
   } else {
     return data;
   }

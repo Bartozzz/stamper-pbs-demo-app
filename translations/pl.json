@@ -27,7 +27,8 @@
     },
 
     "prizes": {
-      "list": "Nagrody"
+      "list": "Nagrody",
+      "collect": "Odbieranie nagrody"
     },
 
     "scanner": {
@@ -117,8 +118,15 @@
   },
 
   "prizes": {
-    "receive": "Odbierz nagrodę",
-    "validTill": "ważna do {{date}}"
+    "receiveOnline": "Odbierz nagrodę on-line",
+    "receiveOnPlace": "Odbierz nagrodę",
+    "quickCollect": "Szybkie odbieranie w sklepie",
+
+    "validTill": "ważna do {{date}}",
+    "writeCode": "Wpisz kod nagrody:",
+
+    "available": "Nagrody do odebrania",
+    "received": "Odebrane"
   },
 
   "card": {
@@ -151,6 +159,7 @@
   "map": {
     "nearby": "W pobliżu",
     "favs": "Ulubione",
+    "online": "On-line",
 
     "collectStamps": {
       "one": "zbierz 1 pieczątkę",

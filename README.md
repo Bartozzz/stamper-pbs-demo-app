@@ -1,4 +1,4 @@
-# QR Scanner
+# Stamper app
 
 ## Getting started
 

@@ -10,12 +10,15 @@ import layout from "../constants/Layout";
 
 import InfoErrorScreen from "../screens/info/ErrorScreen";
 import InfoSuccessScreen from "../screens/info/SuccessScreen";
-import PrizesListScreen from "../screens/prizes/ListScreen";
+import PrizesAvailableScreen from "../screens/prizes/AvailableListScreen";
+import PrizesReceivedScreen from "../screens/prizes/ReceivedListScreen";
+import PrizesRewardCodeScreen from "../screens/prizes/RewardCodeScreen";
 import MapScreen from "../screens/map/MapScreen";
 import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
 import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
 import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
+import AuthConnectivityCheckScreen from "../screens/auth/ConnectivityCheckScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
@@ -103,7 +106,9 @@ const InfoStack = createStackNavigator(
 
 const PrizesStack = createStackNavigator(
   {
-    [Route.PRIZES_LIST]: PrizesListScreen
+    [Route.PRIZES_LIST]: PrizesAvailableScreen,
+    [Route.PRIZES_RECEIVED]: PrizesReceivedScreen,
+    [Route.PRIZES_SELECTED]: PrizesRewardCodeScreen
   },
   {
     initialRouteName: Route.PRIZES_LIST,
@@ -205,6 +210,7 @@ export default createAppContainer(
       [Route.PRIZES]: PrizesStack,
       [Route.MAP]: MapStack,
       [Route.CARD]: CardStack,
+      [Route.AUTH_CONNECTIVITY_CHECK]: AuthConnectivityCheckScreen,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.DASHBOARD]: DashboardStack,
       [Route.SCANNER]: ScannerStack,
@@ -212,7 +218,7 @@ export default createAppContainer(
       [Route.WALLET]: WalletStack
     },
     {
-      initialRouteName: Route.AUTH_LOADING
+      initialRouteName: Route.AUTH_CONNECTIVITY_CHECK
     }
   )
 );
