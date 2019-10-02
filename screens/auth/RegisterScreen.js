@@ -171,12 +171,6 @@ export const AuthRegisterScreenLinks = props => (
 );
 
 const styles = StyleSheet.create({
-  hero: {
-    flex: 1,
-    minHeight: 230,
-    maxHeight: Math.max(250, (Dimensions.get("window").height - 170) / 2)
-  },
-
   regBold: {
     fontWeight: "900"
   },
