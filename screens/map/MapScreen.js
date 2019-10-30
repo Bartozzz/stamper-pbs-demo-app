@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
-import Carousel from "react-native-snap-carousel";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 import {
   AsyncStorage,
   Dimensions,
@@ -70,6 +70,7 @@ class MapNearbyScreen extends React.Component {
   state = {
     mode: MODE_MAP,
     filter: FILTER_ALL,
+    active: 0,
     region: null,
     selected: null,
     city: null,
@@ -156,7 +157,10 @@ class MapNearbyScreen extends React.Component {
   };
 
   selectCard = cardId => () => {
-    this.setState({ selected: cardId });
+    this.setState({
+      selected: cardId,
+      active: 0
+    });
   };
 
   addCard = cardId => () => {
@@ -210,7 +214,7 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderSelectedCardOnMap() {
-    const { selected } = this.state;
+    const { selected, active } = this.state;
     const selectedCard = this.data.find(item => item.id === selected);
 
     // If no card is selected, render nothing:
@@ -229,6 +233,18 @@ class MapNearbyScreen extends React.Component {
 
     return (
       <View style={styles.selectedContainer}>
+        <Pagination
+          dotsLength={selectedBatch.length}
+          carouselRef={this.carouselRef}
+          activeDotIndex={active}
+          containerStyle={styles.paginationContainer}
+          dotColor={colors.color}
+          dotStyle={styles.paginationDot}
+          inactiveDotColor={colors.color}
+          inactiveDotOpacity={0.5}
+          inactiveDotScale={1}
+        />
+
         <Carousel
           ref={carousel => (this.carouselRef = carousel)}
           data={selectedBatch}
@@ -497,6 +513,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background
   },
 
+  paginationDot: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    padding: 0,
+
+    width: 6,
+    height: 6,
+    borderRadius: 6
+  },
+  paginationContainer: {
+    position: "absolute",
+    bottom: 80,
+
+    // Take all the width:
+    left: 0,
+    right: 0,
+
+    marginBottom: 0
+  },
   selectedContainer: {
     zIndex: 3,
 
@@ -505,9 +540,7 @@ const styles = StyleSheet.create({
 
     // Take all the width:
     left: 0,
-    right: 0,
-
-    height: 100
+    right: 0
   },
   selected: {
     flexDirection: "row",
