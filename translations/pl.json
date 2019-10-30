@@ -167,6 +167,13 @@
       "other": "zbierz {{count}} pieczątek",
       "zero": "brak pieczątek do zebrania"
     },
+    "validDays": {
+      "one": "Ważna przez 1 dzień",
+      "few": "Ważna przez {{count}} dni",
+      "other": "Ważna przez {{count}} dni",
+      "zero": "Nieważna"
+    },
+    "validTill": "Ważna do {{date}}",
     "addCard": "Dodaj kartę",
     "cardAlreadyAdded": "Karta już w portfelu",
 

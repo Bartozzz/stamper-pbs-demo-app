@@ -252,11 +252,20 @@ class MapNearbyScreen extends React.Component {
 
               <View style={styles.selectedInfoContainer}>
                 <Text style={styles.selectedTitle}>{item.title}</Text>
-                <Text style={styles.selectedAmount}>
-                  {i18n.t("map.collectStamps", {
-                    count: item.stampsTotal
-                  })}
-                </Text>
+
+                <View style={styles.otherInformations}>
+                  <Text style={styles.selectedAmount}>
+                    {i18n.t("map.collectStamps", {
+                      count: item.stampsTotal
+                    })}
+                  </Text>
+
+                  <Text style={styles.selectedValidTill}>
+                    {item.validTo
+                      ? i18n.t("map.validTill", { date: item.validToDate })
+                      : i18n.t("map.validDays", { count: item.validDays })}
+                  </Text>
+                </View>
               </View>
 
               {item.inWallet ? (
@@ -572,6 +581,17 @@ const styles = StyleSheet.create({
     color: "#709BE7",
     fontSize: 9,
     fontFamily: layout.fontText
+  },
+  selectedValidTill: {
+    marginLeft: 10,
+
+    color: "#709BE7",
+    fontSize: 9,
+    fontFamily: layout.fontText
+  },
+
+  otherInformations: {
+    flexDirection: "row"
   }
 });
 

@@ -167,6 +167,13 @@
       "other": "collect {{count}} stamps",
       "zero": "no stamps to collect"
     },
+    "validDays": {
+      "one": "Ważna przez 1 dzień",
+      "few": "Ważna przez {{count}} dni",
+      "other": "Ważna przez {{count}} dni",
+      "zero": "Nieważna"
+    },
+    "validTill": "Ważna do {{date}}",
     "addCard": "Add card",
     "cardAlreadyAdded": "Card in my wallet",
 
