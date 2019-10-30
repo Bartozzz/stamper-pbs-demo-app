@@ -28,8 +28,14 @@ export const CardFront = ({ data, onPress }) => {
 
       <View style={[defaultStyles.row, { paddingTop: 10 }]}>
         <Image
+          resizeMode="contain"
           source={{ uri: data.logoUrl }}
-          style={{ width: 40, height: 40, borderRadius: 20 }}
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            backgroundColor: "white"
+          }}
         />
 
         <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
