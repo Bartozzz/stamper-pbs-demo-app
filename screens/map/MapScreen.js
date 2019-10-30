@@ -242,7 +242,9 @@ class MapNearbyScreen extends React.Component {
           data={selectedBatch}
           onSnapToItem={index => this.setState({ active: index })}
           renderItem={({ item }) => (
-            <View style={styles.selected}>
+            <View
+              style={[styles.selected, !item.active && styles.selectedInactive]}
+            >
               <View style={styles.selectedImageContainer}>
                 <Image
                   style={styles.selectedImage}
@@ -262,7 +264,9 @@ class MapNearbyScreen extends React.Component {
               {item.inWallet ? (
                 <IconInWallet />
               ) : (
-                <IconAddToWallet onPress={this.addCard(item.id)} />
+                <IconAddToWallet
+                  onPress={item.active ? this.addCard(item.id) : () => null}
+                />
               )}
             </View>
           )}
@@ -540,6 +544,9 @@ const styles = StyleSheet.create({
     borderRadius: 80,
 
     backgroundColor: colors.primary
+  },
+  selectedInactive: {
+    backgroundColor: colors.disabled
   },
   selectedImageContainer: {
     marginHorizontal: 12,
