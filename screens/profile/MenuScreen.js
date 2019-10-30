@@ -17,6 +17,7 @@ class ProfileMenuScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.menu"),
     headerTitle: "",
+    headerLeft: null,
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTransparent
     // headerTransparent: true

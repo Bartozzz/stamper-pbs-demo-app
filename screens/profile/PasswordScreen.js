@@ -26,7 +26,7 @@ class ProfilePasswordScreen extends React.Component {
     headerLeft: (
       <HeaderBackIcon
         navigation={navigation}
-        onPress={() => navigation.navigate(Routes.PROFILE_MENU)}
+        onPress={() => navigation.goBack()}
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
@@ -182,6 +182,7 @@ const mapDispatchToProps = {
   changePassword
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ProfilePasswordScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfilePasswordScreen);

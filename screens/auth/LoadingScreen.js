@@ -51,7 +51,7 @@ class AuthLoadingScreen extends React.Component {
 
   handleAuthorized = async response => {
     const { navigation } = this.props;
-    const nextScreen = navigation.getParam("redirect", Routes.DASHBOARD);
+    const nextScreen = navigation.getParam("redirect", Routes.APP);
 
     try {
       if (response.payload.data.email) {
@@ -97,4 +97,7 @@ const mapDispatchToProps = {
   setAccessToken
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthLoadingScreen);
