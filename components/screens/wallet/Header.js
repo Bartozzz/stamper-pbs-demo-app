@@ -21,13 +21,13 @@ export default function WalletHeader(props) {
       <Text style={styles.tabsTitle}>{props.title}</Text>
 
       <TouchableOpacity
-        onPress={() => props.navigation.navigate(Routes.WALLET_CARDS)}
+        onPress={() => props.navigation.push(Routes.WALLET_CARDS)}
       >
         <Text style={cardsStyles}>{i18n.t("wallet.cards")}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => props.navigation.navigate(Routes.WALLET_PLACES)}
+        onPress={() => props.navigation.push(Routes.WALLET_PLACES)}
       >
         <Text style={placesStyles}>{i18n.t("wallet.places")}</Text>
       </TouchableOpacity>

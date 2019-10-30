@@ -80,7 +80,7 @@ class WalletCardsScreen extends React.Component {
   }
 
   removeCard = cardId => {
-    this.props.navigation.navigate(Routes.WALLET_CARD_REMOVAL_CONFIRMATION, {
+    this.props.navigation.push(Routes.WALLET_CARD_REMOVAL_CONFIRMATION, {
       cardId: cardId
     });
   };
@@ -90,7 +90,7 @@ class WalletCardsScreen extends React.Component {
   };
 
   navigateToCardInfo = card => {
-    this.props.navigation.navigate(Routes.CARD_INFO, {
+    this.props.navigation.push(Routes.CARD_INFO, {
       merchant: "",
       cards: [card],
       backTo: Routes.WALLET_CARDS
@@ -244,4 +244,7 @@ const mapDispatchToProps = {
   getWallet
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletCardsScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletCardsScreen);
