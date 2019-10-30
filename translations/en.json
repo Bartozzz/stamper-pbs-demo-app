@@ -27,7 +27,8 @@
     },
 
     "prizes": {
-      "list": "Rewards"
+      "list": "Rewards",
+      "collect": "Collect on-line"
     },
 
     "scanner": {
@@ -64,7 +65,7 @@
     "forgotPassword": "Reset password.",
 
     "hero": {
-      "slogan1": "Join more \n loyal customers!",
+      "slogan1": "Join the \n loyal crowd!",
       "slogan2": "Stamper gives you many opportunities \n without any obligations."
     },
 
@@ -117,8 +118,15 @@
   },
 
   "prizes": {
-    "receive": "Collect your reward",
-    "validTill": "valid to {{date}}"
+    "receiveOnline": "Collect reward on-line",
+    "receiveOnPlace": "Collect reward",
+    "quickCollect": "Direct link to your reward",
+
+    "validTill": "valid to {{date}}",
+    "writeCode": "Your code:",
+
+    "available": "Rewards to collect",
+    "received": "Received"
   },
 
   "card": {
@@ -149,7 +157,7 @@
   },
 
   "map": {
-    "nearby": "My area",
+    "nearby": "Close by",
     "favs": "Favourites",
     "online": "On-line",
 
@@ -197,8 +205,8 @@
     "changed": "Changes have not been saved!",
 
     "scanner": {
-      "stampAdd": "Error adding stamp.",
-      "claimPrize": "Error collecting reward."
+      "stampAdd": "Error adding your stamp.",
+      "claimPrize": "Error collecting your reward."
     },
 
     "wallet": {

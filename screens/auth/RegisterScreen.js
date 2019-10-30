@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Animated,
   StyleSheet,
   Text,
   AsyncStorage,
@@ -12,8 +11,6 @@ import {
 } from "react-native";
 import Background from "../../components/Background";
 
-import KeyboardAware from "../../components/helpers/KeyboardAware";
-import AuthHero from "../../components/screens/auth/Hero";
 import Button from "../../components/forms/Button";
 import InputWithIcon from "../../components/forms/InputWithIcon";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
@@ -48,8 +45,6 @@ class AuthRegisterScreen extends React.Component {
 
   state = {
     processing: false,
-
-    topAnim: new Animated.Value(0),
 
     nickname: __DEV__ ? "testing" : null,
     password: __DEV__ ? "Test1234+" : null,
@@ -112,81 +107,52 @@ class AuthRegisterScreen extends React.Component {
     this.props.navigation.navigate(Routes.AUTH_TOS);
   };
 
-  handleKeyboardShow = keyboardHeight => {
-    Animated.timing(this.state.topAnim, {
-      toValue: -keyboardHeight,
-      duration: 250
-    }).start();
-  };
-
-  handleKeyboardHide = () => {
-    Animated.timing(this.state.topAnim, {
-      toValue: 0,
-      duration: 250
-    }).start();
-  };
-
   render() {
-    const { topAnim, nickname, password, email, error } = this.state;
+    const { nickname, password, email, error } = this.state;
 
     return (
-      <KeyboardAware
-        onKeyboardShow={this.handleKeyboardShow}
-        onKeyboardHide={this.handleKeyboardHide}
-      >
-        {() => (
-          <View style={defaultStyles.container}>
-            <AuthHero style={[styles.hero]} />
+      <Background source={BackgroundImage} disableScroll>
+        <ScrollView style={styles.regContainer}>
+          <InputWithIcon
+            iconName="ios-contact"
+            iconSize={20}
+            placeholder={i18n.t("auth.nickname")}
+            value={nickname}
+            error={error.nickname}
+            onChangeText={nickname => this.setState({ nickname })}
+            autoCapitalize="none"
+          />
 
-            <Animated.View
-              style={[{ flex: 1 }, { minHeight: 350 }, { top: topAnim }]}
-            >
-              <Background source={BackgroundImage} disableScroll>
-                <ScrollView style={styles.regContainer}>
-                  <InputWithIcon
-                    iconName="ios-contact"
-                    iconSize={20}
-                    placeholder={i18n.t("auth.nickname")}
-                    value={nickname}
-                    error={error.nickname}
-                    onChangeText={nickname => this.setState({ nickname })}
-                    autoCapitalize="none"
-                  />
+          <InputWithIcon
+            iconName="ios-at"
+            iconSize={20}
+            placeholder={i18n.t("auth.email")}
+            value={email}
+            error={error.email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+          />
 
-                  <InputWithIcon
-                    iconName="ios-at"
-                    iconSize={20}
-                    placeholder={i18n.t("auth.email")}
-                    value={email}
-                    error={error.email}
-                    onChangeText={email => this.setState({ email })}
-                    autoCapitalize="none"
-                  />
+          <InputWithIcon
+            iconName="ios-lock"
+            iconSize={20}
+            placeholder={i18n.t("auth.password")}
+            value={password}
+            error={error.password}
+            onChangeText={password => this.setState({ password })}
+            autoCapitalize="none"
+            secureTextEntry
+          />
 
-                  <InputWithIcon
-                    iconName="ios-lock"
-                    iconSize={20}
-                    placeholder={i18n.t("auth.password")}
-                    value={password}
-                    error={error.password}
-                    onChangeText={password => this.setState({ password })}
-                    autoCapitalize="none"
-                    secureTextEntry
-                  />
+          <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
 
-                  <AuthRegisterScreenLinks navigateToTOS={this.navigateToTOS} />
-
-                  <Button
-                    title={i18n.t("auth.register")}
-                    onPress={this.registerWithCredentials}
-                    processing={this.state.processing}
-                  />
-                </ScrollView>
-              </Background>
-            </Animated.View>
-          </View>
-        )}
-      </KeyboardAware>
+          <Button
+            title={i18n.t("auth.register")}
+            onPress={this.registerWithCredentials}
+            processing={this.state.processing}
+          />
+        </ScrollView>
+      </Background>
     );
   }
 }
@@ -205,12 +171,6 @@ export const AuthRegisterScreenLinks = props => (
 );
 
 const styles = StyleSheet.create({
-  hero: {
-    flex: 1,
-    minHeight: 230,
-    maxHeight: Math.max(250, (Dimensions.get("window").height - 170) / 2)
-  },
-
   regBold: {
     fontWeight: "900"
   },
@@ -243,4 +203,7 @@ const mapDispatchToProps = {
   register
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRegisterScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthRegisterScreen);

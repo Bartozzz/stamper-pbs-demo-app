@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
-import Carousel from "react-native-snap-carousel";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 import {
   AsyncStorage,
   Dimensions,
@@ -27,12 +27,14 @@ import WalletIcon from "../../components/icons/WalletIcon";
 import IconAddToWallet from "../../components/screens/map/IconAddToWallet";
 import IconInWallet from "../../components/screens/map/IconInWallet";
 import Marker from "../../components/screens/map/Marker";
+import ClusterMarker from "../../components/screens/map/ClusterMarker";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import { getCluster } from "../../helpers/map";
 
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
 import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
@@ -68,6 +70,8 @@ class MapNearbyScreen extends React.Component {
   state = {
     mode: MODE_MAP,
     filter: FILTER_ALL,
+    active: 0,
+    region: null,
     selected: null,
     city: null,
     location: null,
@@ -153,7 +157,10 @@ class MapNearbyScreen extends React.Component {
   };
 
   selectCard = cardId => () => {
-    this.setState({ selected: cardId });
+    this.setState({
+      selected: cardId,
+      active: 0
+    });
   };
 
   addCard = cardId => () => {
@@ -207,7 +214,7 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderSelectedCardOnMap() {
-    const { selected } = this.state;
+    const { selected, active } = this.state;
     const selectedCard = this.data.find(item => item.id === selected);
 
     // If no card is selected, render nothing:
@@ -226,6 +233,18 @@ class MapNearbyScreen extends React.Component {
 
     return (
       <View style={styles.selectedContainer}>
+        <Pagination
+          dotsLength={selectedBatch.length}
+          carouselRef={this.carouselRef}
+          activeDotIndex={active}
+          containerStyle={styles.paginationContainer}
+          dotColor={colors.color}
+          dotStyle={styles.paginationDot}
+          inactiveDotColor={colors.color}
+          inactiveDotOpacity={0.5}
+          inactiveDotScale={1}
+        />
+
         <Carousel
           ref={carousel => (this.carouselRef = carousel)}
           data={selectedBatch}
@@ -267,7 +286,56 @@ class MapNearbyScreen extends React.Component {
     );
   }
 
+  renderMarker = (marker, cluster) => {
+    const key = marker.geometry.coordinates[0];
+
+    // If a cluster
+    if (marker.properties) {
+      const markersInCluster = cluster.getLeaves(marker.id);
+
+      return (
+        <ClusterMarker
+          key={key}
+          coordinate={{
+            latitude: Number(marker.geometry.coordinates[1]),
+            longitude: Number(marker.geometry.coordinates[0])
+          }}
+          count={marker.properties.point_count}
+          onPress={this.selectCard(markersInCluster[0].id)}
+        />
+      );
+    } else {
+      return (
+        <Marker
+          key={`${marker.id}`}
+          item={marker}
+          coordinate={{
+            latitude: Number(marker.geometry.coordinates[1]),
+            longitude: Number(marker.geometry.coordinates[0])
+          }}
+          onPress={this.selectCard(marker.id)}
+        />
+      );
+    }
+  };
+
   renderDataAsMap() {
+    const { region } = this.state;
+
+    const allCoords = this.data.map(marker => ({
+      ...marker,
+      geometry: {
+        coordinates: [marker.lng, marker.lat]
+      }
+    }));
+
+    const { markers, cluster } = getCluster(
+      allCoords,
+      region || this.initialRegion
+    );
+
+    // console.log(cluster.points);
+
     return (
       <View style={styles.map}>
         <MapView
@@ -275,6 +343,8 @@ class MapNearbyScreen extends React.Component {
           customMapStyle={mapStyle}
           provider={MapView.PROVIDER_GOOGLE}
           initialRegion={this.initialRegion}
+          region={region}
+          onRegionChangeComplete={region => this.setState({ region })}
         >
           <MapView.Marker coordinate={this.initialRegion}>
             <View>
@@ -282,13 +352,9 @@ class MapNearbyScreen extends React.Component {
             </View>
           </MapView.Marker>
 
-          {this.data.map(item => (
-            <Marker
-              key={`${item.id}:${item.lat}:${item.lng}`}
-              item={item}
-              onPress={this.selectCard(item.id)}
-            />
-          ))}
+          {markers.map((marker, index) =>
+            this.renderMarker(marker, cluster, index)
+          )}
         </MapView>
 
         {this.renderSelectedCardOnMap()}
@@ -329,7 +395,6 @@ class MapNearbyScreen extends React.Component {
                   <CardButton
                     title={i18n.t("map.addCard")}
                     onPress={() => null}
-                    style={{ backgroundColor: "#34dbff" }}
                     disabled
                   />
                 ) : (
@@ -360,7 +425,10 @@ class MapNearbyScreen extends React.Component {
               }
               renderSecondaryAction={() =>
                 item.inWallet ? (
-                  <WalletIcon color="#34dbff" onPress={this.navigateToWallet} />
+                  <WalletIcon
+                    color={colors.primary}
+                    onPress={this.navigateToWallet}
+                  />
                 ) : (
                   <WalletIcon color="#95989A" onPress={() => /* noop */ null} />
                 )
@@ -445,6 +513,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background
   },
 
+  paginationDot: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    padding: 0,
+
+    width: 6,
+    height: 6,
+    borderRadius: 6
+  },
+  paginationContainer: {
+    position: "absolute",
+    bottom: 80,
+
+    // Take all the width:
+    left: 0,
+    right: 0,
+
+    marginBottom: 0
+  },
   selectedContainer: {
     zIndex: 3,
 
@@ -453,9 +540,7 @@ const styles = StyleSheet.create({
 
     // Take all the width:
     left: 0,
-    right: 0,
-
-    height: 100
+    right: 0
   },
   selected: {
     flexDirection: "row",

@@ -21,8 +21,8 @@ export function HeaderHamburger(props) {
 }
 
 const hamburgerIconName = Platform.select({
-  ios: "ios-menu",
-  android: "md-menu"
+  ios: "md-home",
+  android: "md-home"
 });
 
 const hamburgerIconSize = Platform.select({

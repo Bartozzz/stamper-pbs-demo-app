@@ -25,6 +25,7 @@ import {
   FORCE_REFRESH_PRIZES,
   getPrizes
 } from "../../store/reducers/prizes";
+import PrizesHeader from "../../components/screens/prizes/Header";
 import ExpirationDate from "../../components/helpers/ExpirationDate";
 
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
@@ -73,15 +74,19 @@ class PrizesListScreen extends React.Component {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
-  claimPrize = () => {
-    this.props.navigation.push(Routes.SCANNER, {
-      type: Routes.PRIZES
+  claimPrizeOnline = () => {
+    this.props.navigation.navigate(Routes.PRIZES_SELECTED, {
+      card: this.state.selected
     });
   };
 
-  selectPrize = prizeId => () => {
+  claimPrizeOffline = () => {
+    this.props.navigation.navigate(Routes.SCANNER);
+  };
+
+  selectPrize = prize => () => {
     this.setState({
-      selected: prizeId
+      selected: prize
     });
   };
 
@@ -94,7 +99,7 @@ class PrizesListScreen extends React.Component {
   renderList() {
     const { selected, search } = this.state;
     const { prizes } = this.props;
-    let data = prizes;
+    let data = prizes.filter(prize => !prize.collected);
 
     // Filter data based on current search term:
     if (search) {
@@ -113,13 +118,13 @@ class PrizesListScreen extends React.Component {
           return item.id;
         }}
         renderItem={({ item }) => {
-          const isSelected = selected === item.id;
+          const isSelected = selected && selected.id === item.id;
 
           return (
             <TouchableOpacity
               key={item.id}
               style={[styles.item, isSelected && styles.itemSelected]}
-              onPress={this.selectPrize(item.id)}
+              onPress={this.selectPrize(item)}
             >
               <View style={defaultStyles.row}>
                 <View
@@ -151,19 +156,30 @@ class PrizesListScreen extends React.Component {
                       {item.title}
                     </Text>
 
-                    <Text
-                      style={[
-                        styles.textExpiry,
-                        isSelected && styles.textExpirySelected
-                      ]}
-                    >
-                      {i18n.t("prizes.validTill", {
-                        date: ExpirationDate({
-                          isValid: item.validTo,
-                          expirationDate: item.validToDate
-                        })
-                      })}
-                    </Text>
+                    <View style={styles.otherInformations}>
+                      <Text
+                        style={[
+                          styles.textExpiry,
+                          isSelected && styles.textExpirySelected
+                        ]}
+                      >
+                        {i18n.t("prizes.validTill", {
+                          date: ExpirationDate({
+                            isValid: item.validTo,
+                            expirationDate: item.validToDate
+                          })
+                        })}
+                      </Text>
+
+                      <Text
+                        style={[
+                          styles.textCardNumber,
+                          isSelected && styles.textCardNumberSelected
+                        ]}
+                      >
+                        NR {item.cardNumber}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
@@ -175,12 +191,16 @@ class PrizesListScreen extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, navigation } = this.props;
     const { isCheckingIfCacheValid, selected } = this.state;
 
     return (
       <Background source={BackgroundImage} disableScroll>
-        <Header title={i18n.t("navigation.prizes.list")} />
+        <PrizesHeader
+          title={i18n.t("navigation.prizes.list")}
+          navigation={navigation}
+          available
+        />
 
         {!isCheckingIfCacheValid ? (
           <>
@@ -202,13 +222,25 @@ class PrizesListScreen extends React.Component {
           <View style={[defaultStyles.grow]} />
         )}
 
-        <View style={styles.buttonContainer}>
-          <Button
-            title={i18n.t("prizes.receive")}
-            onPress={this.claimPrize}
-            disabled={selected === null}
-          />
-        </View>
+        {selected && (
+          <View style={styles.buttonContainer}>
+            {selected.collectOffline && (
+              <Button
+                title={i18n.t("prizes.receiveOnPlace")}
+                onPress={this.claimPrizeOffline}
+                style={styles.button}
+              />
+            )}
+
+            {selected.collectOnline && (
+              <Button
+                title={i18n.t("prizes.receiveOnline")}
+                onPress={this.claimPrizeOnline}
+                style={styles.button}
+              />
+            )}
+          </View>
+        )}
       </Background>
     );
   }
@@ -224,6 +256,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     paddingVertical: 20,
     paddingHorizontal: 24
+  },
+  button: {
+    marginVertical: 5
   },
 
   imageContainer: {
@@ -287,13 +322,32 @@ const styles = StyleSheet.create({
     color: "#95989A"
   },
 
+  otherInformations: {
+    marginTop: 5,
+
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+
   textExpiry: {
-    marginTop: 11,
+    width: "50%",
 
     fontSize: 9,
     color: "#74798B"
   },
   textExpirySelected: {
+    color: "#74798B"
+  },
+
+  textCardNumber: {
+    width: "50%",
+
+    fontSize: 9,
+    color: "#74798B",
+    textAlign: "right"
+  },
+  textCardNumberSelected: {
     color: "#74798B"
   }
 });
