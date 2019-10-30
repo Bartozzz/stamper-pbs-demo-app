@@ -54,7 +54,7 @@ class ProfileEditScreen extends React.Component {
     headerLeft: (
       <HeaderBackIcon
         navigation={navigation}
-        onPress={() => navigation.navigate(Routes.PROFILE_MENU)}
+        onPress={() => navigation.goBack()}
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,

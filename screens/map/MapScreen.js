@@ -74,23 +74,9 @@ class MapNearbyScreen extends React.Component {
     region: null,
     selected: null,
     city: null,
-    location: null,
+    userPosition: null,
     locationLoaded: false
   };
-
-  get initialRegion() {
-    const { location } = this.state;
-
-    if (location && Reflect.has(location, "coords")) {
-      return {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        // TODO: calculate deltas based on screen sizes:
-        latitudeDelta: 0.025,
-        longitudeDelta: 0.025
-      };
-    }
-  }
 
   get data() {
     const pickOnlyOnline = this.state.filter === FILTER_ONLINE;
@@ -101,12 +87,12 @@ class MapNearbyScreen extends React.Component {
   componentDidMount() {
     this.requestUserPosition().then(data => {
       if (__DEV__) {
-        this.props.getRegion("Kraków", data.location.coords);
+        this.props.getRegion("Kraków", data.region);
       } else {
-        this.props.getRegion(data.city, data.location.coords);
+        this.props.getRegion(data.city, data.region);
       }
 
-      this.setState(data);
+      this.setState({ ...data, userPosition: data.region });
     });
   }
 
@@ -142,15 +128,21 @@ class MapNearbyScreen extends React.Component {
 
       // Same shape as component' state:
       return {
+        locationLoaded: true,
         city: Array.isArray(reverse) ? reverse[0].city : null,
-        location,
-        locationLoaded: true
+        region: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          // TODO: calculate deltas based on screen sizes:
+          latitudeDelta: 0.02897628441160549,
+          longitudeDelta: 0.025000199675559998
+        }
       };
     } catch (err) {
       console.error(err);
 
       return {
-        location: {},
+        region: {},
         locationLoaded: false
       };
     }
@@ -320,7 +312,7 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderDataAsMap() {
-    const { region } = this.state;
+    const { userPosition, region } = this.state;
 
     const allCoords = this.data.map(marker => ({
       ...marker,
@@ -329,10 +321,7 @@ class MapNearbyScreen extends React.Component {
       }
     }));
 
-    const { markers, cluster } = getCluster(
-      allCoords,
-      region || this.initialRegion
-    );
+    const { markers, cluster } = getCluster(allCoords, region);
 
     // console.log(cluster.points);
 
@@ -342,11 +331,10 @@ class MapNearbyScreen extends React.Component {
           style={styles.map}
           customMapStyle={mapStyle}
           provider={MapView.PROVIDER_GOOGLE}
-          initialRegion={this.initialRegion}
-          region={region}
-          onRegionChangeComplete={region => this.setState({ region })}
+          initialRegion={region}
+          onRegionChange={region => this.setState({ region })}
         >
-          <MapView.Marker coordinate={this.initialRegion}>
+          <MapView.Marker coordinate={userPosition}>
             <View>
               <Image style={styles.indicator} source={LocationIndicator} />
             </View>
