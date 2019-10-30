@@ -2,15 +2,9 @@ import React from "react";
 import MapView from "react-native-maps";
 import { View, Image, StyleSheet } from "react-native";
 
-export function Marker({ item, onPress = () => null }) {
+export function Marker({ item, onPress = () => null, ...rest }) {
   return (
-    <MapView.Marker
-      onPress={onPress}
-      coordinate={{
-        latitude: Number(item.lat),
-        longitude: Number(item.lng)
-      }}
-    >
+    <MapView.Marker onPress={onPress} {...rest}>
       <View style={[styles.marker, styles.container]}>
         {item.logoUrl && (
           <Image
