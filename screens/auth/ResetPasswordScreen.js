@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Background from "../../components/Background";
 
-import KeyboardAware from "../../components/helpers/KeyboardAware";
 import AuthHero from "../../components/screens/auth/Hero";
 import Button from "../../components/forms/Button";
 import Error from "../../components/Error";
@@ -41,8 +40,6 @@ class ResetPasswordScreen extends React.Component {
   state = {
     processing: false,
 
-    topAnim: new Animated.Value(0),
-
     email: __DEV__ ? "testing@test.pl" : null,
 
     error: {
@@ -73,85 +70,41 @@ class ResetPasswordScreen extends React.Component {
     this.props.navigation.navigate(Routes.INFO_ERROR);
   };
 
-  handleKeyboardShow = keyboardHeight => {
-    Animated.timing(this.state.topAnim, {
-      toValue: -keyboardHeight,
-      duration: 250
-    }).start();
-  };
-
-  handleKeyboardHide = () => {
-    Animated.timing(this.state.topAnim, {
-      toValue: 0,
-      duration: 250
-    }).start();
-  };
-
   render() {
-    const { topAnim, email, error } = this.state;
+    const { email, error } = this.state;
 
     return (
-      <KeyboardAware
-        onKeyboardShow={this.handleKeyboardShow}
-        onKeyboardHide={this.handleKeyboardHide}
-      >
-        {() => (
-          <View style={defaultStyles.container}>
-            <AuthHero style={[styles.hero]} />
+      <Background source={BackgroundImage} disableScroll>
+        <ScrollView style={styles.loginContainer}>
+          {error.other ? (
+            <Error message={i18n.t("errors.auth.unauthorized")} />
+          ) : null}
 
-            <Animated.View
-              style={[{ flex: 1 }, { minHeight: 350 }, { top: topAnim }]}
-            >
-              <Background source={BackgroundImage} disableScroll>
-                <ScrollView style={styles.loginContainer}>
-                  {error.other ? (
-                    <Error message={i18n.t("errors.auth.unauthorized")} />
-                  ) : null}
+          <InputWithIcon
+            iconName="ios-contact"
+            iconSize={20}
+            placeholder={i18n.t("auth.email")}
+            value={email}
+            error={error.email}
+            onChangeText={email => this.setState({ email })}
+            autoCapitalize="none"
+          />
 
-                  <InputWithIcon
-                    iconName="ios-contact"
-                    iconSize={20}
-                    placeholder={i18n.t("auth.email")}
-                    value={email}
-                    error={error.email}
-                    onChangeText={email => this.setState({ email })}
-                    autoCapitalize="none"
-                  />
-                </ScrollView>
-
-                <View style={styles.buttonContainer}>
-                  <Button
-                    title={i18n.t("auth.resetPassword")}
-                    onPress={this.resetPassword}
-                    processing={this.state.processing}
-                  />
-                </View>
-              </Background>
-            </Animated.View>
-          </View>
-        )}
-      </KeyboardAware>
+          <Button
+            title={i18n.t("auth.resetPassword")}
+            onPress={this.resetPassword}
+            processing={this.state.processing}
+          />
+        </ScrollView>
+      </Background>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  hero: {
-    flex: 1,
-    minHeight: 230,
-    maxHeight: Math.max(250, (Dimensions.get("window").height - 170) / 2)
-  },
-
   loginContainer: {
-    flex: 1,
-
     marginHorizontal: 30,
     paddingTop: 15
-  },
-
-  buttonContainer: {
-    paddingVertical: 20,
-    paddingHorizontal: 24
   }
 });
 
@@ -164,6 +117,7 @@ const mapDispatchToProps = {
   resetPassword
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ResetPasswordScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResetPasswordScreen);
