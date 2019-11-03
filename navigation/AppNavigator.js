@@ -63,6 +63,15 @@ const defaultNavigationOptions = {
   }
 };
 
+const disableNavigationAnimations = {
+  transitionConfig: () => ({
+    transitionSpec: {
+      // Disable animations:
+      duration: -1
+    }
+  })
+};
+
 const AuthStack = createStackNavigator(
   {
     [Route.AUTH_LOGIN]: AuthLoginScreen,
@@ -75,7 +84,8 @@ const AuthStack = createStackNavigator(
     initialRouteName: Route.AUTH_LOGIN,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
-    headerMode: "screen"
+    headerMode: "screen",
+    ...disableNavigationAnimations
   }
 );
 
@@ -129,7 +139,8 @@ const AppStack = createStackNavigator(
     initialRouteName: Route.DASHBOARD_MAIN,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
-    headerMode: "screen"
+    headerMode: "screen",
+    ...disableNavigationAnimations
   }
 );
 
