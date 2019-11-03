@@ -362,10 +362,11 @@ class MapNearbyScreen extends React.Component {
     // Situation 1: a restaurant has the same card in two different locations.
     // In this case, we display only one card when rendering cards as list and
     // keep the default rendering when rendering as a map.
-    const data = getUniqueData(this.data);
-
-    // Show favourite items first:
-    data.sort(item => !item.favorite);
+    const data = getUniqueData(this.data)
+      // Filter inactive cards:
+      .filter(item => item.active)
+      // Show favourite items first:
+      .sort(item => !item.favorite);
 
     return (
       <ScrollView style={styles.list}>
