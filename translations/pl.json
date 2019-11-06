@@ -118,7 +118,7 @@
   },
 
   "prizes": {
-    "receiveOnline": "Odbierz nagrodę on-line",
+    "receiveOnline": "Odbierz nagrodę online",
     "receiveOnPlace": "Odbierz nagrodę",
     "quickCollect": "Szybkie odbieranie w sklepie",
 
@@ -159,7 +159,7 @@
   "map": {
     "nearby": "W pobliżu",
     "favs": "Ulubione",
-    "online": "On-line",
+    "online": "Online",
 
     "collectStamps": {
       "one": "zbierz 1 pieczątkę",

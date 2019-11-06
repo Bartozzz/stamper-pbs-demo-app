@@ -28,7 +28,7 @@
 
     "prizes": {
       "list": "Rewards",
-      "collect": "Collect on-line"
+      "collect": "Collect online"
     },
 
     "scanner": {
@@ -159,7 +159,7 @@
   "map": {
     "nearby": "Close by",
     "favs": "Favourites",
-    "online": "On-line",
+    "online": "Online",
 
     "collectStamps": {
       "one": "collect 1 stamp",
@@ -168,12 +168,12 @@
       "zero": "no stamps to collect"
     },
     "validDays": {
-      "one": "Ważna przez 1 dzień",
-      "few": "Ważna przez {{count}} dni",
-      "other": "Ważna przez {{count}} dni",
-      "zero": "Nieważna"
+      "one": "Valid 1 day",
+      "few": "Valid {{count}} days",
+      "other": "Valid {{count}} days",
+      "zero": "Expired"
     },
-    "validTill": "Ważna do {{date}}",
+    "validTill": "Valid to {{date}}",
     "addCard": "Add card",
     "cardAlreadyAdded": "Card in my wallet",
 
