@@ -148,9 +148,9 @@ class MapNearbyScreen extends React.Component {
     }
   };
 
-  selectCard = cardId => () => {
+  selectCard = cluster => () => {
     this.setState({
-      selected: cardId,
+      selected: cluster,
       active: 0
     });
   };
@@ -207,26 +207,16 @@ class MapNearbyScreen extends React.Component {
 
   renderSelectedCardOnMap() {
     const { selected, active } = this.state;
-    const selectedCard = this.data.find(item => item.id === selected);
 
     // If no card is selected, render nothing:
-    if (!selectedCard) {
+    if (!Array.isArray(selected) || selected.length === 0) {
       return null;
     }
-
-    // Situation 2: a restaurant can have multiple cards in the same location.
-    // When a card is selected, we should display all the cards in the selected
-    // location.
-    const selectedBatch = getDataForLocation(
-      this.data,
-      selectedCard.lat,
-      selectedCard.lng
-    );
 
     return (
       <View style={styles.selectedContainer}>
         <Pagination
-          dotsLength={selectedBatch.length}
+          dotsLength={selected.length}
           carouselRef={this.carouselRef}
           activeDotIndex={active}
           containerStyle={styles.paginationContainer}
@@ -239,7 +229,7 @@ class MapNearbyScreen extends React.Component {
 
         <Carousel
           ref={carousel => (this.carouselRef = carousel)}
-          data={selectedBatch}
+          data={selected}
           onSnapToItem={index => this.setState({ active: index })}
           renderItem={({ item }) => (
             <View style={[styles.selected]}>
@@ -296,7 +286,7 @@ class MapNearbyScreen extends React.Component {
             longitude: Number(marker.geometry.coordinates[0])
           }}
           count={marker.properties.point_count}
-          onPress={this.selectCard(markersInCluster[0].id)}
+          onPress={this.selectCard(markersInCluster)}
         />
       );
     } else {
@@ -308,7 +298,7 @@ class MapNearbyScreen extends React.Component {
             latitude: Number(marker.geometry.coordinates[1]),
             longitude: Number(marker.geometry.coordinates[0])
           }}
-          onPress={this.selectCard(marker.id)}
+          onPress={this.selectCard([marker])}
         />
       );
     }
