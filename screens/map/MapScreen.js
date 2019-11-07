@@ -148,9 +148,9 @@ class MapNearbyScreen extends React.Component {
     }
   };
 
-  selectCard = cardId => () => {
+  selectCard = cluster => () => {
     this.setState({
-      selected: cardId,
+      selected: cluster,
       active: 0
     });
   };
@@ -207,26 +207,16 @@ class MapNearbyScreen extends React.Component {
 
   renderSelectedCardOnMap() {
     const { selected, active } = this.state;
-    const selectedCard = this.data.find(item => item.id === selected);
 
     // If no card is selected, render nothing:
-    if (!selectedCard) {
+    if (!Array.isArray(selected) || selected.length === 0) {
       return null;
     }
-
-    // Situation 2: a restaurant can have multiple cards in the same location.
-    // When a card is selected, we should display all the cards in the selected
-    // location.
-    const selectedBatch = getDataForLocation(
-      this.data,
-      selectedCard.lat,
-      selectedCard.lng
-    );
 
     return (
       <View style={styles.selectedContainer}>
         <Pagination
-          dotsLength={selectedBatch.length}
+          dotsLength={selected.length}
           carouselRef={this.carouselRef}
           activeDotIndex={active}
           containerStyle={styles.paginationContainer}
@@ -239,10 +229,10 @@ class MapNearbyScreen extends React.Component {
 
         <Carousel
           ref={carousel => (this.carouselRef = carousel)}
-          data={selectedBatch}
+          data={selected}
           onSnapToItem={index => this.setState({ active: index })}
           renderItem={({ item }) => (
-            <View style={styles.selected}>
+            <View style={[styles.selected]}>
               <View style={styles.selectedImageContainer}>
                 <Image
                   style={styles.selectedImage}
@@ -262,7 +252,10 @@ class MapNearbyScreen extends React.Component {
               {item.inWallet ? (
                 <IconInWallet />
               ) : (
-                <IconAddToWallet onPress={this.addCard(item.id)} />
+                <IconAddToWallet
+                  onPress={item.active ? this.addCard(item.id) : () => null}
+                  style={[!item.active && styles.selectedInactive]}
+                />
               )}
             </View>
           )}
@@ -293,7 +286,7 @@ class MapNearbyScreen extends React.Component {
             longitude: Number(marker.geometry.coordinates[0])
           }}
           count={marker.properties.point_count}
-          onPress={this.selectCard(markersInCluster[0].id)}
+          onPress={this.selectCard(markersInCluster)}
         />
       );
     } else {
@@ -305,7 +298,7 @@ class MapNearbyScreen extends React.Component {
             latitude: Number(marker.geometry.coordinates[1]),
             longitude: Number(marker.geometry.coordinates[0])
           }}
-          onPress={this.selectCard(marker.id)}
+          onPress={this.selectCard([marker])}
         />
       );
     }
@@ -358,10 +351,11 @@ class MapNearbyScreen extends React.Component {
     // Situation 1: a restaurant has the same card in two different locations.
     // In this case, we display only one card when rendering cards as list and
     // keep the default rendering when rendering as a map.
-    const data = getUniqueData(this.data);
-
-    // Show favourite items first:
-    data.sort(item => !item.favorite);
+    const data = getUniqueData(this.data)
+      // Filter inactive cards:
+      .filter(item => item.active)
+      // Show favourite items first:
+      .sort(item => !item.favorite);
 
     return (
       <ScrollView style={styles.list}>
@@ -540,6 +534,10 @@ const styles = StyleSheet.create({
     borderRadius: 80,
 
     backgroundColor: colors.primary
+  },
+  selectedInactive: {
+    backgroundColor: colors.disabled,
+    borderRadius: 24
   },
   selectedImageContainer: {
     marginHorizontal: 12,
