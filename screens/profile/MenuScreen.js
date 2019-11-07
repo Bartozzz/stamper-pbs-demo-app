@@ -17,6 +17,7 @@ class ProfileMenuScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.profile.menu"),
     headerTitle: "",
+    headerLeft: null,
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTransparent
     // headerTransparent: true
@@ -42,7 +43,7 @@ class ProfileMenuScreen extends React.Component {
 
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => navigation.navigate(Routes.PROFILE_EDIT)}
+            onPress={() => navigation.push(Routes.PROFILE_EDIT)}
           >
             <Text style={styles.menuItemText}>
               {i18n.t("profile.menu.edit")}
@@ -53,7 +54,7 @@ class ProfileMenuScreen extends React.Component {
 
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => navigation.navigate(Routes.PROFILE_PASSWORD)}
+            onPress={() => navigation.push(Routes.PROFILE_PASSWORD)}
           >
             <Text style={styles.menuItemText}>
               {i18n.t("profile.menu.password")}
@@ -64,7 +65,7 @@ class ProfileMenuScreen extends React.Component {
 
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => navigation.navigate(Routes.PROFILE_LEGAL)}
+            onPress={() => navigation.push(Routes.PROFILE_LEGAL)}
           >
             <Text style={styles.menuItemText}>
               {i18n.t("profile.menu.tos")}
@@ -75,7 +76,7 @@ class ProfileMenuScreen extends React.Component {
 
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => navigation.navigate(Routes.PROFILE_LOGOUT)}
+            onPress={() => navigation.push(Routes.PROFILE_LOGOUT)}
           >
             <Text style={styles.menuItemText}>
               {i18n.t("profile.menu.logout")}

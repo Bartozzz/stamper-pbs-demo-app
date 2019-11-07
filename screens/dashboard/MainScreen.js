@@ -62,22 +62,22 @@ class DashboardMainScreen extends React.Component {
 
     switch (element) {
       case MENU_MAP:
-        return navigation.navigate(Routes.MAP);
+        return navigation.push(Routes.MAP);
 
       case MENU_WALLET:
-        return navigation.navigate(Routes.WALLET);
+        return navigation.push(Routes.WALLET);
 
       case MENU_PRIZES:
-        return navigation.navigate(Routes.PRIZES);
+        return navigation.push(Routes.PRIZES);
 
       case MENU_PROFILE:
-        return navigation.navigate(Routes.PROFILE);
+        return navigation.push(Routes.PROFILE);
 
       case MENU_MARKET:
         return;
 
       case MENU_SCANNER:
-        return navigation.navigate(Routes.SCANNER);
+        return navigation.push(Routes.SCANNER);
     }
   };
 
@@ -270,6 +270,7 @@ const mapDispatchToProps = {
   getPrizesCount
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DashboardMainScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardMainScreen);

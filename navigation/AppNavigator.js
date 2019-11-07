@@ -41,7 +41,7 @@ import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
 
 const defaultNavigationOptions = {
   headerTintColor: colors.color,
-  headerBackTitle: null,
+  // headerBackTitle: null,
 
   headerStyle: {
     marginTop: layout.headerTopSpacer,
@@ -84,79 +84,18 @@ const AuthStack = createStackNavigator(
     initialRouteName: Route.AUTH_LOGIN,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
+    headerMode: "screen",
     ...disableNavigationAnimations
   }
 );
 
-const InfoStack = createStackNavigator(
+const AppStack = createStackNavigator(
   {
-    // The initial route is always mounted. If we set it to INFO_ERROR, it will
-    // trigger INFO_ERROR's setTimeout even if we navigte to INFO_SUCCESS:
-    [Route.INFO_INIT]: () => null,
-    [Route.INFO_ERROR]: InfoErrorScreen,
-    [Route.INFO_SUCCESS]: InfoSuccessScreen
-  },
-  {
-    initialRouteName: Route.INFO_INIT,
-    headerLayoutPreset: "left",
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
-
-const PrizesStack = createStackNavigator(
-  {
-    [Route.PRIZES_LIST]: PrizesAvailableScreen,
-    [Route.PRIZES_RECEIVED]: PrizesReceivedScreen,
-    [Route.PRIZES_SELECTED]: PrizesRewardCodeScreen
-  },
-  {
-    initialRouteName: Route.PRIZES_LIST,
-    headerLayoutPreset: "left",
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
-
-const MapStack = createStackNavigator(
-  {
-    [Route.MAP_ALL]: MapScreen,
-    [Route.MAP_ACCEPT_CARD_TERMS]: MapAcceptCardTermsScreen,
-    [Route.MAP_CONFIRM_REFUSED_TERMS]: MapConfirmRefusedTermsScreen
-  },
-  {
-    initialRouteName: Route.MAP_ALL,
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
-
-const CardStack = createStackNavigator(
-  {
-    [Route.CARD_INFO]: CardInfoScreen
-  },
-  {
-    initialRouteName: Route.CARD_INFO,
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
-
-const DashboardStack = createStackNavigator(
-  {
+    [Route.DASHBOARD]: DashboardMainScreen,
     [Route.DASHBOARD_MAIN]: DashboardMainScreen,
-    [Route.DASHBOARD_TOS]: TermsOfServiceScreen
-  },
-  {
-    initialRouteName: Route.DASHBOARD_MAIN,
-    headerLayoutPreset: "left",
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
+    [Route.DASHBOARD_TOS]: TermsOfServiceScreen,
 
-const ProfileStack = createStackNavigator(
-  {
+    [Route.PROFILE]: ProfileMenuScreen,
     [Route.PROFILE_MENU]: ProfileMenuScreen,
     [Route.PROFILE_EDIT]: ProfileEditScreen,
     [Route.PROFILE_PASSWORD]: ProfilePasswordScreen,
@@ -164,40 +103,43 @@ const ProfileStack = createStackNavigator(
     [Route.PROFILE_TOS]: TermsOfServiceScreen,
     [Route.PROFILE_LEGAL]: ProfileLegalScreen,
     [Route.PROFILE_NEWSLETTER_TOS]: ProfileNewsletterTermsScreen,
-    [Route.PROFILE_NEWSLETTER_UPDATE]: ProfileNewsletterUpdateScreen
-  },
-  {
-    initialRouteName: Route.PROFILE_MENU,
-    headerLayoutPreset: "left",
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
+    [Route.PROFILE_NEWSLETTER_UPDATE]: ProfileNewsletterUpdateScreen,
 
-const WalletStack = createStackNavigator(
-  {
+    [Route.MAP]: MapScreen,
+    [Route.MAP_ALL]: MapScreen,
+    [Route.MAP_ACCEPT_CARD_TERMS]: MapAcceptCardTermsScreen,
+    [Route.MAP_CONFIRM_REFUSED_TERMS]: MapConfirmRefusedTermsScreen,
+
+    [Route.PRIZES]: PrizesAvailableScreen,
+    [Route.PRIZES_LIST]: PrizesAvailableScreen,
+    [Route.PRIZES_RECEIVED]: PrizesReceivedScreen,
+    [Route.PRIZES_SELECTED]: PrizesRewardCodeScreen,
+
+    [Route.WALLET]: WalletCardsScreen,
     [Route.WALLET_CARDS]: WalletCardsScreen,
     [Route.WALLET_PLACES]: WalletPlacesScreen,
-    [Route.WALLET_CARD_REMOVAL_CONFIRMATION]: WalletCardRemovalConfirmationScreen
-  },
-  {
-    initialRouteName: Route.WALLET_CARDS,
-    headerLayoutPreset: "left",
-    defaultNavigationOptions,
-    ...disableNavigationAnimations
-  }
-);
+    [Route.WALLET_CARD_REMOVAL_CONFIRMATION]: WalletCardRemovalConfirmationScreen,
 
-const ScannerStack = createStackNavigator(
-  {
+    [Route.CARD]: CardInfoScreen,
+    [Route.CARD_INFO]: CardInfoScreen,
+
+    // The initial route is always mounted. If we set it to INFO_ERROR, it will
+    // trigger INFO_ERROR's setTimeout even if we navigte to INFO_SUCCESS:
+    [Route.INFO]: () => null,
+    [Route.INFO_INIT]: () => null,
+    [Route.INFO_ERROR]: InfoErrorScreen,
+    [Route.INFO_SUCCESS]: InfoSuccessScreen,
+
+    [Route.SCANNER]: ScannerScanScreen,
     [Route.SCANNER_SCAN]: ScannerScanScreen,
     [Route.SCANNER_ACCEPT_STAMP_TERMS]: ScannerAcceptStampTermsScreen,
     [Route.SCANNER_CONFIRM_REFUSED_TERMS]: ScannerConfirmRefusedTermsScreen
   },
   {
-    initialRouteName: Route.SCANNER_SCAN,
+    initialRouteName: Route.DASHBOARD_MAIN,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
+    headerMode: "screen",
     ...disableNavigationAnimations
   }
 );
@@ -205,20 +147,14 @@ const ScannerStack = createStackNavigator(
 export default createAppContainer(
   createSwitchNavigator(
     {
-      [Route.AUTH]: AuthStack,
-      [Route.INFO]: InfoStack,
-      [Route.PRIZES]: PrizesStack,
-      [Route.MAP]: MapStack,
-      [Route.CARD]: CardStack,
       [Route.AUTH_CONNECTIVITY_CHECK]: AuthConnectivityCheckScreen,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
-      [Route.DASHBOARD]: DashboardStack,
-      [Route.SCANNER]: ScannerStack,
-      [Route.PROFILE]: ProfileStack,
-      [Route.WALLET]: WalletStack
+      [Route.AUTH]: AuthStack,
+      [Route.APP]: AppStack
     },
     {
-      initialRouteName: Route.AUTH_CONNECTIVITY_CHECK
+      initialRouteName: Route.AUTH_CONNECTIVITY_CHECK,
+      headerMode: "screen"
     }
   )
 );

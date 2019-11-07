@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
-import Carousel from "react-native-snap-carousel";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 import {
   AsyncStorage,
   Dimensions,
@@ -27,12 +27,14 @@ import WalletIcon from "../../components/icons/WalletIcon";
 import IconAddToWallet from "../../components/screens/map/IconAddToWallet";
 import IconInWallet from "../../components/screens/map/IconInWallet";
 import Marker from "../../components/screens/map/Marker";
+import ClusterMarker from "../../components/screens/map/ClusterMarker";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import { getCluster } from "../../helpers/map";
 
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
 import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
@@ -68,25 +70,13 @@ class MapNearbyScreen extends React.Component {
   state = {
     mode: MODE_MAP,
     filter: FILTER_ALL,
+    active: 0,
+    region: null,
     selected: null,
     city: null,
-    location: null,
+    userPosition: null,
     locationLoaded: false
   };
-
-  get initialRegion() {
-    const { location } = this.state;
-
-    if (location && Reflect.has(location, "coords")) {
-      return {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        // TODO: calculate deltas based on screen sizes:
-        latitudeDelta: 0.025,
-        longitudeDelta: 0.025
-      };
-    }
-  }
 
   get data() {
     const pickOnlyOnline = this.state.filter === FILTER_ONLINE;
@@ -97,12 +87,12 @@ class MapNearbyScreen extends React.Component {
   componentDidMount() {
     this.requestUserPosition().then(data => {
       if (__DEV__) {
-        this.props.getRegion("Kraków", data.location.coords);
+        this.props.getRegion("Kraków", data.region);
       } else {
-        this.props.getRegion(data.city, data.location.coords);
+        this.props.getRegion(data.city, data.region);
       }
 
-      this.setState(data);
+      this.setState({ ...data, userPosition: data.region });
     });
   }
 
@@ -138,22 +128,31 @@ class MapNearbyScreen extends React.Component {
 
       // Same shape as component' state:
       return {
+        locationLoaded: true,
         city: Array.isArray(reverse) ? reverse[0].city : null,
-        location,
-        locationLoaded: true
+        region: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          // TODO: calculate deltas based on screen sizes:
+          latitudeDelta: 0.02897628441160549,
+          longitudeDelta: 0.025000199675559998
+        }
       };
     } catch (err) {
       console.error(err);
 
       return {
-        location: {},
+        region: {},
         locationLoaded: false
       };
     }
   };
 
-  selectCard = cardId => () => {
-    this.setState({ selected: cardId });
+  selectCard = cluster => () => {
+    this.setState({
+      selected: cluster,
+      active: 0
+    });
   };
 
   addCard = cardId => () => {
@@ -181,7 +180,7 @@ class MapNearbyScreen extends React.Component {
         const { title, termsAndConditionsUrl } = termsAndConditions;
 
         if (termsAndConditionsUrl) {
-          navigation.navigate(Routes.MAP_ACCEPT_CARD_TERMS, {
+          navigation.push(Routes.MAP_ACCEPT_CARD_TERMS, {
             title,
             termsAndConditionsUrl,
             onConfirm: confirmCardTerms
@@ -207,31 +206,33 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderSelectedCardOnMap() {
-    const { selected } = this.state;
-    const selectedCard = this.data.find(item => item.id === selected);
+    const { selected, active } = this.state;
 
     // If no card is selected, render nothing:
-    if (!selectedCard) {
+    if (!Array.isArray(selected) || selected.length === 0) {
       return null;
     }
 
-    // Situation 2: a restaurant can have multiple cards in the same location.
-    // When a card is selected, we should display all the cards in the selected
-    // location.
-    const selectedBatch = getDataForLocation(
-      this.data,
-      selectedCard.lat,
-      selectedCard.lng
-    );
-
     return (
       <View style={styles.selectedContainer}>
+        <Pagination
+          dotsLength={selected.length}
+          carouselRef={this.carouselRef}
+          activeDotIndex={active}
+          containerStyle={styles.paginationContainer}
+          dotColor={colors.color}
+          dotStyle={styles.paginationDot}
+          inactiveDotColor={colors.color}
+          inactiveDotOpacity={0.5}
+          inactiveDotScale={1}
+        />
+
         <Carousel
           ref={carousel => (this.carouselRef = carousel)}
-          data={selectedBatch}
+          data={selected}
           onSnapToItem={index => this.setState({ active: index })}
           renderItem={({ item }) => (
-            <View style={styles.selected}>
+            <View style={[styles.selected]}>
               <View style={styles.selectedImageContainer}>
                 <Image
                   style={styles.selectedImage}
@@ -241,17 +242,29 @@ class MapNearbyScreen extends React.Component {
 
               <View style={styles.selectedInfoContainer}>
                 <Text style={styles.selectedTitle}>{item.title}</Text>
-                <Text style={styles.selectedAmount}>
-                  {i18n.t("map.collectStamps", {
-                    count: item.stampsTotal
-                  })}
-                </Text>
+
+                <View style={styles.otherInformations}>
+                  <Text style={styles.selectedAmount}>
+                    {i18n.t("map.collectStamps", {
+                      count: item.stampsTotal
+                    })}
+                  </Text>
+
+                  <Text style={styles.selectedValidTill}>
+                    {item.validTo
+                      ? i18n.t("map.validTill", { date: item.validToDate })
+                      : i18n.t("map.validDays", { count: item.validDays })}
+                  </Text>
+                </View>
               </View>
 
               {item.inWallet ? (
                 <IconInWallet />
               ) : (
-                <IconAddToWallet onPress={this.addCard(item.id)} />
+                <IconAddToWallet
+                  onPress={item.active ? this.addCard(item.id) : () => null}
+                  style={[!item.active && styles.selectedInactive]}
+                />
               )}
             </View>
           )}
@@ -267,28 +280,71 @@ class MapNearbyScreen extends React.Component {
     );
   }
 
+  renderMarker = (marker, cluster) => {
+    const key = marker.geometry.coordinates[0];
+
+    // If a cluster
+    if (marker.properties) {
+      const markersInCluster = cluster.getLeaves(marker.id);
+
+      return (
+        <ClusterMarker
+          key={key}
+          coordinate={{
+            latitude: Number(marker.geometry.coordinates[1]),
+            longitude: Number(marker.geometry.coordinates[0])
+          }}
+          count={marker.properties.point_count}
+          onPress={this.selectCard(markersInCluster)}
+        />
+      );
+    } else {
+      return (
+        <Marker
+          key={`${marker.id}`}
+          item={marker}
+          coordinate={{
+            latitude: Number(marker.geometry.coordinates[1]),
+            longitude: Number(marker.geometry.coordinates[0])
+          }}
+          onPress={this.selectCard([marker])}
+        />
+      );
+    }
+  };
+
   renderDataAsMap() {
+    const { userPosition, region } = this.state;
+
+    const allCoords = this.data.map(marker => ({
+      ...marker,
+      geometry: {
+        coordinates: [marker.lng, marker.lat]
+      }
+    }));
+
+    const { markers, cluster } = getCluster(allCoords, region);
+
+    // console.log(cluster.points);
+
     return (
       <View style={styles.map}>
         <MapView
           style={styles.map}
           customMapStyle={mapStyle}
           provider={MapView.PROVIDER_GOOGLE}
-          initialRegion={this.initialRegion}
+          initialRegion={region}
+          onRegionChange={region => this.setState({ region })}
         >
-          <MapView.Marker coordinate={this.initialRegion}>
+          <MapView.Marker coordinate={userPosition}>
             <View>
               <Image style={styles.indicator} source={LocationIndicator} />
             </View>
           </MapView.Marker>
 
-          {this.data.map(item => (
-            <Marker
-              key={`${item.id}:${item.lat}:${item.lng}`}
-              item={item}
-              onPress={this.selectCard(item.id)}
-            />
-          ))}
+          {markers.map((marker, index) =>
+            this.renderMarker(marker, cluster, index)
+          )}
         </MapView>
 
         {this.renderSelectedCardOnMap()}
@@ -297,17 +353,18 @@ class MapNearbyScreen extends React.Component {
   }
 
   navigateToWallet = () => {
-    this.props.navigation.navigate(Routes.WALLET);
+    this.props.navigation.push(Routes.WALLET);
   };
 
   renderDataAsCards() {
     // Situation 1: a restaurant has the same card in two different locations.
     // In this case, we display only one card when rendering cards as list and
     // keep the default rendering when rendering as a map.
-    const data = getUniqueData(this.data);
-
-    // Show favourite items first:
-    data.sort(item => !item.favorite);
+    const data = getUniqueData(this.data)
+      // Filter inactive cards:
+      .filter(item => item.active)
+      // Show favourite items first:
+      .sort(item => !item.favorite);
 
     return (
       <ScrollView style={styles.list}>
@@ -447,6 +504,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background
   },
 
+  paginationDot: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    padding: 0,
+
+    width: 6,
+    height: 6,
+    borderRadius: 6
+  },
+  paginationContainer: {
+    position: "absolute",
+    bottom: 80,
+
+    // Take all the width:
+    left: 0,
+    right: 0,
+
+    marginBottom: 0
+  },
   selectedContainer: {
     zIndex: 3,
 
@@ -455,9 +531,7 @@ const styles = StyleSheet.create({
 
     // Take all the width:
     left: 0,
-    right: 0,
-
-    height: 100
+    right: 0
   },
   selected: {
     flexDirection: "row",
@@ -469,6 +543,10 @@ const styles = StyleSheet.create({
     borderRadius: 80,
 
     backgroundColor: colors.primary
+  },
+  selectedInactive: {
+    backgroundColor: colors.disabled,
+    borderRadius: 24
   },
   selectedImageContainer: {
     marginHorizontal: 12,
@@ -501,6 +579,17 @@ const styles = StyleSheet.create({
     color: "#709BE7",
     fontSize: 9,
     fontFamily: layout.fontText
+  },
+  selectedValidTill: {
+    marginLeft: 10,
+
+    color: "#709BE7",
+    fontSize: 9,
+    fontFamily: layout.fontText
+  },
+
+  otherInformations: {
+    flexDirection: "row"
   }
 });
 

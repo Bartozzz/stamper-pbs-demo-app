@@ -2,10 +2,10 @@ import React from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import PlusImage from "../../../assets/images/plus.png";
 
-export function IconAddToWallet({ onPress }) {
+export function IconAddToWallet({ style, onPress }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image style={styles.icon} source={PlusImage} />
+      <Image style={[styles.icon, style]} source={PlusImage} />
     </TouchableOpacity>
   );
 }
