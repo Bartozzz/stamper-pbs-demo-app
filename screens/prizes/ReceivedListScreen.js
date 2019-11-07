@@ -28,6 +28,7 @@ import {
 import PrizesHeader from "../../components/screens/prizes/Header";
 import ExpirationDate from "../../components/helpers/ExpirationDate";
 
+const OkIconImage = require("../../assets/images/icons/ok.png");
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 const RewardsLoader = require("../../assets/loaders/rewards.gif");
 
@@ -102,6 +103,8 @@ class PrizesListScreen extends React.Component {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity key={item.id} style={[styles.item]}>
+              <Image source={OkIconImage} style={styles.itemOkIcon} />
+
               <View style={defaultStyles.row}>
                 <View style={[styles.imageContainer]}>
                   <Image source={{ uri: item.iconUrl }} style={styles.image} />
@@ -203,6 +206,8 @@ const styles = StyleSheet.create({
   },
 
   item: {
+    position: "relative",
+
     flex: 1,
     height: 90,
 
@@ -215,6 +220,14 @@ const styles = StyleSheet.create({
     borderColor: "#203451",
     borderRadius: 10,
     backgroundColor: "#203451"
+  },
+  itemOkIcon: {
+    position: "absolute",
+    top: 28,
+    right: 25,
+
+    width: 32,
+    height: 32
   },
 
   textMerchant: {
