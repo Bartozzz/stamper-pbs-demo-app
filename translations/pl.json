@@ -118,7 +118,7 @@
   },
 
   "prizes": {
-    "receiveOnline": "Odbierz nagrodę on-line",
+    "receiveOnline": "Odbierz nagrodę online",
     "receiveOnPlace": "Odbierz nagrodę",
     "quickCollect": "Szybkie odbieranie w sklepie",
 
@@ -159,7 +159,7 @@
   "map": {
     "nearby": "W pobliżu",
     "favs": "Ulubione",
-    "online": "On-line",
+    "online": "Online",
 
     "collectStamps": {
       "one": "zbierz 1 pieczątkę",
@@ -167,6 +167,13 @@
       "other": "zbierz {{count}} pieczątek",
       "zero": "brak pieczątek do zebrania"
     },
+    "validDays": {
+      "one": "Ważna przez 1 dzień",
+      "few": "Ważna przez {{count}} dni",
+      "other": "Ważna przez {{count}} dni",
+      "zero": "Nieważna"
+    },
+    "validTill": "Ważna do {{date}}",
     "addCard": "Dodaj kartę",
     "cardAlreadyAdded": "Karta już w portfelu",
 
