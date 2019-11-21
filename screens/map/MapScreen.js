@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as R from "ramda";
 import { connect } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
@@ -56,6 +57,24 @@ const MODE_CARD = "MODE_CARD";
 const FILTER_ALL = "FILTER_ALL";
 const FILTER_ONLINE = "FILTER_ONLINE";
 
+function createCardFromMerchantData(data) {
+  return {
+    id: data.id,
+    title: data.title,
+    position: data.position,
+    stampsTotal: data.stampsTotal,
+    active: data.active,
+    favorite: data.favorite,
+    offline: data.offline,
+    online: data.online,
+    inWallet: data.inWallet,
+    iconUrl: data.iconUrl,
+    validTo: data.validTo,
+    validDays: data.validDays,
+    validToDate: data.validToDate
+  };
+}
+
 class MapNearbyScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.map"),
@@ -82,6 +101,33 @@ class MapNearbyScreen extends React.Component {
     const pickOnlyOnline = this.state.filter === FILTER_ONLINE;
 
     return getData(this.props.data, pickOnlyOnline);
+  }
+
+  get groupedByMerchant() {
+    return R.reduce((acc, cur) => {
+      const index = R.findIndex(
+        R.allPass([
+          R.propEq("merchantId", cur.merchantId),
+          R.propEq("lat", cur.lat),
+          R.propEq("lng", cur.lng)
+        ])
+      )(acc);
+
+      if (index > -1) {
+        return R.over(
+          R.compose(R.lensIndex(index), R.lensProp("cards")),
+          R.append(createCardFromMerchantData(cur))
+        )(acc);
+      } else {
+        return R.append({
+          lat: cur.lat,
+          lng: cur.lng,
+          logoUrl: cur.logoUrl,
+          merchantId: cur.merchantId,
+          cards: [createCardFromMerchantData(cur)]
+        })(acc);
+      }
+    }, [])(this.data);
   }
 
   componentDidMount() {
@@ -295,19 +341,24 @@ class MapNearbyScreen extends React.Component {
             longitude: Number(marker.geometry.coordinates[0])
           }}
           count={marker.properties.point_count}
-          onPress={this.selectCard(markersInCluster)}
+          onPress={this.selectCard(
+            R.pipe(
+              R.map(R.view(R.lensProp("cards"))),
+              R.flatten
+            )(markersInCluster)
+          )}
         />
       );
     } else {
       return (
         <Marker
-          key={`${marker.id}`}
+          key={`${marker.merchantId}${marker.lat}${marker.lng}`}
           item={marker}
           coordinate={{
             latitude: Number(marker.geometry.coordinates[1]),
             longitude: Number(marker.geometry.coordinates[0])
           }}
-          onPress={this.selectCard([marker])}
+          onPress={this.selectCard(marker.cards)}
         />
       );
     }
@@ -316,7 +367,7 @@ class MapNearbyScreen extends React.Component {
   renderDataAsMap() {
     const { userPosition, region } = this.state;
 
-    const allCoords = this.data.map(marker => ({
+    const allCoords = this.groupedByMerchant.map(marker => ({
       ...marker,
       geometry: {
         coordinates: [marker.lng, marker.lat]
@@ -605,7 +656,4 @@ const mapDispatchToProps = {
   removeFav
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapNearbyScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MapNearbyScreen);
