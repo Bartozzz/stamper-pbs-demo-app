@@ -334,6 +334,7 @@ class MapNearbyScreen extends React.Component {
           customMapStyle={mapStyle}
           provider={MapView.PROVIDER_GOOGLE}
           initialRegion={region}
+          maxZoomLevel={18}
           onRegionChange={region => this.setState({ region })}
         >
           <MapView.Marker coordinate={userPosition}>
@@ -605,7 +606,4 @@ const mapDispatchToProps = {
   removeFav
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapNearbyScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MapNearbyScreen);
