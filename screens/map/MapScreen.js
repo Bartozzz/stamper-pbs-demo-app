@@ -385,6 +385,7 @@ class MapNearbyScreen extends React.Component {
           customMapStyle={mapStyle}
           provider={MapView.PROVIDER_GOOGLE}
           initialRegion={region}
+          maxZoomLevel={18}
           onRegionChange={region => this.setState({ region })}
         >
           <MapView.Marker coordinate={userPosition}>
