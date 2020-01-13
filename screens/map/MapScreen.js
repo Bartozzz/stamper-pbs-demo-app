@@ -36,7 +36,6 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import { getCluster } from "../../helpers/map";
 
 import { getRegion, addFav, removeFav } from "../../store/reducers/map";
@@ -65,21 +64,7 @@ function calculateDistance(a, b) {
 }
 
 function createCardFromMerchantData(data) {
-  return {
-    id: data.id,
-    title: data.title,
-    position: data.position,
-    stampsTotal: data.stampsTotal,
-    active: data.active,
-    favorite: data.favorite,
-    offline: data.offline,
-    online: data.online,
-    inWallet: data.inWallet,
-    iconUrl: data.iconUrl,
-    validTo: data.validTo,
-    validDays: data.validDays,
-    validToDate: data.validToDate
-  };
+  return data;
 }
 
 class MapNearbyScreen extends React.Component {
@@ -100,7 +85,8 @@ class MapNearbyScreen extends React.Component {
     city: null,
     userPosition: null,
     locationLoaded: false,
-    showCards: true
+    showCards: true,
+    cardsToShow: []
   };
 
   get data() {
@@ -263,32 +249,32 @@ class MapNearbyScreen extends React.Component {
   };
 
   renderSelectedCardOnMap() {
+    const data = this.state.cardsToShow.length
+      ? this.state.cardsToShow
+      : this.data;
+
     return (
       <View style={styles.cards}>
         <Carousel
           ref={c => {
             this.carousel = c;
           }}
-          data={this.data}
+          data={data}
           onSnapToItem={index => {
-            const card = this.data[index];
-
-            this.mapView.animateToRegion(
-              {
-                latitude: parseFloat(card.lat),
-                longitude: parseFloat(card.lng)
-              },
-              1000
-            );
+            // const card = this.data[index];
+            //
+            // this.mapView.animateToRegion(
+            //   {
+            //     latitude: parseFloat(card.lat),
+            //     longitude: parseFloat(card.lng)
+            //   },
+            //   1000
+            // );
           }}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback
               onPress={() => {
-                if (this.state.selected === item.id) {
-                  this.setState({ selected: null });
-                } else {
-                  this.setState({ selected: item.id });
-                }
+                // …
               }}
             >
               <View style={[styles.card]}>
@@ -392,8 +378,22 @@ class MapNearbyScreen extends React.Component {
 
                 <View style={[styles.cardFooter]}>
                   <View style={[styles.cardFooterButtons]}>
-                    <TouchableOpacity>
-                      <View style={[styles.cardFooterButton]}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        if (this.state.selected === item.id) {
+                          this.setState({ selected: null });
+                        } else {
+                          this.setState({ selected: item.id });
+                        }
+                      }}
+                    >
+                      <View
+                        style={[
+                          styles.cardFooterButton,
+                          this.state.selected === item.id &&
+                            styles.cardFooterButtonActive
+                        ]}
+                      >
                         <Entypo name="message" size={20} color="#fff" />
                       </View>
                     </TouchableOpacity>
@@ -487,7 +487,8 @@ class MapNearbyScreen extends React.Component {
 
             this.setState(
               {
-                showCards: true
+                showCards: true,
+                cardsToShow: cardsInCluster
               },
               () => {
                 this.carousel.snapToItem(
@@ -513,7 +514,8 @@ class MapNearbyScreen extends React.Component {
 
             this.setState(
               {
-                showCards: true
+                showCards: true,
+                cardsToShow: marker.cards
               },
               () => {
                 this.carousel.snapToItem(
@@ -685,7 +687,10 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   cardSectionIcon: {
-    marginRight: 5
+    marginRight: 5,
+    textAlign: "center",
+
+    width: 20
   },
   cardSectionText: {
     paddingRight: slideTargetPadding * 2
