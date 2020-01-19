@@ -491,10 +491,8 @@ class MapNearbyScreen extends React.Component {
                 cardsToShow: cardsInCluster
               },
               () => {
-                this.carousel.snapToItem(
-                  this.data.findIndex(item => item.id === selectedCard.id),
-                  true
-                );
+                // item = this.data.findIndex(item => item.id === selectedCard.id);
+                this.carousel.snapToItem(0, true);
               }
             );
           }}
@@ -518,10 +516,8 @@ class MapNearbyScreen extends React.Component {
                 cardsToShow: marker.cards
               },
               () => {
-                this.carousel.snapToItem(
-                  this.data.findIndex(item => item.id === selectedCard.id),
-                  true
-                );
+                // item = this.data.findIndex(item => item.id === selectedCard.id)
+                this.carousel.snapToItem(0, true);
               }
             );
           }}
@@ -569,7 +565,8 @@ class MapNearbyScreen extends React.Component {
         <TouchableWithoutFeedback
           onPress={() =>
             this.setState(state => ({
-              showCards: !state.showCards
+              showCards: !state.showCards,
+              cardsToShow: []
             }))
           }
         >
