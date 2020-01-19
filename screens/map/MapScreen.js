@@ -289,7 +289,7 @@ class MapNearbyScreen extends React.Component {
                 >
                   <Image
                     style={styles.cardImage}
-                    source={{ uri: item.backgroundUrl }}
+                    source={{ uri: item.backgroundImageUrl }}
                   />
 
                   <View style={[styles.cardSection]}>
