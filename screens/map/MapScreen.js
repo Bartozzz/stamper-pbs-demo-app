@@ -273,189 +273,213 @@ class MapNearbyScreen extends React.Component {
             //   1000
             // );
           }}
-          renderItem={({ item }) => (
-            <View style={[styles.card]}>
-              <Text style={[styles.cardName]}>{item.merchantName}</Text>
+          renderItem={({ item }) =>
+            console.log(item) || (
+              <View style={[styles.card]}>
+                <Text style={[styles.cardName]}>{item.merchantName}</Text>
 
-              <View
-                style={[
-                  styles.cardFlip,
-                  styles.cardFlipShow,
-                  this.state.selected === item.id && styles.cardFlipHide
-                ]}
-              >
-                <View>
-                  <View style={styles.cardImageIconContainer}>
+                <View
+                  style={[
+                    styles.cardFlip,
+                    styles.cardFlipShow,
+                    this.state.selected === item.id && styles.cardFlipHide
+                  ]}
+                >
+                  <View>
+                    <View style={styles.cardImageIconContainer}>
+                      <Image
+                        style={styles.cardImageIcon}
+                        source={{ uri: item.logoUrl }}
+                      />
+                    </View>
+
                     <Image
-                      style={styles.cardImageIcon}
-                      source={{ uri: item.logoUrl }}
+                      style={styles.cardImage}
+                      source={{ uri: item.backgroundImageUrl }}
                     />
                   </View>
 
-                  <Image
-                    style={styles.cardImage}
-                    source={{ uri: item.backgroundImageUrl }}
-                  />
+                  <View style={[styles.cardSection]}>
+                    <Text style={[styles.cardSectionIcon]}>
+                      <AntDesign name="tag" size={18} color="#c1c0ca" />
+                    </Text>
+
+                    <Text style={[styles.cardSectionText]}>{item.title}</Text>
+                  </View>
+
+                  <View style={[styles.cardSection]}>
+                    <Text style={[styles.cardSectionIcon]}>
+                      <Feather name="clock" size={18} color="#c1c0ca" />
+                    </Text>
+
+                    <Text
+                      style={[
+                        styles.cardSectionText,
+                        !item.active && styles.invalid
+                      ]}
+                    >
+                      {item.validTo
+                        ? i18n.t("map.validTill", { date: item.validToDate })
+                        : i18n.t("map.validDays", { count: item.validDays })}
+                    </Text>
+                  </View>
+
+                  <View style={[styles.cardSection]}>
+                    <Text style={[styles.cardSectionIcon]}>
+                      <MaterialIcons
+                        name="monetization-on"
+                        size={18}
+                        color="#c1c0ca"
+                      />
+                    </Text>
+
+                    <ScrollView style={{ height: 70 }}>
+                      <Text style={[styles.cardSectionText]}>
+                        {item.cardDescription}
+                      </Text>
+                    </ScrollView>
+                  </View>
                 </View>
 
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <AntDesign name="tag" size={18} color="#c1c0ca" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText]}>{item.title}</Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <Feather name="clock" size={18} color="#c1c0ca" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText]}>
-                    {item.validTo
-                      ? i18n.t("map.validTill", { date: item.validToDate })
-                      : i18n.t("map.validDays", { count: item.validDays })}
-                  </Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <MaterialIcons
-                      name="monetization-on"
-                      size={18}
-                      color="#c1c0ca"
-                    />
-                  </Text>
-
-                  <ScrollView style={{ height: 70 }}>
-                    <Text style={[styles.cardSectionText]}>
-                      {item.cardDescription}
+                <View
+                  style={[
+                    styles.cardFlip,
+                    styles.cardFlipActive,
+                    styles.cardFlipHide,
+                    this.state.selected === item.id && styles.cardFlipShow
+                  ]}
+                >
+                  <ScrollView style={{ flexGrow: 0, height: 130 }}>
+                    <Text
+                      style={[styles.cardDescription, styles.cardLightText]}
+                    >
+                      {item.companyDescription}
                     </Text>
                   </ScrollView>
-                </View>
-              </View>
 
-              <View
-                style={[
-                  styles.cardFlip,
-                  styles.cardFlipActive,
-                  styles.cardFlipHide,
-                  this.state.selected === item.id && styles.cardFlipShow
-                ]}
-              >
-                <ScrollView style={{ flexGrow: 0, height: 130 }}>
-                  <Text style={[styles.cardDescription, styles.cardLightText]}>
-                    {item.companyDescription}
-                  </Text>
-                </ScrollView>
+                  <View style={[styles.cardSection]}>
+                    <Text style={[styles.cardSectionIcon]}>
+                      <Entypo name="link" size={18} color="#000" />
+                    </Text>
 
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <Entypo name="link" size={18} color="#000" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText, styles.cardLightText]}>
-                    {item.website}
-                  </Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <Foundation name="marker" size={18} color="#000" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText, styles.cardLightText]}>
-                    {item.address}
-                  </Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <FontAwesome name="bell" size={18} color="#000" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText, styles.cardLightText]}>
-                    {item.openingHours}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={[styles.cardFooter]}>
-                <View style={[styles.cardFooterButtons]}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (!item.companyDescription) {
-                        return;
-                      }
-
-                      if (this.state.selected === item.id) {
-                        this.setState({ selected: null });
-                      } else {
-                        this.setState({ selected: item.id });
-                      }
-                    }}
-                  >
-                    <View
-                      style={[
-                        styles.cardFooterButton,
-                        item.companyDescription && styles.cardFooterButtonActive
-                      ]}
+                    <Text
+                      style={[styles.cardSectionText, styles.cardLightText]}
                     >
-                      <Entypo name="message" size={20} color="#fff" />
-                    </View>
-                  </TouchableOpacity>
+                      {item.website}
+                    </Text>
+                  </View>
 
-                  <TouchableOpacity
-                    onPress={() => item.phone && this.openCall(item.phone)}
-                  >
-                    <View
-                      style={[
-                        styles.cardFooterButton,
-                        item.phone && styles.cardFooterButtonActive
-                      ]}
+                  <View style={[styles.cardSection]}>
+                    <Text style={[styles.cardSectionIcon]}>
+                      <Foundation name="marker" size={18} color="#000" />
+                    </Text>
+
+                    <Text
+                      style={[styles.cardSectionText, styles.cardLightText]}
                     >
-                      <FontAwesome name="phone" size={20} color="#fff" />
-                    </View>
-                  </TouchableOpacity>
+                      {item.address}
+                    </Text>
+                  </View>
+
+                  <View style={[styles.cardSection]}>
+                    <Text style={[styles.cardSectionIcon]}>
+                      <FontAwesome name="bell" size={18} color="#000" />
+                    </Text>
+
+                    <Text
+                      style={[styles.cardSectionText, styles.cardLightText]}
+                    >
+                      {item.openingHours}
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={[styles.cardFooter]}>
+                  <View style={[styles.cardFooterButtons]}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        if (!item.companyDescription) {
+                          return;
+                        }
+
+                        if (this.state.selected === item.id) {
+                          this.setState({ selected: null });
+                        } else {
+                          this.setState({ selected: item.id });
+                        }
+                      }}
+                    >
+                      <View
+                        style={[
+                          styles.cardFooterButton,
+                          item.companyDescription &&
+                            styles.cardFooterButtonActive
+                        ]}
+                      >
+                        <Entypo name="message" size={20} color="#fff" />
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => item.phone && this.openCall(item.phone)}
+                    >
+                      <View
+                        style={[
+                          styles.cardFooterButton,
+                          item.phone && styles.cardFooterButtonActive
+                        ]}
+                      >
+                        <FontAwesome name="phone" size={20} color="#fff" />
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() =>
+                        item.ecommerceUrl && this.openUrl(item.ecommerceUrl)
+                      }
+                    >
+                      <View
+                        style={[
+                          styles.cardFooterButton,
+                          item.ecommerceUrl && styles.cardFooterButtonActive
+                        ]}
+                      >
+                        <Entypo name="shopping-cart" size={16} color="#fff" />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
 
                   <TouchableOpacity
-                    onPress={() =>
-                      item.ecommerceUrl && this.openUrl(item.ecommerceUrl)
+                    onPress={
+                      item.inWallet || !item.active
+                        ? () => null
+                        : this.addCard(item.id)
                     }
                   >
                     <View
                       style={[
-                        styles.cardFooterButton,
-                        item.ecommerceUrl && styles.cardFooterButtonActive
+                        styles.cardFooterAddCard,
+                        !item.inWallet &&
+                          item.active &&
+                          styles.cardFooterAddCardActive
                       ]}
                     >
-                      <Entypo name="shopping-cart" size={16} color="#fff" />
+                      <Text
+                        style={[
+                          styles.cardFooterAddCardText,
+                          !item.inWallet &&
+                            item.active &&
+                            styles.cardFooterAddCardTextActive
+                        ]}
+                      >
+                        {i18n.t("map.addCard")}
+                      </Text>
                     </View>
                   </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity
-                  onPress={item.inWallet ? () => null : this.addCard(item.id)}
-                >
-                  <View
-                    style={[
-                      styles.cardFooterAddCard,
-                      !item.inWallet && styles.cardFooterAddCardActive
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.cardFooterAddCardText,
-                        !item.inWallet && styles.cardFooterAddCardTextActive
-                      ]}
-                    >
-                      {i18n.t("map.addCard")}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
               </View>
-            </View>
-          )}
+            )
+          }
           inactiveSlideScale={1}
           inactiveSlideOpacity={1}
           inactiveSlideShift={0}
@@ -625,6 +649,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
     width: 120,
     height: 120
+  },
+
+  invalid: {
+    color: "red"
   },
 
   map: {
