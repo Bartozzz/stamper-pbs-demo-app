@@ -285,10 +285,12 @@ class MapNearbyScreen extends React.Component {
                 ]}
               >
                 <View>
-                  <Image
-                    style={styles.cardImageIcon}
-                    source={{ uri: item.logoUrl }}
-                  />
+                  <View style={styles.cardImageIconContainer}>
+                    <Image
+                      style={styles.cardImageIcon}
+                      source={{ uri: item.logoUrl }}
+                    />
+                  </View>
 
                   <Image
                     style={styles.cardImage}
@@ -680,13 +682,24 @@ const styles = StyleSheet.create({
     height: (slideTargetWidth - slideTargetPadding * 2) * 0.3,
     resizeMode: "cover"
   },
-  cardImageIcon: {
+  cardImageIconContainer: {
     position: "absolute",
     zIndex: 9999,
 
-    margin: slideTargetPadding,
-    width: slideTargetWidth - slideTargetPadding * 2,
-    height: (slideTargetWidth - slideTargetPadding * 2) * 0.3,
+    alignSelf: "center",
+    marginVertical: slideTargetPadding + 10,
+    marginHorizontal: slideTargetPadding,
+
+    width: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
+    height: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
+
+    backgroundColor: "white",
+    borderRadius: ((slideTargetWidth - slideTargetPadding * 2) * 0.3) / 2
+  },
+  cardImageIcon: {
+    width: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
+    height: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
+    borderRadius: ((slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20) / 2,
     resizeMode: "contain"
   },
   cardSection: {
