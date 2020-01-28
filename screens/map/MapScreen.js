@@ -28,6 +28,7 @@ import {
 
 import Background from "../../components/Background";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderEmpty from "../../components/nav/HeaderEmpty";
 import MapHeader from "../../components/screens/map/Header";
 
 import Marker from "../../components/screens/map/Marker";
@@ -71,7 +72,7 @@ function createCardFromMerchantData(data) {
 class MapNearbyScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.map"),
-    headerLeft: null,
+    headerLeft: <HeaderEmpty />,
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: {
       ...defaultStyles.headerTransparent,
