@@ -1,6 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -26,6 +26,7 @@
     "expo-location": "5.0.1",
     "expo-permissions": "5.0.1",
     "i18n-js": "3.2.1",
+    "ramda": "0.26.1",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-easy-toast": "1.2.0",

@@ -1,11 +1,3 @@
-export function getData(data, filterOnline) {
-  if (filterOnline) {
-    return data.filter(item => item.online);
-  } else {
-    return data;
-  }
-}
-
 export function getDataForLocation(data, lat, lng) {
   return data.filter(item => {
     const eps = 0.00001;
