@@ -13,6 +13,7 @@ export const MAP_UNFAV_FAIL = "APP/MAP/UNFAV_FAIL";
 
 const initialState = {
   isLoading: false,
+  filters: [],
   data: []
 };
 
@@ -28,6 +29,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+        filters: action.payload.data.filters,
         data: action.payload.data.cards
       };
 
@@ -35,6 +37,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+        fiters: [],
         data: []
       };
 

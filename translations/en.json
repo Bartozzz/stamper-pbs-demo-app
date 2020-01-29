@@ -161,6 +161,9 @@
     "favs": "Favourites",
     "online": "Online",
 
+    "closeCards": "Hide nearby places.",
+    "showCards": "Show nearby places.",
+
     "collectStamps": {
       "one": "collect 1 stamp",
       "few": "collect {{count}} stamps",
