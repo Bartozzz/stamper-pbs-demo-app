@@ -173,7 +173,13 @@ class MapNearbyScreen extends React.Component {
       // Same shape as component' state:
       return {
         locationLoaded: true,
-        city: Array.isArray(reverse) ? reverse[0].city : null,
+        // FIX: sometimes reverse is an array but without any objects inside:
+        city:
+          Array.isArray(reverse) &&
+          reverse.length > 0 &&
+          typeof reverse[0] === "object"
+            ? reverse[0].city
+            : "Warszawa",
         region: {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
