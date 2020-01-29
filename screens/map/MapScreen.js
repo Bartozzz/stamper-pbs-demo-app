@@ -189,11 +189,17 @@ class MapNearbyScreen extends React.Component {
         }
       };
     } catch (err) {
-      console.error(err);
+      // console.error(err);
 
       return {
-        region: {},
-        locationLoaded: false
+        city: "Warsaw",
+        region: {
+          latitude: 52.237049,
+          longitude: 21.017532,
+          latitudeDelta: 0.02897628441160549,
+          longitudeDelta: 0.025000199675559998
+        },
+        locationLoaded: true
       };
     }
   };
