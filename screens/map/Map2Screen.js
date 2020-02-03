@@ -196,6 +196,7 @@ const MapScreen = ({ navigation }) => {
             marker={marker}
             cluster={cluster.cluster}
             onPress={selectedCards => {
+              setShowCards(true);
               setCards(
                 selectedCards
                   .map(normalizeCardGeometry)
