@@ -4,6 +4,8 @@ import { AsyncStorage, Dimensions, View, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 
+import * as R from "ramda";
+
 // Utils:
 import * as Routes from "../../navigation";
 import i18n from "../../translations";
@@ -116,13 +118,17 @@ const MapScreen = ({ navigation }) => {
           const cards = data.cards
             .map(normalizeCardGeometry)
             .sort(sortByDistance(getRegionForLocation(currentLocation)))
-            .sort(sortByActive())
-            .filter(filterByCategory(filter, filters));
+            .sort(sortByActive());
 
           setFilters(data.filters);
           setMarkers(cards);
           setCards(cards);
-          setCluster(getCluster(cards, getRegionForLocation(currentLocation)));
+          setCluster(
+            getCluster(
+              groupCardsByMerchant(cards).map(normalizeCardGeometry),
+              getRegionForLocation(currentLocation)
+            )
+          );
         })
         .catch(error => {
           console.log(error);
@@ -177,14 +183,26 @@ const MapScreen = ({ navigation }) => {
       <MapArea
         userPosition={getRegionForLocation(currentLocation)}
         onRegionChangeComplete={region => {
-          setCluster(getCluster(markers, region));
+          setCluster(
+            getCluster(
+              groupCardsByMerchant(markers).map(normalizeCardGeometry),
+              region
+            )
+          );
         }}
       >
         {cluster.markers.map(marker => (
           <MapAreaMarker
-            key={marker.id}
             marker={marker}
             cluster={cluster.cluster}
+            onPress={selectedCards => {
+              setCards(
+                selectedCards
+                  .map(normalizeCardGeometry)
+                  .sort(sortByDistance(getRegionForLocation(currentLocation)))
+                  .sort(sortByActive())
+              );
+            }}
           />
         ))}
       </MapArea>
@@ -287,6 +305,33 @@ function calculateDistance(a, b) {
   dist = dist * 1.609344;
 
   return dist;
+}
+
+function groupCardsByMerchant(cards) {
+  return R.reduce((acc, cur) => {
+    const index = R.findIndex(
+      R.allPass([
+        R.propEq("merchantId", cur.merchantId),
+        R.propEq("lat", Number(cur.lat)),
+        R.propEq("lng", Number(cur.lng))
+      ])
+    )(acc);
+
+    if (index > -1) {
+      return R.over(
+        R.compose(R.lensIndex(index), R.lensProp("cards")),
+        R.append(cur)
+      )(acc);
+    } else {
+      return R.append({
+        lat: Number(cur.lat),
+        lng: Number(cur.lng),
+        logoUrl: cur.logoUrl,
+        merchantId: cur.merchantId,
+        cards: [cur]
+      })(acc);
+    }
+  }, [])(cards);
 }
 
 export default MapScreen;
