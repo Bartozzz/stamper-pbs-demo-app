@@ -254,14 +254,6 @@ class MapNearbyScreen extends React.Component {
     this.openLink(url.startsWith("http") ? url : `https://${url}`);
   };
 
-  openLink = url => {
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      }
-    });
-  };
-
   renderSelectedCardOnMap() {
     const data = this.state.cardsToShow.length
       ? this.state.cardsToShow
