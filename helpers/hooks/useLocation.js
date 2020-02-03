@@ -8,7 +8,6 @@ export default function useLocation(
     enableHighAccuracy: true
   }
 ) {
-  const [errors, setErrors] = React.useState(null);
   const [currentLocation, setCurrentLocation] = React.useState(null);
   const [reverseLocation, setReverseLocation] = React.useState(null);
   const [permission] = usePermissions(Permissions.LOCATION, { ask: true });
@@ -30,7 +29,8 @@ export default function useLocation(
         setCurrentLocation(currentLocation);
         setReverseLocation(reverseLocation);
       } catch (error) {
-        setErrors(error);
+        setCurrentLocation(currentPositionMock());
+        setReverseLocation(reversePositionMock());
       }
     };
 
@@ -38,10 +38,40 @@ export default function useLocation(
       if (permission.status === "granted") {
         getPositions();
       } else {
-        setErrors(new Error("Permissions denied"));
+        setCurrentLocation(currentPositionMock());
+        setReverseLocation(reversePositionMock());
       }
     }
   }, [permission]);
 
-  return [currentLocation, reverseLocation, errors];
+  return [currentLocation, reverseLocation];
+}
+
+function currentPositionMock() {
+  return {
+    coords: {
+      accuracy: 5,
+      altitude: 0,
+      altitudeAccuracy: -1,
+      heading: -1,
+      latitude: 52.2297,
+      longitude: 21.0122,
+      speed: -1
+    },
+    timestamp: Date.now()
+  };
+}
+
+function reversePositionMock() {
+  return [
+    {
+      city: "Warsaw",
+      country: "Poland",
+      isoCountryCode: "PL",
+      name: "00-001",
+      postalCode: "00-001",
+      region: "Masovia",
+      street: null
+    }
+  ];
 }

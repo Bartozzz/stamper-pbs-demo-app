@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { View, Image } from "react-native";
+import { useDispatch } from "react-redux";
 
 import * as R from "ramda";
 
@@ -28,7 +28,7 @@ import MapLoader from "../../assets/loaders/map.gif";
 
 const MapScreen = () => {
   const dispatch = useDispatch();
-  const [currentLocation, reverseLocation, locationErrors] = useLocation();
+  const [currentLocation, reverseLocation] = useLocation();
 
   const [region, setRegion] = React.useState();
   const [cards, setCards] = React.useState([]);
@@ -45,8 +45,8 @@ const MapScreen = () => {
   React.useEffect(() => {
     if (currentLocation) {
       setRegion({
-        latitude: currentLocation.coords.latitude,
-        longitude: currentLocation.coords.longitude,
+        latitude: Number(currentLocation.coords.latitude),
+        longitude: Number(currentLocation.coords.longitude),
         latitudeDelta: 0.025,
         longitudeDelta: 0.025
       });
@@ -75,20 +75,6 @@ const MapScreen = () => {
     }
   }, [currentLocation, reverseLocation]);
 
-  // Refresh cluster at each region change:
-  React.useEffect(() => {
-    setCluster(getCluster(markers, region));
-  }, [region]);
-
-  // Could not fetch user location:
-  if (locationErrors) {
-    return (
-      <View style={[defaultStyles.container, defaultStyles.center]}>
-        <Text>Could not fetch user location.</Text>
-      </View>
-    );
-  }
-
   // Still fetching user location:
   if (currentLocation === null && reverseLocation === null) {
     return (
@@ -109,12 +95,14 @@ const MapScreen = () => {
 
       <MapArea
         userPosition={{
-          latitude: currentLocation.coords.latitude,
-          longitude: currentLocation.coords.longitude,
+          latitude: Number(currentLocation.coords.latitude),
+          longitude: Number(currentLocation.coords.longitude),
           latitudeDelta: 0.025,
           longitudeDelta: 0.025
         }}
-        onRegionChangeComplete={region => setRegion(region)}
+        onRegionChangeComplete={region => {
+          setCluster(getCluster(markers, region));
+        }}
       >
         {cluster.markers.map(marker => (
           <MapAreaMarker
@@ -141,8 +129,10 @@ MapScreen.navigationOptions = ({ navigation }) => ({
 export function normalizeCardGeometry(card) {
   return {
     ...card,
+    lat: Number(card.lat),
+    lng: Number(card.lng),
     geometry: {
-      coordinates: [card.lng, card.lat]
+      coordinates: [Number(card.lng), Number(card.lat)]
     }
   };
 }
@@ -152,8 +142,8 @@ export function groupCardsByMerchant(data) {
     const index = R.findIndex(
       R.allPass([
         R.propEq("merchantId", cur.merchantId),
-        R.propEq("lat", cur.lat),
-        R.propEq("lng", cur.lng)
+        R.propEq("lat", Number(cur.lat)),
+        R.propEq("lng", Number(cur.lng))
       ])
     )(acc);
 
@@ -165,8 +155,8 @@ export function groupCardsByMerchant(data) {
     } else {
       return R.append({
         merchantId: cur.merchantId,
-        lng: cur.lng,
-        lat: cur.lat,
+        lng: Number(cur.lng),
+        lat: Number(cur.lat),
         logoUrl: cur.logoUrl,
 
         cards: [cur]
