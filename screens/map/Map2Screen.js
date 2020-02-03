@@ -30,7 +30,6 @@ const MapScreen = () => {
   const dispatch = useDispatch();
   const [currentLocation, reverseLocation] = useLocation();
 
-  const [region, setRegion] = React.useState();
   const [cards, setCards] = React.useState([]);
   const [markers, setMarkers] = React.useState([]);
   const [cluster, setCluster] = React.useState({ markers: [] });
@@ -40,18 +39,6 @@ const MapScreen = () => {
   React.useEffect(() => {
     console.log("Re-render");
   });
-
-  // Set initial region to user location:
-  React.useEffect(() => {
-    if (currentLocation) {
-      setRegion({
-        latitude: Number(currentLocation.coords.latitude),
-        longitude: Number(currentLocation.coords.longitude),
-        latitudeDelta: 0.025,
-        longitudeDelta: 0.025
-      });
-    }
-  }, [currentLocation]);
 
   // Fetch data for user location from the API:
   React.useEffect(() => {
@@ -67,7 +54,15 @@ const MapScreen = () => {
           setFilters(data.filters);
           setMarkers(cards);
           setCards(groupCardsByMerchant(cards));
-          setCluster(getCluster(cards, region));
+
+          setCluster(
+            getCluster(cards, {
+              latitude: Number(currentLocation.coords.latitude),
+              longitude: Number(currentLocation.coords.longitude),
+              latitudeDelta: 0.025,
+              longitudeDelta: 0.025
+            })
+          );
         })
         .catch(error => {
           console.log(error);
