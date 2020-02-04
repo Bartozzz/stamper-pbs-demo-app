@@ -51,9 +51,26 @@ const MapScreen = ({ navigation }) => {
   const [cards, setCards] = React.useState([]);
   const [showCards, setShowCards] = React.useState(false);
   const [markers, setMarkers] = React.useState([]);
+  const [region, setRegion] = React.useState();
   const [cluster, setCluster] = React.useState({ markers: [] });
   const [filters, setFilters] = React.useState([]);
   const [filter, setFilter] = React.useState(0);
+
+  const createCluster = React.useCallback(
+    (markers, region) => {
+      const cards = markers
+        .map(normalizeCardGeometry)
+        .sort(sortByDistance(getRegionForLocation(currentLocation)))
+        .sort(sortByActive())
+        .filter(filterByCategory(filter, filters));
+
+      return getCluster(
+        groupCardsByMerchant(cards).map(normalizeCardGeometry),
+        region
+      );
+    },
+    [currentLocation]
+  );
 
   const addCardHandler = React.useCallback(cardId => {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
@@ -102,35 +119,26 @@ const MapScreen = ({ navigation }) => {
       });
   }, []);
 
-  React.useEffect(() => {
-    console.log("Re-render");
-  });
-
   // Fetch data for user location from the API:
   React.useEffect(() => {
     if (currentLocation && reverseLocation) {
       const { city, isoCountryCode } = reverseLocation;
       const { coords } = currentLocation;
 
-      console.log(reverseLocation);
-
       dispatch(getRegion(city, isoCountryCode, coords))
         .then(response => {
           const { data } = response.payload;
+          const region = getRegionForLocation(currentLocation);
           const cards = data.cards
             .map(normalizeCardGeometry)
-            .sort(sortByDistance(getRegionForLocation(currentLocation)))
+            .sort(sortByDistance(region))
             .sort(sortByActive());
 
           setFilters(data.filters);
           setMarkers(cards);
           setCards(cards);
-          setCluster(
-            getCluster(
-              groupCardsByMerchant(cards).map(normalizeCardGeometry),
-              getRegionForLocation(currentLocation)
-            )
-          );
+          setRegion(region);
+          setCluster(createCluster(cards, region));
         })
         .catch(error => {
           console.log(error);
@@ -148,6 +156,7 @@ const MapScreen = ({ navigation }) => {
         .filter(filterByCategory(filter, filters));
 
       setCards(cards);
+      setCluster(createCluster(cards, region));
     }
   }, [filters, filter]);
 
@@ -185,12 +194,12 @@ const MapScreen = ({ navigation }) => {
       <MapArea
         userPosition={getRegionForLocation(currentLocation)}
         onRegionChangeComplete={region => {
-          setCluster(
-            getCluster(
-              groupCardsByMerchant(markers).map(normalizeCardGeometry),
-              region
-            )
-          );
+          const cards = markers
+            .map(normalizeCardGeometry)
+            .filter(filterByCategory(filter, filters));
+
+          setRegion(region);
+          setCluster(createCluster(cards, region));
         }}
       >
         {cluster.markers.map(marker => (
