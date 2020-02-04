@@ -1,229 +1,101 @@
-import * as React from "react";
-import * as R from "ramda";
-import { connect } from "react-redux";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
-import {
-  AntDesign,
-  Feather,
-  MaterialIcons,
-  FontAwesome,
-  Foundation,
-  Entypo
-} from "@expo/vector-icons";
-import MapView from "react-native-maps";
+import React from "react";
+import styled from "styled-components/native";
+import { AsyncStorage, Dimensions, View, Image } from "react-native";
+import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
-import {
-  Linking,
-  AsyncStorage,
-  Dimensions,
-  StyleSheet,
-  View,
-  ScrollView,
-  Text,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableOpacity
-} from "react-native";
 
-import Background from "../../components/Background";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderEmpty from "../../components/nav/HeaderEmpty";
-import MapHeader from "../../components/screens/map/Header";
+import * as R from "ramda";
 
-import Marker from "../../components/screens/map/Marker";
-import ClusterMarker from "../../components/screens/map/ClusterMarker";
-
-import i18n from "../../translations";
+// Utils:
 import * as Routes from "../../navigation";
-import defaultStyles from "../../constants/Styles";
+import i18n from "../../translations";
 import colors from "../../constants/Colors";
+import defaultStyles from "../../constants/Styles";
+import useLocation from "../../helpers/hooks/useLocation";
 import { getCluster } from "../../helpers/map";
 
-import { getRegion, addFav, removeFav } from "../../store/reducers/map";
+// Components:
+import Background from "../../components/Background";
+import MapHeader from "../../components/screens/map/Header";
+import HeaderEmpty from "../../components/nav/HeaderEmpty";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import MapArea from "../../components/MapArea";
+import MapAreaMarker from "../../components/MapAreaMarker";
+import MapCard, { slideWidth, slideMargin } from "../../components/MapCard";
+import MapCardToggler from "../../components/MapCardToggler";
+
+// Store:
+import { getRegion } from "../../store/reducers/map";
 import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 
-import mapStyle from "../../assets/mapStyle";
+// Assets:
 import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
-import LocationIndicator from "../../assets/images/icons/location_indicator.png";
 import MapLoader from "../../assets/loaders/map.gif";
 import CardAdd from "../../assets/success/card_add.gif";
 
-function calculateDistance(a, b) {
-  var radlat1 = (Math.PI * a.lat) / 180;
-  var radlat2 = (Math.PI * b.lng) / 180;
-  var theta = a.lng - b.lng;
-  var radtheta = (Math.PI * theta) / 180;
-  var dist =
-    Math.sin(radlat1) * Math.sin(radlat2) +
-    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-  dist = Math.acos(dist);
-  dist = (dist * 180) / Math.PI;
-  dist = dist * 60 * 1.1515;
-  dist = dist * 1.609344;
-  return dist;
-}
+const CardsContainer = styled.View`
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  right: 0;
 
-function createCardFromMerchantData(data) {
-  return data;
-}
+  z-index: 3;
+`;
 
-class MapNearbyScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: i18n.t("navigation.map"),
-    headerLeft: <HeaderEmpty />,
-    headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: {
-      ...defaultStyles.headerTransparent,
-      backgroundColor: colors.background
-    }
-  });
+const MapScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [currentLocation, reverseLocation] = useLocation();
 
-  state = {
-    filter: 0,
-    selected: null,
-    region: null,
-    city: null,
-    userPosition: null,
-    locationLoaded: false,
-    showCards: false,
-    cardsToShow: []
-  };
+  const [cards, setCards] = React.useState([]);
+  const [showCards, setShowCards] = React.useState(false);
+  const [markers, setMarkers] = React.useState([]);
+  const [region, setRegion] = React.useState();
+  const [cluster, setCluster] = React.useState({ markers: [] });
+  const [filters, setFilters] = React.useState([]);
+  const [filter, setFilter] = React.useState(0);
 
-  get data() {
-    // All:
-    if (this.state.filter === 0) {
-      return this.props.data;
-    }
+  const createCluster = React.useCallback(
+    (markers, region) => {
+      const cards = markers
+        .map(normalizeCardGeometry)
+        .sort(sortByDistance(getRegionForLocation(currentLocation)))
+        .sort(sortByActive())
+        .filter(filterByCategory(filter, filters));
 
-    // Filter by category:
-    const filter = this.props.filters[this.state.filter];
+      return getCluster(
+        groupCardsByMerchant(cards).map(normalizeCardGeometry),
+        region
+      );
+    },
+    [currentLocation]
+  );
 
-    return this.props.data
-      .filter(item => item.filter === filter)
-      .sort((a, b) => {
-        const userCoords = {
-          lat: this.state.userPosition.latitude,
-          lng: this.state.userPosition.longitude
-        };
-
-        const aDist = calculateDistance(a, userCoords);
-        const bDist = calculateDistance(b, userCoords);
-
-        return aDist - bDist;
-      });
-  }
-
-  get groupedByMerchant() {
-    return R.reduce((acc, cur) => {
-      const index = R.findIndex(
-        R.allPass([
-          R.propEq("merchantId", cur.merchantId),
-          R.propEq("lat", cur.lat),
-          R.propEq("lng", cur.lng)
-        ])
-      )(acc);
-
-      if (index > -1) {
-        return R.over(
-          R.compose(R.lensIndex(index), R.lensProp("cards")),
-          R.append(createCardFromMerchantData(cur))
-        )(acc);
-      } else {
-        return R.append({
-          lat: cur.lat,
-          lng: cur.lng,
-          logoUrl: cur.logoUrl,
-          merchantId: cur.merchantId,
-          cards: [createCardFromMerchantData(cur)]
-        })(acc);
-      }
-    }, [])(this.data);
-  }
-
-  componentDidMount() {
-    this.requestUserPosition().then(data => {
-      if (__DEV__) {
-        this.props.getRegion("Kraków", data.region);
-      } else {
-        this.props.getRegion(data.city, data.region);
-      }
-
-      this.setState({ ...data, userPosition: data.region });
-    });
-  }
-
-  requestUserPosition = async () => {
-    try {
-      let { status } = await Permissions.askAsync(Permissions.LOCATION);
-      let location;
-      let reverse;
-
-      if (status === "granted") {
-        // Get user geocode location:
-        location = await Location.getCurrentPositionAsync({
-          enableHighAccuracy: true
-        });
-
-        // Try to find the name of the city the current user is in:
-        reverse = await Location.reverseGeocodeAsync(location.coords);
-      }
-
-      // Same shape as component' state:
-      return {
-        locationLoaded: true,
-        // FIX: sometimes reverse is an array but without any objects inside:
-        city:
-          Array.isArray(reverse) &&
-          reverse.length > 0 &&
-          typeof reverse[0] === "object"
-            ? reverse[0].city
-            : "Warszawa",
-        region: {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          // TODO: calculate deltas based on screen sizes:
-          latitudeDelta: 0.02897628441160549,
-          longitudeDelta: 0.025000199675559998
-        }
-      };
-    } catch (err) {
-      // console.error(err);
-
-      return {
-        city: "Warsaw",
-        region: {
-          latitude: 52.237049,
-          longitude: 21.017532,
-          latitudeDelta: 0.02897628441160549,
-          longitudeDelta: 0.025000199675559998
-        },
-        locationLoaded: true
-      };
-    }
-  };
-
-  addCard = cardId => () => {
-    const { navigation, addCard } = this.props;
-
+  const addCardHandler = React.useCallback(cardId => {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
     function confirmCardTerms() {
-      addCard(cardId, true).then(() => {
-        navigation.navigate(Routes.INFO_SUCCESS, {
-          redirect: Routes.WALLET_CARDS,
-          message: i18n.t("success.wallet.cardAdd"),
-          height: 100,
-          width: 88,
-          image: CardAdd,
-          timeout: 3000
-        });
+      dispatch(addCard(cardId, true)).then(() => {
+        navigation
+          .navigate(Routes.INFO_SUCCESS, {
+            redirect: Routes.WALLET_CARDS,
+            message: i18n.t("success.wallet.cardAdd"),
+            height: 100,
+            width: 88,
+            image: CardAdd,
+            timeout: 3000
+          })
+          .catch(() => {
+            navigation.navigate(Routes.INFO_ERROR, {
+              redirect: Routes.MAP,
+              message: i18n.t("errors.wallet.cardAdd")
+            });
+          });
       });
     }
 
-    addCard(cardId)
+    dispatch(addCard(cardId))
       .then(response => {
         const { termsAndConditions } = response.payload.data;
         const { title, termsAndConditionsUrl } = termsAndConditions;
@@ -244,583 +116,226 @@ class MapNearbyScreen extends React.Component {
           message: i18n.t("errors.wallet.cardAdd")
         });
       });
-  };
+  }, []);
 
-  openCall = phoneNumber => {
-    this.openLink(`tel:${phoneNumber.replace(/-| /g, "")}`);
-  };
+  // Fetch data for user location from the API:
+  React.useEffect(() => {
+    if (currentLocation && reverseLocation) {
+      const { city, isoCountryCode } = reverseLocation;
+      const { coords } = currentLocation;
 
-  openUrl = url => {
-    this.openLink(url.startsWith("http") ? url : `https://${url}`);
-  };
+      dispatch(getRegion(city, isoCountryCode, coords))
+        .then(response => {
+          const { data } = response.payload;
+          const region = getRegionForLocation(currentLocation);
+          const cards = data.cards
+            .map(normalizeCardGeometry)
+            .sort(sortByDistance(region))
+            .sort(sortByActive());
 
-  openLink = url => {
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      }
-    });
-  };
+          setFilters(data.filters);
+          setMarkers(cards);
+          setCards(cards);
+          setRegion(region);
+          setCluster(createCluster(cards, region));
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }, [currentLocation, reverseLocation]);
 
-  renderSelectedCardOnMap() {
-    const data = this.state.cardsToShow.length
-      ? this.state.cardsToShow
-      : this.data;
+  // If the user selects a filter, filter shown cards:
+  React.useEffect(() => {
+    if (region) {
+      const cards = markers.filter(filterByCategory(filter, filters));
 
+      setCards(cards);
+      setCluster(createCluster(cards, region));
+    }
+  }, [filters, filter]);
+
+  // If the user hides cards, reset their state to default:
+  React.useEffect(() => {
+    if (region && !showCards) {
+      const cards = markers.filter(filterByCategory(filter, filters));
+
+      setCards(cards);
+      setCluster(createCluster(cards, region));
+    }
+  }, [showCards]);
+
+  // Still fetching user location:
+  if (currentLocation === null && reverseLocation === null) {
     return (
-      <View style={styles.cards}>
-        <Carousel
-          ref={c => {
-            this.carousel = c;
-          }}
-          useScrollView={false}
-          data={data}
-          onSnapToItem={index => {
-            // const card = this.data[index];
-            //
-            // this.mapView.animateToRegion(
-            //   {
-            //     latitude: parseFloat(card.lat),
-            //     longitude: parseFloat(card.lng)
-            //   },
-            //   1000
-            // );
-          }}
-          renderItem={({ item }) => (
-            <View style={[styles.card]}>
-              <Text style={[styles.cardName]}>{item.merchantName}</Text>
-
-              <View
-                style={[
-                  styles.cardFlip,
-                  styles.cardFlipShow,
-                  this.state.selected === item.id && styles.cardFlipHide
-                ]}
-              >
-                <View>
-                  <View style={styles.cardImageIconContainer}>
-                    <Image
-                      style={styles.cardImageIcon}
-                      source={{ uri: item.logoUrl }}
-                    />
-                  </View>
-
-                  <Image
-                    style={styles.cardImage}
-                    source={{ uri: item.backgroundImageUrl }}
-                  />
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <AntDesign name="tag" size={18} color="#c1c0ca" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText]}>{item.title}</Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <Feather name="clock" size={18} color="#c1c0ca" />
-                  </Text>
-
-                  <Text
-                    style={[
-                      styles.cardSectionText,
-                      !item.active && styles.invalid
-                    ]}
-                  >
-                    {item.validTo
-                      ? i18n.t("map.validTill", { date: item.validToDate })
-                      : i18n.t("map.validDays", { count: item.validDays })}
-                  </Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <MaterialIcons
-                      name="monetization-on"
-                      size={18}
-                      color="#c1c0ca"
-                    />
-                  </Text>
-
-                  <ScrollView style={{ height: 70 }}>
-                    <Text style={[styles.cardSectionText]}>
-                      {item.cardDescription}
-                    </Text>
-                  </ScrollView>
-                </View>
-              </View>
-
-              <View
-                style={[
-                  styles.cardFlip,
-                  styles.cardFlipActive,
-                  styles.cardFlipHide,
-                  this.state.selected === item.id && styles.cardFlipShow
-                ]}
-              >
-                <ScrollView style={{ flexGrow: 0, height: 130 }}>
-                  <Text style={[styles.cardDescription, styles.cardLightText]}>
-                    {item.companyDescription}
-                  </Text>
-                </ScrollView>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <Entypo name="link" size={18} color="#000" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText, styles.cardLightText]}>
-                    {item.website}
-                  </Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <Foundation name="marker" size={18} color="#000" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText, styles.cardLightText]}>
-                    {item.address}
-                  </Text>
-                </View>
-
-                <View style={[styles.cardSection]}>
-                  <Text style={[styles.cardSectionIcon]}>
-                    <FontAwesome name="bell" size={18} color="#000" />
-                  </Text>
-
-                  <Text style={[styles.cardSectionText, styles.cardLightText]}>
-                    {item.openingHours}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={[styles.cardFooter]}>
-                <View style={[styles.cardFooterButtons]}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (!item.companyDescription) {
-                        return;
-                      }
-
-                      if (this.state.selected === item.id) {
-                        this.setState({ selected: null });
-                      } else {
-                        this.setState({ selected: item.id });
-                      }
-                    }}
-                  >
-                    <View
-                      style={[
-                        styles.cardFooterButton,
-                        item.companyDescription && styles.cardFooterButtonActive
-                      ]}
-                    >
-                      <Entypo name="message" size={20} color="#fff" />
-                    </View>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => item.phone && this.openCall(item.phone)}
-                  >
-                    <View
-                      style={[
-                        styles.cardFooterButton,
-                        item.phone && styles.cardFooterButtonActive
-                      ]}
-                    >
-                      <FontAwesome name="phone" size={20} color="#fff" />
-                    </View>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() =>
-                      item.ecommerceUrl && this.openUrl(item.ecommerceUrl)
-                    }
-                  >
-                    <View
-                      style={[
-                        styles.cardFooterButton,
-                        item.ecommerceUrl && styles.cardFooterButtonActive
-                      ]}
-                    >
-                      <Entypo name="shopping-cart" size={16} color="#fff" />
-                    </View>
-                  </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity
-                  onPress={
-                    item.inWallet || !item.active
-                      ? () => null
-                      : this.addCard(item.id)
-                  }
-                >
-                  <View
-                    style={[
-                      styles.cardFooterAddCard,
-                      !item.inWallet &&
-                        item.active &&
-                        styles.cardFooterAddCardActive
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.cardFooterAddCardText,
-                        !item.inWallet &&
-                          item.active &&
-                          styles.cardFooterAddCardTextActive
-                      ]}
-                    >
-                      {i18n.t("map.addCard")}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
-          inactiveSlideScale={1}
-          inactiveSlideOpacity={1}
-          inactiveSlideShift={0}
-          sliderWidth={Dimensions.get("window").width}
-          itemWidth={slideTargetWidth + slideTargetMargin}
-          containerCustomStyle={styles.slider}
-          contentContainerCustomStyle={styles.sliderContentContainer}
-        />
+      <View style={[defaultStyles.container, defaultStyles.center]}>
+        <Image source={MapLoader} style={{ width: 150, height: 150 }} />
       </View>
     );
   }
 
-  renderMarker = (marker, cluster) => {
-    const key = marker.geometry.coordinates[0];
+  // Fetched user location:
+  return (
+    <Background source={BackgroundImage} disableScroll>
+      <MapHeader
+        filters={filters}
+        filter={filter}
+        onFilterSelect={(filter, index) => setFilter(index)}
+      />
 
-    // If a cluster
-    if (marker.properties) {
-      const markersInCluster = cluster.getLeaves(marker.id);
+      <MapArea
+        userPosition={getRegionForLocation(currentLocation)}
+        onRegionChangeComplete={region => {
+          const cards = markers.filter(filterByCategory(filter, filters));
 
-      return (
-        <ClusterMarker
-          key={key}
-          coordinate={{
-            latitude: Number(marker.geometry.coordinates[1]),
-            longitude: Number(marker.geometry.coordinates[0])
-          }}
-          count={marker.properties.point_count}
-          onPress={() => {
-            const cardsInCluster = R.pipe(
-              R.map(R.view(R.lensProp("cards"))),
-              R.flatten
-            )(markersInCluster);
+          setRegion(region);
+          setCluster(createCluster(cards, region));
+        }}
+      >
+        {cluster.markers.map(marker => (
+          <MapAreaMarker
+            key={`${marker.geometry.coordinates[0]}-${marker.geometry.coordinates[1]}`}
+            marker={marker}
+            cluster={cluster.cluster}
+            onPress={selectedCards => {
+              const cards = selectedCards
+                .sort(sortByDistance(getRegionForLocation(currentLocation)))
+                .sort(sortByActive());
 
-            const selectedCard = cardsInCluster[0];
+              setShowCards(true);
+              setCards(cards);
+            }}
+          />
+        ))}
+      </MapArea>
 
-            this.setState(
-              {
-                showCards: true,
-                cardsToShow: cardsInCluster
-              },
-              () => {
-                // item = this.data.findIndex(item => item.id === selectedCard.id);
-                this.carousel.snapToItem(0, true);
-              }
-            );
-          }}
-        />
-      );
-    } else {
-      return (
-        <Marker
-          key={`${marker.merchantId}${marker.lat}${marker.lng}`}
-          item={marker}
-          coordinate={{
-            latitude: Number(marker.geometry.coordinates[1]),
-            longitude: Number(marker.geometry.coordinates[0])
-          }}
-          onPress={() => {
-            const selectedCard = marker.cards[0];
+      {showCards && (
+        <CardsContainer>
+          <Carousel
+            data={cards}
+            renderItem={({ item }) => (
+              <MapCard {...item} onAddCard={addCardHandler} />
+            )}
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+            inactiveSlideShift={0}
+            sliderWidth={Dimensions.get("window").width}
+            itemWidth={slideWidth + slideMargin}
+          />
+        </CardsContainer>
+      )}
 
-            this.setState(
-              {
-                showCards: true,
-                cardsToShow: marker.cards
-              },
-              () => {
-                // item = this.data.findIndex(item => item.id === selectedCard.id)
-                this.carousel.snapToItem(0, true);
-              }
-            );
-          }}
-        />
-      );
-    }
-  };
+      <MapCardToggler
+        show={showCards}
+        onPress={() => setShowCards(!showCards)}
+      />
+    </Background>
+  );
+};
 
-  renderDataAsMap() {
-    const { showCards, userPosition, region } = this.state;
-
-    const allCoords = this.groupedByMerchant.map(marker => ({
-      ...marker,
-      geometry: {
-        coordinates: [marker.lng, marker.lat]
-      }
-    }));
-
-    const { markers, cluster } = getCluster(allCoords, region);
-
-    return (
-      <View style={styles.map}>
-        <MapView
-          ref={ref => (this.mapView = ref)}
-          style={styles.map}
-          customMapStyle={mapStyle}
-          provider={MapView.PROVIDER_GOOGLE}
-          initialRegion={region}
-          maxZoomLevel={18}
-          onRegionChange={region => this.setState({ region })}
-        >
-          <MapView.Marker coordinate={userPosition}>
-            <View>
-              <Image style={styles.indicator} source={LocationIndicator} />
-            </View>
-          </MapView.Marker>
-
-          {markers.map((marker, index) =>
-            this.renderMarker(marker, cluster, index)
-          )}
-        </MapView>
-
-        {showCards && this.renderSelectedCardOnMap()}
-
-        <TouchableWithoutFeedback
-          onPress={() =>
-            this.setState(state => ({
-              showCards: !state.showCards,
-              cardsToShow: []
-            }))
-          }
-        >
-          <View style={styles.showSelectedOnMapActivator}>
-            <Text style={styles.showSelectedOnMapActivatorText}>
-              {showCards ? i18n.t("map.closeCards") : i18n.t("map.showCards")}
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
-    );
+MapScreen.navigationOptions = ({ navigation }) => ({
+  title: i18n.t("navigation.map"),
+  headerLeft: <HeaderEmpty />,
+  headerRight: <HeaderHamburger navigation={navigation} />,
+  headerStyle: {
+    ...defaultStyles.headerTransparent,
+    backgroundColor: colors.background
   }
+});
 
-  navigateToWallet = () => {
-    this.props.navigation.push(Routes.WALLET);
+export function normalizeCardGeometry(card) {
+  return {
+    ...card,
+    lat: Number(card.lat),
+    lng: Number(card.lng),
+    geometry: {
+      coordinates: [Number(card.lng), Number(card.lat)]
+    }
+  };
+}
+
+function sortByDistance(userPosition) {
+  const userCoords = {
+    lat: Number(userPosition.latitude),
+    lng: Number(userPosition.longitude)
   };
 
-  render() {
-    const { filters } = this.props;
-    const { filter, locationLoaded } = this.state;
+  return (a, b) => {
+    const aDist = calculateDistance(a, userCoords);
+    const bDist = calculateDistance(b, userCoords);
 
-    if (!locationLoaded) {
-      return (
-        <View style={[defaultStyles.container, defaultStyles.center]}>
-          <Image source={MapLoader} style={{ width: 150, height: 150 }} />
-        </View>
-      );
-    }
+    return aDist - bDist;
+  };
+}
 
-    return (
-      <Background source={BackgroundImage} disableScroll>
-        <MapHeader
-          filters={filters}
-          filter={filter}
-          onFilterSelect={(filter, index) => this.setState({ filter: index })}
-        />
+function sortByActive() {
+  return (a, b) => {
+    const isActiveA = a.active && !a.inWallet;
+    const isActiveB = b.active && !b.inWallet;
 
-        {this.renderDataAsMap()}
-      </Background>
-    );
+    return Number(isActiveB) - Number(isActiveA);
+  };
+}
+
+function filterByCategory(filter, categories) {
+  if (filter === 0) {
+    return () => true;
+  } else {
+    return card => card.filter === categories[filter];
   }
 }
 
-const slideTargetWidth = 300;
-const slideTargetMargin = 6;
-const slideTargetPadding = 10;
+function getRegionForLocation(location) {
+  return {
+    latitude: Number(location.coords.latitude),
+    longitude: Number(location.coords.longitude),
+    latitudeDelta: 0.025,
+    longitudeDelta: 0.025
+  };
+}
 
-const styles = StyleSheet.create({
-  indicator: {
-    zIndex: 1,
-    width: 120,
-    height: 120
-  },
+function calculateDistance(a, b) {
+  var radlat1 = (Math.PI * a.lat) / 180;
+  var radlat2 = (Math.PI * b.lng) / 180;
+  var theta = a.lng - b.lng;
+  var radtheta = (Math.PI * theta) / 180;
+  var dist =
+    Math.sin(radlat1) * Math.sin(radlat2) +
+    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
 
-  invalid: {
-    color: "red"
-  },
+  dist = Math.acos(dist);
+  dist = (dist * 180) / Math.PI;
+  dist = dist * 60 * 1.1515;
+  dist = dist * 1.609344;
 
-  map: {
-    flex: 1,
-    zIndex: 1,
+  return dist;
+}
 
-    // Center indicator vertically:
-    justifyContent: "center",
-    backgroundColor: colors.background
-  },
+function groupCardsByMerchant(cards) {
+  return R.reduce((acc, cur) => {
+    const index = R.findIndex(
+      R.allPass([
+        R.propEq("merchantId", cur.merchantId),
+        R.propEq("lat", Number(cur.lat)),
+        R.propEq("lng", Number(cur.lng))
+      ])
+    )(acc);
 
-  cards: {
-    zIndex: 3,
+    if (index > -1) {
+      return R.over(
+        R.compose(R.lensIndex(index), R.lensProp("cards")),
+        R.append(cur)
+      )(acc);
+    } else {
+      return R.append({
+        lat: Number(cur.lat),
+        lng: Number(cur.lng),
+        logoUrl: cur.logoUrl,
+        merchantId: cur.merchantId,
+        cards: [cur]
+      })(acc);
+    }
+  }, [])(cards);
+}
 
-    position: "absolute",
-    bottom: 100,
-
-    // Take all the width:
-    left: 0,
-    right: 0
-  },
-  cardFlip: {
-    minHeight: 250,
-    backgroundColor: colors.color
-  },
-  cardFlipActive: {
-    backgroundColor: colors.primary,
-    paddingTop: slideTargetPadding,
-    paddingBottom: slideTargetPadding * 2
-  },
-  cardFlipHide: {
-    display: "none"
-  },
-  cardFlipShow: {
-    display: "flex"
-  },
-  card: {
-    backgroundColor: colors.color,
-    borderRadius: 5,
-
-    margin: slideTargetMargin
-  },
-  cardName: {
-    margin: slideTargetPadding,
-
-    fontSize: 16,
-    fontWeight: "bold"
-  },
-  cardDescription: {
-    margin: slideTargetPadding
-  },
-  cardImage: {
-    margin: slideTargetPadding,
-    width: slideTargetWidth - slideTargetPadding * 2,
-    height: (slideTargetWidth - slideTargetPadding * 2) * 0.3,
-    resizeMode: "cover"
-  },
-  cardImageIconContainer: {
-    position: "absolute",
-    zIndex: 9999,
-
-    alignSelf: "center",
-    marginVertical: slideTargetPadding + 10,
-    marginHorizontal: slideTargetPadding,
-
-    width: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
-    height: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
-
-    backgroundColor: "white",
-    borderRadius: ((slideTargetWidth - slideTargetPadding * 2) * 0.3) / 2
-  },
-  cardImageIcon: {
-    width: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
-    height: (slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20,
-    borderRadius: ((slideTargetWidth - slideTargetPadding * 2) * 0.3 - 20) / 2,
-    resizeMode: "contain"
-  },
-  cardSection: {
-    marginHorizontal: slideTargetPadding,
-    marginVertical: slideTargetPadding / 2,
-
-    flexDirection: "row"
-  },
-  cardSectionIcon: {
-    marginRight: 5,
-    textAlign: "center",
-
-    width: 20
-  },
-  cardSectionText: {
-    paddingRight: slideTargetPadding * 2
-  },
-  cardLightText: {
-    color: colors.color
-  },
-  cardFooter: {
-    flexDirection: "row",
-    padding: slideTargetPadding
-  },
-  cardFooterButtons: {
-    flexDirection: "row",
-    width: 130
-  },
-  cardFooterButton: {
-    alignItems: "center",
-    justifyContent: "center",
-
-    marginRight: 7,
-
-    width: 37,
-    height: 37,
-
-    backgroundColor: "#dad9e3",
-    borderRadius: 19
-  },
-  cardFooterButtonActive: {
-    backgroundColor: colors.primary
-  },
-  cardFooterAddCard: {
-    alignItems: "center",
-    justifyContent: "center",
-
-    width: slideTargetWidth - 130 - slideTargetPadding * 3,
-    height: 37,
-
-    backgroundColor: "#dad9e3",
-    borderRadius: 19
-  },
-  cardFooterAddCardActive: {
-    backgroundColor: colors.primary
-  },
-  cardFooterAddCardText: {
-    color: colors.color
-  },
-
-  showSelectedOnMapActivator: {
-    zIndex: 3,
-
-    alignItems: "center",
-    justifyContent: "center",
-
-    position: "absolute",
-    bottom: 25,
-    left: 0,
-    right: 0,
-
-    height: 70,
-
-    backgroundColor: colors.primary
-  },
-  showSelectedOnMapActivatorText: {
-    color: colors.color
-  }
-});
-
-const mapStateToProps = state => ({
-  isLoading: state.map.isLoading,
-  filters: state.map.filters,
-  data: state.map.data
-});
-
-const mapDispatchToProps = {
-  getRegion,
-  addCard,
-  addFav,
-  removeFav
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapNearbyScreen);
+export default MapScreen;
