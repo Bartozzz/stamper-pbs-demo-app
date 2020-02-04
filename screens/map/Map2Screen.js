@@ -109,10 +109,12 @@ const MapScreen = ({ navigation }) => {
   // Fetch data for user location from the API:
   React.useEffect(() => {
     if (currentLocation && reverseLocation) {
-      const { city } = reverseLocation;
+      const { city, isoCountryCode } = reverseLocation;
       const { coords } = currentLocation;
 
-      dispatch(getRegion(city, coords))
+      console.log(reverseLocation);
+
+      dispatch(getRegion(city, isoCountryCode, coords))
         .then(response => {
           const { data } = response.payload;
           const cards = data.cards
@@ -193,6 +195,7 @@ const MapScreen = ({ navigation }) => {
       >
         {cluster.markers.map(marker => (
           <MapAreaMarker
+            key={`${marker.geometry.coordinates[0]}-${marker.geometry.coordinates[1]}`}
             marker={marker}
             cluster={cluster.cluster}
             onPress={selectedCards => {

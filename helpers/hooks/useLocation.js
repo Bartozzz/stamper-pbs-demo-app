@@ -25,9 +25,12 @@ export default function useLocation(
       try {
         const currentLocation = await getCurrentPosition(options);
         const reverseLocation = await getReversePosition(currentLocation);
+        const reverseLocationData = reverseLocation.length
+          ? reverseLocation[0]
+          : reversePositionMock();
 
         setCurrentLocation(currentLocation);
-        setReverseLocation(reverseLocation);
+        setReverseLocation(reverseLocationData);
       } catch (error) {
         setCurrentLocation(currentPositionMock());
         setReverseLocation(reversePositionMock());
@@ -63,15 +66,13 @@ function currentPositionMock() {
 }
 
 function reversePositionMock() {
-  return [
-    {
-      city: "Warsaw",
-      country: "Poland",
-      isoCountryCode: "PL",
-      name: "00-001",
-      postalCode: "00-001",
-      region: "Masovia",
-      street: null
-    }
-  ];
+  return {
+    city: "Warsaw",
+    country: "Poland",
+    isoCountryCode: "PL",
+    name: "00-001",
+    postalCode: "00-001",
+    region: "Masovia",
+    street: null
+  };
 }
