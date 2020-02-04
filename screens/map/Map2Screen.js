@@ -38,7 +38,8 @@ const CardsContainer = styled.View`
   display: ${({ hide }) => (hide ? "none" : "flex")};
   z-index: 3;
 
-  position: absolute;
+  /* https://github.com/facebook/react-native/issues/18415 */
+  position: ${({ hide }) => (hide ? "relative" : "absolute")};
   bottom: 100px;
   left: 0;
   right: 0;
