@@ -35,14 +35,12 @@ import MapLoader from "../../assets/loaders/map.gif";
 import CardAdd from "../../assets/success/card_add.gif";
 
 const CardsContainer = styled.View`
-  display: ${({ hide }) => (hide ? "none" : "flex")};
-  z-index: 3;
-
-  /* https://github.com/facebook/react-native/issues/18415 */
-  position: ${({ hide }) => (hide ? "relative" : "absolute")};
+  position: absolute;
   bottom: 100px;
   left: 0;
   right: 0;
+
+  z-index: 3;
 `;
 
 const MapScreen = ({ navigation }) => {
@@ -200,31 +198,32 @@ const MapScreen = ({ navigation }) => {
             marker={marker}
             cluster={cluster.cluster}
             onPress={selectedCards => {
+              const cards = selectedCards
+                .sort(sortByDistance(getRegionForLocation(currentLocation)))
+                .sort(sortByActive());
+
               setShowCards(true);
-              setCards(
-                selectedCards
-                  .map(normalizeCardGeometry)
-                  .sort(sortByDistance(getRegionForLocation(currentLocation)))
-                  .sort(sortByActive())
-              );
+              setCards(cards);
             }}
           />
         ))}
       </MapArea>
 
-      <CardsContainer hide={!showCards}>
-        <Carousel
-          data={cards}
-          renderItem={({ item }) => (
-            <MapCard {...item} onAddCard={addCardHandler} />
-          )}
-          inactiveSlideScale={1}
-          inactiveSlideOpacity={1}
-          inactiveSlideShift={0}
-          sliderWidth={Dimensions.get("window").width}
-          itemWidth={slideWidth + slideMargin}
-        />
-      </CardsContainer>
+      {showCards && (
+        <CardsContainer>
+          <Carousel
+            data={cards}
+            renderItem={({ item }) => (
+              <MapCard {...item} onAddCard={addCardHandler} />
+            )}
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+            inactiveSlideShift={0}
+            sliderWidth={Dimensions.get("window").width}
+            itemWidth={slideWidth + slideMargin}
+          />
+        </CardsContainer>
+      )}
 
       <MapCardToggler
         show={showCards}
