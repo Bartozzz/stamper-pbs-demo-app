@@ -13,7 +13,7 @@ import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import PrizesAvailableScreen from "../screens/prizes/AvailableListScreen";
 import PrizesReceivedScreen from "../screens/prizes/ReceivedListScreen";
 import PrizesRewardCodeScreen from "../screens/prizes/RewardCodeScreen";
-import MapScreen from "../screens/map/Map2Screen";
+import MapScreen from "../screens/map/MapScreen";
 import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
 import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
 import CardInfoScreen from "../screens/card/CardInfo";
