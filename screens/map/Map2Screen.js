@@ -149,12 +149,8 @@ const MapScreen = ({ navigation }) => {
 
   // If the user selects a filter, filter shown cards:
   React.useEffect(() => {
-    if (currentLocation && currentLocation) {
-      const cards = markers
-        .map(normalizeCardGeometry)
-        .sort(sortByDistance(getRegionForLocation(currentLocation)))
-        .sort(sortByActive())
-        .filter(filterByCategory(filter, filters));
+    if (region) {
+      const cards = markers.filter(filterByCategory(filter, filters));
 
       setCards(cards);
       setCluster(createCluster(cards, region));
@@ -163,14 +159,11 @@ const MapScreen = ({ navigation }) => {
 
   // If the user hides cards, reset their state to default:
   React.useEffect(() => {
-    if (currentLocation && currentLocation && !showCards) {
-      const cards = markers
-        .map(normalizeCardGeometry)
-        .sort(sortByDistance(getRegionForLocation(currentLocation)))
-        .sort(sortByActive())
-        .filter(filterByCategory(filter, filters));
+    if (region && !showCards) {
+      const cards = markers.filter(filterByCategory(filter, filters));
 
       setCards(cards);
+      setCluster(createCluster(cards, region));
     }
   }, [showCards]);
 
@@ -195,9 +188,7 @@ const MapScreen = ({ navigation }) => {
       <MapArea
         userPosition={getRegionForLocation(currentLocation)}
         onRegionChangeComplete={region => {
-          const cards = markers
-            .map(normalizeCardGeometry)
-            .filter(filterByCategory(filter, filters));
+          const cards = markers.filter(filterByCategory(filter, filters));
 
           setRegion(region);
           setCluster(createCluster(cards, region));
