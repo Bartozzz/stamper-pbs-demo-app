@@ -35,6 +35,11 @@
 
       "config": {
         "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
+      },
+
+      "infoPlist": {
+        "NSCameraUsageDescription": "Stamper needs your camera to allow you to scan QR codes and get rewarded.",
+        "NSLocationWhenInUseUsageDescription": "Stamper needs your location to help you find nearby promotions."
       }
     },
 
