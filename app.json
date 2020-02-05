@@ -10,7 +10,7 @@
     "description": "Stamper to wirtualny portfel kart lojalnościowych w Twoim telefonie - zawsze gotowy by zdobyć nowe pieczątki. Aplikacja zrzesza bardziej lojalnych klientów lubiących korzystać z kart lojalnościowych. Uwolnij się od noszenia wielu papierowych kart i tracenia możliwości zbierania pieczątek podczas zamawiania jedzenia do domu. Od teraz już nigdy nie zgubisz kart lojalnościowych!",
     "primaryColor": "#0046F4",
 
-    "version": "1.9.1",
+    "version": "1.9.2",
     "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],
 
@@ -35,12 +35,17 @@
 
       "config": {
         "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
+      },
+
+      "infoPlist": {
+        "NSCameraUsageDescription": "Stamper needs your camera to allow you to scan QR codes and get rewarded.",
+        "NSLocationWhenInUseUsageDescription": "Stamper needs your location to help you find nearby promotions."
       }
     },
 
     "android": {
       "package": "com.getstamper.app",
-      "versionCode": 11,
+      "versionCode": 12,
 
       "adaptiveIcon": {
         "backgroundColor": "#001432"
