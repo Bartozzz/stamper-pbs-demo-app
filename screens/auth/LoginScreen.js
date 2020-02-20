@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Animated,
   StyleSheet,
   Text,
   AsyncStorage,
@@ -13,8 +12,6 @@ import {
 import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
 import Background from "../../components/Background";
 
-import KeyboardAware from "../../components/helpers/KeyboardAware";
-import AuthHero from "../../components/screens/auth/Hero";
 import Button from "../../components/forms/Button";
 import InputWithIcon from "../../components/forms/InputWithIcon";
 
@@ -28,24 +25,22 @@ import {
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
+import HeaderTitle from "../../components/nav/HeaderTitle";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
-const heroMinWidth = 280;
-const heroMaxWidth = Math.max(340, (Dimensions.get("window").height - 170) / 2);
-
 class AuthLoginScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    title: i18n.t("navigation.auth.login"),
+    headerTitle: HeaderTitle,
+    headerStyle: defaultStyles.headerTwoLines
   };
 
   state = {
     processing: false,
-
-    topAnim: new Animated.Value(0),
 
     password: __DEV__ ? "Test1234+" : null,
     email: __DEV__ ? "testing@test.pl" : null,
@@ -168,35 +163,11 @@ class AuthLoginScreen extends React.Component {
     });
   };
 
-  handleKeyboardShow = keyboardHeight => {
-    Animated.timing(this.state.topAnim, {
-      toValue: -keyboardHeight,
-      duration: 250
-    }).start();
-  };
-
-  handleKeyboardHide = () => {
-    Animated.timing(this.state.topAnim, {
-      toValue: 0,
-      duration: 250
-    }).start();
-  };
-
   render() {
-    const { topAnim, email, password, error } = this.state;
+    const { email, password, error } = this.state;
 
     return (
-      <KeyboardAware
-        onKeyboardShow={this.handleKeyboardShow}
-        onKeyboardHide={this.handleKeyboardHide}
-      >
-        {() => (
           <View style={defaultStyles.container}>
-            <AuthHero style={[styles.hero]} />
-
-            <Animated.View
-              style={[{ flex: 1 }, { minHeight: 350 }, { top: topAnim }]}
-            >
               <Background source={BackgroundImage} disableScroll>
                 <ScrollView style={styles.loginContainer}>
                   <InputWithIcon
@@ -306,20 +277,12 @@ class AuthLoginScreen extends React.Component {
                   />
                 </ScrollView>
               </Background>
-            </Animated.View>
           </View>
-        )}
-      </KeyboardAware>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  hero: {
-    flex: 1,
-    minHeight: heroMinWidth,
-    maxHeight: heroMaxWidth
-  },
 
   loginProvider: {
     fontWeight: "900"
