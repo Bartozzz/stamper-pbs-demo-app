@@ -195,6 +195,7 @@ const MapScreen = ({ navigation }) => {
           setCluster(createCluster(cards, region));
         }}
         onRegionChange={closeCardsOnDrag}
+        onPress={closeCardsOnDrag}
       >
         {cluster.markers.map(marker => (
           <MapAreaMarker
