@@ -233,7 +233,7 @@ const MapCard = props => {
         <CardFooterButtons>
           <TouchableOpacity onPress={handleFlipButtonClick}>
             <CardFooterButton active={!!props.companyDescription}>
-              <Entypo name="message" size={20} color="#fff" />
+              <Entypo name="dots-three-horizontal" size={20} color="#fff" />
             </CardFooterButton>
           </TouchableOpacity>
 
