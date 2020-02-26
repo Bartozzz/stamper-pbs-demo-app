@@ -70,6 +70,7 @@ class CardInfoScreen extends React.Component {
           <Carousel
             ref={carousel => (this.carouselRef = carousel)}
             data={cards}
+            removeClippedSubviews={false}
             onSnapToItem={index => this.setState({ active: index })}
             renderItem={({ item }) => (
               <View style={styles.slideInnerContainer}>
