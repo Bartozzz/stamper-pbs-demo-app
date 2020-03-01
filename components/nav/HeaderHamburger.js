@@ -1,7 +1,26 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
+import styled, { css } from "styled-components/native";
 import * as Routes from "../../navigation";
+
+const Hamburger = styled.TouchableOpacity`
+  alignSelf: flex-start
+`;
+
+const Icon = styled(Ionicons)`
+    ${Platform.select({
+      ios: css`
+        paddingTop: 5;
+        paddingRight: 20
+      `,
+      android: css`
+        paddingTop: 16;
+        paddingLeft: 8;
+        paddingRight: 16
+      `
+    })}
+`;
 
 export function HeaderHamburger(props) {
   function onPress() {
@@ -9,14 +28,13 @@ export function HeaderHamburger(props) {
   }
 
   return (
-    <TouchableOpacity style={styles.hamburger} onPress={onPress}>
-      <Ionicons
-        style={styles.hamburgerIcon}
+    <Hamburger onPress={onPress}>
+      <Icon
         name={hamburgerIconName}
         size={hamburgerIconSize}
         color="white"
       />
-    </TouchableOpacity>
+    </Hamburger>
   );
 }
 
@@ -28,26 +46,6 @@ const hamburgerIconName = Platform.select({
 const hamburgerIconSize = Platform.select({
   ios: 32,
   android: 24
-});
-
-const styles = StyleSheet.create({
-  hamburger: {
-    alignSelf: "flex-start"
-  },
-
-  hamburgerIcon: {
-    ...Platform.select({
-      ios: {
-        paddingTop: 5,
-        paddingRight: 20
-      },
-      android: {
-        paddingTop: 16,
-        paddingLeft: 8,
-        paddingRight: 16
-      }
-    })
-  }
 });
 
 export default HeaderHamburger;

@@ -1,21 +1,56 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import styled from "styled-components/native";
+
+const InputPadder = styled.View`
+  marginVertical: 15;
+`;
+
+const InputContainer = styled.View`
+  flex: 1;
+  flexDirection: row;
+  justifyContent: center;
+  alignItems: center;
+
+  height: 47;
+  width: 100%;
+
+  borderRadius: 100;
+  borderWidth: 1;
+  borderStyle: solid;
+  borderColor: ${colors.inputBorder};
+  
+  ${({ error }) => error && `
+    borderColor: ${colors.error}
+  `};
+  ${({ isFocused }) => isFocused && `
+    borderColor: ${colors.color}
+  `}
+`;
+
+const InputIcon = styled(Ionicons)`
+  paddingVertical: 10;
+  paddingHorizontal: 20
+`;
+
+const TextInput = styled.TextInput`
+  flex: 1;
+  paddingTop: 10;
+  paddingRight: 10;
+  paddingBottom: 10;
+  paddingLeft: 0;
+
+  fontSize: 14;
+  fontFamily: ${layout.fontText};
+  color: ${colors.color}
+`;
 
 class InputWithIcon extends Component {
   state = {
     isFocused: false
   };
-
-  get inputStyle() {
-    if (this.error) {
-      return styles.inputContainerErrored;
-    } else if (this.state.isFocused) {
-      return styles.inputContainerFocused;
-    }
-  }
 
   get inputColor() {
     if (this.error) {
@@ -57,10 +92,9 @@ class InputWithIcon extends Component {
     const { iconName, iconSize, ...rest } = this.props;
 
     return (
-      <View style={[styles.inputPadder]}>
-        <View style={[styles.inputContainer, this.inputStyle]}>
-          <Ionicons
-            style={styles.inputIcon}
+      <InputPadder>
+        <InputContainer style={this.inputStyle} error={this.error} isFocused={this.state.isFocused}>
+          <InputIcon
             name={iconName}
             size={iconSize}
             color={this.inputColor}
@@ -69,75 +103,20 @@ class InputWithIcon extends Component {
           <TextInput
             {...rest}
             placeholderTextColor={this.inputColor}
-            style={styles.inputStyle}
             underlineColorAndroid="transparent"
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
             autoCorrect={false}
           />
-        </View>
+        </InputContainer>
 
         {this.error ? (
-          <Text style={styles.inputError}>{this.error}</Text>
+          <Error>{this.error}</Error>
         ) : null}
-      </View>
+      </InputPadder>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  inputPadder: {
-    marginVertical: 15
-  },
-
-  inputContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-
-    height: 47,
-    width: "100%",
-
-    borderRadius: 100,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: colors.inputBorder
-  },
-  inputContainerFocused: {
-    borderColor: colors.color
-  },
-  inputContainerErrored: {
-    borderColor: colors.error
-  },
-
-  inputIcon: {
-    paddingVertical: 10,
-    paddingHorizontal: 20
-  },
-
-  inputStyle: {
-    flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
-
-    fontSize: 14,
-    fontFamily: layout.fontText,
-    color: colors.color
-  },
-
-  inputError: {
-    position: "absolute",
-    top: 48,
-
-    color: colors.error,
-    marginHorizontal: 17,
-    marginTop: 2,
-
-    fontSize: 12
-  }
-});
 
 export default InputWithIcon;
