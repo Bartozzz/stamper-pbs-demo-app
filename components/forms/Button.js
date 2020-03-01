@@ -1,68 +1,69 @@
 import React from "react";
-import {
-  TouchableOpacity,
-  ActivityIndicator,
-  View,
-  Text,
-  StyleSheet
-} from "react-native";
+import { ActivityIndicator } from "react-native";
 import colors from "../../constants/Colors";
+import styled from "styled-components/native";
+
+const ButtonDisabled = styled.View`
+  justifyContent: center;
+  alignItems: center;
+
+  height: 48;
+
+  borderRadius: 7;
+
+  backgroundColor: ${colors.disabled}
+`;
+
+const ButtonText = styled.Text`
+  fontSize: 16;
+  fontFamily: poppins-bold;
+
+  color: ${colors.color};
+  textAlign: center;
+  textTransform: uppercase;
+  textShadowColor: ${colors.shadow};
+  textShadowOffset: { width: 1, height: 1 };
+  textShadowRadius: 2
+`;
+
+const ButtonEnabled = styled.TouchableOpacity`
+  justifyContent: center;
+  alignItems: center;
+
+  height: 48;
+
+  borderRadius: 7;
+
+  backgroundColor: ${colors.primary}
+`;
 
 export function Button({ title, style, textStyle, onPress, ...rest }) {
   const fullStyle = rest.full ? { width: "100%" } : {};
 
   if (rest.disabled) {
     return (
-      <View style={[styles.button, styles.disabledButton, fullStyle, style]}>
-        <Text style={[styles.text, textStyle]}>{title}</Text>
-      </View>
+      <ButtonDisabled style={[fullStyle, style]}>
+        <ButtonText style={textStyle}>{title}</ButtonText>
+      </ButtonDisabled>
     );
   }
 
   if (rest.processing) {
     return (
-      <View style={[styles.button, styles.disabledButton, fullStyle, style]}>
+      <ButtonDisabled style={[fullStyle, style]}>
         <ActivityIndicator size="small" color={colors.color} />
-      </View>
+      </ButtonDisabled>
     );
   }
 
   return (
-    <TouchableOpacity
-      style={[styles.button, fullStyle, style]}
+    <ButtonEnabled
+      style={[fullStyle, style]}
       onPress={onPress}
     >
-      <Text style={[styles.text, textStyle]}>{title}</Text>
-    </TouchableOpacity>
+      <ButtonText style={textStyle}>{title}</ButtonText>
+    </ButtonEnabled>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 16,
-    fontFamily: "poppins-bold",
-
-    color: colors.color,
-    textAlign: "center",
-    textTransform: "uppercase",
-    textShadowColor: colors.shadow,
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2
-  },
-
-  button: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    height: 48,
-
-    backgroundColor: colors.primary,
-    borderRadius: 7
-  },
-
-  disabledButton: {
-    backgroundColor: colors.disabled
-  }
-});
 
 export default Button;

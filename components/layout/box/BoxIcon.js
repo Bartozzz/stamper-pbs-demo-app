@@ -1,14 +1,14 @@
 import React from "react";
-import { StyleSheet, Image } from "react-native";
+import styled from "styled-components/native";
+
+const Icon = styled.Image`
+  marginBottom: 40;
+  width: ${props => props.width};
+  height: ${props => props.height}
+`;
 
 export function BoxIcon({ source, width, height }) {
-  return <Image style={[styles.icon, { width, height }]} source={source} />;
+  return <Icon width={width} height={height} source={source} />;
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    marginBottom: 40
-  }
-});
 
 export default BoxIcon;

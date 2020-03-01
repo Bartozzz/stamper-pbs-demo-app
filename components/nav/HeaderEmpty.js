@@ -1,17 +1,15 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import styled from "styled-components/native";
+
+const Empty = styled.View`
+  alignSelf: flex-start;
+
+  width: 45;
+  height: 40
+`;
 
 export function HeaderEmpty() {
-  return <View style={styles.empty}></View>;
+  return <Empty></Empty>;
 }
-
-const styles = StyleSheet.create({
-  empty: {
-    alignSelf: "flex-start",
-
-    width: 45,
-    height: 40
-  }
-});
 
 export default HeaderEmpty;
