@@ -1,26 +1,27 @@
 import React from "react";
-import styled from "styled-components/native";
+import { ImageBackground, View, ScrollView, StyleSheet } from "react-native";
+import defaultStyles from "../constants/Styles";
 
-const Container = styled.View`
-  flexGrow: 1
-`;
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1
+  },
 
-const ImageBackground = styled.ImageBackground`
-  flex: 1;
-  width: 100%;
-  height: 100%
-`;
-
-const ScrollView = styled.ScrollView`
-  flexGrow: 1
-`;
+  background: {
+    flex: 1,
+    width: "100%",
+    height: "100%"
+  }
+});
 
 export default function Background({ children, disableScroll, ...props }) {
   const renderContainer = childs =>
     disableScroll ? (
-      <Container>{childs}</Container>
+      <View style={defaultStyles.container}>{childs}</View>
     ) : (
       <ScrollView
+        style={defaultStyles.container}
+        contentContainerStyle={styles.container}
         alwaysBounceVertical={false}
       >
         {childs}
@@ -31,7 +32,7 @@ export default function Background({ children, disableScroll, ...props }) {
     <ImageBackground
       resizeMode="stretch"
       {...props}
-      style={[props.style]}
+      style={[styles.background, props.style]}
     >
       {children}
     </ImageBackground>
