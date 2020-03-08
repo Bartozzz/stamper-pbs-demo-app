@@ -4,20 +4,20 @@ import colors from "../../../constants/Colors";
 import styled from "styled-components/native";
 
 const BoxComponent = styled.View`
-  alignItems: center,
+  align-items: center;
 
-  paddingTop: 40;
-  paddingBottom: 40;
-  marginVertical: 20;
-  marginHorizontal: 20;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-vertical: 20px;
+  margin-horizontal: 20px;
 
-  shadowColor: #2699FB;
-  shadowOffset: { width: 0, height: 30 };
-  shadowOpacity: 0.1;
-  shadowRadius: 30;
+  shadow-color: #2699FB;
+  shadow-offset: { width: 0px, height: 30px };
+  shadow-opacity: 0.1px;
+  shadow-radius: 30px;
 
-  borderRadius: 10;
-  backgroundColor: ${colors.background}
+  border-radius: 10px;
+  background-color: ${colors.background};
 `;
 
 export function Box({ children, style }) {
