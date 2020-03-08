@@ -5,24 +5,24 @@ import layout from "../constants/Layout";
 import styled from "styled-components/native";
 
 const ErrorContainer = styled.View`
-  padding: 10;
-  marginVertical: 10;
+  padding: 10px;
+  margin-vertical: 10px;
 
   width: 100%;
-  backgroundColor: ${colors.error};
-  borderRadius: 5
+  background-color: ${colors.error};
+  border-radius: 5px;
 `;
 
 const ErrorHead =  styled.Text`
-  fontSize: 14;
-  fontFamily: ${layout.fontHead};
-  color: ${colors.color}
+  font-size: 14px;
+  font-family: ${layout.fontHead};
+  color: ${colors.color};
 `;
 
 const ErrorText = styled.Text`
-  fontSize: 14;
-  fontFamily: ${layout.fontText};
-  color: ${colors.color}
+  font-size: 14;
+  font-family: ${layout.fontText};
+  color: ${colors.color};
 `;
 
 class Error extends Component {
