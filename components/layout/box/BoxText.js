@@ -21,7 +21,7 @@ const BoxSubHeading = styled.Text`
 const BoxAction = styled.Text`
   margin-top: 30px;
 
-  color: #709BE7;
+  color: ${colors.info};
   font-size: 18px;
   text-align: center;
   text-transform: uppercase;
