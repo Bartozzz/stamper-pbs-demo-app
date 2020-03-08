@@ -4,9 +4,9 @@ import styled from "styled-components/native";
 
 const ButtonComponent = styled(Button)`
   padding: 4px;
-  marginHorizontal: 4;
-  marginBottom: 4;
-  marginTop: 10;
+  margin-horizontal: 4px;
+  margin-bottom: 4px;
+  margin-top: 10px;
 
   height: auto;
 `;

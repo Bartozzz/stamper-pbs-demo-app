@@ -3,28 +3,28 @@ import colors from "../../../constants/Colors";
 import styled from "styled-components/native";
 
 const BoxHeading = styled.Text`
-  paddingHorizontal: 30;
+  padding-horizontal: 30px;
 
   color: ${colors.color};
-  fontSize: 24;
-  textAlign: center
+  font-size: 24px;
+  text-align: center;
 `;
 
 const BoxSubHeading = styled.Text`
-  marginTop: 30;
+  margin-top: 30px
 
-  textAlign: center;
-  fontSize: 18;
-  color: ${colors.color}
+  text-align: center;
+  font-size: 18px;
+  color: ${colors.color};
 `;
 
 const BoxAction = styled.Text`
-  marginTop: 30;
+  margin-top: 30px;
 
   color: #709BE7;
-  fontSize: 18;
-  textAlign: center;
-  textTransform: uppercase
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
 `;
 
 export function Heading({ children, style }) {

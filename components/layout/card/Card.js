@@ -4,52 +4,52 @@ import styled from "styled-components/native";
 
 const CardPadder = styled.View`
   width: 50%;
-  paddingVertical: 8;
-  paddingHorizontal: 8
+  padding-vertical: 8px;
+  padding-horizontal: 8px;
 `;
 
 const CardComponent = styled.View`
-  backgroundColor: ${colors.color};
-  borderRadius: 8
+  background-color: ${colors.color};
+  border-radius: 8px;
 `;
 
 const CardActionButton = styled.View`
   position: absolute;
-  top: 0;
-  left: 0
+  top: 0px;
+  left: 0px;
 `;
 
 const CardSecondaryActionButton = styled.View`
   position: absolute;
-  top: 0;
-  right: 0
+  top: 0px;
+  right: 0px;
 `;
 
 const CardImage = styled.Image`
-  alignSelf: center;
+  align-self: center;
 
-  marginTop: 35;
-  marginBottom: 20;
+  margin-top: 35px;
+  margin-bottom: 20px;
 
   /* Make sure the image fits: */
-  resizeMode: contain;
+  resize-mode: contain;
 
-  width: 60;
-  height: 60
+  width: 60px;
+  height: 60px;
 `;
 
 const CardTitle = styled.Text`
   color: #001432;
-  fontSize: 14;
-  fontFamily: poppins-bold;
-  textAlign: center
+  font-Size: 14px;
+  font-family: poppins-bold;
+  text-align: center;
 `;
 
 const CardSubtitle = styled.Text`
   color: #709BE7;
-  fontSize: 9;
-  fontFamily: nunito-regular;
-  textAlign: center
+  font-size: 9px;
+  font-family: nunito-regular;
+  text-align: center;
 `;
 
 export function Card({ image, title, subtitle, ...props }) {
