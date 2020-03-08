@@ -30,9 +30,9 @@ const CheckboxComponent = styled.TouchableOpacity`
   border-color: ${colors.inputBorder};
 
   ${({ checked }) => checked && `
-  border-color: ${colors.primary};
-  background-color: ${colors.primary};
-`};
+    border-color: ${colors.primary};
+    background-color: ${colors.primary};
+  `};
 `;
 
 export const CheckBoxLabel = styled.Text`
