@@ -13,9 +13,9 @@ const VersionComponent = styled.Text`
   margin-vertical: 18px;
 `;
 
-export function Version({ style, ...props }) {
+export function Version(props) {
   return (
-    <VersionComponent {...props} style={style}>
+    <VersionComponent {...props}>
       V. {Constants.manifest.version}–{version}
     </VersionComponent>
   );
