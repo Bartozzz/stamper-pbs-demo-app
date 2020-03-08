@@ -6,48 +6,49 @@ import styled from "styled-components/native";
 
 const InputContainer = styled.View`
   flex: 1;
-  flexDirection: row;
-  justifyContent: center;
-  alignItems: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-  marginHorizontal: 20;
-  marginVertical: 0;
+  margin-horizontal: 20px;
+  margin-vertical: 0px;
 
-  height: 40;
-  width: 265;
+  height: 40px;
+  width: 265px;
 
-  borderRadius: 10;
-  backgroundColor: #1A5BF1
+  border-radius: 10px;
+  background-color: #1A5BF1;
 `;
 
-const InputIcon = styled(Ionicons)`
-  paddingHorizontal: 10
+const InputIcon = styled(Ionicons).attrs(props => ({
+  name: "ios-search",
+  size: "16",
+  color: colors.info
+}))`
+  padding-horizontal: 10px;
 `;
 
-const Input = styled.TextInput`
+const Input = styled.TextInput.attrs(props => ({
+  underlineColorAndroid: "transparent",
+  autoCorrect: false,
+  placeholderTextColor: colors.info
+}))`
   flex: 1;
-  paddingRight: 10;
-  paddingLeft: 0;
+  padding-right: 10px;
+  padding-left: 0px;
 
-  fontSize: 14;
-  fontFamily: ${layout.fontText};
-  color: ${colors.info}
+  font-size: 14px;
+  font-family: ${layout.fontText};
+  color: ${colors.info};
 `;
 
 export function InputSearch(props) {
   return (
     <InputContainer>
-      <InputIcon
-        name="ios-search"
-        size={16}
-        color={colors.info}
-      />
+      <InputIcon/>
 
       <Input
         {...props}
-        placeholderTextColor={colors.info}
-        underlineColorAndroid="transparent"
-        autoCorrect={false}
       />
     </InputContainer>
   );

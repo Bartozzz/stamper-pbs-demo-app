@@ -5,46 +5,49 @@ import layout from "../../constants/Layout";
 import styled from "styled-components/native";
 
 const InputPadder = styled.View`
-  marginVertical: 15;
+  margin-vertical: 15px;
 `;
 
 const InputContainer = styled.View`
   flex: 1;
-  flexDirection: row;
-  justifyContent: center;
-  alignItems: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-  height: 47;
+  height: 47px;
   width: 100%;
 
-  borderRadius: 100;
-  borderWidth: 1;
-  borderStyle: solid;
-  borderColor: ${colors.inputBorder};
+  border-radius: 100px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${colors.inputBorder};
   
   ${({ error }) => error && `
-    borderColor: ${colors.error}
+    border-color: ${colors.error};
   `};
   ${({ isFocused }) => isFocused && `
-    borderColor: ${colors.color}
+    border-color: ${colors.color};
   `}
 `;
 
 const InputIcon = styled(Ionicons)`
-  paddingVertical: 10;
-  paddingHorizontal: 20
+  padding-vertical: 10px;
+  padding-horizontal: 20px;
 `;
 
-const TextInput = styled.TextInput`
+const TextInput = styled.TextInput.attrs(props => ({
+  underlineColorAndroid: "transparent",
+  autoCorrect: false
+}))`
   flex: 1;
-  paddingTop: 10;
-  paddingRight: 10;
-  paddingBottom: 10;
-  paddingLeft: 0;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
 
-  fontSize: 14;
-  fontFamily: ${layout.fontText};
-  color: ${colors.color}
+  font-size: 14px;
+  font-family: ${layout.fontText};
+  color: ${colors.color};
 `;
 
 class InputWithIcon extends Component {
@@ -103,10 +106,8 @@ class InputWithIcon extends Component {
           <TextInput
             {...rest}
             placeholderTextColor={this.inputColor}
-            underlineColorAndroid="transparent"
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
-            autoCorrect={false}
           />
         </InputContainer>
 

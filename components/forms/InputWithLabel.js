@@ -4,53 +4,56 @@ import layout from "../../constants/Layout";
 import styled from "styled-components/native";
 
 const InputPadder = styled.View`
-  marginVertical: 15;
+  margin-vertical: 15px;
 `;
 
 const InputContainer = styled.View`
-  flexDirection: row;
-  justifyContent: center;
-  alignItems: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-  borderRadius: 8;
-  borderWidth: 1.5;
-  borderColor: ${colors.inputBorder}
+  border-radius: 8px;
+  border-width: 1.5px;
+  border-color: ${colors.inputBorder}
 
   ${({ error }) => error && `
-    borderColor: ${colors.error}
+    border-color: ${colors.error};
   `};
   ${({ isFocused }) => isFocused && `
-    borderColor: ${colors.color}
-  `}
+    border-color: ${colors.color};
+  `};
 `;
 
 const InputLabel = styled.Text`
-  paddingVertical: 10;
-  paddingRight: 10;
+  padding-vertical: 10px;
+  padding-right: 10px;
 
   color: ${colors.info};
-  fontSize: 10
+  font-size: 10px;
 `;
 
-const TextInput = styled.TextInput`
+const TextInput = styled.TextInput.attrs(props => ({
+  underlineColorAndroid: "transparent",
+  autoCorrect: false
+}))`
   flex: 1;
-  paddingVertical: 15;
-  paddingHorizontal: 15;
+  padding-vertical: 15px;
+  padding-horizontal: 15px;
 
-  fontSize: 14;
-  fontFamily: ${layout.fontText};
-  color: ${colors.color}
+  font-size: 14px;
+  font-family: ${layout.fontText};
+  color: ${colors.color};
 `;
 
 const Error = styled.Text`
   position: absolute;
-  top: 54;
+  top: 54px;
 
   color: ${colors.error};
-  marginHorizontal: 12;
-  marginTop: 2;
+  margin-horizontal: 12px;
+  margin-top: 2px;
 
-  fontSize: 12
+  font-size: 12px;
 `;
 
 class InputWithLabel extends Component {
@@ -103,10 +106,8 @@ class InputWithLabel extends Component {
           <TextInput
             {...rest}
             placeholderTextColor={this.inputColor}
-            underlineColorAndroid="transparent"
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
-            autoCorrect={false}
           />
 
           <InputLabel>{label}</InputLabel>
