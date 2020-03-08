@@ -3,17 +3,19 @@ import { Animated, Platform } from "react-native";
 import colors from "../../constants/Colors";
 import styled, { css } from "styled-components/native";
 
-const Title = styled.Text`
+const Title = styled(Animated.Text).attrs(props => ({
+  numberOfLines: 1,
+  accessibilityTraits: "header"
+}))`
   ${Platform.select({
       android: css`
-        marginBottom: 9;
-        fontSize: 20
+        margin-bottom: 9px;
+        font-size: 20px;
       `,
       ios: css`
         /* Standard header margin: */
-        marginVertical: 6;
-
-        fontSize: 26
+        margin-vertical: 6px;
+        font-size: 26px;
       `
     })};
 
@@ -21,17 +23,12 @@ const Title = styled.Text`
     fontFamily: poppins-bold;
 
     /* Align to the bottom of the container: */
-    alignSelf: flex-end
+    alignSelf: flex-end;
 `;
 
 export function HeaderTitle(props) {
   return (
-    <Title
-      as={Animated.text}
-      numberOfLines={1}
-      {...props}
-      accessibilityTraits="header"
-    />
+    <Title {...props} />
   );
 }
 

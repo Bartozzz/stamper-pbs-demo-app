@@ -5,21 +5,25 @@ import styled, { css } from "styled-components/native";
 import * as Routes from "../../navigation";
 
 const Hamburger = styled.TouchableOpacity`
-  alignSelf: flex-start
+  align-self: flex-start;
 `;
 
-const Icon = styled(Ionicons)`
+const Icon = styled(Ionicons).attrs(props => ({
+  color: "white",
+  name: hamburgerIconName,
+  size: hamburgerIconSize
+}))`
     ${Platform.select({
       ios: css`
-        paddingTop: 5;
-        paddingRight: 20
+        padding-top: 5px;
+        padding-right: 20px;
       `,
       android: css`
-        paddingTop: 16;
-        paddingLeft: 8;
-        paddingRight: 16
+        padding-top: 16px;
+        padding-left: 8px;
+        padding-right: 16px;
       `
-    })}
+    })};
 `;
 
 export function HeaderHamburger(props) {
@@ -29,11 +33,7 @@ export function HeaderHamburger(props) {
 
   return (
     <Hamburger onPress={onPress}>
-      <Icon
-        name={hamburgerIconName}
-        size={hamburgerIconSize}
-        color="white"
-      />
+      <Icon/>
     </Hamburger>
   );
 }

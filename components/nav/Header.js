@@ -4,20 +4,20 @@ import defaultStyles from "../../constants/Styles";
 import styled from "styled-components/native";
 
 const HeaderComponent = styled.View`
-  flexDirection: row;
-  alignItems: center;
+  flex-direction: row;
+  align-items: center;
 
   width: 100%;
 
-  paddingVertical: 12;
-  paddingHorizontal: 20;
+  padding-vertical: 12px;
+  padding-horizontal: 20px;
 
-  backgroundColor: ${colors.primary}
+  background-color: ${colors.primary};
 `;
 
 const Title = styled.Text`
   ${defaultStyles.grow};
-  ${defaultStyles.headerTwoLinesTitle}
+  ${defaultStyles.headerTwoLinesTitle};
 `;
 
 export function Header(props) {
