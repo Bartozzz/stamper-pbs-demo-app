@@ -5,12 +5,12 @@ import styled from "styled-components/native";
 
 const VersionComponent = styled.Text`
   color: white;
-  textAlign: center;
+  text-align: center;
 
-  fontSize: 10;
-  fontWeight: bold;
+  font-size: 10px;
+  font-weight: bold;
 
-  marginVertical: 18
+  margin-vertical: 18px;
 `;
 
 export function Version({ style, ...props }) {
