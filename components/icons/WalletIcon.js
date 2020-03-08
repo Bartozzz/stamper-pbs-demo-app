@@ -3,19 +3,19 @@ import styled from "styled-components/native";
 import WalletImage from "../../assets/images/icons/wallet.png";
 
 const IconContainer = styled.TouchableOpacity`
-  marginVertical: 10;
-  marginHorizontal: 13;
+  margin-vertical: 10px;
+  margin-horizontal: 13px;
 
-  padding: 5;
+  padding: 5px;
 
-  borderRadius: 20;
+  border-radius: 20px;
   
-  backgroundColor: ${props => props.backgroundColor}
+  background-color: ${props => props.backgroundColor};
 `;
 
 const IconImage = styled.Image`
-  width: 14;
-  height: 14
+  width: 14px;
+  height: 14px;
 `;
 
 export class WalletIcon extends React.Component {
