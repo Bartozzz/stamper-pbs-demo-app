@@ -1,46 +1,45 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 import colors from "../../constants/Colors";
 
 const Container = styled.View`
-  alignItems: center;
+  align-items: center;
 
-  marginHorizontal: 0;
-  marginVertical: 12;
+  margin-horizontal: 0px;
+  margin-vertical: 12px;
 
-  flexDirection: row
+  flex-direction: row;
 `;
 const CheckboxComponent = styled.TouchableOpacity`
-  marginRight: 9;
+  margin-right: 9px;
   /* Visual centering: */
-  paddingTop: 1;
-  paddingLeft: 1;
+  padding-top: 1px;
+  padding-left: 1px;
 
-  alignItems: center;
-  justifyContent: center;
+  align-items: center;
+  justify-content: center;
 
-  width: 20;
-  height: 20;
-  borderRadius: 20;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
 
-  borderWidth: 1.5;
-  borderStyle: solid;
-  borderColor: ${colors.inputBorder};
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: ${colors.inputBorder};
 
   ${({ checked }) => checked && `
-  borderColor: ${colors.primary};
-  backgroundColor: ${colors.primary}
-`}
+  border-color: ${colors.primary};
+  background-color: ${colors.primary};
+`};
 `;
 
 export const CheckBoxLabel = styled.Text`
-  marginRight: 2;
+  margin-right: 2px;
 
-  fontSize: 11.5;
-  color: ${colors.link}
+  font-size: 11.5px;
+  color: ${colors.link};
 `;
 
 export class Checkbox extends React.PureComponent {
@@ -73,7 +72,6 @@ export class Checkbox extends React.PureComponent {
         >
           {checked && <Ionicons name="md-checkmark" size={14} color="white" />}
         </CheckboxComponent>
-
         {label}
       </Container>
     );
