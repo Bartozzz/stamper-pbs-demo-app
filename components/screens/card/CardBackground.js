@@ -1,21 +1,29 @@
 import React from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import styled from "styled-components/native";
 
 import defaultStyles from "../../../constants/Styles";
 import CardImage from "../../../assets/backgrounds/card.png";
+
+const ImageBackground = styled.ImageBackground.attrs(props => ({
+  resizeMode: "cover"
+}))`
+  ${defaultStyles.grow};
+  ${defaultStyles.row};
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 10px;
+`;
 
 export function CardBackground({ src, children }) {
   return (
     <ImageBackground
       source={CardImage}
-      style={styles.background}
-      resizeMode="cover"
     >
       {src ? (
         <ImageBackground
           source={{ uri: src }}
-          style={styles.background}
-          resizeMode="cover"
         >
           {children}
         </ImageBackground>
@@ -25,17 +33,5 @@ export function CardBackground({ src, children }) {
     </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    ...defaultStyles.grow,
-    ...defaultStyles.row,
-
-    width: "100%",
-    height: "100%",
-
-    borderRadius: 10
-  }
-});
 
 export default CardBackground;
