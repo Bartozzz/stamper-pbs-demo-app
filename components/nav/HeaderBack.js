@@ -5,21 +5,25 @@ import styled, { css } from "styled-components/native";
 import * as Routes from "../../navigation";
 
 const Back = styled.TouchableOpacity`
-  alignSelf: flex-start
+  align-self: flex-start;
 `;
 
-const Icon = styled(Ionicons)`
+const Icon = styled(Ionicons).attrs(props => ({
+  color: "white",
+  name: backIconName,
+  size: backIconSize
+}))`
     ${Platform.select({
       ios: css`
-        paddingTop: 1;
-        paddingLeft: 20
+        padding-top: 1px;
+        padding-left: 20px;
       `,
       android: css`
-        paddingTop: 16;
-        paddingRight: 8;
-        paddingLeft: 16
+        padding-top: 16px;
+        padding-right: 8px;
+        padding-left: 16px;
       `
-    })}
+    })};
 `;
 
 export function BackButton(props) {
@@ -31,11 +35,7 @@ export function BackButton(props) {
 
   return (
     <Back onPress={onPress}>
-      <Icon
-        name={backIconName}
-        size={backIconSize}
-        color="white"
-      />
+      <Icon/>
     </Back>
   );
 }

@@ -1,15 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
 
-const Empty = styled.View`
-  alignSelf: flex-start;
+const HeaderEmpty = styled.View`
+  align-self: flex-start;
 
-  width: 45;
-  height: 40
+  width: 45px;
+  height: 40px;
 `;
-
-export function HeaderEmpty() {
-  return <Empty></Empty>;
-}
 
 export default HeaderEmpty;
