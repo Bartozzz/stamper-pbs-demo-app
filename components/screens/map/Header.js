@@ -1,81 +1,70 @@
 import React from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  ScrollView
-} from "react-native";
+import { View } from "react-native";
+import styled from "styled-components/native";
 
 import colors from "../../../constants/Colors";
 import layout from "../../../constants/Layout";
 
+const Header = styled.ScrollView.attrs(props => ({
+  horizontal: true
+}))`
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-horizontal: 20px;
+
+  background-color: ${colors.background};
+`;
+
+const Item = styled.TouchableOpacity`
+  margin-right: 30px;
+
+  /* Centers item bar: */
+  align-items: center;
+`;
+
+const ItemText = styled.Text`
+  font-family: ${layout.fontText};
+  font-size: 18px;
+  color: #95989A;
+  ${({ active }) => active && `
+    color: ${colors.color};
+  `};
+`;
+
+const ItemBar = styled.View`
+  margin-top: 10px;
+
+  width: 40px;
+  height: 4px;
+
+  opacity: 0;
+  border-radius: 2px;
+
+  background-color: ${colors.color};
+
+  ${({ active }) => active && `
+    opacity: 1
+  `};
+`;
+
 export default function MapHeader(props) {
   return (
     <View>
-      <ScrollView style={[styles.header, props.style]} horizontal>
+      <Header>
         {props.filters.map((filter, index) => (
-          <TouchableOpacity
+          <Item
             key={filter}
-            style={styles.headerItem}
             onPress={() => props.onFilterSelect(filter, index)}
           >
-            <Text
-              style={[
-                styles.headerItemText,
-                index === props.filter && styles.headerItemTextActive
-              ]}
-            >
+            <ItemText active={index === props.filter} >
               {filter}
-            </Text>
+            </ItemText>
 
-            <View
-              style={[
-                styles.headerItemBar,
-                index === props.filter && styles.headerItemBarActive
-              ]}
-            />
-          </TouchableOpacity>
+            <ItemBar active={index === props.filter} />
+          </Item>
         ))}
-      </ScrollView>
+      </Header>
     </View>
   );
 }
 
-export const styles = StyleSheet.create({
-  header: {
-    paddingTop: 15,
-    paddingBottom: 10,
-    paddingHorizontal: 20,
-
-    backgroundColor: colors.background
-  },
-  headerItem: {
-    marginRight: 30,
-
-    // Centers item bar:
-    alignItems: "center"
-  },
-  headerItemText: {
-    fontFamily: layout.fontText,
-    fontSize: 18,
-    color: "#95989A"
-  },
-  headerItemTextActive: {
-    color: colors.color
-  },
-  headerItemBar: {
-    marginTop: 10,
-
-    width: 40,
-    height: 4,
-
-    opacity: 0,
-    borderRadius: 2,
-
-    backgroundColor: colors.color
-  },
-  headerItemBarActive: {
-    opacity: 1
-  }
-});

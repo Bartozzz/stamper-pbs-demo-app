@@ -8,17 +8,17 @@ import colors from "../constants/Colors";
 const Button = styled.View`
   zIndex: 3;
 
-  alignItems: center;
-  justifyContent: center;
+  align-items: center;
+  justify-content: center;
 
   position: absolute;
-  bottom: 25;
-  left: 0;
-  right: 0;
+  bottom: 25px;
+  left: 0px;
+  right: 0px;
 
-  height: 70;
+  height: 70px;
 
-  backgroundColor: ${colors.primary}
+  background-color: ${colors.primary};
 `;
 
 const Text = styled.Text`
