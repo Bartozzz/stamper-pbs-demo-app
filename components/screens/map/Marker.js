@@ -1,35 +1,38 @@
 import React from "react";
 import MapView from "react-native-maps";
-import { View, Image, StyleSheet } from "react-native";
+import styled from "styled-components/native";
+
+const Container = styled.View`
+  overflow: hidden;
+  background-color: white;
+
+  zIndex: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+`;
+
+const MarkerComponent = styled.Image.attrs(props => ({
+  resizeMode: "contain"
+}))`
+  zIndex: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+`;
 
 export function Marker({ item, onPress = () => null, ...rest }) {
   return (
     <MapView.Marker onPress={onPress} {...rest}>
-      <View style={[styles.marker, styles.container]}>
+      <Container>
         {item.logoUrl && (
-          <Image
-            style={styles.marker}
-            resizeMode="contain"
+          <MarkerComponent
             source={{ uri: item.logoUrl }}
           />
         )}
-      </View>
+      </Container>
     </MapView.Marker>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: "hidden",
-    backgroundColor: "white"
-  },
-
-  marker: {
-    zIndex: 2,
-    width: 40,
-    height: 40,
-    borderRadius: 20
-  }
-});
 
 export default Marker;

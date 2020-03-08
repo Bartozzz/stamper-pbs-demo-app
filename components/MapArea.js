@@ -13,8 +13,8 @@ const Map = styled(MapView)`
   zIndex: 1;
 
   /* Center indicator vertically: */
-  justifyContent: center;
-  backgroundColor: ${colors.background}
+  justify-content: center;
+  background-color: ${colors.background};
 `;
 
 
