@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Image,
   View,
   TouchableWithoutFeedback
 } from "react-native";
