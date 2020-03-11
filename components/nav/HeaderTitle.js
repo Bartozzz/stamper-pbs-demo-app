@@ -1,33 +1,40 @@
 import React from "react";
-import { Animated, Platform } from "react-native";
+import { StyleSheet, Animated, Platform } from "react-native";
 import colors from "../../constants/Colors";
-import styled, { css } from "styled-components/native";
-
-const Title = styled(Animated.Text).attrs(props => ({
-  numberOfLines: 1,
-  accessibilityTraits: "header"
-}))`
-  ${Platform.select({
-    android: css`
-      margin-bottom: 9px;
-      font-size: 20px;
-    `,
-    ios: css`
-      /* Standard header margin: */
-      margin-vertical: 6px;
-      font-size: 26px;
-    `
-  })};
-
-  color: ${colors.color};
-  font-family: poppins-bold;
-
-  /* Align to the bottom of the container: */
-  align-self: flex-end;
-`;
 
 export function HeaderTitle(props) {
-  return <Title {...props} />;
+  return (
+    <Animated.Text
+      numberOfLines={1}
+      {...props}
+      style={[styles.title]}
+      accessibilityTraits="header"
+    />
+  );
 }
+
+const styles = StyleSheet.create({
+  title: {
+    ...Platform.select({
+      android: {
+        marginBottom: 9
+      },
+      ios: {
+        // Standard header margin:
+        marginVertical: 6
+      }
+    }),
+
+    color: colors.color,
+    fontFamily: "poppins-bold",
+    fontSize: Platform.select({
+      android: 20,
+      ios: 26
+    }),
+
+    // Align to the bottom of the container:
+    alignSelf: "flex-end"
+  }
+});
 
 export default HeaderTitle;
