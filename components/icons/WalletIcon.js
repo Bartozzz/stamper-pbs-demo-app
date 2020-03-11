@@ -1,35 +1,36 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Image } from "react-native";
+import styled from "styled-components/native";
 import WalletImage from "../../assets/images/icons/wallet.png";
+
+const IconContainer = styled.TouchableOpacity`
+  margin-vertical: 10px;
+  margin-horizontal: 13px;
+
+  padding: 5px;
+
+  border-radius: 20px;
+  
+  background-color: ${props => props.backgroundColor};
+`;
+
+const IconImage = styled.Image`
+  width: 14px;
+  height: 14px;
+`;
 
 export class WalletIcon extends React.Component {
   render() {
     const { color, onPress } = this.props;
 
     return (
-      <TouchableOpacity
-        style={[styles.iconContainer, { backgroundColor: color }]}
+      <IconContainer
+        backgroundColor={color}
         onPress={onPress}
       >
-        <Image style={styles.iconImage} source={WalletImage} />
-      </TouchableOpacity>
+        <IconImage source={WalletImage} />
+      </IconContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    marginVertical: 10,
-    marginHorizontal: 13,
-
-    padding: 5,
-
-    borderRadius: 20
-  },
-  iconImage: {
-    width: 14,
-    height: 14
-  }
-});
 
 export default WalletIcon;

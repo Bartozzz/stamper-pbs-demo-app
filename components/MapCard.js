@@ -49,7 +49,9 @@ const CardBackgroundImage = styled.Image`
   resize-mode: cover;
 `;
 
-const CardLogoImage = styled.Image`
+const CardLogoImage = styled.Image.attrs(props => ({
+  resizeMode: "contain"
+}))`
   position: absolute;
   z-index: 9999;
 
@@ -61,7 +63,6 @@ const CardLogoImage = styled.Image`
   border-radius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
 
   background-color: white;
-  resize-mode: contain;
 `;
 
 const CardItem = styled.View`

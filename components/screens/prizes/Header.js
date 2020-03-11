@@ -1,31 +1,55 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import styled from "styled-components/native";
 
 import * as Routes from "../../../navigation";
 import i18n from "../../../translations";
 import colors from "../../../constants/Colors";
 
+const Tabs = styled.View`
+  flex-direction: row;
+  align-items: center;
+
+  padding-vertical: 13px;
+  padding-horizontal: 20px;
+
+  background-color: ${colors.primary};
+`;
+
+const AvailablePrizes = styled.Text`
+  font-family: poppins-regular;
+  font-size: 18px;
+  color: ${colors.color};
+
+  ${({ active }) =>
+    active &&
+    `
+      font-family: poppins-bold;
+    `};
+`;
+
+const ReceivedPrizes = styled.Text`
+  font-family: poppins-regular;
+  font-size: 18px;
+  color: ${colors.color};
+
+  ${({ active }) =>
+    active &&
+    `
+      font-family: poppins-bold;
+    `};
+`;
+
 export default function PrizesHeader(props) {
-  const availablePrizesStyles = [
-    styles.tabsItem,
-    props.available ? styles.tabsItemActive : false
-  ];
-
-  const receivedPrizesStyles = [
-    styles.tabsItem,
-    { textAlign: "right" },
-    props.received ? styles.tabsItemActive : false
-  ];
-
   return (
-    <View style={[styles.tabs, props.style]}>
+    <Tabs style={[props.style]}>
       <View style={{ flex: 2 }}>
         <TouchableOpacity
           onPress={() => props.navigation.navigate(Routes.PRIZES_LIST)}
         >
-          <Text style={availablePrizesStyles}>
+          <AvailablePrizes active={props.available}>
             {i18n.t("prizes.available")}
-          </Text>
+          </AvailablePrizes>
         </TouchableOpacity>
       </View>
 
@@ -33,30 +57,11 @@ export default function PrizesHeader(props) {
         <TouchableOpacity
           onPress={() => props.navigation.navigate(Routes.PRIZES_RECEIVED)}
         >
-          <Text style={receivedPrizesStyles}>{i18n.t("prizes.received")}</Text>
+          <ReceivedPrizes active={props.received}>
+            {i18n.t("prizes.received")}
+          </ReceivedPrizes>
         </TouchableOpacity>
       </View>
-    </View>
+    </Tabs>
   );
 }
-
-export const styles = StyleSheet.create({
-  tabs: {
-    flexDirection: "row",
-    alignItems: "center",
-
-    paddingVertical: 13,
-    paddingHorizontal: 20,
-
-    backgroundColor: colors.primary
-  },
-
-  tabsItem: {
-    fontFamily: "poppins-regular",
-    fontSize: 18,
-    color: colors.color
-  },
-  tabsItemActive: {
-    fontFamily: "poppins-bold"
-  }
-});

@@ -1,20 +1,70 @@
 import React, { Component } from "react";
-import { Text, View, TextInput, StyleSheet } from "react-native";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
+import styled from "styled-components/native";
+
+const InputPadder = styled.View`
+  margin-vertical: 15px;
+`;
+
+const InputContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  border-width: 1.5px;
+  border-color: ${colors.inputBorder};
+
+  ${({ error }) =>
+    error &&
+    `
+      border-color: ${colors.error};
+    `};
+
+  ${({ isFocused }) =>
+    isFocused &&
+    `
+      border-color: ${colors.color};
+    `};
+`;
+
+const InputLabel = styled.Text`
+  padding-vertical: 10px;
+  padding-right: 10px;
+
+  color: ${colors.info};
+  font-size: 10px;
+`;
+
+const TextInput = styled.TextInput.attrs(props => ({
+  underlineColorAndroid: "transparent",
+  autoCorrect: false
+}))`
+  flex: 1;
+  padding-vertical: 15px;
+  padding-horizontal: 15px;
+
+  font-size: 14px;
+  font-family: ${layout.fontText};
+  color: ${colors.color};
+`;
+
+const InputError = styled.Text`
+  position: absolute;
+  top: 54px;
+
+  color: ${colors.error};
+  margin-horizontal: 12px;
+  margin-top: 2px;
+
+  font-size: 12px;
+`;
 
 class InputWithLabel extends Component {
   state = {
     isFocused: false
   };
-
-  get inputStyle() {
-    if (this.error) {
-      return styles.inputContainerErrored;
-    } else if (this.state.isFocused) {
-      return styles.inputContainerFocused;
-    }
-  }
 
   get inputColor() {
     if (this.error) {
@@ -56,78 +106,26 @@ class InputWithLabel extends Component {
     const { label, ...rest } = this.props;
 
     return (
-      <View style={[styles.inputPadder]}>
-        <View style={[styles.inputContainer, this.inputStyle]}>
+      <InputPadder>
+        <InputContainer
+          style={this.inputStyle}
+          error={this.error}
+          isFocused={this.state.isFocused}
+        >
           <TextInput
             {...rest}
             placeholderTextColor={this.inputColor}
-            style={styles.inputStyle}
-            underlineColorAndroid="transparent"
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
-            autoCorrect={false}
           />
 
-          <Text style={styles.inputLabel}>{label}</Text>
-        </View>
+          <InputLabel>{label}</InputLabel>
+        </InputContainer>
 
-        {this.error ? (
-          <Text style={styles.inputError}>{this.error}</Text>
-        ) : null}
-      </View>
+        {this.error ? <InputError>{this.error}</InputError> : null}
+      </InputPadder>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  inputPadder: {
-    marginVertical: 15
-  },
-
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: colors.inputBorder
-  },
-  inputContainerFocused: {
-    borderColor: colors.color
-  },
-  inputContainerErrored: {
-    borderColor: colors.error
-  },
-
-  inputLabel: {
-    paddingVertical: 10,
-    paddingRight: 10,
-
-    color: colors.info,
-    fontSize: 10
-  },
-
-  inputStyle: {
-    flex: 1,
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-
-    fontSize: 14,
-    fontFamily: layout.fontText,
-    color: colors.color
-  },
-
-  inputError: {
-    position: "absolute",
-    top: 54,
-
-    color: colors.error,
-    marginHorizontal: 12,
-    marginTop: 2,
-
-    fontSize: 12
-  }
-});
 
 export default InputWithLabel;

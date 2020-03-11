@@ -1,42 +1,40 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
 import colors from "../../../constants/Colors";
+import styled from "styled-components/native";
+
+const BoxHeading = styled.Text`
+  padding-horizontal: 30px;
+
+  color: ${colors.color};
+  font-size: 24px;
+  text-align: center;
+`;
+
+const BoxSubHeading = styled.Text`
+  margin-top: 30px
+
+  text-align: center;
+  font-size: 18px;
+  color: ${colors.color};
+`;
+
+const BoxAction = styled.Text`
+  margin-top: 30px;
+
+  color: ${colors.info};
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+`;
 
 export function Heading({ children, style }) {
-  return <Text style={[styles.boxHeading, style]}>{children}</Text>;
+  return <BoxHeading style={style}>{children}</BoxHeading>;
 }
 
 export function Subheading({ children, style }) {
-  return <Text style={[styles.boxSubheading, style]}>{children}</Text>;
+  return <BoxSubHeading style={style}>{children}</BoxSubHeading>;
 }
 
 export function Action({ children, style }) {
-  return <Text style={[styles.boxAction, style]}>{children}</Text>;
+  return <BoxAction style={style}>{children}</BoxAction>;
 }
-
-const styles = StyleSheet.create({
-  boxHeading: {
-    paddingHorizontal: 30,
-
-    color: colors.color,
-    fontSize: 24,
-    textAlign: "center"
-  },
-
-  boxSubheading: {
-    marginTop: 30,
-
-    textAlign: "center",
-    fontSize: 18,
-    color: colors.color
-  },
-
-  boxAction: {
-    marginTop: 30,
-
-    color: "#709BE7",
-    fontSize: 18,
-    textAlign: "center",
-    textTransform: "uppercase"
-  }
-});

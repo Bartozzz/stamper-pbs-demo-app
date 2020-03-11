@@ -22,9 +22,8 @@ import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import InputWithLabel from "../../components/forms/InputWithLabel";
-import Checkbox, {
-  styles as checkboxStyles
-} from "../../components/forms/Checkbox";
+import Checkbox, { CheckBoxLabel } from "../../components/forms/Checkbox";
+
 
 import {
   EMAIL,
@@ -283,19 +282,18 @@ class ProfileEditScreen extends React.Component {
                     onChange={newsletter => this.setState({ newsletter })}
                     label={
                       <View style={{ flexDirection: "row" }}>
-                        <Text style={checkboxStyles.checkboxLabel}>
+                        <CheckBoxLabel>
                           {i18n.t("profile.edit.newsletter")}
-                        </Text>
+                        </CheckBoxLabel>
 
                         <TouchableOpacity onPress={this.showNewsletterTerms}>
-                          <Text
-                            style={[
-                              checkboxStyles.checkboxLabel,
+                          <CheckBoxLabel
+                            style={
                               { fontWeight: "900", textTransform: "uppercase" }
-                            ]}
+                            }
                           >
                             {i18n.t("more")}
-                          </Text>
+                          </CheckBoxLabel>
                         </TouchableOpacity>
                       </View>
                     }
