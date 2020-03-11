@@ -17,12 +17,12 @@ const InputContainer = styled.View`
   width: 265px;
 
   border-radius: 10px;
-  background-color: #1A5BF1;
+  background-color: #1a5bf1;
 `;
 
 const InputIcon = styled(Ionicons).attrs(props => ({
   name: "ios-search",
-  size: "16",
+  size: 16,
   color: colors.info
 }))`
   padding-horizontal: 10px;
@@ -45,11 +45,9 @@ const Input = styled.TextInput.attrs(props => ({
 export function InputSearch(props) {
   return (
     <InputContainer>
-      <InputIcon/>
+      <InputIcon />
 
-      <Input
-        {...props}
-      />
+      <Input {...props} />
     </InputContainer>
   );
 }

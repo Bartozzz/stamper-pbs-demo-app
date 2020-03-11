@@ -11,9 +11,8 @@ const BoxComponent = styled.View`
   margin-vertical: 20px;
   margin-horizontal: 20px;
 
-  shadow-color: #2699FB;
-  /* TODO: check if this syntax is correct */
-  shadow-offset: { width: 0px, height: 30px };
+  shadow-color: #2699fb;
+  shadow-offset: 0 30px;
   shadow-opacity: 0.1px;
   shadow-radius: 30px;
 
