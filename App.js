@@ -97,8 +97,6 @@ export default class App extends React.Component {
         require("./assets/backgrounds/cards.png"),
         // require("./assets/backgrounds/details_wn.png"),
         require("./assets/backgrounds/details.png"),
-        require("./assets/backgrounds/hero.png"),
-        require("./assets/backgrounds/hero-2.png"),
         // require("./assets/backgrounds/home_wn.png"),
         require("./assets/backgrounds/home.png"),
         // require("./assets/backgrounds/logout_wn.png"),
