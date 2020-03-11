@@ -14,6 +14,7 @@ import Background from "../../components/Background";
 
 import Button from "../../components/forms/Button";
 import InputWithIcon from "../../components/forms/InputWithIcon";
+import HeaderEmpty from "../../components/nav/HeaderEmpty";
 
 import {
   login,
@@ -36,6 +37,7 @@ class AuthLoginScreen extends React.Component {
   static navigationOptions = {
     title: i18n.t("navigation.auth.login"),
     headerTitle: HeaderTitle,
+    headerLeft: <HeaderEmpty />,
     headerStyle: defaultStyles.headerTwoLines
   };
 
@@ -167,123 +169,116 @@ class AuthLoginScreen extends React.Component {
     const { email, password, error } = this.state;
 
     return (
-          <View style={defaultStyles.container}>
-              <Background source={BackgroundImage} disableScroll>
-                <ScrollView style={styles.loginContainer}>
-                  <InputWithIcon
-                    iconName="ios-contact"
-                    iconSize={20}
-                    placeholder={i18n.t("auth.email")}
-                    value={email}
-                    error={error.email}
-                    onChangeText={email => this.setState({ email })}
-                    autoCapitalize="none"
-                  />
+      <View style={defaultStyles.container}>
+        <Background source={BackgroundImage} disableScroll>
+          <ScrollView style={styles.loginContainer}>
+            <InputWithIcon
+              iconName="ios-contact"
+              iconSize={20}
+              placeholder={i18n.t("auth.email")}
+              value={email}
+              error={error.email}
+              onChangeText={email => this.setState({ email })}
+              autoCapitalize="none"
+            />
 
-                  <InputWithIcon
-                    iconName="ios-lock"
-                    iconSize={20}
-                    placeholder={i18n.t("auth.password")}
-                    value={password}
-                    error={error.password}
-                    onChangeText={password => this.setState({ password })}
-                    autoCapitalize="none"
-                    secureTextEntry
-                  />
+            <InputWithIcon
+              iconName="ios-lock"
+              iconSize={20}
+              placeholder={i18n.t("auth.password")}
+              value={password}
+              error={error.password}
+              onChangeText={password => this.setState({ password })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-                  <View style={styles.loginContainerTextContainer}>
-                    <Text
-                      style={[
-                        styles.loginContainerText,
-                        styles.loginContainerTextA
-                      ]}
-                    >
-                      {i18n.t("auth.loginWith")}
-                    </Text>
+            <View style={styles.loginContainerTextContainer}>
+              <Text
+                style={[styles.loginContainerText, styles.loginContainerTextA]}
+              >
+                {i18n.t("auth.loginWith")}
+              </Text>
 
-                    <TouchableOpacity onPress={this.loginWithFacebook}>
-                      <Text
-                        style={[
-                          styles.loginContainerText,
-                          styles.loginContainerTextA,
-                          styles.loginProvider
-                        ]}
-                      >
-                        {" "}
-                        Facebook{" "}
-                      </Text>
-                    </TouchableOpacity>
+              <TouchableOpacity onPress={this.loginWithFacebook}>
+                <Text
+                  style={[
+                    styles.loginContainerText,
+                    styles.loginContainerTextA,
+                    styles.loginProvider
+                  ]}
+                >
+                  {" "}
+                  Facebook{" "}
+                </Text>
+              </TouchableOpacity>
 
-                    <Text
-                      style={[
-                        styles.loginContainerText,
-                        styles.loginContainerTextA
-                      ]}
-                    >
-                      {i18n.t("auth.loginOr")}
-                    </Text>
+              <Text
+                style={[styles.loginContainerText, styles.loginContainerTextA]}
+              >
+                {i18n.t("auth.loginOr")}
+              </Text>
 
-                    <TouchableOpacity onPress={this.loginWithGoogle}>
-                      <Text
-                        style={[
-                          styles.loginContainerText,
-                          styles.loginContainerTextA,
-                          styles.loginProvider
-                        ]}
-                      >
-                        {" "}
-                        Google.
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+              <TouchableOpacity onPress={this.loginWithGoogle}>
+                <Text
+                  style={[
+                    styles.loginContainerText,
+                    styles.loginContainerTextA,
+                    styles.loginProvider
+                  ]}
+                >
+                  {" "}
+                  Google.
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-                  <View style={styles.loginContainerTextContainer}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        this.props.navigation.navigate(Routes.AUTH_REGISTER);
-                      }}
-                    >
-                      <Text
-                        style={[
-                          styles.loginContainerText,
-                          styles.loginContainerTextB
-                        ]}
-                      >
-                        {i18n.t("auth.dontHaveAccount")}
-                      </Text>
-                    </TouchableOpacity>
+            <View style={styles.loginContainerTextContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate(Routes.AUTH_REGISTER);
+                }}
+              >
+                <Text
+                  style={[
+                    styles.loginContainerText,
+                    styles.loginContainerTextB
+                  ]}
+                >
+                  {i18n.t("auth.dontHaveAccount")}
+                </Text>
+              </TouchableOpacity>
 
-                    <TouchableOpacity
-                      onPress={() => {
-                        this.props.navigation.navigate(Routes.AUTH_RESET);
-                      }}
-                    >
-                      <Text
-                        style={[
-                          styles.loginContainerText,
-                          styles.loginContainerTextB
-                        ]}
-                      >
-                        {" "}
-                        {i18n.t("auth.forgotPassword")}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate(Routes.AUTH_RESET);
+                }}
+              >
+                <Text
+                  style={[
+                    styles.loginContainerText,
+                    styles.loginContainerTextB
+                  ]}
+                >
+                  {" "}
+                  {i18n.t("auth.forgotPassword")}
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-                  <Button
-                    title={i18n.t("auth.login")}
-                    onPress={this.loginWithCredentials}
-                    processing={this.state.processing}
-                  />
-                </ScrollView>
-              </Background>
-          </View>
+            <Button
+              title={i18n.t("auth.login")}
+              onPress={this.loginWithCredentials}
+              processing={this.state.processing}
+            />
+          </ScrollView>
+        </Background>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-
   loginProvider: {
     fontWeight: "900"
   },
