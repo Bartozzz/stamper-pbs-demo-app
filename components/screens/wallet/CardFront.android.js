@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  View,
-  TouchableWithoutFeedback
-} from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 import { Bar as ProgressBar } from "react-native-progress";
 import styled from "styled-components/native";
 
@@ -25,7 +22,7 @@ const ID = styled.Text`
 
   font-size: 14px;
   font-family: nunito-black;
-  color: #95989A;
+  color: #95989a;
 `;
 
 const Image = styled.Image.attrs(props => ({
@@ -49,7 +46,7 @@ const Title = styled.Text`
 const Expiry = styled.Text`
   font-size: 9px;
   font-family: nunito-regular;
-  color: #95989A;
+  color: #95989a;
 `;
 
 const Amount = styled.Text`
@@ -59,7 +56,7 @@ const Amount = styled.Text`
   text-align: right;
   font-size: 12px;
   font-family: nunito-regular;
-  color: #95989A;
+  color: #95989a;
 `;
 
 export const CardFront = ({ data, onPress }) => {
@@ -83,7 +80,7 @@ export const CardFront = ({ data, onPress }) => {
         </View>
 
         <View style={[defaultStyles.row, { paddingTop: 10 }]}>
-          <Image source={{ uri: data.logoUrl }}/>
+          <Image source={{ uri: data.logoUrl }} />
 
           <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
             <View>

@@ -21,13 +21,29 @@ const InputContainer = styled.View`
   border-width: 1px;
   border-style: solid;
   border-color: ${colors.inputBorder};
-  
-  ${({ error }) => error && `
-    border-color: ${colors.error};
-  `};
-  ${({ isFocused }) => isFocused && `
-    border-color: ${colors.color};
-  `}
+
+  ${({ error }) =>
+    error &&
+    `
+      border-color: ${colors.error};
+    `};
+
+  ${({ isFocused }) =>
+    isFocused &&
+    `
+      border-color: ${colors.color};
+    `}
+`;
+
+const InputError = styled.Text`
+  position: absolute;
+  top: 48px;
+
+  color: ${colors.error};
+  margin-horizontal: 17px;
+  margin-top: 2px;
+
+  font-size: 12px;
 `;
 
 const InputIcon = styled(Ionicons)`
@@ -96,12 +112,12 @@ class InputWithIcon extends Component {
 
     return (
       <InputPadder>
-        <InputContainer style={this.inputStyle} error={this.error} isFocused={this.state.isFocused}>
-          <InputIcon
-            name={iconName}
-            size={iconSize}
-            color={this.inputColor}
-          />
+        <InputContainer
+          style={this.inputStyle}
+          error={this.error}
+          isFocused={this.state.isFocused}
+        >
+          <InputIcon name={iconName} size={iconSize} color={this.inputColor} />
 
           <TextInput
             {...rest}
@@ -111,13 +127,10 @@ class InputWithIcon extends Component {
           />
         </InputContainer>
 
-        {this.error ? (
-          <Error>{this.error}</Error>
-        ) : null}
+        {this.error && <InputError>{this.error}</InputError>}
       </InputPadder>
     );
   }
 }
-
 
 export default InputWithIcon;

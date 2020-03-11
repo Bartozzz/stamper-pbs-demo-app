@@ -25,10 +25,13 @@ const Item = styled.TouchableOpacity`
 const ItemText = styled.Text`
   font-family: ${layout.fontText};
   font-size: 18px;
-  color: #95989A;
-  ${({ active }) => active && `
-    color: ${colors.color};
-  `};
+  color: #95989a;
+
+  ${({ active }) =>
+    active &&
+    `
+      color: ${colors.color};
+    `};
 `;
 
 const ItemBar = styled.View`
@@ -42,9 +45,11 @@ const ItemBar = styled.View`
 
   background-color: ${colors.color};
 
-  ${({ active }) => active && `
-    opacity: 1
-  `};
+  ${({ active }) =>
+    active &&
+    `
+      opacity: 1
+    `};
 `;
 
 export default function MapHeader(props) {
@@ -56,9 +61,7 @@ export default function MapHeader(props) {
             key={filter}
             onPress={() => props.onFilterSelect(filter, index)}
           >
-            <ItemText active={index === props.filter} >
-              {filter}
-            </ItemText>
+            <ItemText active={index === props.filter}>{filter}</ItemText>
 
             <ItemBar active={index === props.filter} />
           </Item>
@@ -67,4 +70,3 @@ export default function MapHeader(props) {
     </View>
   );
 }
-

@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 
 import * as Routes from "../../../navigation";
 import i18n from "../../../translations";
@@ -21,9 +21,11 @@ const AvailablePrizes = styled.Text`
   font-size: 18px;
   color: ${colors.color};
 
-  ${({ active }) => active && `
-    font-family: poppins-bold;
-  `};
+  ${({ active }) =>
+    active &&
+    `
+      font-family: poppins-bold;
+    `};
 `;
 
 const ReceivedPrizes = styled.Text`
@@ -31,13 +33,14 @@ const ReceivedPrizes = styled.Text`
   font-size: 18px;
   color: ${colors.color};
 
-  ${({ active }) => active && `
-    font-family: poppins-bold;
-  `};
+  ${({ active }) =>
+    active &&
+    `
+      font-family: poppins-bold;
+    `};
 `;
 
 export default function PrizesHeader(props) {
-
   return (
     <Tabs style={[props.style]}>
       <View style={{ flex: 2 }}>
@@ -54,7 +57,9 @@ export default function PrizesHeader(props) {
         <TouchableOpacity
           onPress={() => props.navigation.navigate(Routes.PRIZES_RECEIVED)}
         >
-          <ReceivedPrizes active={props.received}>{i18n.t("prizes.received")}</ReceivedPrizes>
+          <ReceivedPrizes active={props.received}>
+            {i18n.t("prizes.received")}
+          </ReceivedPrizes>
         </TouchableOpacity>
       </View>
     </Tabs>

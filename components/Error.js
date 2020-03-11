@@ -13,14 +13,14 @@ const ErrorContainer = styled.View`
   border-radius: 5px;
 `;
 
-const ErrorHead =  styled.Text`
+const ErrorHead = styled.Text`
   font-size: 14px;
   font-family: ${layout.fontHead};
   color: ${colors.color};
 `;
 
 const ErrorText = styled.Text`
-  font-size: 14;
+  font-size: 14px;
   font-family: ${layout.fontText};
   color: ${colors.color};
 `;

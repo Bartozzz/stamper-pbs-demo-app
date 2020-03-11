@@ -22,6 +22,7 @@ const ButtonText = styled.Text`
   text-align: center;
   text-transform: uppercase;
   text-shadow-color: ${colors.shadow};
+  /* TODO: check if this syntax is correct */
   text-shadow-offset: { width: 1px, height: 1px };
   text-shadow-radius: 2px;
 `;
@@ -57,10 +58,7 @@ export function Button({ title, style, textStyle, onPress, ...rest }) {
   }
 
   return (
-    <ButtonEnabled
-      style={[fullStyle, style]}
-      onPress={onPress}
-    >
+    <ButtonEnabled style={[fullStyle, style]} onPress={onPress}>
       <ButtonText style={textStyle}>{title}</ButtonText>
     </ButtonEnabled>
   );

@@ -18,15 +18,9 @@ const ImageBackground = styled.ImageBackground.attrs(props => ({
 
 export function CardBackground({ src, children }) {
   return (
-    <ImageBackground
-      source={CardImage}
-    >
+    <ImageBackground source={CardImage}>
       {src ? (
-        <ImageBackground
-          source={{ uri: src }}
-        >
-          {children}
-        </ImageBackground>
+        <ImageBackground source={{ uri: src }}>{children}</ImageBackground>
       ) : (
         children
       )}

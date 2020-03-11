@@ -40,13 +40,13 @@ const CardImage = styled.Image`
 
 const CardTitle = styled.Text`
   color: #001432;
-  font-Size: 14px;
+  font-size: 14px;
   font-family: poppins-bold;
   text-align: center;
 `;
 
 const CardSubtitle = styled.Text`
-  color: #709BE7;
+  color: #709be7;
   font-size: 9px;
   font-family: nunito-regular;
   text-align: center;
@@ -73,7 +73,7 @@ export function Card({ image, title, subtitle, ...props }) {
         <CardTitle>{title.toUpperCase()}</CardTitle>
         <CardSubtitle>{subtitle.toUpperCase()}</CardSubtitle>
 
-        {typeof props.renderButton === "function" ? props.renderButton() : null}
+        {typeof props.renderButton === "function" && props.renderButton()}
       </CardComponent>
     </CardPadder>
   );

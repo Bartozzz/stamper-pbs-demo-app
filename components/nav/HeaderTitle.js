@@ -8,28 +8,26 @@ const Title = styled(Animated.Text).attrs(props => ({
   accessibilityTraits: "header"
 }))`
   ${Platform.select({
-      android: css`
-        margin-bottom: 9px;
-        font-size: 20px;
-      `,
-      ios: css`
-        /* Standard header margin: */
-        margin-vertical: 6px;
-        font-size: 26px;
-      `
-    })};
+    android: css`
+      margin-bottom: 9px;
+      font-size: 20px;
+    `,
+    ios: css`
+      /* Standard header margin: */
+      margin-vertical: 6px;
+      font-size: 26px;
+    `
+  })};
 
-    color: ${colors.color};
-    fontFamily: poppins-bold;
+  color: ${colors.color};
+  font-family: poppins-bold;
 
-    /* Align to the bottom of the container: */
-    alignSelf: flex-end;
+  /* Align to the bottom of the container: */
+  align-self: flex-end;
 `;
 
 export function HeaderTitle(props) {
-  return (
-    <Title {...props} />
-  );
+  return <Title {...props} />;
 }
 
 export default HeaderTitle;

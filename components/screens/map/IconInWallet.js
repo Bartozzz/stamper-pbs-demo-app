@@ -28,7 +28,7 @@ const Text = styled.Text`
 export function IconInWallet() {
   return (
     <Container>
-      <Icon/>
+      <Icon />
       <Text>{i18n.t("map.cardAlreadyAdded")}</Text>
     </Container>
   );

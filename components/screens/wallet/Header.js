@@ -33,9 +33,11 @@ const Cards = styled.Text`
 
   opacity: 0.5;
 
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
       opacity: 1;
-`};
+    `};
 `;
 
 const Places = styled.Text`
@@ -47,13 +49,14 @@ const Places = styled.Text`
 
   opacity: 0.5;
 
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
       opacity: 1;
-`};
+    `};
 `;
 
 export default function WalletHeader(props) {
-
   return (
     <Tabs style={[props.style]}>
       <TabsTitle>{props.title}</TabsTitle>
@@ -72,4 +75,3 @@ export default function WalletHeader(props) {
     </Tabs>
   );
 }
-

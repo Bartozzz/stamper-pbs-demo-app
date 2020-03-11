@@ -13,17 +13,17 @@ const Icon = styled(Ionicons).attrs(props => ({
   name: hamburgerIconName,
   size: hamburgerIconSize
 }))`
-    ${Platform.select({
-      ios: css`
-        padding-top: 5px;
-        padding-right: 20px;
-      `,
-      android: css`
-        padding-top: 16px;
-        padding-left: 8px;
-        padding-right: 16px;
-      `
-    })};
+  ${Platform.select({
+    ios: css`
+      padding-top: 5px;
+      padding-right: 20px;
+    `,
+    android: css`
+      padding-top: 16px;
+      padding-left: 8px;
+      padding-right: 16px;
+    `
+  })};
 `;
 
 export function HeaderHamburger(props) {
@@ -33,7 +33,7 @@ export function HeaderHamburger(props) {
 
   return (
     <Hamburger onPress={onPress}>
-      <Icon/>
+      <Icon />
     </Hamburger>
   );
 }

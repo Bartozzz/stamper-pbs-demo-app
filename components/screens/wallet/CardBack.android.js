@@ -25,7 +25,7 @@ const ItemRemove = styled.TouchableOpacity`
 
   /* Need to add zIndex to ensure that the TouchableOpacity will receive press */
   /* events on Android: */
-  zIndex: 1;
+  z-index: 1;
 `;
 
 const RemoveImage = styled.Image.attrs(props => ({
@@ -38,7 +38,7 @@ const RemoveImage = styled.Image.attrs(props => ({
 export const CardBack = ({ data, onPress }) => {
   return (
     <ItemRemove onPress={onPress}>
-      <RemoveImage/>
+      <RemoveImage />
     </ItemRemove>
   );
 };

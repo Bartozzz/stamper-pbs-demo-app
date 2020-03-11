@@ -13,17 +13,17 @@ const Icon = styled(Ionicons).attrs(props => ({
   name: backIconName,
   size: backIconSize
 }))`
-    ${Platform.select({
-      ios: css`
-        padding-top: 1px;
-        padding-left: 20px;
-      `,
-      android: css`
-        padding-top: 16px;
-        padding-right: 8px;
-        padding-left: 16px;
-      `
-    })};
+  ${Platform.select({
+    ios: css`
+      padding-top: 1px;
+      padding-left: 20px;
+    `,
+    android: css`
+      padding-top: 16px;
+      padding-right: 8px;
+      padding-left: 16px;
+    `
+  })};
 `;
 
 export function BackButton(props) {
@@ -35,7 +35,7 @@ export function BackButton(props) {
 
   return (
     <Back onPress={onPress}>
-      <Icon/>
+      <Icon />
     </Back>
   );
 }

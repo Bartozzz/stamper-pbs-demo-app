@@ -7,16 +7,14 @@ import MapCurrentLocationMarker from "./MapCurrentLocationMarker";
 import mapStyle from "../assets/mapStyle";
 import colors from "../constants/Colors";
 
-
 const Map = styled(MapView)`
   flex: 1;
-  zIndex: 1;
+  z-index: 1;
 
   /* Center indicator vertically: */
   justify-content: center;
   background-color: ${colors.background};
 `;
-
 
 const MapArea = ({ children, userPosition, ...rest }) => {
   return (

@@ -14,14 +14,19 @@ const InputContainer = styled.View`
 
   border-radius: 8px;
   border-width: 1.5px;
-  border-color: ${colors.inputBorder}
+  border-color: ${colors.inputBorder};
 
-  ${({ error }) => error && `
-    border-color: ${colors.error};
-  `};
-  ${({ isFocused }) => isFocused && `
-    border-color: ${colors.color};
-  `};
+  ${({ error }) =>
+    error &&
+    `
+      border-color: ${colors.error};
+    `};
+
+  ${({ isFocused }) =>
+    isFocused &&
+    `
+      border-color: ${colors.color};
+    `};
 `;
 
 const InputLabel = styled.Text`
@@ -45,7 +50,7 @@ const TextInput = styled.TextInput.attrs(props => ({
   color: ${colors.color};
 `;
 
-const Error = styled.Text`
+const InputError = styled.Text`
   position: absolute;
   top: 54px;
 
@@ -102,7 +107,11 @@ class InputWithLabel extends Component {
 
     return (
       <InputPadder>
-        <InputContainer style={this.inputStyle} error={this.error} isFocused={this.state.isFocused}>
+        <InputContainer
+          style={this.inputStyle}
+          error={this.error}
+          isFocused={this.state.isFocused}
+        >
           <TextInput
             {...rest}
             placeholderTextColor={this.inputColor}
@@ -113,9 +122,7 @@ class InputWithLabel extends Component {
           <InputLabel>{label}</InputLabel>
         </InputContainer>
 
-        {this.error ? (
-          <Error>{this.error}</Error>
-        ) : null}
+        {this.error ? <InputError>{this.error}</InputError> : null}
       </InputPadder>
     );
   }

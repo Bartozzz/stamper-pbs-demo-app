@@ -24,7 +24,7 @@ const Bubble = styled.View`
 
   background-color: ${colors.primary};
 
-  zIndex: 2;
+  z-index: 2;
 `;
 
 const Count = styled.Text`
