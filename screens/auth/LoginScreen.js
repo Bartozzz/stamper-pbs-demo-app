@@ -34,13 +34,6 @@ import { getErrorsFromResponse } from "../../helpers/errors";
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthLoginScreen extends React.Component {
-  static navigationOptions = {
-    title: i18n.t("navigation.auth.login"),
-    headerTitle: HeaderTitle,
-    headerLeft: <HeaderEmpty />,
-    headerStyle: defaultStyles.headerTwoLines
-  };
-
   state = {
     processing: false,
 
