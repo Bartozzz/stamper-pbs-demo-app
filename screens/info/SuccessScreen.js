@@ -13,11 +13,11 @@ class SuccessScreen extends React.Component {
   };
 
   get size() {
-    const { navigation } = this.props;
+    const { route } = this.props;
 
-    const size = navigation.getParam("size", 150);
-    const width = navigation.getParam("width", null);
-    const height = navigation.getParam("height", null);
+    const size = route.params?.size ?? 150;
+    const width = route.params?.width ?? null;
+    const height = route.params?.height ?? null;
 
     if (width && height) {
       return [width, height];
@@ -27,12 +27,12 @@ class SuccessScreen extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
 
-    const image = navigation.getParam("image", SuccessImage);
-    const message = navigation.getParam("message", "Success!");
-    const timeout = navigation.getParam("timeout", 2000);
-    const screen = navigation.getParam("redirect", Routes.AUTH);
+    const image = route.params?.image ?? SuccessImage;
+    const message = route.params?.message ?? "Success!";
+    const timeout = route.params?.timeout ?? 2000;
+    const screen = route.params?.redirect ?? Routes.AUTH;
     const [width, height] = this.size;
 
     return (
