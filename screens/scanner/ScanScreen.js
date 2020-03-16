@@ -45,8 +45,8 @@ class ScannerScanScreen extends React.Component {
   }
 
   componentWillUnmount() {
-    this.focusListener.remove();
-    this.blurListener.remove();
+    this.focusListener();
+    this.blurListener();
   }
 
   redirectToSuccess = message => {
