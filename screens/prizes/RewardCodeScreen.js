@@ -19,9 +19,6 @@ import colors from "../../constants/Colors";
 import * as Routes from "../../navigation";
 
 import Button from "../../components/forms/Button";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
-import HeaderTitle from "../../components/nav/HeaderTitle";
 import Background from "../../components/Background";
 import CardBackground from "../../components/screens/card/CardBackground";
 import { formatDate } from "../../helpers/date";
@@ -30,28 +27,13 @@ const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 const CardImage = require("../../assets/backgrounds/card.png");
 
 class RewardCodeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: i18n.t("navigation.prizes.collect"),
-    headerTitle: HeaderTitle,
-    headerLeft: (
-      <HeaderBackIcon
-        navigation={navigation}
-        onPress={() =>
-          navigation.navigate(navigation.getParam("backTo", Routes.PRIZES_LIST))
-        }
-      />
-    ),
-    headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
-  });
-
   openLinkInBrowser = link => {
     return Linking.openURL(link);
   };
 
   render() {
-    const { navigation } = this.props;
-    const card = navigation.getParam("card");
+    const { route } = this.props;
+    const card = route.params?.card;
 
     return (
       <Background source={BackgroundImage} disableScroll>

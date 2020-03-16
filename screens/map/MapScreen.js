@@ -10,7 +10,6 @@ import * as R from "ramda";
 // Utils:
 import * as Routes from "../../navigation";
 import i18n from "../../translations";
-import colors from "../../constants/Colors";
 import defaultStyles from "../../constants/Styles";
 import useLocation from "../../helpers/hooks/useLocation";
 import { getCluster } from "../../helpers/map";
@@ -18,8 +17,6 @@ import { getCluster } from "../../helpers/map";
 // Components:
 import Background from "../../components/Background";
 import MapHeader from "../../components/screens/map/Header";
-import HeaderEmpty from "../../components/nav/HeaderEmpty";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import MapArea from "../../components/MapArea";
 import MapAreaMarker from "../../components/MapAreaMarker";
 import MapCard, { slideWidth, slideMargin } from "../../components/MapCard";
@@ -237,16 +234,6 @@ const MapScreen = ({ navigation }) => {
     </Background>
   );
 };
-
-MapScreen.navigationOptions = ({ navigation }) => ({
-  title: i18n.t("navigation.map"),
-  headerLeft: <HeaderEmpty />,
-  headerRight: <HeaderHamburger navigation={navigation} />,
-  headerStyle: {
-    ...defaultStyles.headerTransparent,
-    backgroundColor: colors.background
-  }
-});
 
 export function normalizeCardGeometry(card) {
   return {

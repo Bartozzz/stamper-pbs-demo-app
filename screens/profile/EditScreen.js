@@ -18,9 +18,6 @@ import KeyboardAware from "../../components/helpers/KeyboardAware";
 import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderTitle from "../../components/nav/HeaderTitle";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
 import InputWithLabel from "../../components/forms/InputWithLabel";
 import Checkbox, { CheckBoxLabel } from "../../components/forms/Checkbox";
 
@@ -47,19 +44,6 @@ const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const UPLOAD_HEIGHT = 120;
 
 class ProfileEditScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: i18n.t("navigation.profile.edit"),
-    headerTitle: HeaderTitle,
-    headerLeft: (
-      <HeaderBackIcon
-        navigation={navigation}
-        onPress={() => navigation.goBack()}
-      />
-    ),
-    headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
-  });
-
   state = {
     processing: false,
 

@@ -15,10 +15,6 @@ const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class TermsOfUseScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
   state = {
     processing: false
   };
@@ -26,7 +22,7 @@ class TermsOfUseScreen extends React.Component {
   accept = () => {
     this.setState({ processing: true });
 
-    this.props.navigation.getParam("onAccept")();
+    this.props.route.params?.onAccept();
   };
 
   showTerms = () => {

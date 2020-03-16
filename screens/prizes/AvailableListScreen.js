@@ -32,21 +32,6 @@ const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 const RewardsLoader = require("../../assets/loaders/rewards.gif");
 
 class PrizesListScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: "",
-    headerLeft: (
-      <InputSearch
-        onChangeText={
-          navigation.state.params &&
-          Reflect.has(navigation.state.params, "handleSearch")
-            ? navigation.state.params.handleSearch
-            : null
-        }
-      />
-    ),
-    headerRight: <HeaderHamburger navigation={navigation} />
-  });
-
   state = {
     isCheckingIfCacheValid: false,
     selected: null,

@@ -19,10 +19,6 @@ const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class ScannerAcceptStampTermsScreen extends React.Component {
-  static navigationOptions = () => ({
-    header: null
-  });
-
   state = {
     processing: false
   };
@@ -33,18 +29,18 @@ class ScannerAcceptStampTermsScreen extends React.Component {
 
   accept = () => {
     this.setState({ processing: true });
-    this.props.navigation.getParam("onConfirm", () => {})();
+    this.props.route.params?.onConfirm() ?? (() => {})();
   };
 
   refuse = () => {
     this.props.navigation.navigate(Routes.SCANNER_CONFIRM_REFUSED_TERMS, {
-      onConfirm: () => this.props.navigation.getParam("onConfirm", () => {})()
+      onConfirm: () => this.props.route.params?.onConfirm() ?? (() => {})()
     });
   };
 
   render() {
-    const title = this.props.navigation.getParam("title");
-    const terms = this.props.navigation.getParam("termsAndConditionsUrl");
+    const title = this.props.route.params?.title;
+    const terms = this.props.route.params?.termsAndConditionsUrl;
 
     return (
       <Background source={BackgroundImage}>
