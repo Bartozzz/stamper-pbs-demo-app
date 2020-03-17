@@ -16,7 +16,9 @@ const MapAreaMarker = ({ marker, cluster, onPress }) => {
       <ClusterMarker
         coordinate={coordinate}
         count={marker.properties.point_count}
-        onPress={() => {
+        onPress={event => {
+          event.stopPropagation();
+
           const markersInCluster = cluster.getLeaves(marker.id);
           const cardsInCluster = R.pipe(
             R.map(R.view(R.lensProp("cards"))),
@@ -34,7 +36,9 @@ const MapAreaMarker = ({ marker, cluster, onPress }) => {
       <Marker
         coordinate={coordinate}
         item={marker}
-        onPress={() => {
+        onPress={event => {
+          event.stopPropagation();
+
           if (onPress) {
             onPress(marker.cards);
           }
