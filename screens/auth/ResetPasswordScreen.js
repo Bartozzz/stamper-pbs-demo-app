@@ -12,13 +12,30 @@ import Background from "../../components/Background";
 import Button from "../../components/forms/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/forms/InputWithIcon";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
+import HeaderTitle from "../../components/nav/HeaderTitle";
+
 import { resetPassword } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
+import * as Routes from "../../navigation";
+import defaultStyles from "../../constants/Styles";
 
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class ResetPasswordScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.auth.forgot"),
+    headerTitle: HeaderTitle,
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />
+    ),
+    headerStyle: defaultStyles.headerTwoLines
+  });
+
   state = {
     processing: false,
 

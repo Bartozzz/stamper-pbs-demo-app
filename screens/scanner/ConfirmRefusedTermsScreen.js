@@ -18,6 +18,10 @@ const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class ScannerConfirmRefusedTermsScreen extends React.Component {
+  static navigationOptions = () => ({
+    header: null
+  });
+
   accept = () => {
     this.props.navigation.navigate(Routes.DASHBOARD);
   };

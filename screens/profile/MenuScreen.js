@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
@@ -13,6 +14,15 @@ const BackgroundImage = require("../../assets/backgrounds/profile_wn.png");
 const EmailImage = require("../../assets/images/icons/email.png");
 
 class ProfileMenuScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.profile.menu"),
+    headerTitle: "",
+    headerLeft: null,
+    headerRight: <HeaderHamburger navigation={navigation} />,
+    headerStyle: defaultStyles.headerTransparent
+    // headerTransparent: true
+  });
+
   render() {
     const { nickname, email, photo, navigation } = this.props;
 

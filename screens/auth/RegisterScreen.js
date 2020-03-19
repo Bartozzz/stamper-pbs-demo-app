@@ -13,6 +13,7 @@ import Background from "../../components/Background";
 
 import Button from "../../components/forms/Button";
 import InputWithIcon from "../../components/forms/InputWithIcon";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import {
   register,
@@ -22,12 +23,26 @@ import {
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
+import HeaderTitle from "../../components/nav/HeaderTitle";
+import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthRegisterScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.auth.register"),
+    headerTitle: HeaderTitle,
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />
+    ),
+    headerStyle: defaultStyles.headerTwoLines
+  });
+
   state = {
     processing: false,
 

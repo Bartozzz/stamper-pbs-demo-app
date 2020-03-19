@@ -18,6 +18,8 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import * as Routes from "../../navigation";
 
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 import Background from "../../components/Background";
 import CardBackground from "../../components/screens/card/CardBackground";
 import { formatDate } from "../../helpers/date";
@@ -26,6 +28,24 @@ const BackgroundImage = require("../../assets/backgrounds/details_wn.png");
 const CardImage = require("../../assets/backgrounds/card.png");
 
 class CardInfoScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam("merchant"),
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() =>
+          navigation.navigate(
+            navigation.getParam("backTo", Routes.WALLET_PLACES)
+          )
+        }
+      />
+    ),
+    headerRight: <HeaderHamburger navigation={navigation} />,
+    headerStyle: {
+      ...defaultStyles.headerTransparent,
+      backgroundColor: colors.background
+    }
+  });
 
   state = {
     active: 0
@@ -38,10 +58,10 @@ class CardInfoScreen extends React.Component {
   };
 
   render() {
-    const { route } = this.props;
+    const { navigation } = this.props;
     const { active } = this.state;
 
-    const cards = route.params?.cards;
+    const cards = navigation.getParam("cards");
     const card = cards[active];
 
     return (

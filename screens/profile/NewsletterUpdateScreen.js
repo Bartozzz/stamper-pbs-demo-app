@@ -20,6 +20,10 @@ const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
 
 class NewsletterUpdateScreen extends React.Component {
+  static navigationOptions = () => ({
+    header: null
+  });
+
   state = {
     processing: false
   };

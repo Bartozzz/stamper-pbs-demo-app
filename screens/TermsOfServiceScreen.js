@@ -1,15 +1,30 @@
 import React from "react";
 
 import Background from "../components/Background";
+import HeaderTitle from "../components/nav/HeaderTitle";
+import HeaderBackIcon from "../components/nav/HeaderBack";
 import TermsAsHTML from "../components/screens/terms/TermsAsHTML";
 
 import i18n from "../translations";
 import Url from "../constants/Urls";
+import defaultStyles from "../constants/Styles";
 import axios from "../store/axios";
 
 const BackgroundImage = require("../assets/backgrounds/tos_wn.png");
 
 class TermsOfServiceScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.tos"),
+    headerTitle: HeaderTitle,
+    headerLeft: (
+      <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />
+    ),
+    headerStyle: defaultStyles.headerTwoLines
+  });
+
   state = {
     loading: true,
     content: "",

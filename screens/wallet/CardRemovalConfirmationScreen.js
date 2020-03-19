@@ -19,6 +19,10 @@ const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
 const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
 
 class CardRemovalConfirmationScreen extends React.Component {
+  static navigationOptions = () => ({
+    header: null
+  });
+
   state = {
     processing: false
   };
@@ -26,8 +30,8 @@ class CardRemovalConfirmationScreen extends React.Component {
   accept = async () => {
     this.setState({ processing: true });
 
-    const { navigation, route } = this.props;
-    const cardId = route.params?.cardId;
+    const { navigation } = this.props;
+    const cardId = navigation.getParam("cardId");
 
     this.props.removeCard(cardId).finally(() => {
       AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));

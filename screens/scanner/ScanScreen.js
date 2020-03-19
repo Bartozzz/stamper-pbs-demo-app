@@ -8,6 +8,9 @@ import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
 import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
+import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderTitle from "../../components/nav/HeaderTitle";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
@@ -18,6 +21,19 @@ import colors from "../../constants/Colors";
 const SpinnerImage = require("../../assets/loaders/spinner.gif");
 
 class ScannerScanScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: i18n.t("navigation.scanner.scan"),
+    header: navigation.state.params
+      ? navigation.state.params.hideHeader
+        ? undefined
+        : null
+      : undefined,
+    headerTitle: HeaderTitle,
+    headerLeft: <HeaderBackIcon navigation={navigation} />,
+    headerRight: <HeaderHamburger navigation={navigation} />,
+    headerStyle: defaultStyles.headerTwoLines
+  });
+
   state = {
     isRequesting: false,
     isProcessing: false,
@@ -62,7 +78,7 @@ class ScannerScanScreen extends React.Component {
   };
 
   redirectToFailure = () => {
-    const mode = this.props.route.params?.type ?? Routes.SCANNER;
+    const mode = this.props.navigation.getParam("type", Routes.SCANNER);
 
     this.props.navigation.navigate(Routes.INFO_ERROR, {
       redirect: Routes.DASHBOARD,

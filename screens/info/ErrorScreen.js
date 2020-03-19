@@ -5,12 +5,16 @@ import InfoScreen from "./InfoScreen";
 import ErrorImage from "../../assets/images/error.png";
 
 class ErrorScreen extends React.Component {
-  get size() {
-    const { route } = this.props;
+  static navigationOptions = {
+    header: null
+  };
 
-    const size = route.params?.size ?? 150;
-    const width = route.params?.width ?? null;
-    const height = route.params?.height ?? null;
+  get size() {
+    const { navigation } = this.props;
+
+    const size = navigation.getParam("size", 150);
+    const width = navigation.getParam("width", null);
+    const height = navigation.getParam("height", null);
 
     if (width && height) {
       return [width, height];
@@ -20,12 +24,12 @@ class ErrorScreen extends React.Component {
   }
 
   render() {
-    const { route, navigation } = this.props;
+    const { navigation } = this.props;
 
-    const image = route.params?.image ?? ErrorImage;
-    const message = route.params?.message ?? "Error!";
-    const timeout = route.params?.timeout ?? 2000;
-    const screen = route.params?.redirect ?? Routes.AUTH;
+    const image = navigation.getParam("image", ErrorImage);
+    const message = navigation.getParam("message", "Error!");
+    const timeout = navigation.getParam("timeout", 2000);
+    const screen = navigation.getParam("redirect", Routes.AUTH);
     const [width, height] = this.size;
 
     return (
