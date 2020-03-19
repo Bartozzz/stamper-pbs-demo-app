@@ -10,7 +10,6 @@ import defaultStyles from "../constants/Styles";
 import HeaderTitle from "../components/nav/HeaderTitle";
 import HeaderEmpty from "../components/nav/HeaderEmpty";
 import HeaderBackIcon from "../components/nav/HeaderBack";
-import HeaderHamburger from "../components/nav/HeaderHamburger";
 
 import i18n from "../translations";
 
@@ -51,7 +50,7 @@ const defaultNavigationOptions = {
   animationEnabled: false,
   gestureEnabled: true,
   headerTitleAlign: "left",
-  headerTintColor: colors.color,
+  headerTintColor: "red",
   headerStyle: {
     marginTop: layout.headerTopSpacer,
 
@@ -92,49 +91,22 @@ function AuthStack() {
         options={{
           defaultNavigationOptions,
           title: i18n.t("navigation.auth.register"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
         }}
         name={Route.AUTH_REGISTER}
         component={AuthRegisterScreen}
       />
       <Stack.Screen
-        options={{
-          defaultNavigationOptions,
-          title: i18n.t("navigation.auth.forgot"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.AUTH_RESET}
         component={AuthResetPasswordScreen}
       />
       <Stack.Screen
-        options={{
-          defaultNavigationOptions,
-          title: i18n.t("navigation.tos"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.AUTH_TOS}
         component={TermsOfServiceScreen}
       /> 
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.AUTH_EXTERNAL_TOS}
         component={AuthTermsOfUseScreen}
       /> 
@@ -148,7 +120,6 @@ function AppStack() {
       initialRouteName={Route.DASHBOARD_MAIN} 
       headerMode="screen"
     >
-      
       <Stack.Screen
         options={{ 
           defaultNavigationOptions,     
@@ -168,195 +139,84 @@ function AppStack() {
         component={DashboardMainScreen}
       />
       <Stack.Screen
-        options={{
-          defaultNavigationOptions,
-          title: i18n.t("navigation.tos"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.DASHBOARD_TOS}
         component={TermsOfServiceScreen}
       />
 
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.profile.menu"),
-          headerTitle: "",
-          headerLeft: null,
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTransparent
-          // headerTransparent: true
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE}
         component={ProfileMenuScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.profile.menu"),
-          headerTitle: "",
-          headerLeft: null,
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTransparent
-          // headerTransparent: true
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_MENU}
         component={ProfileMenuScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.profile.edit"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTwoLines
-        } }
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_EDIT}
         component={ProfileEditScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.profile.password"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_PASSWORD}
         component={ProfilePasswordScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.profile.logout"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTwoLines
-         }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_LOGOUT}
         component={ProfileLogoutScreen}
       />
       <Stack.Screen
-        options={{
-          defaultNavigationOptions,
-          title: i18n.t("navigation.tos"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_TOS}
         component={TermsOfServiceScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.tos"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_LEGAL}
         component={ProfileLegalScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.tos"),
-          headerTitle: HeaderTitle,
-          headerLeft: () => (
-            <HeaderBackIcon
-              onPress={(navigation) => navigation.goBack()}
-            />
-          ),
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_NEWSLETTER_TOS}
         component={ProfileNewsletterTermsScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.PROFILE_NEWSLETTER_UPDATE}
         component={ProfileNewsletterUpdateScreen}
       />
       
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.map"),
-          headerLeft: HeaderEmpty,
-          headerRight: HeaderHamburger,
-          headerStyle: {
-            ...defaultStyles.headerTransparent,
-            backgroundColor: colors.background
-          }
-        }}
+        options={ defaultNavigationOptions }
         name={Route.MAP}
         component={MapScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.map"),
-          headerLeft: HeaderEmpty,
-          headerRight: HeaderHamburger,
-          headerStyle: {
-            ...defaultStyles.headerTransparent,
-            backgroundColor: colors.background
-          }
-        }}
+        options={ defaultNavigationOptions }
         name={Route.MAP_ALL}
         component={MapScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.MAP_ACCEPT_CARD_TERMS}
         component={MapAcceptCardTermsScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.MAP_CONFIRM_REFUSED_TERMS}
         component={MapConfirmRefusedTermsScreen}
       />
 
       <Stack.Screen
-        /* search */
-        options={{ 
-          defaultNavigationOptions
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PRIZES}
         component={PrizesAvailableScreen}
       />
       <Stack.Screen
-        /* search */
         options={ defaultNavigationOptions }
         name={Route.PRIZES_LIST}
         component={PrizesAvailableScreen}
@@ -367,100 +227,39 @@ function AppStack() {
         component={PrizesReceivedScreen}
       />
       <Stack.Screen
-        options={{
-          defaultNavigationOptions,
-          title: i18n.t("navigation.prizes.collect"),
-          headerTitle: HeaderTitle,
-          headerLeft: (
-            function Back() {
-              const { route } = this.props;
-              return(
-                <HeaderBackIcon
-                onPress={(navigation) =>
-                  navigation.navigate(route.params?.backTo() ?? Routes.PRIZES_LIST)
-                }
-              />
-              )
-            }
-          ),
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTwoLines
-        }}
+        options={ defaultNavigationOptions }
         name={Route.PRIZES_SELECTED}
         component={PrizesRewardCodeScreen}
       />
       
       <Stack.Screen
-        /* search */
         options={ defaultNavigationOptions }
         name={Route.WALLET}
         component={WalletCardsScreen}
       />
       <Stack.Screen
-        /* search */
         options={ defaultNavigationOptions }
         name={Route.WALLET_CARDS}
         component={WalletCardsScreen}
       />
       <Stack.Screen
-        /* search */
         options={ defaultNavigationOptions }
         name={Route.WALLET_PLACES}
         component={WalletPlacesScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.WALLET_CARD_REMOVAL_CONFIRMATION}
         component={WalletCardRemovalConfirmationScreen}
       />
 
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions, 
-          /* title: navigation.getParam("merchant"), */
-          headerLeft: () => (
-            function Back() {
-              const { route } = this.props;
-              return(
-                <HeaderBackIcon
-                onPress={(navigation) =>
-                  navigation.navigate(route.params?.backTo() ?? Routes.WALLET_PLACES)
-                }
-              />
-              )
-            }
-          ),
-          headerRight: HeaderHamburger,
-          headerStyle: {
-            ...defaultStyles.headerTransparent,
-            backgroundColor: colors.background
-          }
-        }}
+        options={ defaultNavigationOptions }
         name={Route.CARD}
         component={CardInfoScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions, 
-          /* title: navigation.getParam("merchant"), */
-          headerLeft: () => (
-            function Back() {
-              const { route } = this.props;
-              return(
-                <HeaderBackIcon
-                onPress={(navigation) =>
-                  navigation.navigate(route.params?.backTo() ?? Routes.WALLET_PLACES)
-                }
-              />
-              )
-            }
-          ),
-          headerRight: HeaderHamburger,
-          headerStyle: {
-            ...defaultStyles.headerTransparent,
-            backgroundColor: colors.background
-          }
-        }}
+        options={ defaultNavigationOptions }
         name={Route.CARD_INFO}
         component={CardInfoScreen}
       />
@@ -478,57 +277,33 @@ function AppStack() {
         component={() => null}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.INFO_ERROR}
         component={InfoErrorScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.INFO_SUCCESS}
         component={InfoSuccessScreen}
       />
       
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.scanner.scan"),
-         /* header: navigation.state.params
-            ? navigation.state.params.hideHeader
-              ? undefined
-              : null
-            : undefined, */
-          headerTitle: HeaderTitle,
-          headerLeft: HeaderBackIcon,
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTwoLines 
-        }}
+        options={ defaultNavigationOptions }
         name={Route.SCANNER}
         component={ScannerScanScreen}
       />
       <Stack.Screen
-        options={{ 
-          defaultNavigationOptions,
-          title: i18n.t("navigation.scanner.scan"),
-          /* header: navigation.state.params
-            ? navigation.state.params.hideHeader
-              ? undefined
-              : null
-            : undefined, */
-          headerTitle: HeaderTitle,
-          headerLeft: <HeaderBackIcon />,
-          headerRight: HeaderHamburger,
-          headerStyle: defaultStyles.headerTwoLines 
-        }}
+        options={ defaultNavigationOptions }
         name={Route.SCANNER_SCAN}
         component={ScannerScanScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.SCANNER_ACCEPT_STAMP_TERMS}
         component={ScannerAcceptStampTermsScreen}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={ defaultNavigationOptions }
         name={Route.SCANNER_CONFIRM_REFUSED_TERMS}
         component={ScannerConfirmRefusedTermsScreen}
       />
