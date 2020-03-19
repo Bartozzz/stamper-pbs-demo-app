@@ -50,8 +50,8 @@ class AuthLoadingScreen extends React.Component {
   }
 
   handleAuthorized = async response => {
-    const { navigation, route } = this.props;
-    const nextScreen = route.params?.redirect ?? Routes.APP;
+    const { navigation } = this.props;
+    const nextScreen = navigation.getParam("redirect", Routes.APP);
 
     try {
       if (response.payload.data.email) {
