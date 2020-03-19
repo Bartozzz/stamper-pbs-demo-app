@@ -6882,6 +6882,13 @@ expect@^25.1.0:
     jest-message-util "^25.1.0"
     jest-regex-util "^25.1.0"
 
+expo-app-auth@~8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/expo-app-auth/-/expo-app-auth-8.0.0.tgz#607813705bf7c56178cc427dfb2b67e0b180aa89"
+  integrity sha512-sb1gsmS4C2YB1ZnBKmQ2RBnjcW0oPfSJ6OTCyQkineY99qIQ37nqkOCReLEMj/fAhDDbGzIqrlLdCXUyzhr7zQ==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-app-loader-provider@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-app-loader-provider/-/expo-app-loader-provider-8.0.0.tgz#c18ef20a24153f5a0dbb297106ef0bcb5de57180"
@@ -6998,6 +7005,14 @@ expo-font@~8.0.0:
   integrity sha512-1hrlvxv8MpE1761v2mDjZRwhhM4hkfDr/MQlkWD2+g17N+UjU3WQct4kc+VuZW30pP+YowwrmG3O6JVoIOhWGA==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-google-app-auth@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/expo-google-app-auth/-/expo-google-app-auth-8.0.1.tgz#38f30f1285e55a94956a1898f7d75bd3119d3ed6"
+  integrity sha512-CCZ15ZR6ffRsoEFjakEbraqsJ4/Upl6uEl4jc7cly6tGeuOpx4Ow0y3bsTk2oyU9AgEImLImoG28kEGD7BNRXw==
+  dependencies:
+    expo-app-auth "~8.0.0"
+    expo-constants "~8.0.0"
 
 expo-image-picker@~8.0.1:
   version "8.0.2"
@@ -8074,9 +8089,9 @@ gzip-size@5.1.1, gzip-size@^5.0.0:
     duplexer "^0.1.1"
     pify "^4.0.1"
 
-"hammerjs@git+https://github.com/naver/hammer.js.git":
+"hammerjs@https://github.com/naver/hammer.js.git":
   version "2.0.17-snapshot"
-  resolved "git+https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
+  resolved "https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
