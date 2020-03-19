@@ -2,9 +2,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";
-
 import * as Routes from "../../navigation";
-import { useNavigation } from '@react-navigation/native';
 
 const Back = styled.TouchableOpacity`
   align-self: flex-start;
@@ -29,11 +27,10 @@ const Icon = styled(Ionicons).attrs(props => ({
 `;
 
 export function BackButton(props) {
-  const navigation = useNavigation();
   function onPress() {
     props.onPress
-      ? props.onPress(navigation)
-      : navigation.navigate(Routes.DASHBOARD);
+      ? props.onPress()
+      : props.navigation.navigate(Routes.DASHBOARD);
   }
 
   return (

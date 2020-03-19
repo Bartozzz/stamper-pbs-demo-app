@@ -3,7 +3,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";
 import * as Routes from "../../navigation";
-import { useNavigation } from '@react-navigation/native';
 
 const Hamburger = styled.TouchableOpacity`
   align-self: flex-start;
@@ -27,11 +26,9 @@ const Icon = styled(Ionicons).attrs(props => ({
   })};
 `;
 
-export function HeaderHamburger() {
-  const navigation = useNavigation();
-
+export function HeaderHamburger(props) {
   function onPress() {
-    navigation.navigate(Routes.DASHBOARD);
+    props.navigation.navigate(Routes.DASHBOARD);
   }
 
   return (
