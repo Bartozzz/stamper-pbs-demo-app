@@ -29,6 +29,8 @@ const AvailablePrizes = styled.Text`
 `;
 
 const ReceivedPrizes = styled.Text`
+  text-align: right;
+
   font-family: poppins-regular;
   font-size: 18px;
   color: ${colors.color};

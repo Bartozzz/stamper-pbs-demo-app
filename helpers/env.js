@@ -25,7 +25,7 @@ const ENV = {
   }
 };
 
-const getEnv = (env = Constants.manifest.releaseChannel) => {
+export const getEnv = (env = Constants.manifest.releaseChannel) => {
   if (__DEV__) {
     return "development";
   }
