@@ -2,9 +2,9 @@
   "expo": {
     "name": "Stamper",
     "slug": "stamper-app",
+    "sdkVersion": "36.0.0",
     "scheme": "stamper",
     "privacy": "unlisted",
-    "icon": "./assets/images/icon.png",
     "orientation": "portrait",
     "description": "Stamper to wirtualny portfel kart lojalnościowych w Twoim telefonie - zawsze gotowy by zdobyć nowe pieczątki. Aplikacja zrzesza bardziej lojalnych klientów lubiących korzystać z kart lojalnościowych. Uwolnij się od noszenia wielu papierowych kart i tracenia możliwości zbierania pieczątek podczas zamawiania jedzenia do domu. Od teraz już nigdy nie zgubisz kart lojalnościowych!",
     "primaryColor": "#0046F4",
@@ -12,6 +12,8 @@
     "platforms": ["ios", "android"],
     "facebookAppId": "356151625034848",
     "facebookDisplayName": "Stamper",
+    "assetBundlePatterns": ["**/*"],
+    "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -21,7 +23,17 @@
       "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "expo-postpublish-rollbar",
+          "config": {
+            "serverItemAccessToken": "64cee778687d4cdeb209a00c8b66eb62",
+            "minifiedUrlTemplate": "http://reactnativehost/{{url}}"
+          }
+        }
+      ]
+    },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.getstamper.app",
@@ -51,7 +63,6 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ]
-    },
-    "sdkVersion": "36.0.0"
+    }
   }
 }

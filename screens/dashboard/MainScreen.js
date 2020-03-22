@@ -28,6 +28,10 @@ const MENU_WALLET = "MENU_WALLET";
 const MENU_SCANNER = "MENU_SCANNER";
 
 class DashboardMainScreen extends React.Component {
+  static navigationOptions = {
+    title: i18n.t("navigation.dashboard.main"),
+    header: null
+  };
 
   state = {
     focused: null
