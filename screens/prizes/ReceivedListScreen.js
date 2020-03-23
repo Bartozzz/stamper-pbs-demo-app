@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import i18n from "../../translations";
+import colors from "../../constants/Colors";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
@@ -50,6 +51,7 @@ class PrizesListScreen extends React.Component {
 
   state = {
     isCheckingIfCacheValid: false,
+    selected: null,
     search: null
   };
 
@@ -74,6 +76,12 @@ class PrizesListScreen extends React.Component {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
+  selectPrize = prize => () => {
+    this.setState({
+      selected: prize
+    });
+  };
+
   handleSearch = searchTerm => {
     this.setState({
       search: searchTerm
@@ -81,7 +89,7 @@ class PrizesListScreen extends React.Component {
   };
 
   renderList() {
-    const { search } = this.state;
+    const { selected, search } = this.state;
     const { prizes } = this.props;
     let data = prizes.filter(prize => prize.collected);
 
@@ -97,38 +105,93 @@ class PrizesListScreen extends React.Component {
     return (
       <FlatList
         data={data}
+        extraData={selected}
         keyExtractor={item => {
           return item.id;
         }}
         renderItem={({ item }) => {
+          const isSelected = selected && selected.id === item.id;
+
+          console.log(item);
+
           return (
-            <TouchableOpacity key={item.id} style={[styles.item]}>
-              <Image source={OkIconImage} style={styles.itemOkIcon} />
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.item, isSelected && styles.itemSelected]}
+              onPress={this.selectPrize(item)}
+            >
+              {isSelected ? (
+                <View style={defaultStyles.row}>
+                  <View style={[styles.imageContainer]}>
+                    <Image
+                      source={{
+                        uri: item.collectOnlineLogoUrl || item.iconUrl
+                      }}
+                      style={styles.image}
+                    />
+                  </View>
 
-              <View style={defaultStyles.row}>
-                <View style={[styles.imageContainer]}>
-                  <Image source={{ uri: item.iconUrl }} style={styles.image} />
-                </View>
+                  <View
+                    style={[defaultStyles.row, { flex: 1, marginLeft: 15 }]}
+                  >
+                    <View>
+                      <Text style={[styles.textCodeTitle]}>Kod rabatowy:</Text>
 
-                <View style={[defaultStyles.row, { flex: 1, marginLeft: 15 }]}>
-                  <View>
-                    <Text style={[styles.textMerchant]}>
-                      {item.merchantName}
-                    </Text>
+                      <Text style={[styles.textCodeNumber]}>
+                        {item.collectOnlineCode}
+                      </Text>
 
-                    <Text style={[styles.textTitle]}>{item.title}</Text>
-
-                    <Text style={[styles.textExpiry]}>
-                      {i18n.t("prizes.validTill", {
-                        date: ExpirationDate({
-                          isValid: item.validTo,
-                          expirationDate: item.validToDate
-                        })
-                      })}
-                    </Text>
+                      <Text style={[styles.textGenerationDate]}>
+                        {i18n.t("prizes.validTill", {
+                          date: ExpirationDate({
+                            isValid: true,
+                            expirationDate: item.collectedDate
+                          })
+                        })}
+                      </Text>
+                    </View>
                   </View>
                 </View>
-              </View>
+              ) : (
+                <>
+                  <Image source={OkIconImage} style={styles.itemOkIcon} />
+
+                  <View style={defaultStyles.row}>
+                    <View
+                      style={[
+                        styles.imageContainer,
+                        styles.imageContainerBorder
+                      ]}
+                    >
+                      <Image
+                        source={{ uri: item.iconUrl }}
+                        style={styles.image}
+                      />
+                    </View>
+
+                    <View
+                      style={[defaultStyles.row, { flex: 1, marginLeft: 15 }]}
+                    >
+                      <View>
+                        <Text style={[styles.textMerchant]}>
+                          {item.merchantName}
+                        </Text>
+
+                        <Text style={[styles.textTitle]}>{item.title}</Text>
+
+                        <Text style={[styles.textExpiry]}>
+                          {i18n.t("prizes.validTill", {
+                            date: ExpirationDate({
+                              isValid: item.validTo,
+                              expirationDate: item.validToDate
+                            })
+                          })}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </>
+              )}
             </TouchableOpacity>
           );
         }}
@@ -192,8 +255,9 @@ const styles = StyleSheet.create({
     height: 70,
 
     alignItems: "center",
-    justifyContent: "center",
-
+    justifyContent: "center"
+  },
+  imageContainerBorder: {
     backgroundColor: "#001432",
     borderColor: "#709BE7",
     borderWidth: 2,
@@ -201,6 +265,8 @@ const styles = StyleSheet.create({
     borderRadius: 35
   },
   image: {
+    resizeMode: "contain",
+
     width: 70,
     height: 70
   },
@@ -220,6 +286,10 @@ const styles = StyleSheet.create({
     borderColor: "#203451",
     borderRadius: 10,
     backgroundColor: "#203451"
+  },
+  itemSelected: {
+    borderColor: "#0046F5",
+    backgroundColor: "#ffffff"
   },
   itemOkIcon: {
     position: "absolute",
@@ -250,6 +320,24 @@ const styles = StyleSheet.create({
 
     fontSize: 9,
     color: "#74798B"
+  },
+
+  textCodeTitle: {
+    fontSize: 16,
+    fontFamily: layout.fontText,
+    color: colors.primary
+  },
+
+  textCodeNumber: {
+    marginTop: 4,
+    fontSize: 16,
+    fontFamily: layout.fontText
+  },
+
+  textGenerationDate: {
+    marginTop: 5,
+    fontSize: 9,
+    fontFamily: layout.fontText
   }
 });
 
@@ -264,7 +352,4 @@ const mapDispatchToProps = {
   getPrizes
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PrizesListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(PrizesListScreen);
