@@ -12,6 +12,7 @@ import {
   Linking
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
+import normalize from 'react-native-normalize';
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -76,7 +77,7 @@ class CardInfoScreen extends React.Component {
               <View style={styles.slideInnerContainer}>
                 <CardBackground src={item.cardUrl}>
                   <View style={styles.slideInnerSection}>
-                    <View style={{ height: 130, padding: 15 }}>
+                    <View style={{ height: normalize(130, 'height'), padding: 15 }}>
                       {!item.cardOnly && (
                         <Image
                           source={{ uri: item.logoUrl }}
@@ -240,9 +241,9 @@ const styles = StyleSheet.create({
   },
   slideInnerContainer: {
     // width: Dimensions.get("window").width * 0.75,
-    width: 280,
-    height: 180,
-
+    width: normalize(280, 'width'),
+    height: normalize(180, 'height'),
+    
     // backgroundColor: colors.color,
     borderRadius: 10
   },
@@ -269,7 +270,7 @@ const styles = StyleSheet.create({
   },
   slideInnerTextB: {
     fontSize: 10,
-    color: colors.info
+    color: colors.info,
   },
 
   infoContainer: {
