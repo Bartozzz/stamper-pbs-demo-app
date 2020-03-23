@@ -9,6 +9,8 @@ import {
   View,
   Dimensions
 } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import Background from "../../components/Background";
 
 import Button from "../../components/forms/Button";
@@ -112,7 +114,7 @@ class AuthRegisterScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage} disableScroll>
-        <ScrollView style={styles.regContainer}>
+        <KeyboardAwareScrollView style={styles.regContainer} extraScrollHeight={60}>
           <InputWithIcon
             iconName="ios-contact"
             iconSize={20}
@@ -151,7 +153,7 @@ class AuthRegisterScreen extends React.Component {
             onPress={this.registerWithCredentials}
             processing={this.state.processing}
           />
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </Background>
     );
   }

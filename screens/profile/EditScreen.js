@@ -13,8 +13,8 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import { AntDesign } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import KeyboardAware from "../../components/helpers/KeyboardAware";
 import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
@@ -23,7 +23,6 @@ import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import InputWithLabel from "../../components/forms/InputWithLabel";
 import Checkbox, { CheckBoxLabel } from "../../components/forms/Checkbox";
-
 
 import {
   EMAIL,
@@ -183,30 +182,6 @@ class ProfileEditScreen extends React.Component {
     this.setState({ error, processing: false });
   };
 
-  handleKeyboardShow = keyboardHeight => {
-    Animated.timing(this.state.heightAnim, {
-      toValue: keyboardHeight,
-      duration: 250
-    }).start();
-
-    Animated.timing(this.state.topAnim, {
-      toValue: -UPLOAD_HEIGHT,
-      duration: 250
-    }).start();
-  };
-
-  handleKeyboardHide = () => {
-    Animated.timing(this.state.heightAnim, {
-      toValue: 0,
-      duration: 250
-    }).start();
-
-    Animated.timing(this.state.topAnim, {
-      toValue: 0,
-      duration: 250
-    }).start();
-  };
-
   render() {
     const {
       firstName,
@@ -219,12 +194,7 @@ class ProfileEditScreen extends React.Component {
     } = this.state;
 
     return (
-      <KeyboardAware
-        onKeyboardShow={this.handleKeyboardShow}
-        onKeyboardHide={this.handleKeyboardHide}
-      >
-        {() => (
-          <>
+      <KeyboardAwareScrollView extraScrollHeight={60}>
             <TouchableOpacity onPress={this.uploadImage}>
               <ImageBackground
                 resizeMode="cover"
@@ -311,10 +281,8 @@ class ProfileEditScreen extends React.Component {
                 <Animated.View style={[{ height: this.state.heightAnim }]} />
               </Background>
             </Animated.View>
-          </>
-        )}
-      </KeyboardAware>
-    );
+      </KeyboardAwareScrollView>    
+      );
   }
 }
 
@@ -367,7 +335,6 @@ const mapDispatchToProps = {
   setEmail,
   setPhoto
 };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
