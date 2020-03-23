@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 
@@ -91,10 +91,13 @@ class DashboardMainScreen extends React.Component {
     const marketStyles = this.isFocused(MENU_MARKET) ? styles.boxFocus : null;
     const scannerStyles = this.isFocused(MENU_SCANNER) ? styles.boxFocus : null;
 
+    const { height } = Dimensions.get('window');
+    const smallPhone = height<=640 ? true : false;
+
     return (
       <Background source={BackgroundImage}>
         <View style={[defaultStyles.center, styles.menu]}>
-          <StamperLogo style={{ marginBottom: 30 }} />
+          <StamperLogo style={{ marginBottom: smallPhone ? 0 : 30 }} />
 
           <View style={[defaultStyles.row, styles.row]}>
             <TouchableOpacity
