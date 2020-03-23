@@ -112,8 +112,6 @@ class PrizesListScreen extends React.Component {
         renderItem={({ item }) => {
           const isSelected = selected && selected.id === item.id;
 
-          console.log(item);
-
           return (
             <TouchableOpacity
               key={item.id}
@@ -135,14 +133,16 @@ class PrizesListScreen extends React.Component {
                     style={[defaultStyles.row, { flex: 1, marginLeft: 15 }]}
                   >
                     <View>
-                      <Text style={[styles.textCodeTitle]}>Kod rabatowy:</Text>
+                      <Text style={[styles.textCodeTitle]}>
+                        {i18n.t("prizes.code")}:
+                      </Text>
 
                       <Text style={[styles.textCodeNumber]}>
                         {item.collectOnlineCode}
                       </Text>
 
                       <Text style={[styles.textGenerationDate]}>
-                        {i18n.t("prizes.validTill", {
+                        {i18n.t("prizes.generatedOn", {
                           date: ExpirationDate({
                             isValid: true,
                             expirationDate: item.collectedDate

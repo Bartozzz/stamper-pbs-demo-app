@@ -161,7 +161,7 @@ class RewardCodeScreen extends React.Component {
         {this.defaultDiscountProvider && (
           <View style={styles.buttonContainer}>
             <Button
-              title={"Odbierz na stronie sklepu"}
+              title={i18n.t("prizes.receiveInApplication")}
               onPress={() => {
                 this.selectDiscountProvider(this.defaultDiscountProvider);
               }}
@@ -171,11 +171,11 @@ class RewardCodeScreen extends React.Component {
 
         {this.defaultDiscountProvider ? (
           <Text style={styles.pickText}>
-            lub wybierz aplikację by wygenerować kod rabatowy:
+            {i18n.t("prizes.selectTextSecondary")}
           </Text>
         ) : (
           <Text style={styles.pickText}>
-            Wybierz aplikację by wygenerować kod rabatowy:
+            {i18n.t("prizes.selectTextPrimary")}
           </Text>
         )}
 
@@ -203,8 +203,6 @@ class RewardCodeScreen extends React.Component {
                     { opacity: provider.active ? 1 : 0.25 }
                   ]}
                 />
-
-                <Text>{provider.active ? "ytur" : "false"}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -227,14 +225,17 @@ class RewardCodeScreen extends React.Component {
         </View>
 
         <Text style={[styles.text, styles.heading]}>
-          Czy jesteś pewien, że chcesz wykorzystać kod oraz odebrać nagrodę?
+          {i18n.t("prizes.confirm")}
         </Text>
 
         <Text style={styles.text}>{this.card.merchantName}</Text>
         <Text style={styles.text}>{this.card.title}</Text>
 
         <View style={styles.buttonContainer}>
-          <Button title="Generuj kod" onPress={this.generateCode} />
+          <Button
+            title={i18n.t("prizes.generate")}
+            onPress={this.generateCode}
+          />
         </View>
       </View>
     );
