@@ -9,6 +9,7 @@ import {
   Foundation,
   Entypo
 } from "@expo/vector-icons";
+import normalize from "react-native-normalize";
 
 import colors from "../constants/Colors";
 import i18n from "../translations";
@@ -26,7 +27,7 @@ const CardWrapper = styled.View`
 
 const CardSection = styled.View`
   display: ${({ show }) => (show ? "flex" : "none")};
-  min-height: 250px;
+  min-height: ${normalize(250)}px;
 
   padding-top: ${({ alternateColor }) => (alternateColor ? slidePadding : 0)}px;
   padding-bottom: ${({ alternateColor }) =>
