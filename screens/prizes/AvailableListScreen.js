@@ -363,7 +363,4 @@ const mapDispatchToProps = {
   getPrizes
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PrizesListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(PrizesListScreen);
