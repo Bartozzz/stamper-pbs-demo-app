@@ -113,10 +113,20 @@
   },
 
   "prizes": {
+    "code": "Kod rabatowy",
+    "generate": "Generuj kod",
+
+    "confirm": "Czy jesteś pewien, że chcesz wykorzystać kod oraz odebrać nagrodę?",
+
     "receiveOnline": "Odbierz nagrodę online",
     "receiveOnPlace": "Odbierz nagrodę",
+    "receiveInApplication": "Odbierz na stronie sklepu",
     "quickCollect": "Szybkie odbieranie w sklepie",
 
+    "selectTextPrimary": "Wybierz aplikację by wygenerować kod rabatowy:",
+    "selectTextSecondary": "lub wybierz aplikację by wygenerować kod rabatowy:",
+
+    "generatedOn": "wygenerowany {{date}}",
     "validTill": "ważna do {{date}}",
     "writeCode": "Wpisz kod nagrody:",
 

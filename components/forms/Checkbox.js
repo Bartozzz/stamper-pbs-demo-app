@@ -1,8 +1,46 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import styled from "styled-components/native";
 
 import colors from "../../constants/Colors";
+
+const Container = styled.View`
+  align-items: center;
+
+  margin-horizontal: 0px;
+  margin-vertical: 12px;
+
+  flex-direction: row;
+`;
+const CheckboxComponent = styled.TouchableOpacity`
+  margin-right: 9px;
+  /* Visual centering: */
+  padding-top: 1px;
+  padding-left: 1px;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: ${colors.inputBorder};
+
+  ${({ checked }) => checked && `
+    border-color: ${colors.primary};
+    background-color: ${colors.primary};
+  `};
+`;
+
+export const CheckBoxLabel = styled.Text`
+  margin-right: 2px;
+
+  font-size: 11.5px;
+  color: ${colors.link};
+`;
 
 export class Checkbox extends React.PureComponent {
   state = {
@@ -27,58 +65,18 @@ export class Checkbox extends React.PureComponent {
     const { label } = this.props;
 
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={[styles.checkbox, checked && styles.checkboxChecked]}
+      <Container>
+        <CheckboxComponent
+          checked={checked}
           onPress={this.toggle}
         >
           {checked && <Ionicons name="md-checkmark" size={14} color="white" />}
-        </TouchableOpacity>
-
+        </CheckboxComponent>
         {label}
-      </View>
+      </Container>
     );
   }
 }
 
-export const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-
-    marginHorizontal: 0,
-    marginVertical: 12,
-
-    flexDirection: "row"
-  },
-
-  checkbox: {
-    marginRight: 9,
-    // Visual centering:
-    paddingTop: 1,
-    paddingLeft: 1,
-
-    alignItems: "center",
-    justifyContent: "center",
-
-    width: 20,
-    height: 20,
-    borderRadius: 20,
-
-    borderWidth: 1.5,
-    borderStyle: "solid",
-    borderColor: colors.inputBorder
-  },
-  checkboxChecked: {
-    borderColor: colors.primary,
-    backgroundColor: colors.primary
-  },
-
-  checkboxLabel: {
-    marginRight: 2,
-
-    fontSize: 11.5,
-    color: colors.link
-  }
-});
 
 export default Checkbox;

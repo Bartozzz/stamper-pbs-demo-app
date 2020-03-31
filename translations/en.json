@@ -113,10 +113,20 @@
   },
 
   "prizes": {
+    "code": "Discount code",
+    "generate": "Generate the discount code",
+
+    "confirm": "Are you sure that you want to use this code and get the reward?",
+
     "receiveOnline": "Collect reward on-line",
     "receiveOnPlace": "Collect reward",
+    "receiveInApplication": "Collect on the shop's website",
     "quickCollect": "Direct link to your reward",
 
+    "selectTextPrimary": "Select an application to generate the discount code:",
+    "selectTextSecondary": "or select an application to generate the discount code:",
+
+    "generatedOn": "generated on {{date}}",
     "validTill": "valid to {{date}}",
     "writeCode": "Your code:",
 

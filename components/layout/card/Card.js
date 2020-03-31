@@ -1,80 +1,82 @@
 import React from "react";
-import { Text, View, Image, StyleSheet } from "react-native";
 import colors from "../../../constants/Colors";
+import styled from "styled-components/native";
+
+const CardPadder = styled.View`
+  width: 50%;
+  padding-vertical: 8px;
+  padding-horizontal: 8px;
+`;
+
+const CardComponent = styled.View`
+  background-color: ${colors.color};
+  border-radius: 8px;
+`;
+
+const CardActionButton = styled.View`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+`;
+
+const CardSecondaryActionButton = styled.View`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+`;
+
+const CardImage = styled.Image`
+  align-self: center;
+
+  margin-top: 35px;
+  margin-bottom: 20px;
+
+  /* Make sure the image fits: */
+  resize-mode: contain;
+
+  width: 60px;
+  height: 60px;
+`;
+
+const CardTitle = styled.Text`
+  color: #001432;
+  font-size: 14px;
+  font-family: poppins-bold;
+  text-align: center;
+`;
+
+const CardSubtitle = styled.Text`
+  color: #709be7;
+  font-size: 9px;
+  font-family: nunito-regular;
+  text-align: center;
+`;
 
 export function Card({ image, title, subtitle, ...props }) {
   return (
-    <View style={styles.cardPadder}>
-      <View style={styles.card}>
-        <View style={styles.cardActionButton}>
+    <CardPadder>
+      <CardComponent>
+        <CardActionButton>
           {typeof props.renderPrimaryAction === "function"
             ? props.renderPrimaryAction()
             : null}
-        </View>
+        </CardActionButton>
 
-        <View style={styles.cardSecondaryActionButton}>
+        <CardSecondaryActionButton>
           {typeof props.renderSecondaryAction === "function"
             ? props.renderSecondaryAction()
             : null}
-        </View>
+        </CardSecondaryActionButton>
 
-        <Image style={styles.cardImage} source={image} />
+        <CardImage source={image} />
 
-        <Text style={styles.cardTitle}>{title}</Text>
-        <Text style={styles.cardSubtitle}>{subtitle}</Text>
+        <CardTitle>{title.toUpperCase()}</CardTitle>
+        <CardSubtitle>{subtitle.toUpperCase()}</CardSubtitle>
 
-        {typeof props.renderButton === "function" ? props.renderButton() : null}
-      </View>
-    </View>
+        {typeof props.renderButton === "function" && props.renderButton()}
+      </CardComponent>
+    </CardPadder>
   );
 }
-
-const styles = StyleSheet.create({
-  cardPadder: {
-    width: "50%",
-    paddingVertical: 8,
-    paddingHorizontal: 8
-  },
-  card: {
-    backgroundColor: colors.color,
-    borderRadius: 8
-  },
-  cardActionButton: {
-    position: "absolute",
-    top: 0,
-    left: 0
-  },
-  cardSecondaryActionButton: {
-    position: "absolute",
-    top: 0,
-    right: 0
-  },
-  cardImage: {
-    alignSelf: "center",
-
-    marginTop: 35,
-    marginBottom: 20,
-
-    // Make sure the image fits:
-    resizeMode: "contain",
-
-    width: 60,
-    height: 60
-  },
-  cardTitle: {
-    color: "#001432",
-    fontSize: 14,
-    fontFamily: "poppins-bold",
-    textTransform: "uppercase",
-    textAlign: "center"
-  },
-  cardSubtitle: {
-    color: "#709BE7",
-    fontSize: 9,
-    fontFamily: "nunito-regular",
-    textTransform: "uppercase",
-    textAlign: "center"
-  }
-});
 
 export default Card;

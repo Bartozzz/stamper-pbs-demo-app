@@ -103,6 +103,10 @@ const V1 = {
 
     Get() {
       return `${Server.V1}/Rewards/Get`;
+    },
+
+    GetDiscountCode() {
+      return `${Server.V1}/Rewards/GetDiscountCode`;
     }
   },
 

@@ -5,6 +5,7 @@ import * as Icon from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import { AsyncStorage, Platform, StatusBar } from "react-native";
+import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
 import configureStore from "./store";
 import { EMAIL, setEmail } from "./store/reducers/profile";
@@ -24,8 +25,13 @@ const store = configureStore();
 
 export default class App extends React.Component {
   state = {
+    rollbar: useRollbar(),
     isLoadingComplete: false
   };
+
+  componentDidCatch(error) {
+    this.state.rollbar.critical(error);
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {

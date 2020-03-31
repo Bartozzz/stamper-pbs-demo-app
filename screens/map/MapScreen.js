@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components/native";
 import { AsyncStorage, Dimensions, View, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
+import { _ } from "lodash";
 
 import * as R from "ramda";
 
@@ -118,6 +119,8 @@ const MapScreen = ({ navigation }) => {
       });
   }, []);
 
+  const closeCardsOnDrag = useRef(_.debounce(() => setShowCards(false), 250)).current;
+
   // Fetch data for user location from the API:
   React.useEffect(() => {
     if (currentLocation && reverseLocation) {
@@ -191,6 +194,8 @@ const MapScreen = ({ navigation }) => {
           setRegion(region);
           setCluster(createCluster(cards, region));
         }}
+        onRegionChange={closeCardsOnDrag}
+        onPress={closeCardsOnDrag}
       >
         {cluster.markers.map(marker => (
           <MapAreaMarker

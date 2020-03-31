@@ -1,25 +1,24 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View } from "react-native";
 import MapView from "react-native-maps";
+import styled from "styled-components/native";
 
 import LocationIndicator from "../assets/images/icons/location_indicator.png";
+
+const Indicator = styled.Image`
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+`;
 
 const MapCurrentLocationMarker = ({ coordinate }) => {
   return (
     <MapView.Marker coordinate={coordinate} anchor={{ x: 0.5, y: 0.5 }}>
       <View>
-        <Image style={styles.indicator} source={LocationIndicator} />
+        <Indicator source={LocationIndicator} />
       </View>
     </MapView.Marker>
   );
 };
-
-const styles = StyleSheet.create({
-  indicator: {
-    zIndex: 1,
-    width: 120,
-    height: 120
-  }
-});
 
 export default MapCurrentLocationMarker;

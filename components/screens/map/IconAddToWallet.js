@@ -1,23 +1,24 @@
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import styled from "styled-components/native";
 import PlusImage from "../../../assets/images/plus.png";
+
+const Container = styled.TouchableOpacity`
+  margin-right: 16px;
+`;
+
+const Icon = styled.Image.attrs(props => ({
+  source: PlusImage
+}))`
+  width: 48px;
+  height: 48px;
+`;
 
 export function IconAddToWallet({ style, onPress }) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image style={[styles.icon, style]} source={PlusImage} />
-    </TouchableOpacity>
+    <Container onPress={onPress}>
+      <Icon style={[style]} />
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginRight: 16
-  },
-  icon: {
-    width: 48,
-    height: 48
-  }
-});
 
 export default IconAddToWallet;

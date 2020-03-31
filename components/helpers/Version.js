@@ -1,26 +1,24 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
 import Constants from 'expo-constants';
 import { version } from "../../package.json";
+import styled from "styled-components/native";
 
-export function Version({ style, ...props }) {
+const VersionComponent = styled.Text`
+  color: white;
+  text-align: center;
+
+  font-size: 10px;
+  font-weight: bold;
+
+  margin-vertical: 18px;
+`;
+
+export function Version(props) {
   return (
-    <Text {...props} style={[styles.version, style]}>
+    <VersionComponent {...props}>
       V. {Constants.manifest.version}–{version}
-    </Text>
+    </VersionComponent>
   );
 }
-
-const styles = StyleSheet.create({
-  version: {
-    color: "white",
-    textAlign: "center",
-
-    fontSize: 10,
-    fontWeight: "bold",
-
-    marginVertical: 18
-  }
-});
 
 export default Version;
