@@ -54,8 +54,8 @@
     "login": "Log in",
     "register": "Register",
 
-    "loginOr": "or",
-    "loginWith": "Log in with",
+    "loginwithfacebook": "Log in with Facebook",
+    "loginwithgoogle": "Log in with Google",
 
     "resetPassword": "Reset password",
 
