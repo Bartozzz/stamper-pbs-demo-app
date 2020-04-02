@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import {
   StyleSheet,
   AsyncStorage,
-  View,
   Dimensions,
+  SafeAreaView
 } from "react-native";
 import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
 import Carousel, { Pagination } from "react-native-snap-carousel";
@@ -44,6 +44,8 @@ class AuthWelcomeScreen extends React.Component {
       {
         background: WelcomePicture1,
         image: WelcomePicture1Sygnet,
+        width: 70,
+        flex: 0.5,
         title: i18n.t("welcome.title1"),
         subtitle: i18n.t("welcome.subtitle1")
       },
@@ -173,22 +175,26 @@ class AuthWelcomeScreen extends React.Component {
   render() {
     const { active } = this.state;
     return (
-      <View style={defaultStyles.container}>
+      <SafeAreaView style={defaultStyles.container}>
         <Background source={BackgroundImage} disableScroll>
             <Carousel
                 ref={carousel => (this.carouselRef = carousel)}
                 data={this.state.entries}
                 renderItem={({item}) => (
                   <WelcomeItem 
-                  image={item.image} 
-                  title={item.title} 
-                  subtitle={item.subtitle} 
+                    background={item.background}
+                    image={item.image} 
+                    width={item.width}
+                    flex={item.flex}
+                    title={item.title} 
+                    subtitle={item.subtitle} 
                   />
                 )}
                 inactiveSlideOpacity={0}
                 sliderWidth={Dimensions.get("window").width}
                 itemWidth={Dimensions.get("window").width}
                 onSnapToItem={index => this.setState({ active: index })}
+                loop={true}
               />
               <Pagination
                 dotsLength={4}
@@ -208,7 +214,7 @@ class AuthWelcomeScreen extends React.Component {
                 register={() => {this.props.navigation.navigate(Routes.AUTH_REGISTER)}}
               />
         </Background>
-      </View>
+      </SafeAreaView>
     );
   }
 }
