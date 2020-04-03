@@ -116,7 +116,7 @@ class PrizesListScreen extends React.Component {
             <TouchableOpacity
               key={item.id}
               style={[styles.item, isSelected && styles.itemSelected]}
-              onPress={this.selectPrize(item)}
+              onPress={isSelected ? this.selectPrize() : this.selectPrize(item)}
             >
               {isSelected ? (
                 <View style={defaultStyles.row}>
