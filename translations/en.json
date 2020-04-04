@@ -44,6 +44,20 @@
     "map": "My Area"
   },
 
+  "welcome": {
+    "title1": "Dołącz do bardziej lojalnych!",
+    "subtitle1": "Poznaj aplikację Stamper",
+
+    "title2": "Zawsze pod ręką!",
+    "subtitle2": "Stamper to aplikacja umo\u017Cliwiaj\u0105ce korzystanie \u000Bz r\u00F3\u017Cnych program\u00F3w lojalno\u015Bciowych \u000Bw jednym miejscu zawsze pod r\u0119k\u0105 - bez stosu zapominanych papierowych kart.",
+
+    "title3": "Namierzaj promocje!",
+    "subtitle3": "Stamper posiada panel „okolica” dzięki czemu nie przegapisz programów lojalnościowych, które czają się w pobliżu. Wystarczy wejść w widok mapy, zobaczyć aktualne promocje i korzystać!",
+
+    "title4": "Nie trać bonusów!",
+    "subtitle4": "Gdy wype\u0142nisz kart\u0119 okre\u015Blon\u0105 ilo\u015Bci\u0105 piecz\u0105tek \u000Bautomatycznie dostaniesz powiadomienie, \u000B\u017Ce nagroda czeka do odebrania! \u000BKoniec z niewykorzystanymi bonusami!"
+  },
+
   "auth": {
     "email": "Email",
     "password": "Password",
