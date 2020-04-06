@@ -114,7 +114,7 @@ class AuthRegisterScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage} disableScroll>
-        <KeyboardAwareScrollView style={styles.regContainer} extraScrollHeight={60}>
+        <KeyboardAwareScrollView enableOnAndroid={true} style={styles.regContainer} extraScrollHeight={60}>
           <InputWithIcon
             iconName="ios-contact"
             iconSize={20}

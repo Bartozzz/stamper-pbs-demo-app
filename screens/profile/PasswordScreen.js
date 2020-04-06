@@ -93,7 +93,7 @@ class ProfilePasswordScreen extends React.Component {
 
     return (
           <Background source={BackgroundImage}>
-          <KeyboardAwareScrollView scrollEnabled={false} contentContainerStyle={{flex: 1}} extraScrollHeight={60}>
+          <KeyboardAwareScrollView enableOnAndroid={true} scrollEnabled={false} contentContainerStyle={{flex: 1}} extraScrollHeight={60}>
             <View style={styles.form}>
               {error.other ? <Error message={error.other} /> : null}
 

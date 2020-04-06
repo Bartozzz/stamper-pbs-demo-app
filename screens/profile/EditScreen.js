@@ -194,7 +194,7 @@ class ProfileEditScreen extends React.Component {
     } = this.state;
 
     return (
-      <KeyboardAwareScrollView extraScrollHeight={60}>
+      <KeyboardAwareScrollView enableOnAndroid={true} extraScrollHeight={100}>
             <TouchableOpacity onPress={this.uploadImage}>
               <ImageBackground
                 resizeMode="cover"
