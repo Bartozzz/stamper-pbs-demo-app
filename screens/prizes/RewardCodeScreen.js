@@ -181,31 +181,22 @@ class RewardCodeScreen extends React.Component {
 
         <View style={styles.providers}>
           {this.discountProviders.map(provider => (
-            <TouchableOpacity
-              key={provider.id}
-              onPress={() =>
-                provider.active
-                  ? this.selectDiscountProvider(provider)
-                  : () => null
-              }
-            >
-              <View style={styles.provider}>
-                <Image
-                  source={{ uri: provider.logoUrl }}
-                  style={[styles.providerImage, styles.providerImageOverlay]}
-                />
-
-                <Image
-                  source={{ uri: provider.logoUrl }}
-                  style={[
-                    styles.providerImage,
-                    styles.providerImageMain,
-                    { opacity: provider.active ? 1 : 0.25 }
-                  ]}
-                />
-              </View>
-            </TouchableOpacity>
-          ))}
+              <TouchableOpacity
+                key={provider.id}
+                onPress={() =>
+                  provider.active
+                    ? this.selectDiscountProvider(provider)
+                    : () => null
+                }
+              >
+                <View style={styles.provider}>
+                  <Image
+                    source={(provider.active ? {uri: provider.logoUrl} : {uri: provider.logoUrlInactive})}
+                    style={[styles.providerImage]}
+                  />
+                </View>
+              </TouchableOpacity>
+            ))}
         </View>
       </>
     );
