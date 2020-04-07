@@ -42,7 +42,7 @@ class MapConfirmRefusedTermsScreen extends React.Component {
             {i18n.t("map.terms.refuse.heading")}
           </BoxText.Heading>
 
-          <BoxText.Subheading>
+          <BoxText.Subheading style={{width: '80%'}}>
             {i18n.t("map.terms.refuse.subheading")}
           </BoxText.Subheading>
         </Box>
