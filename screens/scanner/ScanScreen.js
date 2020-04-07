@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as Permissions from "expo-permissions";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import { Camera } from "expo-camera";
 import { AsyncStorage, Text, View, Image, StyleSheet } from "react-native";
 
 import * as Routes from "../../navigation";
@@ -169,7 +169,7 @@ class ScannerScanScreen extends React.Component {
 
     if (focusedScreen) {
       return (
-        <BarCodeScanner
+        <Camera
           onBarCodeScanned={this.onBarCodeRead}
           style={[StyleSheet.absoluteFill, styles.scannerCamera]}
         >
@@ -177,7 +177,7 @@ class ScannerScanScreen extends React.Component {
             style={styles.scannerImage}
             source={require("../../assets/images/qr.png")}
           />
-        </BarCodeScanner>
+        </Camera>
       );
     }
 
