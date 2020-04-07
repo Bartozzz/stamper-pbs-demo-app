@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import styled from "styled-components/native";
+import normalize from "react-native-normalize";
 
 import i18n from "../translations";
 import colors from "../constants/Colors";
@@ -16,7 +17,7 @@ const Button = styled.View`
   left: 0px;
   right: 0px;
 
-  height: 70px;
+  height: ${normalize(70)}px;
 
   background-color: ${colors.primary};
 `;
