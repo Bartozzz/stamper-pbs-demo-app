@@ -6,11 +6,9 @@ import {
   Text,
   Image,
   Dimensions,
-  TouchableOpacity,
-  ScrollView
+  TouchableOpacity
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import normalize from "react-native-normalize";
 
 import { getDiscountCode } from "../../store/reducers/prizes";
 
@@ -153,7 +151,7 @@ class RewardCodeScreen extends React.Component {
 
   renderAllDiscountProviders() {
     return (
-      <View style={{justifyContent: 'center', flex: 1}}>
+      <>
         <View style={styles.about}>
           <Image source={{ uri: this.card.iconUrl }} style={styles.aboutIcon} />
           <Text style={styles.aboutMerchant}>{this.card.merchantName}</Text>
@@ -180,28 +178,36 @@ class RewardCodeScreen extends React.Component {
             {i18n.t("prizes.selectTextPrimary")}
           </Text>
         )}
+
         <View style={styles.providers}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {this.discountProviders.map(provider => (
-                <TouchableOpacity
-                  key={provider.id}
-                  onPress={() =>
-                    provider.active
-                      ? this.selectDiscountProvider(provider)
-                      : () => null
-                  }
-                >
-                  <View style={styles.provider}>
-                    <Image
-                      source={(provider.active ? {uri: provider.logoUrl} : {uri: provider.logoUrlInactive})}
-                      style={[styles.providerImage]}
-                    />
-                  </View>
-                </TouchableOpacity>
-              ))}
-          </ScrollView>
+          {this.discountProviders.map(provider => (
+            <TouchableOpacity
+              key={provider.id}
+              onPress={() =>
+                provider.active
+                  ? this.selectDiscountProvider(provider)
+                  : () => null
+              }
+            >
+              <View style={styles.provider}>
+                <Image
+                  source={{ uri: provider.logoUrl }}
+                  style={[styles.providerImage, styles.providerImageOverlay]}
+                />
+
+                <Image
+                  source={{ uri: provider.logoUrl }}
+                  style={[
+                    styles.providerImage,
+                    styles.providerImageMain,
+                    { opacity: provider.active ? 1 : 0.25 }
+                  ]}
+                />
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
-      </View>
+      </>
     );
   }
 
@@ -255,21 +261,22 @@ const providerCardSize =
 
 const styles = StyleSheet.create({
   about: {
-
+    marginTop: 60,
+    marginBottom: 40
   },
   aboutIcon: {
     alignSelf: "center",
-    marginBottom: normalize(20, 'height'),
+    marginBottom: 20,
 
-    width: normalize(150, 'width'),
-    height: normalize(150),
+    width: 80,
+    height: 80,
 
     borderWidth: 2,
-    borderRadius: normalize(75),
+    borderRadius: 40,
     borderColor: colors.primary
   },
   aboutMerchant: {
-    marginBottom: normalize(10, 'height'),
+    marginBottom: 10,
 
     textTransform: "uppercase",
     textAlign: "center",
@@ -296,16 +303,14 @@ const styles = StyleSheet.create({
   },
 
   pickText: {
-    width: '90%',
-    alignSelf: 'center',
-    marginBottom: normalize(20, 'height'),
+    marginBottom: 20,
     textAlign: "center",
     color: colors.disabled
   },
 
   providers: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    margin: providerCardMargin
   },
 
   provider: {
@@ -326,6 +331,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     opacity: 0.25
   },
+  providerImageOverlay: {
+    tintColor: "gray"
+  },
+
   code: {
     marginVertical: 20,
     marginHorizontal: 24,
@@ -352,7 +361,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    paddingVertical: normalize(25, 'height'),
+    paddingVertical: 25,
     paddingHorizontal: 24
   },
 
