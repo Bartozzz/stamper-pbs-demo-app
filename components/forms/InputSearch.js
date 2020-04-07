@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/Colors";
 import layout from "../../constants/Layout";
 import styled from "styled-components/native";
+import normalize from 'react-native-normalize';
 
 const InputContainer = styled.View`
   flex: 1;
@@ -14,7 +15,7 @@ const InputContainer = styled.View`
   margin-vertical: 0px;
 
   height: 40px;
-  width: 265px;
+  width: ${normalize(265)}px;
 
   border-radius: 10px;
   background-color: #1a5bf1;
