@@ -7,14 +7,12 @@ import {
   TouchableOpacity,
   ScrollView,
   View,
-  Dimensions
 } from "react-native";
-import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
 import Background from "../../components/Background";
 
 import Button from "../../components/forms/Button";
 import InputWithIcon from "../../components/forms/InputWithIcon";
-import HeaderEmpty from "../../components/nav/HeaderEmpty";
+import HeaderBackIcon from "../../components/nav/HeaderBack";
 
 import {
   login,
@@ -34,12 +32,15 @@ import { getErrorsFromResponse } from "../../helpers/errors";
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthLoginScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     title: i18n.t("navigation.auth.login"),
     headerTitle: HeaderTitle,
-    headerLeft: <HeaderEmpty />,
+    headerLeft: <HeaderBackIcon
+        navigation={navigation}
+        onPress={() => navigation.goBack()}
+      />,
     headerStyle: defaultStyles.headerTwoLines
-  };
+  });
 
   state = {
     processing: false,
@@ -52,73 +53,6 @@ class AuthLoginScreen extends React.Component {
       email: null,
       other: null
     }
-  };
-
-  loginWithFacebook = async () => {
-    this.setState({ processing: true });
-
-    logInWithFacebook(
-      user => {
-        const email = user.email;
-        const username = email.split("@")[0];
-
-        this.props
-          .registerExternal(email, "facebook", username)
-          .then(response => {
-            // Require user to accepts the terms of service. The registeration
-            // already logs the user in, so calling `loginExternal` will fail:
-            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => this.handleSuccess(true)(response)
-            });
-          })
-          .catch(() => {
-            this.loginExternal(email);
-          });
-      },
-      error => {
-        this.setState({
-          processing: false,
-          error: { ...this.state.error, other: error }
-        });
-      }
-    );
-  };
-
-  loginWithGoogle = async () => {
-    this.setState({ processing: true });
-
-    logInWithGoogle(
-      user => {
-        const email = user.email;
-        const username = email.split("@")[0];
-
-        this.props
-          .registerExternal(email, "google", username)
-          .then(response => {
-            // Require user to accepts the terms of service. The registeration
-            // already logs the user in, so calling `loginExternal` will fail:
-            this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => this.handleSuccess(true)(response)
-            });
-          })
-          .catch(() => {
-            this.loginExternal(email);
-          });
-      },
-      error => {
-        this.setState({
-          processing: false,
-          error: { ...this.state.error, other: error }
-        });
-      }
-    );
-  };
-
-  loginExternal = (email, firstLogin = false) => {
-    this.props
-      .loginExternal(email)
-      .then(this.handleSuccess(firstLogin))
-      .catch(this.handleError);
   };
 
   loginWithCredentials = () => {
@@ -192,46 +126,6 @@ class AuthLoginScreen extends React.Component {
               autoCapitalize="none"
               secureTextEntry
             />
-
-            <View style={styles.loginContainerTextContainer}>
-              <Text
-                style={[styles.loginContainerText, styles.loginContainerTextA]}
-              >
-                {i18n.t("auth.loginWith")}
-              </Text>
-
-              <TouchableOpacity onPress={this.loginWithFacebook}>
-                <Text
-                  style={[
-                    styles.loginContainerText,
-                    styles.loginContainerTextA,
-                    styles.loginProvider
-                  ]}
-                >
-                  {" "}
-                  Facebook{" "}
-                </Text>
-              </TouchableOpacity>
-
-              <Text
-                style={[styles.loginContainerText, styles.loginContainerTextA]}
-              >
-                {i18n.t("auth.loginOr")}
-              </Text>
-
-              <TouchableOpacity onPress={this.loginWithGoogle}>
-                <Text
-                  style={[
-                    styles.loginContainerText,
-                    styles.loginContainerTextA,
-                    styles.loginProvider
-                  ]}
-                >
-                  {" "}
-                  Google.
-                </Text>
-              </TouchableOpacity>
-            </View>
 
             <View style={styles.loginContainerTextContainer}>
               <TouchableOpacity
