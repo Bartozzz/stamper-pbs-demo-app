@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Animated, StyleSheet, View } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import KeyboardAware from "../../components/helpers/KeyboardAware";
 import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
@@ -88,30 +88,12 @@ class ProfilePasswordScreen extends React.Component {
     this.setState({ error, processing: false });
   };
 
-  handleKeyboardShow = keyboardHeight => {
-    Animated.timing(this.state.heightAnim, {
-      toValue: keyboardHeight,
-      duration: 250
-    }).start();
-  };
-
-  handleKeyboardHide = () => {
-    Animated.timing(this.state.heightAnim, {
-      toValue: 0,
-      duration: 250
-    }).start();
-  };
-
   render() {
     const { currPassword, newPasswordA, newPasswordB, error } = this.state;
 
     return (
-      <KeyboardAware
-        onKeyboardShow={this.handleKeyboardShow}
-        onKeyboardHide={this.handleKeyboardHide}
-      >
-        {() => (
           <Background source={BackgroundImage}>
+          <KeyboardAwareScrollView enableOnAndroid={true} scrollEnabled={false} contentContainerStyle={{flex: 1}} extraScrollHeight={60}>
             <View style={styles.form}>
               {error.other ? <Error message={error.other} /> : null}
 
@@ -152,9 +134,8 @@ class ProfilePasswordScreen extends React.Component {
             </View>
 
             <Animated.View style={[{ height: this.state.heightAnim }]} />
+            </KeyboardAwareScrollView>
           </Background>
-        )}
-      </KeyboardAware>
     );
   }
 }
