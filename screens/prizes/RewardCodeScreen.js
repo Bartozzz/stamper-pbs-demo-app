@@ -6,7 +6,8 @@ import {
   Text,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -151,7 +152,7 @@ class RewardCodeScreen extends React.Component {
 
   renderAllDiscountProviders() {
     return (
-      <>
+      <ScrollView>
         <View style={styles.about}>
           <Image source={{ uri: this.card.iconUrl }} style={styles.aboutIcon} />
           <Text style={styles.aboutMerchant}>{this.card.merchantName}</Text>
@@ -181,33 +182,24 @@ class RewardCodeScreen extends React.Component {
 
         <View style={styles.providers}>
           {this.discountProviders.map(provider => (
-            <TouchableOpacity
-              key={provider.id}
-              onPress={() =>
-                provider.active
-                  ? this.selectDiscountProvider(provider)
-                  : () => null
-              }
-            >
-              <View style={styles.provider}>
-                <Image
-                  source={{ uri: provider.logoUrl }}
-                  style={[styles.providerImage, styles.providerImageOverlay]}
-                />
-
-                <Image
-                  source={{ uri: provider.logoUrl }}
-                  style={[
-                    styles.providerImage,
-                    styles.providerImageMain,
-                    { opacity: provider.active ? 1 : 0.25 }
-                  ]}
-                />
-              </View>
-            </TouchableOpacity>
-          ))}
+              <TouchableOpacity
+                key={provider.id}
+                onPress={() =>
+                  provider.active
+                    ? this.selectDiscountProvider(provider)
+                    : () => null
+                }
+              >
+                <View style={styles.provider}>
+                  <Image
+                    source={(provider.active ? {uri: provider.logoUrl} : {uri: provider.logoUrlInactive})}
+                    style={[styles.providerImage]}
+                  />
+                </View>
+              </TouchableOpacity>
+            ))}
         </View>
-      </>
+      </ScrollView>
     );
   }
 
@@ -304,11 +296,14 @@ const styles = StyleSheet.create({
 
   pickText: {
     marginBottom: 20,
+    width: '90%',
+    alignSelf: "center",
     textAlign: "center",
     color: colors.disabled
   },
 
   providers: {
+    flexWrap: "wrap",
     flexDirection: "row",
     margin: providerCardMargin
   },
