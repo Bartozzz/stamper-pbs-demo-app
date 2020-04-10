@@ -181,8 +181,8 @@ const styles = StyleSheet.create({
     paddingTop: 15
   },
   regContainerTextContainer: {
-    marginTop: 3,
-    marginBottom: 15,
+    marginTop: 20,
+    marginBottom: 30,
 
     flexDirection: "row",
     alignSelf: "center"
