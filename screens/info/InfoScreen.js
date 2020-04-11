@@ -27,7 +27,7 @@ class InfoScreen extends React.Component {
           this.props.style
         ]}
       >
-        <Image style={[{ width, height }]} source={image} />
+        <Image style={[{ width, height }]} resizeMode="contain" source={image} />
         <Text style={styles.text}>{message}</Text>
       </TouchableOpacity>
     );
