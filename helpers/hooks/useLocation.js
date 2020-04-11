@@ -5,7 +5,7 @@ import { usePermissions } from "@use-expo/permissions";
 
 export default function useLocation(
   options = {
-    enableHighAccuracy: true
+    enableHighAccuracy: false
   }
 ) {
   const [currentLocation, setCurrentLocation] = React.useState(null);
