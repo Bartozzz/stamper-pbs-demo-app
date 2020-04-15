@@ -208,7 +208,7 @@ class RewardCodeScreen extends React.Component {
 
     return (
       <View style={styles.card}>
-        <TouchableOpacity onPress={this.discountProviders.length === 0 ? () => {this.props.navigation.navigate(Routes.PRIZES_LIST)} : this.selectDiscountProvider(null)}>
+        <TouchableOpacity onPress={this.discountProviders.length === 0 ? () => {this.props.navigation.navigate(Routes.PRIZES_LIST)} : () => this.selectDiscountProvider(null)}>
           <AntDesign style={styles.close} name="closecircleo" size={32} />
         </TouchableOpacity>
 

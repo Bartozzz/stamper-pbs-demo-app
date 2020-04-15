@@ -196,7 +196,7 @@ const MapScreen = ({ navigation }) => {
             setRegion(region);
             setCluster(createCluster(cards, region));
           }}
-          onRegionChange={closeCardsOnDrag}
+          onPanDrag={closeCardsOnDrag}
           onPress={closeCardsOnDrag}
         >
           <NavigationEvents
