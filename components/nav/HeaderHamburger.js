@@ -27,12 +27,8 @@ const Icon = styled(Ionicons).attrs(props => ({
 `;
 
 export function HeaderHamburger(props) {
-  function onPress() {
-    props.navigation.navigate(Routes.DASHBOARD);
-  }
-
   return (
-    <Hamburger onPress={onPress}>
+    <Hamburger onPress={() => props.onPress ? props.onPress() : props.navigation.navigate(Routes.DASHBOARD)}>
       <Icon />
     </Hamburger>
   );
