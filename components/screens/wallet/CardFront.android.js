@@ -25,12 +25,20 @@ const ID = styled.Text`
   color: #95989a;
 `;
 
+const ImageContainer = styled.View`
+  overflow: hidden;
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+`;
+
 const Image = styled.Image.attrs(props => ({
   resizeMode: "contain"
 }))`
   width: 40px;
   height: 40px;
-  border-radius: 20px;
   background-color: white;
 `;
 
@@ -80,7 +88,9 @@ export const CardFront = ({ data, onPress }) => {
         </View>
 
         <View style={[defaultStyles.row, { paddingTop: 10 }]}>
-          <Image source={{ uri: data.logoUrl }} />
+          <ImageContainer>
+            <Image source={{ uri: data.logoUrl }} />
+          </ImageContainer>
 
           <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
             <View>
