@@ -137,7 +137,7 @@ class RewardCodeScreen extends React.Component {
 
         <View style={styles.buttonContainer}>
           <Button
-            title={i18n.t("prizes.quickCollect")}
+            title={i18n.t("prizes.backToRewards")}
             onPress={() => {
               this.props.navigation.navigate(Routes.INFO_SUCCESS, {
                 message: i18n.t("success.scanner.reward"),

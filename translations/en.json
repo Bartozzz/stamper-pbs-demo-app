@@ -136,6 +136,7 @@
     "receiveOnPlace": "Collect reward",
     "receiveInApplication": "Collect on the shop's website",
     "quickCollect": "Direct link to your reward",
+    "backToRewards": "Go back to rewards",
 
     "selectTextPrimary": "Select an application to generate the discount code:",
     "selectTextSecondary": "or select an application to generate the discount code:",
