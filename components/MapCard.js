@@ -50,18 +50,23 @@ const CardBackgroundImage = styled.Image`
   resize-mode: cover;
 `;
 
+const CardLogoImageContainer = styled.View`
+  position: absolute;
+  align-self: center;
+  overflow: hidden;
+  z-index: 2;
+
+  margin: ${slidePadding}px;
+  width: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
+  height: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px; 
+  borderRadius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
+`;
+
 const CardLogoImage = styled.Image.attrs(props => ({
   resizeMode: "contain"
 }))`
-  position: absolute;
-  z-index: 9999;
-
-  align-self: center;
-  margin: ${slidePadding}px;
-
   width: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
   height: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
-  border-radius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
 
   background-color: white;
 `;
@@ -166,7 +171,9 @@ const MapCard = props => {
 
       <CardSection show={!flip}>
         <View>
-          <CardLogoImage source={{ uri: props.logoUrl }} />
+          <CardLogoImageContainer>
+            <CardLogoImage source={{ uri: props.logoUrl }} />
+          </CardLogoImageContainer>
           <CardBackgroundImage source={{ uri: props.backgroundImageUrl }} />
         </View>
 
