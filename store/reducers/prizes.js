@@ -13,6 +13,10 @@ export const PRIZES_GET_COUNT_REQUEST = "APP/PRIZES_COUNT/GET_REQUEST";
 export const PRIZES_GET_COUNT_SUCCESS = "APP/PRIZES_COUNT/GET_SUCCESS";
 export const PRIZES_GET_COUNT_FAIL = "APP/PRIZES_COUNT/GET_FAIL";
 
+export const PRIZES_GET_DISCOUNT_REQUEST = "APP/PRIZES_DISCOUNT/GET_REQUEST";
+export const PRIZES_GET_DISCOUNT_SUCCESS = "APP/PRIZES_DISCOUNT/GET_SUCCESS";
+export const PRIZES_GET_DISCOUNT_FAIL = "APP/PRIZES_DISCOUNT/GET_FAIL";
+
 const initialState = {
   isLoading: false,
   count: 0,
@@ -84,6 +88,24 @@ export const getPrizesCount = () => ({
   payload: {
     request: {
       url: Url.Rewards.Count()
+    }
+  }
+});
+
+export const getDiscountCode = (cardId, providerId) => ({
+  types: [
+    PRIZES_GET_DISCOUNT_REQUEST,
+    PRIZES_GET_DISCOUNT_SUCCESS,
+    PRIZES_GET_DISCOUNT_FAIL
+  ],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Rewards.GetDiscountCode(),
+      data: {
+        cardId,
+        providerId
+      }
     }
   }
 });

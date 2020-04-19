@@ -44,6 +44,20 @@
     "map": "My Area"
   },
 
+  "welcome": {
+    "title1": "Join more \n loyal customers!",
+    "subtitle1": "Find out more about Stamper",
+
+    "title2": "All cards - at your fingertips!",
+    "subtitle2": "Stamper enables customers to collect loyalty stamps from multiple restaurants, and keep them safe all in one place - All of your cards will be at your fingertips.",
+
+    "title3": "Keep up to date!",
+    "subtitle3": "Stamper has convinient option called „local area”, that allows you to check which of your favourite places are running customer loyalty schemes in your area.",
+
+    "title4": "Collect rewards!",
+    "subtitle4": "You don't need to worry about missing out on benefits. Once you collect the necessary stamps on your virtual card, you receive an automatic notification that you are eligible to collect your reward!"
+  },
+
   "auth": {
     "email": "Email",
     "password": "Password",
@@ -54,8 +68,8 @@
     "login": "Log in",
     "register": "Register",
 
-    "loginOr": "or",
-    "loginWith": "Log in with",
+    "loginwithfacebook": "Log in with Facebook",
+    "loginwithgoogle": "Log in with Google",
 
     "resetPassword": "Reset password",
 
@@ -63,11 +77,6 @@
     "tosAccept": "By continuing you accept our",
     "dontHaveAccount": "Don't have an account? Register.",
     "forgotPassword": "Reset password.",
-
-    "hero": {
-      "slogan1": "Join the \n loyal crowd!",
-      "slogan2": "Stamper gives you many opportunities \n without any obligations."
-    },
 
     "externalTos": {
       "headline": "I aggree to the terms and conditions Stamper.",
@@ -118,10 +127,21 @@
   },
 
   "prizes": {
+    "code": "Discount code",
+    "generate": "Generate the discount code",
+
+    "confirm": "Are you sure that you want to use this code and get the reward?",
+
     "receiveOnline": "Collect reward on-line",
     "receiveOnPlace": "Collect reward",
+    "receiveInApplication": "Collect on the shop's website",
     "quickCollect": "Direct link to your reward",
+    "backToRewards": "Go back to rewards",
 
+    "selectTextPrimary": "Select an application to generate the discount code:",
+    "selectTextSecondary": "or select an application to generate the discount code:",
+
+    "generatedOn": "generated on {{date}}",
     "validTill": "valid to {{date}}",
     "writeCode": "Your code:",
 

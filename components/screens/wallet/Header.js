@@ -1,66 +1,77 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native";
+import styled from "styled-components/native";
 
 import * as Routes from "../../../navigation";
 import i18n from "../../../translations";
 import colors from "../../../constants/Colors";
 import defaultStyles from "../../../constants/Styles";
 
-export default function WalletHeader(props) {
-  const cardsStyles = [
-    styles.tabsItem,
-    props.cards ? styles.tabsItemActive : false
-  ];
-  const placesStyles = [
-    styles.tabsItem,
-    props.places ? styles.tabsItemActive : false
-  ];
+const Tabs = styled.View`
+  flex-direction: row;
+  align-items: center;
 
+  width: 100%;
+
+  padding-vertical: 12px;
+  padding-horizontal: 20px;
+
+  background-color: ${colors.primary};
+`;
+
+const TabsTitle = styled.Text`
+  ${defaultStyles.grow};
+  ${defaultStyles.headerTwoLinesTitle};
+`;
+
+const Cards = styled.Text`
+  margin-left: 16px;
+
+  font-family: poppins-regular;
+  font-size: 18px;
+  color: ${colors.color};
+
+  opacity: 0.5;
+
+  ${({ active }) =>
+    active &&
+    `
+      opacity: 1;
+    `};
+`;
+
+const Places = styled.Text`
+  margin-left: 16px;
+
+  font-family: poppins-regular;
+  font-size: 18px;
+  color: ${colors.color};
+
+  opacity: 0.5;
+
+  ${({ active }) =>
+    active &&
+    `
+      opacity: 1;
+    `};
+`;
+
+export default function WalletHeader(props) {
   return (
-    <View style={[styles.tabs, props.style]}>
-      <Text style={styles.tabsTitle}>{props.title}</Text>
+    <Tabs style={[props.style]}>
+      <TabsTitle>{props.title}</TabsTitle>
 
       <TouchableOpacity
         onPress={() => props.navigation.push(Routes.WALLET_CARDS)}
       >
-        <Text style={cardsStyles}>{i18n.t("wallet.cards")}</Text>
+        <Cards active={props.cards}>{i18n.t("wallet.cards")}</Cards>
       </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => props.navigation.push(Routes.WALLET_PLACES)}
       >
-        <Text style={placesStyles}>{i18n.t("wallet.places")}</Text>
+        <Places active={props.places}>{i18n.t("wallet.places")}</Places>
       </TouchableOpacity>
-    </View>
+    </Tabs>
   );
 }
-
-export const styles = StyleSheet.create({
-  tabs: {
-    flexDirection: "row",
-    alignItems: "center",
-
-    width: "100%",
-
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-
-    backgroundColor: colors.primary
-  },
-  tabsTitle: {
-    ...defaultStyles.grow,
-    ...defaultStyles.headerTwoLinesTitle
-  },
-  tabsItem: {
-    marginLeft: 16,
-
-    fontFamily: "poppins-regular",
-    fontSize: 18,
-    color: colors.color,
-
-    opacity: 0.5
-  },
-  tabsItemActive: {
-    opacity: 1
-  }
-});

@@ -5,6 +5,7 @@ import * as Icon from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import { AsyncStorage, Platform, StatusBar } from "react-native";
+import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
 import configureStore from "./store";
 import { EMAIL, setEmail } from "./store/reducers/profile";
@@ -24,8 +25,13 @@ const store = configureStore();
 
 export default class App extends React.Component {
   state = {
+    rollbar: useRollbar(),
     isLoadingComplete: false
   };
+
+  componentDidCatch(error) {
+    this.state.rollbar.critical(error);
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -92,13 +98,15 @@ export default class App extends React.Component {
 
       // Preload assets:
       Asset.loadAsync([
+        require("./assets/images/welcome/1.png"),
+        require("./assets/images/welcome/2.png"),
+        require("./assets/images/welcome/3.png"),
+        require("./assets/images/welcome/4.png"),  
         require("./assets/backgrounds/card.png"),
         // require("./assets/backgrounds/cards_wn.png"),
         require("./assets/backgrounds/cards.png"),
         // require("./assets/backgrounds/details_wn.png"),
         require("./assets/backgrounds/details.png"),
-        require("./assets/backgrounds/hero.png"),
-        require("./assets/backgrounds/hero-2.png"),
         // require("./assets/backgrounds/home_wn.png"),
         require("./assets/backgrounds/home.png"),
         // require("./assets/backgrounds/logout_wn.png"),

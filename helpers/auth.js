@@ -1,4 +1,4 @@
-import { Google } from "expo";
+import * as Google from "expo-google-app-auth"
 import * as Facebook from "expo-facebook";
 import getEnvVariables from "./env";
 
@@ -32,7 +32,9 @@ export async function logInWithGoogle(onSuccess, onError) {
 export async function logInWithFacebook(onSuccess, onError) {
   try {
     const fid = facebookAppId;
-    const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
+    await Facebook.initializeAsync(fid);
+    const options = { behavior: 'web' }
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid, options);
 
     if (type !== "success") {
       onError("Could not log-in with Facebook");

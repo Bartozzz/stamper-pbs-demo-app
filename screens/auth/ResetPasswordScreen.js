@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Background from "../../components/Background";
 
-import AuthHero from "../../components/screens/auth/Hero";
 import Button from "../../components/forms/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/forms/InputWithIcon";

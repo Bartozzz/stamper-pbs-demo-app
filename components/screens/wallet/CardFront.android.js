@@ -1,24 +1,78 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  TouchableWithoutFeedback
-} from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 import { Bar as ProgressBar } from "react-native-progress";
+import styled from "styled-components/native";
 
 import i18n from "../../../translations";
 import defaultStyles from "../../../constants/Styles";
 import colors from "../../../constants/Colors";
 import { formatDate } from "../../../helpers/date";
 
+const Item = styled.View`
+  padding: 10px;
+  margin-horizontal: 15px;
+  margin-vertical: 10px;
+
+  border-radius: 10px;
+  background-color: #1a2c47;
+`;
+
+const ID = styled.Text`
+  flex: 1;
+
+  font-size: 14px;
+  font-family: nunito-black;
+  color: #95989a;
+`;
+
+const ImageContainer = styled.View`
+  overflow: hidden;
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+`;
+
+const Image = styled.Image.attrs(props => ({
+  resizeMode: "contain"
+}))`
+  width: 40px;
+  height: 40px;
+  background-color: white;
+`;
+
+const Title = styled.Text`
+  margin-top: 2px;
+  margin-bottom: 3px;
+
+  font-size: 14px;
+  font-family: poppins-bold;
+  color: ${colors.color};
+`;
+
+const Expiry = styled.Text`
+  font-size: 9px;
+  font-family: nunito-regular;
+  color: #95989a;
+`;
+
+const Amount = styled.Text`
+  flex: 1;
+  margin-top: 5px;
+
+  text-align: right;
+  font-size: 12px;
+  font-family: nunito-regular;
+  color: #95989a;
+`;
+
 export const CardFront = ({ data, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={[styles.item, styles.itemFront]}>
+      <Item>
         <View style={[defaultStyles.row]}>
-          <Text style={styles.textId}>{data.merchantName}</Text>
+          <ID>{data.merchantName}</ID>
 
           <View style={{ marginTop: 6 }}>
             <ProgressBar
@@ -34,78 +88,28 @@ export const CardFront = ({ data, onPress }) => {
         </View>
 
         <View style={[defaultStyles.row, { paddingTop: 10 }]}>
-          <Image
-            resizeMode="contain"
-            source={{ uri: data.logoUrl }}
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 20,
-              backgroundColor: "white"
-            }}
-          />
+          <ImageContainer>
+            <Image source={{ uri: data.logoUrl }} />
+          </ImageContainer>
 
           <View style={[defaultStyles.row, { flex: 1, marginLeft: 10 }]}>
             <View>
-              <Text style={styles.textTitle}>{data.title}</Text>
-              <Text style={styles.textExpiry}>
+              <Title>{data.title}</Title>
+              <Expiry>
                 {i18n.t("prizes.validTill", {
                   date: formatDate(data.validToDate)
                 })}
-              </Text>
+              </Expiry>
             </View>
 
-            <Text style={styles.textAmount}>
+            <Amount>
               {data.stampsToDate} / {data.stampsTotal}
-            </Text>
+            </Amount>
           </View>
         </View>
-      </View>
+      </Item>
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    marginHorizontal: 15,
-    marginVertical: 10,
-
-    borderRadius: 10
-  },
-  itemFront: {
-    backgroundColor: "#1a2c47"
-  },
-
-  textId: {
-    flex: 1,
-
-    fontSize: 14,
-    fontFamily: "nunito-black",
-    color: "#95989A"
-  },
-  textTitle: {
-    marginTop: 2,
-    marginBottom: 3,
-
-    fontSize: 14,
-    fontFamily: "poppins-bold",
-    color: colors.color
-  },
-  textExpiry: {
-    fontSize: 9,
-    fontFamily: "nunito-regular",
-    color: "#95989A"
-  },
-  textAmount: {
-    flex: 1,
-    marginTop: 5,
-
-    textAlign: "right",
-    fontSize: 12,
-    fontFamily: "nunito-regular",
-    color: "#95989A"
-  }
-});
 
 export default CardFront;

@@ -20,6 +20,7 @@ import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
 import AuthConnectivityCheckScreen from "../screens/auth/ConnectivityCheckScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
+import AuthWelcomeScreen from "../screens/auth/WelcomeScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";
 import AuthResetPasswordScreen from "../screens/auth/ResetPasswordScreen";
@@ -74,6 +75,7 @@ const disableNavigationAnimations = {
 
 const AuthStack = createStackNavigator(
   {
+    [Route.AUTH_WELCOME]: AuthWelcomeScreen,
     [Route.AUTH_LOGIN]: AuthLoginScreen,
     [Route.AUTH_REGISTER]: AuthRegisterScreen,
     [Route.AUTH_RESET]: AuthResetPasswordScreen,
@@ -81,7 +83,7 @@ const AuthStack = createStackNavigator(
     [Route.AUTH_EXTERNAL_TOS]: AuthTermsOfUseScreen
   },
   {
-    initialRouteName: Route.AUTH_LOGIN,
+    initialRouteName: Route.AUTH_WELCOME,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
     headerMode: "screen",

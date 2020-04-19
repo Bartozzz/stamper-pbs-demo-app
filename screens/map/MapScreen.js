@@ -4,6 +4,7 @@ import { AsyncStorage, Dimensions, View, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 import { _ } from "lodash";
+import { NavigationEvents } from 'react-navigation';
 
 import * as R from "ramda";
 
@@ -55,6 +56,7 @@ const MapScreen = ({ navigation }) => {
   const [cluster, setCluster] = React.useState({ markers: [] });
   const [filters, setFilters] = React.useState([]);
   const [filter, setFilter] = React.useState(0);
+  const [destroyMap, setDestroyMap] = React.useState(false);
 
   const createCluster = React.useCallback(
     (markers, region) => {
@@ -185,35 +187,38 @@ const MapScreen = ({ navigation }) => {
         filter={filter}
         onFilterSelect={(filter, index) => setFilter(index)}
       />
+      {destroyMap || (
+        <MapArea
+          userPosition={getRegionForLocation(currentLocation)}
+          onRegionChangeComplete={region => {
+            const cards = markers.filter(filterByCategory(filter, filters));
 
-      <MapArea
-        userPosition={getRegionForLocation(currentLocation)}
-        onRegionChangeComplete={region => {
-          const cards = markers.filter(filterByCategory(filter, filters));
-
-          setRegion(region);
-          setCluster(createCluster(cards, region));
-        }}
-        onRegionChange={closeCardsOnDrag}
-        onPress={closeCardsOnDrag}
-      >
-        {cluster.markers.map(marker => (
-          <MapAreaMarker
-            key={`${marker.geometry.coordinates[0]}-${marker.geometry.coordinates[1]}`}
-            marker={marker}
-            cluster={cluster.cluster}
-            onPress={selectedCards => {
-              const cards = selectedCards
-                .sort(sortByDistance(getRegionForLocation(currentLocation)))
-                .sort(sortByActive());
-
-              setShowCards(true);
-              setCards(cards);
-            }}
+            setRegion(region);
+            setCluster(createCluster(cards, region));
+          }}
+          onPanDrag={closeCardsOnDrag}
+          onPress={closeCardsOnDrag}
+        >
+          <NavigationEvents
+            onWillBlur={() => {setDestroyMap(true)}}
           />
-        ))}
-      </MapArea>
+            {cluster.markers.map(marker => (
+              <MapAreaMarker
+                key={`${marker.geometry.coordinates[0]}-${marker.geometry.coordinates[1]}`}
+                marker={marker}
+                cluster={cluster.cluster}
+                onPress={selectedCards => {
+                  const cards = selectedCards
+                    .sort(sortByDistance(getRegionForLocation(currentLocation)))
+                    .sort(sortByActive());
 
+                    setShowCards(true);
+                    setCards(cards);
+                  }}
+                />
+              ))}
+        </MapArea>
+      )}
       {showCards && (
         <CardsContainer>
           <Carousel
@@ -241,11 +246,12 @@ const MapScreen = ({ navigation }) => {
 MapScreen.navigationOptions = ({ navigation }) => ({
   title: i18n.t("navigation.map"),
   headerLeft: <HeaderEmpty />,
-  headerRight: <HeaderHamburger navigation={navigation} />,
+  headerRight: <HeaderHamburger onPress={() => navigation.pop()} navigation={navigation} />,
   headerStyle: {
     ...defaultStyles.headerTransparent,
     backgroundColor: colors.background
-  }
+  },
+  gesturesEnabled: false
 });
 
 export function normalizeCardGeometry(card) {

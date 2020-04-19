@@ -1,8 +1,29 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
 import i18n from "../translations";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
+import styled from "styled-components/native";
+
+const ErrorContainer = styled.View`
+  padding: 10px;
+  margin-vertical: 10px;
+
+  width: 100%;
+  background-color: ${colors.error};
+  border-radius: 5px;
+`;
+
+const ErrorHead = styled.Text`
+  font-size: 14px;
+  font-family: ${layout.fontHead};
+  color: ${colors.color};
+`;
+
+const ErrorText = styled.Text`
+  font-size: 14px;
+  font-family: ${layout.fontText};
+  color: ${colors.color};
+`;
 
 class Error extends Component {
   get message() {
@@ -25,35 +46,12 @@ class Error extends Component {
     }
 
     return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorHead}>{i18n.t("error")}:</Text>
-        <Text style={styles.errorText}>{message}</Text>
-      </View>
+      <ErrorContainer>
+        <ErrorHead>{i18n.t("error")}:</ErrorHead>
+        <ErrorText>{message}</ErrorText>
+      </ErrorContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  errorHead: {
-    fontSize: 14,
-    fontFamily: layout.fontHead,
-    color: colors.color
-  },
-
-  errorText: {
-    fontSize: 14,
-    fontFamily: layout.fontText,
-    color: colors.color
-  },
-
-  errorContainer: {
-    padding: 10,
-    marginVertical: 10,
-
-    width: "100%",
-    backgroundColor: colors.error,
-    borderRadius: 5
-  }
-});
 
 export default Error;
