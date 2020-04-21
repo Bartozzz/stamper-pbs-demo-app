@@ -1,19 +1,5 @@
 import React from "react";
-import styled from "styled-components/native";
-
-export const StyledCardContainer = styled.TouchableOpacity`
-  position: relative;
-
-  padding: 10px;
-  margin-horizontal: 15px;
-  margin-vertical: 10px;
-
-  border-width: 1px;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: ${({ selected }) => (selected ? "#0046F5" : "#203451")};
-  background-color: ${({ selected }) => (selected ? "#ffffff" : "#203451")};
-`;
+import * as Styled from "./index.styled";
 
 export const SelectableCard = ({
   onPress,
@@ -35,9 +21,9 @@ export const SelectableCard = ({
   });
 
   return (
-    <StyledCardContainer {...props} selected={selected} onPress={handlePress}>
+    <Styled.CardContainer {...props} selected={selected} onPress={handlePress}>
       {selected ? renderBack() : renderFront()}
-    </StyledCardContainer>
+    </Styled.CardContainer>
   );
 };
 
