@@ -1,32 +1,28 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
-  AsyncStorage,
   StyleSheet,
   Image,
   View,
-  TouchableOpacity,
   ScrollView,
   FlatList,
-  Text
+  Text,
 } from "react-native";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
-import Header from "../../components/nav/Header";
+
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
 import InputSearch from "../../components/forms/InputSearch";
-import {
-  PRIZES_CARDS,
-  FORCE_REFRESH_PRIZES,
-  getPrizes
-} from "../../store/reducers/prizes";
 import PrizesHeader from "../../components/screens/prizes/Header";
 import ExpirationDate from "../../components/helpers/ExpirationDate";
+import FocusableCard from "../../components/FocusableCard";
+
+import { getPrizes } from "../../store/reducers/prizes";
 
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
 const RewardsLoader = require("../../assets/loaders/rewards.gif");
@@ -44,39 +40,23 @@ class PrizesListScreen extends React.Component {
         }
       />
     ),
-    headerRight: <HeaderHamburger navigation={navigation} />
+    headerRight: <HeaderHamburger navigation={navigation} />,
   });
 
   state = {
     isCheckingIfCacheValid: false,
     selected: null,
-    search: null
+    search: null,
   };
 
   async componentDidMount() {
-    // const shouldRefetchData = await AsyncStorage.getItem(FORCE_REFRESH_PRIZES);
-    // const shouldRefetchBool = JSON.parse(shouldRefetchData);
-    // const hasCards = Array.isArray(prizes) && prizes.length > 0;
-    //
-    // if (shouldRefetchData === null || shouldRefetchBool === true || !hasCards) {
-    //   this.setState({ isCheckingIfCacheValid: false });
-    //   console.log("Refreshing prizes cards");
-    //
-    //   getPrizes().then(data => {
-    //     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(false));
-    //     AsyncStorage.setItem(PRIZES_CARDS, JSON.stringify(data.payload.data));
-    //   });
-    // } else {
-    //   this.setState({ isCheckingIfCacheValid: false });
-    // }
-
     this.props.getPrizes();
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
   claimPrizeOnline = () => {
     this.props.navigation.navigate(Routes.PRIZES_SELECTED, {
-      card: this.state.selected
+      card: this.state.selected,
     });
   };
 
@@ -84,27 +64,27 @@ class PrizesListScreen extends React.Component {
     this.props.navigation.navigate(Routes.SCANNER);
   };
 
-  selectPrize = prize => () => {
+  selectPrize = (prize) => () => {
     this.setState({
-      selected: prize
+      selected: prize,
     });
   };
 
-  handleSearch = searchTerm => {
+  handleSearch = (searchTerm) => {
     this.setState({
-      search: searchTerm
+      search: searchTerm,
     });
   };
 
   renderList() {
     const { selected, search } = this.state;
     const { prizes } = this.props;
-    let data = prizes.filter(prize => !prize.collected);
+    let data = prizes.filter((prize) => !prize.collected);
 
     // Filter data based on current search term:
     if (search) {
       data = data.filter(
-        prize =>
+        (prize) =>
           prize.title.toLowerCase().includes(search.toLowerCase()) ||
           prize.merchantName.toLowerCase().includes(search.toLowerCase())
       );
@@ -114,23 +94,23 @@ class PrizesListScreen extends React.Component {
       <FlatList
         data={data}
         extraData={selected}
-        keyExtractor={item => {
+        keyExtractor={(item) => {
           return item.id;
         }}
         renderItem={({ item }) => {
           const isSelected = selected && selected.id === item.id;
 
           return (
-            <TouchableOpacity
+            <FocusableCard
               key={item.id}
-              style={[styles.item, isSelected && styles.itemSelected]}
+              focused={isSelected}
               onPress={this.selectPrize(item)}
             >
               <View style={defaultStyles.row}>
                 <View
                   style={[
                     styles.imageContainer,
-                    isSelected && styles.imageContainerSelected
+                    isSelected && styles.imageContainerSelected,
                   ]}
                 >
                   <Image source={{ uri: item.iconUrl }} style={styles.image} />
@@ -141,7 +121,7 @@ class PrizesListScreen extends React.Component {
                     <Text
                       style={[
                         styles.textMerchant,
-                        isSelected && styles.textMerchantSelected
+                        isSelected && styles.textMerchantSelected,
                       ]}
                     >
                       {item.merchantName}
@@ -150,7 +130,7 @@ class PrizesListScreen extends React.Component {
                     <Text
                       style={[
                         styles.textTitle,
-                        isSelected && styles.textTitleSelected
+                        isSelected && styles.textTitleSelected,
                       ]}
                     >
                       {item.title}
@@ -160,21 +140,21 @@ class PrizesListScreen extends React.Component {
                       <Text
                         style={[
                           styles.textExpiry,
-                          isSelected && styles.textExpirySelected
+                          isSelected && styles.textExpirySelected,
                         ]}
                       >
                         {i18n.t("prizes.validTill", {
                           date: ExpirationDate({
                             isValid: item.validTo,
-                            expirationDate: item.validToDate
-                          })
+                            expirationDate: item.validToDate,
+                          }),
                         })}
                       </Text>
 
                       <Text
                         style={[
                           styles.textCardNumber,
-                          isSelected && styles.textCardNumberSelected
+                          isSelected && styles.textCardNumberSelected,
                         ]}
                       >
                         NR {item.cardNumber}
@@ -183,7 +163,7 @@ class PrizesListScreen extends React.Component {
                   </View>
                 </View>
               </View>
-            </TouchableOpacity>
+            </FocusableCard>
           );
         }}
       />
@@ -247,18 +227,17 @@ class PrizesListScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  // …
   list: {
     paddingTop: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
   },
 
   buttonContainer: {
     paddingVertical: 20,
-    paddingHorizontal: 24
+    paddingHorizontal: 24,
   },
   button: {
-    marginVertical: 5
+    marginVertical: 5,
   },
 
   imageContainer: {
@@ -272,33 +251,14 @@ const styles = StyleSheet.create({
     borderColor: "#709BE7",
     borderWidth: 2,
     borderStyle: "solid",
-    borderRadius: 35
+    borderRadius: 35,
   },
   imageContainerSelected: {
-    borderColor: "#0046F5"
+    borderColor: "#0046F5",
   },
   image: {
     width: 70,
-    height: 70
-  },
-
-  item: {
-    flex: 1,
-    height: 90,
-
-    padding: 10,
-    marginHorizontal: 15,
-    marginVertical: 10,
-
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#203451",
-    borderRadius: 10,
-    backgroundColor: "#203451"
-  },
-  itemSelected: {
-    borderColor: "#0046F5",
-    backgroundColor: "#001333"
+    height: 70,
   },
 
   textMerchant: {
@@ -307,19 +267,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: layout.fontText,
     color: "#74798B",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   textMerchantSelected: {
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
 
   textTitle: {
     fontSize: 14,
     fontFamily: layout.fontText,
-    color: "#74798B"
+    color: "#74798B",
   },
   textTitleSelected: {
-    color: "#95989A"
+    color: "#95989A",
   },
 
   otherInformations: {
@@ -327,17 +287,17 @@ const styles = StyleSheet.create({
 
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
 
   textExpiry: {
     width: "50%",
 
     fontSize: 9,
-    color: "#74798B"
+    color: "#74798B",
   },
   textExpirySelected: {
-    color: "#74798B"
+    color: "#74798B",
   },
 
   textCardNumber: {
@@ -345,22 +305,20 @@ const styles = StyleSheet.create({
 
     fontSize: 9,
     color: "#74798B",
-    textAlign: "right"
+    textAlign: "right",
   },
   textCardNumberSelected: {
-    color: "#74798B"
-  }
+    color: "#74798B",
+  },
 });
 
-const mapStateToProps = state => ({
-  // …
+const mapStateToProps = (state) => ({
   isLoading: state.prizes.isLoading,
-  prizes: state.prizes.prizes
+  prizes: state.prizes.prizes,
 });
 
 const mapDispatchToProps = {
-  // …
-  getPrizes
+  getPrizes,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrizesListScreen);
