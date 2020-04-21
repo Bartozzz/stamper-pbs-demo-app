@@ -44,7 +44,6 @@ class PrizesListScreen extends React.Component {
   });
 
   state = {
-    isCheckingIfCacheValid: false,
     selected: null,
     search: null,
   };
@@ -172,7 +171,7 @@ class PrizesListScreen extends React.Component {
 
   render() {
     const { isLoading, navigation } = this.props;
-    const { isCheckingIfCacheValid, selected } = this.state;
+    const { selected } = this.state;
 
     return (
       <Background source={BackgroundImage} disableScroll>
@@ -182,24 +181,15 @@ class PrizesListScreen extends React.Component {
           available
         />
 
-        {!isCheckingIfCacheValid ? (
-          <>
-            {isLoading ? (
-              <View style={[defaultStyles.grow, defaultStyles.center]}>
-                <Image
-                  source={RewardsLoader}
-                  style={{ width: 150, height: 150 }}
-                />
-              </View>
-            ) : (
-              <ScrollView style={styles.list}>
-                {this.renderList()}
-                <View style={{ height: 60 }} />
-              </ScrollView>
-            )}
-          </>
+        {isLoading ? (
+          <View style={[defaultStyles.grow, defaultStyles.center]}>
+            <Image source={RewardsLoader} style={{ width: 150, height: 150 }} />
+          </View>
         ) : (
-          <View style={[defaultStyles.grow]} />
+          <ScrollView style={styles.list}>
+            {this.renderList()}
+            <View style={{ height: 60 }} />
+          </ScrollView>
         )}
 
         {selected && (
