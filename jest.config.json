@@ -9,13 +9,12 @@
 		"^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
 	},
 	"setupFiles": [
-		"<rootDir>/jest/setup.js"
+		"<rootDir>/jest.setup.js"
 	],
 	"transformIgnorePatterns": [
 		"node_modules/(?!(jest-)?react-native)"
 	],
 	"coveragePathIgnorePatterns": [
-		"/node_modules/",
-		"/jest"
+		"/node_modules/"
 	]
 }
