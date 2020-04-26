@@ -33,8 +33,7 @@ export async function logInWithFacebook(onSuccess, onError) {
   try {
     const fid = facebookAppId;
     await Facebook.initializeAsync(fid);
-    const options = { behavior: 'web' }
-    const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid, options);
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(fid);
 
     if (type !== "success") {
       onError("Could not log-in with Facebook");

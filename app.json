@@ -12,6 +12,7 @@
     "platforms": ["ios", "android"],
     "facebookAppId": "356151625034848",
     "facebookDisplayName": "Stamper",
+    "facebookScheme": "fb356151625034848",
     "assetBundlePatterns": ["**/*"],
     "icon": "./assets/images/icon.png",
     "splash": {
