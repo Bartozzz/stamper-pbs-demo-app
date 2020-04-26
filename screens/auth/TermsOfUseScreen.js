@@ -9,7 +9,7 @@ import * as BoxText from "../../components/layout/box/BoxText";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
-import Button from "../../components/forms/Button";
+import Button from "../../components/Button/index";
 
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
 const BalanceIcon = require("../../assets/images/icons/balance.png");

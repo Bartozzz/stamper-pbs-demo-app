@@ -15,7 +15,7 @@ import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
 
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import Button from "../../components/forms/Button";
+import Button from "../../components/Button/index";
 import Background from "../../components/Background";
 import InputSearch from "../../components/forms/InputSearch";
 import PrizesHeader from "../../components/screens/prizes/Header";

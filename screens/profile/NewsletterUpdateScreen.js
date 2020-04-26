@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 
-import Button from "../../components/forms/Button";
+import Button from "../../components/Button/index";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 

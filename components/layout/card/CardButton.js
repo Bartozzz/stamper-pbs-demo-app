@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../forms/Button";
+import Button from "../../Button/index";
 import styled from "styled-components/native";
 
 const ButtonComponent = styled(Button)`
