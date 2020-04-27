@@ -9,20 +9,20 @@ const ENV = {
       ios:
         "664764542609-dm39ujqp7hvebhcanqpbtkt3342ffr3l.apps.googleusercontent.com",
       android:
-        "664764542609-e79dr8nrbjsutidf2ujpam8ti8nivu6p.apps.googleusercontent.com"
-    })
+        "664764542609-e79dr8nrbjsutidf2ujpam8ti8nivu6p.apps.googleusercontent.com",
+    }),
   },
 
   production: {
     apiUrl: "https://app.getstamper.com",
-    facebookAppId: "356151625034848",
+    facebookAppId: "230031908097780",
     googleClientId: Platform.select({
       ios:
         "664764542609-o4r5a6sbj6av965qv6708p6mvm0aj6si.apps.googleusercontent.com",
       android:
-        "664764542609-hnmmq5p12fc19efikv023lhm4i8bct6k.apps.googleusercontent.com"
-    })
-  }
+        "664764542609-hnmmq5p12fc19efikv023lhm4i8bct6k.apps.googleusercontent.com",
+    }),
+  },
 };
 
 export const getEnv = (env = Constants.manifest.releaseChannel) => {
