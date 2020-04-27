@@ -10,9 +10,9 @@
     "primaryColor": "#0046F4",
     "version": "1.9.5",
     "platforms": ["ios", "android"],
-    "facebookAppId": "356151625034848",
+    "facebookAppId": "230031908097780",
     "facebookDisplayName": "Stamper",
-    "facebookScheme": "fb356151625034848",
+    "facebookScheme": "fb230031908097780",
     "assetBundlePatterns": ["**/*"],
     "icon": "./assets/images/icon.png",
     "splash": {

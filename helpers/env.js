@@ -4,7 +4,7 @@ import { Platform } from "react-native";
 const ENV = {
   staging: {
     apiUrl: "https://stamper-mobile-api-users-staging.azurewebsites.net",
-    facebookAppId: "356151625034848",
+    facebookAppId: "230031908097780",
     googleClientId: Platform.select({
       ios:
         "664764542609-dm39ujqp7hvebhcanqpbtkt3342ffr3l.apps.googleusercontent.com",
