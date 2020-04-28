@@ -18,7 +18,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import * as Routes from "../../navigation";
 
-import Button from "../../components/Button/index";
+import Button from "../../components/Button";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import HeaderTitle from "../../components/nav/HeaderTitle";

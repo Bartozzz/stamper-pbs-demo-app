@@ -6,7 +6,7 @@ import Box from "../../components/layout/box/Box";
 import BoxIcon from "../../components/layout/box/BoxIcon";
 import * as BoxText from "../../components/layout/box/BoxText";
 
-import Button from "../../components/Button/index";
+import Button from "../../components/Button";
 import Background from "../../components/Background";
 import StamperLogo from "../../components/StamperLogo";
 

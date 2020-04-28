@@ -1,15 +1,16 @@
+import React from "react";
+import { TouchableOpacity } from "react-native";
 import colors from "../../constants/Colors";
 import styled from "styled-components/native";
 
-export const ButtonDisabled = styled.View`
+export const Button = styled.View`
   justify-content: center;
   align-items: center;
 
+  width: ${({ full }) => (full ? "100%" : "auto")};
   height: 48px;
 
   border-radius: 7px;
-
-  background-color: ${colors.disabled};
 `;
 
 export const ButtonText = styled.Text`
@@ -29,13 +30,10 @@ export const ActivityIndicator = styled.ActivityIndicator.attrs(() => ({
   color: colors.color
 }))``;
 
-export const ButtonEnabled = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
+export const ButtonDisabled = styled(Button)`
+  background-color: ${colors.disabled};
+`;
 
-  height: 48px;
-
-  border-radius: 7px;
-
+export const ButtonEnabled = styled(props => <Button {...props} as={TouchableOpacity} />)`
   background-color: ${colors.primary};
 `;

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Background from "../../components/Background";
 
-import Button from "../../components/Button/index";
+import Button from "../../components/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/forms/InputWithIcon";
 import HeaderBackIcon from "../../components/nav/HeaderBack";

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
 
-import Button from "../../components/Button/index";
+import Button from "../../components/Button";
 import Background from "../../components/Background";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";

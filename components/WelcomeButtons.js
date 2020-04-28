@@ -5,7 +5,7 @@ import colors from "../constants/Colors";
 
 import i18n from "../translations";
 
-import Button from "./Button/index";
+import Button from "./Button";
 
 const Container = styled(View)`
   flex-direction: row;
