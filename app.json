@@ -8,7 +8,7 @@
     "orientation": "portrait",
     "description": "Stamper to wirtualny portfel kart lojalnościowych w Twoim telefonie - zawsze gotowy by zdobyć nowe pieczątki. Aplikacja zrzesza bardziej lojalnych klientów lubiących korzystać z kart lojalnościowych. Uwolnij się od noszenia wielu papierowych kart i tracenia możliwości zbierania pieczątek podczas zamawiania jedzenia do domu. Od teraz już nigdy nie zgubisz kart lojalnościowych!",
     "primaryColor": "#0046F4",
-    "version": "1.9.5",
+    "version": "1.9.6",
     "platforms": ["ios", "android"],
     "facebookAppId": "230031908097780",
     "facebookDisplayName": "Stamper",
@@ -49,7 +49,7 @@
     },
     "android": {
       "package": "com.getstamper.app",
-      "versionCode": 15,
+      "versionCode": 16,
       "adaptiveIcon": {
         "backgroundColor": "#001432"
       },
