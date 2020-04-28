@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Button from './index.js';
+import Button from './';
 
 const press = jest.fn();
 
