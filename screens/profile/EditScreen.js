@@ -15,7 +15,7 @@ import * as Permissions from "expo-permissions";
 import { AntDesign } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import Button from "../../components/Button/index";
+import Button from "../../components/Button/";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
