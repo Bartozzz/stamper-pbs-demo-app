@@ -11,7 +11,7 @@ export const DashboardButton = ({ children, icon, badge, ...props }) => {
       onPressOut={() => setFocus(false)}
       {...props}
     >
-      {badge !== undefined && (
+      {badge !== undefined && badge>0 && (
         <Styled.BadgeContainer>
           <Styled.BadgeText>{badge}</Styled.BadgeText>
         </Styled.BadgeContainer>
