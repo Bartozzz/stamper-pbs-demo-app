@@ -1,5 +1,5 @@
 import React from "react";
-import * as Styled from "./Index.styled";
+import * as Styled from "./index.styled";
 
 export const InputSearch = (props) => {
     return (
