@@ -6,10 +6,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "npx jest"
-  },
-  "jest": {
-    "preset": "jest-expo"
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-0",
@@ -68,13 +65,12 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "babel-preset-expo": "^8.0.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
     "expo-cli": "^3.13.8",
     "jest": "^25.1.0",
     "jest-expo": "^36.0.0",
+    "jest-expo-enzyme": "^1.0.0",
     "react-native-web": "^0.11.7"
   },
   "private": true
