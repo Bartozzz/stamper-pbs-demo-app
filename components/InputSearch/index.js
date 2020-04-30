@@ -1,4 +1,5 @@
 import React from "react";
+
 import * as Styled from "./index.styled";
 
 export const InputSearch = (props) => {
@@ -6,7 +7,7 @@ export const InputSearch = (props) => {
         <Styled.InputContainer>
             <Styled.InputIcon />
 
-             <Styled.Input testID="InputSearch" {...props} />
+             <Styled.Input testID="input-search" {...props} />
         </Styled.InputContainer>
     );
 };

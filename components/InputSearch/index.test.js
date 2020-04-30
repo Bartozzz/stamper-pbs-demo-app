@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+
 import InputSearch from './';
 
 const getByTestID = (component, ID) => {
@@ -7,9 +8,9 @@ const getByTestID = (component, ID) => {
 }
 
 describe('Input Search', () => { 
-    const mockFn = jest.fn();
+    const changeTextHandler = jest.fn();
 
-    const component = mount(<InputSearch onChangeText={(e) => mockFn(e)} />);
+    const component = mount(<InputSearch onChangeText={(e) => changeTextHandler(e)} />);
     const input = getByTestID(component, "InputSearch");
 
     it('Render', () => {
@@ -17,8 +18,12 @@ describe('Input Search', () => {
     });
 
     it('Interaction', () => {
-        component.props().onChangeText("test");
-        expect(mockFn).toHaveBeenCalledWith("test");
+        const value = "test";
+
+        component.props().onChangeText(value);
+        expect(changeTextHandler).toHaveBeenCalledWith(value);
+        expect(changeTextHandler).toHaveBeenCalledTimes(1);
+
     });
 
 });

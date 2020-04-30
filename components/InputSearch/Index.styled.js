@@ -1,8 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import styled from "styled-components/native";
 import normalize from 'react-native-normalize';
+
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
 
 export const InputContainer = styled.View`
   flex: 1;
