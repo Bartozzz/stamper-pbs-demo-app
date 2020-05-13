@@ -1,11 +1,11 @@
-import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 import styled from "styled-components/native";
 import normalize from 'react-native-normalize';
 
-const InputContainer = styled.View`
+import colors from "../../constants/Colors";
+import layout from "../../constants/Layout";
+
+export const InputContainer = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: center;
@@ -21,7 +21,7 @@ const InputContainer = styled.View`
   background-color: #1a5bf1;
 `;
 
-const InputIcon = styled(Ionicons).attrs(props => ({
+export const InputIcon = styled(Ionicons).attrs(props => ({
   name: "ios-search",
   size: 16,
   color: colors.info
@@ -29,10 +29,10 @@ const InputIcon = styled(Ionicons).attrs(props => ({
   padding-horizontal: 10px;
 `;
 
-const Input = styled.TextInput.attrs(props => ({
+export const Input = styled.TextInput.attrs(props => ({
   underlineColorAndroid: "transparent",
   autoCorrect: false,
-  placeholderTextColor: colors.info
+  placeholderTextColor: colors.info,
 }))`
   flex: 1;
   padding-right: 10px;
@@ -42,15 +42,3 @@ const Input = styled.TextInput.attrs(props => ({
   font-family: ${layout.fontText};
   color: ${colors.info};
 `;
-
-export function InputSearch(props) {
-  return (
-    <InputContainer>
-      <InputIcon />
-
-      <Input {...props} />
-    </InputContainer>
-  );
-}
-
-export default InputSearch;

@@ -16,7 +16,7 @@ import layout from "../../constants/Layout";
 
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Background from "../../components/Background";
-import InputSearch from "../../components/forms/InputSearch";
+import InputSearch from "../../components/InputSearch";
 import PrizesHeader from "../../components/screens/prizes/Header";
 import ExpirationDate from "../../components/helpers/ExpirationDate";
 import SelectableCard from "../../components/SelectableCard";

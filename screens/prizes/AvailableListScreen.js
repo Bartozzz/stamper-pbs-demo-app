@@ -17,7 +17,7 @@ import * as Routes from "../../navigation";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import Button from "../../components/forms/Button";
 import Background from "../../components/Background";
-import InputSearch from "../../components/forms/InputSearch";
+import InputSearch from "../../components/InputSearch";
 import PrizesHeader from "../../components/screens/prizes/Header";
 import ExpirationDate from "../../components/helpers/ExpirationDate";
 import FocusableCard from "../../components/FocusableCard";
