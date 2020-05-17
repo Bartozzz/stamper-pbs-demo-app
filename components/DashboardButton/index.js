@@ -10,15 +10,16 @@ export const DashboardButton = ({ children, icon, badge, ...props }) => {
       onPressIn={() => setFocus(true)}
       onPressOut={() => setFocus(false)}
       {...props}
+      testID="button"
     >
       {badge !== undefined && badge>0 && (
         <Styled.BadgeContainer>
-          <Styled.BadgeText>{badge}</Styled.BadgeText>
+          <Styled.BadgeText testID="badge">{badge}</Styled.BadgeText>
         </Styled.BadgeContainer>
       )}
 
-      <Styled.DashboardButtonIcon source={icon} />
-      <Styled.DashboardButtonText>{children}</Styled.DashboardButtonText>
+      <Styled.DashboardButtonIcon testID="icon" source={icon} />
+      <Styled.DashboardButtonText testID="text">{children}</Styled.DashboardButtonText>
     </Styled.DashboardButton>
   );
 };
