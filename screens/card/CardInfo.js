@@ -22,7 +22,7 @@ import * as Routes from "../../navigation";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import Background from "../../components/Background";
-import CardBackground from "../../components/screens/card/CardBackground";
+import CardBackground from "../../components/CardBackground/";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/details_wn.png");
