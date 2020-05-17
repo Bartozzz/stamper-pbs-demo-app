@@ -21,7 +21,7 @@ import Error from "../../components/Error";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
-import InputWithLabel from "../../components/forms/InputWithLabel";
+import InputWithLabel from "../../components/InputWithLabel";
 import Checkbox, { CheckBoxLabel } from "../../components/Checkbox";
 
 import {
