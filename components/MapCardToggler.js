@@ -9,8 +9,10 @@ import colors from "../constants/Colors";
 const Button = styled.View`
   z-index: 3;
 
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   position: absolute;
   bottom: 25px;
@@ -18,19 +20,28 @@ const Button = styled.View`
   right: 0px;
 
   height: ${normalize(70)}px;
+  padding-horizontal: 20px;
 
   background-color: ${colors.primary};
 `;
 
-const Text = styled.Text`
+const TextCount = styled.Text`
   color: ${colors.color};
 `;
 
-const MapCardToggler = ({ show, onPress }) => {
+const TextControl = styled.Text`
+  color: ${colors.color};
+  text-transform: uppercase;
+`;
+
+const MapCardToggler = ({ show, count, onPress }) => {
+  const controlText = show ? i18n.t("map.closeCards") : i18n.t("map.showCards");
+
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <Button>
-        <Text>{show ? i18n.t("map.closeCards") : i18n.t("map.showCards")}</Text>
+        <TextCount>{i18n.t("map.count", { count })}</TextCount>
+        <TextControl>{controlText}</TextControl>
       </Button>
     </TouchableWithoutFeedback>
   );

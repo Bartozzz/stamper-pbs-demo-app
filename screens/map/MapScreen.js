@@ -4,7 +4,7 @@ import { AsyncStorage, Dimensions, View, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 import { _ } from "lodash";
-import { NavigationEvents } from 'react-navigation';
+import { NavigationEvents } from "react-navigation";
 
 import * as R from "ramda";
 
@@ -19,8 +19,9 @@ import { getCluster } from "../../helpers/map";
 // Components:
 import Background from "../../components/Background";
 import MapHeader from "../../components/screens/map/Header";
-import HeaderEmpty from "../../components/nav/HeaderEmpty";
+import HeaderButtonSearch from "../../components/HeaderButtonSearch";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import MapSearchInput from "../../components/MapSearchInput";
 import MapArea from "../../components/MapArea";
 import MapAreaMarker from "../../components/MapAreaMarker";
 import MapCard, { slideWidth, slideMargin } from "../../components/MapCard";
@@ -49,6 +50,9 @@ const MapScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [currentLocation, reverseLocation] = useLocation();
 
+  const [searchVisible, setSearchVisible] = React.useState(false);
+  const [searchQuery, setSearchQuery] = React.useState("");
+
   const [cards, setCards] = React.useState([]);
   const [showCards, setShowCards] = React.useState(false);
   const [markers, setMarkers] = React.useState([]);
@@ -74,7 +78,7 @@ const MapScreen = ({ navigation }) => {
     [currentLocation]
   );
 
-  const addCardHandler = React.useCallback(cardId => {
+  const addCardHandler = React.useCallback((cardId) => {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
@@ -87,19 +91,19 @@ const MapScreen = ({ navigation }) => {
             height: 100,
             width: 88,
             image: CardAdd,
-            timeout: 3000
+            timeout: 3000,
           })
           .catch(() => {
             navigation.navigate(Routes.INFO_ERROR, {
               redirect: Routes.MAP,
-              message: i18n.t("errors.wallet.cardAdd")
+              message: i18n.t("errors.wallet.cardAdd"),
             });
           });
       });
     }
 
     dispatch(addCard(cardId))
-      .then(response => {
+      .then((response) => {
         const { termsAndConditions } = response.payload.data;
         const { title, termsAndConditionsUrl } = termsAndConditions;
 
@@ -107,7 +111,7 @@ const MapScreen = ({ navigation }) => {
           navigation.push(Routes.MAP_ACCEPT_CARD_TERMS, {
             title,
             termsAndConditionsUrl,
-            onConfirm: confirmCardTerms
+            onConfirm: confirmCardTerms,
           });
         } else {
           confirmCardTerms();
@@ -116,12 +120,26 @@ const MapScreen = ({ navigation }) => {
       .catch(() => {
         navigation.navigate(Routes.INFO_ERROR, {
           redirect: Routes.MAP,
-          message: i18n.t("errors.wallet.cardAdd")
+          message: i18n.t("errors.wallet.cardAdd"),
         });
       });
   }, []);
 
-  const closeCardsOnDrag = useRef(_.debounce(() => setShowCards(false), 250)).current;
+  const handleSearch = React.useCallback((value) => {
+    setSearchQuery(value);
+  }, []);
+
+  const closeCardsOnDrag = useRef(_.debounce(() => setShowCards(false), 250))
+    .current;
+
+  // Set navigation params on initial route mount:
+  React.useEffect(() => {
+    navigation.setParams({
+      toggle: () => {
+        setSearchVisible((visible) => !visible);
+      },
+    });
+  }, []);
 
   // Fetch data for user location from the API:
   React.useEffect(() => {
@@ -130,7 +148,7 @@ const MapScreen = ({ navigation }) => {
       const { coords } = currentLocation;
 
       dispatch(getRegion(city, isoCountryCode, coords))
-        .then(response => {
+        .then((response) => {
           const { data } = response.payload;
           const region = getRegionForLocation(currentLocation);
           const cards = data.cards
@@ -144,26 +162,36 @@ const MapScreen = ({ navigation }) => {
           setRegion(region);
           setCluster(createCluster(cards, region));
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
   }, [currentLocation, reverseLocation]);
 
-  // If the user selects a filter, filter shown cards:
+  // If the user updates filters, filter shown cards:
   React.useEffect(() => {
     if (region) {
-      const cards = markers.filter(filterByCategory(filter, filters));
+      let cards = markers.filter(filterByCategory(filter, filters));
+
+      // If user has search enabled, filter by the query. If he closed the
+      // search bar, reset search query to the default value:
+      if (searchVisible) {
+        cards = cards.filter(filterByQuery(searchQuery));
+      } else {
+        setSearchQuery("");
+      }
 
       setCards(cards);
       setCluster(createCluster(cards, region));
     }
-  }, [filters, filter]);
+  }, [filters, filter, searchVisible, searchQuery]);
 
   // If the user hides cards, reset their state to default:
   React.useEffect(() => {
     if (region && !showCards) {
-      const cards = markers.filter(filterByCategory(filter, filters));
+      const cards = markers
+        .filter(filterByCategory(filter, filters))
+        .filter(filterByQuery(searchQuery));
 
       setCards(cards);
       setCluster(createCluster(cards, region));
@@ -187,10 +215,19 @@ const MapScreen = ({ navigation }) => {
         filter={filter}
         onFilterSelect={(filter, index) => setFilter(index)}
       />
+
+      {searchVisible && (
+        <MapSearchInput
+          onChangeText={handleSearch}
+          value={searchQuery}
+          onClose={() => setSearchVisible(false)}
+        />
+      )}
+
       {destroyMap || (
         <MapArea
           userPosition={getRegionForLocation(currentLocation)}
-          onRegionChangeComplete={region => {
+          onRegionChangeComplete={(region) => {
             const cards = markers.filter(filterByCategory(filter, filters));
 
             setRegion(region);
@@ -200,25 +237,29 @@ const MapScreen = ({ navigation }) => {
           onPress={closeCardsOnDrag}
         >
           <NavigationEvents
-            onWillBlur={() => {setDestroyMap(true)}}
+            onWillBlur={() => {
+              setDestroyMap(true);
+            }}
           />
-            {cluster.markers.map(marker => (
-              <MapAreaMarker
-                key={`${marker.geometry.coordinates[0]}-${marker.geometry.coordinates[1]}`}
-                marker={marker}
-                cluster={cluster.cluster}
-                onPress={selectedCards => {
-                  const cards = selectedCards
-                    .sort(sortByDistance(getRegionForLocation(currentLocation)))
-                    .sort(sortByActive());
 
-                    setShowCards(true);
-                    setCards(cards);
-                  }}
-                />
-              ))}
+          {cluster.markers.map((marker) => (
+            <MapAreaMarker
+              key={`${marker.geometry.coordinates[0]}-${marker.geometry.coordinates[1]}`}
+              marker={marker}
+              cluster={cluster.cluster}
+              onPress={(selectedCards) => {
+                const cards = selectedCards
+                  .sort(sortByDistance(getRegionForLocation(currentLocation)))
+                  .sort(sortByActive());
+
+                setShowCards(true);
+                setCards(cards);
+              }}
+            />
+          ))}
         </MapArea>
       )}
+
       {showCards && (
         <CardsContainer>
           <Carousel
@@ -237,6 +278,7 @@ const MapScreen = ({ navigation }) => {
 
       <MapCardToggler
         show={showCards}
+        count={cards.length}
         onPress={() => setShowCards(!showCards)}
       />
     </Background>
@@ -245,13 +287,17 @@ const MapScreen = ({ navigation }) => {
 
 MapScreen.navigationOptions = ({ navigation }) => ({
   title: i18n.t("navigation.map"),
-  headerLeft: <HeaderEmpty />,
-  headerRight: <HeaderHamburger onPress={() => navigation.pop()} navigation={navigation} />,
+  headerLeft: (
+    <HeaderButtonSearch onPress={() => navigation.state.params.toggle()} />
+  ),
+  headerRight: (
+    <HeaderHamburger onPress={() => navigation.pop()} navigation={navigation} />
+  ),
   headerStyle: {
     ...defaultStyles.headerTransparent,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
-  gesturesEnabled: false
+  gesturesEnabled: false,
 });
 
 export function normalizeCardGeometry(card) {
@@ -260,15 +306,15 @@ export function normalizeCardGeometry(card) {
     lat: Number(card.lat),
     lng: Number(card.lng),
     geometry: {
-      coordinates: [Number(card.lng), Number(card.lat)]
-    }
+      coordinates: [Number(card.lng), Number(card.lat)],
+    },
   };
 }
 
 function sortByDistance(userPosition) {
   const userCoords = {
     lat: Number(userPosition.latitude),
-    lng: Number(userPosition.longitude)
+    lng: Number(userPosition.longitude),
   };
 
   return (a, b) => {
@@ -292,8 +338,20 @@ function filterByCategory(filter, categories) {
   if (filter === 0) {
     return () => true;
   } else {
-    return card => card.filter === categories[filter];
+    return (card) => card.filter === categories[filter];
   }
+}
+
+function filterByQuery(query) {
+  return (marker) => {
+    const criterias = [marker.title, marker.address, marker.merchantName]
+      .filter((criterion) => typeof criterion === "string")
+      .map((string) => string.toLowerCase());
+
+    return criterias.some((criterion) =>
+      criterion.includes(query.toLowerCase())
+    );
+  };
 }
 
 function getRegionForLocation(location) {
@@ -301,7 +359,7 @@ function getRegionForLocation(location) {
     latitude: Number(location.coords.latitude),
     longitude: Number(location.coords.longitude),
     latitudeDelta: 0.025,
-    longitudeDelta: 0.025
+    longitudeDelta: 0.025,
   };
 }
 
@@ -328,7 +386,7 @@ function groupCardsByMerchant(cards) {
       R.allPass([
         R.propEq("merchantId", cur.merchantId),
         R.propEq("lat", Number(cur.lat)),
-        R.propEq("lng", Number(cur.lng))
+        R.propEq("lng", Number(cur.lng)),
       ])
     )(acc);
 
@@ -343,7 +401,7 @@ function groupCardsByMerchant(cards) {
         lng: Number(cur.lng),
         logoUrl: cur.logoUrl,
         merchantId: cur.merchantId,
-        cards: [cur]
+        cards: [cur],
       })(acc);
     }
   }, [])(cards);

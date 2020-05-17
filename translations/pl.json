@@ -181,8 +181,9 @@
     "favs": "Ulubione",
     "online": "Online",
 
-    "closeCards": "Zamknij listę miejsc.",
-    "showCards": "Pokaż listę miejsc.",
+    "closeCards": "Zamknij",
+    "showCards": "Pokaż",
+    "count": "Znaleziono {{count}} miejsc w okolicy.",
 
     "collectStamps": {
       "one": "zbierz 1 pieczątkę",
