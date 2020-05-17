@@ -7,9 +7,9 @@ const ENV = {
     facebookAppId: "230031908097780",
     googleClientId: Platform.select({
       ios:
-        "664764542609-dm39ujqp7hvebhcanqpbtkt3342ffr3l.apps.googleusercontent.com",
+        "1083137618823-qse3mci4ig0t9ji9i255k117pa7tg3td.apps.googleusercontent.com",
       android:
-        "664764542609-e79dr8nrbjsutidf2ujpam8ti8nivu6p.apps.googleusercontent.com",
+        "1083137618823-7naukb8qdbqjf9sc91jkloogn773965u.apps.googleusercontent.com",
     }),
   },
 
@@ -18,9 +18,9 @@ const ENV = {
     facebookAppId: "230031908097780",
     googleClientId: Platform.select({
       ios:
-        "664764542609-o4r5a6sbj6av965qv6708p6mvm0aj6si.apps.googleusercontent.com",
+        "1083137618823-jjutii8verfihrinjefns1rk7ifsas6o.apps.googleusercontent.com",
       android:
-        "664764542609-hnmmq5p12fc19efikv023lhm4i8bct6k.apps.googleusercontent.com",
+        "1083137618823-i2n9ulgor4v6sst7t41iisrglivs47ch.apps.googleusercontent.com",
     }),
   },
 };
