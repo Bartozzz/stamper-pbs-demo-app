@@ -11,7 +11,7 @@ import Background from "../../components/Background";
 
 import Button from "../../components/Button";
 import Error from "../../components/Error";
-import InputWithIcon from "../../components/forms/InputWithIcon";
+import InputWithIcon from "../../components/InputWithIcon";
 import HeaderBackIcon from "../../components/nav/HeaderBack";
 import HeaderTitle from "../../components/nav/HeaderTitle";
 
