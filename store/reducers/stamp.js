@@ -5,8 +5,8 @@ export const STAMP_ADD_REQUEST = "APP/STAMP/ADD_REQUEST";
 export const STAMP_ADD_SUCCESS = "APP/STAMP/ADD_SUCCESS";
 export const STAMP_ADD_FAIL = "APP/STAMP/ADD_FAIL";
 
-const initialState = {
-  isAdding: false
+export const initialState = {
+  isAdding: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -14,14 +14,14 @@ export default function reducer(state = initialState, action) {
     case STAMP_ADD_REQUEST:
       return {
         ...state,
-        isAdding: true
+        isAdding: true,
       };
 
     case STAMP_ADD_SUCCESS:
     case STAMP_ADD_FAIL:
       return {
         ...state,
-        isAdding: false
+        isAdding: false,
       };
 
     default:
@@ -37,8 +37,8 @@ export const addStamp = (code, acceptedTerms = false) => ({
       url: Url.Stamp.Add(),
       data: {
         code,
-        TermsAndConditions: acceptedTerms
-      }
-    }
-  }
+        TermsAndConditions: acceptedTerms,
+      },
+    },
+  },
 });
