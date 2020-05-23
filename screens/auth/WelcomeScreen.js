@@ -10,7 +10,7 @@ import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import Background from "../../components/Background";
 
-import WelcomeItem from "../../components/WelcomelItem"
+import WelcomeItem from "../../components/WelcomeItem"
 import WelcomeButtons from "../../components/WelcomeButtons"
 
 import {
