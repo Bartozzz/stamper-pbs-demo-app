@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import Box from "../../components/layout/box/Box";
-import BoxIcon from "../../components/layout/box/BoxIcon";
-import * as BoxText from "../../components/layout/box/BoxText";
+import * as Box from "../../components/layout/Box";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -50,21 +48,21 @@ class ScannerAcceptStampTermsScreen extends React.Component {
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
 
-        <Box>
+        <Box.Container>
           <TouchableOpacity style={styles.close} onPress={this.refuse}>
             <Ionicons name="md-close" size={32} color="white" />
           </TouchableOpacity>
 
-          <BoxIcon width={107} height={85} source={BalanceIcon} />
+          <Box.Icon width={107} height={85} source={BalanceIcon} />
 
-          <BoxText.Heading>
+          <Box.Heading>
             {i18n.t("map.terms.accept", { title })}
-          </BoxText.Heading>
+          </Box.Heading>
 
           <TouchableOpacity onPress={this.openTermsAndConditions(terms)}>
-            <BoxText.Action>{i18n.t("map.terms.terms")}</BoxText.Action>
+            <Box.Action>{i18n.t("map.terms.terms")}</Box.Action>
           </TouchableOpacity>
-        </Box>
+        </Box.Container>
 
         <View style={[defaultStyles.row, styles.buttons]}>
           <Button

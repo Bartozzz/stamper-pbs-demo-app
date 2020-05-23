@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { AsyncStorage, StyleSheet, View } from "react-native";
 
-import Box from "../../components/layout/box/Box";
-import BoxIcon from "../../components/layout/box/BoxIcon";
-import * as BoxText from "../../components/layout/box/BoxText";
+import * as Box from "../../components/layout/Box";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -50,15 +48,15 @@ class CardRemovalConfirmationScreen extends React.Component {
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
 
-        <Box>
-          <BoxIcon width={107} height={85} source={NewsletterIcon} />
+        <Box.Container>
+          <Box.Icon width={107} height={85} source={NewsletterIcon} />
 
-          <BoxText.Heading>{i18n.t("wallet.removal.headline")}</BoxText.Heading>
+          <Box.Heading>{i18n.t("wallet.removal.headline")}</Box.Heading>
 
-          <BoxText.Subheading>
+          <Box.Subheading>
             {i18n.t("wallet.removal.description")}
-          </BoxText.Subheading>
-        </Box>
+          </Box.Subheading>
+        </Box.Container>
 
         <View style={[defaultStyles.row, styles.buttons]}>
           <Button

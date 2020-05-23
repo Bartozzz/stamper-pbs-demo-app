@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View } from "react-native";
 
-import Box from "../../components/layout/box/Box";
-import BoxIcon from "../../components/layout/box/BoxIcon";
-import * as BoxText from "../../components/layout/box/BoxText";
+import * as Box from "../../components/layout/Box";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -35,17 +33,17 @@ class ScannerConfirmRefusedTermsScreen extends React.Component {
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
 
-        <Box>
-          <BoxIcon width={107} height={85} source={BalanceIcon} />
+        <Box.Container>
+          <Box.Icon width={107} height={85} source={BalanceIcon} />
 
-          <BoxText.Heading>
+          <Box.Heading>
             {i18n.t("map.terms.refuse.heading")}
-          </BoxText.Heading>
+          </Box.Heading>
 
-          <BoxText.Subheading>
+          <Box.Subheading>
             {i18n.t("map.terms.refuse.subheading")}
-          </BoxText.Subheading>
-        </Box>
+          </Box.Subheading>
+        </Box.Container>
 
         <View style={[defaultStyles.row, styles.buttons]}>
           <Button

@@ -8,9 +8,7 @@ import StamperLogo from "../../components/StamperLogo";
 
 import { updateNewsletter } from "../../store/reducers/profile";
 
-import Box from "../../components/layout/box/Box";
-import BoxIcon from "../../components/layout/box/BoxIcon";
-import * as BoxText from "../../components/layout/box/BoxText";
+import * as Box from "../../components/layout/Box";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -53,23 +51,23 @@ class NewsletterUpdateScreen extends React.Component {
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />
 
-        <Box>
-          <BoxIcon width={107} height={85} source={NewsletterIcon} />
+        <Box.Container>
+          <Box.Icon width={107} height={85} source={NewsletterIcon} />
 
-          <BoxText.Heading>
+          <Box.Heading>
             {i18n.t("profile.newsletter.headline")}
-          </BoxText.Heading>
+          </Box.Heading>
 
           <TouchableOpacity onPress={this.navigateToTOS}>
-            <BoxText.Action>
+            <Box.Action>
               {i18n.t("profile.newsletter.terms")}
-            </BoxText.Action>
+            </Box.Action>
           </TouchableOpacity>
 
-          <BoxText.Subheading>
+          <Box.Subheading>
             {i18n.t("profile.newsletter.question")}
-          </BoxText.Subheading>
-        </Box>
+          </Box.Subheading>
+        </Box.Container>
 
         <View style={[defaultStyles.row, styles.buttons]}>
           <Button
