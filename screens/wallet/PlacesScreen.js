@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
 
 import * as Routes from "../../navigation";
-import Card from "../../components/layout/card/Card";
-import CardButton from "../../components/layout/card/CardButton";
+import * as Card from "../../components/layout/Card";
 import HeaderHamburger from "../../components/nav/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -91,14 +90,14 @@ class WalletPlacesScreen extends React.Component {
           return item.id;
         }}
         renderItem={({ item }) => (
-          <Card
+          <Card.Component
             image={{ uri: item.logoUrl }}
             title={item.merchantName}
             subtitle={i18n.t("wallet.cardsAmount", {
               count: item.cardsAmount
             })}
             renderButton={() => (
-              <CardButton
+              <Card.Button
                 title={i18n.t("wallet.seeCards")}
                 onPress={() => {
                   navigation.push(Routes.CARD_INFO, {
