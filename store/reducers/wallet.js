@@ -18,7 +18,7 @@ export const WALLET_REMOVE_CARD_FAIL = "APP/WALLET/REMOVE_CARD_FAIL";
 
 const initialState = {
   isLoading: false,
-  cards: []
+  cards: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -26,21 +26,21 @@ export default function reducer(state = initialState, action) {
     case WALLET_GET_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case WALLET_GET_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        cards: action.payload.data.cards
+        cards: action.payload.data.cards,
       };
 
     case WALLET_GET_FAIL:
       return {
         ...state,
         isLoading: false,
-        cards: []
+        cards: [],
       };
 
     case WALLET_REMOVE_CARD_REQUEST: {
@@ -48,14 +48,14 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        cards: state.cards.filter(card => card.id !== cardId)
+        cards: state.cards.filter((card) => card.id !== cardId),
       };
     }
 
     case WALLET_RESTORE: {
       return {
         ...state,
-        cards: action.payload.cards
+        cards: action.payload.cards,
       };
     }
 
@@ -64,27 +64,27 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const restoreWallet = payload => ({
+export const restoreWallet = (payload) => ({
   type: WALLET_RESTORE,
   payload: {
-    cards: payload.cards
-  }
+    cards: payload.cards,
+  },
 });
 
 export const getWallet = () => ({
   types: [WALLET_GET_REQUEST, WALLET_GET_SUCCESS, WALLET_GET_FAIL],
   payload: {
     request: {
-      url: Url.Wallet.Get()
-    }
-  }
+      url: Url.Wallet.Get(),
+    },
+  },
 });
 
 export const addCard = (cardId, acceptedTerms = false) => ({
   types: [
     WALLET_ADD_CARD_REQUEST,
     WALLET_ADD_CARD_SUCCESS,
-    WALLET_ADD_CARD_FAIL
+    WALLET_ADD_CARD_FAIL,
   ],
   payload: {
     request: {
@@ -92,25 +92,25 @@ export const addCard = (cardId, acceptedTerms = false) => ({
       url: Url.Card.Add(),
       data: {
         cardId,
-        TermsAndConditions: acceptedTerms
-      }
-    }
-  }
+        TermsAndConditions: acceptedTerms,
+      },
+    },
+  },
 });
 
-export const removeCard = cardId => ({
+export const removeCard = (cardId) => ({
   types: [
     WALLET_REMOVE_CARD_REQUEST,
     WALLET_REMOVE_CARD_SUCCESS,
-    WALLET_REMOVE_CARD_FAIL
+    WALLET_REMOVE_CARD_FAIL,
   ],
   payload: {
     request: {
       method: "POST",
       url: Url.Card.Remove(),
       data: {
-        cardId
-      }
-    }
-  }
+        cardId,
+      },
+    },
+  },
 });

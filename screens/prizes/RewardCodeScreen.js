@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -41,18 +41,18 @@ class RewardCodeScreen extends React.Component {
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
     selectedDiscountProvider: null,
-    generatedCode: null
+    generatedCode: null,
   };
 
   componentDidMount() {
     if (this.defaultDiscountProvider && this.discountProviders.length === 0) {
       this.setState({
-        selectedDiscountProvider: this.defaultDiscountProvider
+        selectedDiscountProvider: this.defaultDiscountProvider,
       });
     }
   }
@@ -64,12 +64,12 @@ class RewardCodeScreen extends React.Component {
       if (this.defaultDiscountProvider && this.discountProviders.length === 0) {
         this.setState({
           selectedDiscountProvider: this.defaultDiscountProvider,
-          generatedCode: null
+          generatedCode: null,
         });
       } else {
         this.setState({
           selectedDiscountProvider: null,
-          generatedCode: null
+          generatedCode: null,
         });
       }
     }
@@ -80,20 +80,20 @@ class RewardCodeScreen extends React.Component {
   }
 
   get defaultDiscountProvider() {
-    return this.card.discountProviders.filter(provider => {
+    return this.card.discountProviders.filter((provider) => {
       return provider.active && provider.default;
     })[0];
   }
 
   get discountProviders() {
-    return this.card.discountProviders.filter(provider => {
+    return this.card.discountProviders.filter((provider) => {
       return !provider.default;
     });
   }
 
-  selectDiscountProvider = provider => {
+  selectDiscountProvider = (provider) => {
     this.setState({
-      selectedDiscountProvider: provider
+      selectedDiscountProvider: provider,
     });
   };
 
@@ -103,15 +103,15 @@ class RewardCodeScreen extends React.Component {
 
     this.props
       .getDiscountCode(cardId, providerId)
-      .then(response => {
+      .then((response) => {
         this.setState({
-          generatedCode: response.payload.data.code
+          generatedCode: response.payload.data.code,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         this.props.navigation.navigate(Routes.INFO_ERROR, {
-          redirect: Routes.PRIZES_LIST
+          redirect: Routes.PRIZES_LIST,
         });
       });
   };
@@ -141,7 +141,7 @@ class RewardCodeScreen extends React.Component {
             onPress={() => {
               this.props.navigation.navigate(Routes.INFO_SUCCESS, {
                 message: i18n.t("success.scanner.reward"),
-                redirect: Routes.PRIZES_LIST
+                redirect: Routes.PRIZES_LIST,
               });
             }}
           />
@@ -181,23 +181,27 @@ class RewardCodeScreen extends React.Component {
         )}
 
         <View style={styles.providers}>
-          {this.discountProviders.map(provider => (
-              <TouchableOpacity
-                key={provider.id}
-                onPress={() =>
-                  provider.active
-                    ? this.selectDiscountProvider(provider)
-                    : () => null
-                }
-              >
-                <View style={styles.provider}>
-                  <Image
-                    source={(provider.active ? {uri: provider.logoUrl} : {uri: provider.logoUrlInactive})}
-                    style={[styles.providerImage]}
-                  />
-                </View>
-              </TouchableOpacity>
-            ))}
+          {this.discountProviders.map((provider) => (
+            <TouchableOpacity
+              key={provider.id}
+              onPress={() =>
+                provider.active
+                  ? this.selectDiscountProvider(provider)
+                  : () => null
+              }
+            >
+              <View style={styles.provider}>
+                <Image
+                  source={
+                    provider.active
+                      ? { uri: provider.logoUrl }
+                      : { uri: provider.logoUrlInactive }
+                  }
+                  style={[styles.providerImage]}
+                />
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
     );
@@ -208,7 +212,13 @@ class RewardCodeScreen extends React.Component {
 
     return (
       <View style={styles.card}>
-        <TouchableOpacity onPress={this.discountProviders.length === 0 ? () => {this.props.navigation.navigate(Routes.PRIZES_LIST)} : () => this.selectDiscountProvider(null)}>
+        <TouchableOpacity
+          onPress={
+            this.discountProviders.length === 0
+              ? () => this.props.navigation.navigate(Routes.PRIZES_LIST)
+              : () => this.selectDiscountProvider(null)
+          }
+        >
           <AntDesign style={styles.close} name="closecircleo" size={32} />
         </TouchableOpacity>
 
@@ -254,7 +264,7 @@ const providerCardSize =
 const styles = StyleSheet.create({
   about: {
     marginTop: 60,
-    marginBottom: 40
+    marginBottom: 40,
   },
   aboutIcon: {
     alignSelf: "center",
@@ -265,47 +275,47 @@ const styles = StyleSheet.create({
 
     borderWidth: 2,
     borderRadius: 40,
-    borderColor: colors.primary
+    borderColor: colors.primary,
   },
   aboutMerchant: {
     marginBottom: 10,
 
     textTransform: "uppercase",
     textAlign: "center",
-    color: colors.color
+    color: colors.color,
   },
   aboutTitle: {
     textAlign: "center",
-    color: colors.disabled
+    color: colors.disabled,
   },
 
   close: {
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
   },
 
   heading: {
     marginVertical: 20,
-    fontSize: 20
+    fontSize: 20,
   },
 
   text: {
     fontFamily: "poppins-regular",
     textAlign: "center",
-    color: "#000000"
+    color: "#000000",
   },
 
   pickText: {
     marginBottom: 20,
-    width: '90%',
+    width: "90%",
     alignSelf: "center",
     textAlign: "center",
-    color: colors.disabled
+    color: colors.disabled,
   },
 
   providers: {
     flexWrap: "wrap",
     flexDirection: "row",
-    margin: providerCardMargin
+    margin: providerCardMargin,
   },
 
   provider: {
@@ -315,19 +325,19 @@ const styles = StyleSheet.create({
     width: providerCardSize,
     height: providerCardSize,
 
-    alignSelf: "center"
+    alignSelf: "center",
   },
   providerImage: {
     width: providerCardSize,
     height: providerCardSize,
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
   providerImageMain: {
     position: "absolute",
-    opacity: 0.25
+    opacity: 0.25,
   },
   providerImageOverlay: {
-    tintColor: "gray"
+    tintColor: "gray",
   },
 
   code: {
@@ -337,7 +347,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: "solid",
-    borderColor: colors.primary
+    borderColor: colors.primary,
   },
   codeTitle: {
     marginTop: 50,
@@ -345,19 +355,19 @@ const styles = StyleSheet.create({
 
     fontSize: 26,
     textAlign: "center",
-    color: colors.primary
+    color: colors.primary,
   },
   codeValue: {
     marginBottom: 50,
 
     fontSize: 28,
     textAlign: "center",
-    color: colors.color
+    color: colors.color,
   },
 
   buttonContainer: {
     paddingVertical: 25,
-    paddingHorizontal: 24
+    paddingHorizontal: 24,
   },
 
   card: {
@@ -365,8 +375,8 @@ const styles = StyleSheet.create({
     padding: 15,
 
     backgroundColor: "white",
-    borderRadius: 16
-  }
+    borderRadius: 16,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -374,7 +384,7 @@ const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = {
-  getDiscountCode
+  getDiscountCode,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RewardCodeScreen);

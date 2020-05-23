@@ -5,8 +5,8 @@ import styled from "styled-components/native";
 import colors from "../../../constants/Colors";
 import layout from "../../../constants/Layout";
 
-const Header = styled.ScrollView.attrs(props => ({
-  horizontal: true
+const Header = styled.ScrollView.attrs((props) => ({
+  horizontal: true,
 }))`
   padding-top: 15px;
   padding-bottom: 10px;

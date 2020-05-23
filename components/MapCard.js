@@ -7,7 +7,7 @@ import {
   MaterialIcons,
   FontAwesome,
   Foundation,
-  Entypo
+  Entypo,
 } from "@expo/vector-icons";
 import normalize from "react-native-normalize";
 
@@ -58,12 +58,12 @@ const CardLogoImageContainer = styled.View`
 
   margin: ${slidePadding}px;
   width: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
-  height: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px; 
-  borderRadius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
+  height: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
+  borderradius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
 `;
 
-const CardLogoImage = styled.Image.attrs(props => ({
-  resizeMode: "contain"
+const CardLogoImage = styled.Image.attrs((props) => ({
+  resizeMode: "contain",
 }))`
   width: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
   height: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
@@ -135,7 +135,7 @@ const CardFooterAddCardButtonText = styled.Text`
 `;
 
 function openLink(url) {
-  Linking.canOpenURL(url).then(supported => {
+  Linking.canOpenURL(url).then((supported) => {
     if (supported) {
       Linking.openURL(url);
     }
@@ -146,18 +146,18 @@ function noop() {
   // Does nothing
 }
 
-const MapCard = props => {
+const MapCard = (props) => {
   const [flip, setFlip] = React.useState(false);
 
   const handleFlipButtonClick = React.useCallback(() => {
-    setFlip(flip => !flip);
+    setFlip((flip) => !flip);
   }, []);
 
-  const handleLinkButtonClick = React.useCallback(url => {
+  const handleLinkButtonClick = React.useCallback((url) => {
     openLink(url.startsWith("http") ? url : `https://${url}`);
   }, []);
 
-  const handlePhoneButtonClick = React.useCallback(phoneNumber => {
+  const handlePhoneButtonClick = React.useCallback((phoneNumber) => {
     openLink(`tel:${phoneNumber.replace(/-| /g, "")}`);
   }, []);
 

@@ -4,20 +4,21 @@ import {
   StyleSheet,
   AsyncStorage,
   Dimensions,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
+import { getErrorsFromResponse } from "../../helpers/errors";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import Background from "../../components/Background";
 
-import WelcomeItem from "../../components/WelcomeItem"
-import WelcomeButtons from "../../components/WelcomeButtons"
+import WelcomeItem from "../../components/WelcomeItem";
+import WelcomeButtons from "../../components/WelcomeButtons";
 
 import {
   loginExternal,
   registerExternal,
   ACCESS_TOKEN,
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
 } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
@@ -47,56 +48,56 @@ class AuthWelcomeScreen extends React.Component {
         width: 70,
         flex: 0.5,
         title: i18n.t("welcome.title1"),
-        subtitle: i18n.t("welcome.subtitle1")
+        subtitle: i18n.t("welcome.subtitle1"),
       },
       {
         image: WelcomePicture2,
         title: i18n.t("welcome.title2"),
-        subtitle: i18n.t("welcome.subtitle2")
+        subtitle: i18n.t("welcome.subtitle2"),
       },
       {
         image: WelcomePicture3,
         title: i18n.t("welcome.title3"),
-        subtitle: i18n.t("welcome.subtitle3")
+        subtitle: i18n.t("welcome.subtitle3"),
       },
       {
         image: WelcomePicture4,
         title: i18n.t("welcome.title4"),
-        subtitle: i18n.t("welcome.subtitle4")
-      }
+        subtitle: i18n.t("welcome.subtitle4"),
+      },
     ],
     error: {
       password: null,
       email: null,
-      other: null
-    }
+      other: null,
+    },
   };
 
   loginWithFacebook = async () => {
     this.setState({ processing: true });
 
     logInWithFacebook(
-      user => {
+      (user) => {
         const email = user.email;
         const username = email.split("@")[0];
 
         this.props
           .registerExternal(email, "facebook", username)
-          .then(response => {
+          .then((response) => {
             // Require user to accepts the terms of service. The registeration
             // already logs the user in, so calling `loginExternal` will fail:
             this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => this.handleSuccess(true)(response)
+              onAccept: () => this.handleSuccess(true)(response),
             });
           })
           .catch(() => {
             this.loginExternal(email);
           });
       },
-      error => {
+      (error) => {
         this.setState({
           processing: false,
-          error: { ...this.state.error, other: error }
+          error: { ...this.state.error, other: error },
         });
       }
     );
@@ -106,27 +107,27 @@ class AuthWelcomeScreen extends React.Component {
     this.setState({ processing: true });
 
     logInWithGoogle(
-      user => {
+      (user) => {
         const email = user.email;
         const username = email.split("@")[0];
 
         this.props
           .registerExternal(email, "google", username)
-          .then(response => {
+          .then((response) => {
             // Require user to accepts the terms of service. The registeration
             // already logs the user in, so calling `loginExternal` will fail:
             this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
-              onAccept: () => this.handleSuccess(true)(response)
+              onAccept: () => this.handleSuccess(true)(response),
             });
           })
           .catch(() => {
             this.loginExternal(email);
           });
       },
-      error => {
+      (error) => {
         this.setState({
           processing: false,
-          error: { ...this.state.error, other: error }
+          error: { ...this.state.error, other: error },
         });
       }
     );
@@ -139,7 +140,7 @@ class AuthWelcomeScreen extends React.Component {
       .catch(this.handleError);
   };
 
-  handleSuccess = firstLogin => async response => {
+  handleSuccess = (firstLogin) => async (response) => {
     if (response.error) {
       return this.handleError(response);
     }
@@ -155,11 +156,13 @@ class AuthWelcomeScreen extends React.Component {
 
     // Triggers profile fetch:
     this.props.navigation.navigate(Routes.AUTH_LOADING, {
-      redirect: firstLogin ? Routes.PROFILE_NEWSLETTER_UPDATE : Routes.DASHBOARD
+      redirect: firstLogin
+        ? Routes.PROFILE_NEWSLETTER_UPDATE
+        : Routes.DASHBOARD,
     });
   };
 
-  handleError = async response => {
+  handleError = async (response) => {
     const { data } = response.error.response;
 
     this.setState({
@@ -167,8 +170,8 @@ class AuthWelcomeScreen extends React.Component {
       error: getErrorsFromResponse(data, {
         password: null,
         email: null,
-        other: null
-      })
+        other: null,
+      }),
     });
   };
 
@@ -177,56 +180,60 @@ class AuthWelcomeScreen extends React.Component {
     return (
       <SafeAreaView style={defaultStyles.container}>
         <Background source={BackgroundImage} disableScroll>
-            <Carousel
-                ref={carousel => (this.carouselRef = carousel)}
-                data={this.state.entries}
-                renderItem={({item}) => (
-                  <WelcomeItem 
-                    background={item.background}
-                    image={item.image} 
-                    width={item.width}
-                    flex={item.flex}
-                    title={item.title} 
-                    subtitle={item.subtitle} 
-                  />
-                )}
-                inactiveSlideOpacity={0}
-                sliderWidth={Dimensions.get("window").width}
-                itemWidth={Dimensions.get("window").width}
-                onSnapToItem={index => this.setState({ active: index })}
-                loop={true}
+          <Carousel
+            ref={(carousel) => (this.carouselRef = carousel)}
+            data={this.state.entries}
+            renderItem={({ item }) => (
+              <WelcomeItem
+                background={item.background}
+                image={item.image}
+                width={item.width}
+                flex={item.flex}
+                title={item.title}
+                subtitle={item.subtitle}
               />
-              <Pagination
-                dotsLength={4}
-                carouselRef={this.carouselRef}
-                activeDotIndex={active}
-                dotStyle={styles.paginationDot}
-                containerStyle={styles.paginationContainer}
-                dotColor={colors.primary}
-                inactiveDotColor={colors.primary}
-                inactiveDotOpacity={0.2}
-                inactiveDotScale={1}
-              />
-              <WelcomeButtons 
-                loginWithGoogle={this.loginWithGoogle}
-                loginWithFacebook={this.loginWithFacebook}
-                login={() => {this.props.navigation.navigate(Routes.AUTH_LOGIN)}}
-                register={() => {this.props.navigation.navigate(Routes.AUTH_REGISTER)}}
-              />
+            )}
+            inactiveSlideOpacity={0}
+            sliderWidth={Dimensions.get("window").width}
+            itemWidth={Dimensions.get("window").width}
+            onSnapToItem={(index) => this.setState({ active: index })}
+            loop={true}
+          />
+          <Pagination
+            dotsLength={4}
+            carouselRef={this.carouselRef}
+            activeDotIndex={active}
+            dotStyle={styles.paginationDot}
+            containerStyle={styles.paginationContainer}
+            dotColor={colors.primary}
+            inactiveDotColor={colors.primary}
+            inactiveDotOpacity={0.2}
+            inactiveDotScale={1}
+          />
+          <WelcomeButtons
+            loginWithGoogle={this.loginWithGoogle}
+            loginWithFacebook={this.loginWithFacebook}
+            login={() => {
+              this.props.navigation.navigate(Routes.AUTH_LOGIN);
+            }}
+            register={() => {
+              this.props.navigation.navigate(Routes.AUTH_REGISTER);
+            }}
+          />
         </Background>
       </SafeAreaView>
     );
   }
 }
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   paginationDot: {
     height: 12,
     width: 12,
     borderRadius: 12,
   },
   paginationContainer: {
-    alignItems: 'flex-start'
-  }
+    alignItems: "flex-start",
+  },
 });
 
 const mapStateToProps = () => ({
@@ -236,7 +243,7 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = {
   // …
   loginExternal,
-  registerExternal
+  registerExternal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthWelcomeScreen);

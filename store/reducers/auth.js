@@ -34,7 +34,7 @@ const initialState = {
   appTokenExpiryDate: null,
   expiryDate: null,
   accessToken: null,
-  refreshToken: null
+  refreshToken: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -42,32 +42,32 @@ export default function reducer(state = initialState, action) {
     case SET_EXPIRY_DATE:
       return {
         ...state,
-        expiryDate: action.payload
+        expiryDate: action.payload,
       };
 
     case SET_ACCESS_TOKEN: {
       const header = `Bearer ${action.payload}`;
 
       // Required in all other endpoints:
-      axios.defaults.headers.common["Authorization"] = header;
+      axios.defaults.headers.common.Authorization = header;
 
       return {
         ...state,
-        accessToken: action.payload
+        accessToken: action.payload,
       };
     }
 
     case SET_REFRESH_TOKEN:
       return {
         ...state,
-        refreshToken: action.payload
+        refreshToken: action.payload,
       };
 
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
       };
 
     case ACCESS_REQUEST: {
@@ -75,7 +75,7 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        appToken: null
+        appToken: null,
       };
     }
 
@@ -88,12 +88,12 @@ export default function reducer(state = initialState, action) {
 
       // Set app access token for further usage.
       // Required in all other endpoints:
-      axios.defaults.headers.common["Authorization"] = header;
+      axios.defaults.headers.common.Authorization = header;
 
       return {
         ...state,
         appToken: accessToken,
-        appTokenExpiryDate: expiryDate
+        appTokenExpiryDate: expiryDate,
       };
     }
 
@@ -107,7 +107,7 @@ export default function reducer(state = initialState, action) {
         fetchingData: false,
         expiryDate: null,
         accessToken: null,
-        refreshToken: null
+        refreshToken: null,
       };
 
     case LOGIN_SUCCESS:
@@ -118,14 +118,14 @@ export default function reducer(state = initialState, action) {
       const header = `Bearer ${accessToken}`;
 
       // Required in all other endpoints:
-      axios.defaults.headers.common["Authorization"] = header;
+      axios.defaults.headers.common.Authorization = header;
 
       return {
         ...state,
         fetchingData: false,
         expiryDate: expiryDate,
         accessToken: accessToken,
-        refreshToken: refreshToken
+        refreshToken: refreshToken,
       };
     }
 
@@ -153,10 +153,10 @@ export const authorize = () => ({
       url: Url.Account.ApplicationToken(),
       data: {
         Application: Secret.Application,
-        AuthorizationKey: Secret.AuthorizationKey
-      }
-    }
-  }
+        AuthorizationKey: Secret.AuthorizationKey,
+      },
+    },
+  },
 });
 
 export const login = (email, password) => ({
@@ -168,13 +168,13 @@ export const login = (email, password) => ({
       data: {
         email,
         password,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
-export const loginExternal = email => ({
+export const loginExternal = (email) => ({
   types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL],
   payload: {
     request: {
@@ -182,10 +182,10 @@ export const loginExternal = email => ({
       url: Url.Account.ExternalLogin(),
       data: {
         email,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
 export const register = (email, password, nickname) => ({
@@ -198,10 +198,10 @@ export const register = (email, password, nickname) => ({
         email,
         password,
         nickname,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
 export const registerExternal = (email, provider, nickname) => ({
@@ -214,10 +214,10 @@ export const registerExternal = (email, provider, nickname) => ({
         email,
         provider,
         nickname,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
 export const logout = () => ({
@@ -225,9 +225,9 @@ export const logout = () => ({
   payload: {
     request: {
       method: "POST",
-      url: Url.Account.Logout()
-    }
-  }
+      url: Url.Account.Logout(),
+    },
+  },
 });
 
 export const changePassword = (Current, NewPassword, ConfirmNewPassword) => ({
@@ -240,13 +240,13 @@ export const changePassword = (Current, NewPassword, ConfirmNewPassword) => ({
         CurrentPassword: Current,
         NewPassword,
         ConfirmNewPassword,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
-export const resetPassword = email => ({
+export const resetPassword = (email) => ({
   type: "noop",
   payload: {
     request: {
@@ -254,23 +254,23 @@ export const resetPassword = email => ({
       url: Url.Account.ForgotPassword(),
       data: {
         email,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
-export const setExpiryDate = expiryDate => ({
+export const setExpiryDate = (expiryDate) => ({
   type: SET_EXPIRY_DATE,
-  payload: expiryDate
+  payload: expiryDate,
 });
 
-export const setAccessToken = accessToken => ({
+export const setAccessToken = (accessToken) => ({
   type: SET_ACCESS_TOKEN,
-  payload: accessToken
+  payload: accessToken,
 });
 
-export const setRefreshToken = refreshToken => ({
+export const setRefreshToken = (refreshToken) => ({
   type: SET_REFRESH_TOKEN,
-  payload: refreshToken
+  payload: refreshToken,
 });

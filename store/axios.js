@@ -9,22 +9,22 @@ import {
   REFRESH_TOKEN,
   setExpiryDate,
   setAccessToken,
-  setRefreshToken
+  setRefreshToken,
 } from "../store/reducers/auth";
 
 const client = axios.create({
-  responseType: "json"
+  responseType: "json",
 });
 
 function authorizeApp() {
   return client.post(Url.Account.ApplicationToken(), {
     Application: Secret.Application,
-    AuthorizationKey: Secret.AuthorizationKey
+    AuthorizationKey: Secret.AuthorizationKey,
   });
 }
 
 function authorizeUser(email, refreshtoken) {
-  return authorizeApp().then(response => {
+  return authorizeApp().then((response) => {
     const { accessToken } = response.data;
     const data = { email, refreshtoken };
 
@@ -32,8 +32,8 @@ function authorizeUser(email, refreshtoken) {
 
     return client.post(Url.Account.RefreshToken(), data, {
       headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
   });
 }
@@ -60,11 +60,11 @@ const middleware = axiosMiddleware(client, {
               console.log("Unauthorized – issuing new user access token…");
 
               return authorizeUser(email, refreshToken)
-                .then(async response => {
+                .then(async (response) => {
                   const {
                     accessToken,
                     refreshToken,
-                    expiryDate
+                    expiryDate,
                   } = response.data;
                   const expirySec = (new Date(expiryDate) - new Date()) / 1000;
 
@@ -81,14 +81,12 @@ const middleware = axiosMiddleware(client, {
                   dispatch(setAccessToken(accessToken));
                   dispatch(setRefreshToken(refreshToken));
 
-                  originalRequest.headers[
-                    "Authorization"
-                  ] = `Bearer ${accessToken}`;
+                  originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
                   console.log("Re-trying the request");
                   return client(originalRequest);
                 })
-                .catch(err => {
+                .catch((err) => {
                   console.log("Could not issue new access token…", err);
                   return Promise.reject(error);
                 });
@@ -96,21 +94,19 @@ const middleware = axiosMiddleware(client, {
               console.log("Unauthorized – issuing new app access token…");
 
               return authorizeApp()
-                .then(async response => {
+                .then(async (response) => {
                   const { accessToken, expiryDate } = response.data;
                   const expirySec = (new Date(expiryDate) - new Date()) / 1000;
 
                   console.log("Issued a new access token…", response.data);
                   console.log("Token will expire in", expirySec);
 
-                  originalRequest.headers[
-                    "Authorization"
-                  ] = `Bearer ${accessToken}`;
+                  originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
                   console.log("Re-trying the request");
                   return client(originalRequest);
                 })
-                .catch(err => {
+                .catch((err) => {
                   console.log("Could not issue new access token…", err);
                   return Promise.reject(error);
                 });
@@ -118,10 +114,10 @@ const middleware = axiosMiddleware(client, {
           }
 
           return Promise.reject(error);
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 });
 
 export default client;

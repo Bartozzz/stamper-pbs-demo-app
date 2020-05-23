@@ -6,7 +6,7 @@ import ErrorImage from "../../assets/images/error.png";
 
 class ErrorScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   get size() {

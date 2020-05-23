@@ -14,7 +14,7 @@ export const MAP_UNFAV_FAIL = "APP/MAP/UNFAV_FAIL";
 const initialState = {
   isLoading: false,
   filters: [],
-  data: []
+  data: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -22,7 +22,7 @@ export default function reducer(state = initialState, action) {
     case MAP_GET_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case MAP_GET_SUCCESS:
@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         isLoading: false,
         filters: action.payload.data.filters,
-        data: action.payload.data.cards
+        data: action.payload.data.cards,
       };
 
     case MAP_GET_FAIL:
@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         isLoading: false,
         fiters: [],
-        data: []
+        data: [],
       };
 
     case MAP_FAV_REQUEST: {
@@ -46,13 +46,13 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        data: state.data.map(card => {
+        data: state.data.map((card) => {
           if (card.id === cardId) {
             return { ...card, favorite: true };
           } else {
             return card;
           }
-        })
+        }),
       };
     }
 
@@ -61,13 +61,13 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        data: state.data.map(card => {
+        data: state.data.map((card) => {
           if (card.id === cardId) {
             return { ...card, favorite: false };
           } else {
             return card;
           }
-        })
+        }),
       };
     }
 
@@ -86,34 +86,34 @@ export const getRegion = (city, isoCountryCode, coords) => ({
         city,
         country: isoCountryCode,
         lat: coords.latitude,
-        lng: coords.longitude
-      }
-    }
-  }
+        lng: coords.longitude,
+      },
+    },
+  },
 });
 
-export const addFav = cardId => ({
+export const addFav = (cardId) => ({
   types: [MAP_FAV_REQUEST, MAP_FAV_SUCCESS, MAP_FAV_FAIL],
   payload: {
     request: {
       method: "POST",
       url: Url.Favorite.Add(),
       data: {
-        cardId
-      }
-    }
-  }
+        cardId,
+      },
+    },
+  },
 });
 
-export const removeFav = cardId => ({
+export const removeFav = (cardId) => ({
   types: [MAP_UNFAV_REQUEST, MAP_UNFAV_SUCCESS, MAP_UNFAV_FAIL],
   payload: {
     request: {
       method: "POST",
       url: Url.Favorite.Remove(),
       data: {
-        cardId
-      }
-    }
-  }
+        cardId,
+      },
+    },
+  },
 });

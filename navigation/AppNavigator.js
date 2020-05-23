@@ -1,7 +1,7 @@
 import {
   createStackNavigator,
   createSwitchNavigator,
-  createAppContainer
+  createAppContainer,
 } from "react-navigation";
 
 import * as Route from "./index";
@@ -49,7 +49,7 @@ const defaultNavigationOptions = {
 
     elevation: 0,
     borderBottomWidth: 0,
-    backgroundColor: colors.primary
+    backgroundColor: colors.primary,
   },
 
   headerTitleStyle: {
@@ -60,17 +60,17 @@ const defaultNavigationOptions = {
 
     alignSelf: "center",
     textAlign: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 };
 
 const disableNavigationAnimations = {
   transitionConfig: () => ({
     transitionSpec: {
       // Disable animations:
-      duration: -1
-    }
-  })
+      duration: -1,
+    },
+  }),
 };
 
 const AuthStack = createStackNavigator(
@@ -80,14 +80,14 @@ const AuthStack = createStackNavigator(
     [Route.AUTH_REGISTER]: AuthRegisterScreen,
     [Route.AUTH_RESET]: AuthResetPasswordScreen,
     [Route.AUTH_TOS]: TermsOfServiceScreen,
-    [Route.AUTH_EXTERNAL_TOS]: AuthTermsOfUseScreen
+    [Route.AUTH_EXTERNAL_TOS]: AuthTermsOfUseScreen,
   },
   {
     initialRouteName: Route.AUTH_WELCOME,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
     headerMode: "screen",
-    ...disableNavigationAnimations
+    ...disableNavigationAnimations,
   }
 );
 
@@ -135,14 +135,14 @@ const AppStack = createStackNavigator(
     [Route.SCANNER]: ScannerScanScreen,
     [Route.SCANNER_SCAN]: ScannerScanScreen,
     [Route.SCANNER_ACCEPT_STAMP_TERMS]: ScannerAcceptStampTermsScreen,
-    [Route.SCANNER_CONFIRM_REFUSED_TERMS]: ScannerConfirmRefusedTermsScreen
+    [Route.SCANNER_CONFIRM_REFUSED_TERMS]: ScannerConfirmRefusedTermsScreen,
   },
   {
     initialRouteName: Route.DASHBOARD_MAIN,
     headerLayoutPreset: "left",
     defaultNavigationOptions,
     headerMode: "screen",
-    ...disableNavigationAnimations
+    ...disableNavigationAnimations,
   }
 );
 
@@ -152,11 +152,11 @@ export default createAppContainer(
       [Route.AUTH_CONNECTIVITY_CHECK]: AuthConnectivityCheckScreen,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.AUTH]: AuthStack,
-      [Route.APP]: AppStack
+      [Route.APP]: AppStack,
     },
     {
       initialRouteName: Route.AUTH_CONNECTIVITY_CHECK,
-      headerMode: "screen"
+      headerMode: "screen",
     }
   )
 );

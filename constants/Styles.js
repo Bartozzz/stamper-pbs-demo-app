@@ -4,32 +4,32 @@ import layout from "./Layout";
 
 export default StyleSheet.create({
   grow: {
-    flex: 1
+    flex: 1,
   },
 
   container: {
     flex: 1,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
 
   content: {
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
   },
 
   center: {
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
 
   row: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
 
   headerTwoLines: {
     marginTop: layout.headerTopSpacer,
     height: Platform.select({
       ios: 96,
-      android: 56
+      android: 56,
     }),
 
     backgroundColor: colors.primary,
@@ -42,12 +42,12 @@ export default StyleSheet.create({
     shadowRadius: 0,
 
     // Remove shadow on Android:
-    elevation: 0
+    elevation: 0,
   },
   headerTwoLinesTitle: {
     fontFamily: "poppins-bold",
     fontSize: 26,
-    color: colors.color
+    color: colors.color,
   },
 
   headerTransparent: {
@@ -64,13 +64,13 @@ export default StyleSheet.create({
     shadowRadius: 0,
 
     // Remove shadow on Android:
-    elevation: 0
+    elevation: 0,
   },
 
   textLeft: {
-    textAlign: "left"
+    textAlign: "left",
   },
   textRight: {
-    textAlign: "right"
-  }
+    textAlign: "right",
+  },
 });

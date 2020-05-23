@@ -11,7 +11,7 @@ import styles from "../../constants/Styles";
 
 class AuthLoadingScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class AuthLoadingScreen extends React.Component {
       this.props
         .authorize()
         .then(() => this.navigateToApp())
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
   }
 
@@ -49,7 +49,7 @@ class AuthLoadingScreen extends React.Component {
     }
   }
 
-  handleAuthorized = async response => {
+  handleAuthorized = async (response) => {
     const { navigation } = this.props;
     const nextScreen = navigation.getParam("redirect", Routes.APP);
 
@@ -68,7 +68,7 @@ class AuthLoadingScreen extends React.Component {
     return navigation.navigate(nextScreen);
   };
 
-  handleUnauthorized = async error => {
+  handleUnauthorized = async (error) => {
     if (error) {
       console.log(error);
     }
@@ -85,19 +85,16 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   appToken: state.auth.appToken,
   accessToken: state.auth.accessToken,
-  refreshToken: state.auth.refreshToken
+  refreshToken: state.auth.refreshToken,
 });
 
 const mapDispatchToProps = {
   authorize,
   getProfile,
-  setAccessToken
+  setAccessToken,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthLoadingScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);

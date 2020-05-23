@@ -8,10 +8,10 @@ const Hamburger = styled.TouchableOpacity`
   align-self: flex-start;
 `;
 
-const Icon = styled(Ionicons).attrs(props => ({
+const Icon = styled(Ionicons).attrs((props) => ({
   color: "white",
   name: hamburgerIconName,
-  size: hamburgerIconSize
+  size: hamburgerIconSize,
 }))`
   ${Platform.select({
     ios: css`
@@ -22,13 +22,19 @@ const Icon = styled(Ionicons).attrs(props => ({
       padding-top: 16px;
       padding-left: 8px;
       padding-right: 16px;
-    `
+    `,
   })};
 `;
 
 export function HeaderHamburger(props) {
   return (
-    <Hamburger onPress={() => props.onPress ? props.onPress() : props.navigation.navigate(Routes.DASHBOARD)}>
+    <Hamburger
+      onPress={() =>
+        props.onPress
+          ? props.onPress()
+          : props.navigation.navigate(Routes.DASHBOARD)
+      }
+    >
       <Icon />
     </Hamburger>
   );
@@ -36,12 +42,12 @@ export function HeaderHamburger(props) {
 
 const hamburgerIconName = Platform.select({
   ios: "md-home",
-  android: "md-home"
+  android: "md-home",
 });
 
 const hamburgerIconSize = Platform.select({
   ios: 32,
-  android: 24
+  android: 24,
 });
 
 export default HeaderHamburger;

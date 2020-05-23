@@ -30,7 +30,7 @@ const initialState = {
   lastname: null,
   newsletter: false,
   email: null,
-  photo: null
+  photo: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -43,43 +43,43 @@ export default function reducer(state = initialState, action) {
         lastname: action.payload.data.lastname,
         newsletter: action.payload.data.newsletter,
         email: action.payload.data.email,
-        photo: action.payload.data.photo
+        photo: action.payload.data.photo,
       };
 
     case PROFILE_SET_NICKNAME:
       return {
         ...state,
-        nickname: action.payload
+        nickname: action.payload,
       };
 
     case PROFILE_SET_FIRSTNAME:
       return {
         ...state,
-        firstname: action.payload
+        firstname: action.payload,
       };
 
     case PROFILE_SET_LASTNAME:
       return {
         ...state,
-        lastname: action.payload
+        lastname: action.payload,
       };
 
     case PROFILE_SET_NEWSLETTER:
       return {
         ...state,
-        newsletter: action.payload
+        newsletter: action.payload,
       };
 
     case PROFILE_SET_EMAIL:
       return {
         ...state,
-        email: action.payload
+        email: action.payload,
       };
 
     case PROFILE_SET_PHOTO:
       return {
         ...state,
-        photo: action.payload
+        photo: action.payload,
       };
 
     default:
@@ -91,9 +91,9 @@ export const getProfile = () => ({
   types: [PROFILE_GET_REQUEST, PROFILE_GET_SUCCESS, PROFILE_GET_FAIL],
   payload: {
     request: {
-      url: Url.Account.GetProfile()
-    }
-  }
+      url: Url.Account.GetProfile(),
+    },
+  },
 });
 
 export const updateProfile = (
@@ -114,30 +114,30 @@ export const updateProfile = (
         Lastname,
         Email,
         Newsletter,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
-export const updatePhoto = Photo => ({
+export const updatePhoto = (Photo) => ({
   types: [PHOTO_UPDATE_REQUEST, PHOTO_UPDATE_SUCCESS, PHOTO_UPDATE_FAIL],
   payload: {
     request: {
       method: "POST",
       url: Url.Account.UpdatePhoto(),
       data: {
-        Photo
-      }
-    }
-  }
+        Photo,
+      },
+    },
+  },
 });
 
-export const updateNewsletter = newsletter => ({
+export const updateNewsletter = (newsletter) => ({
   types: [
     NEWSLETTER_UPDATE_REQUEST,
     NEWSLETTER_UPDATE_SUCCESS,
-    NEWSLETTER_UPDATE_FAIL
+    NEWSLETTER_UPDATE_FAIL,
   ],
   payload: {
     request: {
@@ -145,38 +145,38 @@ export const updateNewsletter = newsletter => ({
       url: Url.Account.UpdateNewsletter(),
       data: {
         newsletter,
-        language: i18n.appLocale
-      }
-    }
-  }
+        language: i18n.appLocale,
+      },
+    },
+  },
 });
 
-export const setNickname = nickname => ({
+export const setNickname = (nickname) => ({
   type: PROFILE_SET_NICKNAME,
-  payload: nickname
+  payload: nickname,
 });
 
-export const setFirstname = firstname => ({
+export const setFirstname = (firstname) => ({
   type: PROFILE_SET_FIRSTNAME,
-  payload: firstname
+  payload: firstname,
 });
 
-export const setLastname = lastname => ({
+export const setLastname = (lastname) => ({
   type: PROFILE_SET_LASTNAME,
-  payload: lastname
+  payload: lastname,
 });
 
-export const setNewsletter = newsletter => ({
+export const setNewsletter = (newsletter) => ({
   type: PROFILE_SET_NEWSLETTER,
-  payload: newsletter
+  payload: newsletter,
 });
 
-export const setEmail = email => ({
+export const setEmail = (email) => ({
   type: PROFILE_SET_EMAIL,
-  payload: email
+  payload: email,
 });
 
-export const setPhoto = photo => ({
+export const setPhoto = (photo) => ({
   type: PROFILE_SET_PHOTO,
-  payload: photo
+  payload: photo,
 });

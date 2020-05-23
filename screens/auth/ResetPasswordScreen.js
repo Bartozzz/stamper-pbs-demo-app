@@ -1,12 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Animated,
-  StyleSheet,
-  View,
-  ScrollView,
-  Dimensions
-} from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import Background from "../../components/Background";
 
 import Button from "../../components/Button";
@@ -33,7 +27,7 @@ class ResetPasswordScreen extends React.Component {
         onPress={() => navigation.goBack()}
       />
     ),
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
@@ -42,8 +36,8 @@ class ResetPasswordScreen extends React.Component {
     email: __DEV__ ? "testing@test.pl" : null,
 
     error: {
-      email: null
-    }
+      email: null,
+    },
   };
 
   resetPassword = () => {
@@ -55,7 +49,7 @@ class ResetPasswordScreen extends React.Component {
       .catch(this.handleError);
   };
 
-  handleSuccess = async response => {
+  handleSuccess = async (response) => {
     if (response.error) {
       return this.handleError(response);
     }
@@ -85,7 +79,7 @@ class ResetPasswordScreen extends React.Component {
             placeholder={i18n.t("auth.email")}
             value={email}
             error={error.email}
-            onChangeText={email => this.setState({ email })}
+            onChangeText={(email) => this.setState({ email })}
             autoCapitalize="none"
           />
 
@@ -103,8 +97,8 @@ class ResetPasswordScreen extends React.Component {
 const styles = StyleSheet.create({
   loginContainer: {
     marginHorizontal: 30,
-    paddingTop: 15
-  }
+    paddingTop: 15,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -113,7 +107,7 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = {
   // …
-  resetPassword
+  resetPassword,
 };
 
 export default connect(

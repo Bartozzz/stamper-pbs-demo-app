@@ -12,7 +12,7 @@ export const CardsList = ({ data, onCheck, onDelete }) => {
     <SwipeListView
       useFlatList
       data={data}
-      keyExtractor={item => {
+      keyExtractor={(item) => {
         return item.id;
       }}
       renderItem={(data, rowMap) => (

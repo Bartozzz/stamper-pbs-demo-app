@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Animated, StyleSheet, View } from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -30,7 +30,7 @@ class ProfilePasswordScreen extends React.Component {
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
@@ -46,8 +46,8 @@ class ProfilePasswordScreen extends React.Component {
       currPassword: null,
       newPasswordA: null,
       newPasswordB: null,
-      other: null
-    }
+      other: null,
+    },
   };
 
   editPassword = () => {
@@ -65,17 +65,17 @@ class ProfilePasswordScreen extends React.Component {
     // Go back:
     this.props.navigation.navigate(Routes.INFO_SUCCESS, {
       redirect: Routes.PROFILE_MENU,
-      message: i18n.t("success.changed")
+      message: i18n.t("success.changed"),
     });
   };
 
-  handleError = async response => {
+  handleError = async (response) => {
     const { data } = response.error.response;
 
     const error = {
       currPassword: null,
       newPasswordA: null,
-      newPasswordB: null
+      newPasswordB: null,
     };
 
     if (data.CurrentPassword) error.currPassword = data.CurrentPassword;
@@ -92,50 +92,55 @@ class ProfilePasswordScreen extends React.Component {
     const { currPassword, newPasswordA, newPasswordB, error } = this.state;
 
     return (
-          <Background source={BackgroundImage}>
-          <KeyboardAwareScrollView enableOnAndroid={true} scrollEnabled={false} contentContainerStyle={{flex: 1}} extraScrollHeight={60}>
-            <View style={styles.form}>
-              {error.other ? <Error message={error.other} /> : null}
+      <Background source={BackgroundImage}>
+        <KeyboardAwareScrollView
+          enableOnAndroid={true}
+          scrollEnabled={false}
+          contentContainerStyle={{ flex: 1 }}
+          extraScrollHeight={60}
+        >
+          <View style={styles.form}>
+            {error.other ? <Error message={error.other} /> : null}
 
-              <InputWithLabel
-                label={i18n.t("profile.password.current")}
-                value={currPassword}
-                error={error.currPassword}
-                onChangeText={currPassword => this.setState({ currPassword })}
-                autoCapitalize="none"
-                secureTextEntry
-              />
+            <InputWithLabel
+              label={i18n.t("profile.password.current")}
+              value={currPassword}
+              error={error.currPassword}
+              onChangeText={(currPassword) => this.setState({ currPassword })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-              <InputWithLabel
-                label={i18n.t("profile.password.password")}
-                value={newPasswordA}
-                error={error.newPasswordA}
-                onChangeText={newPasswordA => this.setState({ newPasswordA })}
-                autoCapitalize="none"
-                secureTextEntry
-              />
+            <InputWithLabel
+              label={i18n.t("profile.password.password")}
+              value={newPasswordA}
+              error={error.newPasswordA}
+              onChangeText={(newPasswordA) => this.setState({ newPasswordA })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
 
-              <InputWithLabel
-                label={i18n.t("profile.password.confirm")}
-                value={newPasswordB}
-                error={error.newPasswordB}
-                onChangeText={newPasswordB => this.setState({ newPasswordB })}
-                autoCapitalize="none"
-                secureTextEntry
-              />
-            </View>
+            <InputWithLabel
+              label={i18n.t("profile.password.confirm")}
+              value={newPasswordB}
+              error={error.newPasswordB}
+              onChangeText={(newPasswordB) => this.setState({ newPasswordB })}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+          </View>
 
-            <View style={styles.buttonContainer}>
-              <Button
-                title={i18n.t("profile.save")}
-                onPress={this.editPassword}
-                processing={this.state.processing}
-              />
-            </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              title={i18n.t("profile.save")}
+              onPress={this.editPassword}
+              processing={this.state.processing}
+            />
+          </View>
 
-            <Animated.View style={[{ height: this.state.heightAnim }]} />
-            </KeyboardAwareScrollView>
-          </Background>
+          <Animated.View style={[{ height: this.state.heightAnim }]} />
+        </KeyboardAwareScrollView>
+      </Background>
     );
   }
 }
@@ -145,13 +150,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 30,
 
-    justifyContent: "center"
+    justifyContent: "center",
   },
 
   buttonContainer: {
     marginVertical: 20,
-    marginHorizontal: 30
-  }
+    marginHorizontal: 30,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -160,7 +165,7 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = {
   // …
-  changePassword
+  changePassword,
 };
 
 export default connect(

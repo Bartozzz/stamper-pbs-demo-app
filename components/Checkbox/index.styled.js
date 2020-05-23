@@ -27,7 +27,9 @@ export const CheckboxComponent = styled.TouchableOpacity`
   border-style: solid;
   border-color: ${colors.inputBorder};
 
-  ${({ checked }) => checked && `
+  ${({ checked }) =>
+    checked &&
+    `
     border-color: ${colors.primary};
     background-color: ${colors.primary};
   `};

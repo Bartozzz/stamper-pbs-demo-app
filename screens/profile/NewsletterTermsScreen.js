@@ -22,13 +22,13 @@ class NewsletterTermsScreen extends React.Component {
         onPress={() => navigation.goBack()}
       />
     ),
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
     loading: true,
     content: "",
-    error: ""
+    error: "",
   };
 
   componentDidMount() {
@@ -36,22 +36,22 @@ class NewsletterTermsScreen extends React.Component {
       .post(
         Url.Account.Newsletter(i18n.appLocale),
         {
-          language: i18n.appLocale
+          language: i18n.appLocale,
         },
         {
-          responseType: "text"
+          responseType: "text",
         }
       )
-      .then(response => {
+      .then((response) => {
         this.setState({
           loading: false,
-          content: response.data
+          content: response.data,
         });
       })
       .catch(() => {
         this.setState({
           loading: false,
-          error: i18n.t("errors.tos.fetch")
+          error: i18n.t("errors.tos.fetch"),
         });
       });
   }

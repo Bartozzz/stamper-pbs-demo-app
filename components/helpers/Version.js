@@ -1,5 +1,5 @@
 import React from "react";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 import { version } from "../../package.json";
 import styled from "styled-components/native";
 

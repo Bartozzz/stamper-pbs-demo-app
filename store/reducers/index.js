@@ -12,7 +12,7 @@ const reducers = {
   profile,
   stamp,
   wallet,
-  prizes
+  prizes,
 };
 
 export default combineReducers(reducers);

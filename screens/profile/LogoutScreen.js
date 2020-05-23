@@ -15,7 +15,7 @@ import {
   logout,
   setExpiryDate,
   setAccessToken,
-  setRefreshToken
+  setRefreshToken,
 } from "../../store/reducers/auth";
 import { EMAIL } from "../../store/reducers/profile";
 import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
@@ -40,11 +40,11 @@ class ProfileLogoutScreen extends React.Component {
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
-    processing: false
+    processing: false,
   };
 
   accept = async () => {
@@ -55,7 +55,7 @@ class ProfileLogoutScreen extends React.Component {
       EXPIRY_DATE,
       ACCESS_TOKEN,
       REFRESH_TOKEN,
-      EMAIL
+      EMAIL,
     ]);
 
     // When user is logged out, force the refresh of offline-first elements:
@@ -121,26 +121,26 @@ const styles = StyleSheet.create({
     shadowRadius: 30,
 
     borderRadius: 10,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
   logoutText: {
     color: colors.color,
     fontSize: 15,
-    textAlign: "center"
+    textAlign: "center",
   },
   logoutIcon: {
     width: 120,
     height: 120,
-    marginBottom: 60
+    marginBottom: 60,
   },
 
   buttons: {
     justifyContent: "space-around",
-    marginBottom: 50
+    marginBottom: 50,
   },
   button: {
-    width: 90
-  }
+    width: 90,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -152,7 +152,7 @@ const mapDispatchToProps = {
   logout,
   setExpiryDate,
   setAccessToken,
-  setRefreshToken
+  setRefreshToken,
 };
 
 export default connect(

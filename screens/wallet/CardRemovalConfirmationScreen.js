@@ -18,11 +18,11 @@ const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
 
 class CardRemovalConfirmationScreen extends React.Component {
   static navigationOptions = () => ({
-    header: null
+    header: null,
   });
 
   state = {
-    processing: false
+    processing: false,
   };
 
   accept = async () => {
@@ -83,16 +83,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     marginTop: 80,
-    marginBottom: 30
+    marginBottom: 30,
   },
 
   buttons: {
     justifyContent: "space-around",
-    marginBottom: 50
+    marginBottom: 50,
   },
   button: {
-    width: 90
-  }
+    width: 90,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -101,9 +101,10 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = {
   // …
-  removeCard
+  removeCard,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CardRemovalConfirmationScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardRemovalConfirmationScreen);

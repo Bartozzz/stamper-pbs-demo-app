@@ -31,14 +31,14 @@ class ScannerScanScreen extends React.Component {
     headerTitle: HeaderTitle,
     headerLeft: <HeaderBackIcon navigation={navigation} />,
     headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
     isRequesting: false,
     isProcessing: false,
     focusedScreen: true,
-    hasCameraPermission: null
+    hasCameraPermission: null,
   };
 
   focusListener = null;
@@ -48,7 +48,7 @@ class ScannerScanScreen extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
 
     this.setState({
-      hasCameraPermission: status === "granted"
+      hasCameraPermission: status === "granted",
     });
 
     this.focusListener = this.props.navigation.addListener("willFocus", () =>
@@ -65,7 +65,7 @@ class ScannerScanScreen extends React.Component {
     this.blurListener.remove();
   }
 
-  redirectToSuccess = message => {
+  redirectToSuccess = (message) => {
     const { image, dimensions, timeout } = getImageForMessage(message);
 
     this.props.navigation.navigate(Routes.INFO_SUCCESS, {
@@ -73,7 +73,7 @@ class ScannerScanScreen extends React.Component {
       image,
       timeout,
       redirect: Routes.DASHBOARD,
-      message: i18n.t(`success.scanner.${message}`)
+      message: i18n.t(`success.scanner.${message}`),
     });
   };
 
@@ -85,7 +85,7 @@ class ScannerScanScreen extends React.Component {
       message:
         mode === Routes.SCANNER
           ? i18n.t("errors.scanner.stampAdd")
-          : i18n.t("errors.scanner.claimPrize")
+          : i18n.t("errors.scanner.claimPrize"),
     });
   };
 
@@ -99,7 +99,7 @@ class ScannerScanScreen extends React.Component {
       onConfirm: () => {
         this.props
           .addStamp(code, true)
-          .then(res => {
+          .then((res) => {
             const { message } = res.payload.data;
 
             if (message) {
@@ -111,11 +111,11 @@ class ScannerScanScreen extends React.Component {
           .catch(() => {
             this.redirectToFailure();
           });
-      }
+      },
     });
   };
 
-  onBarCodeRead = async scan => {
+  onBarCodeRead = async (scan) => {
     if (this.state.isProcessing) {
       return;
     }
@@ -124,12 +124,12 @@ class ScannerScanScreen extends React.Component {
       const code = getParameterByName("p", scan.data);
 
       this.props.navigation.setParams({
-        hideHeader: true
+        hideHeader: true,
       });
 
       this.setState({
         isProcessing: true,
-        isRequesting: true
+        isRequesting: true,
       });
 
       await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
@@ -137,7 +137,7 @@ class ScannerScanScreen extends React.Component {
 
       this.props
         .addStamp(code)
-        .then(res => {
+        .then((res) => {
           const { termsAndConditions, message } = res.payload.data;
 
           if (termsAndConditions && typeof termsAndConditions === "object") {
@@ -212,23 +212,23 @@ class ScannerScanScreen extends React.Component {
 const styles = StyleSheet.create({
   scannerContainer: {
     flex: 1,
-    backgroundColor: "#000000"
+    backgroundColor: "#000000",
   },
   scannerCamera: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   scannerImage: {
     width: layout.window.width * 0.7,
-    height: layout.window.width * 0.7
+    height: layout.window.width * 0.7,
   },
 
   buttonContainer: {
     alignItems: "center",
     marginVertical: 20,
-    marginHorizontal: 30
-  }
+    marginHorizontal: 30,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -237,7 +237,7 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = {
   // …
-  addStamp
+  addStamp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScannerScanScreen);

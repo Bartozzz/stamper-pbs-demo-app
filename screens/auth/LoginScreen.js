@@ -19,7 +19,7 @@ import {
   loginExternal,
   registerExternal,
   ACCESS_TOKEN,
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
 } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
@@ -32,14 +32,16 @@ import { getErrorsFromResponse } from "../../helpers/errors";
 const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
 
 class AuthLoginScreen extends React.Component {
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.auth.login"),
     headerTitle: HeaderTitle,
-    headerLeft: <HeaderBackIcon
+    headerLeft: (
+      <HeaderBackIcon
         navigation={navigation}
         onPress={() => navigation.goBack()}
-      />,
-    headerStyle: defaultStyles.headerTwoLines
+      />
+    ),
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
@@ -51,8 +53,8 @@ class AuthLoginScreen extends React.Component {
     error: {
       password: null,
       email: null,
-      other: null
-    }
+      other: null,
+    },
   };
 
   loginWithCredentials = () => {
@@ -66,7 +68,7 @@ class AuthLoginScreen extends React.Component {
       .catch(this.handleError);
   };
 
-  handleSuccess = firstLogin => async response => {
+  handleSuccess = (firstLogin) => async (response) => {
     if (response.error) {
       return this.handleError(response);
     }
@@ -82,11 +84,13 @@ class AuthLoginScreen extends React.Component {
 
     // Triggers profile fetch:
     this.props.navigation.navigate(Routes.AUTH_LOADING, {
-      redirect: firstLogin ? Routes.PROFILE_NEWSLETTER_UPDATE : Routes.DASHBOARD
+      redirect: firstLogin
+        ? Routes.PROFILE_NEWSLETTER_UPDATE
+        : Routes.DASHBOARD,
     });
   };
 
-  handleError = async response => {
+  handleError = async (response) => {
     const { data } = response.error.response;
 
     this.setState({
@@ -94,8 +98,8 @@ class AuthLoginScreen extends React.Component {
       error: getErrorsFromResponse(data, {
         password: null,
         email: null,
-        other: null
-      })
+        other: null,
+      }),
     });
   };
 
@@ -112,7 +116,7 @@ class AuthLoginScreen extends React.Component {
               placeholder={i18n.t("auth.email")}
               value={email}
               error={error.email}
-              onChangeText={email => this.setState({ email })}
+              onChangeText={(email) => this.setState({ email })}
               autoCapitalize="none"
             />
 
@@ -122,7 +126,7 @@ class AuthLoginScreen extends React.Component {
               placeholder={i18n.t("auth.password")}
               value={password}
               error={error.password}
-              onChangeText={password => this.setState({ password })}
+              onChangeText={(password) => this.setState({ password })}
               autoCapitalize="none"
               secureTextEntry
             />
@@ -136,7 +140,7 @@ class AuthLoginScreen extends React.Component {
                 <Text
                   style={[
                     styles.loginContainerText,
-                    styles.loginContainerTextB
+                    styles.loginContainerTextB,
                   ]}
                 >
                   {i18n.t("auth.dontHaveAccount")}
@@ -151,7 +155,7 @@ class AuthLoginScreen extends React.Component {
                 <Text
                   style={[
                     styles.loginContainerText,
-                    styles.loginContainerTextB
+                    styles.loginContainerTextB,
                   ]}
                 >
                   {" "}
@@ -174,33 +178,33 @@ class AuthLoginScreen extends React.Component {
 
 const styles = StyleSheet.create({
   loginProvider: {
-    fontWeight: "900"
+    fontWeight: "900",
   },
   loginContainer: {
     marginHorizontal: 30,
-    paddingTop: 15
+    paddingTop: 15,
   },
   loginContainerTextContainer: {
     flexDirection: "row",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   loginContainerText: {
     color: colors.color,
-    textAlign: "center"
+    textAlign: "center",
   },
   loginContainerTextA: {
     fontSize: 14,
 
     marginTop: 15,
-    marginBottom: 10
+    marginBottom: 10,
   },
   loginContainerTextB: {
     color: colors.info,
     fontSize: 12,
 
     marginTop: 20,
-    marginBottom: 30
-  }
+    marginBottom: 30,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -211,7 +215,7 @@ const mapDispatchToProps = {
   // …
   login,
   loginExternal,
-  registerExternal
+  registerExternal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthLoginScreen);

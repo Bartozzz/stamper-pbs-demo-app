@@ -9,7 +9,7 @@ const SuccessImage = require("../../assets/images/success.png");
 
 class SuccessScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   get size() {

@@ -9,28 +9,28 @@ export function getImageForMessage(message) {
       return {
         image: EarnedRewardImage,
         dimensions: { size: 100 },
-        timeout: 5000
+        timeout: 5000,
       };
 
     case "reward":
       return {
         image: ReceivedRewardImage,
         dimensions: { size: 100 },
-        timeout: 5000
+        timeout: 5000,
       };
 
     case "subtract":
       return {
         image: SubtractStampImage,
         dimensions: { width: 153, height: 100 },
-        timeout: 3000
+        timeout: 3000,
       };
 
     default:
       return {
         image: AddStampImage,
         dimensions: { width: 153, height: 100 },
-        timeout: 3000
+        timeout: 3000,
       };
   }
 }

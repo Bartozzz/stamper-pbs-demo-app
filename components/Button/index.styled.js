@@ -27,13 +27,15 @@ export const ButtonText = styled.Text`
 
 export const ActivityIndicator = styled.ActivityIndicator.attrs(() => ({
   size: "small",
-  color: colors.color
+  color: colors.color,
 }))``;
 
 export const ButtonDisabled = styled(Button)`
   background-color: ${colors.disabled};
 `;
 
-export const ButtonEnabled = styled(props => <Button {...props} as={TouchableOpacity} />)`
+export const ButtonEnabled = styled((props) => (
+  <Button {...props} as={TouchableOpacity} />
+))`
   background-color: ${colors.primary};
 `;

@@ -9,7 +9,7 @@ import OfflineImage from "../../assets/offline.png";
 const ConnectivityCheckScreen = ({ navigation }) => {
   const [isOffline, setIsOffline] = React.useState(false);
 
-  const networkListener = React.useCallback(state => {
+  const networkListener = React.useCallback((state) => {
     console.log("Network status changed", state.isConnected);
 
     if (!state.isConnected) {
@@ -46,18 +46,18 @@ const ConnectivityCheckScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     ...globalStyles.container,
-    ...globalStyles.center
+    ...globalStyles.center,
   },
 
   offlineImage: {
     width: 200,
-    height: 200
+    height: 200,
   },
 
   offlineMessage: {
     marginVertical: 25,
-    color: colors.color
-  }
+    color: colors.color,
+  },
 });
 
 export default ConnectivityCheckScreen;

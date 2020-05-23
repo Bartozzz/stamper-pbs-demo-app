@@ -32,7 +32,7 @@ class DashboardMainScreen extends React.Component {
   render() {
     const { navigation, prizesCount } = this.props;
     const { height } = Dimensions.get("window");
-    const smallPhone = height <= 640 ? true : false;
+    const smallPhone = height <= 640;
 
     return (
       <Background source={BackgroundImage}>

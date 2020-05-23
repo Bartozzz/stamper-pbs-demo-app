@@ -12,8 +12,8 @@ const Container = styled.View`
   border-radius: 20px;
 `;
 
-const MarkerComponent = styled.Image.attrs(props => ({
-  resizeMode: "contain"
+const MarkerComponent = styled.Image.attrs((props) => ({
+  resizeMode: "contain",
 }))`
   z-index: 2;
   width: 40px;

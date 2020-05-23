@@ -28,8 +28,8 @@ const ItemRemove = styled.TouchableOpacity`
   z-index: 1;
 `;
 
-const RemoveImage = styled.Image.attrs(props => ({
-  source: DeleteImage
+const RemoveImage = styled.Image.attrs((props) => ({
+  source: DeleteImage,
 }))`
   width: 40px;
   height: 40px;

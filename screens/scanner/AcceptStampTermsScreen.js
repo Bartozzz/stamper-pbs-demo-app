@@ -18,14 +18,14 @@ const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class ScannerAcceptStampTermsScreen extends React.Component {
   static navigationOptions = () => ({
-    header: null
+    header: null,
   });
 
   state = {
-    processing: false
+    processing: false,
   };
 
-  openTermsAndConditions = link => () => {
+  openTermsAndConditions = (link) => () => {
     Linking.openURL(link);
   };
 
@@ -36,7 +36,7 @@ class ScannerAcceptStampTermsScreen extends React.Component {
 
   refuse = () => {
     this.props.navigation.navigate(Routes.SCANNER_CONFIRM_REFUSED_TERMS, {
-      onConfirm: () => this.props.navigation.getParam("onConfirm", () => {})()
+      onConfirm: () => this.props.navigation.getParam("onConfirm", () => {})(),
     });
   };
 
@@ -55,9 +55,7 @@ class ScannerAcceptStampTermsScreen extends React.Component {
 
           <Box.Icon width={107} height={85} source={BalanceIcon} />
 
-          <Box.Heading>
-            {i18n.t("map.terms.accept", { title })}
-          </Box.Heading>
+          <Box.Heading>{i18n.t("map.terms.accept", { title })}</Box.Heading>
 
           <TouchableOpacity onPress={this.openTermsAndConditions(terms)}>
             <Box.Action>{i18n.t("map.terms.terms")}</Box.Action>
@@ -82,20 +80,20 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     marginTop: 80,
-    marginBottom: 30
+    marginBottom: 30,
   },
 
   close: {
     position: "absolute",
     top: 10,
-    right: 15
+    right: 15,
   },
 
   buttons: {
     justifyContent: "space-around",
     marginBottom: 50,
-    marginHorizontal: 20
-  }
+    marginHorizontal: 20,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -106,6 +104,7 @@ const mapDispatchToProps = {
   // …
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ScannerAcceptStampTermsScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScannerAcceptStampTermsScreen);

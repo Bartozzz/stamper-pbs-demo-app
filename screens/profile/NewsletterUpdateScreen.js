@@ -19,11 +19,11 @@ const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
 
 class NewsletterUpdateScreen extends React.Component {
   static navigationOptions = () => ({
-    header: null
+    header: null,
   });
 
   state = {
-    processing: false
+    processing: false,
   };
 
   navigateToTOS = () => {
@@ -54,14 +54,10 @@ class NewsletterUpdateScreen extends React.Component {
         <Box.Container>
           <Box.Icon width={107} height={85} source={NewsletterIcon} />
 
-          <Box.Heading>
-            {i18n.t("profile.newsletter.headline")}
-          </Box.Heading>
+          <Box.Heading>{i18n.t("profile.newsletter.headline")}</Box.Heading>
 
           <TouchableOpacity onPress={this.navigateToTOS}>
-            <Box.Action>
-              {i18n.t("profile.newsletter.terms")}
-            </Box.Action>
+            <Box.Action>{i18n.t("profile.newsletter.terms")}</Box.Action>
           </TouchableOpacity>
 
           <Box.Subheading>
@@ -94,16 +90,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     marginTop: 40,
-    marginBottom: 0
+    marginBottom: 0,
   },
 
   buttons: {
     justifyContent: "space-around",
-    marginBottom: 50
+    marginBottom: 50,
   },
   button: {
-    width: 90
-  }
+    width: 90,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -112,7 +108,7 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = {
   // …
-  updateNewsletter
+  updateNewsletter,
 };
 
 export default connect(

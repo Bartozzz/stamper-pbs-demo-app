@@ -10,7 +10,7 @@ const rollbar = new Rollbar({
   captureDeviceInfo: true,
 
   environment: getEnv(),
-  platform: Platform.OS
+  platform: Platform.OS,
 });
 
 export default function useRollbar() {

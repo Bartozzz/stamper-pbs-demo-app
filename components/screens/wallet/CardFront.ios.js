@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Bar as ProgressBar } from "react-native-progress";
 
 import i18n from "../../../translations";
@@ -26,8 +26,8 @@ const ID = styled.Text`
   color: #95989a;
 `;
 
-const Image = styled.Image.attrs(props => ({
-  resizeMode: "contain"
+const Image = styled.Image.attrs((props) => ({
+  resizeMode: "contain",
 }))`
   width: 40px;
   height: 40px;
@@ -87,7 +87,7 @@ export const CardFront = ({ data, onPress }) => {
             <Title>{data.title}</Title>
             <Expiry>
               {i18n.t("prizes.validTill", {
-                date: formatDate(data.validToDate)
+                date: formatDate(data.validToDate),
               })}
             </Expiry>
           </View>

@@ -6,13 +6,12 @@ import {
   ScrollView,
   Text,
   Image,
-  ImageBackground,
   Dimensions,
   TouchableOpacity,
-  Linking
+  Linking,
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import normalize from 'react-native-normalize';
+import normalize from "react-native-normalize";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -26,7 +25,6 @@ import CardBackground from "../../components/CardBackground/";
 import { formatDate } from "../../helpers/date";
 
 const BackgroundImage = require("../../assets/backgrounds/details_wn.png");
-const CardImage = require("../../assets/backgrounds/card.png");
 
 class CardInfoScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -44,15 +42,15 @@ class CardInfoScreen extends React.Component {
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: {
       ...defaultStyles.headerTransparent,
-      backgroundColor: colors.background
-    }
+      backgroundColor: colors.background,
+    },
   });
 
   state = {
-    active: 0
+    active: 0,
   };
 
-  openInLinkedApp = link => {
+  openInLinkedApp = (link) => {
     if (Linking.canOpenURL(link)) {
       Linking.openURL(link);
     }
@@ -69,22 +67,24 @@ class CardInfoScreen extends React.Component {
       <Background source={BackgroundImage} disableScroll>
         <View style={styles.carousel}>
           <Carousel
-            ref={carousel => (this.carouselRef = carousel)}
+            ref={(carousel) => (this.carouselRef = carousel)}
             data={cards}
             removeClippedSubviews={false}
-            onSnapToItem={index => this.setState({ active: index })}
+            onSnapToItem={(index) => this.setState({ active: index })}
             renderItem={({ item }) => (
               <View style={styles.slideInnerContainer}>
                 <CardBackground src={item.cardUrl}>
                   <View style={styles.slideInnerSection}>
-                    <View style={{ height: normalize(130, 'height'), padding: 15 }}>
+                    <View
+                      style={{ height: normalize(130, "height"), padding: 15 }}
+                    >
                       {!item.cardOnly && (
                         <Image
                           source={{ uri: item.logoUrl }}
                           style={{
                             width: 80,
                             height: 80,
-                            resizeMode: "contain"
+                            resizeMode: "contain",
                           }}
                         />
                       )}
@@ -212,7 +212,7 @@ class CardInfoScreen extends React.Component {
 const styles = StyleSheet.create({
   carousel: {
     alignItems: "center",
-    height: 300
+    height: 300,
   },
   paginationDot: {
     marginHorizontal: 0,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
 
     width: 6,
     height: 6,
-    borderRadius: 6
+    borderRadius: 6,
   },
   paginationContainer: {
     paddingVertical: 8,
@@ -229,23 +229,23 @@ const styles = StyleSheet.create({
     marginBottom: 40,
 
     backgroundColor: colors.primary,
-    borderRadius: 20
+    borderRadius: 20,
   },
 
   slider: {
     marginTop: 20,
-    overflow: "visible"
+    overflow: "visible",
   },
   sliderContentContainer: {
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   slideInnerContainer: {
     // width: Dimensions.get("window").width * 0.75,
-    width: normalize(280, 'width'),
-    height: normalize(180, 'height'),
-    
+    width: normalize(280, "width"),
+    height: normalize(180, "height"),
+
     // backgroundColor: colors.color,
-    borderRadius: 10
+    borderRadius: 10,
   },
   slideInnerImage: {
     ...defaultStyles.grow,
@@ -254,19 +254,19 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
 
-    borderRadius: 10
+    borderRadius: 10,
   },
   slideInnerSection: {
-    flex: 1
+    flex: 1,
   },
   slideInnerText: {
-    paddingLeft: 20
+    paddingLeft: 20,
   },
   slideInnerTextA: {
     marginBottom: 10,
 
     fontSize: 9,
-    color: colors.info
+    color: colors.info,
   },
   slideInnerTextB: {
     fontSize: 10,
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
 
-    backgroundColor: colors.color
+    backgroundColor: colors.color,
   },
 
   row: {
@@ -286,11 +286,11 @@ const styles = StyleSheet.create({
 
     borderStyle: "solid",
     borderBottomWidth: 1,
-    borderBottomColor: "#efefef"
+    borderBottomColor: "#efefef",
   },
 
   textDescriptionContainer: {
-    flex: 1
+    flex: 1,
   },
   textDescription: {
     marginLeft: 24,
@@ -298,14 +298,14 @@ const styles = StyleSheet.create({
     color: "#636363",
     fontSize: 14,
     textAlign: "left",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   textValue: {
     marginRight: 24,
 
     fontSize: 14,
     textAlign: "right",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
 
   descriptionTitle: {
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
     color: "#636363",
     fontSize: 14,
     textAlign: "left",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   descriptionValue: {
     marginHorizontal: 24,
@@ -325,26 +325,26 @@ const styles = StyleSheet.create({
 
     color: "#636363",
     fontSize: 14,
-    textAlign: "left"
+    textAlign: "left",
   },
 
   terms: {
     alignItems: "center",
     justifyContent: "center",
 
-    height: 70
+    height: 70,
   },
   termsText: {
     color: "#709BE7",
     fontSize: 14,
-    textTransform: "uppercase"
-  }
+    textTransform: "uppercase",
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // …
   isLoading: state.prizes.isLoading,
-  prizes: state.prizes.prizes
+  prizes: state.prizes.prizes,
 });
 
 const mapDispatchToProps = {

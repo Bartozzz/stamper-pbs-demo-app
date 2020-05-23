@@ -4,11 +4,12 @@ import { ImageBackground, View, ScrollView } from "react-native";
 import defaultStyles from "../../constants/Styles";
 import styles from "./index.styled";
 
-
 export const Background = ({ children, disableScroll, ...props }) => {
-    const renderContainer = childs =>
+  const renderContainer = (childs) =>
     disableScroll ? (
-      <View testID="background-view" style={defaultStyles.container}>{childs}</View>
+      <View testID="background-view" style={defaultStyles.container}>
+        {childs}
+      </View>
     ) : (
       <ScrollView
         testID="background-scrollview"
@@ -29,6 +30,6 @@ export const Background = ({ children, disableScroll, ...props }) => {
       {children}
     </ImageBackground>
   );
-}
+};
 
 export default Background;

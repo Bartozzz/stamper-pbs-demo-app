@@ -32,15 +32,15 @@ export const InputContainer = styled.View`
   border-color: ${colors.inputBorder};
 
   ${({ isFocused }) =>
-    isFocused ? ` border-color: ${colors.color}; ` : `border-color: ${colors.inputBorder}`
-  };
+    isFocused
+      ? ` border-color: ${colors.color}; `
+      : `border-color: ${colors.inputBorder}`};
 
   ${({ error }) =>
     error &&
     `
       border-color: ${colors.error};
     `};
-
 `;
 
 export const InputError = styled.Text`
@@ -62,10 +62,10 @@ export const InputLabel = styled.Text`
   font-size: 10px;
 `;
 
-export const Input = styled.TextInput.attrs(props => ({
+export const Input = styled.TextInput.attrs((props) => ({
   underlineColorAndroid: "transparent",
   autoCorrect: false,
-  placeholderTextColor: getColorForState(props.error, props.isFocused)
+  placeholderTextColor: getColorForState(props.error, props.isFocused),
 }))`
   flex: 1;
   padding-vertical: 15px;

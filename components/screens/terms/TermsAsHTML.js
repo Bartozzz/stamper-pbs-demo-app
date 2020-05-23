@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   View,
   Text,
-  Linking
+  Linking,
 } from "react-native";
 import HTML from "react-native-render-html";
 
@@ -46,7 +46,7 @@ function TermsAsHTML({ loading, content, error }) {
                 height: 12 / 2.8,
                 marginTop: 12 / 2,
                 borderRadius: 12 / 2.8,
-                backgroundColor: "white"
+                backgroundColor: "white",
               }}
             />
           ),
@@ -54,7 +54,7 @@ function TermsAsHTML({ loading, content, error }) {
             <Text style={{ marginRight: 5, fontSize: 12, color: "white" }}>
               {passProps.index + 1})
             </Text>
-          )
+          ),
         }}
       />
     </View>
@@ -62,62 +62,62 @@ function TermsAsHTML({ loading, content, error }) {
 }
 
 const headingStyle = {
-  color: "white"
+  color: "white",
 };
 
 const textStyle = {
   color: "#95989A",
-  fontSize: 12
+  fontSize: 12,
 };
 
 const listStyle = {
-  marginTop: 5
+  marginTop: 5,
 };
 
 // @see https://www.npmjs.com/package/react-native-render-html#styling
 const tagsStyles = {
   h1: {
     ...headingStyle,
-    marginBottom: 10
+    marginBottom: 10,
   },
   h2: {
     ...headingStyle,
     fontSize: 16,
 
     marginTop: 20,
-    marginBottom: 4
+    marginBottom: 4,
   },
   h3: {
-    ...headingStyle
+    ...headingStyle,
   },
   h4: {
-    ...headingStyle
+    ...headingStyle,
   },
   h5: {
-    ...headingStyle
+    ...headingStyle,
   },
   h6: {
-    ...headingStyle
+    ...headingStyle,
   },
   ol: {
-    ...listStyle
+    ...listStyle,
   },
   ul: {
-    ...listStyle
+    ...listStyle,
   },
   p: {
-    ...textStyle
+    ...textStyle,
   },
   li: {
-    ...textStyle
-  }
+    ...textStyle,
+  },
 };
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
-    paddingVertical: 20
-  }
+    paddingVertical: 20,
+  },
 });
 
 export default TermsAsHTML;

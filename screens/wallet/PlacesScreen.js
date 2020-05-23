@@ -28,18 +28,18 @@ class WalletPlacesScreen extends React.Component {
         }
       />
     ),
-    headerRight: <HeaderHamburger navigation={navigation} />
+    headerRight: <HeaderHamburger navigation={navigation} />,
   });
 
   state = {
-    search: ""
+    search: "",
   };
 
   componentDidMount() {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
-  handleSearch = search => {
+  handleSearch = (search) => {
     this.setState({ search });
   };
 
@@ -49,22 +49,24 @@ class WalletPlacesScreen extends React.Component {
 
     const data = cards
       .filter(
-        card =>
+        (card) =>
           card.id.toLowerCase().includes(search.toLowerCase()) ||
           card.title.toLowerCase().includes(search.toLowerCase()) ||
           card.cardNumber.toLowerCase().includes(search.toLowerCase()) ||
           card.merchantName.toLowerCase().includes(search.toLowerCase())
       )
       .reduce((acc, curr) => {
-        const index = acc.findIndex(c => c.merchantName === curr.merchantName);
+        const index = acc.findIndex(
+          (c) => c.merchantName === curr.merchantName
+        );
 
         if (index === -1) {
           acc = [
             ...acc,
             {
               ...curr,
-              cardsAmount: 1
-            }
+              cardsAmount: 1,
+            },
           ];
         } else {
           acc = acc.map((e, i) =>
@@ -73,7 +75,7 @@ class WalletPlacesScreen extends React.Component {
                   ...e,
                   stampsTotal: e.stampsTotal + curr.stampsTotal,
                   stampsToDate: e.stampsToDate + curr.stampsToDate,
-                  cardsAmount: e.cardsAmount + 1
+                  cardsAmount: e.cardsAmount + 1,
                 }
               : e
           );
@@ -86,7 +88,7 @@ class WalletPlacesScreen extends React.Component {
       <FlatList
         data={data}
         numColumns={2}
-        keyExtractor={item => {
+        keyExtractor={(item) => {
           return item.id;
         }}
         renderItem={({ item }) => (
@@ -94,7 +96,7 @@ class WalletPlacesScreen extends React.Component {
             image={{ uri: item.logoUrl }}
             title={item.merchantName}
             subtitle={i18n.t("wallet.cardsAmount", {
-              count: item.cardsAmount
+              count: item.cardsAmount,
             })}
             renderButton={() => (
               <Card.Button
@@ -103,8 +105,8 @@ class WalletPlacesScreen extends React.Component {
                   navigation.push(Routes.CARD_INFO, {
                     merchant: item.merchantName,
                     cards: cards.filter(
-                      c => c.merchantName === item.merchantName
-                    )
+                      (c) => c.merchantName === item.merchantName
+                    ),
                   });
                 }}
               />
@@ -143,22 +145,19 @@ class WalletPlacesScreen extends React.Component {
 
 const styles = StyleSheet.create({
   list: {
-    padding: 8
-  }
+    padding: 8,
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // …
   isLoading: state.wallet.isLoading,
-  cards: state.wallet.cards
+  cards: state.wallet.cards,
 });
 
 const mapDispatchToProps = {
   // …
-  getWallet
+  getWallet,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WalletPlacesScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletPlacesScreen);

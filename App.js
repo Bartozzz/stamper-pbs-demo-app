@@ -17,7 +17,7 @@ import {
   REFRESH_TOKEN,
   setExpiryDate,
   setAccessToken,
-  setRefreshToken
+  setRefreshToken,
 } from "./store/reducers/auth";
 
 // Redux store:
@@ -26,7 +26,7 @@ const store = configureStore();
 export default class App extends React.Component {
   state = {
     rollbar: useRollbar(),
-    isLoadingComplete: false
+    isLoadingComplete: false,
   };
 
   componentDidCatch(error) {
@@ -101,7 +101,7 @@ export default class App extends React.Component {
         require("./assets/images/welcome/1.png"),
         require("./assets/images/welcome/2.png"),
         require("./assets/images/welcome/3.png"),
-        require("./assets/images/welcome/4.png"),  
+        require("./assets/images/welcome/4.png"),
         require("./assets/backgrounds/card.png"),
         // require("./assets/backgrounds/cards_wn.png"),
         require("./assets/backgrounds/cards.png"),
@@ -164,7 +164,7 @@ export default class App extends React.Component {
         require("./assets/success/received_reward.gif"),
         require("./assets/success/card_add.gif"),
         require("./assets/success/stamp_add.gif"),
-        require("./assets/success/stamp_subtract.gif")
+        require("./assets/success/stamp_subtract.gif"),
       ]),
 
       // Load fonts:
@@ -205,12 +205,12 @@ export default class App extends React.Component {
         "nunito-bold": require("./assets/fonts/Nunito-Bold.ttf"),
         "nunito-bold-italic": require("./assets/fonts/Nunito-BoldItalic.ttf"),
         "nunito-extra-bold": require("./assets/fonts/Nunito-ExtraBold.ttf"),
-        "nunito-extra-bold-italic": require("./assets/fonts/Nunito-ExtraBoldItalic.ttf")
-      })
+        "nunito-extra-bold-italic": require("./assets/fonts/Nunito-ExtraBoldItalic.ttf"),
+      }),
     ]);
   };
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error) => {
     console.warn(error);
   };
 

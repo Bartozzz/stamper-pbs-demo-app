@@ -6,13 +6,13 @@ const height = Dimensions.get("window").height;
 export default {
   window: {
     width,
-    height
+    height,
   },
 
   // React navigation:
   headerTopSpacer: Platform.select({
     ios: 6,
-    android: 0
+    android: 0,
   }),
 
   // Utilities:
@@ -20,5 +20,5 @@ export default {
 
   // Fonts:
   fontHead: "poppins-black",
-  fontText: "nunito-regular"
+  fontText: "nunito-regular",
 };

@@ -14,11 +14,11 @@ const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class TermsOfUseScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   state = {
-    processing: false
+    processing: false,
   };
 
   accept = () => {
@@ -39,9 +39,7 @@ class TermsOfUseScreen extends React.Component {
         <Box.Container>
           <Box.Icon width={160} height={125} source={BalanceIcon} />
 
-          <Box.Heading>
-            {i18n.t("auth.externalTos.headline")}
-          </Box.Heading>
+          <Box.Heading>{i18n.t("auth.externalTos.headline")}</Box.Heading>
 
           <TouchableOpacity onPress={this.showTerms}>
             <Box.Action>{i18n.t("auth.externalTos.link")}</Box.Action>
@@ -65,12 +63,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     marginTop: 80,
-    marginBottom: 30
+    marginBottom: 30,
   },
 
   button: {
-    marginHorizontal: 30
-  }
+    marginHorizontal: 30,
+  },
 });
 
 export default TermsOfUseScreen;

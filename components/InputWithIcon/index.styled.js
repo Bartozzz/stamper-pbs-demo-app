@@ -33,15 +33,15 @@ export const InputContainer = styled.View`
   border-color: ${colors.inputBorder};
 
   ${({ isFocused }) =>
-    isFocused ? ` border-color: ${colors.color}; ` : `border-color: ${colors.inputBorder}`
-  };
+    isFocused
+      ? ` border-color: ${colors.color}; `
+      : `border-color: ${colors.inputBorder}`};
 
   ${({ error }) =>
     error &&
     `
       border-color: ${colors.error};
     `};
-
 `;
 
 export const InputError = styled.Text`
@@ -60,20 +60,19 @@ export const InputIcon = styled(Ionicons)`
   padding-horizontal: 20px;
 
   ${({ isFocused }) =>
-    isFocused ? ` color: ${colors.color}; ` : `color: ${colors.inputBorder}`
-  };
+    isFocused ? ` color: ${colors.color}; ` : `color: ${colors.inputBorder}`};
 
   ${({ error }) =>
     error &&
-  `
+    `
     color: ${colors.error};
   `};
 `;
 
-export const Input = styled.TextInput.attrs(props => ({
+export const Input = styled.TextInput.attrs((props) => ({
   underlineColorAndroid: "transparent",
   autoCorrect: false,
-  placeholderTextColor: getColorForState(props.error, props.isFocused)
+  placeholderTextColor: getColorForState(props.error, props.isFocused),
 }))`
   flex: 1;
   padding-top: 10px;

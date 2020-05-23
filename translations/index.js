@@ -10,7 +10,7 @@ i18n.locale = Localization.locale;
 i18n.defaultLocale = "pl";
 i18n.appLocale = (i18n.currentLocale() || i18n.defaultLocale).slice(0, 2);
 
-i18n.pluralization["pl"] = function(count) {
+i18n.pluralization.pl = function (count) {
   if (count === 0) {
     return ["zero"];
   } else if (count === 1) {

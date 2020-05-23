@@ -17,7 +17,7 @@ const BalanceIcon = require("../../assets/images/icons/balance.png");
 
 class ScannerConfirmRefusedTermsScreen extends React.Component {
   static navigationOptions = () => ({
-    header: null
+    header: null,
   });
 
   accept = () => {
@@ -36,9 +36,7 @@ class ScannerConfirmRefusedTermsScreen extends React.Component {
         <Box.Container>
           <Box.Icon width={107} height={85} source={BalanceIcon} />
 
-          <Box.Heading>
-            {i18n.t("map.terms.refuse.heading")}
-          </Box.Heading>
+          <Box.Heading>{i18n.t("map.terms.refuse.heading")}</Box.Heading>
 
           <Box.Subheading>
             {i18n.t("map.terms.refuse.subheading")}
@@ -68,16 +66,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     marginTop: 80,
-    marginBottom: 30
+    marginBottom: 30,
   },
 
   buttons: {
     justifyContent: "space-around",
-    marginBottom: 50
+    marginBottom: 50,
   },
   button: {
-    width: 90
-  }
+    width: 90,
+  },
 });
 
 const mapStateToProps = () => ({
@@ -88,6 +86,7 @@ const mapDispatchToProps = {
   // …
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ScannerConfirmRefusedTermsScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScannerConfirmRefusedTermsScreen);

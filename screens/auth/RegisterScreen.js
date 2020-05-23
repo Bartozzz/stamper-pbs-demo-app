@@ -5,11 +5,9 @@ import {
   Text,
   AsyncStorage,
   TouchableOpacity,
-  ScrollView,
   View,
-  Dimensions
 } from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Background from "../../components/Background";
 
@@ -20,7 +18,7 @@ import HeaderBackIcon from "../../components/nav/HeaderBack";
 import {
   register,
   ACCESS_TOKEN,
-  REFRESH_TOKEN
+  REFRESH_TOKEN,
 } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
@@ -42,7 +40,7 @@ class AuthRegisterScreen extends React.Component {
         onPress={() => navigation.goBack()}
       />
     ),
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
@@ -56,8 +54,8 @@ class AuthRegisterScreen extends React.Component {
       nickname: [],
       password: [],
       email: [],
-      other: []
-    }
+      other: [],
+    },
   };
 
   registerWithCredentials = () => {
@@ -71,7 +69,7 @@ class AuthRegisterScreen extends React.Component {
       .catch(this.handleError);
   };
 
-  handleSuccess = async response => {
+  handleSuccess = async (response) => {
     if (response.error) {
       return this.handleError(response);
     }
@@ -87,11 +85,11 @@ class AuthRegisterScreen extends React.Component {
 
     // Triggers profile fetch and redirects to the newsletter update screen:
     this.props.navigation.navigate(Routes.AUTH_LOADING, {
-      redirect: Routes.PROFILE_NEWSLETTER_UPDATE
+      redirect: Routes.PROFILE_NEWSLETTER_UPDATE,
     });
   };
 
-  handleError = async response => {
+  handleError = async (response) => {
     const { data } = response.error.response;
 
     this.setState({
@@ -100,8 +98,8 @@ class AuthRegisterScreen extends React.Component {
         nickname: null,
         password: null,
         email: null,
-        other: null
-      })
+        other: null,
+      }),
     });
   };
 
@@ -114,14 +112,18 @@ class AuthRegisterScreen extends React.Component {
 
     return (
       <Background source={BackgroundImage} disableScroll>
-        <KeyboardAwareScrollView enableOnAndroid={true} style={styles.regContainer} extraScrollHeight={60}>
+        <KeyboardAwareScrollView
+          enableOnAndroid={true}
+          style={styles.regContainer}
+          extraScrollHeight={60}
+        >
           <InputWithIcon
             iconName="ios-contact"
             iconSize={20}
             placeholder={i18n.t("auth.nickname")}
             value={nickname}
             error={error.nickname}
-            onChangeText={nickname => this.setState({ nickname })}
+            onChangeText={(nickname) => this.setState({ nickname })}
             autoCapitalize="none"
           />
 
@@ -131,7 +133,7 @@ class AuthRegisterScreen extends React.Component {
             placeholder={i18n.t("auth.email")}
             value={email}
             error={error.email}
-            onChangeText={email => this.setState({ email })}
+            onChangeText={(email) => this.setState({ email })}
             autoCapitalize="none"
           />
 
@@ -141,7 +143,7 @@ class AuthRegisterScreen extends React.Component {
             placeholder={i18n.t("auth.password")}
             value={password}
             error={error.password}
-            onChangeText={password => this.setState({ password })}
+            onChangeText={(password) => this.setState({ password })}
             autoCapitalize="none"
             secureTextEntry
           />
@@ -159,7 +161,7 @@ class AuthRegisterScreen extends React.Component {
   }
 }
 
-export const AuthRegisterScreenLinks = props => (
+export const AuthRegisterScreenLinks = (props) => (
   <View style={styles.regContainerTextContainer}>
     <Text style={[styles.regContainerText]}>{i18n.t("auth.tosAccept")}</Text>
 
@@ -174,38 +176,35 @@ export const AuthRegisterScreenLinks = props => (
 
 const styles = StyleSheet.create({
   regBold: {
-    fontWeight: "900"
+    fontWeight: "900",
   },
   regContainer: {
     marginHorizontal: 30,
-    paddingTop: 15
+    paddingTop: 15,
   },
   regContainerTextContainer: {
     marginTop: 20,
     marginBottom: 30,
 
     flexDirection: "row",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   regContainerText: {
     fontSize: 14,
 
     color: colors.color,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // …
-  loading: state.auth.fetchingData
+  loading: state.auth.fetchingData,
 });
 
 const mapDispatchToProps = {
   // …,
-  register
+  register,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthRegisterScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthRegisterScreen);

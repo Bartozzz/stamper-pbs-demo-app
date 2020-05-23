@@ -7,7 +7,7 @@ import ClusterMarker from "../components/screens/map/ClusterMarker";
 const MapAreaMarker = ({ marker, cluster, onPress }) => {
   const coordinate = {
     latitude: marker.geometry.coordinates[1],
-    longitude: marker.geometry.coordinates[0]
+    longitude: marker.geometry.coordinates[0],
   };
 
   // If a cluster
@@ -16,7 +16,7 @@ const MapAreaMarker = ({ marker, cluster, onPress }) => {
       <ClusterMarker
         coordinate={coordinate}
         count={marker.properties.point_count}
-        onPress={event => {
+        onPress={(event) => {
           event.stopPropagation();
 
           const markersInCluster = cluster.getLeaves(marker.id);
@@ -36,7 +36,7 @@ const MapAreaMarker = ({ marker, cluster, onPress }) => {
       <Marker
         coordinate={coordinate}
         item={marker}
-        onPress={event => {
+        onPress={(event) => {
           event.stopPropagation();
 
           if (onPress) {

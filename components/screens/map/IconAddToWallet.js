@@ -6,8 +6,8 @@ const Container = styled.TouchableOpacity`
   margin-right: 16px;
 `;
 
-const Icon = styled.Image.attrs(props => ({
-  source: PlusImage
+const Icon = styled.Image.attrs((props) => ({
+  source: PlusImage,
 }))`
   width: 48px;
   height: 48px;

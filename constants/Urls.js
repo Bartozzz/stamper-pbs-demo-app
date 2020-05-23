@@ -4,7 +4,7 @@ import getEnvVariables from "../helpers/env";
 const { apiUrl } = getEnvVariables();
 
 const Server = {
-  V1: apiUrl
+  V1: apiUrl,
 };
 
 const V1 = {
@@ -71,13 +71,13 @@ const V1 = {
 
     Newsletter(language = i18n.appLocale) {
       return `${Server.V1}/Account/Newsletter?language=${language}`;
-    }
+    },
   },
 
   Wallet: {
     Get() {
       return `${Server.V1}/Wallet/Get`;
-    }
+    },
   },
 
   Favorite: {
@@ -87,13 +87,13 @@ const V1 = {
 
     Remove() {
       return `${Server.V1}/Favorite/Remove`;
-    }
+    },
   },
 
   Region: {
     Get() {
       return `${Server.V1}/Region/Get`;
-    }
+    },
   },
 
   Rewards: {
@@ -107,7 +107,7 @@ const V1 = {
 
     GetDiscountCode() {
       return `${Server.V1}/Rewards/GetDiscountCode`;
-    }
+    },
   },
 
   Card: {
@@ -117,14 +117,14 @@ const V1 = {
 
     Add() {
       return `${Server.V1}/Card/Add`;
-    }
+    },
   },
 
   Stamp: {
     Add() {
       return `${Server.V1}/Stamp/Add`;
-    }
-  }
+    },
+  },
 };
 
 // Those endpoints doesn't require Authorization header:
@@ -135,7 +135,7 @@ const publicUrls = [
   V1.Account.ExternalRegister(),
   V1.Account.Login(),
   V1.Account.ExternalLogin(),
-  V1.Account.TermsAndConditions()
+  V1.Account.TermsAndConditions(),
 ];
 
 export default V1;

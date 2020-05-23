@@ -7,8 +7,8 @@ export const IconContainer = styled.TouchableOpacity`
   padding: 5px;
 
   border-radius: 20px;
-  
-  background-color: ${props => props.backgroundColor};
+
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const IconImage = styled.Image`

@@ -19,7 +19,7 @@ class ProfileMenuScreen extends React.Component {
     headerTitle: "",
     headerLeft: null,
     headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTransparent
+    headerStyle: defaultStyles.headerTransparent,
     // headerTransparent: true
   });
 
@@ -95,11 +95,11 @@ const styles = StyleSheet.create({
 
     borderRadius: 35,
     borderWidth: 4,
-    borderColor: colors.border
+    borderColor: colors.border,
   },
 
   logo: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
 
   login: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
     color: colors.color,
     fontSize: 16,
-    fontFamily: "poppins-bold"
+    fontFamily: "poppins-bold",
   },
 
   email: {
@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
 
     color: colors.info,
     fontSize: 10,
-    fontFamily: "nunito-regular"
+    fontFamily: "nunito-regular",
   },
   emailIcon: {
     width: 16,
     height: 16,
-    marginRight: 6
+    marginRight: 6,
   },
 
   menu: {
@@ -132,37 +132,34 @@ const styles = StyleSheet.create({
     marginTop: 25,
 
     borderRadius: 10,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
   menuSpacer: {
     width: 50,
     height: 1.5,
 
-    backgroundColor: colors.border
+    backgroundColor: colors.border,
   },
   menuItem: {
-    marginVertical: 14
+    marginVertical: 14,
   },
   menuItemText: {
     color: colors.color,
     fontSize: 20,
     fontFamily: "poppins-regular",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // …
   nickname: state.profile.nickname,
   email: state.profile.email,
-  photo: state.profile.photo
+  photo: state.profile.photo,
 });
 
 const mapDispatchToProps = {
   // …
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProfileMenuScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenuScreen);

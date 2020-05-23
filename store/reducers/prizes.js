@@ -20,7 +20,7 @@ export const PRIZES_GET_DISCOUNT_FAIL = "APP/PRIZES_DISCOUNT/GET_FAIL";
 const initialState = {
   isLoading: false,
   count: 0,
-  prizes: []
+  prizes: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -28,33 +28,33 @@ export default function reducer(state = initialState, action) {
     case PRIZES_GET_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case PRIZES_GET_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        prizes: action.payload.data.cards
+        prizes: action.payload.data.cards,
       };
 
     case PRIZES_GET_FAIL:
       return {
         ...state,
         isLoading: false,
-        prizes: []
+        prizes: [],
       };
 
     case PRIZES_GET_COUNT_SUCCESS:
       return {
         ...state,
-        count: action.payload.data
+        count: action.payload.data,
       };
 
     case PRIZES_RESTORE: {
       return {
         ...state,
-        prizes: action.payload.cards
+        prizes: action.payload.cards,
       };
     }
 
@@ -63,40 +63,40 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const restorePrizes = payload => ({
+export const restorePrizes = (payload) => ({
   type: PRIZES_RESTORE,
   payload: {
-    cards: payload.cards
-  }
+    cards: payload.cards,
+  },
 });
 
 export const getPrizes = () => ({
   types: [PRIZES_GET_REQUEST, PRIZES_GET_SUCCESS, PRIZES_GET_FAIL],
   payload: {
     request: {
-      url: Url.Rewards.Get()
-    }
-  }
+      url: Url.Rewards.Get(),
+    },
+  },
 });
 
 export const getPrizesCount = () => ({
   types: [
     PRIZES_GET_COUNT_REQUEST,
     PRIZES_GET_COUNT_SUCCESS,
-    PRIZES_GET_COUNT_FAIL
+    PRIZES_GET_COUNT_FAIL,
   ],
   payload: {
     request: {
-      url: Url.Rewards.Count()
-    }
-  }
+      url: Url.Rewards.Count(),
+    },
+  },
 });
 
 export const getDiscountCode = (cardId, providerId) => ({
   types: [
     PRIZES_GET_DISCOUNT_REQUEST,
     PRIZES_GET_DISCOUNT_SUCCESS,
-    PRIZES_GET_DISCOUNT_FAIL
+    PRIZES_GET_DISCOUNT_FAIL,
   ],
   payload: {
     request: {
@@ -104,8 +104,8 @@ export const getDiscountCode = (cardId, providerId) => ({
       url: Url.Rewards.GetDiscountCode(),
       data: {
         cardId,
-        providerId
-      }
-    }
-  }
+        providerId,
+      },
+    },
+  },
 });

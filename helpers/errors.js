@@ -21,7 +21,7 @@ export function getErrorsFromResponse(response, defaultErrors = {}) {
     }
   } else {
     // Otherwise, iterate all errors:
-    Object.entries(response).forEach(error => {
+    Object.entries(response).forEach((error) => {
       const errorField = error[0].toLowerCase();
       const errorValue = error[1];
 

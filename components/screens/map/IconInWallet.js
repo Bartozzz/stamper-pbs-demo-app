@@ -8,8 +8,8 @@ const Container = styled.View`
   margin-right: 14px;
 `;
 
-const Icon = styled.Image.attrs(props => ({
-  source: AddedImage
+const Icon = styled.Image.attrs((props) => ({
+  source: AddedImage,
 }))`
   height: 56px;
   width: 74px;

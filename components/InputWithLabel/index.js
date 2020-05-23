@@ -14,12 +14,17 @@ const getErrorMessage = (error) => {
   }
 };
 
-export const InputWithLabel = ({ iconName, iconSize, error, label, ...rest }) => {
-
+export const InputWithLabel = ({
+  iconName,
+  iconSize,
+  error,
+  label,
+  ...rest
+}) => {
   const [focus, setFocus] = React.useState(false);
 
   const handleFocus = () => {
-    setFocus(true)
+    setFocus(true);
   };
 
   const handleBlur = () => {
@@ -27,13 +32,10 @@ export const InputWithLabel = ({ iconName, iconSize, error, label, ...rest }) =>
   };
 
   const hasError = Boolean(getErrorMessage(error));
-  
+
   return (
     <Styled.InputPadder>
-      <Styled.InputContainer
-        error={hasError}
-        isFocused={focus}
-      >
+      <Styled.InputContainer error={hasError} isFocused={focus}>
         <Styled.Input
           {...rest}
           error={hasError}
@@ -44,13 +46,15 @@ export const InputWithLabel = ({ iconName, iconSize, error, label, ...rest }) =>
         />
 
         <Styled.InputLabel testID="input-label">{label}</Styled.InputLabel>
-
       </Styled.InputContainer>
 
-      {hasError && <Styled.InputError testID="input-label-error">{getErrorMessage(error)}</Styled.InputError>}
+      {hasError && (
+        <Styled.InputError testID="input-label-error">
+          {getErrorMessage(error)}
+        </Styled.InputError>
+      )}
     </Styled.InputPadder>
   );
-}
-
+};
 
 export default InputWithLabel;

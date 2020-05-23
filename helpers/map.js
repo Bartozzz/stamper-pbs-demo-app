@@ -7,16 +7,16 @@ export function getZoomLevel(longitudeDelta) {
 export function getCluster(places, region) {
   if (places.lenght === 0) {
     return {
-      markers: places
+      markers: places,
     };
   }
 
   const cluster = new Supercluster({
     radius: 40,
-    maxZoom: 18
+    maxZoom: 18,
   });
 
-  let padding = 0;
+  const padding = 0;
   let markers = [];
 
   try {
@@ -27,7 +27,7 @@ export function getCluster(places, region) {
         region.longitude - region.longitudeDelta * (0.5 + padding),
         region.latitude - region.latitudeDelta * (0.5 + padding),
         region.longitude + region.longitudeDelta * (0.5 + padding),
-        region.latitude + region.latitudeDelta * (0.5 + padding)
+        region.latitude + region.latitudeDelta * (0.5 + padding),
       ],
       getZoomLevel(region.longitudeDelta)
     );
@@ -37,6 +37,6 @@ export function getCluster(places, region) {
 
   return {
     markers,
-    cluster
+    cluster,
   };
 }

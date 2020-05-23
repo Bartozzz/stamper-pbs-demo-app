@@ -1,14 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {
-  AsyncStorage,
-  StyleSheet,
-  Image,
-  View,
-  ScrollView,
-  TouchableOpacity
-} from "react-native";
-import { SwipeListView } from "react-native-swipe-list-view";
+import { StyleSheet, Image, View, ScrollView } from "react-native";
 import Toast from "react-native-easy-toast";
 
 import * as Routes from "../../navigation";
@@ -20,21 +12,13 @@ import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/screens/wallet/Header";
 import CardsList from "../../components/screens/wallet/CardsList";
-import CardFront from "../../components/screens/wallet/CardFront";
-import CardBack from "../../components/screens/wallet/CardBack";
 
-import {
-  WALLET_CARDS,
-  FORCE_REFRESH_WALLET,
-  getWallet
-} from "../../store/reducers/wallet";
+import { getWallet } from "../../store/reducers/wallet";
 
 const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
-const DeleteImage = require("../../assets/images/delete.png");
 const WalletLoader = require("../../assets/loaders/wallet.gif");
 
 const height = 90;
-const margin = 15;
 
 class WalletCardsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -49,12 +33,12 @@ class WalletCardsScreen extends React.Component {
         }
       />
     ),
-    headerRight: <HeaderHamburger navigation={navigation} />
+    headerRight: <HeaderHamburger navigation={navigation} />,
   });
 
   state = {
     isCheckingIfCacheValid: false,
-    search: null
+    search: null,
   };
 
   async componentDidMount() {
@@ -79,21 +63,21 @@ class WalletCardsScreen extends React.Component {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
-  removeCard = cardId => {
+  removeCard = (cardId) => {
     this.props.navigation.push(Routes.WALLET_CARD_REMOVAL_CONFIRMATION, {
-      cardId: cardId
+      cardId: cardId,
     });
   };
 
-  handleSearch = search => {
+  handleSearch = (search) => {
     this.setState({ search });
   };
 
-  navigateToCardInfo = card => {
+  navigateToCardInfo = (card) => {
     this.props.navigation.push(Routes.CARD_INFO, {
       merchant: "",
       cards: [card],
-      backTo: Routes.WALLET_CARDS
+      backTo: Routes.WALLET_CARDS,
     });
   };
 
@@ -105,7 +89,7 @@ class WalletCardsScreen extends React.Component {
     // Filter data based on current search term:
     if (search) {
       data = data.filter(
-        card =>
+        (card) =>
           card.id.toLowerCase().includes(search.toLowerCase()) ||
           card.cardNumber.toLowerCase().includes(search.toLowerCase()) ||
           card.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -116,7 +100,7 @@ class WalletCardsScreen extends React.Component {
     return (
       <CardsList
         data={data}
-        onCheck={item => {
+        onCheck={(item) => {
           this.navigateToCardInfo(item);
         }}
         onDelete={(item, rowMap) => {
@@ -157,7 +141,7 @@ class WalletCardsScreen extends React.Component {
           </>
         )}
 
-        <Toast ref={errorToast => (this.errorToast = errorToast)} />
+        <Toast ref={(errorToast) => (this.errorToast = errorToast)} />
       </Background>
     );
   }
@@ -165,7 +149,7 @@ class WalletCardsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   list: {
-    paddingTop: 8
+    paddingTop: 8,
   },
 
   item: {
@@ -173,10 +157,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 10,
 
-    borderRadius: 10
+    borderRadius: 10,
   },
   itemFront: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)"
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
   },
   itemRemove: {
     alignItems: "center",
@@ -195,11 +179,11 @@ const styles = StyleSheet.create({
 
     // Need to add zIndex to ensure that the TouchableOpacity will receive press
     // events on Android:
-    zIndex: 1
+    zIndex: 1,
   },
   itemRemoveImage: {
     width: 40,
-    height: 40
+    height: 40,
   },
 
   textId: {
@@ -207,7 +191,7 @@ const styles = StyleSheet.create({
 
     fontSize: 14,
     fontFamily: "nunito-black",
-    color: "#95989A"
+    color: "#95989A",
   },
   textTitle: {
     marginTop: 2,
@@ -215,12 +199,12 @@ const styles = StyleSheet.create({
 
     fontSize: 14,
     fontFamily: "poppins-bold",
-    color: colors.color
+    color: colors.color,
   },
   textExpiry: {
     fontSize: 9,
     fontFamily: "nunito-regular",
-    color: "#95989A"
+    color: "#95989A",
   },
   textAmount: {
     flex: 1,
@@ -229,22 +213,19 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontSize: 12,
     fontFamily: "nunito-regular",
-    color: "#95989A"
-  }
+    color: "#95989A",
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // …
   isLoading: state.wallet.isLoading,
-  cards: state.wallet.cards
+  cards: state.wallet.cards,
 });
 
 const mapDispatchToProps = {
   // …
-  getWallet
+  getWallet,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WalletCardsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletCardsScreen);

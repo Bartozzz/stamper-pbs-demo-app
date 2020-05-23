@@ -8,12 +8,12 @@ import {
   ImageBackground,
   TouchableOpacity,
   Text,
-  View
+  View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import { AntDesign } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Button from "../../components/Button/";
 import Background from "../../components/Background";
@@ -33,7 +33,7 @@ import {
   setLastname,
   setNewsletter,
   setEmail,
-  setPhoto
+  setPhoto,
 } from "../../store/reducers/profile";
 
 import i18n from "../../translations";
@@ -56,7 +56,7 @@ class ProfileEditScreen extends React.Component {
       />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
-    headerStyle: defaultStyles.headerTwoLines
+    headerStyle: defaultStyles.headerTwoLines,
   });
 
   state = {
@@ -79,8 +79,8 @@ class ProfileEditScreen extends React.Component {
       login: null,
       email: null,
       photo: null,
-      other: null
-    }
+      other: null,
+    },
   };
 
   uploadImage = async () => {
@@ -96,14 +96,14 @@ class ProfileEditScreen extends React.Component {
         base64: true,
         mediaTypes: "Images",
         allowsEditing: true,
-        aspect: [1, 1]
+        aspect: [1, 1],
       });
 
       if (!result.cancelled) {
         const photo = `data:image/jpg;base64,${result.base64}`;
 
         this.setState({
-          uploading: true
+          uploading: true,
         });
 
         this.props
@@ -113,13 +113,13 @@ class ProfileEditScreen extends React.Component {
 
             this.props.navigation.navigate(Routes.INFO_SUCCESS, {
               redirect: Routes.PROFILE_EDIT,
-              message: i18n.t("success.profile.photoAdd")
+              message: i18n.t("success.profile.photoAdd"),
             });
           })
           .catch(() =>
             this.props.navigation.navigate(Routes.INFO_ERROR, {
               redirect: Routes.PROFILE_EDIT,
-              message: i18n.t("errors.profile.photoAdd")
+              message: i18n.t("errors.profile.photoAdd"),
             })
           );
       }
@@ -156,11 +156,11 @@ class ProfileEditScreen extends React.Component {
     // Go back:
     this.props.navigation.navigate(Routes.INFO_SUCCESS, {
       redirect: Routes.PROFILE_MENU,
-      message: i18n.t("success.changed")
+      message: i18n.t("success.changed"),
     });
   };
 
-  handleError = async response => {
+  handleError = async (response) => {
     const { data } = response.error.response;
 
     const error = {
@@ -169,7 +169,7 @@ class ProfileEditScreen extends React.Component {
       login: null,
       email: null,
       photo: null,
-      other: null
+      other: null,
     };
 
     if (data.Nickname) error.login = data.Nickname;
@@ -190,99 +190,100 @@ class ProfileEditScreen extends React.Component {
       login,
       newsletter,
       photo,
-      error
+      error,
     } = this.state;
 
     return (
       <KeyboardAwareScrollView enableOnAndroid={true} extraScrollHeight={100}>
-            <TouchableOpacity onPress={this.uploadImage}>
-              <ImageBackground
-                resizeMode="cover"
-                source={{ uri: photo }}
-                style={styles.upload}
-              >
-                {this.state.uploading ? (
-                  <ActivityIndicator color="white" size="large" />
-                ) : (
-                  <React.Fragment>
-                    <AntDesign name="camerao" size={36} color="white" />
-                    <Text style={styles.uploadText}>
-                      {i18n.t("profile.edit.changePhoto")}
-                    </Text>
-                  </React.Fragment>
-                )}
-              </ImageBackground>
-            </TouchableOpacity>
+        <TouchableOpacity onPress={this.uploadImage}>
+          <ImageBackground
+            resizeMode="cover"
+            source={{ uri: photo }}
+            style={styles.upload}
+          >
+            {this.state.uploading ? (
+              <ActivityIndicator color="white" size="large" />
+            ) : (
+              <React.Fragment>
+                <AntDesign name="camerao" size={36} color="white" />
+                <Text style={styles.uploadText}>
+                  {i18n.t("profile.edit.changePhoto")}
+                </Text>
+              </React.Fragment>
+            )}
+          </ImageBackground>
+        </TouchableOpacity>
 
-            <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
-              <Background source={BackgroundImage}>
-                <View style={styles.form}>
-                  {error.other ? <Error message={error.other} /> : null}
+        <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
+          <Background source={BackgroundImage}>
+            <View style={styles.form}>
+              {error.other ? <Error message={error.other} /> : null}
 
-                  <InputWithLabel
-                    label={i18n.t("auth.firstname")}
-                    value={firstName}
-                    error={error.firstName}
-                    onChangeText={firstName => this.setState({ firstName })}
-                  />
+              <InputWithLabel
+                label={i18n.t("auth.firstname")}
+                value={firstName}
+                error={error.firstName}
+                onChangeText={(firstName) => this.setState({ firstName })}
+              />
 
-                  <InputWithLabel
-                    label={i18n.t("auth.lastname")}
-                    value={lastName}
-                    error={error.lastName}
-                    onChangeText={lastName => this.setState({ lastName })}
-                  />
+              <InputWithLabel
+                label={i18n.t("auth.lastname")}
+                value={lastName}
+                error={error.lastName}
+                onChangeText={(lastName) => this.setState({ lastName })}
+              />
 
-                  <InputWithLabel
-                    label={i18n.t("auth.email")}
-                    value={email}
-                    error={error.email}
-                    onChangeText={email => this.setState({ email })}
-                  />
+              <InputWithLabel
+                label={i18n.t("auth.email")}
+                value={email}
+                error={error.email}
+                onChangeText={(email) => this.setState({ email })}
+              />
 
-                  <InputWithLabel
-                    label={i18n.t("auth.nickname")}
-                    value={login}
-                    error={error.login}
-                    onChangeText={login => this.setState({ login })}
-                  />
+              <InputWithLabel
+                label={i18n.t("auth.nickname")}
+                value={login}
+                error={error.login}
+                onChangeText={(login) => this.setState({ login })}
+              />
 
-                  <Checkbox
-                    checked={newsletter}
-                    onChange={newsletter => this.setState({ newsletter })}
-                    label={
-                      <View style={{ flexDirection: "row" }}>
-                        <CheckBoxLabel>
-                          {i18n.t("profile.edit.newsletter")}
-                        </CheckBoxLabel>
+              <Checkbox
+                checked={newsletter}
+                onChange={(newsletter) => this.setState({ newsletter })}
+                label={
+                  <View style={{ flexDirection: "row" }}>
+                    <CheckBoxLabel>
+                      {i18n.t("profile.edit.newsletter")}
+                    </CheckBoxLabel>
 
-                        <TouchableOpacity onPress={this.showNewsletterTerms}>
-                          <CheckBoxLabel
-                            style={
-                              { fontWeight: "900", textTransform: "uppercase" }
-                            }
-                          >
-                            {i18n.t("more")}
-                          </CheckBoxLabel>
-                        </TouchableOpacity>
-                      </View>
-                    }
-                  />
-                </View>
+                    <TouchableOpacity onPress={this.showNewsletterTerms}>
+                      <CheckBoxLabel
+                        style={{
+                          fontWeight: "900",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {i18n.t("more")}
+                      </CheckBoxLabel>
+                    </TouchableOpacity>
+                  </View>
+                }
+              />
+            </View>
 
-                <View style={styles.buttonContainer}>
-                  <Button
-                    title={i18n.t("profile.save")}
-                    onPress={this.editProfile}
-                    processing={this.state.processing}
-                  />
-                </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                title={i18n.t("profile.save")}
+                onPress={this.editProfile}
+                processing={this.state.processing}
+              />
+            </View>
 
-                <Animated.View style={[{ height: this.state.heightAnim }]} />
-              </Background>
-            </Animated.View>
-      </KeyboardAwareScrollView>    
-      );
+            <Animated.View style={[{ height: this.state.heightAnim }]} />
+          </Background>
+        </Animated.View>
+      </KeyboardAwareScrollView>
+    );
   }
 }
 
@@ -291,12 +292,12 @@ const styles = StyleSheet.create({
     flex: 1,
 
     paddingTop: 15,
-    marginHorizontal: 30
+    marginHorizontal: 30,
   },
 
   buttonContainer: {
     marginVertical: 20,
-    marginHorizontal: 30
+    marginHorizontal: 30,
   },
 
   upload: {
@@ -304,24 +305,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     width: "100%",
-    height: UPLOAD_HEIGHT
+    height: UPLOAD_HEIGHT,
   },
   uploadText: {
     marginTop: 5,
 
     fontSize: 10,
-    color: colors.info
-  }
+    color: colors.info,
+  },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   // …
   nickname: state.profile.nickname,
   firstname: state.profile.firstname,
   lastname: state.profile.lastname,
   newsletter: state.profile.newsletter,
   email: state.profile.email,
-  photo: state.profile.photo
+  photo: state.profile.photo,
 });
 
 const mapDispatchToProps = {
@@ -333,9 +334,6 @@ const mapDispatchToProps = {
   setLastname,
   setNewsletter,
   setEmail,
-  setPhoto
+  setPhoto,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProfileEditScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileEditScreen);

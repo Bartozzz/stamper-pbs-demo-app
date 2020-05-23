@@ -24,10 +24,14 @@ class InfoScreen extends React.Component {
         style={[
           defaultStyles.container,
           defaultStyles.center,
-          this.props.style
+          this.props.style,
         ]}
       >
-        <Image style={[{ width, height }]} resizeMode="contain" source={image} />
+        <Image
+          style={[{ width, height }]}
+          resizeMode="contain"
+          source={image}
+        />
         <Text style={styles.text}>{message}</Text>
       </TouchableOpacity>
     );
@@ -45,8 +49,8 @@ const styles = StyleSheet.create({
 
     fontSize: 22,
     fontFamily: layout.fontText,
-    color: colors.color
-  }
+    color: colors.color,
+  },
 });
 
 export default InfoScreen;

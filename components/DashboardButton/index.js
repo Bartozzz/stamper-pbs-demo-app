@@ -12,14 +12,16 @@ export const DashboardButton = ({ children, icon, badge, ...props }) => {
       {...props}
       testID="button"
     >
-      {badge !== undefined && badge>0 && (
+      {badge !== undefined && badge > 0 && (
         <Styled.BadgeContainer>
           <Styled.BadgeText testID="badge">{badge}</Styled.BadgeText>
         </Styled.BadgeContainer>
       )}
 
       <Styled.DashboardButtonIcon testID="icon" source={icon} />
-      <Styled.DashboardButtonText testID="text">{children}</Styled.DashboardButtonText>
+      <Styled.DashboardButtonText testID="text">
+        {children}
+      </Styled.DashboardButtonText>
     </Styled.DashboardButton>
   );
 };

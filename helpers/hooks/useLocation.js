@@ -5,7 +5,7 @@ import { usePermissions } from "@use-expo/permissions";
 
 export default function useLocation(
   options = {
-    enableHighAccuracy: false
+    enableHighAccuracy: false,
   }
 ) {
   const [currentLocation, setCurrentLocation] = React.useState(null);
@@ -13,11 +13,11 @@ export default function useLocation(
   const [permission] = usePermissions(Permissions.LOCATION, { ask: true });
 
   React.useEffect(() => {
-    const getCurrentPosition = async options => {
+    const getCurrentPosition = async (options) => {
       return await Location.getCurrentPositionAsync(options);
     };
 
-    const getReversePosition = async location => {
+    const getReversePosition = async (location) => {
       return await Location.reverseGeocodeAsync(location.coords);
     };
 
@@ -59,9 +59,9 @@ function currentPositionMock() {
       heading: -1,
       latitude: 52.2297,
       longitude: 21.0122,
-      speed: -1
+      speed: -1,
     },
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
 }
 
@@ -73,6 +73,6 @@ function reversePositionMock() {
     name: "00-001",
     postalCode: "00-001",
     region: "Masovia",
-    street: null
+    street: null,
   };
 }

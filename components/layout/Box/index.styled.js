@@ -21,8 +21,8 @@ export const Container = styled.View`
 
 export const Icon = styled.Image`
   margin-bottom: 40px;
-  width: ${props => props.width}px;
-  height: ${props => props.height}px;
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
 `;
 
 export const Heading = styled.Text`

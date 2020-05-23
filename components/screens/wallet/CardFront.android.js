@@ -34,8 +34,8 @@ const ImageContainer = styled.View`
   border-radius: 20px;
 `;
 
-const Image = styled.Image.attrs(props => ({
-  resizeMode: "contain"
+const Image = styled.Image.attrs((props) => ({
+  resizeMode: "contain",
 }))`
   width: 40px;
   height: 40px;
@@ -97,7 +97,7 @@ export const CardFront = ({ data, onPress }) => {
               <Title>{data.title}</Title>
               <Expiry>
                 {i18n.t("prizes.validTill", {
-                  date: formatDate(data.validToDate)
+                  date: formatDate(data.validToDate),
                 })}
               </Expiry>
             </View>
