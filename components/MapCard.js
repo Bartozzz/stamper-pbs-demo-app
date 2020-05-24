@@ -59,7 +59,7 @@ const CardLogoImageContainer = styled.View`
   margin: ${slidePadding}px;
   width: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
   height: ${(slideWidth - slidePadding * 2) * 0.3 - 20}px;
-  borderradius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
+  borderRadius: ${((slideWidth - slidePadding * 2) * 0.3 - 20) / 2}px;
 `;
 
 const CardLogoImage = styled.Image.attrs((props) => ({
