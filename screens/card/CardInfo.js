@@ -71,7 +71,7 @@ class CardInfoScreen extends React.Component {
 
   actionCardButtonOnPress = (link, phone) => {
     if (this.state.actionCardAction === "website") {
-      this.openInLinkedApp("https://" + link);
+      this.openInLinkedApp("http://" + link);
     } else if (this.state.actionCardAction === "phone") {
       this.openInLinkedApp("tel:" + phone);
     }
@@ -79,12 +79,7 @@ class CardInfoScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const {
-      active,
-      collapsed,
-      actionCardActive,
-      actionCardAction,
-    } = this.state;
+    const { active, collapsed, actionCardActive } = this.state;
 
     const cards = navigation.getParam("cards");
     const card = cards[active];
@@ -173,15 +168,17 @@ class CardInfoScreen extends React.Component {
               inactiveDotOpacity={0.5}
               inactiveDotScale={1}
             />
-            <View style={styles.openingHoursContainer}>
-              <FontAwesome
-                style={styles.textIcon}
-                name="bell"
-                size={16}
-                color={colors.color}
-              />
-              <Text style={styles.openingHours}>{card.openingHours}</Text>
-            </View>
+            {card.openingHours && (
+              <View style={styles.openingHoursContainer}>
+                <FontAwesome
+                  style={styles.textIcon}
+                  name="bell"
+                  size={16}
+                  color={colors.color}
+                />
+                <Text style={styles.openingHours}>{card.openingHours}</Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.infoContainer}>
@@ -213,7 +210,7 @@ class CardInfoScreen extends React.Component {
               </View>
             </View>
 
-            {this.state.actionCardActive && (
+            {actionCardActive && (
               <View style={styles.actionCard}>
                 <TouchableOpacity
                   onPress={() =>
@@ -248,7 +245,7 @@ class CardInfoScreen extends React.Component {
                 />
               </View>
             )}
-            {this.state.actionCardActive || (
+            {actionCardActive || (
               <View>
                 {card.description && (
                   <View style={[styles.row]}>
@@ -264,7 +261,7 @@ class CardInfoScreen extends React.Component {
                   </View>
                 )}
 
-                {this.state.collapsed || (
+                {collapsed || (
                   <View>
                     {card.address && (
                       <View style={[defaultStyles.row, styles.row]}>
@@ -314,29 +311,35 @@ class CardInfoScreen extends React.Component {
                     styles.learnMoreContainer,
                   ]}
                 >
-                  <TouchableOpacity
-                    onPress={() => this.setState({ collapsed: !collapsed })}
-                  >
-                    <View>
-                      {collapsed ? (
-                        <Text style={styles.learnMoreText}>
-                          {i18n.t("card.learnMore")}
-                        </Text>
-                      ) : (
-                        <View style={styles.collapseText}>
+                  {card.companyDescription || card.address || card.website ? (
+                    <TouchableOpacity
+                      onPress={() => this.setState({ collapsed: !collapsed })}
+                    >
+                      <View>
+                        {collapsed ? (
                           <Text style={styles.learnMoreText}>
-                            {i18n.t("card.less")}
+                            {i18n.t("card.learnMore")}
                           </Text>
-                          <FontAwesome
-                            name="arrow-up"
-                            size={18}
-                            color={colors.primary}
-                            style={styles.textIcon}
-                          />
-                        </View>
-                      )}
-                    </View>
-                  </TouchableOpacity>
+                        ) : (
+                          <View style={styles.collapseText}>
+                            <Text style={styles.learnMoreText}>
+                              {i18n.t("card.less")}
+                            </Text>
+                            <FontAwesome
+                              name="arrow-up"
+                              size={18}
+                              color={colors.primary}
+                              style={styles.textIcon}
+                            />
+                          </View>
+                        )}
+                      </View>
+                    </TouchableOpacity>
+                  ) : (
+                    <Text style={{ color: "#dad9e3" }}>
+                      {i18n.t("card.learnMore")}
+                    </Text>
+                  )}
 
                   <View style={styles.buttons}>
                     <TouchableOpacity
@@ -396,7 +399,7 @@ class CardInfoScreen extends React.Component {
             )}
           </View>
 
-          {this.state.actionCardActive ||
+          {actionCardActive ||
             (card.termsAndConditionsUrl && (
               <TouchableOpacity
                 style={styles.terms}
