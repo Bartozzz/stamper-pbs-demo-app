@@ -18,9 +18,9 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import Button from "../../components/Button/";
 import Background from "../../components/Background";
 import Error from "../../components/Error";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderTitle from "../../components/nav/HeaderTitle";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderHamburger from "../../components/HeaderHamburger";
+import HeaderBack from "../../components/HeaderBack";
 import InputWithLabel from "../../components/InputWithLabel";
 import Checkbox, { CheckBoxLabel } from "../../components/Checkbox";
 
@@ -50,10 +50,7 @@ class ProfileEditScreen extends React.Component {
     title: i18n.t("navigation.profile.edit"),
     headerTitle: HeaderTitle,
     headerLeft: (
-      <HeaderBackIcon
-        navigation={navigation}
-        onPress={() => navigation.goBack()}
-      />
+      <HeaderBack navigation={navigation} onPress={() => navigation.goBack()} />
     ),
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTwoLines,

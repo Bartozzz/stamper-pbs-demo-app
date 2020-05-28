@@ -14,7 +14,7 @@ import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 import * as Routes from "../../navigation";
 
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderHamburger from "../../components/HeaderHamburger";
 import Button from "../../components/Button";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";

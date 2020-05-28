@@ -4,7 +4,7 @@ import { StyleSheet, Image, View, ScrollView } from "react-native";
 import Toast from "react-native-easy-toast";
 
 import * as Routes from "../../navigation";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderHamburger from "../../components/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";

@@ -4,7 +4,7 @@ import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
 
 import * as Routes from "../../navigation";
 import * as Card from "../../components/layout/Card";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderHamburger from "../../components/HeaderHamburger";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import Background from "../../components/Background";

@@ -6,8 +6,8 @@ import Background from "../../components/Background";
 import Button from "../../components/Button";
 import Error from "../../components/Error";
 import InputWithIcon from "../../components/InputWithIcon";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
-import HeaderTitle from "../../components/nav/HeaderTitle";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBack from "../../components/HeaderBack";
 
 import { resetPassword } from "../../store/reducers/auth";
 
@@ -22,10 +22,7 @@ class ResetPasswordScreen extends React.Component {
     title: i18n.t("navigation.auth.forgot"),
     headerTitle: HeaderTitle,
     headerLeft: (
-      <HeaderBackIcon
-        navigation={navigation}
-        onPress={() => navigation.goBack()}
-      />
+      <HeaderBack navigation={navigation} onPress={() => navigation.goBack()} />
     ),
     headerStyle: defaultStyles.headerTwoLines,
   });

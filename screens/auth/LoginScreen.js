@@ -12,7 +12,8 @@ import Background from "../../components/Background";
 
 import Button from "../../components/Button";
 import InputWithIcon from "../../components/InputWithIcon";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBack from "../../components/HeaderBack";
 
 import {
   login,
@@ -24,7 +25,6 @@ import {
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
-import HeaderTitle from "../../components/nav/HeaderTitle";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import { getErrorsFromResponse } from "../../helpers/errors";
@@ -36,10 +36,7 @@ class AuthLoginScreen extends React.Component {
     title: i18n.t("navigation.auth.login"),
     headerTitle: HeaderTitle,
     headerLeft: (
-      <HeaderBackIcon
-        navigation={navigation}
-        onPress={() => navigation.goBack()}
-      />
+      <HeaderBack navigation={navigation} onPress={() => navigation.goBack()} />
     ),
     headerStyle: defaultStyles.headerTwoLines,
   });

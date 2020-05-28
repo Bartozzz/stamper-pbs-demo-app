@@ -1,8 +1,8 @@
 import React from "react";
 
 import Background from "../../components/Background";
-import HeaderTitle from "../../components/nav/HeaderTitle";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBack from "../../components/HeaderBack";
 import TermsAsHTML from "../../components/screens/terms/TermsAsHTML";
 
 import i18n from "../../translations";
@@ -17,10 +17,7 @@ class NewsletterTermsScreen extends React.Component {
     title: i18n.t("navigation.tos"),
     headerTitle: HeaderTitle,
     headerLeft: (
-      <HeaderBackIcon
-        navigation={navigation}
-        onPress={() => navigation.goBack()}
-      />
+      <HeaderBack navigation={navigation} onPress={() => navigation.goBack()} />
     ),
     headerStyle: defaultStyles.headerTwoLines,
   });

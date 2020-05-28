@@ -14,7 +14,7 @@ import colors from "../../constants/Colors";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
 
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderHamburger from "../../components/HeaderHamburger";
 import Background from "../../components/Background";
 import InputSearch from "../../components/InputSearch";
 import PrizesHeader from "../../components/screens/prizes/Header";

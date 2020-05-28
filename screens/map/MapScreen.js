@@ -20,7 +20,7 @@ import { getCluster } from "../../helpers/map";
 import Background from "../../components/Background";
 import MapHeader from "../../components/screens/map/Header";
 import HeaderButtonSearch from "../../components/HeaderButtonSearch";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
+import HeaderHamburger from "../../components/HeaderHamburger";
 import MapSearchInput from "../../components/MapSearchInput";
 import MapArea from "../../components/MapArea";
 import MapAreaMarker from "../../components/MapAreaMarker";

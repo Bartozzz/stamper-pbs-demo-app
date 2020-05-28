@@ -8,9 +8,9 @@ import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
 import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderTitle from "../../components/nav/HeaderTitle";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderHamburger from "../../components/HeaderHamburger";
+import HeaderBack from "../../components/HeaderBack";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
@@ -29,7 +29,7 @@ class ScannerScanScreen extends React.Component {
         : null
       : undefined,
     headerTitle: HeaderTitle,
-    headerLeft: <HeaderBackIcon navigation={navigation} />,
+    headerLeft: <HeaderBack navigation={navigation} />,
     headerRight: <HeaderHamburger navigation={navigation} />,
     headerStyle: defaultStyles.headerTwoLines,
   });

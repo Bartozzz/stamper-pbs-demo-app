@@ -18,8 +18,8 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import * as Routes from "../../navigation";
 
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
+import HeaderHamburger from "../../components/HeaderHamburger";
+import HeaderBack from "../../components/HeaderBack";
 import Background from "../../components/Background";
 import CardBackground from "../../components/CardBackground/";
 import { formatDate } from "../../helpers/date";
@@ -30,7 +30,7 @@ class CardInfoScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam("merchant"),
     headerLeft: (
-      <HeaderBackIcon
+      <HeaderBack
         navigation={navigation}
         onPress={() =>
           navigation.navigate(

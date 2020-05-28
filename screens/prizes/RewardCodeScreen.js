@@ -19,9 +19,9 @@ import colors from "../../constants/Colors";
 import * as Routes from "../../navigation";
 
 import Button from "../../components/Button";
-import HeaderHamburger from "../../components/nav/HeaderHamburger";
-import HeaderBackIcon from "../../components/nav/HeaderBack";
-import HeaderTitle from "../../components/nav/HeaderTitle";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderHamburger from "../../components/HeaderHamburger";
+import HeaderBack from "../../components/HeaderBack";
 import Background from "../../components/Background";
 
 const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
@@ -31,7 +31,7 @@ class RewardCodeScreen extends React.Component {
     title: i18n.t("navigation.prizes.collect"),
     headerTitle: HeaderTitle,
     headerLeft: (
-      <HeaderBackIcon
+      <HeaderBack
         navigation={navigation}
         onPress={() => {
           navigation.navigate(
