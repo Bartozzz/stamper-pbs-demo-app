@@ -4,86 +4,67 @@
   "yes": "Yes",
   "no": "No",
   "more": "Read More",
-
   "error": "An Application Error Has Occurred",
   "errorInternal": "Application Error",
-
   "navigation": {
     "dashboard": {
       "main": "Dashboard"
     },
-
     "auth": {
       "login": "Log in",
       "register": "Register",
       "forgot": "Forgotten password"
     },
-
     "profile": {
       "menu": "Menu",
       "edit": "Edit Profile",
       "logout": "Log out",
       "password": "Change password"
     },
-
     "prizes": {
       "list": "Rewards",
       "collect": "Collect online"
     },
-
     "scanner": {
       "scan": "Scan your code"
     },
-
     "wallet": {
       "cards": "Wallet",
       "places": "Wallet"
     },
-
     "tos": "Terms of Use",
     "map": "My Area"
   },
-
   "welcome": {
     "title1": "Join more \n loyal customers!",
     "subtitle1": "Find out more about Stamper",
-
     "title2": "All cards - at your fingertips!",
     "subtitle2": "Stamper enables customers to collect loyalty stamps from multiple restaurants, and keep them safe all in one place - All of your cards will be at your fingertips.",
-
     "title3": "Keep up to date!",
     "subtitle3": "Stamper has convinient option called „local area”, that allows you to check which of your favourite places are running customer loyalty schemes in your area.",
-
     "title4": "Collect rewards!",
     "subtitle4": "You don't need to worry about missing out on benefits. Once you collect the necessary stamps on your virtual card, you receive an automatic notification that you are eligible to collect your reward!"
   },
-
   "auth": {
     "email": "Email",
     "password": "Password",
     "nickname": "Nickname",
     "firstname": "First Name",
     "lastname": "Last Name",
-
     "login": "Log in",
     "register": "Register",
-
     "loginwithfacebook": "Log in with Facebook",
     "loginwithgoogle": "Log in with Google",
-
     "resetPassword": "Reset password",
-
     "tos": "Terms of Use",
     "tosAccept": "By continuing you accept our",
     "dontHaveAccount": "Don't have an account? Register.",
     "forgotPassword": "Reset password.",
-
     "externalTos": {
       "headline": "I aggree to the terms and conditions Stamper.",
       "link": "Terms And Conditions"
     }
   },
-
   "dashboard": {
     "map": "My Area",
     "wallet": "Wallet",
@@ -92,32 +73,26 @@
     "profile": "Profile",
     "scanner": "Scan"
   },
-
   "profile": {
     "save": "Save",
-
     "menu": {
       "edit": "Edit profile",
       "password": "Change password",
       "tos": "Legal",
       "logout": "Log out"
     },
-
     "logout": {
       "sure": "Are you sure \n you want to log out?"
     },
-
     "password": {
       "current": "Current password",
       "password": "New password",
       "confirm": "Confirm password"
     },
-
     "edit": {
       "changePhoto": "Change photo",
       "newsletter": "Subscribe to the newsletter. "
     },
-
     "newsletter": {
       "title": "newsletter",
       "terms": "Terms And Conditions",
@@ -125,43 +100,41 @@
       "question": "Would you like to subscribe to our newsletter?"
     }
   },
-
   "prizes": {
     "code": "Discount code",
     "generate": "Generate the discount code",
-
     "confirm": "Are you sure that you want to use this code and get the reward?",
-
     "receiveOnline": "Collect reward on-line",
     "receiveOnPlace": "Collect reward",
     "receiveInApplication": "Collect on the shop's website",
     "quickCollect": "Direct link to your reward",
     "backToRewards": "Go back to rewards",
-
     "selectTextPrimary": "Select an application to generate the discount code:",
     "selectTextSecondary": "or select an application to generate the discount code:",
-
     "generatedOn": "generated on {{date}}",
     "validTill": "valid to {{date}}",
     "writeCode": "Your code:",
-
     "available": "Rewards to collect",
     "received": "Received"
   },
-
   "card": {
     "details1": "Number of stamps to reward",
     "details2": "Promotion valid to",
     "details3": "Exchange stamps",
     "details4": "Your stamps",
     "details5": "Description",
+    "details6": "Name",
+    "details7": "WWW",
+    "details8": "Place Description",
+    "learnMore": "Learn more about the place",
+    "less": "Less",
+    "call": "Call",
+    "orderOnline": "Order on the website",
     "seeTerms": "Terms And Conditions"
   },
-
   "wallet": {
     "cards": "Cards",
     "places": "Places",
-
     "cardsAmount": {
       "one": "1 card",
       "few": "{{count}} cards",
@@ -169,22 +142,18 @@
       "zero": "0 card"
     },
     "seeCards": "Show cards",
-
     "removal": {
       "headline": "Are you sure you want to delete this card?",
       "description": "By continuing you will permanently delete all the stamps from this card."
     }
   },
-
   "map": {
     "nearby": "Close by",
     "favs": "Favourites",
     "online": "Online",
-
     "closeCards": "Hide",
     "showCards": "Show",
     "count": "Found {{count}} neraby places.",
-
     "collectStamps": {
       "one": "collect 1 stamp",
       "few": "collect {{count}} stamps",
@@ -200,62 +169,49 @@
     "validTill": "Valid to {{date}}",
     "addCard": "Add card",
     "cardAlreadyAdded": "Card in my wallet",
-
     "terms": {
       "accept": "I aggree to the terms and conditions \"{{title}}\"",
       "confirm": "Accept",
       "terms": "Terms And Conditions",
-
       "refuse": {
         "heading": "Are you sure you don't want to join this loyalty program?",
         "subheading": "To be able to collect stamps you need to accept terms and conditions."
       }
     }
   },
-
   "success": {
     "changed": "Changes have been saved!",
-
     "scanner": {
       "add": "Your stamp has been added!",
       "subtract": "Your stamp has been subtracted!",
       "congratulations": "Congratulations! You have recived a reward!",
       "reward": "Congratulations! You have recived a reward!"
     },
-
     "wallet": {
       "cardAdd": "The card\n has been added to the wallet!"
     },
-
     "profile": {
       "photoAdd": "Your photo has been saved!"
     }
   },
-
   "errors": {
     "changed": "Changes have not been saved!",
-
     "scanner": {
       "stampAdd": "Error adding your stamp.",
       "claimPrize": "Error collecting your reward."
     },
-
     "wallet": {
       "cardAdd": "Error adding the card."
     },
-
     "profile": {
       "photoAdd": "Error sending the photo."
     },
-
     "auth": {
       "unauthorized": "Incorrect login or password"
     },
-
     "edit": {
       "photo": "Error saving the photo"
     },
-
     "tos": {
       "fetch": "Error loading the terms of use"
     }

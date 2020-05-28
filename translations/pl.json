@@ -4,86 +4,67 @@
   "yes": "Tak",
   "no": "Nie",
   "more": "Więcej",
-
   "error": "Wystąpił błąd aplikacji",
   "errorInternal": "Błąd aplikacji",
-
   "navigation": {
     "dashboard": {
       "main": "Dashboard"
     },
-
     "auth": {
       "login": "Logowanie",
       "register": "Rejestracja",
       "forgot": "Zapomniane hasło"
     },
-
     "profile": {
       "menu": "Menu",
       "edit": "Edycja profilu",
       "logout": "Wyloguj się",
       "password": "Zmiana hasła"
     },
-
     "prizes": {
       "list": "Nagrody",
       "collect": "Odbieranie nagrody"
     },
-
     "scanner": {
       "scan": "Skanuj kod"
     },
-
     "wallet": {
       "cards": "Portfel",
       "places": "Portfel"
     },
-
     "tos": "Regulamin",
     "map": "Okolica"
   },
-
   "welcome": {
     "title1": "Dołącz do bardziej lojalnych!",
     "subtitle1": "Poznaj aplikację Stamper",
-
     "title2": "Zawsze pod ręką!",
     "subtitle2": "Stamper to aplikacja umo\u017Cliwiaj\u0105ce korzystanie \u000Bz r\u00F3\u017Cnych program\u00F3w lojalno\u015Bciowych \u000Bw jednym miejscu zawsze pod r\u0119k\u0105 - bez stosu zapominanych papierowych kart.",
-
     "title3": "Namierzaj promocje!",
     "subtitle3": "Stamper posiada panel „okolica” dzięki czemu nie przegapisz programów lojalnościowych, które czają się w pobliżu. Wystarczy wejść w widok mapy, zobaczyć aktualne promocje i korzystać!",
-
     "title4": "Nie trać bonusów!",
     "subtitle4": "Gdy wype\u0142nisz kart\u0119 okre\u015Blon\u0105 ilo\u015Bci\u0105 piecz\u0105tek \u000Bautomatycznie dostaniesz powiadomienie, \u000B\u017Ce nagroda czeka do odebrania! \u000BKoniec z niewykorzystanymi bonusami!"
   },
-
   "auth": {
     "email": "Email",
     "password": "Password",
     "nickname": "Nick",
     "firstname": "Imię",
     "lastname": "Nazwisko",
-
     "login": "Zaloguj się",
     "register": "Rejestracja",
-
     "loginwithfacebook": "Zaloguj się z Facebook",
     "loginwithgoogle": "Zaloguj się z Google",
-
     "resetPassword": "Zresetuj hasło",
-
     "tos": "Regulamin",
     "tosAccept": "Kontynuując akceptujesz Nasz",
     "dontHaveAccount": "Nie masz konta? Zarejestruj się.",
     "forgotPassword": "Nie pamiętasz hasła?",
-
     "externalTos": {
       "headline": "Akceptuję regulamin aplikacji Stamper.",
       "link": "Zobacz regulamin"
     }
   },
-
   "dashboard": {
     "map": "Okolica",
     "wallet": "Portfel",
@@ -92,32 +73,26 @@
     "profile": "Twój profil",
     "scanner": "Skanuj"
   },
-
   "profile": {
     "save": "Zapisz zmiany",
-
     "menu": {
       "edit": "Edytuj profil",
       "password": "Zmiana hasła",
       "tos": "Regulamin",
       "logout": "Wyloguj się"
     },
-
     "logout": {
       "sure": "Jesteś pewien \n że chcesz się wylogować?"
     },
-
     "password": {
       "current": "Hasło aktualne",
       "password": "Nowe hasło",
       "confirm": "Potwierdź hasło"
     },
-
     "edit": {
       "changePhoto": "Zmień zdjęcie",
       "newsletter": "Chce otrzymywać informację o promocjach."
     },
-
     "newsletter": {
       "title": "newsletter",
       "terms": "Regulamin",
@@ -125,43 +100,41 @@
       "question": "Zapisujesz się na newsletter?"
     }
   },
-
   "prizes": {
     "code": "Kod rabatowy",
     "generate": "Generuj kod",
-
     "confirm": "Czy jesteś pewien, że chcesz wykorzystać kod oraz odebrać nagrodę?",
-
     "receiveOnline": "Odbierz nagrodę online",
     "receiveOnPlace": "Odbierz nagrodę",
     "receiveInApplication": "Odbierz na stronie sklepu",
     "quickCollect": "Szybkie odbieranie w sklepie",
     "backToRewards": "Powrót do nagród",
-
     "selectTextPrimary": "Wybierz aplikację by wygenerować kod rabatowy:",
     "selectTextSecondary": "lub wybierz aplikację by wygenerować kod rabatowy:",
-
     "generatedOn": "wygenerowany {{date}}",
     "validTill": "ważna do {{date}}",
     "writeCode": "Wpisz kod nagrody:",
-
     "available": "Nagrody do odebrania",
     "received": "Odebrane"
   },
-
   "card": {
     "details1": "Ilość pieczątek do nagrody",
     "details2": "Promocja trwa do",
     "details3": "Możliwość wymiany pieczątek",
     "details4": "Zebrane pieczątki",
     "details5": "Opis promocji",
+    "details6": "Nazwa miejsca",
+    "details7": "WWW",
+    "details8": "Opis miejsca",
+    "learnMore": "Dowiedz się wiecej o miejscu",
+    "less": "Mniej",
+    "call": "Zadzwoń",
+    "orderOnline": "Zamów na stronie",
     "seeTerms": "Zobacz regulamin"
   },
-
   "wallet": {
     "cards": "Karty",
     "places": "Miejsca",
-
     "cardsAmount": {
       "one": "1 karta",
       "few": "{{count}} karty",
@@ -169,22 +142,18 @@
       "zero": "0 kart"
     },
     "seeCards": "Zobacz karty",
-
     "removal": {
       "headline": "Czy na pewno chcesz usunąć kartę?",
       "description": "Zatwierdzając wybór, wszystkie zapisane pieczątki na karcie zostaną bezpowrotnie utracone."
     }
   },
-
   "map": {
     "nearby": "W pobliżu",
     "favs": "Ulubione",
     "online": "Online",
-
     "closeCards": "Zamknij",
     "showCards": "Pokaż",
     "count": "Znaleziono {{count}} miejsc w okolicy.",
-
     "collectStamps": {
       "one": "zbierz 1 pieczątkę",
       "few": "zbierz {{count}} pieczątki",
@@ -200,62 +169,49 @@
     "validTill": "Ważna do {{date}}",
     "addCard": "Dodaj kartę",
     "cardAlreadyAdded": "Karta już w portfelu",
-
     "terms": {
       "accept": "Akceptuję regulamin promocji \"{{title}}\"",
       "confirm": "Akceptuję",
       "terms": "Regulamin",
-
       "refuse": {
         "heading": "Czy jesteś pewien ze nie chcesz przystąpić do programu lojalnościowego?",
         "subheading": "Byś mógł zbierać pieczątki zatwierdzenie regulaminu jest wymagane."
       }
     }
   },
-
   "success": {
     "changed": "Zmiany zostały wprowadzone!",
-
     "scanner": {
       "add": "Pieczątka została dodana!",
       "subtract": "Pieczątka została odjęta!",
       "congratulations": "Gratulujemy! Zdobyłeś nagrodę!",
       "reward": "Gratulujemy! Odebrałeś nagrodę!"
     },
-
     "wallet": {
       "cardAdd": "Karta\n dodana do portfela!"
     },
-
     "profile": {
       "photoAdd": "Zdjęcie zostało przesłane!"
     }
   },
-
   "errors": {
     "changed": "Zmiany nie zostały wprowadzone!",
-
     "scanner": {
       "stampAdd": "Nie było można dodać pieczątki.",
       "claimPrize": "Nie udało się odebrać nagrody."
     },
-
     "wallet": {
       "cardAdd": "Nie było można dodać karty."
     },
-
     "profile": {
       "photoAdd": "Błąd podczas przesyłania zdjęcia."
     },
-
     "auth": {
       "unauthorized": "Podano złe dane logowania"
     },
-
     "edit": {
       "photo": "Błąd podczas zmiany zdjęcia"
     },
-
     "tos": {
       "fetch": "Błąd wczytywania regulaminu"
     }
