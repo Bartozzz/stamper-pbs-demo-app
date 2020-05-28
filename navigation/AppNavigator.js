@@ -62,6 +62,10 @@ const defaultNavigationOptions = {
     textAlign: "center",
     justifyContent: "center",
   },
+  /* For some reasons, stable builds crash after performing
+  the back gesture on iOS. importing the react-native-gesture-handler
+  as it is mentioned in some GitHub Issues doesn't help */
+  gesturesEnabled: false,
 };
 
 const disableNavigationAnimations = {
@@ -90,6 +94,13 @@ const AuthStack = createStackNavigator(
     ...disableNavigationAnimations,
   }
 );
+
+const InfoStack = createStackNavigator({
+  [Route.INFO]: () => null,
+  [Route.INFO_INIT]: () => null,
+  [Route.INFO_ERROR]: InfoErrorScreen,
+  [Route.INFO_SUCCESS]: InfoSuccessScreen,
+});
 
 const AppStack = createStackNavigator(
   {
@@ -125,13 +136,6 @@ const AppStack = createStackNavigator(
     [Route.CARD]: CardInfoScreen,
     [Route.CARD_INFO]: CardInfoScreen,
 
-    // The initial route is always mounted. If we set it to INFO_ERROR, it will
-    // trigger INFO_ERROR's setTimeout even if we navigte to INFO_SUCCESS:
-    [Route.INFO]: () => null,
-    [Route.INFO_INIT]: () => null,
-    [Route.INFO_ERROR]: InfoErrorScreen,
-    [Route.INFO_SUCCESS]: InfoSuccessScreen,
-
     [Route.SCANNER]: ScannerScanScreen,
     [Route.SCANNER_SCAN]: ScannerScanScreen,
     [Route.SCANNER_ACCEPT_STAMP_TERMS]: ScannerAcceptStampTermsScreen,
@@ -152,6 +156,7 @@ export default createAppContainer(
       [Route.AUTH_CONNECTIVITY_CHECK]: AuthConnectivityCheckScreen,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.AUTH]: AuthStack,
+      [Route.Info]: InfoStack,
       [Route.APP]: AppStack,
     },
     {
