@@ -7,7 +7,7 @@ import * as Box from "../../components/layout/Box";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
-import StamperLogo from "../../components/StamperLogo";
+import { StamperLogo } from "../../components/Stamper";
 
 import * as Routes from "../../navigation";
 import i18n from "../../translations";

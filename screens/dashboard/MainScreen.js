@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Dimensions } from "react-native";
 import Background from "../../components/Background";
-import StamperLogo from "../../components/StamperLogo";
+import { StamperLogo } from "../../components/Stamper";
 import DashboardButton from "../../components/DashboardButton";
 
 import i18n from "../../translations";

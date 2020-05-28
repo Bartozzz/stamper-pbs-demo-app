@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import HeaderHamburger from "../../components/HeaderHamburger";
 import Background from "../../components/Background";
-import StamperLogo from "../../components/StamperLogo";
+import { StamperLogo } from "../../components/Stamper";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";

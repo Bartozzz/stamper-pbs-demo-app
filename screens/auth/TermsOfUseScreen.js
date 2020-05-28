@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Background from "../../components/Background";
-import StamperLogo from "../../components/StamperLogo";
+import { StamperLogo } from "../../components/Stamper";
 
 import * as Box from "../../components/layout/Box";
 

@@ -4,7 +4,7 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
-import StamperLogo from "../../components/StamperLogo";
+import { StamperLogo } from "../../components/Stamper";
 
 import { updateNewsletter } from "../../store/reducers/profile";
 
