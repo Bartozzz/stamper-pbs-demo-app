@@ -71,9 +71,9 @@ class CardInfoScreen extends React.Component {
 
   actionCardButtonOnPress = (link, phone) => {
     if (this.state.actionCardAction === "website") {
-      this.openInLinkedApp("http://" + link);
+      this.openInLinkedApp(link.startsWith("http") ? link : `https://${link}`);
     } else if (this.state.actionCardAction === "phone") {
-      this.openInLinkedApp("tel:" + phone);
+      this.openInLinkedApp(`tel:${phone.replace(/-| /g, "")}`);
     }
   };
 
