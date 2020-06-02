@@ -1,8 +1,8 @@
 import React from "react";
 import * as R from "ramda";
 
-import Marker from "../components/screens/map/Marker";
-import ClusterMarker from "../components/screens/map/ClusterMarker";
+import Marker from "../../components/screens/map/Marker";
+import ClusterMarker from "../../components/screens/map/ClusterMarker";
 
 const MapAreaMarker = ({ marker, cluster, onPress }) => {
   const coordinate = {

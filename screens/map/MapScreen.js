@@ -24,7 +24,8 @@ import HeaderHamburger from "../../components/HeaderHamburger";
 import MapSearchInput from "../../components/MapSearchInput";
 import MapArea from "../../components/MapArea";
 import MapAreaMarker from "../../components/MapAreaMarker";
-import MapCard, { slideWidth, slideMargin } from "../../components/MapCard";
+import MapCard from "../../components/MapCard";
+import { slideWidth, slideMargin } from "../../components/MapCard/constants";
 import MapCardToggler from "../../components/MapCardToggler";
 
 // Store:

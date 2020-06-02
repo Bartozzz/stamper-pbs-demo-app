@@ -8,7 +8,7 @@ export const InputSearch = ({ onClose, ...props }) => {
 
       <Styled.Input testID="input-search" {...props} />
 
-      <Styled.InputClose onPress={onClose} />
+      <Styled.InputClose testID="input-close" onPress={onClose} />
     </Styled.InputContainer>
   );
 };
