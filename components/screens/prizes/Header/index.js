@@ -12,7 +12,10 @@ export const PrizesHeader = (props) => {
         <TouchableOpacity
           onPress={() => props.navigation.navigate(Routes.PRIZES_LIST)}
         >
-          <Styled.AvailablePrizesText testID="prizes-available" active={props.available}>
+          <Styled.AvailablePrizesText
+            testID="prizes-available"
+            active={props.available}
+          >
             {i18n.t("prizes.available")}
           </Styled.AvailablePrizesText>
         </TouchableOpacity>
@@ -22,7 +25,10 @@ export const PrizesHeader = (props) => {
         <TouchableOpacity
           onPress={() => props.navigation.navigate(Routes.PRIZES_RECEIVED)}
         >
-          <Styled.ReceivedPrizesText testID="prizes-received" active={props.received}>
+          <Styled.ReceivedPrizesText
+            testID="prizes-received"
+            active={props.received}
+          >
             {i18n.t("prizes.received")}
           </Styled.ReceivedPrizesText>
         </TouchableOpacity>
