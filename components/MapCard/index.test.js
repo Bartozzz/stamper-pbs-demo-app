@@ -105,6 +105,5 @@ describe("MapCard", () => {
     expect(addCard.last().prop("style")[0].backgroundColor).toBe(
       colors.primary
     );
-    console.log(component.debug());
   });
 });
