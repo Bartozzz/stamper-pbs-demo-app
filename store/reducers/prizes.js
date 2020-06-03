@@ -17,7 +17,7 @@ export const PRIZES_GET_DISCOUNT_REQUEST = "APP/PRIZES_DISCOUNT/GET_REQUEST";
 export const PRIZES_GET_DISCOUNT_SUCCESS = "APP/PRIZES_DISCOUNT/GET_SUCCESS";
 export const PRIZES_GET_DISCOUNT_FAIL = "APP/PRIZES_DISCOUNT/GET_FAIL";
 
-const initialState = {
+export const initialState = {
   isLoading: false,
   count: 0,
   prizes: [],
