@@ -71,7 +71,11 @@
     "prizes": "Rewards",
     "market": "Market",
     "profile": "Profile",
-    "scanner": "Scan"
+    "scanner": "Scan",
+    "UpdateTitle": "Please update the app",
+    "UpdateSubtitle": "A new version is available",
+    "Update": "Update",
+    "NotNow": "Not now"
   },
   "profile": {
     "save": "Save",

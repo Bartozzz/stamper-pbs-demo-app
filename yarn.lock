@@ -7051,6 +7051,13 @@ expo-cli@^3.13.8:
     "@expo/traveling-fastlane-darwin" "1.13.1"
     "@expo/traveling-fastlane-linux" "1.13.1"
 
+expo-constants@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-5.0.1.tgz#597263397f269d7fe37d9cd6b30e305c16635a00"
+  integrity sha512-Ny3teALKaE/jFzBg6DHr2GOoHpwQ/OLs3q3VugZOoR6hXCeVcCEP9MyNvhgn/cheeBDAa6UIgarv2Yufb5RMqQ==
+  dependencies:
+    ua-parser-js "^0.7.19"
+
 expo-constants@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-8.0.0.tgz#e2c5a072dacb4263ccfc57dcb4835ca791960d48"
@@ -7106,6 +7113,13 @@ expo-linear-gradient@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-8.0.0.tgz#972d33e92714d4a4485635683b5bfa357ecec41b"
   integrity sha512-5G3ePGAHUoyBWbGITw5RtdJpssH8TXhCgt55cV+5LTTFjr51OZcuOmGua1vRoVFKBC/9ibLW465GEx9H/HS07Q==
+
+expo-localization@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/expo-localization/-/expo-localization-5.0.1.tgz#9b617198f4627ed5c4eea406ed1a616dbc6d44f6"
+  integrity sha512-tPubS0oSO9nI3rdqnhnuhegV1REE1h3ltXNgtKX9oj9gHeZ+j7trQChF4xb1IGwaKTVm/ur1f4mkhRpQddJIUg==
+  dependencies:
+    rtl-detect "^1.0.2"
 
 expo-localization@~8.0.0:
   version "8.0.0"
@@ -10820,6 +10834,16 @@ lodash.isequal@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
   integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
+lodash.isfunction@^3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
+  integrity sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==
+
+lodash.isnil@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
+  integrity sha1-SeKM1VkBNFjIFMVHnTxmOiG/qmw=
+
 lodash.isobject@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
@@ -10853,6 +10877,11 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+
+lodash.pick@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
+  integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -13917,6 +13946,25 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   integrity sha512-Bke8KkDcDhvB/z0AS7MnQKMD2p6Kwfc1rSKlMOvg9CC5CnClQ2QEnhPSbwegKDYhUkBI92iH/BYy7hNSm5kbUQ==
   dependencies:
     prop-types "^15.6.1"
+
+react-native-version-check-expo@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-version-check-expo/-/react-native-version-check-expo-3.4.1.tgz#d222d8b7e561a119da57f5edb4ccce46e1662e10"
+  integrity sha512-IOHrk3Vr9rvAfgHjhbCuSfNRNL4/+QApN+qCAYo27dn0MeMMpJpY59so45z2qsW5S2FjXQ21q3N8Tu7Xw/bhqw==
+  dependencies:
+    expo-constants "5.0.1"
+    expo-localization "5.0.1"
+    react-native-version-check "^3.4.1"
+
+react-native-version-check@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-version-check/-/react-native-version-check-3.4.1.tgz#6629da999104b281a5f0358c1b69a8ea7ae81ea9"
+  integrity sha512-9VNeeSBFyzI8kD3PoYub7rHssc8eCi8k8cUbEQ3pdo+PCmj+b8LsMvf6EoNmBusGOEh++fCVOyqvY8Qljti1mA==
+  dependencies:
+    lodash.isfunction "^3.0.9"
+    lodash.isnil "^4.0.0"
+    lodash.pick "^4.4.0"
+    semver "^6.1.1"
 
 react-native-view-shot@3.0.2:
   version "3.0.2"

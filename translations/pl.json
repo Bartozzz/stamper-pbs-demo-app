@@ -71,7 +71,11 @@
     "prizes": "Nagrody",
     "market": "Market",
     "profile": "Twój profil",
-    "scanner": "Skanuj"
+    "scanner": "Skanuj",
+    "UpdateTitle": "Zaktualizuj aplikację",
+    "UpdateSubtitle": "Dostępna jest nowa wersja",
+    "Update": "Aktualizuj",
+    "NotNow": "Nie teraz"
   },
   "profile": {
     "save": "Zapisz zmiany",

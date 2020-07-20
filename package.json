@@ -51,6 +51,7 @@
     "react-native-screens": "^1.0.0-alpha.23",
     "react-native-snap-carousel": "^3.8.4",
     "react-native-swipe-list-view": "^2.4.0",
+    "react-native-version-check-expo": "^3.4.1",
     "react-native-webview": "7.4.3",
     "react-navigation": "^3.11.0",
     "react-redux": "^7.2.0",

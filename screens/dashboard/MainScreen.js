@@ -1,9 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Alert,
+  BackHandler,
+  Linking,
+} from "react-native";
 import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
 import DashboardButton from "../../components/DashboardButton";
+import VersionCheck from "react-native-version-check-expo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -19,6 +27,29 @@ const MenuImageWallet = require("../../assets/images/menu/wallet.png");
 const MenuImageScanner = require("../../assets/images/menu/scanner.png");
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
 
+const checkUpdateNeeded = async () => {
+  const updateNeeded = await VersionCheck.needUpdate();
+  if (updateNeeded && updateNeeded.isNeeded) {
+    Alert.alert(
+      i18n.t("dashboard.UpdateTitle"),
+      i18n.t("dashboard.UpdateSubtitle"),
+      [
+        {
+          text: i18n.t("dashboard.Update"),
+          onPress: () => {
+            BackHandler.exitApp();
+            Linking.openURL(updateNeeded.storeUrl);
+          },
+        },
+        {
+          text: i18n.t("dashboard.NotNow"),
+        },
+      ],
+      { cancelable: true }
+    );
+  }
+};
+
 class DashboardMainScreen extends React.Component {
   static navigationOptions = {
     title: i18n.t("navigation.dashboard.main"),
@@ -26,6 +57,8 @@ class DashboardMainScreen extends React.Component {
   };
 
   componentDidMount() {
+    checkUpdateNeeded();
+
     this.props.getPrizesCount();
   }
 
