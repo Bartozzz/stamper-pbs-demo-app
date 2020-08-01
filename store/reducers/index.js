@@ -5,6 +5,7 @@ import profile from "./profile";
 import stamp from "./stamp";
 import wallet from "./wallet";
 import prizes from "./prizes";
+import review from "./review";
 
 const reducers = {
   auth,
@@ -13,6 +14,7 @@ const reducers = {
   stamp,
   wallet,
   prizes,
+  review,
 };
 
 export default combineReducers(reducers);

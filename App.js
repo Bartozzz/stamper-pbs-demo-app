@@ -19,6 +19,11 @@ import {
   setAccessToken,
   setRefreshToken,
 } from "./store/reducers/auth";
+import {
+  APP_LAUNCHES,
+  restoreLaunches,
+  addLaunch,
+} from "./store/reducers/review";
 
 // Redux store:
 const store = configureStore();
@@ -62,6 +67,7 @@ export default class App extends React.Component {
       const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN);
       const walletCards = await AsyncStorage.getItem(WALLET_CARDS);
       const prizesCards = await AsyncStorage.getItem(PRIZES_CARDS);
+      const appLaunches = await AsyncStorage.getItem(APP_LAUNCHES);
 
       if (email !== null) {
         store.dispatch(setEmail(email));
@@ -85,6 +91,10 @@ export default class App extends React.Component {
 
       if (prizesCards !== null) {
         store.dispatch(restorePrizes(JSON.parse(prizesCards)));
+      }
+
+      if (appLaunches !== null) {
+        store.dispatch(restoreLaunches(JSON.parse(appLaunches)));
       }
     } catch (err) {
       // Silent error…
@@ -216,5 +226,12 @@ export default class App extends React.Component {
 
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
+
+    store.dispatch(addLaunch());
+
+    AsyncStorage.setItem(
+      APP_LAUNCHES,
+      String(store.getState().review.appLaunches)
+    );
   };
 }

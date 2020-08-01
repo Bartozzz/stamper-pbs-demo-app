@@ -38,6 +38,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.getstamper.app",
+      "appStoreUrl": "https://itunes.apple.com/pl/app/stamper/id1467621267",
       "config": {
         "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
       },
@@ -50,6 +51,7 @@
     "android": {
       "package": "com.getstamper.app",
       "versionCode": 16,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.getstamper.app",
       "adaptiveIcon": {
         "backgroundColor": "#001432"
       },

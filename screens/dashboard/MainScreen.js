@@ -11,6 +11,7 @@ import {
 import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
 import DashboardButton from "../../components/DashboardButton";
+import * as StoreReview from "expo-store-review";
 import VersionCheck from "react-native-version-check-expo";
 
 import i18n from "../../translations";
@@ -60,6 +61,10 @@ class DashboardMainScreen extends React.Component {
     checkUpdateNeeded();
 
     this.props.getPrizesCount();
+
+    if (this.props.appLaunches % 300 === 0) {
+      StoreReview.requestReview();
+    }
   }
 
   render() {
@@ -135,6 +140,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   prizesCount: state.prizes.count,
+  appLaunches: state.review.appLaunches,
 });
 
 const mapDispatchToProps = {
