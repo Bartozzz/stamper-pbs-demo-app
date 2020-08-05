@@ -366,7 +366,7 @@ function getRegionForLocation(location) {
 
 function calculateDistance(a, b) {
   var radlat1 = (Math.PI * a.lat) / 180;
-  var radlat2 = (Math.PI * b.lng) / 180;
+  var radlat2 = (Math.PI * b.lat) / 180;
   var theta = a.lng - b.lng;
   var radtheta = (Math.PI * theta) / 180;
   var dist =
