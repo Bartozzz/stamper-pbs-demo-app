@@ -136,7 +136,11 @@ const AppStack = createStackNavigator(
     [Route.CARD]: CardInfoScreen,
     [Route.CARD_INFO]: CardInfoScreen,
 
-    [Route.SCANNER]: ScannerScanScreen,
+    [Route.SCANNER]: {
+      screen: ScannerScanScreen,
+      path: "stamp/",
+      params: { p: null, hideHeader: false },
+    },
     [Route.SCANNER_SCAN]: ScannerScanScreen,
     [Route.SCANNER_ACCEPT_STAMP_TERMS]: ScannerAcceptStampTermsScreen,
     [Route.SCANNER_CONFIRM_REFUSED_TERMS]: ScannerConfirmRefusedTermsScreen,
@@ -157,7 +161,10 @@ export default createAppContainer(
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.AUTH]: AuthStack,
       [Route.Info]: InfoStack,
-      [Route.APP]: AppStack,
+      [Route.APP]: {
+        screen: AppStack,
+        path: "",
+      },
     },
     {
       initialRouteName: Route.AUTH_CONNECTIVITY_CHECK,

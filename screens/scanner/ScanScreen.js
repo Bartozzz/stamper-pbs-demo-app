@@ -25,8 +25,8 @@ class ScannerScanScreen extends React.Component {
     title: i18n.t("navigation.scanner.scan"),
     header: navigation.state.params
       ? navigation.state.params.hideHeader
-        ? undefined
-        : null
+        ? null
+        : undefined
       : undefined,
     headerTitle: HeaderTitle,
     headerLeft: <HeaderBack navigation={navigation} />,
@@ -121,7 +121,12 @@ class ScannerScanScreen extends React.Component {
     }
 
     try {
-      const code = getParameterByName("p", scan.data);
+      let code;
+      if (scan.code) {
+        code = scan.code;
+      } else {
+        code = getParameterByName("p", scan.data);
+      }
 
       this.props.navigation.setParams({
         hideHeader: true,
@@ -185,6 +190,11 @@ class ScannerScanScreen extends React.Component {
   }
 
   render() {
+    if (this.props.navigation.state.params.p) {
+      const data = { code: this.props.navigation.state.params.p };
+      this.onBarCodeRead(data);
+    }
+
     if (this.state.isRequesting) {
       return (
         <View

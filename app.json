@@ -39,6 +39,9 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.getstamper.app",
       "appStoreUrl": "https://itunes.apple.com/pl/app/stamper/id1467621267",
+      "associatedDomains": [
+        "applinks:getstamper.com"
+      ],
       "config": {
         "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
       },
@@ -52,6 +55,22 @@
       "package": "com.getstamper.app",
       "versionCode": 16,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.getstamper.app",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "getstamper.com",
+              "pathPrefix": "/stamp"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#001432"
       },

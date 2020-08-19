@@ -28,6 +28,8 @@ import {
 // Redux store:
 const store = configureStore();
 
+const prefix = "https://getstamper.com/";
+
 export default class App extends React.Component {
   state = {
     rollbar: useRollbar(),
@@ -53,7 +55,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <React.Fragment>
           {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
-          <AppContainer />
+          <AppContainer uriPrefix={prefix} />
         </React.Fragment>
       </Provider>
     );
