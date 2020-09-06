@@ -34,7 +34,7 @@ class ErrorScreen extends React.Component {
 
     return (
       <InfoScreen
-        redirect={() => navigation.navigate(screen)}
+        redirect={() => navigation.navigate(screen, { internet: true })}
         image={image}
         width={width}
         height={height}

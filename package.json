@@ -58,6 +58,7 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-axios-middleware": "^4.0.1",
+    "redux-persist": "^6.0.0",
     "rollbar": "2.15.0",
     "sharp-cli": "^1.13.1",
     "styled-components": "^5.0.1",

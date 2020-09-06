@@ -1,5 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { AppLoading } from "expo";
 import * as Icon from "@expo/vector-icons";
 import * as Font from "expo-font";
@@ -7,26 +8,8 @@ import { Asset } from "expo-asset";
 import { AsyncStorage, Platform, StatusBar } from "react-native";
 import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
-import configureStore from "./store";
-import { EMAIL, setEmail } from "./store/reducers/profile";
-import { WALLET_CARDS, restoreWallet } from "./store/reducers/wallet";
-import { PRIZES_CARDS, restorePrizes } from "./store/reducers/prizes";
-import {
-  EXPIRY_DATE,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
-  setExpiryDate,
-  setAccessToken,
-  setRefreshToken,
-} from "./store/reducers/auth";
-import {
-  APP_LAUNCHES,
-  restoreLaunches,
-  addLaunch,
-} from "./store/reducers/review";
-
-// Redux store:
-const store = configureStore();
+import { store, persistor } from "./store";
+import { APP_LAUNCHES, addLaunch } from "./store/reducers/review";
 
 const prefix = "https://getstamper.com/";
 
@@ -53,60 +36,19 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <React.Fragment>
-          {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
-          <AppContainer uriPrefix={prefix} />
-        </React.Fragment>
+        <PersistGate loading={null} persistor={persistor}>
+          <React.Fragment>
+            {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
+            <AppContainer uriPrefix={prefix} />
+          </React.Fragment>
+        </PersistGate>
       </Provider>
     );
   }
 
-  _loadStorageAsync = async () => {
-    try {
-      const email = await AsyncStorage.getItem(EMAIL);
-      const expiryDate = await AsyncStorage.getItem(EXPIRY_DATE);
-      const accessToken = await AsyncStorage.getItem(ACCESS_TOKEN);
-      const refreshToken = await AsyncStorage.getItem(REFRESH_TOKEN);
-      const walletCards = await AsyncStorage.getItem(WALLET_CARDS);
-      const prizesCards = await AsyncStorage.getItem(PRIZES_CARDS);
-      const appLaunches = await AsyncStorage.getItem(APP_LAUNCHES);
-
-      if (email !== null) {
-        store.dispatch(setEmail(email));
-      }
-
-      if (expiryDate !== null) {
-        store.dispatch(setExpiryDate(expiryDate));
-      }
-
-      if (accessToken !== null) {
-        store.dispatch(setAccessToken(accessToken));
-      }
-
-      if (refreshToken !== null) {
-        store.dispatch(setRefreshToken(refreshToken));
-      }
-
-      if (walletCards !== null) {
-        store.dispatch(restoreWallet(JSON.parse(walletCards)));
-      }
-
-      if (prizesCards !== null) {
-        store.dispatch(restorePrizes(JSON.parse(prizesCards)));
-      }
-
-      if (appLaunches !== null) {
-        store.dispatch(restoreLaunches(JSON.parse(appLaunches)));
-      }
-    } catch (err) {
-      // Silent error…
-    }
-  };
-
   _loadResourcesAsync = async () => {
     return Promise.all([
       // Local storage (redux):
-      this._loadStorageAsync(),
 
       // Preload assets:
       Asset.loadAsync([

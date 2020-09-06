@@ -46,10 +46,14 @@ class PrizesListScreen extends React.Component {
   state = {
     selected: null,
     search: null,
+    internet: false,
   };
 
   async componentDidMount() {
-    this.props.getPrizes();
+    if (this.props.navigation.state.params.internet === true) {
+      this.props.getPrizes();
+      this.setState({ internet: true });
+    }
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
@@ -171,13 +175,13 @@ class PrizesListScreen extends React.Component {
 
   render() {
     const { isLoading, navigation } = this.props;
-    const { selected } = this.state;
-
+    const { selected, internet } = this.state;
     return (
       <Background source={BackgroundImage} disableScroll>
         <PrizesHeader
           title={i18n.t("navigation.prizes.list")}
           navigation={navigation}
+          internet={internet}
           available
         />
 
@@ -199,6 +203,7 @@ class PrizesListScreen extends React.Component {
                 title={i18n.t("prizes.receiveOnPlace")}
                 onPress={this.claimPrizeOffline}
                 style={styles.button}
+                disabled={!internet}
               />
             )}
 
@@ -207,6 +212,7 @@ class PrizesListScreen extends React.Component {
                 title={i18n.t("prizes.receiveOnline")}
                 onPress={this.claimPrizeOnline}
                 style={styles.button}
+                disabled={!internet}
               />
             )}
           </View>

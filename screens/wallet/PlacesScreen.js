@@ -125,6 +125,7 @@ class WalletPlacesScreen extends React.Component {
         <WalletHeader
           title={i18n.t("navigation.wallet.places")}
           navigation={navigation}
+          internet={this.props.navigation.state.params.internet}
           places
         />
 

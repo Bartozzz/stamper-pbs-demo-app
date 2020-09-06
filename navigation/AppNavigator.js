@@ -18,7 +18,6 @@ import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
 import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
 import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
-import AuthConnectivityCheckScreen from "../screens/auth/ConnectivityCheckScreen";
 import AuthLoadingScreen from "../screens/auth/LoadingScreen";
 import AuthWelcomeScreen from "../screens/auth/WelcomeScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
@@ -157,7 +156,6 @@ const AppStack = createStackNavigator(
 export default createAppContainer(
   createSwitchNavigator(
     {
-      [Route.AUTH_CONNECTIVITY_CHECK]: AuthConnectivityCheckScreen,
       [Route.AUTH_LOADING]: AuthLoadingScreen,
       [Route.AUTH]: AuthStack,
       [Route.Info]: InfoStack,
@@ -167,7 +165,7 @@ export default createAppContainer(
       },
     },
     {
-      initialRouteName: Route.AUTH_CONNECTIVITY_CHECK,
+      initialRouteName: Route.AUTH_LOADING,
       headerMode: "screen",
     }
   )

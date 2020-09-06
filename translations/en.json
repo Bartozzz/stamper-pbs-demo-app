@@ -4,8 +4,14 @@
   "yes": "Yes",
   "no": "No",
   "more": "Read More",
+  "close": "Close",
   "error": "An Application Error Has Occurred",
   "errorInternal": "Application Error",
+  "offline": {
+    "main": "You're offline",
+    "details": "Check your connection and try again",
+    "alert": "Some parts of the app may be unavailable"
+  },
   "navigation": {
     "dashboard": {
       "main": "Dashboard"

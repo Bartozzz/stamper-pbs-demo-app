@@ -4,8 +4,14 @@
   "yes": "Tak",
   "no": "Nie",
   "more": "Więcej",
+  "close": "Zamknij",
   "error": "Wystąpił błąd aplikacji",
   "errorInternal": "Błąd aplikacji",
+  "offline": {
+    "main": "Jesteś offline",
+    "details": "Sprawdź swoje połączenie i spróbuj ponownie",
+    "alert": "Niektóre funkcje mogą być niedostępne"
+  },
   "navigation": {
     "dashboard": {
       "main": "Dashboard"

@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ActivityIndicator, AsyncStorage, View } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 import { authorize, setAccessToken } from "../../store/reducers/auth";
-import { EMAIL, getProfile } from "../../store/reducers/profile";
+import { getProfile } from "../../store/reducers/profile";
 import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 import * as Routes from "../../navigation";
@@ -33,14 +34,21 @@ class AuthLoadingScreen extends React.Component {
     if (accessToken && refreshToken) {
       // Required, so user's access token doesn't gets overrided by app's access
       // token from AuthLoadingScreen's componentDidMount:
-      this.props.setAccessToken(accessToken);
+      NetInfo.fetch().then((state) => {
+        if (state.isInternetReachable === true) {
+          this.props.setAccessToken(accessToken);
 
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      this.props
-        .getProfile()
-        .then(this.handleAuthorized)
-        .catch(this.handleUnauthorized);
+          // This will switch to the App screen or Auth screen and this loading
+          // screen will be unmounted and thrown away.
+          this.props
+            .getProfile()
+            .then(this.handleAuthorized)
+            .catch(this.handleUnauthorized);
+        } else {
+          // Open the App if the user is logged in, and he's offline
+          this.handleAuthorized();
+        }
+      });
     } else if (appToken) {
       // If the user is not logged-in, we probably want to use the app internal
       // access token (for endpoints like login etc.):
@@ -55,8 +63,6 @@ class AuthLoadingScreen extends React.Component {
 
     try {
       if (response.payload.data.email) {
-        await AsyncStorage.setItem(EMAIL, response.payload.data.email);
-
         // When the user logs-in, force the refresh of offline-first elements:
         await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
         await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));

@@ -125,6 +125,12 @@ const V1 = {
       return `${Server.V1}/Stamp/Add`;
     },
   },
+
+  Info: {
+    GetNotifications() {
+      return `${Server.V1}/Info/GetNotifications`;
+    },
+  },
 };
 
 // Those endpoints doesn't require Authorization header:

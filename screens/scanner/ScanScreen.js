@@ -11,6 +11,7 @@ import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 import HeaderTitle from "../../components/HeaderTitle";
 import HeaderHamburger from "../../components/HeaderHamburger";
 import HeaderBack from "../../components/HeaderBack";
+import NoInternet from "../../components/NoInternet";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 import layout from "../../constants/Layout";
@@ -39,6 +40,7 @@ class ScannerScanScreen extends React.Component {
     isProcessing: false,
     focusedScreen: true,
     hasCameraPermission: null,
+    internet: undefined,
   };
 
   focusListener = null;
@@ -58,6 +60,10 @@ class ScannerScanScreen extends React.Component {
     this.blurListener = this.props.navigation.addListener("willBlur", () =>
       this.setState({ focusedScreen: false })
     );
+
+    if (this.props.navigation.state.params.internet === false) {
+      this.setState({ internet: false });
+    }
   }
 
   componentWillUnmount() {
@@ -170,6 +176,10 @@ class ScannerScanScreen extends React.Component {
 
     if (!hasCameraPermission) {
       return <Text>No access to camera</Text>;
+    }
+
+    if (this.state.internet === false) {
+      return <NoInternet />;
     }
 
     if (focusedScreen) {

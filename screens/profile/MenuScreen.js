@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import HeaderHamburger from "../../components/HeaderHamburger";
 import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
+import NoInternet from "../../components/NoInternet";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -25,7 +26,9 @@ class ProfileMenuScreen extends React.Component {
 
   render() {
     const { nickname, email, photo, navigation } = this.props;
-
+    if (!this.props.navigation.state.params.internet) {
+      return <NoInternet />;
+    }
     return (
       <Background source={BackgroundImage}>
         <StamperLogo style={styles.logo} />

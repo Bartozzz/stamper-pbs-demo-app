@@ -57,8 +57,9 @@ class WalletCardsScreen extends React.Component {
     // } else {
     //   this.setState({ isCheckingIfCacheValid: false });
     // }
-
-    this.props.getWallet();
+    if (this.props.navigation.state.params.internet === true) {
+      this.props.getWallet();
+    }
 
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
@@ -104,8 +105,12 @@ class WalletCardsScreen extends React.Component {
           this.navigateToCardInfo(item);
         }}
         onDelete={(item, rowMap) => {
-          rowMap[item.id].closeRow();
-          this.removeCard(item.id);
+          if (!this.props.navigation.state.params.internet) {
+            rowMap[item.id].closeRow();
+          } else {
+            rowMap[item.id].closeRow();
+            this.removeCard(item.id);
+          }
         }}
       />
     );
@@ -113,13 +118,13 @@ class WalletCardsScreen extends React.Component {
 
   render() {
     const { isLoading, navigation } = this.props;
-    const { isCheckingIfCacheValid } = this.state;
-
+    const { isCheckingIfCacheValid, internet } = this.state;
     return (
       <Background source={BackgroundImage} disableScroll>
         <WalletHeader
           title={i18n.t("navigation.wallet.cards")}
           navigation={navigation}
+          internet={internet}
           cards
         />
 

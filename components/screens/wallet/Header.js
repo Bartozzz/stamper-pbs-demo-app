@@ -62,13 +62,21 @@ export default function WalletHeader(props) {
       <TabsTitle>{props.title}</TabsTitle>
 
       <TouchableOpacity
-        onPress={() => props.navigation.push(Routes.WALLET_CARDS)}
+        onPress={() =>
+          props.navigation.navigate(Routes.WALLET_CARDS, {
+            internet: props.internet,
+          })
+        }
       >
         <Cards active={props.cards}>{i18n.t("wallet.cards")}</Cards>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => props.navigation.push(Routes.WALLET_PLACES)}
+        onPress={() =>
+          props.navigation.push(Routes.WALLET_PLACES, {
+            internet: props.internet,
+          })
+        }
       >
         <Places active={props.places}>{i18n.t("wallet.places")}</Places>
       </TouchableOpacity>

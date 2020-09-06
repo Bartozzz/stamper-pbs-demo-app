@@ -8,6 +8,7 @@ import {
   FlatList,
   Text,
 } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
@@ -45,10 +46,14 @@ class PrizesListScreen extends React.Component {
 
   state = {
     search: null,
+    internet: false,
   };
 
   async componentDidMount() {
-    this.props.getPrizes();
+    if (this.props.navigation.getParam("internet") === true) {
+      this.props.getPrizes();
+      this.setState({ internet: true });
+    }
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
@@ -158,12 +163,14 @@ class PrizesListScreen extends React.Component {
 
   render() {
     const { isLoading, navigation } = this.props;
+    const { internet } = this.state;
 
     return (
       <Background source={BackgroundImage} disableScroll>
         <PrizesHeader
           title={i18n.t("navigation.prizes.list")}
           navigation={navigation}
+          internet={internet}
           received
         />
 

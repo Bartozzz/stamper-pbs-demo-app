@@ -11,14 +11,17 @@ import {
 import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
 import DashboardButton from "../../components/DashboardButton";
+import PopUp from "../../components/PopUp";
 import * as StoreReview from "expo-store-review";
 import VersionCheck from "react-native-version-check-expo";
+import NetInfo from "@react-native-community/netinfo";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 
 import { getPrizesCount } from "../../store/reducers/prizes";
+import { getPopUp } from "../../store/reducers/popup";
 
 const MenuImageMap = require("../../assets/images/menu/map.png");
 const MenuImageMarket = require("../../assets/images/menu/market-inactive.png");
@@ -51,43 +54,94 @@ const checkUpdateNeeded = async () => {
   }
 };
 
+let internet;
+
+const unsubscribe = NetInfo.addEventListener((state) => {
+  if (state.isInternetReachable === true) {
+    internet = true;
+  } else {
+    internet = false;
+  }
+});
+
 class DashboardMainScreen extends React.Component {
   static navigationOptions = {
     title: i18n.t("navigation.dashboard.main"),
     header: null,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { popUp: true };
+  }
+
   componentDidMount() {
     checkUpdateNeeded();
-
-    this.props.getPrizesCount();
-
+    if (internet === true) {
+      this.props.getPrizesCount();
+    }
+    if (internet === false) {
+      Alert.alert(
+        i18n.t("offline.main"),
+        i18n.t("offline.alert"),
+        [
+          {
+            text: i18n.t("close"),
+          },
+        ],
+        { cancelable: true }
+      );
+    }
     if (this.props.appLaunches % 300 === 0) {
       StoreReview.requestReview();
     }
   }
 
+  componentWillUnmount() {
+    unsubscribe();
+  }
+
+  closePopUp = () => {
+    this.setState({ popUp: false });
+  };
+
   render() {
-    const { navigation, prizesCount } = this.props;
+    const { navigation, prizesCount, popUpData } = this.props;
+    const { popUp } = this.state;
     const { height } = Dimensions.get("window");
     const smallPhone = height <= 640;
 
     return (
       <Background source={BackgroundImage}>
+        {popUpData.title && (
+          <PopUp
+            active={popUp}
+            title={popUpData.title}
+            content={popUpData.message}
+            button={i18n.t("close")}
+            onClose={this.closePopUp}
+            onPress={this.closePopUp}
+          />
+        )}
+
         <View style={[defaultStyles.center, styles.menu]}>
           <StamperLogo style={{ marginBottom: smallPhone ? 0 : 30 }} />
 
           <View style={[defaultStyles.row, styles.row]}>
             <DashboardButton
               icon={MenuImageMap}
-              onPress={() => navigation.push(Routes.MAP)}
+              onPress={() =>
+                navigation.push(Routes.MAP, { internet: internet })
+              }
             >
               {i18n.t("dashboard.map")}
             </DashboardButton>
 
             <DashboardButton
               icon={MenuImageWallet}
-              onPress={() => navigation.push(Routes.WALLET)}
+              onPress={() =>
+                navigation.push(Routes.WALLET, { internet: internet })
+              }
             >
               {i18n.t("dashboard.wallet")}
             </DashboardButton>
@@ -97,14 +151,18 @@ class DashboardMainScreen extends React.Component {
             <DashboardButton
               icon={MenuImagePrizes}
               badge={prizesCount}
-              onPress={() => navigation.push(Routes.PRIZES)}
+              onPress={() =>
+                navigation.push(Routes.PRIZES, { internet: internet })
+              }
             >
               {i18n.t("dashboard.prizes")}
             </DashboardButton>
 
             <DashboardButton
               icon={MenuImageProfile}
-              onPress={() => navigation.push(Routes.PROFILE)}
+              onPress={() =>
+                navigation.push(Routes.PROFILE, { internet: internet })
+              }
             >
               {i18n.t("dashboard.profile")}
             </DashboardButton>
@@ -117,7 +175,9 @@ class DashboardMainScreen extends React.Component {
 
             <DashboardButton
               icon={MenuImageScanner}
-              onPress={() => navigation.push(Routes.SCANNER)}
+              onPress={() =>
+                navigation.push(Routes.SCANNER, { internet: internet })
+              }
             >
               {i18n.t("dashboard.scanner")}
             </DashboardButton>
@@ -141,10 +201,12 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   prizesCount: state.prizes.count,
   appLaunches: state.review.appLaunches,
+  popUpData: state.popup,
 });
 
 const mapDispatchToProps = {
   getPrizesCount,
+  getPopUp,
 };
 
 export default connect(

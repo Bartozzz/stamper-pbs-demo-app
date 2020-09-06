@@ -70,7 +70,7 @@ class ProfileLogoutScreen extends React.Component {
   };
 
   refuse = () => {
-    this.props.navigation.navigate(Routes.PROFILE_MENU);
+    this.props.navigation.navigate(Routes.PROFILE_MENU, { internet: true });
   };
 
   render() {

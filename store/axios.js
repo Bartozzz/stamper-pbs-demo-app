@@ -1,12 +1,8 @@
-import { AsyncStorage } from "react-native";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
 import Url from "../constants/Urls";
 import Secret from "../constants/Secret";
 import {
-  EXPIRY_DATE,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
   setExpiryDate,
   setAccessToken,
   setRefreshToken,
@@ -70,11 +66,6 @@ const middleware = axiosMiddleware(client, {
 
                   console.log("Issued a new access token…", response.data);
                   console.log("Token will expire in", expirySec);
-
-                  // Update local persistent storage:
-                  await AsyncStorage.setItem(EXPIRY_DATE, expiryDate);
-                  await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
-                  await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
 
                   // Update local volatile storage:
                   dispatch(setExpiryDate(expiryDate));

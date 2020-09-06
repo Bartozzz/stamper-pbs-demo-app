@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 import { _ } from "lodash";
 import { NavigationEvents } from "react-navigation";
+import NetInfo from "@react-native-community/netinfo";
 
 import * as R from "ramda";
 
@@ -27,6 +28,7 @@ import MapAreaMarker from "../../components/MapAreaMarker";
 import MapCard from "../../components/MapCard";
 import { slideWidth, slideMargin } from "../../components/MapCard/constants";
 import MapCardToggler from "../../components/MapCardToggler";
+import NoInternet from "../../components/NoInternet";
 
 // Store:
 import { getRegion } from "../../store/reducers/map";
@@ -208,6 +210,10 @@ const MapScreen = ({ navigation }) => {
     );
   }
 
+  if (!navigation.state.params.internet) {
+    return <NoInternet />;
+  }
+
   // Fetched user location:
   return (
     <Background source={BackgroundImage} disableScroll>
@@ -366,7 +372,7 @@ function getRegionForLocation(location) {
 
 function calculateDistance(a, b) {
   var radlat1 = (Math.PI * a.lat) / 180;
-  var radlat2 = (Math.PI * b.lat) / 180;
+  var radlat2 = (Math.PI * b.lng) / 180;
   var theta = a.lng - b.lng;
   var radtheta = (Math.PI * theta) / 180;
   var dist =

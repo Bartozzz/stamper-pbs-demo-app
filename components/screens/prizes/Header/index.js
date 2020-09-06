@@ -10,7 +10,11 @@ export const PrizesHeader = (props) => {
     <Styled.Tabs style={[props.style]}>
       <View style={{ flex: 2 }}>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate(Routes.PRIZES_LIST)}
+          onPress={() =>
+            props.navigation.navigate(Routes.PRIZES_LIST, {
+              internet: props.internet,
+            })
+          }
         >
           <Styled.AvailablePrizesText
             testID="prizes-available"
@@ -23,7 +27,11 @@ export const PrizesHeader = (props) => {
 
       <View style={{ flex: 1 }}>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate(Routes.PRIZES_RECEIVED)}
+          onPress={() =>
+            props.navigation.navigate(Routes.PRIZES_RECEIVED, {
+              internet: props.internet,
+            })
+          }
         >
           <Styled.ReceivedPrizesText
             testID="prizes-received"
