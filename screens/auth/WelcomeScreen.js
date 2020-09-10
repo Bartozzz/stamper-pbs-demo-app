@@ -16,10 +16,13 @@ import WelcomeButtons from "../../components/WelcomeButtons";
 
 import {
   loginExternal,
+  setNotificationsToken,
   registerExternal,
   ACCESS_TOKEN,
   REFRESH_TOKEN,
 } from "../../store/reducers/auth";
+
+import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -71,6 +74,8 @@ class AuthWelcomeScreen extends React.Component {
       email: null,
       other: null,
     },
+
+    expoToken: null,
   };
 
   loginWithFacebook = async () => {
@@ -150,6 +155,9 @@ class AuthWelcomeScreen extends React.Component {
 
       await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
       await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
+      if (this.state.expoToken) {
+        this.props.setNotificationsToken(this.state.expoToken);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -174,6 +182,12 @@ class AuthWelcomeScreen extends React.Component {
       }),
     });
   };
+
+  componentDidMount() {
+    registerForPushNotificationsAsync().then((token) =>
+      this.setState({ expoToken: token })
+    );
+  }
 
   render() {
     const { active } = this.state;
@@ -243,6 +257,7 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = {
   // …
   loginExternal,
+  setNotificationsToken,
   registerExternal,
 };
 

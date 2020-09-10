@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";
+
 import Background from "../../components/Background";
 
 import Button from "../../components/Button";
@@ -20,6 +22,7 @@ import {
   register,
   ACCESS_TOKEN,
   REFRESH_TOKEN,
+  setNotificationsToken,
 } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
@@ -53,6 +56,8 @@ class AuthRegisterScreen extends React.Component {
       email: [],
       other: [],
     },
+
+    expoToken: null,
   };
 
   registerWithCredentials = () => {
@@ -76,6 +81,9 @@ class AuthRegisterScreen extends React.Component {
 
       await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
       await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
+      if (this.state.expoToken) {
+        this.props.setNotificationsToken(this.state.expoToken);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -103,6 +111,12 @@ class AuthRegisterScreen extends React.Component {
   navigateToTOS = () => {
     this.props.navigation.navigate(Routes.AUTH_TOS);
   };
+
+  componentDidMount() {
+    registerForPushNotificationsAsync().then((token) =>
+      this.setState({ expoToken: token })
+    );
+  }
 
   render() {
     const { nickname, password, email, error } = this.state;
@@ -202,6 +216,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   // …,
   register,
+  setNotificationsToken,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthRegisterScreen);

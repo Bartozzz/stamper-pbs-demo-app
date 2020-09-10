@@ -8,6 +8,9 @@ import {
   ScrollView,
   View,
 } from "react-native";
+
+import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";
+
 import Background from "../../components/Background";
 
 import Button from "../../components/Button";
@@ -18,6 +21,7 @@ import HeaderBack from "../../components/HeaderBack";
 import {
   login,
   loginExternal,
+  setNotificationsToken,
   registerExternal,
   ACCESS_TOKEN,
   REFRESH_TOKEN,
@@ -52,6 +56,8 @@ class AuthLoginScreen extends React.Component {
       email: null,
       other: null,
     },
+
+    expoToken: null,
   };
 
   loginWithCredentials = () => {
@@ -75,6 +81,9 @@ class AuthLoginScreen extends React.Component {
 
       await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
       await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
+      if (this.state.expoToken) {
+        this.props.setNotificationsToken(this.state.expoToken);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -99,6 +108,12 @@ class AuthLoginScreen extends React.Component {
       }),
     });
   };
+
+  componentDidMount() {
+    registerForPushNotificationsAsync().then((token) =>
+      this.setState({ expoToken: token })
+    );
+  }
 
   render() {
     const { email, password, error } = this.state;
@@ -212,6 +227,7 @@ const mapDispatchToProps = {
   // …
   login,
   loginExternal,
+  setNotificationsToken,
   registerExternal,
 };
 

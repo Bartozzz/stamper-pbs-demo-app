@@ -5,6 +5,7 @@ import { AppLoading } from "expo";
 import * as Icon from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
+import * as Notifications from "expo-notifications";
 import { AsyncStorage, Platform, StatusBar } from "react-native";
 import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
@@ -13,11 +14,41 @@ import { APP_LAUNCHES, addLaunch } from "./store/reducers/review";
 
 const prefix = "https://getstamper.com/";
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
+
 export default class App extends React.Component {
   state = {
     rollbar: useRollbar(),
     isLoadingComplete: false,
+    notification: false,
   };
+
+  constructor(props) {
+    super(props);
+    this.notificationListener = React.createRef();
+    this.responseListener = React.createRef();
+  }
+
+  componentDidMount() {
+    // This listener is fired whenever a notification is received while the app is foregrounded
+    this.notificationListener.current = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        // Maybe we'll want to add some actions when the notifications are being opened
+        this.setState({ notification: notification });
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    Notifications.removeNotificationSubscription(this.notificationListener);
+    Notifications.removeNotificationSubscription(this.responseListener);
+  }
 
   componentDidCatch(error) {
     this.state.rollbar.critical(error);

@@ -21,6 +21,14 @@ const V1 = {
       return `${Server.V1}/Account/ExternalLogin`;
     },
 
+    SetNotificationsToken() {
+      return `${Server.V1}/Account/SetDevice`;
+    },
+
+    GetNotificationsToken() {
+      return `${Server.V1}/Account/CheckDevice`;
+    },
+
     ForgotPassword() {
       return `${Server.V1}/Account/ForgotPassword`;
     },

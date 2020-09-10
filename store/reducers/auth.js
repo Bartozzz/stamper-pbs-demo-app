@@ -18,6 +18,9 @@ export const ACCESS_FAIL = "APP/AUTH/ACCESS_FAIL";
 export const LOGIN_REQUEST = "APP/AUTH/LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "APP/AUTH/LOGIN_SUCCESS";
 export const LOGIN_FAIL = "APP/AUTH/LOGIN_FAIL";
+export const NOTIFICATIONSTOKEN_REQUEST = "APP/AUTH/NOTIFICATIONSTOKEN_REQUEST";
+export const NOTIFICATIONSTOKEN_SUCCESS = "APP/AUTH/NOTIFICATIONSTOKEN_SUCCESS";
+export const NOTIFICATIONSTOKEN_FAIL = "APP/AUTH/NOTIFICATIONSTOKEN_FAIL";
 export const REGISTER_REQUEST = "APP/AUTH/REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "APP/AUTH/REGISTER_SUCCESS";
 export const REGISTER_FAIL = "APP/AUTH/REGISTER_FAIL";
@@ -184,6 +187,38 @@ export const loginExternal = (email) => ({
         email,
         language: i18n.appLocale,
       },
+    },
+  },
+});
+
+export const setNotificationsToken = (token) => ({
+  types: [
+    NOTIFICATIONSTOKEN_REQUEST,
+    NOTIFICATIONSTOKEN_SUCCESS,
+    NOTIFICATIONSTOKEN_FAIL,
+  ],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.SetNotificationsToken(),
+      data: {
+        deviceId: token,
+        language: i18n.appLocale,
+      },
+    },
+  },
+});
+
+export const getNotificationsToken = () => ({
+  types: [
+    NOTIFICATIONSTOKEN_REQUEST,
+    NOTIFICATIONSTOKEN_SUCCESS,
+    NOTIFICATIONSTOKEN_FAIL,
+  ],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.GetNotificationsToken(),
     },
   },
 });
