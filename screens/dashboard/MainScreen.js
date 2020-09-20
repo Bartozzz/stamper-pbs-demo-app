@@ -79,6 +79,7 @@ class DashboardMainScreen extends React.Component {
     checkUpdateNeeded();
     if (internet === true) {
       this.props.getPrizesCount();
+      this.props.getPopUp();
     }
     if (internet === false) {
       Alert.alert(
