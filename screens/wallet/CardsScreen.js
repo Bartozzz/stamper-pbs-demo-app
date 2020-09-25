@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Image, View, ScrollView } from "react-native";
 import Toast from "react-native-easy-toast";
+import * as Analytics from "expo-firebase-analytics";
 
 import * as Routes from "../../navigation";
 import HeaderHamburger from "../../components/HeaderHamburger";
@@ -64,9 +65,11 @@ class WalletCardsScreen extends React.Component {
     this.props.navigation.setParams({ handleSearch: this.handleSearch });
   }
 
-  removeCard = (cardId) => {
+  removeCard = (cardId, title, merchantName) => {
     this.props.navigation.push(Routes.WALLET_CARD_REMOVAL_CONFIRMATION, {
       cardId: cardId,
+      title: title,
+      merchantName: merchantName,
     });
   };
 
@@ -79,6 +82,10 @@ class WalletCardsScreen extends React.Component {
       merchant: "",
       cards: [card],
       backTo: Routes.WALLET_CARDS,
+    });
+    Analytics.logEvent("wallet", {
+      title: card.title,
+      merchantName: card.merchantName,
     });
   };
 
@@ -109,7 +116,7 @@ class WalletCardsScreen extends React.Component {
             rowMap[item.id].closeRow();
           } else {
             rowMap[item.id].closeRow();
-            this.removeCard(item.id);
+            this.removeCard(item.id, item.title, item.merchantName);
           }
         }}
       />

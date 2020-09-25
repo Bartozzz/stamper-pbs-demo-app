@@ -170,7 +170,11 @@ export const MapCard = (props) => {
         </Styled.CardFooterButtons>
 
         <TouchableOpacity
-          onPress={() => (isCardActive ? props.onAddCard(props.id) : noop())}
+          onPress={() =>
+            isCardActive
+              ? props.onAddCard(props.id, props.title, props.merchantName)
+              : noop()
+          }
         >
           <Styled.CardFooterAddCardButton
             testID="add-card"

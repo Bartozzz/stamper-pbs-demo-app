@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import * as Analytics from "expo-firebase-analytics";
 
 import { getDiscountCode } from "../../store/reducers/prizes";
 
@@ -106,6 +107,10 @@ class RewardCodeScreen extends React.Component {
       .then((response) => {
         this.setState({
           generatedCode: response.payload.data.code,
+        });
+        Analytics.logEvent("collect_reward", {
+          title: this.card.title,
+          merchant: this.card.merchantName,
         });
       })
       .catch((error) => {

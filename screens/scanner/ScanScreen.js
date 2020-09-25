@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
 import { AsyncStorage, Text, View, Image, StyleSheet } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 
 import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
@@ -110,6 +111,7 @@ class ScannerScanScreen extends React.Component {
 
             if (message) {
               this.redirectToSuccess(message);
+              Analytics.logEvent("add_stamp");
             } else {
               this.redirectToFailure();
             }
@@ -155,6 +157,7 @@ class ScannerScanScreen extends React.Component {
             this.redirectToTerms(code, termsAndConditions);
           } else if (message && message !== "error") {
             this.redirectToSuccess(message);
+            Analytics.logEvent("add_stamp");
           } else {
             this.redirectToFailure();
           }

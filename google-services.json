@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "217630369702",
+    "firebase_url": "https://stamper-24dcc.firebaseio.com",
+    "project_id": "stamper-24dcc",
+    "storage_bucket": "stamper-24dcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217630369702:android:2a9dafc6266cf86dfe1167",
+        "android_client_info": {
+          "package_name": "com.getstamper.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217630369702-r7jt9dd94f3po7c67q5jso0gmtf7ui7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1anImS-6LcDPS9BW1xM065uqllLXWGd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217630369702-r7jt9dd94f3po7c67q5jso0gmtf7ui7g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "217630369702-moat4nk83f4ale7vi53p7bi2sdhtbacq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.getstamper.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

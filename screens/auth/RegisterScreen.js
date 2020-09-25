@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as Analytics from "expo-firebase-analytics";
 
 import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";
 
@@ -91,6 +92,9 @@ class AuthRegisterScreen extends React.Component {
     // Triggers profile fetch and redirects to the newsletter update screen:
     this.props.navigation.navigate(Routes.AUTH_LOADING, {
       redirect: Routes.PROFILE_NEWSLETTER_UPDATE,
+    });
+    Analytics.logEvent("sign_up", {
+      method: "email",
     });
   };
 

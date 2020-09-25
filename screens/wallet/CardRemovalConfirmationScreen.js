@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { AsyncStorage, StyleSheet, View } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
+
+import * as Routes from "../../navigation";
 
 import * as Box from "../../components/layout/Box";
 
@@ -30,17 +33,23 @@ class CardRemovalConfirmationScreen extends React.Component {
 
     const { navigation } = this.props;
     const cardId = navigation.getParam("cardId");
+    const title = navigation.getParam("title");
+    const merchantName = navigation.getParam("merchantName");
 
     this.props.removeCard(cardId).finally(() => {
       AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
-      navigation.goBack();
+      navigation.navigate(Routes.WALLET_CARDS, { internet: true });
+      Analytics.logEvent("remove_card", {
+        title: title,
+        merchantName: merchantName,
+      });
     });
   };
 
   refuse = () => {
     const { navigation } = this.props;
 
-    navigation.goBack();
+    navigation.navigate(Routes.WALLET_CARDS, { internet: true });
   };
 
   render() {

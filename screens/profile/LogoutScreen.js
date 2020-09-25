@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 
 import Button from "../../components/Button";
 import Background from "../../components/Background";
@@ -64,9 +65,10 @@ class ProfileLogoutScreen extends React.Component {
     this.props.setAccessToken(null);
     this.props.setRefreshToken(null);
 
-    this.props
-      .logout()
-      .finally(() => this.props.navigation.navigate(Routes.AUTH_LOADING));
+    this.props.logout().finally(() => {
+      this.props.navigation.navigate(Routes.AUTH_LOADING);
+      Analytics.logEvent("sign_out");
+    });
   };
 
   refuse = () => {

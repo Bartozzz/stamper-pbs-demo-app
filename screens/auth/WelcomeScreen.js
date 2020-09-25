@@ -6,11 +6,13 @@ import {
   Dimensions,
   SafeAreaView,
 } from "react-native";
+import Carousel, { Pagination } from "react-native-snap-carousel";
+import * as Analytics from "expo-firebase-analytics";
+
 import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
 import { getErrorsFromResponse } from "../../helpers/errors";
-import Carousel, { Pagination } from "react-native-snap-carousel";
-import Background from "../../components/Background";
 
+import Background from "../../components/Background";
 import WelcomeItem from "../../components/WelcomeItem";
 import WelcomeButtons from "../../components/WelcomeButtons";
 
@@ -94,9 +96,12 @@ class AuthWelcomeScreen extends React.Component {
             this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
               onAccept: () => this.handleSuccess(true)(response),
             });
+            Analytics.logEvent("sign_up", {
+              method: "facebook",
+            });
           })
           .catch(() => {
-            this.loginExternal(email);
+            this.loginExternal(email, "facebook");
           });
       },
       (error) => {
@@ -124,9 +129,12 @@ class AuthWelcomeScreen extends React.Component {
             this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
               onAccept: () => this.handleSuccess(true)(response),
             });
+            Analytics.logEvent("sign_up", {
+              method: "google",
+            });
           })
           .catch(() => {
-            this.loginExternal(email);
+            this.loginExternal(email, "google");
           });
       },
       (error) => {
@@ -138,10 +146,15 @@ class AuthWelcomeScreen extends React.Component {
     );
   };
 
-  loginExternal = (email, firstLogin = false) => {
+  loginExternal = (email, method, firstLogin = false) => {
     this.props
       .loginExternal(email)
-      .then(this.handleSuccess(firstLogin))
+      .then(() => {
+        this.handleSuccess(firstLogin);
+        Analytics.logEvent("login", {
+          method: method,
+        });
+      })
       .catch(this.handleError);
   };
 

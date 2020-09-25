@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>217630369702-moat4nk83f4ale7vi53p7bi2sdhtbacq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.217630369702-moat4nk83f4ale7vi53p7bi2sdhtbacq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAiRnoCBZDthdkMzTzoZ3-hP5TkFk7ZcoE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>217630369702</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.getstamper.app</string>
+	<key>PROJECT_ID</key>
+	<string>stamper-24dcc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>stamper-24dcc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:217630369702:ios:54b446c798675f90fe1167</string>
+	<key>DATABASE_URL</key>
+	<string>https://stamper-24dcc.firebaseio.com</string>
+</dict>
+</plist>

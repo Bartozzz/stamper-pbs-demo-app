@@ -7,6 +7,7 @@ import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import * as Notifications from "expo-notifications";
 import { AsyncStorage, Platform, StatusBar } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
 import { store, persistor } from "./store";
@@ -21,6 +22,19 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
+
+// gets the current screen from navigation state
+function getActiveRouteName(navigationState) {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  // dive into nested navigators
+  if (route.routes) {
+    return getActiveRouteName(route);
+  }
+  return route.routeName;
+}
 
 export default class App extends React.Component {
   state = {
@@ -43,6 +57,7 @@ export default class App extends React.Component {
         this.setState({ notification: notification });
       }
     );
+    Analytics.setDebugModeEnabled(__DEV__);
   }
 
   componentWillUnmount() {
@@ -70,7 +85,20 @@ export default class App extends React.Component {
         <PersistGate loading={null} persistor={persistor}>
           <React.Fragment>
             {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
-            <AppContainer uriPrefix={prefix} />
+            <AppContainer
+              uriPrefix={prefix}
+              onNavigationStateChange={(prevState, currentState, action) => {
+                const currentRouteName = getActiveRouteName(currentState);
+                const previousRouteName = getActiveRouteName(prevState);
+
+                if (previousRouteName !== currentRouteName) {
+                  Analytics.logEvent("screen_view", {
+                    screen_name: currentRouteName,
+                    page_title: currentRouteName,
+                  });
+                }
+              }}
+            />
           </React.Fragment>
         </PersistGate>
       </Provider>

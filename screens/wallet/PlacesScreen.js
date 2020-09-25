@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 
 import * as Routes from "../../navigation";
 import * as Card from "../../components/layout/Card";
@@ -102,12 +103,19 @@ class WalletPlacesScreen extends React.Component {
               <Card.Button
                 title={i18n.t("wallet.seeCards")}
                 onPress={() => {
+                  const selectedCards = cards.filter(
+                    (c) => c.merchantName === item.merchantName
+                  );
                   navigation.push(Routes.CARD_INFO, {
                     merchant: item.merchantName,
-                    cards: cards.filter(
-                      (c) => c.merchantName === item.merchantName
-                    ),
+                    cards: selectedCards,
                   });
+                  selectedCards.forEach((c) =>
+                    Analytics.logEvent("wallet", {
+                      title: c.title,
+                      merchantName: c.merchantName,
+                    })
+                  );
                 }}
               />
             )}

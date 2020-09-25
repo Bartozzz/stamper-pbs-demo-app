@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 import { _ } from "lodash";
 import { NavigationEvents } from "react-navigation";
-import NetInfo from "@react-native-community/netinfo";
+import * as Analytics from "expo-firebase-analytics";
 
 import * as R from "ramda";
 
@@ -81,12 +81,16 @@ const MapScreen = ({ navigation }) => {
     [currentLocation]
   );
 
-  const addCardHandler = React.useCallback((cardId) => {
+  const addCardHandler = React.useCallback((cardId, title, merchantName) => {
     AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
     AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
     function confirmCardTerms() {
       dispatch(addCard(cardId, true)).then(() => {
+        Analytics.logEvent("add_card", {
+          title: title,
+          merchantName: merchantName,
+        });
         navigation
           .navigate(Routes.INFO_SUCCESS, {
             redirect: Routes.WALLET_CARDS,

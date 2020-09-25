@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, ScrollView } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 import Background from "../../components/Background";
 
 import Button from "../../components/Button";
@@ -53,6 +54,7 @@ class ResetPasswordScreen extends React.Component {
 
     this.setState({ processing: false });
     this.props.navigation.navigate(Routes.INFO_SUCCESS);
+    Analytics.logEvent("reset_password");
   };
 
   handleError = async () => {

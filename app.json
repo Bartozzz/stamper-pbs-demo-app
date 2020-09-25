@@ -9,16 +9,11 @@
     "description": "Stamper to wirtualny portfel kart lojalnościowych w Twoim telefonie - zawsze gotowy by zdobyć nowe pieczątki. Aplikacja zrzesza bardziej lojalnych klientów lubiących korzystać z kart lojalnościowych. Uwolnij się od noszenia wielu papierowych kart i tracenia możliwości zbierania pieczątek podczas zamawiania jedzenia do domu. Od teraz już nigdy nie zgubisz kart lojalnościowych!",
     "primaryColor": "#0046F4",
     "version": "1.9.7",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "facebookAppId": "230031908097780",
     "facebookDisplayName": "Stamper",
     "facebookScheme": "fb230031908097780",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -40,13 +35,26 @@
         }
       ]
     },
+    "web": {
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyC8abe2CuHilC-bB8MAJqg5CXjk1ns6FGk",
+          "authDomain": "stamper-24dcc.firebaseapp.com",
+          "databaseURL": "https://stamper-24dcc.firebaseio.com",
+          "projectId": "stamper-24dcc",
+          "storageBucket": "stamper-24dcc.appspot.com",
+          "messagingSenderId": "217630369702",
+          "appId": "1:217630369702:web:66cdae38c3ff6364fe1167",
+          "measurementId": "G-X9Z04EY2GX"
+        }
+      }
+    },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.getstamper.app",
+      "googleServicesFile": "./GoogleService-Info.plist",
       "appStoreUrl": "https://itunes.apple.com/pl/app/stamper/id1467621267",
-      "associatedDomains": [
-        "applinks:getstamper.com"
-      ],
+      "associatedDomains": ["applinks:getstamper.com"],
       "config": {
         "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
       },
@@ -58,6 +66,7 @@
     },
     "android": {
       "package": "com.getstamper.app",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 17,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.getstamper.app",
       "intentFilters": [
@@ -70,10 +79,7 @@
               "pathPrefix": "/stamp"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
       "adaptiveIcon": {

@@ -17,6 +17,7 @@ import Quiz from "../../components/Quiz";
 import * as StoreReview from "expo-store-review";
 import VersionCheck from "react-native-version-check-expo";
 import NetInfo from "@react-native-community/netinfo";
+import * as Analytics from "expo-firebase-analytics";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -125,6 +126,9 @@ class DashboardMainScreen extends React.Component {
 
   closePopUp = () => {
     this.setState({ popUp: false });
+    Analytics.logEvent("opened_pop_up", {
+      title: name,
+    });
   };
 
   render() {
@@ -141,8 +145,8 @@ class DashboardMainScreen extends React.Component {
             title={popUpData.title}
             content={popUpData.message}
             button={i18n.t("close")}
-            onClose={this.closePopUp}
-            onPress={this.closePopUp}
+            onClose={() => this.closePopUp(popUpData.message)}
+            onPress={() => this.closePopUp(popUpData.message)}
           />
         )}
         {quizData.title && (

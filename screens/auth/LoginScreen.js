@@ -8,6 +8,7 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 
 import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";
 
@@ -84,6 +85,9 @@ class AuthLoginScreen extends React.Component {
       if (this.state.expoToken) {
         this.props.setNotificationsToken(this.state.expoToken);
       }
+      Analytics.logEvent("login", {
+        method: "email",
+      });
     } catch (err) {
       console.log(err);
     }
