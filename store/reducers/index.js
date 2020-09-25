@@ -7,6 +7,7 @@ import wallet from "./wallet";
 import prizes from "./prizes";
 import review from "./review";
 import popup from "./popup";
+import quiz from "./quiz";
 
 const reducers = {
   auth,
@@ -17,6 +18,7 @@ const reducers = {
   prizes,
   review,
   popup,
+  quiz,
 };
 
 export default combineReducers(reducers);

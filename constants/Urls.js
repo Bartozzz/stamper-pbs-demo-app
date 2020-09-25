@@ -139,6 +139,15 @@ const V1 = {
       return `${Server.V1}/Info/GetNotifications`;
     },
   },
+
+  Quiz: {
+    GetQuestion() {
+      return `${Server.V1}/Quiz/GetQuestion`;
+    },
+    SetAnswer() {
+      return `${Server.V1}/Quiz/SetAnswer`;
+    },
+  },
 };
 
 // Those endpoints doesn't require Authorization header:

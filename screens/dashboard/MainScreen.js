@@ -12,6 +12,8 @@ import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
 import DashboardButton from "../../components/DashboardButton";
 import PopUp from "../../components/PopUp";
+import Quiz from "../../components/Quiz";
+
 import * as StoreReview from "expo-store-review";
 import VersionCheck from "react-native-version-check-expo";
 import NetInfo from "@react-native-community/netinfo";
@@ -22,6 +24,7 @@ import defaultStyles from "../../constants/Styles";
 
 import { getPrizesCount } from "../../store/reducers/prizes";
 import { getPopUp } from "../../store/reducers/popup";
+import { getQuestion, setAnswer } from "../../store/reducers/quiz";
 
 const MenuImageMap = require("../../assets/images/menu/map.png");
 const MenuImageMarket = require("../../assets/images/menu/market-inactive.png");
@@ -72,14 +75,18 @@ class DashboardMainScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { popUp: true };
+    this.state = { popUp: true, quiz: true };
   }
 
   componentDidMount() {
     checkUpdateNeeded();
     if (internet === true) {
       this.props.getPrizesCount();
-      this.props.getPopUp();
+      this.props.getQuestion().then(() => {
+        if (!this.props.quizData) {
+          this.props.getPopUp();
+        }
+      });
     }
     if (internet === false) {
       Alert.alert(
@@ -102,13 +109,27 @@ class DashboardMainScreen extends React.Component {
     unsubscribe();
   }
 
+  closeQuiz = () => {
+    this.setState({ quiz: false });
+  };
+
+  setAnswer = (answer) => {
+    if (answer === this.props.quizData.correctAnswer) {
+      this.props.setAnswer(1);
+      this.setState({ quiz: false });
+    } else {
+      this.props.setAnswer(0);
+      this.setState({ quiz: false });
+    }
+  };
+
   closePopUp = () => {
     this.setState({ popUp: false });
   };
 
   render() {
-    const { navigation, prizesCount, popUpData } = this.props;
-    const { popUp } = this.state;
+    const { navigation, prizesCount, popUpData, quizData } = this.props;
+    const { popUp, quiz } = this.state;
     const { height } = Dimensions.get("window");
     const smallPhone = height <= 640;
 
@@ -124,7 +145,16 @@ class DashboardMainScreen extends React.Component {
             onPress={this.closePopUp}
           />
         )}
-
+        {quizData.title && (
+          <Quiz
+            active={quiz}
+            title={quizData.title.replaceAll("{stamps}", quizData.stamps)}
+            content={quizData.question}
+            onYes={() => this.setAnswer(1)}
+            onNo={() => this.setAnswer(0)}
+            onClose={this.closeQuiz}
+          />
+        )}
         <View style={[defaultStyles.center, styles.menu]}>
           <StamperLogo style={{ marginBottom: smallPhone ? 0 : 30 }} />
 
@@ -203,11 +233,14 @@ const mapStateToProps = (state) => ({
   prizesCount: state.prizes.count,
   appLaunches: state.review.appLaunches,
   popUpData: state.popup,
+  quizData: state.quiz,
 });
 
 const mapDispatchToProps = {
   getPrizesCount,
   getPopUp,
+  getQuestion,
+  setAnswer,
 };
 
 export default connect(
