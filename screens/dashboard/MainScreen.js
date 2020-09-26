@@ -115,13 +115,20 @@ class DashboardMainScreen extends React.Component {
   };
 
   setAnswer = (answer) => {
-    if (answer === this.props.quizData.correctAnswer) {
-      this.props.setAnswer(1);
-      this.setState({ quiz: false });
+    const { navigation, setAnswer } = this.props;
+    const { questionId, correctAnswer } = this.props.quizData;
+
+    if (answer === correctAnswer) {
+      setAnswer(questionId, "true").finally(() => {
+        navigation.navigate(Routes.INFO_SUCCESS);
+      });
     } else {
-      this.props.setAnswer(0);
-      this.setState({ quiz: false });
+      setAnswer(questionId, "false").finally(() => {
+        navigation.navigate(Routes.INFO_ERROR);
+      });
     }
+
+    this.setState({ quiz: false });
   };
 
   closePopUp = () => {

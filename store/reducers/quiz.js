@@ -51,14 +51,15 @@ export const getQuestion = () => ({
   },
 });
 
-export const setAnswer = (answer) => ({
+export const setAnswer = (questionId, correctAnswer) => ({
   types: [SETANSWER_REQUEST, SETANSWER_SUCCESS, SETANSWER_FAIL],
   payload: {
     request: {
       method: "POST",
       url: Url.Quiz.SetAnswer(),
       data: {
-        correctAnswer: answer,
+        questionId,
+        correctAnswer,
       },
     },
   },
