@@ -117,14 +117,15 @@ class DashboardMainScreen extends React.Component {
   setAnswer = (answer) => {
     const { navigation, setAnswer } = this.props;
     const { questionId, correctAnswer } = this.props.quizData;
-
     if (answer === correctAnswer) {
-      setAnswer(questionId, "true").finally(() => {
-        navigation.navigate(Routes.INFO_SUCCESS);
+      setAnswer(questionId, true).finally(() => {
+        navigation.navigate(Routes.INFO_SUCCESS, {
+          redirect: Routes.DASHBOARD,
+        });
       });
     } else {
-      setAnswer(questionId, "false").finally(() => {
-        navigation.navigate(Routes.INFO_ERROR);
+      setAnswer(questionId, false).finally(() => {
+        navigation.navigate(Routes.INFO_ERROR, { redirect: Routes.DASHBOARD });
       });
     }
 

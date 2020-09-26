@@ -14,6 +14,7 @@ export const initialState = {
   question: undefined,
   correctAnswer: undefined,
   stamps: undefined,
+  questionId: undefined,
 };
 
 export default function reducer(state = initialState, action) {
@@ -32,6 +33,7 @@ export default function reducer(state = initialState, action) {
         question: action.payload.data.question,
         correctAnswer: action.payload.data.correctAnswer,
         stamps: action.payload.data.stamps,
+        questionId: action.payload.data.id,
       };
     case SETANSWER_FAIL:
     case SETANSWER_REQUEST:
