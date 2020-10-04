@@ -35,44 +35,15 @@ const MenuImageWallet = require("../../assets/images/menu/wallet.png");
 const MenuImageScanner = require("../../assets/images/menu/scanner.png");
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
 
-const checkUpdateNeeded = async () => {
-  const updateNeeded = await VersionCheck.needUpdate();
-  if (updateNeeded && updateNeeded.isNeeded) {
-    Alert.alert(
-      i18n.t("dashboard.UpdateTitle"),
-      i18n.t("dashboard.UpdateSubtitle"),
-      [
-        {
-          text: i18n.t("dashboard.Update"),
-          onPress: () => {
-            BackHandler.exitApp();
-            Linking.openURL(updateNeeded.storeUrl);
-          },
-        },
-        {
-          text: i18n.t("dashboard.NotNow"),
-        },
-      ],
-      { cancelable: true }
-    );
-  }
-};
-
-let internet;
-
-const unsubscribe = NetInfo.addEventListener((state) => {
-  if (state.isInternetReachable === true) {
-    internet = true;
-  } else {
-    internet = false;
-  }
-});
-
 class DashboardMainScreen extends React.Component {
   static navigationOptions = {
     title: i18n.t("navigation.dashboard.main"),
     header: null,
   };
+
+  internet = null;
+  internetInitialCheck = true;
+  internetUnsubscribe = null;
 
   constructor(props) {
     super(props);
@@ -80,35 +51,69 @@ class DashboardMainScreen extends React.Component {
   }
 
   componentDidMount() {
-    checkUpdateNeeded();
-    if (internet === true) {
-      this.props.getPrizesCount();
-      this.props.getQuestion().then(() => {
-        if (!this.props.quizData) {
-          this.props.getPopUp();
+    this.checkUpdateNeeded();
+
+    this.internetUnsubscribe = NetInfo.addEventListener((state) => {
+      this.internet = state.isInternetReachable || state.isConnected;
+
+      if (this.internetInitialCheck) {
+        if (this.internet) {
+          this.props.getPrizesCount();
+          this.props.getQuestion().then(() => {
+            if (!this.props.quizData) {
+              this.props.getPopUp();
+            }
+          });
+        } else {
+          Alert.alert(
+            i18n.t("offline.main"),
+            i18n.t("offline.alert"),
+            [
+              {
+                text: i18n.t("close"),
+              },
+            ],
+            { cancelable: true }
+          );
         }
-      });
-    }
-    if (internet === false) {
-      Alert.alert(
-        i18n.t("offline.main"),
-        i18n.t("offline.alert"),
-        [
-          {
-            text: i18n.t("close"),
-          },
-        ],
-        { cancelable: true }
-      );
-    }
+      }
+
+      this.internetInitialCheck = false;
+    });
+
     if (this.props.appLaunches % 300 === 0) {
       StoreReview.requestReview();
     }
   }
 
   componentWillUnmount() {
-    unsubscribe();
+    if (this.internetUnsubscribe) {
+      this.internetUnsubscribe();
+    }
   }
+
+  checkUpdateNeeded = async () => {
+    const updateNeeded = await VersionCheck.needUpdate();
+    if (updateNeeded && updateNeeded.isNeeded) {
+      Alert.alert(
+        i18n.t("dashboard.UpdateTitle"),
+        i18n.t("dashboard.UpdateSubtitle"),
+        [
+          {
+            text: i18n.t("dashboard.Update"),
+            onPress: () => {
+              BackHandler.exitApp();
+              Linking.openURL(updateNeeded.storeUrl);
+            },
+          },
+          {
+            text: i18n.t("dashboard.NotNow"),
+          },
+        ],
+        { cancelable: true }
+      );
+    }
+  };
 
   closeQuiz = () => {
     this.setState({ quiz: false });
@@ -174,7 +179,7 @@ class DashboardMainScreen extends React.Component {
             <DashboardButton
               icon={MenuImageMap}
               onPress={() =>
-                navigation.push(Routes.MAP, { internet: internet })
+                navigation.push(Routes.MAP, { internet: this.internet })
               }
             >
               {i18n.t("dashboard.map")}
@@ -183,7 +188,7 @@ class DashboardMainScreen extends React.Component {
             <DashboardButton
               icon={MenuImageWallet}
               onPress={() =>
-                navigation.push(Routes.WALLET, { internet: internet })
+                navigation.push(Routes.WALLET, { internet: this.internet })
               }
             >
               {i18n.t("dashboard.wallet")}
@@ -195,7 +200,7 @@ class DashboardMainScreen extends React.Component {
               icon={MenuImagePrizes}
               badge={prizesCount}
               onPress={() =>
-                navigation.push(Routes.PRIZES, { internet: internet })
+                navigation.push(Routes.PRIZES, { internet: this.internet })
               }
             >
               {i18n.t("dashboard.prizes")}
@@ -204,7 +209,7 @@ class DashboardMainScreen extends React.Component {
             <DashboardButton
               icon={MenuImageProfile}
               onPress={() =>
-                navigation.push(Routes.PROFILE, { internet: internet })
+                navigation.push(Routes.PROFILE, { internet: this.internet })
               }
             >
               {i18n.t("dashboard.profile")}
@@ -219,7 +224,7 @@ class DashboardMainScreen extends React.Component {
             <DashboardButton
               icon={MenuImageScanner}
               onPress={() =>
-                navigation.push(Routes.SCANNER, { internet: internet })
+                navigation.push(Routes.SCANNER, { internet: this.internet })
               }
             >
               {i18n.t("dashboard.scanner")}

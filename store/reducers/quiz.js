@@ -27,14 +27,24 @@ export default function reducer(state = initialState, action) {
         correctAnswer: undefined,
         stamps: undefined,
       };
-    case QUIZ_SUCCESS:
-      return {
-        title: action.payload.data.title,
-        question: action.payload.data.question,
-        correctAnswer: action.payload.data.correctAnswer,
-        stamps: action.payload.data.stamps,
-        questionId: action.payload.data.id,
-      };
+    case QUIZ_SUCCESS: {
+      if (action.payload.data) {
+        return {
+          title: action.payload.data.title,
+          question: action.payload.data.question,
+          correctAnswer: action.payload.data.correctAnswer,
+          stamps: action.payload.data.stamps,
+          questionId: action.payload.data.id,
+        };
+      } else {
+        return {
+          title: undefined,
+          question: undefined,
+          correctAnswer: undefined,
+          stamps: undefined,
+        };
+      }
+    }
     case SETANSWER_FAIL:
     case SETANSWER_REQUEST:
     case SETANSWER_SUCCESS:

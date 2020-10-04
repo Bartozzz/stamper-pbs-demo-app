@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ActivityIndicator, AsyncStorage, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
 import { authorize, setAccessToken } from "../../store/reducers/auth";
 import { getProfile } from "../../store/reducers/profile";
-import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
-import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 import * as Routes from "../../navigation";
 import colors from "../../constants/Colors";
 import styles from "../../constants/Styles";
@@ -35,7 +33,7 @@ class AuthLoadingScreen extends React.Component {
       // Required, so user's access token doesn't gets overrided by app's access
       // token from AuthLoadingScreen's componentDidMount:
       NetInfo.fetch().then((state) => {
-        if (state.isInternetReachable === true) {
+        if (state.isInternetReachable) {
           this.props.setAccessToken(accessToken);
 
           // This will switch to the App screen or Auth screen and this loading
@@ -46,6 +44,7 @@ class AuthLoadingScreen extends React.Component {
             .catch(this.handleUnauthorized);
         } else {
           // Open the App if the user is logged in, and he's offline
+          this.props.setAccessToken(accessToken);
           this.handleAuthorized();
         }
       });
@@ -60,16 +59,6 @@ class AuthLoadingScreen extends React.Component {
   handleAuthorized = async (response) => {
     const { navigation } = this.props;
     const nextScreen = navigation.getParam("redirect", Routes.APP);
-
-    try {
-      if (response.payload.data.email) {
-        // When the user logs-in, force the refresh of offline-first elements:
-        await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
-        await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
-      }
-    } catch (error) {
-      console.log(error);
-    }
 
     return navigation.navigate(nextScreen);
   };
