@@ -4,23 +4,46 @@ import colors from "../../constants/Colors";
 import Button from "../Button";
 
 export const Container = styled.View`
-  flex-direction: row;
+  align-items: center;
   justify-content: center;
 `;
 
-export const ButtonLoginRegister = styled(Button)`
-  margin-left: 5px;
-  margin-right: 5px;
-  width: 130px;
-`;
-
-export const ButtonFacebook = styled(Button)`
-  margin-top: 20px;
+export const LoginRegisterButton = styled(Button)`
+  margin-top: 10px;
   width: 270px;
 `;
 
-export const ButtonGoogle = styled.Text`
+export const OrLoginWith = styled.Text`
   color: ${colors.color};
   text-align: center;
-  padding: 10%;
+  padding-vertical: 5%;
 `;
+
+
+export const ExternalLoginContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  width: 175px;
+
+  align-self: center;
+  padding-bottom: 10%;
+`;
+
+export const LogInWith = styled.TouchableOpacity`
+  background: #FFFFFF;
+  height: 50px;
+  width: 50px;
+  border-radius: 7px;
+`;
+
+export const Icon = styled.Image.attrs({
+  resizeMode: "contain"
+})`
+  height: 22.5px;
+  width: 22.5px;
+
+  flex: 1;
+  align-self: center;
+  justify-content: center;
+`;
+

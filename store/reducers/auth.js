@@ -191,6 +191,20 @@ export const loginExternal = (email) => ({
   },
 });
 
+export const loginApple = (identityToken) => ({
+  types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.AppleLogin(),
+      data: {
+        identityToken,
+        language: i18n.appLocale,
+      },
+    },
+  },
+});
+
 export const setNotificationsToken = (token) => ({
   types: [
     NOTIFICATIONSTOKEN_REQUEST,
@@ -248,6 +262,22 @@ export const registerExternal = (email, provider, nickname) => ({
       data: {
         email,
         provider,
+        nickname,
+        language: i18n.appLocale,
+      },
+    },
+  },
+});
+
+export const registerApple = (email, identityToken, nickname) => ({
+  types: [REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL],
+  payload: {
+    request: {
+      method: "POST",
+      url: Url.Account.AppleRegister(),
+      data: {
+        email,
+        identityToken,
         nickname,
         language: i18n.appLocale,
       },

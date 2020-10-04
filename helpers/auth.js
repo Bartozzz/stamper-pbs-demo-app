@@ -1,5 +1,8 @@
+import { decode } from "base-64";
 import * as Google from "expo-google-app-auth";
 import * as Facebook from "expo-facebook";
+import * as AppleAuthentication from "expo-apple-authentication";
+
 import getEnvVariables from "./env";
 
 const { facebookAppId, googleClientId } = getEnvVariables();
@@ -44,4 +47,31 @@ export async function logInWithFacebook(onSuccess, onError) {
   } catch (error) {
     onError(error);
   }
+}
+
+export async function logInWithApple(onSuccess, onError) {
+  try {
+    const user = await AppleAuthentication.signInAsync({
+      requestedScopes: [
+        AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+        AppleAuthentication.AppleAuthenticationScope.EMAIL,
+      ],
+    });
+    onSuccess(user);
+  } catch (error) {
+    onError(error);
+  }
+}
+
+export function parseJwt(token) {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
+    decode(base64)
+      .split("")
+      .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
 }

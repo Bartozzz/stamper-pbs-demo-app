@@ -1,43 +1,50 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
 
 import * as Styled from "./index.styled";
 import i18n from "../../translations";
 
+import Google from "../../assets/images/icons/google.png";
+import Apple from "../../assets/images/icons/apple.png";
+import Facebook from "../../assets/images/icons/facebook.png";
+
 const WelcomeButtons = ({
   login,
   register,
+  loginWithApple,
   loginWithFacebook,
   loginWithGoogle,
 }) => {
   return (
     <>
       <Styled.Container>
-        <Styled.ButtonLoginRegister
+        <Styled.LoginRegisterButton
           testID="welcome-login"
           title={i18n.t("auth.login")}
           onPress={login}
         />
-        <Styled.ButtonLoginRegister
+        <Styled.LoginRegisterButton
           testID="welcome-register"
           title={i18n.t("auth.register")}
           onPress={register}
         />
       </Styled.Container>
 
-      <Styled.Container>
-        <Styled.ButtonFacebook
-          testID="login-facebook"
-          title={i18n.t("auth.loginwithfacebook")}
-          onPress={loginWithFacebook}
-        />
-      </Styled.Container>
+      <Styled.OrLoginWith>{i18n.t("auth.orLogInWith")}</Styled.OrLoginWith>
 
-      <TouchableOpacity testID="login-google" onPress={loginWithGoogle}>
-        <Styled.ButtonGoogle>
-          {i18n.t("auth.loginwithgoogle")}
-        </Styled.ButtonGoogle>
-      </TouchableOpacity>
+      <Styled.ExternalLoginContainer>
+        {Platform.OS === "ios" && (
+          <Styled.LogInWith onPress={loginWithApple}>
+            <Styled.Icon source={Apple} />
+          </Styled.LogInWith>
+        )}
+        <Styled.LogInWith onPress={loginWithFacebook}>
+          <Styled.Icon source={Facebook} />
+        </Styled.LogInWith>
+        <Styled.LogInWith onPress={loginWithGoogle}>
+          <Styled.Icon source={Google} />
+        </Styled.LogInWith>
+      </Styled.ExternalLoginContainer>
     </>
   );
 };

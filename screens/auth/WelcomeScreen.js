@@ -9,7 +9,12 @@ import {
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import * as Analytics from "expo-firebase-analytics";
 
-import { logInWithGoogle, logInWithFacebook } from "../../helpers/auth";
+import {
+  parseJwt,
+  logInWithGoogle,
+  logInWithFacebook,
+  logInWithApple,
+} from "../../helpers/auth";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
 import Background from "../../components/Background";
@@ -18,8 +23,10 @@ import WelcomeButtons from "../../components/WelcomeButtons";
 
 import {
   loginExternal,
+  loginApple,
   setNotificationsToken,
   registerExternal,
+  registerApple,
   ACCESS_TOKEN,
   REFRESH_TOKEN,
 } from "../../store/reducers/auth";
@@ -78,6 +85,47 @@ class AuthWelcomeScreen extends React.Component {
     },
 
     expoToken: null,
+  };
+
+  loginWithApple = async () => {
+    this.setState({ processing: true });
+
+    logInWithApple(
+      (user) => {
+        const email = user.email;
+        const token = user.identityToken;
+
+        if (email) {
+          const username = email.split("@")[0];
+
+          this.props
+            .registerApple(email, token, username)
+            .then((response) => {
+              // Require user to accepts the terms of service. The registeration
+              // already logs the user in, so calling `loginExternal` will fail:
+              this.props.navigation.navigate(Routes.AUTH_EXTERNAL_TOS, {
+                onAccept: () => this.handleSuccess(true)(response),
+              });
+              Analytics.logEvent("sign_up", {
+                method: "apple",
+              });
+            })
+            .catch((e) => {
+              const data = parseJwt(token);
+              this.loginExternal(data.email, "apple");
+            });
+        } else {
+          const data = parseJwt(token);
+          this.loginExternal(data.email, "apple");
+        }
+      },
+      (error) => {
+        this.setState({
+          processing: false,
+          error: { ...this.state.error, other: error },
+        });
+      }
+    );
   };
 
   loginWithFacebook = async () => {
@@ -149,13 +197,15 @@ class AuthWelcomeScreen extends React.Component {
   loginExternal = (email, method, firstLogin = false) => {
     this.props
       .loginExternal(email)
-      .then(() => {
-        this.handleSuccess(firstLogin);
+      .then((response) => {
+        this.handleSuccess(firstLogin)(response);
         Analytics.logEvent("login", {
           method: method,
         });
       })
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error);
+      });
   };
 
   handleSuccess = (firstLogin) => async (response) => {
@@ -238,6 +288,7 @@ class AuthWelcomeScreen extends React.Component {
             inactiveDotScale={1}
           />
           <WelcomeButtons
+            loginWithApple={this.loginWithApple}
             loginWithGoogle={this.loginWithGoogle}
             loginWithFacebook={this.loginWithFacebook}
             login={() => {
@@ -260,6 +311,7 @@ const styles = StyleSheet.create({
   },
   paginationContainer: {
     alignItems: "flex-start",
+    paddingVertical: "5%",
   },
 });
 
@@ -270,8 +322,10 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = {
   // …
   loginExternal,
+  loginApple,
   setNotificationsToken,
   registerExternal,
+  registerApple,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthWelcomeScreen);
