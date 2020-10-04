@@ -20,6 +20,7 @@ export const TitleComponent = styled.Text`
   font-family: poppins-bold;
 
   color: ${colors.color};
+  padding-horizontal: 5%;
   text-align: center;
   text-transform: uppercase;
   text-shadow-color: ${colors.shadow};

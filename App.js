@@ -111,6 +111,9 @@ export default class App extends React.Component {
 
       // Preload assets:
       Asset.loadAsync([
+        require("./assets/images/icons/google.png"),
+        require("./assets/images/icons/apple.png"),
+        require("./assets/images/icons/facebook.png"),
         require("./assets/images/welcome/1.png"),
         require("./assets/images/welcome/2.png"),
         require("./assets/images/welcome/3.png"),

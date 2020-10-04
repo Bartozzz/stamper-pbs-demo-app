@@ -21,6 +21,10 @@ const V1 = {
       return `${Server.V1}/Account/ExternalLogin`;
     },
 
+    AppleLogin() {
+      return `${Server.V1}/Account/AppleLogin`;
+    },
+
     SetNotificationsToken() {
       return `${Server.V1}/Account/SetDevice`;
     },
@@ -43,6 +47,10 @@ const V1 = {
 
     ExternalRegister() {
       return `${Server.V1}/Account/ExternalRegister`;
+    },
+
+    AppleRegister() {
+      return `${Server.V1}/Account/AppleRegister`;
     },
 
     Logout() {
