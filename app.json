@@ -55,6 +55,7 @@
       "googleServicesFile": "./GoogleService-Info.plist",
       "appStoreUrl": "https://itunes.apple.com/pl/app/stamper/id1467621267",
       "associatedDomains": ["applinks:getstamper.com"],
+      "usesAppleSignIn": true,
       "config": {
         "googleMapsApiKey": "AIzaSyDTfi_GPZda7SSDW9oXKbtrKJHSbqCh2m0"
       },
