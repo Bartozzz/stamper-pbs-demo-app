@@ -349,7 +349,10 @@ function filterByCategory(filter, categories) {
   if (filter === 0) {
     return () => true;
   } else {
-    return (card) => card.filter === categories[filter];
+    return (card) =>
+      card.filters
+        ? card.filters.includes(categories[filter])
+        : card.filter === categories[filter];
   }
 }
 
