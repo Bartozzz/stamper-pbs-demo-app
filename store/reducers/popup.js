@@ -19,10 +19,17 @@ export default function reducer(state = initialState, action) {
         message: undefined,
       };
     case POPUP_SUCCESS:
-      return {
-        title: action.payload.data.title,
-        message: action.payload.data.message,
-      };
+      if (action.payload.data) {
+        return {
+          title: action.payload.data.title,
+          message: action.payload.data.message,
+        };
+      } else {
+        return {
+          title: undefined,
+          message: undefined,
+        };
+      }
     default:
       return state;
   }
