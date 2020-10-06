@@ -60,7 +60,7 @@ class DashboardMainScreen extends React.Component {
         if (this.internet) {
           this.props.getPrizesCount();
           this.props.getQuestion().then(() => {
-            if (!this.props.quizData) {
+            if (!this.props.quizData.title) {
               this.props.getPopUp();
             }
           });
