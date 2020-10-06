@@ -1,11 +1,12 @@
 import React from "react";
+import { Platform } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { usePermissions } from "@use-expo/permissions";
 
 export default function useLocation(
   options = {
-    enableHighAccuracy: false,
+    enableHighAccuracy: Platform.OS !== "ios",
   }
 ) {
   const [currentLocation, setCurrentLocation] = React.useState(null);
