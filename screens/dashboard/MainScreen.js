@@ -165,7 +165,7 @@ class DashboardMainScreen extends React.Component {
         {quizData.title && (
           <Quiz
             active={quiz}
-            title={quizData.title.replaceAll("{stamps}", quizData.stamps)}
+            title={quizData.title.split("{stamps}").join(quizData.stamps)}
             content={quizData.question}
             onYes={() => this.setAnswer(1)}
             onNo={() => this.setAnswer(0)}
