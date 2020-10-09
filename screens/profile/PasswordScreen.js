@@ -144,7 +144,7 @@ class ProfilePasswordScreen extends React.Component {
 
 const styles = StyleSheet.create({
   form: {
-    flex: 1,
+    flex: 0.5,
     marginHorizontal: 30,
 
     justifyContent: "center",

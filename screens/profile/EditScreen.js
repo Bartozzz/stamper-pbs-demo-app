@@ -191,28 +191,28 @@ class ProfileEditScreen extends React.Component {
     } = this.state;
 
     return (
-      <KeyboardAwareScrollView enableOnAndroid={true} extraScrollHeight={100}>
-        <TouchableOpacity onPress={this.uploadImage}>
-          <ImageBackground
-            resizeMode="cover"
-            source={{ uri: photo }}
-            style={styles.upload}
-          >
-            {this.state.uploading ? (
-              <ActivityIndicator color="white" size="large" />
-            ) : (
-              <React.Fragment>
-                <AntDesign name="camerao" size={36} color="white" />
-                <Text style={styles.uploadText}>
-                  {i18n.t("profile.edit.changePhoto")}
-                </Text>
-              </React.Fragment>
-            )}
-          </ImageBackground>
-        </TouchableOpacity>
+      <Background source={BackgroundImage}>
+        <KeyboardAwareScrollView enableOnAndroid={true} extraScrollHeight={100}>
+          <TouchableOpacity onPress={this.uploadImage}>
+            <ImageBackground
+              resizeMode="cover"
+              source={{ uri: photo }}
+              style={styles.upload}
+            >
+              {this.state.uploading ? (
+                <ActivityIndicator color="white" size="large" />
+              ) : (
+                <React.Fragment>
+                  <AntDesign name="camerao" size={36} color="white" />
+                  <Text style={styles.uploadText}>
+                    {i18n.t("profile.edit.changePhoto")}
+                  </Text>
+                </React.Fragment>
+              )}
+            </ImageBackground>
+          </TouchableOpacity>
 
-        <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
-          <Background source={BackgroundImage}>
+          <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
             <View style={styles.form}>
               {error.other ? <Error message={error.other} /> : null}
 
@@ -277,9 +277,9 @@ class ProfileEditScreen extends React.Component {
             </View>
 
             <Animated.View style={[{ height: this.state.heightAnim }]} />
-          </Background>
-        </Animated.View>
-      </KeyboardAwareScrollView>
+          </Animated.View>
+        </KeyboardAwareScrollView>
+      </Background>
     );
   }
 }
