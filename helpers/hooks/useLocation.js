@@ -39,7 +39,12 @@ export default function useLocation(
     };
 
     if (permission) {
-      if (permission.status === "granted") {
+      if (
+        permission.status === "granted" ||
+        // If a user chooses "Allow only while using" on Android 10+
+        // status will return denied, but foregroundGranted will equal true."
+        permission.permissions.location.foregroundGranted === true
+      ) {
         getPositions();
       } else {
         setCurrentLocation(currentPositionMock());
