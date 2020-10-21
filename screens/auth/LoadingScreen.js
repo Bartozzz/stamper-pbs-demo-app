@@ -13,41 +13,49 @@ class AuthLoadingScreen extends React.Component {
     header: null,
   };
 
-  componentDidMount() {
-    const { appToken } = this.props;
+  constructor(props) {
+    super(props);
 
-    if (appToken) {
-      this.navigateToApp();
-    } else {
-      this.props
-        .authorize()
-        .then(() => this.navigateToApp())
-        .catch((err) => console.log(err));
-    }
+    this.unsubscribe = NetInfo.addEventListener((state) => {
+      if (state.isInternetReachable !== null) {
+        const { appToken } = this.props;
+        if (appToken) {
+          this.navigateToApp(state.isInternetReachable);
+        } else {
+          this.props
+            .authorize()
+            .then(() => this.navigateToApp(state.isInternetReachable))
+            .catch((err) => console.log(err));
+        }
+      }
+    });
   }
 
-  navigateToApp() {
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  navigateToApp(isInternetReachable) {
     const { appToken, accessToken, refreshToken } = this.props;
 
     if (accessToken && refreshToken) {
       // Required, so user's access token doesn't gets overrided by app's access
       // token from AuthLoadingScreen's componentDidMount:
-      NetInfo.fetch().then((state) => {
-        if (state.isInternetReachable) {
-          this.props.setAccessToken(accessToken);
 
-          // This will switch to the App screen or Auth screen and this loading
-          // screen will be unmounted and thrown away.
-          this.props
-            .getProfile()
-            .then(this.handleAuthorized)
-            .catch(this.handleUnauthorized);
-        } else {
-          // Open the App if the user is logged in, and he's offline
-          this.props.setAccessToken(accessToken);
-          this.handleAuthorized();
-        }
-      });
+      if (isInternetReachable) {
+        this.props.setAccessToken(accessToken);
+
+        // This will switch to the App screen or Auth screen and this loading
+        // screen will be unmounted and thrown away.
+        this.props
+          .getProfile()
+          .then(this.handleAuthorized)
+          .catch(this.handleUnauthorized);
+      } else {
+        // Open the App if the user is logged in, and he's offline
+        this.props.setAccessToken(accessToken);
+        this.handleAuthorized();
+      }
     } else if (appToken) {
       // If the user is not logged-in, we probably want to use the app internal
       // access token (for endpoints like login etc.):
