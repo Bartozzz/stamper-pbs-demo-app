@@ -3,12 +3,6 @@ import Secret from "../../constants/Secret";
 import i18n from "../../translations";
 import axios from "../axios";
 
-// Keys used for local storage:
-export const EXPIRY_DATE = "expiry_date";
-export const ACCESS_TOKEN = "access_token";
-export const REFRESH_TOKEN = "refresh_token";
-
-// Actions
 export const SET_EXPIRY_DATE = "APP/AUTH/SET/EXPIRY_DATE";
 export const SET_ACCESS_TOKEN = "APP/AUTH/SET/ACCESS_TOKEN";
 export const SET_REFRESH_TOKEN = "APP/AUTH/SET/REFRESH_TOKEN";
@@ -31,7 +25,7 @@ export const CHANGE_PASSWORD_REQUEST = "APP/AUTH/CHANGE_PASSWORD_REQUEST";
 export const CHANGE_PASSWORD_SUCCESS = "APP/AUTH/CHANGE_PASSWORD_SUCCESS";
 export const CHANGE_PASSWORD_FAIL = "APP/AUTH/CHANGE_PASSWORD_FAIL";
 
-const initialState = {
+export const initialState = {
   fetchingData: false,
   appToken: null,
   appTokenExpiryDate: null,

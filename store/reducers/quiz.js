@@ -21,12 +21,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case QUIZ_FAIL:
     case QUIZ_REQUEST:
-      return {
-        title: undefined,
-        question: undefined,
-        correctAnswer: undefined,
-        stamps: undefined,
-      };
+      return initialState;
     case QUIZ_SUCCESS: {
       if (action.payload.data) {
         return {
@@ -37,12 +32,7 @@ export default function reducer(state = initialState, action) {
           questionId: action.payload.data.id,
         };
       } else {
-        return {
-          title: undefined,
-          question: undefined,
-          correctAnswer: undefined,
-          stamps: undefined,
-        };
+        return initialState;
       }
     }
     case SETANSWER_FAIL:

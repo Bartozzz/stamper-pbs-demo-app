@@ -6,12 +6,12 @@ import * as Icon from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import * as Notifications from "expo-notifications";
-import { AsyncStorage, Platform, StatusBar } from "react-native";
+import { Platform, StatusBar } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
 import { store, persistor } from "./store";
-import { APP_LAUNCHES, addLaunch } from "./store/reducers/review";
+import { addLaunch } from "./store/reducers/review";
 
 const prefix = "https://getstamper.com/";
 
@@ -234,10 +234,5 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
 
     store.dispatch(addLaunch());
-
-    AsyncStorage.setItem(
-      APP_LAUNCHES,
-      String(store.getState().review.appLaunches)
-    );
   };
 }

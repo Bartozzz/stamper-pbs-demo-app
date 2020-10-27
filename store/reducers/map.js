@@ -11,7 +11,7 @@ export const MAP_UNFAV_REQUEST = "APP/MAP/UNFAV_REQUEST";
 export const MAP_UNFAV_SUCCESS = "APP/MAP/UNFAV_SUCCESS";
 export const MAP_UNFAV_FAIL = "APP/MAP/UNFAV_FAIL";
 
-const initialState = {
+export const initialState = {
   isLoading: false,
   filters: [],
   data: [],
@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        fiters: [],
+        filters: [],
         data: [],
       };
 

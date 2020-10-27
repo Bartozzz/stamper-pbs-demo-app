@@ -24,7 +24,7 @@ export const PROFILE_SET_NEWSLETTER = "APP/PROFILE/SET_NEWSLETTER";
 export const PROFILE_SET_EMAIL = "APP/PROFILE/SET_EMAIL";
 export const PROFILE_SET_PHOTO = "APP/PROFILE/SET_PHOTO";
 
-const initialState = {
+export const initialState = {
   nickname: null,
   firstname: null,
   lastname: null,

@@ -1,9 +1,5 @@
 import Url from "../../constants/Urls";
 
-// Keys used for local storage:
-export const WALLET_CARDS = "WALLET_CARDS";
-export const FORCE_REFRESH_WALLET = "FORCE_REFRESH_WALLET";
-
 // Actions
 export const WALLET_RESTORE = "APP/WALLET/RESTORE";
 export const WALLET_GET_REQUEST = "APP/WALLET/GET_REQUEST";
@@ -16,7 +12,7 @@ export const WALLET_REMOVE_CARD_REQUEST = "APP/WALLET/REMOVE_CARD_REQUEST";
 export const WALLET_REMOVE_CARD_SUCCESS = "APP/WALLET/REMOVE_CARD_SUCCESS";
 export const WALLET_REMOVE_CARD_FAIL = "APP/WALLET/REMOVE_CARD_FAIL";
 
-const initialState = {
+export const initialState = {
   isLoading: false,
   cards: [],
 };
@@ -52,24 +48,10 @@ export default function reducer(state = initialState, action) {
       };
     }
 
-    case WALLET_RESTORE: {
-      return {
-        ...state,
-        cards: action.payload.cards,
-      };
-    }
-
     default:
       return state;
   }
 }
-
-export const restoreWallet = (payload) => ({
-  type: WALLET_RESTORE,
-  payload: {
-    cards: payload.cards,
-  },
-});
 
 export const getWallet = () => ({
   types: [WALLET_GET_REQUEST, WALLET_GET_SUCCESS, WALLET_GET_FAIL],
