@@ -5,14 +5,21 @@ import * as Styled from "./index.styled";
 
 export const CheckBoxLabel = Styled.CheckBoxLabel;
 
-export const Checkbox = ({ label, checked }) => {
+export const Checkbox = ({ label, checked, onChange }) => {
   const [check, setCheck] = React.useState(checked);
+
+  const handlePress = React.useCallback(() => {
+    const isChecked = !check;
+
+    onChange(isChecked);
+    setCheck(isChecked);
+  }, [onChange, check]);
 
   return (
     <Styled.Container>
       <Styled.CheckboxComponent
         checked={check}
-        onPress={() => setCheck((check) => !check)}
+        onPress={handlePress}
         testID="checkbox"
       >
         {check && (
