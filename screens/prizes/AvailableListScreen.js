@@ -63,8 +63,10 @@ class PrizesListScreen extends React.Component {
     });
   };
 
-  claimPrizeOffline = () => {
-    this.props.navigation.navigate(Routes.SCANNER);
+  claimPrizeOffline = (walletCardId) => {
+    this.props.navigation.navigate(Routes.SCANNER, {
+      walletCardId: walletCardId,
+    });
   };
 
   selectPrize = (prize) => () => {
@@ -201,7 +203,7 @@ class PrizesListScreen extends React.Component {
             {selected.collectOffline && (
               <Button
                 title={i18n.t("prizes.receiveOnPlace")}
-                onPress={this.claimPrizeOffline}
+                onPress={() => this.claimPrizeOffline(this.state.selected.id)}
                 style={styles.button}
                 disabled={!internet}
               />

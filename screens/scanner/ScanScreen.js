@@ -96,7 +96,7 @@ class ScannerScanScreen extends React.Component {
     });
   };
 
-  redirectToTerms = (code, termsAndConditions) => {
+  redirectToTerms = (code, walletId, termsAndConditions) => {
     const { navigation } = this.props;
     const { title, termsAndConditionsUrl } = termsAndConditions;
 
@@ -105,7 +105,7 @@ class ScannerScanScreen extends React.Component {
       termsAndConditionsUrl,
       onConfirm: () => {
         this.props
-          .addStamp(code, true)
+          .addStamp(code, walletId, true)
           .then((res) => {
             const { message } = res.payload.data;
 
@@ -149,12 +149,16 @@ class ScannerScanScreen extends React.Component {
       await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
       this.props
-        .addStamp(code)
+        .addStamp(code, this.props.navigation.state.params.walletCardId)
         .then((res) => {
           const { termsAndConditions, message } = res.payload.data;
 
           if (termsAndConditions && typeof termsAndConditions === "object") {
-            this.redirectToTerms(code, termsAndConditions);
+            this.redirectToTerms(
+              code,
+              this.props.navigation.state.params.walletCardId,
+              termsAndConditions
+            );
           } else if (message && message !== "error") {
             this.redirectToSuccess(message);
             Analytics.logEvent("add_stamp");

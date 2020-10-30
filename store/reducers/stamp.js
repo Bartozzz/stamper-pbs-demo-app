@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const addStamp = (code, acceptedTerms = false) => ({
+export const addStamp = (code, walletCardId, acceptedTerms = false) => ({
   types: [STAMP_ADD_REQUEST, STAMP_ADD_SUCCESS, STAMP_ADD_FAIL],
   payload: {
     request: {
@@ -37,6 +37,7 @@ export const addStamp = (code, acceptedTerms = false) => ({
       url: Url.Stamp.Add(),
       data: {
         code,
+        walletCardId,
         TermsAndConditions: acceptedTerms,
       },
     },

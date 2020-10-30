@@ -43,7 +43,7 @@ describe("Stamp store", () => {
         mockApi.onPost(Url.Stamp.Add()).reply(200);
 
         try {
-          await store.dispatch(addStamp("code", true));
+          await store.dispatch(addStamp("code", "id", true));
           const actions = store.getActions();
 
           expect(
@@ -61,7 +61,7 @@ describe("Stamp store", () => {
         mockApi.onPost(Url.Stamp.Add()).networkError();
 
         try {
-          await store.dispatch(addStamp("code", true));
+          await store.dispatch(addStamp("code", "id", true));
         } catch (err) {
           const actions = store.getActions();
 
