@@ -55,7 +55,7 @@
     "react-native-progress": "^4.0.3",
     "react-native-render-html": "4.2.0",
     "react-native-screens": "~2.9.0",
-    "react-native-snap-carousel": "^3.8.4",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-swipe-list-view": "^2.4.0",
     "react-native-version-check-expo": "^3.4.1",
     "react-native-webview": "9.4.0",

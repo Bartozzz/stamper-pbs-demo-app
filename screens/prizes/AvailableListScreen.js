@@ -102,6 +102,8 @@ class PrizesListScreen extends React.Component {
         keyExtractor={(item) => {
           return item.id;
         }}
+        style={styles.list}
+        contentContainerStyle={{ paddingBottom: 60 }}
         renderItem={({ item }) => {
           const isSelected = selected && selected.id === item.id;
 
@@ -192,10 +194,7 @@ class PrizesListScreen extends React.Component {
             <Image source={RewardsLoader} style={{ width: 150, height: 150 }} />
           </View>
         ) : (
-          <ScrollView style={styles.list}>
-            {this.renderList()}
-            <View style={{ height: 60 }} />
-          </ScrollView>
+          this.renderList()
         )}
 
         {selected && (

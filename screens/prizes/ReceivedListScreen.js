@@ -8,7 +8,6 @@ import {
   FlatList,
   Text,
 } from "react-native";
-import NetInfo from "@react-native-community/netinfo";
 
 import i18n from "../../translations";
 import colors from "../../constants/Colors";
@@ -81,6 +80,8 @@ class PrizesListScreen extends React.Component {
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
+        style={styles.list}
+        contentContainerStyle={{ paddingBottom: 60 }}
         renderItem={({ item }) => (
           <SelectableCard
             selectable={item.collectOnline}
@@ -179,10 +180,7 @@ class PrizesListScreen extends React.Component {
             <Image source={RewardsLoader} style={{ width: 150, height: 150 }} />
           </View>
         ) : (
-          <ScrollView style={styles.list}>
-            {this.renderList()}
-            <View style={{ height: 60 }} />
-          </ScrollView>
+          this.renderList()
         )}
       </Background>
     );

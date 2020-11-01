@@ -108,6 +108,8 @@ class WalletCardsScreen extends React.Component {
     return (
       <CardsList
         data={data}
+        style={styles.list}
+        contentContainerStyle={{ paddingBottom: 60 }}
         onCheck={(item) => {
           this.navigateToCardInfo(item);
         }}
@@ -145,10 +147,7 @@ class WalletCardsScreen extends React.Component {
                 />
               </View>
             ) : (
-              <ScrollView style={styles.list}>
-                {this.renderCards()}
-                <View style={{ height: 60 }} />
-              </ScrollView>
+              this.renderCards()
             )}
           </>
         )}

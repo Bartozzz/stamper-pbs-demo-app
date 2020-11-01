@@ -89,6 +89,8 @@ class WalletPlacesScreen extends React.Component {
       <FlatList
         data={data}
         numColumns={2}
+        style={styles.list}
+        contentContainerStyle={{ paddingBottom: 60 }}
         keyExtractor={(item) => {
           return item.id;
         }}
@@ -142,10 +144,7 @@ class WalletPlacesScreen extends React.Component {
             <Image source={WalletLoader} style={{ width: 150, height: 150 }} />
           </View>
         ) : (
-          <ScrollView style={styles.list}>
-            {this.renderCards()}
-            <View style={{ height: 60 }} />
-          </ScrollView>
+          this.renderCards()
         )}
       </Background>
     );

@@ -8,11 +8,19 @@ import CardBack from "./CardBack";
 const height = 90;
 const margin = 15;
 
-export const CardsList = ({ data, onCheck, onDelete }) => {
+export const CardsList = ({
+  data,
+  onCheck,
+  onDelete,
+  style,
+  contentContainerStyle,
+}) => {
   return (
     <SwipeListView
       useFlatList
       data={data}
+      style={style}
+      contentContainerStyle={contentContainerStyle}
       keyExtractor={(item) => {
         return item.id;
       }}
