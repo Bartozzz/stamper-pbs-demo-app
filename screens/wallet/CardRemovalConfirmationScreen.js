@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { AsyncStorage, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
 import * as Routes from "../../navigation";
@@ -11,7 +11,7 @@ import Button from "../../components/Button";
 import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
 
-import { FORCE_REFRESH_WALLET, removeCard } from "../../store/reducers/wallet";
+import { removeCard } from "../../store/reducers/wallet";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -37,7 +37,6 @@ class CardRemovalConfirmationScreen extends React.Component {
     const merchantName = navigation.getParam("merchantName");
 
     this.props.removeCard(cardId).finally(() => {
-      AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(false));
       navigation.navigate(Routes.WALLET_CARDS, { internet: true });
       Analytics.logEvent("remove_card", {
         title: title,

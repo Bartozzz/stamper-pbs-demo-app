@@ -2,13 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import * as Permissions from "expo-permissions";
 import { Camera } from "expo-camera";
-import { AsyncStorage, Text, View, Image, StyleSheet } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
 import * as Routes from "../../navigation";
 import { addStamp } from "../../store/reducers/stamp";
-import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
-import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 import HeaderTitle from "../../components/HeaderTitle";
 import HeaderHamburger from "../../components/HeaderHamburger";
 import HeaderBack from "../../components/HeaderBack";
@@ -144,9 +142,6 @@ class ScannerScanScreen extends React.Component {
         isProcessing: true,
         isRequesting: true,
       });
-
-      await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
-      await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
 
       this.props
         .addStamp(code, this.props.navigation.state.params.walletCardId)

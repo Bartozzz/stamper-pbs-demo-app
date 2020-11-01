@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
   StyleSheet,
   Text,
-  AsyncStorage,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -78,10 +77,6 @@ class AuthRegisterScreen extends React.Component {
     }
 
     try {
-      const { accessToken, refreshToken } = response.payload.data;
-
-      await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
-      await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
       if (this.state.expoToken) {
         this.props.setNotificationsToken(this.state.expoToken);
       }

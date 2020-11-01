@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components/native";
-import { AsyncStorage, Dimensions, View, Image } from "react-native";
+import { Dimensions, View, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import Carousel from "react-native-snap-carousel";
 import { _ } from "lodash";
@@ -82,9 +82,6 @@ const MapScreen = ({ navigation }) => {
   );
 
   const addCardHandler = React.useCallback((cardId, title, merchantName) => {
-    AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
-    AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
-
     function confirmCardTerms() {
       dispatch(addCard(cardId, true)).then(() => {
         Analytics.logEvent("add_card", {

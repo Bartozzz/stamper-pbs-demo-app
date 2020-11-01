@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   StyleSheet,
-  AsyncStorage,
   Dimensions,
   SafeAreaView,
 } from "react-native";
@@ -214,10 +213,6 @@ class AuthWelcomeScreen extends React.Component {
     }
 
     try {
-      const { accessToken, refreshToken } = response.payload.data;
-
-      await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
-      await AsyncStorage.setItem(REFRESH_TOKEN, refreshToken);
       if (this.state.expoToken) {
         this.props.setNotificationsToken(this.state.expoToken);
       }

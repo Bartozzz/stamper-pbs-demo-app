@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, AsyncStorage, Image, Text, View } from "react-native";
+import { StyleSheet, Image, Text, View } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
 import Button from "../../components/Button";
@@ -10,17 +10,11 @@ import HeaderHamburger from "../../components/HeaderHamburger";
 import HeaderBack from "../../components/HeaderBack";
 
 import {
-  EXPIRY_DATE,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
   logout,
   setExpiryDate,
   setAccessToken,
   setRefreshToken,
 } from "../../store/reducers/auth";
-import { EMAIL } from "../../store/reducers/profile";
-import { FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
-import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
@@ -47,18 +41,6 @@ class ProfileLogoutScreen extends React.Component {
 
   accept = async () => {
     this.setState({ processing: true });
-
-    // Clear local persistent storage:
-    await AsyncStorage.multiRemove([
-      EXPIRY_DATE,
-      ACCESS_TOKEN,
-      REFRESH_TOKEN,
-      EMAIL,
-    ]);
-
-    // When user is logged out, force the refresh of offline-first elements:
-    await AsyncStorage.setItem(FORCE_REFRESH_PRIZES, JSON.stringify(true));
-    await AsyncStorage.setItem(FORCE_REFRESH_WALLET, JSON.stringify(true));
 
     // Clear local volatile storage:
     this.props.setExpiryDate(null);

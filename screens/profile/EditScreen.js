@@ -4,7 +4,6 @@ import {
   Animated,
   StyleSheet,
   ActivityIndicator,
-  AsyncStorage,
   ImageBackground,
   TouchableOpacity,
   Text,
@@ -139,8 +138,6 @@ class ProfileEditScreen extends React.Component {
   };
 
   handleSuccess = async () => {
-    await AsyncStorage.setItem(EMAIL, this.state.email);
-
     // Update local store (here because update endpoint doesn't return updated
     // data):
     this.props.setNickname(this.state.login);
