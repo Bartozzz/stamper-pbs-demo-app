@@ -34,14 +34,14 @@ const WelcomeButtons = ({
 
       <Styled.ExternalLoginContainer>
         {Platform.OS === "ios" && (
-          <Styled.LogInWith onPress={loginWithApple}>
+          <Styled.LogInWith onPress={loginWithApple} testID="login-apple">
             <Styled.Icon source={Apple} />
           </Styled.LogInWith>
         )}
-        <Styled.LogInWith onPress={loginWithFacebook}>
+        <Styled.LogInWith onPress={loginWithFacebook} testID="login-facebook">
           <Styled.Icon source={Facebook} />
         </Styled.LogInWith>
-        <Styled.LogInWith onPress={loginWithGoogle}>
+        <Styled.LogInWith onPress={loginWithGoogle} testID="login-google">
           <Styled.Icon source={Google} />
         </Styled.LogInWith>
       </Styled.ExternalLoginContainer>

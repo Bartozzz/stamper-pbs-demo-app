@@ -1,4 +1,5 @@
 import React from "react";
+import { Platform } from "react-native";
 import { mount } from "enzyme";
 import WelcomeButtons from "./";
 
@@ -16,18 +17,21 @@ describe("WelcomeButtons", () => {
         register={onPress}
         loginWithFacebook={onPress}
         loginWithGoogle={onPress}
+        loginWithApple={onPress}
       />
     );
     const login = getByTestID(component, "welcome-login");
     const register = getByTestID(component, "welcome-register");
+    const apple = getByTestID(component, "login-apple");
     const facebook = getByTestID(component, "login-facebook");
     const google = getByTestID(component, "login-google");
 
     login.first().props().onPress();
     register.first().props().onPress();
+    Platform.OS === "ios" && apple.first().props().onPress();
     facebook.first().props().onPress();
     google.first().props().onPress();
 
-    expect(onPress).toHaveBeenCalledTimes(4);
+    expect(onPress).toHaveBeenCalledTimes(Platform.OS === "ios" ? 5 : 4);
   });
 });

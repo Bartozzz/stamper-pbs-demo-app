@@ -8,7 +8,9 @@ const getByTestID = (component, ID) => {
 };
 
 describe("Checkbox", () => {
-  const component = mount(<Checkbox />);
+  const onChange = jest.fn();
+
+  const component = mount(<Checkbox onChange={(state) => onChange(state)} />);
   const checkbox = getByTestID(component, "checkbox");
 
   it("Render", () => {
@@ -19,5 +21,6 @@ describe("Checkbox", () => {
     checkbox.first().props().onPress();
     component.update();
     expect(getByTestID(component, "checked-icon")).toBeTruthy();
+    expect(onChange).toHaveBeenCalledWith(true);
   });
 });

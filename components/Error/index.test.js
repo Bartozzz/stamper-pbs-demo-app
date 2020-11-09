@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import Error from ".";
-import i18n from "../../translations";
 
 const getByTestID = (component, ID) => {
   return component.findWhere((node) => node.prop("testID") === `${ID}`);
@@ -12,10 +11,10 @@ describe("Error", () => {
   const errorArray = ["test", "test2"];
 
   it("Shouldn't show any errors", () => {
-    const component = mount(<Error message={null} />);
+    const component = mount(<Error />);
     const errorMessage = getByTestID(component, "error-message");
 
-    expect(errorMessage.last().text()).toBe(i18n.t("errorInternal"));
+    expect(errorMessage).toBe({});
   });
 
   it("Should show an error", () => {
