@@ -7,6 +7,7 @@ import {
   Alert,
   BackHandler,
   Linking,
+  FlatList,
 } from "react-native";
 import Background from "../../components/Background";
 import { StamperLogo } from "../../components/Stamper";
@@ -19,6 +20,8 @@ import VersionCheck from "react-native-version-check-expo";
 import NetInfo from "@react-native-community/netinfo";
 import * as Analytics from "expo-firebase-analytics";
 
+import config from "../../constants/dashboard-config";
+
 import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
@@ -27,12 +30,6 @@ import { getPrizesCount } from "../../store/reducers/prizes";
 import { getPopUp } from "../../store/reducers/popup";
 import { getQuestion, setAnswer } from "../../store/reducers/quiz";
 
-const MenuImageMap = require("../../assets/images/menu/map.png");
-const MenuImageMarket = require("../../assets/images/menu/market-inactive.png");
-const MenuImagePrizes = require("../../assets/images/menu/prize.png");
-const MenuImageProfile = require("../../assets/images/menu/profile.png");
-const MenuImageWallet = require("../../assets/images/menu/wallet.png");
-const MenuImageScanner = require("../../assets/images/menu/scanner.png");
 const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
 
 class DashboardMainScreen extends React.Component {
@@ -144,8 +141,30 @@ class DashboardMainScreen extends React.Component {
     });
   };
 
+  renderButton = ({ item }) => {
+    return (
+      <DashboardButton
+        icon={item.icon}
+        onPress={() => {
+          if (item.redirect) {
+            this.props.navigation.push(item.redirect, {
+              internet: this.internet,
+            });
+          }
+        }}
+        badge={
+          item.text === i18n.t("dashboard.prizes")
+            ? this.props.prizesCount
+            : undefined
+        }
+      >
+        {item.text}
+      </DashboardButton>
+    );
+  };
+
   render() {
-    const { navigation, prizesCount, popUpData, quizData } = this.props;
+    const { popUpData, quizData } = this.props;
     const { popUp, quiz } = this.state;
     const { height } = Dimensions.get("window");
     const smallPhone = height <= 640;
@@ -172,64 +191,19 @@ class DashboardMainScreen extends React.Component {
             onClose={this.closeQuiz}
           />
         )}
-        <View style={[defaultStyles.center, styles.menu]}>
-          <StamperLogo style={{ marginBottom: smallPhone ? 0 : 30 }} />
-
-          <View style={[defaultStyles.row, styles.row]}>
-            <DashboardButton
-              icon={MenuImageMap}
-              onPress={() =>
-                navigation.push(Routes.MAP, { internet: this.internet })
-              }
-            >
-              {i18n.t("dashboard.map")}
-            </DashboardButton>
-
-            <DashboardButton
-              icon={MenuImageWallet}
-              onPress={() =>
-                navigation.push(Routes.WALLET, { internet: this.internet })
-              }
-            >
-              {i18n.t("dashboard.wallet")}
-            </DashboardButton>
-          </View>
-
-          <View style={[defaultStyles.row, styles.row]}>
-            <DashboardButton
-              icon={MenuImagePrizes}
-              badge={prizesCount}
-              onPress={() =>
-                navigation.push(Routes.PRIZES, { internet: this.internet })
-              }
-            >
-              {i18n.t("dashboard.prizes")}
-            </DashboardButton>
-
-            <DashboardButton
-              icon={MenuImageProfile}
-              onPress={() =>
-                navigation.push(Routes.PROFILE, { internet: this.internet })
-              }
-            >
-              {i18n.t("dashboard.profile")}
-            </DashboardButton>
-          </View>
-
-          <View style={[defaultStyles.row, styles.row]}>
-            <DashboardButton icon={MenuImageMarket} onPress={() => {}}>
-              {i18n.t("dashboard.market")}
-            </DashboardButton>
-
-            <DashboardButton
-              icon={MenuImageScanner}
-              onPress={() =>
-                navigation.push(Routes.SCANNER, { internet: this.internet })
-              }
-            >
-              {i18n.t("dashboard.scanner")}
-            </DashboardButton>
-          </View>
+        <View style={[{ justifyContent: "center" }, styles.menu]}>
+          <StamperLogo
+            style={{ marginBottom: smallPhone ? 0 : 30, alignSelf: "center" }}
+          />
+          <FlatList
+            style={{ flexGrow: 0 }}
+            scrollEnabled={false}
+            data={config}
+            numColumns={2}
+            renderItem={(item) => this.renderButton(item)}
+            keyExtractor={(item) => item.text}
+            columnWrapperStyle={[defaultStyles.row, styles.row]}
+          />
         </View>
       </Background>
     );
