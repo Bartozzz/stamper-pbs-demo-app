@@ -9,8 +9,7 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import Button from "../../components/Button";
 
-const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
-const BalanceIcon = require("../../assets/images/icons/balance.png");
+import images from "../../constants/images";
 
 class TermsOfUseScreen extends React.Component {
   static navigationOptions = {
@@ -33,11 +32,11 @@ class TermsOfUseScreen extends React.Component {
 
   render() {
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundHome}>
         <StamperLogo style={styles.logo} />
 
         <Box.Container>
-          <Box.Icon width={160} height={125} source={BalanceIcon} />
+          <Box.Icon width={160} height={125} source={images.Balance} />
 
           <Box.Heading>{i18n.t("auth.externalTos.headline")}</Box.Heading>
 

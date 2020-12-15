@@ -4,9 +4,7 @@ import { Platform } from "react-native";
 import * as Styled from "./index.styled";
 import i18n from "../../translations";
 
-import Google from "../../assets/images/icons/google.png";
-import Apple from "../../assets/images/icons/apple.png";
-import Facebook from "../../assets/images/icons/facebook.png";
+import images from "../../constants/images";
 
 const WelcomeButtons = ({
   login,
@@ -35,14 +33,14 @@ const WelcomeButtons = ({
       <Styled.ExternalLoginContainer>
         {Platform.OS === "ios" && (
           <Styled.LogInWith onPress={loginWithApple} testID="login-apple">
-            <Styled.Icon source={Apple} />
+            <Styled.Icon source={images.Apple} />
           </Styled.LogInWith>
         )}
         <Styled.LogInWith onPress={loginWithFacebook} testID="login-facebook">
-          <Styled.Icon source={Facebook} />
+          <Styled.Icon source={images.Facebook} />
         </Styled.LogInWith>
         <Styled.LogInWith onPress={loginWithGoogle} testID="login-google">
-          <Styled.Icon source={Google} />
+          <Styled.Icon source={images.Google} />
         </Styled.LogInWith>
       </Styled.ExternalLoginContainer>
     </>

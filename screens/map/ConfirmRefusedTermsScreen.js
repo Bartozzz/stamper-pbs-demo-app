@@ -12,8 +12,7 @@ import * as Routes from "../../navigation";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 
-const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const BalanceIcon = require("../../assets/images/icons/balance.png");
+import images from "../../constants/images";
 
 class MapConfirmRefusedTermsScreen extends React.Component {
   static navigationOptions = () => ({
@@ -30,11 +29,11 @@ class MapConfirmRefusedTermsScreen extends React.Component {
 
   render() {
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundLogoutWn}>
         <StamperLogo style={styles.logo} />
 
         <Box.Container>
-          <Box.Icon width={107} height={85} source={BalanceIcon} />
+          <Box.Icon width={107} height={85} source={images.Balance} />
 
           <Box.Heading>{i18n.t("map.terms.refuse.heading")}</Box.Heading>
 

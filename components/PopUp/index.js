@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import NewsletterIcon from "../../assets/images/icons/newsletter.png";
+import images from "../../constants/images";
 
 import * as Styled from "./index.styled";
 import * as Box from "../layout/Box";
@@ -14,7 +14,7 @@ export const PopUp = ({ active, title, content, onClose, button, onPress }) => {
           <Ionicons name="md-close" size={32} color="white" />
         </Styled.Close>
 
-        <Box.Icon width={100} height={80} source={NewsletterIcon} />
+        <Box.Icon width={100} height={80} source={images.Newsletter} />
         <Box.Heading>{title}</Box.Heading>
         <Styled.Subheading>{content}</Styled.Subheading>
         <Styled.ButtonContainer>

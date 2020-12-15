@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import NewsletterIcon from "../../assets/images/icons/newsletter.png";
+import images from "../../constants/images";
 import i18n from "../../translations";
 
 import * as Styled from "./index.styled";
@@ -14,7 +14,7 @@ export const Quiz = ({ active, title, content, onClose, onYes, onNo }) => {
           <Ionicons name="md-close" size={32} color="white" />
         </Styled.Close>
 
-        <Box.Icon width={100} height={80} source={NewsletterIcon} />
+        <Box.Icon width={100} height={80} source={images.Newsletter} />
         <Box.Heading style={{ fontSize: 21 }}>{title}</Box.Heading>
         <Styled.Subheading>{content}</Styled.Subheading>
         <Styled.ButtonContainer>

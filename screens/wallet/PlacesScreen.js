@@ -13,8 +13,7 @@ import InputSearch from "../../components/InputSearch";
 import WalletHeader from "../../components/screens/wallet/Header";
 import { getWallet } from "../../store/reducers/wallet";
 
-const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
-const WalletLoader = require("../../assets/loaders/wallet.gif");
+import images from "../../constants/images";
 
 class WalletPlacesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -131,7 +130,7 @@ class WalletPlacesScreen extends React.Component {
     const { isLoading, navigation } = this.props;
 
     return (
-      <Background source={BackgroundImage} disableScroll>
+      <Background source={images.BackgroundWalletWn} disableScroll>
         <WalletHeader
           title={i18n.t("navigation.wallet.places")}
           navigation={navigation}
@@ -141,7 +140,10 @@ class WalletPlacesScreen extends React.Component {
 
         {isLoading ? (
           <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <Image source={WalletLoader} style={{ width: 150, height: 150 }} />
+            <Image
+              source={images.WalletLoader}
+              style={{ width: 150, height: 150 }}
+            />
           </View>
         ) : (
           this.renderCards()

@@ -30,7 +30,7 @@ import { getPrizesCount } from "../../store/reducers/prizes";
 import { getPopUp } from "../../store/reducers/popup";
 import { getQuestion, setAnswer } from "../../store/reducers/quiz";
 
-const BackgroundImage = require("../../assets/backgrounds/home_wn.png");
+import images from "../../constants/images";
 
 class DashboardMainScreen extends React.Component {
   static navigationOptions = {
@@ -170,7 +170,7 @@ class DashboardMainScreen extends React.Component {
     const smallPhone = height <= 640;
 
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundHomeWn}>
         {popUpData.title && (
           <PopUp
             active={popUp}

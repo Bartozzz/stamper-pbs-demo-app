@@ -1,11 +1,11 @@
 import React from "react";
 import * as Styled from "./index.styled";
 
-import CardImage from "../../assets/backgrounds/card.png";
+import images from "../../constants/images";
 
 export const CardBackground = ({ src, children }) => {
   return (
-    <Styled.ImageBackground source={CardImage}>
+    <Styled.ImageBackground source={images.BackgroundCard}>
       {src ? (
         <Styled.ImageBackground testID="card-background" source={{ uri: src }}>
           {children}

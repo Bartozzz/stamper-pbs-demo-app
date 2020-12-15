@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  Dimensions,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Dimensions, SafeAreaView } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import * as Analytics from "expo-firebase-analytics";
 
@@ -37,13 +33,7 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
-const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
-
-const WelcomePicture1 = require("../../assets/images/welcome/1.png");
-const WelcomePicture1Sygnet = require("../../assets/logos/stamper_sygnet_300px.png");
-const WelcomePicture2 = require("../../assets/images/welcome/2.png");
-const WelcomePicture3 = require("../../assets/images/welcome/3.png");
-const WelcomePicture4 = require("../../assets/images/welcome/4.png");
+import images from "../../constants/images";
 
 class AuthWelcomeScreen extends React.Component {
   static navigationOptions = {
@@ -54,25 +44,25 @@ class AuthWelcomeScreen extends React.Component {
     active: 0,
     entries: [
       {
-        background: WelcomePicture1,
-        image: WelcomePicture1Sygnet,
+        background: images.WelcomeCarousel1,
+        image: images.StamperSygnet,
         width: 70,
         flex: 0.5,
         title: i18n.t("welcome.title1"),
         subtitle: i18n.t("welcome.subtitle1"),
       },
       {
-        image: WelcomePicture2,
+        image: images.WelcomeCarousel2,
         title: i18n.t("welcome.title2"),
         subtitle: i18n.t("welcome.subtitle2"),
       },
       {
-        image: WelcomePicture3,
+        image: images.WelcomeCarousel3,
         title: i18n.t("welcome.title3"),
         subtitle: i18n.t("welcome.subtitle3"),
       },
       {
-        image: WelcomePicture4,
+        image: images.WelcomeCarousel4,
         title: i18n.t("welcome.title4"),
         subtitle: i18n.t("welcome.subtitle4"),
       },
@@ -251,7 +241,7 @@ class AuthWelcomeScreen extends React.Component {
     const { active } = this.state;
     return (
       <SafeAreaView style={defaultStyles.container}>
-        <Background source={BackgroundImage} disableScroll>
+        <Background source={images.BackgroundPasswordWn} disableScroll>
           <Carousel
             ref={(carousel) => (this.carouselRef = carousel)}
             data={this.state.entries}

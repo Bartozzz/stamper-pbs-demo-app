@@ -33,7 +33,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
-const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
+import images from "../../constants/images";
 
 class AuthLoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -119,7 +119,7 @@ class AuthLoginScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <Background source={BackgroundImage} disableScroll>
+        <Background source={images.BackgroundPasswordWn} disableScroll>
           <ScrollView style={styles.loginContainer}>
             <InputWithIcon
               iconName="ios-contact"

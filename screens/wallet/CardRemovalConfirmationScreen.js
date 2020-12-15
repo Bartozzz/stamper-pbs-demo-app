@@ -16,8 +16,7 @@ import { removeCard } from "../../store/reducers/wallet";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 
-const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const NewsletterIcon = require("../../assets/images/icons/newsletter.png");
+import images from "../../constants/images";
 
 class CardRemovalConfirmationScreen extends React.Component {
   static navigationOptions = () => ({
@@ -53,11 +52,11 @@ class CardRemovalConfirmationScreen extends React.Component {
 
   render() {
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundLogoutWn}>
         <StamperLogo style={styles.logo} />
 
         <Box.Container>
-          <Box.Icon width={107} height={85} source={NewsletterIcon} />
+          <Box.Icon width={107} height={85} source={images.Newsletter} />
 
           <Box.Heading>{i18n.t("wallet.removal.headline")}</Box.Heading>
 

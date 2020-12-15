@@ -17,7 +17,7 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 
-const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
+import images from "../../constants/images";
 
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -89,7 +89,7 @@ class ProfilePasswordScreen extends React.Component {
     const { currPassword, newPasswordA, newPasswordB, error } = this.state;
 
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundLogoutWn}>
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           scrollEnabled={false}

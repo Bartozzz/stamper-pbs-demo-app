@@ -5,7 +5,7 @@ import colors from "../../constants/Colors";
 
 import InfoScreen from "./InfoScreen";
 
-const SuccessImage = require("../../assets/images/success.png");
+import images from "../../constants/images";
 
 class SuccessScreen extends React.Component {
   static navigationOptions = {
@@ -29,7 +29,7 @@ class SuccessScreen extends React.Component {
   render() {
     const { navigation } = this.props;
 
-    const image = navigation.getParam("image", SuccessImage);
+    const image = navigation.getParam("image", images.Success);
     const message = navigation.getParam("message", "Success!");
     const timeout = navigation.getParam("timeout", 2000);
     const screen = navigation.getParam("redirect", Routes.AUTH);

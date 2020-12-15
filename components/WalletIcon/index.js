@@ -2,7 +2,7 @@ import React from "react";
 
 import * as Styled from "./index.styled";
 
-import WalletImage from "../../assets/images/icons/wallet.png";
+import images from "../../constants/images";
 
 export const WalletIcon = ({ color, onPress }) => {
   return (
@@ -11,7 +11,7 @@ export const WalletIcon = ({ color, onPress }) => {
       onPress={onPress}
       testID="wallet-icon"
     >
-      <Styled.IconImage source={WalletImage} />
+      <Styled.IconImage source={images.Wallet} />
     </Styled.IconContainer>
   );
 };

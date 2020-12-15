@@ -36,9 +36,7 @@ import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
 import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
 
 // Assets:
-import BackgroundImage from "../../assets/backgrounds/wallet_wn.png";
-import MapLoader from "../../assets/loaders/map.gif";
-import CardAdd from "../../assets/success/card_add.gif";
+import images from "../../constants/images";
 
 const CardsContainer = styled.View`
   position: absolute;
@@ -94,7 +92,7 @@ const MapScreen = ({ navigation }) => {
             message: i18n.t("success.wallet.cardAdd"),
             height: 100,
             width: 88,
-            image: CardAdd,
+            image: images.CardAdd,
             timeout: 3000,
           })
           .catch(() => {
@@ -206,7 +204,7 @@ const MapScreen = ({ navigation }) => {
   if (currentLocation === null && reverseLocation === null) {
     return (
       <View style={[defaultStyles.container, defaultStyles.center]}>
-        <Image source={MapLoader} style={{ width: 150, height: 150 }} />
+        <Image source={images.MapLoader} style={{ width: 150, height: 150 }} />
       </View>
     );
   }
@@ -217,7 +215,7 @@ const MapScreen = ({ navigation }) => {
 
   // Fetched user location:
   return (
-    <Background source={BackgroundImage} disableScroll>
+    <Background source={images.BackgroundWalletWn} disableScroll>
       <MapHeader
         filters={filters}
         filter={filter}

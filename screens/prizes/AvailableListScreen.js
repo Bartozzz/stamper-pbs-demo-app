@@ -1,13 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  Image,
-  View,
-  ScrollView,
-  FlatList,
-  Text,
-} from "react-native";
+import { StyleSheet, Image, View, FlatList, Text } from "react-native";
 
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
@@ -24,8 +17,7 @@ import FocusableCard from "../../components/FocusableCard";
 
 import { getPrizes } from "../../store/reducers/prizes";
 
-const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
-const RewardsLoader = require("../../assets/loaders/rewards.gif");
+import images from "../../constants/images";
 
 class PrizesListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -181,7 +173,7 @@ class PrizesListScreen extends React.Component {
     const { isLoading, navigation } = this.props;
     const { selected, internet } = this.state;
     return (
-      <Background source={BackgroundImage} disableScroll>
+      <Background source={images.BackgroundPrizesWn} disableScroll>
         <PrizesHeader
           title={i18n.t("navigation.prizes.list")}
           navigation={navigation}
@@ -191,7 +183,10 @@ class PrizesListScreen extends React.Component {
 
         {isLoading ? (
           <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <Image source={RewardsLoader} style={{ width: 150, height: 150 }} />
+            <Image
+              source={images.RewardsLoader}
+              style={{ width: 150, height: 150 }}
+            />
           </View>
         ) : (
           this.renderList()

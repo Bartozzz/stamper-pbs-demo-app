@@ -40,7 +40,7 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
-const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
+import images from "../../constants/images";
 
 const UPLOAD_HEIGHT = 120;
 
@@ -188,7 +188,7 @@ class ProfileEditScreen extends React.Component {
     } = this.state;
 
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundLogoutWn}>
         <KeyboardAwareScrollView enableOnAndroid={true} extraScrollHeight={100}>
           <TouchableOpacity onPress={this.uploadImage}>
             <ImageBackground

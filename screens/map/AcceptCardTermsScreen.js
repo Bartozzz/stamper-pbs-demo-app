@@ -13,8 +13,7 @@ import * as Routes from "../../navigation";
 import i18n from "../../translations";
 import defaultStyles from "../../constants/Styles";
 
-const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const BalanceIcon = require("../../assets/images/icons/balance.png");
+import images from "../../constants/images";
 
 class MapAcceptCardTermsScreen extends React.Component {
   static navigationOptions = () => ({
@@ -45,7 +44,7 @@ class MapAcceptCardTermsScreen extends React.Component {
     const terms = this.props.navigation.getParam("termsAndConditionsUrl");
 
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundLogoutWn}>
         <StamperLogo style={styles.logo} />
 
         <Box.Container>
@@ -53,7 +52,7 @@ class MapAcceptCardTermsScreen extends React.Component {
             <Ionicons name="md-close" size={32} color="white" />
           </TouchableOpacity>
 
-          <Box.Icon width={107} height={85} source={BalanceIcon} />
+          <Box.Icon width={107} height={85} source={images.Balance} />
 
           <Box.Heading>{i18n.t("map.terms.accept", { title })}</Box.Heading>
 

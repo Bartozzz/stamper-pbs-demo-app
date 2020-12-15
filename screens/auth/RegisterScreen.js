@@ -31,7 +31,7 @@ import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 import { getErrorsFromResponse } from "../../helpers/errors";
 
-const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
+import images from "../../constants/images";
 
 class AuthRegisterScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -121,7 +121,7 @@ class AuthRegisterScreen extends React.Component {
     const { nickname, password, email, error } = this.state;
 
     return (
-      <Background source={BackgroundImage} disableScroll>
+      <Background source={images.BackgroundPasswordWn} disableScroll>
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           style={styles.regContainer}

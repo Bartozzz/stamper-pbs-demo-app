@@ -4,9 +4,7 @@ import normalize from "react-native-normalize";
 
 import i18n from "../../translations";
 
-const LogoImagePL = require("../../assets/logos/stamper_logo_2x.png");
-const LogoImageEN = require("../../assets/logos/stamper_logo_300px_en.png");
-const SygnetImage = require("../../assets/logos/stamper_sygnet_2x.png");
+import images from "../../constants/images";
 
 export const StamperLogo = ({ style, ...props }) => {
   const currentLocale = i18n.currentLocale();
@@ -15,9 +13,13 @@ export const StamperLogo = ({ style, ...props }) => {
   const height = props.height || normalize(70, "height");
 
   if (currentLocale.includes("pl")) {
-    return <Image source={LogoImagePL} style={[style, { width, height }]} />;
+    return (
+      <Image source={images.StamperLogoPl} style={[style, { width, height }]} />
+    );
   } else {
-    return <Image source={LogoImageEN} style={[style, { width, height }]} />;
+    return (
+      <Image source={images.StamperLogoEn} style={[style, { width, height }]} />
+    );
   }
 };
 
@@ -26,5 +28,7 @@ export const StamperSygnet = ({ style, ...props }) => {
   const width = size;
   const height = size;
 
-  return <Image source={SygnetImage} style={[style, { width, height }]} />;
+  return (
+    <Image source={images.StamperSygnet2x} style={[style, { width, height }]} />
+  );
 };

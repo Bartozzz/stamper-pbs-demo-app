@@ -21,8 +21,7 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
-const BackgroundImage = require("../../assets/backgrounds/logout_wn.png");
-const logoutIcon = require("../../assets/images/icons/next_icon.png");
+import images from "../../constants/images";
 
 class ProfileLogoutScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -59,9 +58,9 @@ class ProfileLogoutScreen extends React.Component {
 
   render() {
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundLogoutWn}>
         <View style={[defaultStyles.center, styles.logout]}>
-          <Image style={styles.logoutIcon} source={logoutIcon} />
+          <Image style={styles.logoutIcon} source={images.NextIcon} />
 
           <Text style={styles.logoutText}>{i18n.t("profile.logout.sure")}</Text>
         </View>

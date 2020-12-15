@@ -16,8 +16,7 @@ import CardsList from "../../components/screens/wallet/CardsList";
 
 import { getWallet } from "../../store/reducers/wallet";
 
-const BackgroundImage = require("../../assets/backgrounds/wallet_wn.png");
-const WalletLoader = require("../../assets/loaders/wallet.gif");
+import images from "../../constants/images";
 
 const height = 90;
 
@@ -129,7 +128,7 @@ class WalletCardsScreen extends React.Component {
     const { isLoading, navigation } = this.props;
     const { isCheckingIfCacheValid, internet } = this.state;
     return (
-      <Background source={BackgroundImage} disableScroll>
+      <Background source={images.BackgroundWalletWn} disableScroll>
         <WalletHeader
           title={i18n.t("navigation.wallet.cards")}
           navigation={navigation}
@@ -142,7 +141,7 @@ class WalletCardsScreen extends React.Component {
             {isLoading ? (
               <View style={[defaultStyles.grow, defaultStyles.center]}>
                 <Image
-                  source={WalletLoader}
+                  source={images.WalletLoader}
                   style={{ width: 150, height: 150 }}
                 />
               </View>

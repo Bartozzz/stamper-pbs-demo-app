@@ -4,7 +4,7 @@ import DashboardButton from "./";
 
 import colors from "../../constants/Colors";
 
-const Icon = require("../../assets/images/menu/map.png");
+import images from "../../constants/images";
 
 const getByTestID = (component, ID) => {
   return component.findWhere((node) => node.prop("testID") === `${ID}`);
@@ -16,7 +16,7 @@ describe("Dashboard Button", () => {
   describe("Render", () => {
     it("Shouldn`t have badge", () => {
       const component = mount(
-        <DashboardButton icon={Icon} badge={0}>
+        <DashboardButton icon={images.MenuImageMap} badge={0}>
           {exampleText}
         </DashboardButton>
       );

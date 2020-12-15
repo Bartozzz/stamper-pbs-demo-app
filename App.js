@@ -12,6 +12,7 @@ import useRollbar from "./helpers/hooks/useRollbar";
 import AppContainer from "./navigation/AppNavigator";
 import { store, persistor } from "./store";
 import { addLaunch } from "./store/reducers/review";
+import images from "./constants/images";
 
 const prefix = "https://getstamper.com/";
 
@@ -107,81 +108,8 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     return Promise.all([
-      // Local storage (redux):
-
       // Preload assets:
-      Asset.loadAsync([
-        require("./assets/images/icons/google.png"),
-        require("./assets/images/icons/apple.png"),
-        require("./assets/images/icons/facebook.png"),
-        require("./assets/images/welcome/1.png"),
-        require("./assets/images/welcome/2.png"),
-        require("./assets/images/welcome/3.png"),
-        require("./assets/images/welcome/4.png"),
-        require("./assets/backgrounds/card.png"),
-        // require("./assets/backgrounds/cards_wn.png"),
-        require("./assets/backgrounds/cards.png"),
-        // require("./assets/backgrounds/details_wn.png"),
-        require("./assets/backgrounds/details.png"),
-        // require("./assets/backgrounds/home_wn.png"),
-        require("./assets/backgrounds/home.png"),
-        // require("./assets/backgrounds/logout_wn.png"),
-        require("./assets/backgrounds/logout.png"),
-        // require("./assets/backgrounds/nearby_wn.png"),
-        require("./assets/backgrounds/nearby.png"),
-        // require("./assets/backgrounds/password_wn.png"),
-        require("./assets/backgrounds/password.png"),
-        // require("./assets/backgrounds/plain_wn.png"),
-        require("./assets/backgrounds/plain.png"),
-        // require("./assets/backgrounds/prizes_wn.png"),
-        require("./assets/backgrounds/prizes.png"),
-        // require("./assets/backgrounds/profile_wn.png"),
-        require("./assets/backgrounds/profile.png"),
-        // require("./assets/backgrounds/tos_wn.png"),
-        require("./assets/backgrounds/tos.png"),
-        // require("./assets/backgrounds/wallet_wn.png"),
-        require("./assets/backgrounds/wallet.png"),
-        require("./assets/logos/stamper_logo_300px.png"),
-        require("./assets/logos/stamper_logo_300px_en.png"),
-        require("./assets/logos/stamper_logo_2x.png"),
-        // require("./assets/logos/stamper_logo_3x.png"),
-        // require("./assets/logos/stamper_logo_4x.png"),
-        require("./assets/logos/stamper_sygnet_300px.png"),
-        require("./assets/logos/stamper_sygnet_2x.png"),
-        // require("./assets/logos/stamper_sygnet_3x.png"),
-        // require("./assets/logos/stamper_sygnet_4x.png"),
-        require("./assets/loaders/map.gif"),
-        require("./assets/loaders/rewards.gif"),
-        require("./assets/loaders/wallet.gif"),
-        require("./assets/images/delete.png"),
-        require("./assets/images/error.png"),
-        require("./assets/images/icon.png"),
-        require("./assets/images/plus.png"),
-        require("./assets/images/qr.png"),
-        require("./assets/images/splash.png"),
-        require("./assets/images/success.png"),
-        require("./assets/images/icons/already-in-wallet.png"),
-        require("./assets/images/icons/balance.png"),
-        require("./assets/images/icons/email.png"),
-        require("./assets/images/icons/location_indicator.png"),
-        require("./assets/images/icons/newsletter.png"),
-        require("./assets/images/icons/next_icon.png"),
-        require("./assets/images/icons/wallet.png"),
-        require("./assets/images/menu/map.png"),
-        require("./assets/images/menu/market.png"),
-        require("./assets/images/menu/market-inactive.png"),
-        require("./assets/images/menu/mode_cards.png"),
-        require("./assets/images/menu/mode_map.png"),
-        require("./assets/images/menu/prize.png"),
-        require("./assets/images/menu/profile.png"),
-        require("./assets/images/menu/scanner.png"),
-        require("./assets/images/menu/wallet.png"),
-        require("./assets/success/earned_reward.gif"),
-        require("./assets/success/received_reward.gif"),
-        require("./assets/success/card_add.gif"),
-        require("./assets/success/stamp_add.gif"),
-        require("./assets/success/stamp_subtract.gif"),
-      ]),
+      Asset.loadAsync(Object.values(images)),
 
       // Load fonts:
       Font.loadAsync({

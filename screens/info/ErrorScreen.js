@@ -2,7 +2,7 @@ import React from "react";
 
 import * as Routes from "../../navigation";
 import InfoScreen from "./InfoScreen";
-import ErrorImage from "../../assets/images/error.png";
+import images from "../../constants/images";
 
 class ErrorScreen extends React.Component {
   static navigationOptions = {
@@ -26,7 +26,7 @@ class ErrorScreen extends React.Component {
   render() {
     const { navigation } = this.props;
 
-    const image = navigation.getParam("image", ErrorImage);
+    const image = navigation.getParam("image", images.Error);
     const message = navigation.getParam("message", "Error!");
     const timeout = navigation.getParam("timeout", 2000);
     const screen = navigation.getParam("redirect", Routes.AUTH);

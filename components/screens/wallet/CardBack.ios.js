@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components/native";
 
-const DeleteImage = require("../../../assets/images/delete.png");
+import images from "../../../constants/images";
 
 const height = 90;
 
@@ -26,7 +26,7 @@ const ItemRemove = styled.TouchableOpacity`
 `;
 
 const RemoveImage = styled.Image.attrs((props) => ({
-  source: DeleteImage,
+  source: images.Delete,
 }))`
   width: 40px;
   height: 40px;

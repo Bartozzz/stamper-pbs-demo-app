@@ -16,7 +16,7 @@ import i18n from "../../translations";
 import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 
-const BackgroundImage = require("../../assets/backgrounds/password_wn.png");
+import images from "../../constants/images";
 
 class ResetPasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -66,7 +66,7 @@ class ResetPasswordScreen extends React.Component {
     const { email, error } = this.state;
 
     return (
-      <Background source={BackgroundImage} disableScroll>
+      <Background source={images.BackgroundPassword} disableScroll>
         <ScrollView style={styles.loginContainer}>
           {error.other ? (
             <Error message={i18n.t("errors.auth.unauthorized")} />

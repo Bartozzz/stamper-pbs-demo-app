@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
-import LocationIndicator from "../../assets/images/icons/location_indicator.png";
+import images from "../../constants/images";
 
 export const Indicator = styled.Image.attrs(() => ({
-  source: LocationIndicator,
+  source: images.LocationIndicator,
 }))`
   z-index: 1;
   width: 120px;

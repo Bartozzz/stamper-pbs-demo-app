@@ -10,7 +10,7 @@ import Url from "../../constants/Urls";
 import defaultStyles from "../../constants/Styles";
 import axios from "../../store/axios";
 
-const BackgroundImage = require("../../assets/backgrounds/tos_wn.png");
+import images from "../../constants/images";
 
 class NewsletterTermsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -57,7 +57,7 @@ class NewsletterTermsScreen extends React.Component {
     const { loading, content, error } = this.state;
 
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundTOSWn}>
         <TermsAsHTML loading={loading} error={error} content={content} />
       </Background>
     );

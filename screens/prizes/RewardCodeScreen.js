@@ -25,7 +25,7 @@ import HeaderHamburger from "../../components/HeaderHamburger";
 import HeaderBack from "../../components/HeaderBack";
 import Background from "../../components/Background";
 
-const BackgroundImage = require("../../assets/backgrounds/prizes_wn.png");
+import images from "../../constants/images";
 
 class RewardCodeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -250,7 +250,7 @@ class RewardCodeScreen extends React.Component {
 
   render() {
     return (
-      <Background source={BackgroundImage} disableScroll>
+      <Background source={images.BackgroundPrizesWn} disableScroll>
         {this.state.generatedCode
           ? this.renderGeneratedCode()
           : this.state.selectedDiscountProvider

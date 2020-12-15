@@ -11,8 +11,7 @@ import * as Routes from "../../navigation";
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
 
-const BackgroundImage = require("../../assets/backgrounds/profile_wn.png");
-const EmailImage = require("../../assets/images/icons/email.png");
+import images from "../../constants/images";
 
 class ProfileMenuScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -30,7 +29,7 @@ class ProfileMenuScreen extends React.Component {
       return <NoInternet />;
     }
     return (
-      <Background source={BackgroundImage}>
+      <Background source={images.BackgroundProfileWn}>
         <StamperLogo style={styles.logo} />
 
         <View style={styles.menu}>
@@ -38,7 +37,7 @@ class ProfileMenuScreen extends React.Component {
           <Text style={styles.login}>{nickname}</Text>
 
           <View style={defaultStyles.row}>
-            <Image style={styles.emailIcon} source={EmailImage} />
+            <Image style={styles.emailIcon} source={images.Email} />
             <Text style={styles.email}>{email}</Text>
           </View>
 

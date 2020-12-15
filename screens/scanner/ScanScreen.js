@@ -18,7 +18,7 @@ import { getParameterByName } from "../../helpers/urls";
 import { getImageForMessage } from "../../helpers/scanner";
 import colors from "../../constants/Colors";
 
-const SpinnerImage = require("../../assets/loaders/spinner.gif");
+import images from "../../constants/images";
 
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -190,10 +190,7 @@ class ScannerScanScreen extends React.Component {
           onBarCodeScanned={this.onBarCodeRead}
           style={[StyleSheet.absoluteFill, styles.scannerCamera]}
         >
-          <Image
-            style={styles.scannerImage}
-            source={require("../../assets/images/qr.png")}
-          />
+          <Image style={styles.scannerImage} source={images.Qr} />
         </Camera>
       );
     }
@@ -213,7 +210,7 @@ class ScannerScanScreen extends React.Component {
           style={[defaultStyles.container, { backgroundColor: colors.primary }]}
         >
           <View style={[defaultStyles.grow, defaultStyles.center]}>
-            <Image source={SpinnerImage} style={{ width: 45, height: 45 }} />
+            <Image source={images.Spinner} style={{ width: 45, height: 45 }} />
           </View>
         </View>
       );

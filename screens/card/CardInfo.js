@@ -26,7 +26,7 @@ import Button from "../../components/Button";
 import { formatDate } from "../../helpers/date";
 import { SafeAreaView } from "react-navigation";
 
-const BackgroundImage = require("../../assets/backgrounds/details_wn.png");
+import images from "../../constants/images";
 
 class CardInfoScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -86,7 +86,7 @@ class CardInfoScreen extends React.Component {
 
     return (
       <SafeAreaView style={defaultStyles.container}>
-        <Background scrollsToTop={true} source={BackgroundImage}>
+        <Background scrollsToTop={true} source={images.BackgroundDetails}>
           <View style={styles.carousel}>
             <Carousel
               ref={(carousel) => (this.carouselRef = carousel)}
