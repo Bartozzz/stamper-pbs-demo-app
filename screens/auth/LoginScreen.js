@@ -23,8 +23,6 @@ import {
   loginExternal,
   setNotificationsToken,
   registerExternal,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
 } from "../../store/reducers/auth";
 
 import i18n from "../../translations";

@@ -24,7 +24,6 @@ import InputWithLabel from "../../components/InputWithLabel";
 import Checkbox, { CheckBoxLabel } from "../../components/Checkbox";
 
 import {
-  EMAIL,
   updatePhoto,
   updateProfile,
   setNickname,

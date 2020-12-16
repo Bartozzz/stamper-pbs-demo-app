@@ -32,8 +32,7 @@ import NoInternet from "../../components/NoInternet";
 
 // Store:
 import { getRegion } from "../../store/reducers/map";
-import { addCard, FORCE_REFRESH_WALLET } from "../../store/reducers/wallet";
-import { FORCE_REFRESH_PRIZES } from "../../store/reducers/prizes";
+import { addCard } from "../../store/reducers/wallet";
 
 // Assets:
 import images from "../../constants/images";

@@ -1,11 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as Analytics from "expo-firebase-analytics";
 
@@ -18,12 +13,7 @@ import InputWithIcon from "../../components/InputWithIcon";
 import HeaderTitle from "../../components/HeaderTitle";
 import HeaderBack from "../../components/HeaderBack";
 
-import {
-  register,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
-  setNotificationsToken,
-} from "../../store/reducers/auth";
+import { register, setNotificationsToken } from "../../store/reducers/auth";
 
 import i18n from "../../translations";
 import * as Routes from "../../navigation";

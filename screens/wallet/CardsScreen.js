@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, View, ScrollView } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import Toast from "react-native-easy-toast";
 import * as Analytics from "expo-firebase-analytics";
 

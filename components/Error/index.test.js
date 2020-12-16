@@ -14,7 +14,7 @@ describe("Error", () => {
     const component = mount(<Error />);
     const errorMessage = getByTestID(component, "error-message");
 
-    expect(errorMessage).toBe({});
+    expect(errorMessage).toEqual({});
   });
 
   it("Should show an error", () => {

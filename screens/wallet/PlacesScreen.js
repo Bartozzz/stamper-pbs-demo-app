@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, ScrollView, View, FlatList, Image } from "react-native";
+import { StyleSheet, View, FlatList, Image } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
 import * as Routes from "../../navigation";

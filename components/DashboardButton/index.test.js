@@ -27,13 +27,13 @@ describe("Dashboard Button", () => {
 
       expect(button).toBeTruthy();
       expect(badge).not.toBe();
-      expect(icon.last().prop("source")).toBe(Icon);
+      expect(icon.last().prop("source")).toBe(images.MenuImageMap);
       expect(text.last().text()).toBe("Test");
     });
 
     it("Should have badge", () => {
       const component = mount(
-        <DashboardButton icon={Icon} badge={1}>
+        <DashboardButton icon={images.MenuImageMap} badge={1}>
           {exampleText}
         </DashboardButton>
       );
@@ -44,7 +44,7 @@ describe("Dashboard Button", () => {
 
       expect(button).toBeTruthy();
       expect(badge).toBeTruthy();
-      expect(icon.last().prop("source")).toBe(Icon);
+      expect(icon.last().prop("source")).toBe(images.MenuImageMap);
       expect(text.last().text()).toBe("Test");
     });
   });

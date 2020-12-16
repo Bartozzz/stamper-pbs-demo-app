@@ -19,7 +19,6 @@ export const OrLoginWith = styled.Text`
   padding-vertical: 5%;
 `;
 
-
 export const ExternalLoginContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -30,14 +29,14 @@ export const ExternalLoginContainer = styled.View`
 `;
 
 export const LogInWith = styled.TouchableOpacity`
-  background: #FFFFFF;
+  background: #ffffff;
   height: 50px;
   width: 50px;
   border-radius: 7px;
 `;
 
 export const Icon = styled.Image.attrs({
-  resizeMode: "contain"
+  resizeMode: "contain",
 })`
   height: 22.5px;
   width: 22.5px;
@@ -46,4 +45,3 @@ export const Icon = styled.Image.attrs({
   align-self: center;
   justify-content: center;
 `;
-

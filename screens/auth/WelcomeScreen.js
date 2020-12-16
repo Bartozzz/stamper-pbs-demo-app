@@ -22,8 +22,6 @@ import {
   setNotificationsToken,
   registerExternal,
   registerApple,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
 } from "../../store/reducers/auth";
 
 import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";

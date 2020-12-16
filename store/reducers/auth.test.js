@@ -22,8 +22,6 @@ import reducer, {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   CHANGE_PASSWORD_REQUEST,
-  CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAIL,
   authorize,
   login,
   loginExternal,
