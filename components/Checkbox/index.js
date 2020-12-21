@@ -1,6 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
 export const CheckBoxLabel = Styled.CheckBoxLabel;
@@ -16,23 +17,25 @@ export const Checkbox = ({ label, checked, onChange }) => {
   }, [onChange, check]);
 
   return (
-    <Styled.Container>
-      <Styled.CheckboxComponent
-        checked={check}
-        onPress={handlePress}
-        testID="checkbox"
-      >
-        {check && (
-          <Ionicons
-            testID="checked-icon"
-            name="md-checkmark"
-            size={14}
-            color="white"
-          />
-        )}
-      </Styled.CheckboxComponent>
-      {label}
-    </Styled.Container>
+    <Theme>
+      <Styled.Container>
+        <Styled.CheckboxComponent
+          checked={check}
+          onPress={handlePress}
+          testID="checkbox"
+        >
+          {check && (
+            <Ionicons
+              testID="checked-icon"
+              name="md-checkmark"
+              size={14}
+              color="white"
+            />
+          )}
+        </Styled.CheckboxComponent>
+        {label}
+      </Styled.Container>
+    </Theme>
   );
 };
 

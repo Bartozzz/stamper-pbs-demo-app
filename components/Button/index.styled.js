@@ -1,6 +1,5 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import colors from "../../constants/Colors";
 import styled from "styled-components/native";
 
 export const Button = styled.View`
@@ -8,34 +7,37 @@ export const Button = styled.View`
   align-items: center;
 
   width: ${({ full }) => (full ? "100%" : "auto")};
-  height: 48px;
+  height: ${(props) => props.theme.height};
 
-  border-radius: 7px;
+  border-radius: ${(props) => props.theme.borderRadius};
 `;
 
 export const ButtonText = styled.Text`
   font-size: 16px;
-  font-family: poppins-bold;
+  font-family: ${(props) => props.theme.fontFamily};
 
-  color: ${colors.color};
+  color: ${(props) =>
+    props.disabled
+      ? props.theme.disabled.textColor
+      : props.theme.normal.textColor};
   text-align: center;
   text-transform: uppercase;
-  text-shadow-color: ${colors.shadow};
+  text-shadow-color: ${(props) => props.theme.shadowColor};
   text-shadow-offset: 1px 1px;
   text-shadow-radius: 2px;
 `;
 
-export const ActivityIndicator = styled.ActivityIndicator.attrs(() => ({
+export const ActivityIndicator = styled.ActivityIndicator.attrs((props) => ({
   size: "small",
-  color: colors.color,
+  color: props.theme.disabled.textColor,
 }))``;
 
 export const ButtonDisabled = styled(Button)`
-  background-color: ${colors.disabled};
+  background-color: ${(props) => props.theme.disabled.backgroundColor};
 `;
 
 export const ButtonEnabled = styled((props) => (
   <Button {...props} as={TouchableOpacity} />
 ))`
-  background-color: ${colors.primary};
+  background-color: ${(props) => props.theme.normal.backgroundColor};
 `;

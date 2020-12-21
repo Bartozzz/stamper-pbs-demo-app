@@ -1,7 +1,5 @@
 import styled from "styled-components/native";
 
-import colors from "../../constants/Colors";
-
 export const Container = styled.View`
   align-items: center;
 
@@ -21,17 +19,17 @@ export const CheckboxComponent = styled.TouchableOpacity`
 
   width: 20px;
   height: 20px;
-  border-radius: 20px;
+  border-radius: ${(props) => props.theme.borderRadius};
 
   border-width: 1.5px;
   border-style: solid;
-  border-color: ${colors.inputBorder};
+  border-color: ${(props) => props.theme.borderColor};
 
-  ${({ checked }) =>
-    checked &&
+  ${(props) =>
+    props.checked &&
     `
-    border-color: ${colors.primary};
-    background-color: ${colors.primary};
+    border-color: ${props.theme.backgroundColor};
+    background-color: ${props.theme.backgroundColor};
   `};
 `;
 
@@ -39,5 +37,5 @@ export const CheckBoxLabel = styled.Text`
   margin-right: 2px;
 
   font-size: 11.5px;
-  color: ${colors.link};
+  color: ${(props) => props.theme.labelColor};
 `;
