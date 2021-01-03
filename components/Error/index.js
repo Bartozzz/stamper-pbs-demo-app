@@ -1,6 +1,7 @@
 import React from "react";
 
 import i18n from "../../translations";
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
 const getErrorMessage = (error) => {
@@ -23,12 +24,14 @@ export const Error = ({ message }) => {
   }
 
   return (
-    <Styled.ErrorContainer>
-      <Styled.ErrorHead>{i18n.t("error")}:</Styled.ErrorHead>
-      <Styled.ErrorText testID="error-message">
-        {getErrorMessage(message)}
-      </Styled.ErrorText>
-    </Styled.ErrorContainer>
+    <Theme>
+      <Styled.ErrorContainer>
+        <Styled.ErrorHead>{i18n.t("error")}:</Styled.ErrorHead>
+        <Styled.ErrorText testID="error-message">
+          {getErrorMessage(message)}
+        </Styled.ErrorText>
+      </Styled.ErrorContainer>
+    </Theme>
   );
 };
 
