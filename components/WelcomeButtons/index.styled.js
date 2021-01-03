@@ -14,7 +14,7 @@ export const LoginRegisterButton = styled(Button)`
 `;
 
 export const OrLoginWith = styled.Text`
-  color: ${colors.color};
+  color: ${({ theme }) => theme.orLoginWithColor};
   text-align: center;
   padding-vertical: 5%;
 `;
@@ -29,7 +29,7 @@ export const ExternalLoginContainer = styled.View`
 `;
 
 export const LogInWith = styled.TouchableOpacity`
-  background: #ffffff;
+  background-color: ${({ theme }) => theme.logInWithBackgroundColor};
   height: 50px;
   width: 50px;
   border-radius: 7px;
@@ -40,7 +40,7 @@ export const Icon = styled.Image.attrs({
 })`
   height: 22.5px;
   width: 22.5px;
-
+  tint-color: ${({ theme }) => theme.iconTint};
   flex: 1;
   align-self: center;
   justify-content: center;

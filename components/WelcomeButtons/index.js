@@ -1,6 +1,7 @@
 import React from "react";
 import { Platform } from "react-native";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 import i18n from "../../translations";
 
@@ -14,7 +15,7 @@ const WelcomeButtons = ({
   loginWithGoogle,
 }) => {
   return (
-    <>
+    <Theme>
       <Styled.Container>
         <Styled.LoginRegisterButton
           testID="welcome-login"
@@ -43,7 +44,7 @@ const WelcomeButtons = ({
           <Styled.Icon source={images.Google} />
         </Styled.LogInWith>
       </Styled.ExternalLoginContainer>
-    </>
+    </Theme>
   );
 };
 

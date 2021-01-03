@@ -1,8 +1,6 @@
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 
-import colors from "../../constants/Colors";
-
 export const Background = styled.ImageBackground`
   flex: 1;
   resize-mode: cover;
@@ -17,13 +15,13 @@ export const ImageComponent = styled.Image`
 
 export const TitleComponent = styled.Text`
   font-size: 24px;
-  font-family: poppins-bold;
+  font-family: ${({ theme }) => theme.titleFontFamily};
 
-  color: ${colors.color};
+  color: ${({ theme }) => theme.titleColor};
   padding-horizontal: 5%;
   text-align: center;
   text-transform: uppercase;
-  text-shadow-color: ${colors.shadow};
+  text-shadow-color: ${({ theme }) => theme.titleShadow};
   text-shadow-offset: 1px 1px;
   text-shadow-radius: 2px;
 
@@ -31,7 +29,7 @@ export const TitleComponent = styled.Text`
 `;
 
 export const SubtitleComponent = styled.Text`
-  color: ${colors.info};
+  color: ${({ theme }) => theme.subtitleColor};
   text-align: center;
   margin-top: 10px;
   align-self: center;
