@@ -6,6 +6,7 @@ export default {
     background100: "#001333",
 
     white: "#ffffff",
+    black: "#000000",
     link: "#709BE7",
 
     primary: "#0046F4",

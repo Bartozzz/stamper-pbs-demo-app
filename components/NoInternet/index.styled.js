@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import Colors from "../../constants/Colors";
 
 export const Container = styled.View`
   flex: 0.8;
@@ -18,13 +17,13 @@ export const Image = styled.Image.attrs((props) => ({
 export const Title = styled.Text`
   margin-top: 5%;
 
-  color: #ffffff;
+  color: ${({ theme }) => theme.titleColor};
   font-size: 26px;
 `;
 
 export const Subtitle = styled.Text`
   margin-top: 2%;
 
-  color: ${Colors.info};
+  color: ${({ theme }) => theme.subtitleColor};
   font-size: 18px;
 `;
