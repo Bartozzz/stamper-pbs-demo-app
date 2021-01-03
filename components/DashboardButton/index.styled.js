@@ -1,6 +1,4 @@
 import styled from "styled-components/native";
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
 
 export const DashboardButton = styled.TouchableOpacity.attrs({
   activeOpacity: 1,
@@ -8,20 +6,25 @@ export const DashboardButton = styled.TouchableOpacity.attrs({
   flex: 1;
   margin: 10px;
 
-  border-radius: 8px;
-  border-width: 1px;
+  border-radius: ${(props) => props.theme.borderRadius};
+  border-width: ${(props) => props.theme.borderWidth};
   border-style: solid;
-  border-color: ${({ focus }) => (focus ? colors.primary : colors.border)};
-  background-color: ${({ focus }) =>
-    focus ? colors.highlight : "transparent"};
+  border-color: ${(props) =>
+    props.focus
+      ? props.theme.focus.borderColor
+      : props.theme.normal.borderColor};
+  background-color: ${(props) =>
+    props.focus
+      ? props.theme.focus.backgroundColor
+      : props.theme.normal.backgroundColor};
 `;
 
 export const DashboardButtonText = styled.Text`
   margin-bottom: 20px;
 
-  color: ${colors.color};
-  font-size: 14px;
-  font-family: poppins-regular;
+  color: ${(props) => props.theme.text.color};
+  font-size: ${(props) => props.theme.text.fontSize};
+  font-family: ${(props) => props.theme.text.fontFamily};
   text-align: center;
 `;
 
@@ -47,11 +50,11 @@ export const BadgeContainer = styled.View`
   height: 22px;
 
   border-radius: 22px;
-  background-color: #00d1ff;
+  background-color: ${(props) => props.theme.badge.backgroundColor};
 `;
 
 export const BadgeText = styled.Text`
-  color: ${colors.color};
-  font-family: ${layout.fontHead};
+  color: ${(props) => props.theme.badge.textColor};
+  font-family: ${(props) => props.theme.badge.fontFamily};
   text-align: center;
 `;

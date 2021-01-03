@@ -12,6 +12,7 @@ export default {
     disabled: "#95989A",
     highlight: "#020d1e",
     label: "#3e619e",
+    badge: "#00d1ff",
 
     shadow: "rgba(0, 0, 0, 0.16)",
 
