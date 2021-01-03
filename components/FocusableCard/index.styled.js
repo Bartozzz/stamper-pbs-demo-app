@@ -7,9 +7,15 @@ export const CardContainer = styled.TouchableOpacity`
   margin-horizontal: 15px;
   margin-vertical: 10px;
 
-  border-width: 1px;
-  border-radius: 10px;
+  border-width: ${({ theme }) => theme.borderWidth};
+  border-radius: ${({ theme }) => theme.borderRadius};
   border-style: solid;
-  border-color: ${({ focused }) => (focused ? "#0046F5" : "#203451")};
-  background-color: ${({ focused }) => (focused ? "#001333" : "#203451")};
+  border-color: ${(props) =>
+    props.focused
+      ? props.theme.focused.borderColor
+      : props.theme.idle.borderColor};
+  background-color: ${(props) =>
+    props.focused
+      ? props.theme.focused.backgroundColor
+      : props.theme.idle.backgroundColor};
 `;

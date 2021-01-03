@@ -3,12 +3,16 @@ import getFont from "../helpers/getFont";
 export default {
   colors: {
     background: "#001232",
+    background100: "#001333",
 
     white: "#ffffff",
     link: "#709BE7",
 
     primary: "#0046F4",
+
     border: "#233055",
+    border100: "#203451",
+
     disabled: "#95989A",
     highlight: "#020d1e",
     label: "#3e619e",

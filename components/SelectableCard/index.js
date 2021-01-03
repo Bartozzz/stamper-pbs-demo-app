@@ -1,4 +1,6 @@
 import React from "react";
+
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
 export const SelectableCard = ({
@@ -21,9 +23,15 @@ export const SelectableCard = ({
   });
 
   return (
-    <Styled.CardContainer {...props} selected={selected} onPress={handlePress}>
-      {selected ? renderBack() : renderFront()}
-    </Styled.CardContainer>
+    <Theme>
+      <Styled.CardContainer
+        {...props}
+        selected={selected}
+        onPress={handlePress}
+      >
+        {selected ? renderBack() : renderFront()}
+      </Styled.CardContainer>
+    </Theme>
   );
 };
 
