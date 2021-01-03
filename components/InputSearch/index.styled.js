@@ -2,9 +2,6 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import normalize from "react-native-normalize";
 
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
-
 export const InputContainer = styled.View`
   flex: 1;
   flex-direction: row;
@@ -17,14 +14,14 @@ export const InputContainer = styled.View`
   height: 40px;
   width: ${normalize(265)}px;
 
-  border-radius: 10px;
-  background-color: #1a5bf1;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const InputIcon = styled(Ionicons).attrs((props) => ({
   name: "ios-search",
   size: 16,
-  color: colors.info,
+  color: props.theme.textColor,
 }))`
   padding-horizontal: 10px;
 `;
@@ -32,13 +29,13 @@ export const InputIcon = styled(Ionicons).attrs((props) => ({
 export const Input = styled.TextInput.attrs((props) => ({
   underlineColorAndroid: "transparent",
   autoCorrect: false,
-  placeholderTextColor: colors.info,
+  placeholderTextColor: props.theme.textColor,
 }))`
   flex: 1;
   padding-right: 10px;
   padding-left: 0px;
 
   font-size: 14px;
-  font-family: ${layout.fontText};
-  color: ${colors.info};
+  font-family: ${({ theme }) => theme.fontFamily};
+  color: ${({ theme }) => theme.textColor};
 `;
