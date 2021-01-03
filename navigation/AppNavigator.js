@@ -51,16 +51,6 @@ const defaultNavigationOptions = {
     backgroundColor: colors.primary,
   },
 
-  headerTitleStyle: {
-    flex: 1,
-
-    fontFamily: "poppins-semi-bold",
-    fontSize: 17,
-
-    alignSelf: "center",
-    textAlign: "center",
-    justifyContent: "center",
-  },
   /* For some reasons, stable builds crash after performing
   the back gesture on iOS. importing the react-native-gesture-handler
   as it is mentioned in some GitHub Issues doesn't help */

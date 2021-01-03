@@ -1,5 +1,6 @@
 import React from "react";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 import * as Routes from "../../navigation";
 
@@ -13,9 +14,11 @@ export const HeaderHamburger = ({ onPress, navigation, props }) => {
   }, [onPress, navigation]);
 
   return (
-    <Styled.Hamburger onPress={handlePress}>
-      <Styled.HamburgerIcon />
-    </Styled.Hamburger>
+    <Theme>
+      <Styled.Hamburger onPress={handlePress}>
+        <Styled.HamburgerIcon />
+      </Styled.Hamburger>
+    </Theme>
   );
 };
 

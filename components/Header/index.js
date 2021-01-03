@@ -1,12 +1,15 @@
 import React from "react";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
 export const Header = ({ style, title }) => {
   return (
-    <Styled.Header style={style}>
-      <Styled.Title>{title}</Styled.Title>
-    </Styled.Header>
+    <Theme>
+      <Styled.Header style={style}>
+        <Styled.Title>{title}</Styled.Title>
+      </Styled.Header>
+    </Theme>
   );
 };
 

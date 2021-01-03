@@ -1,5 +1,6 @@
 import React from "react";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 import * as Routes from "../../navigation";
 
@@ -13,9 +14,11 @@ export const HeaderBack = ({ onPress, navigation, ...props }) => {
   }, [onPress, navigation]);
 
   return (
-    <Styled.Back onPress={handlePress}>
-      <Styled.BackIcon />
-    </Styled.Back>
+    <Theme>
+      <Styled.Back onPress={handlePress}>
+        <Styled.BackIcon />
+      </Styled.Back>
+    </Theme>
   );
 };
 

@@ -11,8 +11,8 @@ export const Hamburger = styled.TouchableOpacity`
   align-self: flex-start;
 `;
 
-export const HamburgerIcon = styled(Ionicons).attrs((props) => ({
-  color: "white",
+export const HamburgerIcon = styled(Ionicons).attrs(({ theme }) => ({
+  color: theme.iconColor,
   name: "md-home",
   size: hamburgerIconSize,
 }))`

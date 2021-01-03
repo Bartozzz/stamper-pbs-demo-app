@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 
-import colors from "../../constants/Colors";
 import defaultStyles from "../../constants/Styles";
 
 export const Header = styled.View`
@@ -12,7 +11,7 @@ export const Header = styled.View`
   padding-vertical: 12px;
   padding-horizontal: 20px;
 
-  background-color: ${colors.primary};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const Title = styled.Text.attrs(() => ({

@@ -6,8 +6,8 @@ export const Button = styled.TouchableOpacity`
   align-self: flex-start;
 `;
 
-export const Icon = styled(Ionicons).attrs(() => ({
-  color: "white",
+export const Icon = styled(Ionicons).attrs(({ theme }) => ({
+  color: theme.iconColor,
   name: "ios-search",
   size: Platform.select({
     ios: 32,

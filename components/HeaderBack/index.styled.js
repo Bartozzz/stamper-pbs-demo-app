@@ -16,8 +16,8 @@ export const Back = styled.TouchableOpacity`
   align-self: flex-start;
 `;
 
-export const BackIcon = styled(Ionicons).attrs((props) => ({
-  color: "white",
+export const BackIcon = styled(Ionicons).attrs(({ theme }) => ({
+  color: theme.iconColor,
   name: backIconName,
   size: backIconSize,
 }))`

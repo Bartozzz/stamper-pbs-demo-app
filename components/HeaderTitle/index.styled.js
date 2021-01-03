@@ -1,28 +1,22 @@
-import { Platform, StyleSheet } from "react-native";
+import styled, { css } from "styled-components/native";
+import { Platform } from "react-native";
 
-import colors from "../../constants/Colors";
+export const HeaderTitle = styled.Text`
+  ${Platform.select({
+    android: css`
+      margin-bottom: 9px;
+    `,
+    ios: css`
+      margin-vertical: 6px;
+    `,
+  })}
 
-// For some reasons it doesn't work with styled-components
-export const HeaderTitle = StyleSheet.create({
-  styles: {
-    ...Platform.select({
-      android: {
-        marginBottom: 9,
-      },
-      ios: {
-        // Standard header margin:
-        marginVertical: 6,
-      },
-    }),
+  color: ${({ theme }) => theme.textColor};
+  font-family: ${({ theme }) => theme.fontFamily};;
+  font-size: ${Platform.select({
+    android: 20,
+    ios: 26,
+  })}px;
 
-    color: colors.color,
-    fontFamily: "poppins-bold",
-    fontSize: Platform.select({
-      android: 20,
-      ios: 26,
-    }),
-
-    // Align to the bottom of the container:
-    alignSelf: "flex-end",
-  },
-});
+  align-self: flex-end;
+`;
