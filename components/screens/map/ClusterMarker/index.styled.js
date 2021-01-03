@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import colors from "../../../../constants/Colors";
 
 export const Container = styled.View`
   flex-direction: column;
@@ -18,15 +17,15 @@ export const Bubble = styled.View`
 
   border-radius: 20px;
   border-width: 1px;
-  border-color: ${colors.primary};
+  border-color: ${({ theme }) => theme.borderColor};
 
-  background-color: ${colors.primary};
+  background-color: ${({ theme }) => theme.backgroundColor};
 
   z-index: 2;
 `;
 
 export const Count = styled.Text`
-  color: #fff;
+  color: ${({ theme }) => theme.countColor};
   font-size: 13px;
   font-weight: bold;
 `;

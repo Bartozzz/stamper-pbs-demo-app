@@ -1,0 +1,24 @@
+import React from "react";
+import { ThemeProvider } from "styled-components/native";
+
+import theme from "../../../../constants/theme";
+
+export const Theme = ({ children }) => {
+  return (
+    <ThemeProvider
+      theme={{
+        backgroundColor: theme.colors.background,
+        item: {
+          fontFamily: theme.fontText,
+          inactiveColor: theme.colors.disabled,
+          activeColor: theme.colors.white,
+        },
+        itemBarColor: theme.colors.white,
+      }}
+    >
+      {children}
+    </ThemeProvider>
+  );
+};
+
+export default Theme;

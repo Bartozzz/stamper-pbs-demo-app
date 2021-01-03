@@ -1,8 +1,5 @@
 import styled from "styled-components/native";
 
-import colors from "../../../../constants/Colors";
-import layout from "../../../../constants/Layout";
-
 export const Header = styled.ScrollView.attrs((props) => ({
   horizontal: true,
 }))`
@@ -10,7 +7,7 @@ export const Header = styled.ScrollView.attrs((props) => ({
   padding-bottom: 10px;
   padding-horizontal: 20px;
 
-  background-color: ${colors.background};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const Item = styled.TouchableOpacity`
@@ -21,14 +18,14 @@ export const Item = styled.TouchableOpacity`
 `;
 
 export const ItemText = styled.Text`
-  font-family: ${layout.fontText};
+  font-family: ${({ theme }) => theme.item.fontFamily};
   font-size: 18px;
-  color: #95989a;
+  color: ${({ theme }) => theme.item.inactiveColor};
 
-  ${({ active }) =>
-    active &&
+  ${(props) =>
+    props.active &&
     `
-      color: ${colors.color};
+      color: ${props.theme.item.activeColor};
     `};
 `;
 
@@ -41,7 +38,7 @@ export const ItemBar = styled.View`
   opacity: 0;
   border-radius: 2px;
 
-  background-color: ${colors.color};
+  background-color: ${({ theme }) => theme.itemBarColor};
 
   ${({ active }) =>
     active &&
