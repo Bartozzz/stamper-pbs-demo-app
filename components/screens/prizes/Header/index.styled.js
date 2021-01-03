@@ -8,31 +8,31 @@ export const Tabs = styled.View`
   padding-vertical: 13px;
   padding-horizontal: 20px;
 
-  background-color: ${colors.primary};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const AvailablePrizesText = styled.Text`
-  font-family: poppins-regular;
+  font-family: ${({ theme }) => theme.idleFontFamily};
   font-size: 18px;
-  color: ${colors.color};
+  color: ${({ theme }) => theme.textColor};
 
-  ${({ active }) =>
-    active &&
+  ${(props) =>
+    props.active &&
     `
-      font-family: poppins-bold;
+      font-family: ${props.theme.activeFontFamily};
     `};
 `;
 
 export const ReceivedPrizesText = styled.Text`
   text-align: right;
 
-  font-family: poppins-regular;
+  font-family: ${({ theme }) => theme.idleFontFamily};
   font-size: 18px;
-  color: ${colors.color};
+  color: ${({ theme }) => theme.textColor};
 
-  ${({ active }) =>
-    active &&
+  ${(props) =>
+    props.active &&
     `
-      font-family: poppins-bold;
+      font-family: ${props.theme.activeFontFamily};
     `};
 `;
