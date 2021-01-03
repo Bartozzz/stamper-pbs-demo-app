@@ -15,7 +15,7 @@ export const InputContainer = styled.View`
   justify-content: center;
   align-items: center;
 
-  background-color: ${colors.primary};
+  background-color: ${({ theme }) => theme.backgroundColor};
 
   z-index: 3;
 `;
@@ -23,7 +23,7 @@ export const InputContainer = styled.View`
 export const InputIcon = styled(Ionicons).attrs((props) => ({
   name: "ios-search",
   size: 24,
-  color: colors.color,
+  color: props.theme.iconColor,
 }))`
   padding-horizontal: 15px;
 `;
@@ -31,7 +31,7 @@ export const InputIcon = styled(Ionicons).attrs((props) => ({
 export const InputClose = styled(Ionicons).attrs((props) => ({
   name: "ios-close-circle-outline",
   size: 24,
-  color: colors.info,
+  color: props.theme.closeColor,
 }))`
   padding-horizontal: 15px;
 `;
@@ -39,13 +39,13 @@ export const InputClose = styled(Ionicons).attrs((props) => ({
 export const Input = styled.TextInput.attrs((props) => ({
   underlineColorAndroid: "transparent",
   autoCorrect: false,
-  placeholderTextColor: colors.color,
+  placeholderTextColor: props.theme.placeholderColor,
 }))`
   flex: 1;
   padding-right: 10px;
   padding-left: 0px;
 
   font-size: 14px;
-  font-family: ${layout.fontText};
-  color: ${colors.color};
+  font-family: ${({ theme }) => theme.fontFamily};
+  color: ${({ theme }) => theme.textColor};
 `;
