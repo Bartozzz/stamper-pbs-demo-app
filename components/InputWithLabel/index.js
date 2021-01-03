@@ -1,5 +1,6 @@
 import React from "react";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
 const getErrorMessage = (error) => {
@@ -34,26 +35,28 @@ export const InputWithLabel = ({
   const hasError = Boolean(getErrorMessage(error));
 
   return (
-    <Styled.InputPadder>
-      <Styled.InputContainer error={hasError} isFocused={focus}>
-        <Styled.Input
-          {...rest}
-          error={hasError}
-          isFocused={focus}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          testID="input-label-parent"
-        />
+    <Theme>
+      <Styled.InputPadder>
+        <Styled.InputContainer error={hasError} isFocused={focus}>
+          <Styled.Input
+            {...rest}
+            error={hasError}
+            isFocused={focus}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            testID="input-label-parent"
+          />
 
-        <Styled.InputLabel testID="input-label">{label}</Styled.InputLabel>
-      </Styled.InputContainer>
+          <Styled.InputLabel testID="input-label">{label}</Styled.InputLabel>
+        </Styled.InputContainer>
 
-      {hasError && (
-        <Styled.InputError testID="input-label-error">
-          {getErrorMessage(error)}
-        </Styled.InputError>
-      )}
-    </Styled.InputPadder>
+        {hasError && (
+          <Styled.InputError testID="input-label-error">
+            {getErrorMessage(error)}
+          </Styled.InputError>
+        )}
+      </Styled.InputPadder>
+    </Theme>
   );
 };
 

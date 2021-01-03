@@ -2,16 +2,22 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../constants/theme";
+import getFont from "../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
     <ThemeProvider
       theme={{
-        backgroundColor: theme.colors.primary,
-        textColor: theme.colors.label,
-        borderColor: theme.colors.inputBorder,
+        borderRadius: "100px",
+        borderWidth: "1px",
+
+        errorColor: theme.colors.error,
+        focusColor: theme.colors.white,
+        idleColor: theme.colors.inputBorder,
         labelColor: theme.colors.label,
-        borderRadius: theme.borderRadiusBg,
+
+        fontFamily: getFont("nunito", "regular", false),
+        textColor: theme.colors.white,
       }}
     >
       {children}

@@ -1,5 +1,6 @@
 import React from "react";
 
+import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
 const getErrorMessage = (error) => {
@@ -28,31 +29,33 @@ export const InputWithIcon = ({ iconName, iconSize, error, ...rest }) => {
   const hasError = Boolean(getErrorMessage(error));
 
   return (
-    <Styled.InputPadder>
-      <Styled.InputContainer error={hasError} isFocused={focus}>
-        <Styled.InputIcon
-          isFocused={focus}
-          error={hasError}
-          name={iconName}
-          size={iconSize}
-        />
+    <Theme>
+      <Styled.InputPadder>
+        <Styled.InputContainer error={hasError} isFocused={focus}>
+          <Styled.InputIcon
+            isFocused={focus}
+            error={hasError}
+            name={iconName}
+            size={iconSize}
+          />
 
-        <Styled.Input
-          {...rest}
-          error={hasError}
-          isFocused={focus}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          testID="input-icon"
-        />
-      </Styled.InputContainer>
+          <Styled.Input
+            {...rest}
+            error={hasError}
+            isFocused={focus}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            testID="input-icon"
+          />
+        </Styled.InputContainer>
 
-      {hasError && (
-        <Styled.InputError testID="input-icon-error">
-          {getErrorMessage(error)}
-        </Styled.InputError>
-      )}
-    </Styled.InputPadder>
+        {hasError && (
+          <Styled.InputError testID="input-icon-error">
+            {getErrorMessage(error)}
+          </Styled.InputError>
+        )}
+      </Styled.InputPadder>
+    </Theme>
   );
 };
 

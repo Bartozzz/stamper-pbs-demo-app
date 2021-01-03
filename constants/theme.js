@@ -7,7 +7,7 @@ export default {
 
     white: "#ffffff",
     black: "#000000",
-    link: "#709BE7",
+    label: "#709BE7",
 
     primary: "#0046F4",
 
@@ -16,7 +16,7 @@ export default {
 
     disabled: "#95989A",
     highlight: "#020d1e",
-    label: "#3e619e",
+
     badge: "#00d1ff",
 
     shadow: "rgba(0, 0, 0, 0.16)",

@@ -1,16 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
-
-function getColorForState(error, focus) {
+function getColorForState(theme, error, focus) {
   if (error) {
-    return colors.error;
+    return theme.errorColor;
   } else if (focus) {
-    return colors.color;
+    return theme.focusColor;
   } else {
-    return colors.inputBorder;
+    return theme.idleColor;
   }
 }
 
@@ -27,28 +24,19 @@ export const InputContainer = styled.View`
   height: 47px;
   width: 100%;
 
-  border-radius: 100px;
-  border-width: 1px;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border-width: ${({ theme }) => theme.borderWidth};
   border-style: solid;
-  border-color: ${colors.inputBorder};
-
-  ${({ isFocused }) =>
-    isFocused
-      ? ` border-color: ${colors.color}; `
-      : `border-color: ${colors.inputBorder}`};
-
-  ${({ error }) =>
-    error &&
-    `
-      border-color: ${colors.error};
-    `};
+  border-color: ${(props) => {
+    return getColorForState(props.theme, props.error, props.isFocused);
+  }};
 `;
 
 export const InputError = styled.Text`
   position: absolute;
   top: 48px;
 
-  color: ${colors.error};
+  color: ${({ theme }) => theme.errorColor};
   margin-horizontal: 17px;
   margin-top: 2px;
 
@@ -58,21 +46,19 @@ export const InputError = styled.Text`
 export const InputIcon = styled(Ionicons)`
   padding-vertical: 10px;
   padding-horizontal: 20px;
-
-  ${({ isFocused }) =>
-    isFocused ? ` color: ${colors.color}; ` : `color: ${colors.inputBorder}`};
-
-  ${({ error }) =>
-    error &&
-    `
-    color: ${colors.error};
-  `};
+  color: ${(props) => {
+    return getColorForState(props.theme, props.error, props.isFocused);
+  }};
 `;
 
 export const Input = styled.TextInput.attrs((props) => ({
   underlineColorAndroid: "transparent",
   autoCorrect: false,
-  placeholderTextColor: getColorForState(props.error, props.isFocused),
+  placeholderTextColor: getColorForState(
+    props.theme,
+    props.error,
+    props.isFocused
+  ),
 }))`
   flex: 1;
   padding-top: 10px;
@@ -81,6 +67,6 @@ export const Input = styled.TextInput.attrs((props) => ({
   padding-left: 0px;
 
   font-size: 14px;
-  font-family: ${layout.fontText};
-  color: ${colors.color};
+  font-family: ${({ theme }) => theme.fontFamily};
+  color: ${({ theme }) => theme.textColor};
 `;
