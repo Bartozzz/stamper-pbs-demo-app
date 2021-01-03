@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 
-import colors from "../../../constants/Colors";
 import Button from "../../Button";
 
 export const Padder = styled.View`
@@ -10,7 +9,7 @@ export const Padder = styled.View`
 `;
 
 export const Component = styled.View`
-  background-color: ${colors.color};
+  background-color: ${({ theme }) => theme.backgroundColor};
   border-radius: 8px;
 `;
 
@@ -40,16 +39,16 @@ export const Image = styled.Image`
 `;
 
 export const Title = styled.Text`
-  color: #001432;
+  color: ${({ theme }) => theme.titleColor};
   font-size: 14px;
-  font-family: poppins-bold;
+  font-family: ${({ theme }) => theme.titleFontFamily};
   text-align: center;
 `;
 
 export const Subtitle = styled.Text`
-  color: #709be7;
+  color: ${({ theme }) => theme.subtitleColor};
   font-size: 9px;
-  font-family: nunito-regular;
+  font-family: ${({ theme }) => theme.subtitleFontFamily};
   text-align: center;
 `;
 

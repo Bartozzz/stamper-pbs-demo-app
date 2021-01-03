@@ -1,7 +1,5 @@
 import styled from "styled-components/native";
 
-import colors from "../../../constants/Colors";
-
 export const Container = styled.View`
   align-items: center;
 
@@ -16,7 +14,7 @@ export const Container = styled.View`
   shadow-radius: 30px;
 
   border-radius: 10px;
-  background-color: ${colors.background};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const Icon = styled.Image`
@@ -28,7 +26,7 @@ export const Icon = styled.Image`
 export const Heading = styled.Text`
   padding-horizontal: 30px;
 
-  color: ${colors.color};
+  color: ${({ theme }) => theme.headingColor};
   font-size: 24px;
   text-align: center;
 `;
@@ -38,13 +36,13 @@ export const Subheading = styled.Text`
 
   text-align: center;
   font-size: 18px;
-  color: ${colors.color};
+  color: ${({ theme }) => theme.subheadingColor};
 `;
 
 export const Action = styled.Text`
   margin-top: 30px;
 
-  color: ${colors.info};
+  color: ${({ theme }) => theme.actionColor};
   font-size: 18px;
   text-align: center;
   text-transform: uppercase;
