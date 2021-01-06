@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import colors from "../../constants/Colors";
 
 import Button from "../Button";
 
