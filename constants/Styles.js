@@ -67,6 +67,17 @@ export default StyleSheet.create({
     elevation: 0,
   },
 
+  headerCenteredTitle: {
+    flex: 1,
+
+    fontFamily: "poppins-semi-bold",
+    fontSize: 17,
+
+    alignSelf: "center",
+    textAlign: "center",
+    justifyContent: "center",
+  },
+
   textLeft: {
     textAlign: "left",
   },

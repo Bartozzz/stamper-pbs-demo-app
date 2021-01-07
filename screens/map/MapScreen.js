@@ -302,6 +302,8 @@ MapScreen.navigationOptions = ({ navigation }) => ({
     ...defaultStyles.headerTransparent,
     backgroundColor: colors.background,
   },
+
+  headerTitleStyle: { ...defaultStyles.headerCenteredTitle },
   gesturesEnabled: false,
 });
 

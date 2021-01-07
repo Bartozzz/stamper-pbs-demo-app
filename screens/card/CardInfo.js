@@ -46,6 +46,7 @@ class CardInfoScreen extends React.Component {
       ...defaultStyles.headerTransparent,
       backgroundColor: colors.background,
     },
+    headerTitleStyle: { ...defaultStyles.headerCenteredTitle },
   });
 
   state = {
