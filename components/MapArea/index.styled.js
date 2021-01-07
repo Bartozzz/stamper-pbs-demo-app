@@ -2,7 +2,7 @@ import MapView from "react-native-maps";
 import styled from "styled-components/native";
 
 import mapStyle from "../../assets/mapStyle";
-import colors from "../../constants/Colors";
+import theme from "../../constants/theme";
 
 export const Map = styled(MapView).attrs(() => ({
   provider: MapView.PROVIDER_GOOGLE,
@@ -14,5 +14,5 @@ export const Map = styled(MapView).attrs(() => ({
 
   /* Center indicator vertically: */
   justify-content: center;
-  background-color: ${colors.background};
+  background-color: ${theme.colors.background};
 `;
