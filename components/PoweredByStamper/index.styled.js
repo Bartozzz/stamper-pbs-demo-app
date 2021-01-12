@@ -1,9 +1,5 @@
 import styled from "styled-components/native";
-import { StamperLogo } from "./";
-
-export const StamperLogoTint = styled(StamperLogo)`
-  tint-color: ${(props) => props.theme.textColor};
-`;
+import { StamperLogo } from "../Stamper";
 
 export const PoweredByStamper = styled.Text`
   align-self: center;
@@ -13,4 +9,8 @@ export const PoweredByStamper = styled.Text`
   font-family: poppins-regular;
 
   color: ${(props) => props.theme.textColor};
+`;
+
+export const StamperLogoTint = styled(StamperLogo)`
+  tint-color: ${(props) => props.theme.textColor};
 `;
