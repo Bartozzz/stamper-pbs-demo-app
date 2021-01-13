@@ -1,8 +1,6 @@
 import styled from "styled-components/native";
 import normalize from "react-native-normalize";
 
-import colors from "../../constants/Colors";
-
 export const Button = styled.View`
   z-index: 3;
 
@@ -19,14 +17,14 @@ export const Button = styled.View`
   height: ${normalize(70)}px;
   padding-horizontal: 20px;
 
-  background-color: ${colors.primary};
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const TextCount = styled.Text`
-  color: ${colors.color};
+  color: ${({ theme }) => theme.textColor};
 `;
 
 export const TextControl = styled.Text`
-  color: ${colors.color};
+  color: ${({ theme }) => theme.textColor};
   text-transform: uppercase;
 `;

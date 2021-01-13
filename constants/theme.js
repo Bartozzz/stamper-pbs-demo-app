@@ -6,6 +6,8 @@ export default {
     background100: "#001333",
 
     white: "#ffffff",
+    white100: "#dad9e3",
+
     black: "#000000",
     label: "#709BE7",
 

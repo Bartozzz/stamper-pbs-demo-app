@@ -1,14 +1,13 @@
 import styled from "styled-components/native";
 import normalize from "react-native-normalize";
 
-import colors from "../../constants/Colors";
 import { slideMargin, slidePadding, slideWidth } from "./constants";
 
 export const CardWrapper = styled.View`
   margin: ${slideMargin}px;
 
-  background-color: ${colors.color};
-  border-radius: 5px;
+  background-color: ${({ theme }) => theme.wrapperBackground};
+  border-radius: ${({ theme }) => theme.wrapperBorderRadius};
 `;
 
 export const CardSection = styled.View`
@@ -18,8 +17,10 @@ export const CardSection = styled.View`
   padding-top: ${({ alternateColor }) => (alternateColor ? slidePadding : 0)}px;
   padding-bottom: ${({ alternateColor }) =>
     alternateColor ? slidePadding * 2 : 0}px;
-  background-color: ${({ alternateColor }) =>
-    alternateColor ? colors.primary : colors.color};
+  background-color: ${({ alternateColor, theme }) =>
+    alternateColor
+      ? theme.focused.cardBackground
+      : theme.normal.cardBackground};
 `;
 
 export const CardName = styled.Text`
@@ -73,12 +74,19 @@ export const CardItemIcon = styled.Text`
 
 export const CardItemText = styled.Text`
   padding-right: ${slidePadding * 2}px;
-  color: ${({ alternateColor, invalid }) =>
-    invalid ? "red" : alternateColor ? colors.color : "#000"};
+  color: ${({ alternateColor, invalid, theme }) => {
+    if (invalid) {
+      return theme.invalid.cardItemText;
+    } else if (alternateColor) {
+      return theme.focused.cardItemText;
+    } else {
+      return theme.normal.cardItemText;
+    }
+  }};
 `;
 
 export const CardDescription = styled.Text`
-  color: ${colors.color};
+  color: ${({ theme }) => theme.focused.cardDescription};
   margin: ${slidePadding}px;
 `;
 
@@ -101,8 +109,11 @@ export const CardFooterButton = styled.View`
   width: 37px;
   height: 37px;
 
-  background-color: ${({ active }) => (active ? colors.primary : "#dad9e3")};
-  border-radius: 19px;
+  background-color: ${({ active, theme }) =>
+    active
+      ? theme.footerButton.backgroundColor.active
+      : theme.footerButton.backgroundColor.inactive};
+  border-radius: ${({ theme }) => theme.footerButton.borderRadius};
 `;
 
 export const CardFooterAddCardButton = styled.View`
@@ -112,10 +123,13 @@ export const CardFooterAddCardButton = styled.View`
   width: ${slideWidth - 130 - slidePadding * 3}px;
   height: 37px;
 
-  background-color: ${({ active }) => (active ? colors.primary : "#dad9e3")};
-  border-radius: 19px;
+  background-color: ${({ active, theme }) =>
+    active
+      ? theme.footerButton.backgroundColor.active
+      : theme.footerButton.backgroundColor.inactive};
+  border-radius: ${({ theme }) => theme.footerButton.borderRadius};
 `;
 
 export const CardFooterAddCardButtonText = styled.Text`
-  color: ${colors.color};
+  color: ${({ theme }) => theme.footerButton.textColor};
 `;
