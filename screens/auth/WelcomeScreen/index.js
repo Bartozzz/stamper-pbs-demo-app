@@ -9,12 +9,13 @@ import {
   logInWithGoogle,
   logInWithFacebook,
   logInWithApple,
-} from "../../helpers/auth";
-import { getErrorsFromResponse } from "../../helpers/errors";
+} from "../../../helpers/auth";
+import { getErrorsFromResponse } from "../../../helpers/errors";
+import config from "../../../constants/welcomescreen-config";
 
-import Background from "../../components/Background";
-import WelcomeItem from "../../components/WelcomeItem";
-import WelcomeButtons from "../../components/WelcomeButtons";
+import Background from "../../../components/Background";
+import WelcomeItem from "../../../components/WelcomeItem";
+import WelcomeButtons from "../../../components/WelcomeButtons";
 
 import {
   loginExternal,
@@ -22,16 +23,15 @@ import {
   setNotificationsToken,
   registerExternal,
   registerApple,
-} from "../../store/reducers/auth";
+} from "../../../store/reducers/auth";
 
-import registerForPushNotificationsAsync from "../../helpers/registerForPushNotifications";
+import registerForPushNotificationsAsync from "../../../helpers/registerForPushNotifications";
 
-import i18n from "../../translations";
-import * as Routes from "../../navigation";
-import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
+import * as Routes from "../../../navigation";
+import defaultStyles from "../../../constants/Styles";
+import theme from "../../../constants/theme";
 
-import images from "../../constants/images";
+import images from "../../../constants/images";
 
 class AuthWelcomeScreen extends React.Component {
   static navigationOptions = {
@@ -40,31 +40,6 @@ class AuthWelcomeScreen extends React.Component {
 
   state = {
     active: 0,
-    entries: [
-      {
-        background: images.WelcomeCarousel1,
-        image: images.StamperSygnet,
-        width: 70,
-        flex: 0.5,
-        title: i18n.t("welcome.title1"),
-        subtitle: i18n.t("welcome.subtitle1"),
-      },
-      {
-        image: images.WelcomeCarousel2,
-        title: i18n.t("welcome.title2"),
-        subtitle: i18n.t("welcome.subtitle2"),
-      },
-      {
-        image: images.WelcomeCarousel3,
-        title: i18n.t("welcome.title3"),
-        subtitle: i18n.t("welcome.subtitle3"),
-      },
-      {
-        image: images.WelcomeCarousel4,
-        title: i18n.t("welcome.title4"),
-        subtitle: i18n.t("welcome.subtitle4"),
-      },
-    ],
     error: {
       password: null,
       email: null,
@@ -242,7 +217,7 @@ class AuthWelcomeScreen extends React.Component {
         <Background source={images.BackgroundPasswordWn} disableScroll>
           <Carousel
             ref={(carousel) => (this.carouselRef = carousel)}
-            data={this.state.entries}
+            data={config}
             renderItem={({ item }) => (
               <WelcomeItem
                 background={item.background}
@@ -265,8 +240,8 @@ class AuthWelcomeScreen extends React.Component {
             activeDotIndex={active}
             dotStyle={styles.paginationDot}
             containerStyle={styles.paginationContainer}
-            dotColor={colors.primary}
-            inactiveDotColor={colors.primary}
+            dotColor={theme.colors.primary}
+            inactiveDotColor={theme.colors.primary}
             inactiveDotOpacity={0.2}
             inactiveDotScale={1}
           />

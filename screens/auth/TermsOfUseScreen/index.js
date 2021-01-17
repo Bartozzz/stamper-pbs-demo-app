@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import Background from "../../components/Background";
-import { StamperLogo } from "../../components/Stamper";
+import { TouchableOpacity } from "react-native";
 
-import * as Box from "../../components/layout/Box";
+import * as Styled from "./index.styled";
 
-import i18n from "../../translations";
-import * as Routes from "../../navigation";
-import Button from "../../components/Button";
+import Background from "../../../components/Background";
 
-import images from "../../constants/images";
+import * as Box from "../../../components/layout/Box";
+
+import i18n from "../../../translations";
+import * as Routes from "../../../navigation";
+import Button from "../../../components/Button";
+
+import images from "../../../constants/images";
 
 class TermsOfUseScreen extends React.Component {
   static navigationOptions = {
@@ -33,7 +35,7 @@ class TermsOfUseScreen extends React.Component {
   render() {
     return (
       <Background source={images.BackgroundHome}>
-        <StamperLogo style={styles.logo} />
+        <Styled.Logo />
 
         <Box.Container>
           <Box.Icon width={160} height={125} source={images.Balance} />
@@ -45,29 +47,16 @@ class TermsOfUseScreen extends React.Component {
           </TouchableOpacity>
         </Box.Container>
 
-        <View style={styles.button}>
+        <Styled.ButtonContainer>
           <Button
             title={i18n.t("yes")}
             onPress={this.accept}
             processing={this.state.processing}
           />
-        </View>
+        </Styled.ButtonContainer>
       </Background>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    alignSelf: "center",
-
-    marginTop: 80,
-    marginBottom: 30,
-  },
-
-  button: {
-    marginHorizontal: 30,
-  },
-});
 
 export default TermsOfUseScreen;

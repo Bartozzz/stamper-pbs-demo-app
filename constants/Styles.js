@@ -1,5 +1,6 @@
 import { StyleSheet, Platform } from "react-native";
-import colors from "./Colors";
+import theme from "./theme";
+import getFont from "../helpers/getFont";
 import layout from "./Layout";
 
 export default StyleSheet.create({
@@ -9,7 +10,7 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: theme.colors.background,
   },
 
   content: {
@@ -32,7 +33,7 @@ export default StyleSheet.create({
       android: 56,
     }),
 
-    backgroundColor: colors.primary,
+    backgroundColor: theme.colors.primary,
 
     // Remove shadow on iOS:
     borderBottomWidth: 0,
@@ -45,16 +46,16 @@ export default StyleSheet.create({
     elevation: 0,
   },
   headerTwoLinesTitle: {
-    fontFamily: "poppins-bold",
+    fontFamily: getFont("poppins", "bold", false),
     fontSize: 26,
-    color: colors.color,
+    color: theme.colors.white,
   },
 
   headerTransparent: {
     marginTop: layout.headerTopSpacer,
 
     // backgroundColor: colors.background,
-    backgroundColor: "#001432",
+    backgroundColor: theme.colors.background200,
 
     // Remove shadow on iOS:
     borderBottomWidth: 0,
@@ -70,7 +71,7 @@ export default StyleSheet.create({
   headerCenteredTitle: {
     flex: 1,
 
-    fontFamily: "poppins-semi-bold",
+    fontFamily: getFont("poppins", "semiBold", false),
     fontSize: 17,
 
     alignSelf: "center",

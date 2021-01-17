@@ -4,6 +4,7 @@ export default {
   colors: {
     background: "#001232",
     background100: "#001333",
+    background200: "#001432",
 
     white: "#ffffff",
     white100: "#dad9e3",
