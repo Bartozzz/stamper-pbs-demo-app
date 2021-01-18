@@ -1,19 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
+import { TouchableOpacity, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import * as Box from "../../components/layout/Box";
+import * as Styled from "./index.styled.js";
 
-import Button from "../../components/Button";
-import Background from "../../components/Background";
-import { StamperLogo } from "../../components/Stamper";
+import * as Box from "../../../components/layout/Box";
 
-import * as Routes from "../../navigation";
-import i18n from "../../translations";
-import defaultStyles from "../../constants/Styles";
+import Button from "../../../components/Button";
+import Background from "../../../components/Background";
 
-import images from "../../constants/images";
+import * as Routes from "../../../navigation";
+import i18n from "../../../translations";
+import defaultStyles from "../../../constants/Styles";
+
+import images from "../../../constants/images";
 
 class ScannerAcceptStampTermsScreen extends React.Component {
   static navigationOptions = () => ({
@@ -45,12 +46,12 @@ class ScannerAcceptStampTermsScreen extends React.Component {
 
     return (
       <Background source={images.BackgroundLogoutWn}>
-        <StamperLogo style={styles.logo} />
+        <Styled.Logo />
 
         <Box.Container>
-          <TouchableOpacity style={styles.close} onPress={this.refuse}>
+          <Styled.Close onPress={this.refuse}>
             <Ionicons name="md-close" size={32} color="white" />
-          </TouchableOpacity>
+          </Styled.Close>
 
           <Box.Icon width={107} height={85} source={images.Balance} />
 
@@ -61,39 +62,18 @@ class ScannerAcceptStampTermsScreen extends React.Component {
           </TouchableOpacity>
         </Box.Container>
 
-        <View style={[defaultStyles.row, styles.buttons]}>
+        <Styled.ButtonsContainer style={defaultStyles.row}>
           <Button
             title={i18n.t("map.terms.confirm")}
             onPress={this.accept}
             processing={this.state.processing}
             full
           />
-        </View>
+        </Styled.ButtonsContainer>
       </Background>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    alignSelf: "center",
-
-    marginTop: 80,
-    marginBottom: 30,
-  },
-
-  close: {
-    position: "absolute",
-    top: 10,
-    right: 15,
-  },
-
-  buttons: {
-    justifyContent: "space-around",
-    marginBottom: 50,
-    marginHorizontal: 20,
-  },
-});
 
 const mapStateToProps = () => ({
   // …

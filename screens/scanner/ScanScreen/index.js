@@ -5,20 +5,22 @@ import { Camera } from "expo-camera";
 import { Text, View, Image, StyleSheet } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
-import * as Routes from "../../navigation";
-import { addStamp } from "../../store/reducers/stamp";
-import HeaderTitle from "../../components/HeaderTitle";
-import HeaderHamburger from "../../components/HeaderHamburger";
-import HeaderBack from "../../components/HeaderBack";
-import NoInternet from "../../components/NoInternet";
-import i18n from "../../translations";
-import defaultStyles from "../../constants/Styles";
-import layout from "../../constants/Layout";
-import { getParameterByName } from "../../helpers/urls";
-import { getImageForMessage } from "../../helpers/scanner";
-import colors from "../../constants/Colors";
+import * as Routes from "../../../navigation";
+import { addStamp } from "../../../store/reducers/stamp";
 
-import images from "../../constants/images";
+import * as Styled from "./index.styled";
+
+import HeaderTitle from "../../../components/HeaderTitle";
+import HeaderHamburger from "../../../components/HeaderHamburger";
+import HeaderBack from "../../../components/HeaderBack";
+import NoInternet from "../../../components/NoInternet";
+import i18n from "../../../translations";
+import defaultStyles from "../../../constants/Styles";
+import { getParameterByName } from "../../../helpers/urls";
+import { getImageForMessage } from "../../../helpers/scanner";
+import colors from "../../../constants/Colors";
+
+import images from "../../../constants/images";
 
 class ScannerScanScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -186,12 +188,12 @@ class ScannerScanScreen extends React.Component {
 
     if (focusedScreen) {
       return (
-        <Camera
+        <Styled.ScannerCamera
           onBarCodeScanned={this.onBarCodeRead}
-          style={[StyleSheet.absoluteFill, styles.scannerCamera]}
+          style={StyleSheet.absoluteFill}
         >
-          <Image style={styles.scannerImage} source={images.Qr} />
-        </Camera>
+          <Styled.ScannerImage source={images.Qr} />
+        </Styled.ScannerCamera>
       );
     }
 
@@ -218,37 +220,15 @@ class ScannerScanScreen extends React.Component {
 
     return (
       <View style={defaultStyles.container}>
-        <View style={styles.scannerContainer}>
+        <Styled.ScannerContainer>
           {this.renderBarCodeScanner()}
-        </View>
+        </Styled.ScannerContainer>
 
-        <View style={styles.buttonContainer} />
+        <Styled.ButtonContainer />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  scannerContainer: {
-    flex: 1,
-    backgroundColor: "#000000",
-  },
-  scannerCamera: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  scannerImage: {
-    width: layout.window.width * 0.7,
-    height: layout.window.width * 0.7,
-  },
-
-  buttonContainer: {
-    alignItems: "center",
-    marginVertical: 20,
-    marginHorizontal: 30,
-  },
-});
 
 const mapStateToProps = () => ({
   // …
