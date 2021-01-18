@@ -11,6 +11,7 @@ export default {
 
     black: "#000000",
     label: "#709BE7",
+    label100: "#74798b",
 
     primary: "#0046F4",
 
