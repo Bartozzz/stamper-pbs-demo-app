@@ -1,23 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import Button from "../../components/Button";
-import Background from "../../components/Background";
-import Error from "../../components/Error";
-import HeaderTitle from "../../components/HeaderTitle";
-import HeaderHamburger from "../../components/HeaderHamburger";
-import HeaderBack from "../../components/HeaderBack";
-import InputWithLabel from "../../components/InputWithLabel";
+import * as Styled from "./index.styled";
 
-import { changePassword } from "../../store/reducers/auth";
+import Button from "../../../components/Button";
+import Background from "../../../components/Background";
+import Error from "../../../components/Error";
+import HeaderTitle from "../../../components/HeaderTitle";
+import HeaderHamburger from "../../../components/HeaderHamburger";
+import HeaderBack from "../../../components/HeaderBack";
+import InputWithLabel from "../../../components/InputWithLabel";
 
-import i18n from "../../translations";
-import * as Routes from "../../navigation";
-import defaultStyles from "../../constants/Styles";
+import { changePassword } from "../../../store/reducers/auth";
 
-import images from "../../constants/images";
+import i18n from "../../../translations";
+import * as Routes from "../../../navigation";
+import defaultStyles from "../../../constants/Styles";
+
+import images from "../../../constants/images";
 
 class ProfilePasswordScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -96,7 +98,7 @@ class ProfilePasswordScreen extends React.Component {
           contentContainerStyle={{ flex: 1 }}
           extraScrollHeight={60}
         >
-          <View style={styles.form}>
+          <Styled.Form>
             {error.other ? <Error message={error.other} /> : null}
 
             <InputWithLabel
@@ -125,15 +127,15 @@ class ProfilePasswordScreen extends React.Component {
               autoCapitalize="none"
               secureTextEntry
             />
-          </View>
+          </Styled.Form>
 
-          <View style={styles.buttonContainer}>
+          <Styled.ButtonContainer>
             <Button
               title={i18n.t("profile.save")}
               onPress={this.editPassword}
               processing={this.state.processing}
             />
-          </View>
+          </Styled.ButtonContainer>
 
           <Animated.View style={[{ height: this.state.heightAnim }]} />
         </KeyboardAwareScrollView>

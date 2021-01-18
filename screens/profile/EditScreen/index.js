@@ -2,11 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   Animated,
-  StyleSheet,
   ActivityIndicator,
-  ImageBackground,
   TouchableOpacity,
-  Text,
   View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
@@ -14,14 +11,17 @@ import * as Permissions from "expo-permissions";
 import { AntDesign } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import Button from "../../components/Button/";
-import Background from "../../components/Background";
-import Error from "../../components/Error";
-import HeaderTitle from "../../components/HeaderTitle";
-import HeaderHamburger from "../../components/HeaderHamburger";
-import HeaderBack from "../../components/HeaderBack";
-import InputWithLabel from "../../components/InputWithLabel";
-import Checkbox, { CheckBoxLabel } from "../../components/Checkbox";
+import Theme from "./index.theme";
+import * as Styled from "./index.styled";
+
+import Button from "../../../components/Button/";
+import Background from "../../../components/Background";
+import Error from "../../../components/Error";
+import HeaderTitle from "../../../components/HeaderTitle";
+import HeaderHamburger from "../../../components/HeaderHamburger";
+import HeaderBack from "../../../components/HeaderBack";
+import InputWithLabel from "../../../components/InputWithLabel";
+import Checkbox, { CheckBoxLabel } from "../../../components/Checkbox";
 
 import {
   updatePhoto,
@@ -32,16 +32,13 @@ import {
   setNewsletter,
   setEmail,
   setPhoto,
-} from "../../store/reducers/profile";
+} from "../../../store/reducers/profile";
 
-import i18n from "../../translations";
-import * as Routes from "../../navigation";
-import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
+import i18n from "../../../translations";
+import * as Routes from "../../../navigation";
+import defaultStyles from "../../../constants/Styles";
 
-import images from "../../constants/images";
-
-const UPLOAD_HEIGHT = 120;
+import images from "../../../constants/images";
 
 class ProfileEditScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -187,126 +184,99 @@ class ProfileEditScreen extends React.Component {
     } = this.state;
 
     return (
-      <Background source={images.BackgroundLogoutWn}>
-        <KeyboardAwareScrollView enableOnAndroid={true} extraScrollHeight={100}>
-          <TouchableOpacity onPress={this.uploadImage}>
-            <ImageBackground
-              resizeMode="cover"
-              source={{ uri: photo }}
-              style={styles.upload}
-            >
-              {this.state.uploading ? (
-                <ActivityIndicator color="white" size="large" />
-              ) : (
-                <React.Fragment>
-                  <AntDesign name="camerao" size={36} color="white" />
-                  <Text style={styles.uploadText}>
-                    {i18n.t("profile.edit.changePhoto")}
-                  </Text>
-                </React.Fragment>
-              )}
-            </ImageBackground>
-          </TouchableOpacity>
+      <Theme>
+        <Background source={images.BackgroundLogoutWn}>
+          <KeyboardAwareScrollView
+            enableOnAndroid={true}
+            extraScrollHeight={100}
+          >
+            <TouchableOpacity onPress={this.uploadImage}>
+              <Styled.Upload resizeMode="cover" source={{ uri: photo }}>
+                {this.state.uploading ? (
+                  <ActivityIndicator color="white" size="large" />
+                ) : (
+                  <React.Fragment>
+                    <AntDesign name="camerao" size={36} color="white" />
+                    <Styled.UploadText>
+                      {i18n.t("profile.edit.changePhoto")}
+                    </Styled.UploadText>
+                  </React.Fragment>
+                )}
+              </Styled.Upload>
+            </TouchableOpacity>
 
-          <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
-            <View style={styles.form}>
-              {error.other ? <Error message={error.other} /> : null}
+            <Animated.View style={[{ flex: 1 }, { top: this.state.topAnim }]}>
+              <Styled.Form>
+                {error.other ? <Error message={error.other} /> : null}
 
-              <InputWithLabel
-                label={i18n.t("auth.firstname")}
-                value={firstName}
-                error={error.firstName}
-                onChangeText={(firstName) => this.setState({ firstName })}
-              />
+                <InputWithLabel
+                  label={i18n.t("auth.firstname")}
+                  value={firstName}
+                  error={error.firstName}
+                  onChangeText={(firstName) => this.setState({ firstName })}
+                />
 
-              <InputWithLabel
-                label={i18n.t("auth.lastname")}
-                value={lastName}
-                error={error.lastName}
-                onChangeText={(lastName) => this.setState({ lastName })}
-              />
+                <InputWithLabel
+                  label={i18n.t("auth.lastname")}
+                  value={lastName}
+                  error={error.lastName}
+                  onChangeText={(lastName) => this.setState({ lastName })}
+                />
 
-              <InputWithLabel
-                label={i18n.t("auth.email")}
-                value={email}
-                error={error.email}
-                onChangeText={(email) => this.setState({ email })}
-              />
+                <InputWithLabel
+                  label={i18n.t("auth.email")}
+                  value={email}
+                  error={error.email}
+                  onChangeText={(email) => this.setState({ email })}
+                />
 
-              <InputWithLabel
-                label={i18n.t("auth.nickname")}
-                value={login}
-                error={error.login}
-                onChangeText={(login) => this.setState({ login })}
-              />
+                <InputWithLabel
+                  label={i18n.t("auth.nickname")}
+                  value={login}
+                  error={error.login}
+                  onChangeText={(login) => this.setState({ login })}
+                />
 
-              <Checkbox
-                checked={newsletter}
-                onChange={(newsletter) => this.setState({ newsletter })}
-                label={
-                  <View style={{ flexDirection: "row" }}>
-                    <CheckBoxLabel>
-                      {i18n.t("profile.edit.newsletter")}
-                    </CheckBoxLabel>
-
-                    <TouchableOpacity onPress={this.showNewsletterTerms}>
-                      <CheckBoxLabel
-                        style={{
-                          fontWeight: "900",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {i18n.t("more")}
+                <Checkbox
+                  checked={newsletter}
+                  onChange={(newsletter) => this.setState({ newsletter })}
+                  label={
+                    <View style={{ flexDirection: "row" }}>
+                      <CheckBoxLabel>
+                        {i18n.t("profile.edit.newsletter")}
                       </CheckBoxLabel>
-                    </TouchableOpacity>
-                  </View>
-                }
-              />
-            </View>
 
-            <View style={styles.buttonContainer}>
-              <Button
-                title={i18n.t("profile.save")}
-                onPress={this.editProfile}
-                processing={this.state.processing}
-              />
-            </View>
+                      <TouchableOpacity onPress={this.showNewsletterTerms}>
+                        <CheckBoxLabel
+                          style={{
+                            fontWeight: "900",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {i18n.t("more")}
+                        </CheckBoxLabel>
+                      </TouchableOpacity>
+                    </View>
+                  }
+                />
+              </Styled.Form>
 
-            <Animated.View style={[{ height: this.state.heightAnim }]} />
-          </Animated.View>
-        </KeyboardAwareScrollView>
-      </Background>
+              <Styled.ButtonContainer>
+                <Button
+                  title={i18n.t("profile.save")}
+                  onPress={this.editProfile}
+                  processing={this.state.processing}
+                />
+              </Styled.ButtonContainer>
+
+              <Animated.View style={[{ height: this.state.heightAnim }]} />
+            </Animated.View>
+          </KeyboardAwareScrollView>
+        </Background>
+      </Theme>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  form: {
-    flex: 1,
-
-    paddingTop: 15,
-    marginHorizontal: 30,
-  },
-
-  buttonContainer: {
-    marginVertical: 20,
-    marginHorizontal: 30,
-  },
-
-  upload: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    width: "100%",
-    height: UPLOAD_HEIGHT,
-  },
-  uploadText: {
-    marginTop: 5,
-
-    fontSize: 10,
-    color: colors.info,
-  },
-});
 
 const mapStateToProps = (state) => ({
   // …

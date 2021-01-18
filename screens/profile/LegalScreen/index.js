@@ -1,18 +1,19 @@
 import React from "react";
 
-import Background from "../../components/Background";
-import HeaderTitle from "../../components/HeaderTitle";
-import HeaderBack from "../../components/HeaderBack";
-import TermsAsHTML from "../../components/screens/terms/TermsAsHTML";
+import Background from "../../../components/Background";
+import HeaderTitle from "../../../components/HeaderTitle";
+import HeaderBack from "../../../components/HeaderBack";
+import TermsAsHTML from "../../../components/screens/terms/TermsAsHTML";
+import Version from "../../../components/helpers/Version";
 
-import i18n from "../../translations";
-import Url from "../../constants/Urls";
-import defaultStyles from "../../constants/Styles";
-import axios from "../../store/axios";
+import i18n from "../../../translations";
+import Url from "../../../constants/Urls";
+import defaultStyles from "../../../constants/Styles";
+import axios from "../../../store/axios";
 
-import images from "../../constants/images";
+import images from "../../../constants/images";
 
-class NewsletterTermsScreen extends React.Component {
+class LegalScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: i18n.t("navigation.tos"),
     headerTitle: HeaderTitle,
@@ -31,7 +32,7 @@ class NewsletterTermsScreen extends React.Component {
   componentDidMount() {
     axios
       .post(
-        Url.Account.Newsletter(i18n.appLocale),
+        Url.Account.Legal(i18n.appLocale),
         {
           language: i18n.appLocale,
         },
@@ -57,11 +58,12 @@ class NewsletterTermsScreen extends React.Component {
     const { loading, content, error } = this.state;
 
     return (
-      <Background source={images.BackgroundTOSWn}>
+      <Background source={images.BackgroundTOS}>
         <TermsAsHTML loading={loading} error={error} content={content} />
+        <Version />
       </Background>
     );
   }
 }
 
-export default NewsletterTermsScreen;
+export default LegalScreen;
