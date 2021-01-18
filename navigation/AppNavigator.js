@@ -18,7 +18,7 @@ import MapAcceptCardTermsScreen from "../screens/map/AcceptCardTermsScreen";
 import MapConfirmRefusedTermsScreen from "../screens/map/ConfirmRefusedTermsScreen";
 import CardInfoScreen from "../screens/card/CardInfo";
 import DashboardMainScreen from "../screens/dashboard/MainScreen";
-import AuthLoadingScreen from "../screens/auth/LoadingScreen";
+import AuthLoadingScreen from "../screens/AuthLoadingScreen";
 import AuthWelcomeScreen from "../screens/auth/WelcomeScreen";
 import AuthLoginScreen from "../screens/auth/LoginScreen";
 import AuthRegisterScreen from "../screens/auth/RegisterScreen";

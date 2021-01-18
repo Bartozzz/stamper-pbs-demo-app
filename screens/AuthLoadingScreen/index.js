@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 import NetInfo from "@react-native-community/netinfo";
-import { authorize, setAccessToken } from "../../../store/reducers/auth";
-import { getProfile } from "../../../store/reducers/profile";
-import * as Routes from "../../../navigation";
-import theme from "../../../constants/theme";
-import styles from "../../../constants/Styles";
+import { authorize, setAccessToken } from "../../store/reducers/auth";
+import { getProfile } from "../../store/reducers/profile";
+import * as Routes from "../../navigation";
+import theme from "../../constants/theme";
+import * as Styled from "./index.styled";
+import Theme from "./index.theme";
 
 class AuthLoadingScreen extends React.Component {
   static navigationOptions = {
@@ -81,9 +82,11 @@ class AuthLoadingScreen extends React.Component {
 
   render() {
     return (
-      <View style={[styles.container, styles.center]}>
-        <ActivityIndicator color={theme.colors.primary} size="large" />
-      </View>
+      <Theme>
+        <Styled.Wrapper>
+          <ActivityIndicator color={theme.colors.primary} size="large" />
+        </Styled.Wrapper>
+      </Theme>
     );
   }
 }
