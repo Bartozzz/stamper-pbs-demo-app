@@ -25,6 +25,7 @@ export default {
     shadow: "rgba(0, 0, 0, 0.16)",
 
     error: "#FF5D30",
+    error100: "#F16C41",
     info: "#709BE7",
 
     inputBorder: "#555f6f",
