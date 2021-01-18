@@ -1,24 +1,24 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, View } from "react-native";
+import { Image, View } from "react-native";
 import Toast from "react-native-easy-toast";
 import * as Analytics from "expo-firebase-analytics";
 
-import * as Routes from "../../navigation";
-import HeaderHamburger from "../../components/HeaderHamburger";
-import i18n from "../../translations";
-import defaultStyles from "../../constants/Styles";
-import colors from "../../constants/Colors";
-import Background from "../../components/Background";
-import InputSearch from "../../components/InputSearch";
-import WalletHeader from "../../components/screens/wallet/Header";
-import CardsList from "../../components/screens/wallet/CardsList";
+import * as Routes from "../../../navigation";
 
-import { getWallet } from "../../store/reducers/wallet";
+import * as Styled from "./index.styled";
 
-import images from "../../constants/images";
+import HeaderHamburger from "../../../components/HeaderHamburger";
+import i18n from "../../../translations";
+import defaultStyles from "../../../constants/Styles";
+import Background from "../../../components/Background";
+import InputSearch from "../../../components/InputSearch";
+import WalletHeader from "../../../components/screens/wallet/Header";
+import CardsList from "../../../components/screens/wallet/CardsList";
 
-const height = 90;
+import { getWallet } from "../../../store/reducers/wallet";
+
+import images from "../../../constants/images";
 
 class WalletCardsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -105,9 +105,8 @@ class WalletCardsScreen extends React.Component {
     }
 
     return (
-      <CardsList
+      <Styled.List
         data={data}
-        style={styles.list}
         contentContainerStyle={{ paddingBottom: 60 }}
         onCheck={(item) => {
           this.navigateToCardInfo(item);
@@ -156,76 +155,6 @@ class WalletCardsScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  list: {
-    paddingTop: 8,
-  },
-
-  item: {
-    padding: 10,
-    marginHorizontal: 15,
-    marginVertical: 10,
-
-    borderRadius: 10,
-  },
-  itemFront: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-  },
-  itemRemove: {
-    alignItems: "center",
-    justifyContent: "center",
-
-    position: "absolute",
-    top: 10,
-    right: -height,
-
-    height: height,
-    width: height,
-
-    // backgroundColor: "#555f6f",
-    backgroundColor: "#f16c41",
-    borderRadius: 10,
-
-    // Need to add zIndex to ensure that the TouchableOpacity will receive press
-    // events on Android:
-    zIndex: 1,
-  },
-  itemRemoveImage: {
-    width: 40,
-    height: 40,
-  },
-
-  textId: {
-    flex: 1,
-
-    fontSize: 14,
-    fontFamily: "nunito-black",
-    color: "#95989A",
-  },
-  textTitle: {
-    marginTop: 2,
-    marginBottom: 3,
-
-    fontSize: 14,
-    fontFamily: "poppins-bold",
-    color: colors.color,
-  },
-  textExpiry: {
-    fontSize: 9,
-    fontFamily: "nunito-regular",
-    color: "#95989A",
-  },
-  textAmount: {
-    flex: 1,
-    marginTop: 5,
-
-    textAlign: "right",
-    fontSize: 12,
-    fontFamily: "nunito-regular",
-    color: "#95989A",
-  },
-});
 
 const mapStateToProps = (state) => ({
   // …

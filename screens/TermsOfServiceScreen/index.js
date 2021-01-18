@@ -1,16 +1,16 @@
 import React from "react";
 
-import Background from "../components/Background";
-import HeaderTitle from "../components/HeaderTitle";
-import HeaderBack from "../components/HeaderBack";
-import TermsAsHTML from "../components/screens/terms/TermsAsHTML";
+import Background from "../../components/Background";
+import HeaderTitle from "../../components/HeaderTitle";
+import HeaderBack from "../../components/HeaderBack";
+import TermsAsHTML from "../../components/screens/terms/TermsAsHTML";
 
-import i18n from "../translations";
-import Url from "../constants/Urls";
-import defaultStyles from "../constants/Styles";
-import axios from "../store/axios";
+import i18n from "../../translations";
+import Url from "../../constants/Urls";
+import defaultStyles from "../../constants/Styles";
+import axios from "../../store/axios";
 
-import images from "../constants/images";
+import images from "../../constants/images";
 
 class TermsOfServiceScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

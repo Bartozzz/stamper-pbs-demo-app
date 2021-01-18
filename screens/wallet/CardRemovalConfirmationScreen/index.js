@@ -3,20 +3,22 @@ import { connect } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
-import * as Routes from "../../navigation";
+import * as Routes from "../../../navigation";
 
-import * as Box from "../../components/layout/Box";
+import * as Styled from "./index.styled";
 
-import Button from "../../components/Button";
-import Background from "../../components/Background";
-import { StamperLogo } from "../../components/Stamper";
+import * as Box from "../../../components/layout/Box";
 
-import { removeCard } from "../../store/reducers/wallet";
+import Button from "../../../components/Button";
+import Background from "../../../components/Background";
+import { StamperLogo } from "../../../components/Stamper";
 
-import i18n from "../../translations";
-import defaultStyles from "../../constants/Styles";
+import { removeCard } from "../../../store/reducers/wallet";
 
-import images from "../../constants/images";
+import i18n from "../../../translations";
+import defaultStyles from "../../../constants/Styles";
+
+import images from "../../../constants/images";
 
 class CardRemovalConfirmationScreen extends React.Component {
   static navigationOptions = () => ({
@@ -60,21 +62,19 @@ class CardRemovalConfirmationScreen extends React.Component {
 
           <Box.Heading>{i18n.t("wallet.removal.headline")}</Box.Heading>
 
-          <Box.Subheading>
+          <Box.Subheading style={{ width: "90%" }}>
             {i18n.t("wallet.removal.description")}
           </Box.Subheading>
         </Box.Container>
 
         <View style={[defaultStyles.row, styles.buttons]}>
-          <Button
-            style={styles.button}
+          <Styled.ButtonStyled
             title={i18n.t("yes")}
             onPress={this.accept}
             processing={this.state.processing}
           />
 
-          <Button
-            style={styles.button}
+          <Styled.ButtonStyled
             title={i18n.t("no")}
             onPress={this.refuse}
             processing={this.state.processing}

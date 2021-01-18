@@ -3,17 +3,19 @@ import { connect } from "react-redux";
 import { StyleSheet, View, FlatList, Image } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
-import * as Routes from "../../navigation";
-import * as Card from "../../components/layout/Card";
-import HeaderHamburger from "../../components/HeaderHamburger";
-import i18n from "../../translations";
-import defaultStyles from "../../constants/Styles";
-import Background from "../../components/Background";
-import InputSearch from "../../components/InputSearch";
-import WalletHeader from "../../components/screens/wallet/Header";
-import { getWallet } from "../../store/reducers/wallet";
+import * as Styled from "./index.styled";
 
-import images from "../../constants/images";
+import * as Routes from "../../../navigation";
+import * as Card from "../../../components/layout/Card";
+import HeaderHamburger from "../../../components/HeaderHamburger";
+import i18n from "../../../translations";
+import defaultStyles from "../../../constants/Styles";
+import Background from "../../../components/Background";
+import InputSearch from "../../../components/InputSearch";
+import WalletHeader from "../../../components/screens/wallet/Header";
+import { getWallet } from "../../../store/reducers/wallet";
+
+import images from "../../../constants/images";
 
 class WalletPlacesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -85,10 +87,9 @@ class WalletPlacesScreen extends React.Component {
       }, []);
 
     return (
-      <FlatList
+      <Styled.List
         data={data}
         numColumns={2}
-        style={styles.list}
         contentContainerStyle={{ paddingBottom: 60 }}
         keyExtractor={(item) => {
           return item.id;
@@ -152,12 +153,6 @@ class WalletPlacesScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  list: {
-    padding: 8,
-  },
-});
 
 const mapStateToProps = (state) => ({
   // …
