@@ -8,6 +8,7 @@ export default {
 
     white: "#ffffff",
     white100: "#dad9e3",
+    white200: "#F8F8F8",
 
     black: "#000000",
     label: "#709BE7",
