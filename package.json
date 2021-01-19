@@ -10,6 +10,11 @@
     "test:unit": "npx jest",
     "test:lint": "npx eslint ."
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "dependencies": {
     "@babel/core": "^7.0.0-0",
     "@expo/samples": "^3.0.3",
@@ -71,6 +76,11 @@
     "use-expo": "^1.0.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
     "axios-mock-adapter": "1.18.1",
     "babel-eslint": "^10.1.0",
     "babel-preset-expo": "^8.2.3",
@@ -84,11 +94,14 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "4.0.1",
     "expo-cli": "^3.26.2",
+    "husky": "^4.3.8",
     "jest": "^25.1.0",
     "jest-expo": "^38.0.0",
     "jest-expo-enzyme": "^1.0.0",
     "prettier": "2.0.5",
-    "redux-mock-store": "1.5.4"
+    "redux-mock-store": "1.5.4",
+    "semantic-release": "^17.3.3",
+    "semantic-release-expo": "^2.2.3"
   },
   "private": true
 }

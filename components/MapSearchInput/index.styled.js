@@ -1,9 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
-import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
-
 export const InputContainer = styled.View`
   position: absolute;
   top: 65px;

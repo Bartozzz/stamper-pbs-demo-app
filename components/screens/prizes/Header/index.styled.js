@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import colors from "../../../../constants/Colors";
 
 export const Tabs = styled.View`
   flex-direction: row;
