@@ -11,7 +11,7 @@ export const Theme = ({ children }) => {
         backgroundColor: theme.colors.error,
         head: {
           fontSize: "14px",
-          fontFamily: getFont("poppins", "black", false),
+          fontFamily: getFont("Poppins", "black", false),
           color: theme.colors.white,
         },
         text: {

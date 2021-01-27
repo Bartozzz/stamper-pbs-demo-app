@@ -1,19 +1,18 @@
 export const defaultFont = {
-  name: "poppins",
+  name: "Poppins",
   weight: "regular",
 };
 
 export const weightMap = {
-  thin: "thin",
-  light: "light",
-  extraLight: "extra-light",
-  italic: "italic",
-  regular: "regular",
-  medium: "medium",
-  black: "black",
-  semiBold: "semi-bold",
-  bold: "bold",
-  extraBold: "extra-bold",
+  thin: "100Thin",
+  extraLight: "200ExtraLight",
+  light: "300Light",
+  regular: "400Regular",
+  medium: "500Medium",
+  semiBold: "600SemiBold",
+  bold: "700Bold",
+  extraBold: "800ExtraBold",
+  black: "900Black",
 };
 
 export default function getFont(
@@ -21,7 +20,7 @@ export default function getFont(
   weight = defaultFont.weight,
   italic = false
 ) {
-  const suffix = italic ? "-italic" : "";
+  const suffix = italic ? "_Italic" : "";
 
-  return `${fontName}-${weightMap[weight]}${suffix}`;
+  return `${fontName}_${weightMap[weight]}${suffix}`;
 }

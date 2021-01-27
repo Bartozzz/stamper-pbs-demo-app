@@ -10,6 +10,7 @@ export const Theme = ({ children }) => {
         aboutIconBorderColor: theme.colors.primary,
         aboutMerchantTextColor: theme.colors.white,
         aboutTitleTextColor: theme.colors.disabled,
+        headingFontFamily: theme.fontHead,
         textFontFamily: theme.fontHead,
         textColor: theme.colors.black,
         pickTextColor: theme.colors.disabled,

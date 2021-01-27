@@ -14,7 +14,7 @@ export const Theme = ({ children }) => {
         },
         login: {
           textColor: theme.colors.white,
-          fontFamily: getFont("poppins", "bold", false),
+          fontFamily: getFont("Poppins", "bold", false),
         },
         email: {
           textColor: theme.colors.info,

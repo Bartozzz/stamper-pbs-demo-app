@@ -10,7 +10,7 @@ export const Theme = ({ children }) => {
       theme={{
         borderRadius: theme.borderRadiusMd,
 
-        fontFamily: getFont("nunito", "regular", false),
+        fontFamily: getFont("Nunito", "regular", false),
 
         backgroundColor: "#1a5bf1",
         textColor: theme.colors.info,

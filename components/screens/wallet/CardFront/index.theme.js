@@ -13,12 +13,12 @@ export const Theme = ({ dark, children }) => {
           Platform.OS === "ios" ? "rgba(255, 255, 255, 0.1)" : "#1a2c47",
         borderRadius: theme.borderRadiusMd,
         ID: {
-          fontFamily: getFont("nunito", "black", false),
+          fontFamily: getFont("Nunito", "black", false),
           textColor: theme.colors.disabled,
         },
         imageBorderRadius: theme.borderRadiusBg,
         title: {
-          fontFamily: getFont("poppins", "bold", false),
+          fontFamily: getFont("Poppins", "bold", false),
           textColor: theme.colors.white,
         },
         expiry: {

@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import theme from "../../constants/theme";
 import { StamperLogo } from "../Stamper";
 
 export const PoweredByStamper = styled.Text`
@@ -6,7 +7,7 @@ export const PoweredByStamper = styled.Text`
   text-align: center;
   margin-vertical: 1%;
   font-size: 18px;
-  font-family: poppins-regular;
+  font-family: ${theme.fontHead};
 
   color: ${(props) => props.theme.textColor};
 `;

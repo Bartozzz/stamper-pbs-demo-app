@@ -42,7 +42,7 @@ export const Theme = ({ children }) => {
 
         actionCard: {
           backgroundColor: "#F8F8F8",
-          nameFontFamily: getFont("poppins", "medium", false),
+          nameFontFamily: getFont("Poppins", "medium", false),
 
           address: {
             textColor: "#77838F",

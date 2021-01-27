@@ -16,7 +16,7 @@ export const Theme = ({ children }) => {
         idleColor: theme.colors.inputBorder,
         labelColor: theme.colors.label,
 
-        fontFamily: getFont("nunito", "regular", false),
+        fontFamily: getFont("Nunito", "regular", false),
         textColor: theme.colors.white,
       }}
     >

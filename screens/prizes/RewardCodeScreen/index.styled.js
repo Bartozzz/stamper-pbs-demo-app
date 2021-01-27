@@ -45,7 +45,7 @@ export const Heading = styled.Text`
   margin-vertical: 20px;
   font-size: 20px;
 
-  font-family: poppins-regular;
+  font-family: ${({ theme }) => theme.headingFontFamily};
   text-align: center;
   color: #000000;
 `;

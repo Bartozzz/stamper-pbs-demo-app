@@ -22,7 +22,7 @@ export const Theme = ({ children }) => {
         badge: {
           backgroundColor: theme.colors.badge,
           textColor: theme.colors.white,
-          fontFamily: getFont("poppins", "black", false),
+          fontFamily: getFont("Poppins", "black", false),
         },
         text: {
           color: theme.colors.white,

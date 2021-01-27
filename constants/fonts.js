@@ -1,0 +1,88 @@
+/* eslint-disable camelcase */
+import {
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from "@expo-google-fonts/poppins";
+
+import {
+  Nunito_200ExtraLight,
+  Nunito_200ExtraLight_Italic,
+  Nunito_300Light,
+  Nunito_300Light_Italic,
+  Nunito_400Regular,
+  Nunito_400Regular_Italic,
+  Nunito_600SemiBold,
+  Nunito_600SemiBold_Italic,
+  Nunito_700Bold,
+  Nunito_700Bold_Italic,
+  Nunito_800ExtraBold,
+  Nunito_800ExtraBold_Italic,
+  Nunito_900Black,
+  Nunito_900Black_Italic,
+} from "@expo-google-fonts/nunito";
+
+import {
+  SpaceMono_400Regular,
+  SpaceMono_400Regular_Italic,
+  SpaceMono_700Bold,
+  SpaceMono_700Bold_Italic,
+} from "@expo-google-fonts/space-mono";
+
+export const fonts = {
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+
+  Nunito_200ExtraLight,
+  Nunito_200ExtraLight_Italic,
+  Nunito_300Light,
+  Nunito_300Light_Italic,
+  Nunito_400Regular,
+  Nunito_400Regular_Italic,
+  Nunito_600SemiBold,
+  Nunito_600SemiBold_Italic,
+  Nunito_700Bold,
+  Nunito_700Bold_Italic,
+  Nunito_800ExtraBold,
+  Nunito_800ExtraBold_Italic,
+  Nunito_900Black,
+  Nunito_900Black_Italic,
+
+  SpaceMono_400Regular,
+  SpaceMono_400Regular_Italic,
+  SpaceMono_700Bold,
+  SpaceMono_700Bold_Italic,
+};
+
+export default fonts;

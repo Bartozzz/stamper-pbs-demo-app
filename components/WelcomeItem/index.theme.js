@@ -8,7 +8,7 @@ export const Theme = ({ children }) => {
   return (
     <ThemeProvider
       theme={{
-        titleFontFamily: getFont("poppins", "bold", false),
+        titleFontFamily: getFont("Poppins", "bold", false),
         titleColor: theme.colors.white,
         titleShadow: theme.colors.shadow,
 

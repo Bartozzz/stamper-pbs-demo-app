@@ -10,7 +10,7 @@ export const Theme = ({ children }) => {
       theme={{
         backgroundColor: theme.colors.white,
         titleColor: theme.colors.background,
-        titleFontFamily: getFont("poppins", "bold", false),
+        titleFontFamily: getFont("Poppins", "bold", false),
         subtitleColor: theme.colors.label,
         subtitleFontFamily: theme.fontText,
       }}

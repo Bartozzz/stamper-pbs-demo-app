@@ -10,7 +10,7 @@ export const Theme = ({ children }) => {
       theme={{
         height: "48px",
         borderRadius: theme.borderRadiusSm,
-        fontFamily: getFont("poppins", "bold", false),
+        fontFamily: getFont("Poppins", "bold", false),
 
         shadowColor: theme.colors.shadow,
 

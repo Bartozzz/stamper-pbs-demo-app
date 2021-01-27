@@ -17,8 +17,4 @@ export default {
 
   // Utilities:
   isSmallDevice: width < 375,
-
-  // Fonts:
-  fontHead: "poppins-black",
-  fontText: "nunito-regular",
 };

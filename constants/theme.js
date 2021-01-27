@@ -38,6 +38,6 @@ export default {
   borderRadiusBg: "20px",
 
   fontHead: getFont(),
-  fontText: getFont("nunito", "regular", false),
-  fontMono: "space-mono",
+  fontText: getFont("Nunito", "regular", false),
+  fontMono: getFont("SpaceMono", "regular", false),
 };

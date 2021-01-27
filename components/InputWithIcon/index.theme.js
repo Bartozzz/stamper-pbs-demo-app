@@ -15,7 +15,7 @@ export const Theme = ({ children }) => {
         focusColor: theme.colors.white,
         idleColor: theme.colors.inputBorder,
 
-        fontFamily: getFont("nunito", "regular", false),
+        fontFamily: getFont("Nunito", "regular", false),
         textColor: theme.colors.white,
       }}
     >

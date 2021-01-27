@@ -10,7 +10,7 @@ export const Theme = ({ children }) => {
       theme={{
         backgroundColor: theme.colors.primary,
         idleFontFamily: theme.fontHead,
-        activeFontFamily: getFont("poppins", "bold", false),
+        activeFontFamily: getFont("Poppins", "bold", false),
         textColor: theme.colors.white,
       }}
     >

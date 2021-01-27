@@ -9,7 +9,7 @@ export const Theme = ({ children }) => {
     <ThemeProvider
       theme={{
         textColor: theme.colors.white,
-        fontFamily: getFont("poppins", "bold", false),
+        fontFamily: getFont("Poppins", "bold", false),
       }}
     >
       {children}

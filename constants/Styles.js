@@ -46,7 +46,7 @@ export default StyleSheet.create({
     elevation: 0,
   },
   headerTwoLinesTitle: {
-    fontFamily: getFont("poppins", "bold", false),
+    fontFamily: getFont("Poppins", "bold", false),
     fontSize: 26,
     color: theme.colors.white,
   },
@@ -71,7 +71,7 @@ export default StyleSheet.create({
   headerCenteredTitle: {
     flex: 1,
 
-    fontFamily: getFont("poppins", "semiBold", false),
+    fontFamily: getFont("Poppins", "semiBold", false),
     fontSize: 17,
 
     alignSelf: "center",

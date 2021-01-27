@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 
 import defaultStyles from "../../constants/Styles";
 import colors from "../../constants/Colors";
-import layout from "../../constants/Layout";
+import theme from "../../constants/theme";
 
 class InfoScreen extends React.Component {
   componentDidMount() {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
 
     fontSize: 22,
-    fontFamily: layout.fontText,
+    fontFamily: theme.fontText,
     color: colors.color,
   },
 });
