@@ -8,8 +8,6 @@ import * as Route from "./index";
 import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
-import InfoErrorScreen from "../screens/info/ErrorScreen";
-import InfoSuccessScreen from "../screens/info/SuccessScreen";
 import PrizesAvailableScreen from "../screens/prizes/AvailableListScreen";
 import PrizesReceivedScreen from "../screens/prizes/ReceivedListScreen";
 import PrizesRewardCodeScreen from "../screens/prizes/RewardCodeScreen";
@@ -38,6 +36,8 @@ import WalletCardsScreen from "../screens/wallet/CardsScreen";
 import WalletPlacesScreen from "../screens/wallet/PlacesScreen";
 import WalletCardRemovalConfirmationScreen from "../screens/wallet/CardRemovalConfirmationScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
+import InfoSuccessScreen from "../screens/InfoSuccessScreen";
+import InfoFailureScreen from "../screens/InfoFailureScreen";
 
 const defaultNavigationOptions = {
   headerTintColor: colors.color,
@@ -87,7 +87,7 @@ const AuthStack = createStackNavigator(
 const InfoStack = createStackNavigator({
   [Route.INFO]: () => null,
   [Route.INFO_INIT]: () => null,
-  [Route.INFO_ERROR]: InfoErrorScreen,
+  [Route.INFO_ERROR]: InfoFailureScreen,
   [Route.INFO_SUCCESS]: InfoSuccessScreen,
 });
 
