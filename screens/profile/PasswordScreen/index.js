@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Animated, StyleSheet } from "react-native";
+import { Animated } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import * as Styled from "./index.styled";
@@ -143,20 +143,6 @@ class ProfilePasswordScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  form: {
-    flex: 0.5,
-    marginHorizontal: 30,
-
-    justifyContent: "center",
-  },
-
-  buttonContainer: {
-    marginVertical: 20,
-    marginHorizontal: 30,
-  },
-});
 
 const mapStateToProps = () => ({
   // …

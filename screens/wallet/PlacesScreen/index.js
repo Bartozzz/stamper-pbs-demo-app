@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View, FlatList, Image } from "react-native";
+import { View, Image } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
 import * as Styled from "./index.styled";

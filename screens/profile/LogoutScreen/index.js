@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Image, Text, View } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
 import Theme from "./index.theme";
 import * as Styled from "./index.styled";
 
-import Button from "../../../components/Button";
 import Background from "../../../components/Background";
 import HeaderTitle from "../../../components/HeaderTitle";
 import HeaderHamburger from "../../../components/HeaderHamburger";
@@ -22,7 +20,6 @@ import {
 import i18n from "../../../translations";
 import * as Routes from "../../../navigation";
 import defaultStyles from "../../../constants/Styles";
-import colors from "../../../constants/Colors";
 
 import images from "../../../constants/images";
 

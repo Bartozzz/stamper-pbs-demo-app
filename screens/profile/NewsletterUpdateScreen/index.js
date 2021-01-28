@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import * as Styled from "./index.styled";
 
-import Button from "../../../components/Button";
 import Background from "../../../components/Background";
-import { StamperLogo } from "../../../components/Stamper";
 
 import { updateNewsletter } from "../../../store/reducers/profile";
 

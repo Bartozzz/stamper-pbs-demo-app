@@ -14,7 +14,6 @@ import defaultStyles from "../../../constants/Styles";
 import Background from "../../../components/Background";
 import InputSearch from "../../../components/InputSearch";
 import WalletHeader from "../../../components/screens/wallet/Header";
-import CardsList from "../../../components/screens/wallet/CardsList";
 
 import { getWallet } from "../../../store/reducers/wallet";
 

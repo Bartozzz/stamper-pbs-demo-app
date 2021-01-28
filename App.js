@@ -41,7 +41,7 @@ function getActiveRouteName(navigationState) {
 
 export const App = () => {
   const [isLoading, setLoading] = React.useState(true);
-  const [notification, setNotification] = React.useState(false);
+  const [, setNotification] = React.useState(false);
 
   const notificationListener = React.createRef();
   const responseListener = React.createRef();

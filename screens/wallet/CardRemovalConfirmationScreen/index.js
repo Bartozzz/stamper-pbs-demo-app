@@ -9,7 +9,6 @@ import * as Styled from "./index.styled";
 
 import * as Box from "../../../components/layout/Box";
 
-import Button from "../../../components/Button";
 import Background from "../../../components/Background";
 import { StamperLogo } from "../../../components/Stamper";
 

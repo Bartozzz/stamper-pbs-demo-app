@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import HeaderHamburger from "../../../components/HeaderHamburger";
 import Background from "../../../components/Background";
-import { StamperLogo } from "../../../components/Stamper";
 import NoInternet from "../../../components/NoInternet";
 
 import Theme from "./index.theme";
@@ -11,7 +10,6 @@ import * as Styled from "./index.styled";
 import i18n from "../../../translations";
 import * as Routes from "../../../navigation";
 import defaultStyles from "../../../constants/Styles";
-import colors from "../../../constants/Colors";
 
 import images from "../../../constants/images";
 

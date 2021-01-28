@@ -23,7 +23,6 @@ import HeaderHamburger from "../../../components/HeaderHamburger";
 import HeaderBack from "../../../components/HeaderBack";
 import Background from "../../../components/Background";
 import CardBackground from "../../../components/CardBackground/";
-import Button from "../../../components/Button";
 import { formatDate } from "../../../helpers/date";
 import { SafeAreaView } from "react-navigation";
 

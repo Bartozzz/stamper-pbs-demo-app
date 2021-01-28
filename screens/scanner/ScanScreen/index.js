@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as Permissions from "expo-permissions";
-import { Camera } from "expo-camera";
 import { Text, View, Image, StyleSheet } from "react-native";
 import * as Analytics from "expo-firebase-analytics";
 
