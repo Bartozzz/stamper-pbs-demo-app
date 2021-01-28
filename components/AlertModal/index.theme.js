@@ -9,7 +9,7 @@ export const Theme = ({ children }) => {
     <ThemeProvider
       theme={{
         fontSize: "22px",
-        fontFamily: getFont("nunito", "regular", false),
+        fontFamily: getFont("Nunito", "regular", false),
         color: theme.colors.white,
       }}
     >
