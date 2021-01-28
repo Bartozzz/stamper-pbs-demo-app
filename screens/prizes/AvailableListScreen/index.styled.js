@@ -44,8 +44,8 @@ export const Merchant = styled.Text`
   font-family: ${({ theme }) => theme.normal.merchant.fontFamily};
   color: ${(props) =>
     props.selected
-      ? props.theme.selected.merchant.color
-      : props.theme.normal.merchant.color};
+      ? props.theme.selected.merchant.textColor
+      : props.theme.normal.merchant.textColor};
   text-transform: uppercase;
 `;
 
@@ -54,8 +54,8 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.normal.title.fontFamily};
   color: ${(props) =>
     props.selected
-      ? props.theme.selected.title.color
-      : props.theme.normal.title.color};
+      ? props.theme.selected.title.textColor
+      : props.theme.normal.title.textColor};
 `;
 
 export const OtherInformations = styled.View`

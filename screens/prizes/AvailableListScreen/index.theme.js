@@ -16,11 +16,11 @@ export const Theme = ({ children }) => {
           },
           merchant: {
             fontFamily: theme.fontText,
-            color: theme.colors.white,
+            textColor: theme.colors.white,
           },
           title: {
             fontFamily: theme.fontText,
-            color: theme.colors.disabled,
+            textColor: theme.colors.disabled,
           },
           expiry: {
             textColor: theme.colors.label100,
