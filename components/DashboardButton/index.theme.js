@@ -2,13 +2,12 @@ import * as React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../constants/theme";
-import getFont from "../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
     <ThemeProvider
       theme={{
-        borderRadius: "8px",
+        borderRadius: theme.borderRadiusSm,
         borderWidth: "1px",
 
         normal: {
@@ -16,17 +15,17 @@ export const Theme = ({ children }) => {
           borderColor: theme.colors.border,
         },
         focus: {
-          backgroundColor: theme.colors.highlight,
+          backgroundColor: "transparent",
           borderColor: theme.colors.primary,
         },
         badge: {
-          backgroundColor: theme.colors.badge,
+          backgroundColor: theme.colors.black,
           textColor: theme.colors.white,
-          fontFamily: getFont("Poppins", "black", false),
+          fontFamily: "System",
         },
         text: {
-          color: theme.colors.white,
-          fontFamily: getFont(),
+          color: theme.colors.black,
+          fontFamily: "System",
           fontSize: "14px",
         },
       }}

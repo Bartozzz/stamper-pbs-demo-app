@@ -55,7 +55,7 @@ export default StyleSheet.create({
     marginTop: layout.headerTopSpacer,
 
     // backgroundColor: colors.background,
-    backgroundColor: theme.colors.background200,
+    backgroundColor: theme.colors.black,
 
     // Remove shadow on iOS:
     borderBottomWidth: 0,

@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../constants/theme";
-import getFont from "../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
@@ -16,7 +15,7 @@ export const Theme = ({ children }) => {
         idleColor: theme.colors.inputBorder,
         labelColor: theme.colors.label,
 
-        fontFamily: getFont("Nunito", "regular", false),
+        fontFamily: "System",
         textColor: theme.colors.white,
       }}
     >

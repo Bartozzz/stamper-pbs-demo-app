@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../../constants/theme";
-import getFont from "../../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
@@ -13,23 +12,23 @@ export const Theme = ({ children }) => {
           borderRadius: "35px",
         },
         login: {
-          textColor: theme.colors.white,
-          fontFamily: getFont("Poppins", "bold", false),
+          textColor: theme.colors.black,
+          fontFamily: "System",
         },
         email: {
-          textColor: theme.colors.info,
-          fontFamily: theme.fontText,
+          textColor: theme.colors.black,
+          fontFamily: "System",
         },
         menu: {
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.background200,
           borderRadius: "10px",
         },
         menuSpacer: {
           backgroundColor: theme.colors.border,
         },
         menuItemText: {
-          textColor: theme.colors.white,
-          fontFamily: theme.fontHead,
+          textColor: theme.colors.black,
+          fontFamily: "System",
         },
       }}
     >

@@ -2,27 +2,27 @@ import getFont from "../helpers/getFont";
 
 export default {
   colors: {
-    background: "#001232",
-    background100: "#001333",
-    background200: "#001432",
+    background: "#ffffff",
+    background100: "#fdfdfd",
+    background200: "#e9e9e9",
 
     white: "#ffffff",
-    white100: "#dad9e3",
-    white200: "#F8F8F8",
+    white100: "#fdfdfd",
+    white200: "#e9e9e9",
 
     black: "#000000",
-    label: "#709BE7",
-    label100: "#74798b",
+    label: "#727272",
+    label100: "#727272",
 
-    primary: "#0046F4",
+    primary: "#000000",
 
-    border: "#233055",
-    border100: "#203451",
+    border: "#e9e9e9",
+    border100: "#c4c4c4",
 
     disabled: "#95989A",
     highlight: "#020d1e",
 
-    badge: "#00d1ff",
+    badge: "#0404fc",
 
     shadow: "rgba(0, 0, 0, 0.16)",
 
@@ -30,12 +30,12 @@ export default {
     error100: "#F16C41",
     info: "#709BE7",
 
-    inputBorder: "#555f6f",
+    inputBorder: "#000000",
   },
 
-  borderRadiusSm: "7px",
-  borderRadiusMd: "10px",
-  borderRadiusBg: "20px",
+  borderRadiusSm: "3px",
+  borderRadiusMd: "15px",
+  borderRadiusBg: "30px",
 
   fontHead: getFont(),
   fontText: getFont("Nunito", "regular", false),

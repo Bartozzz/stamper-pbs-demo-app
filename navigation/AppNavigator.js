@@ -5,7 +5,6 @@ import {
 } from "react-navigation";
 
 import * as Route from "./index";
-import colors from "../constants/Colors";
 import layout from "../constants/Layout";
 
 import PrizesAvailableScreen from "../screens/prizes/AvailableListScreen";
@@ -40,7 +39,7 @@ import InfoSuccessScreen from "../screens/InfoSuccessScreen";
 import InfoFailureScreen from "../screens/InfoFailureScreen";
 
 const defaultNavigationOptions = {
-  headerTintColor: colors.color,
+  headerTintColor: "#ffffff",
   // headerBackTitle: null,
 
   headerStyle: {
@@ -48,7 +47,7 @@ const defaultNavigationOptions = {
 
     elevation: 0,
     borderBottomWidth: 0,
-    backgroundColor: colors.primary,
+    backgroundColor: "#000000",
   },
 
   /* For some reasons, stable builds crash after performing

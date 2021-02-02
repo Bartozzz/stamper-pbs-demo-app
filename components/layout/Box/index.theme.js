@@ -8,8 +8,8 @@ export const Theme = ({ children }) => {
     <ThemeProvider
       theme={{
         backgroundColor: theme.colors.background,
-        headingColor: theme.colors.white,
-        subheadingColor: theme.colors.white,
+        headingColor: theme.colors.black,
+        subheadingColor: theme.colors.black,
         actionColor: theme.colors.info,
       }}
     >

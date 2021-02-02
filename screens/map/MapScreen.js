@@ -12,7 +12,6 @@ import * as R from "ramda";
 // Utils:
 import * as Routes from "../../navigation";
 import i18n from "../../translations";
-import colors from "../../constants/Colors";
 import defaultStyles from "../../constants/Styles";
 import useLocation from "../../helpers/hooks/useLocation";
 import { getCluster } from "../../helpers/map";
@@ -300,7 +299,6 @@ MapScreen.navigationOptions = ({ navigation }) => ({
   ),
   headerStyle: {
     ...defaultStyles.headerTransparent,
-    backgroundColor: colors.background,
   },
 
   headerTitleStyle: { ...defaultStyles.headerCenteredTitle },

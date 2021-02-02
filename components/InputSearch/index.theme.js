@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../constants/theme";
-import getFont from "../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
@@ -10,10 +9,10 @@ export const Theme = ({ children }) => {
       theme={{
         borderRadius: theme.borderRadiusMd,
 
-        fontFamily: getFont("Nunito", "regular", false),
+        fontFamily: "System",
 
-        backgroundColor: "#1a5bf1",
-        textColor: theme.colors.info,
+        backgroundColor: theme.colors.white,
+        textColor: theme.colors.black,
       }}
     >
       {children}

@@ -10,11 +10,11 @@ export const Theme = ({ children }) => {
         backgroundColor: theme.colors.primary,
 
         iconColor: theme.colors.white,
-        closeColor: theme.colors.info,
+        closeColor: theme.colors.white,
 
         placeholderColor: theme.colors.white,
         textColor: theme.colors.white,
-        fontFamily: theme.fontText,
+        fontFamily: "System",
       }}
     >
       {children}

@@ -8,7 +8,7 @@ export const Theme = ({ children }) => {
     <ThemeProvider
       theme={{
         backgroundColor: theme.colors.primary,
-        fontFamily: theme.fontHead,
+        fontFamily: "System",
         textColor: theme.colors.white,
       }}
     >

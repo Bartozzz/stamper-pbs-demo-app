@@ -9,7 +9,7 @@ export const Theme = ({ children }) => {
       theme={{
         // Header & footer
         wrapperBackground: theme.colors.white,
-        wrapperBorderRadius: "5px",
+        wrapperBorderRadius: theme.borderRadiusSm,
 
         normal: {
           cardBackground: theme.colors.white,
@@ -27,10 +27,10 @@ export const Theme = ({ children }) => {
         footerButton: {
           backgroundColor: {
             active: theme.colors.primary,
-            inactive: theme.colors.white100,
+            inactive: theme.colors.background200,
           },
           textColor: theme.colors.white,
-          borderRadius: "19px",
+          borderRadius: theme.borderRadiusMd,
         },
       }}
     >

@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../constants/theme";
-import getFont from "../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
@@ -10,7 +9,7 @@ export const Theme = ({ children }) => {
       theme={{
         height: "48px",
         borderRadius: theme.borderRadiusSm,
-        fontFamily: getFont("Poppins", "bold", false),
+        fontFamily: "System",
 
         shadowColor: theme.colors.shadow,
 

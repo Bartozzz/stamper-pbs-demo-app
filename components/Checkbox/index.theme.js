@@ -10,7 +10,7 @@ export const Theme = ({ children }) => {
         backgroundColor: theme.colors.primary,
         textColor: theme.colors.label,
         borderColor: theme.colors.inputBorder,
-        labelColor: theme.colors.label,
+        labelColor: theme.colors.black,
         borderRadius: theme.borderRadiusBg,
       }}
     >

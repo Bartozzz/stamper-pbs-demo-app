@@ -2,15 +2,14 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import theme from "../../../../constants/theme";
-import getFont from "../../../../helpers/getFont";
 
 export const Theme = ({ children }) => {
   return (
     <ThemeProvider
       theme={{
         backgroundColor: theme.colors.primary,
-        idleFontFamily: theme.fontHead,
-        activeFontFamily: getFont("Poppins", "bold", false),
+        idleFontFamily: "System",
+        activeFontFamily: "System",
         textColor: theme.colors.white,
       }}
     >

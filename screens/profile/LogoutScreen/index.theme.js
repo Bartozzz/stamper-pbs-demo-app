@@ -7,9 +7,9 @@ export const Theme = ({ children }) => {
   return (
     <ThemeProvider
       theme={{
-        backgroundColor: theme.colors.background,
-        containerShadowColor: "#2699FB",
-        logoutTextColor: theme.colors.white,
+        backgroundColor: theme.colors.background100,
+        containerShadowColor: theme.colors.black,
+        logoutTextColor: theme.colors.black,
       }}
     >
       {children}
